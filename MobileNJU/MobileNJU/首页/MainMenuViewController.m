@@ -8,7 +8,7 @@
 
 #import "MainMenuViewController.h"
 #import "HomeCell.h"
-@interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *menuView;
 @property (weak, nonatomic) IBOutlet UIImageView *touchCircle;
 @property (nonatomic)CGPoint leftCenter;
@@ -22,6 +22,13 @@
 
 static NSArray* buttonImages;
 
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ( viewController ==  self) {
+        [navigationController setNavigationBarHidden:YES animated:animated];
+    } else if ( [navigationController isNavigationBarHidden] ) {
+        [navigationController setNavigationBarHidden:NO animated:animated];
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -306,6 +313,7 @@ static NSArray* buttonImages;
 {
     
     [super viewDidLoad];
+    [self.navigationController setDelegate:self];
     [self initNewScroller];
     [self prepareForAnimation];
     [self prepareForNews];
