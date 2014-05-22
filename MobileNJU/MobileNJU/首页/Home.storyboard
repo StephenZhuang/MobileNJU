@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="euj-nV-NZS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Vd6-tb-kEi">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
@@ -39,10 +39,1619 @@
             </objects>
             <point key="canvasLocation" x="91" y="16"/>
         </scene>
+        <!--Welcome View Controller-->
+        <scene sceneID="nm8-xE-z7v">
+            <objects>
+                <viewController id="Vd6-tb-kEi" customClass="WelcomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="p4k-SY-2Lu"/>
+                        <viewControllerLayoutGuide type="bottom" id="fhJ-bh-jPH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JSk-EC-kht">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="hyu-Ng-cMJ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="startLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YD2-fm-uGO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="buttonBar" translatesAutoresizingMaskIntoConstraints="NO" id="dS8-St-LHa">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xNG-qI-6Xr">
+                                <rect key="frame" x="0.0" y="568" width="320" height="350"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" 密码" minimumFontSize="20" background="textArea" translatesAutoresizingMaskIntoConstraints="NO" id="fzd-ZJ-IfL">
+                                        <rect key="frame" x="40" y="178" width="240" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="G3F-nv-rsv"/>
+                                            <constraint firstAttribute="width" constant="240" id="sq8-p9-lhz"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" 账号" minimumFontSize="17" background="textArea" translatesAutoresizingMaskIntoConstraints="NO" id="Gqd-L7-cHM">
+                                        <rect key="frame" x="40" y="127" width="240" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="2oC-rI-u7Q"/>
+                                            <constraint firstAttribute="height" constant="29" id="E8U-av-Yty"/>
+                                        </constraints>
+                                        <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRL-ob-hjT">
+                                        <rect key="frame" x="40" y="304" width="240" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.640625" blue="0.640625" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="eYY-a5-B5E"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="注  册">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="fuX-I9-KYm" kind="push" id="ngb-zJ-3ez"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97s-KF-MNW">
+                                        <rect key="frame" x="40" y="238" width="240" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="3EE-fv-pDQ"/>
+                                            <constraint firstAttribute="height" constant="46" id="P3j-9W-vcT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="登  录">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="cRp-mI-hpY" kind="push" identifier="login in" id="oMV-JV-lxV"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="Phb-5b-RHY">
+                                        <rect key="frame" x="40" y="81" width="12" height="12"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请使用您注册的手机号登录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuI-2x-l36">
+                                        <rect key="frame" x="60" y="76" width="150" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="zdD-60-Xf0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                        <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xt4-Qw-PWQ">
+                                        <rect key="frame" x="205" y="200" width="75" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="忘记密码？">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="QuI-2x-l36" firstAttribute="leading" secondItem="Phb-5b-RHY" secondAttribute="trailing" constant="8" symbolic="YES" id="1mb-wz-Yfr"/>
+                                    <constraint firstItem="fzd-ZJ-IfL" firstAttribute="leading" secondItem="97s-KF-MNW" secondAttribute="leading" id="255-2k-jel"/>
+                                    <constraint firstAttribute="bottom" secondItem="JRL-ob-hjT" secondAttribute="bottom" id="2VB-SN-8S9"/>
+                                    <constraint firstItem="97s-KF-MNW" firstAttribute="trailing" secondItem="JRL-ob-hjT" secondAttribute="trailing" id="3Mu-6Y-lZU"/>
+                                    <constraint firstItem="97s-KF-MNW" firstAttribute="top" secondItem="fzd-ZJ-IfL" secondAttribute="bottom" constant="30" id="5Gj-rH-EE2"/>
+                                    <constraint firstItem="Phb-5b-RHY" firstAttribute="leading" secondItem="xNG-qI-6Xr" secondAttribute="leading" constant="40" id="C9D-2U-Pvb"/>
+                                    <constraint firstItem="JRL-ob-hjT" firstAttribute="centerX" secondItem="xNG-qI-6Xr" secondAttribute="centerX" id="MJV-mF-eqB"/>
+                                    <constraint firstItem="fzd-ZJ-IfL" firstAttribute="trailing" secondItem="97s-KF-MNW" secondAttribute="trailing" id="Rqz-kd-heF"/>
+                                    <constraint firstItem="fzd-ZJ-IfL" firstAttribute="top" secondItem="Gqd-L7-cHM" secondAttribute="bottom" constant="22" id="TJS-Fp-CVk"/>
+                                    <constraint firstItem="Gqd-L7-cHM" firstAttribute="leading" secondItem="Phb-5b-RHY" secondAttribute="leading" id="V40-ZN-WC5"/>
+                                    <constraint firstItem="Gqd-L7-cHM" firstAttribute="top" secondItem="QuI-2x-l36" secondAttribute="bottom" constant="30" id="Vqv-tc-2Bx"/>
+                                    <constraint firstItem="Phb-5b-RHY" firstAttribute="top" secondItem="xNG-qI-6Xr" secondAttribute="top" constant="81" id="WgU-r5-zoF"/>
+                                    <constraint firstItem="fzd-ZJ-IfL" firstAttribute="trailing" secondItem="Gqd-L7-cHM" secondAttribute="trailing" id="dpD-Nn-faC"/>
+                                    <constraint firstItem="fzd-ZJ-IfL" firstAttribute="leading" secondItem="Gqd-L7-cHM" secondAttribute="leading" id="f9o-G0-zNy"/>
+                                    <constraint firstItem="QuI-2x-l36" firstAttribute="top" secondItem="xNG-qI-6Xr" secondAttribute="top" constant="76" id="igy-2S-qgN"/>
+                                    <constraint firstItem="JRL-ob-hjT" firstAttribute="top" secondItem="97s-KF-MNW" secondAttribute="bottom" constant="20" id="jFg-nQ-SIk"/>
+                                    <constraint firstItem="JRL-ob-hjT" firstAttribute="leading" secondItem="97s-KF-MNW" secondAttribute="leading" id="ua3-Vm-qYs"/>
+                                    <constraint firstItem="Gqd-L7-cHM" firstAttribute="top" secondItem="Phb-5b-RHY" secondAttribute="bottom" constant="34" id="yw5-Bv-X1D"/>
+                                </constraints>
+                            </view>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="cZo-iA-RXd">
+                                <rect key="frame" x="101" y="342" width="118" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="currentPageIndicatorTintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YD2-fm-uGO" firstAttribute="bottom" secondItem="dS8-St-LHa" secondAttribute="bottom" id="3iR-nM-r5p"/>
+                            <constraint firstItem="xNG-qI-6Xr" firstAttribute="top" secondItem="fhJ-bh-jPH" secondAttribute="bottom" id="74B-fu-XZ4"/>
+                            <constraint firstAttribute="trailing" secondItem="dS8-St-LHa" secondAttribute="trailing" id="D7l-3A-39n"/>
+                            <constraint firstItem="dS8-St-LHa" firstAttribute="trailing" secondItem="xNG-qI-6Xr" secondAttribute="trailing" id="SSM-5V-Y2j"/>
+                            <constraint firstItem="YD2-fm-uGO" firstAttribute="leading" secondItem="hyu-Ng-cMJ" secondAttribute="leading" id="a8i-Dc-MYY"/>
+                            <constraint firstItem="hyu-Ng-cMJ" firstAttribute="trailing" secondItem="dS8-St-LHa" secondAttribute="trailing" id="bha-qz-7YA"/>
+                            <constraint firstItem="YD2-fm-uGO" firstAttribute="top" secondItem="hyu-Ng-cMJ" secondAttribute="top" id="dBY-du-8LK"/>
+                            <constraint firstAttribute="bottom" secondItem="hyu-Ng-cMJ" secondAttribute="bottom" id="ex0-dS-e0s"/>
+                            <constraint firstAttribute="bottom" secondItem="xNG-qI-6Xr" secondAttribute="bottom" constant="-350" id="ozM-te-2mS"/>
+                            <constraint firstItem="YD2-fm-uGO" firstAttribute="leading" secondItem="JSk-EC-kht" secondAttribute="leading" id="poX-zN-OpL"/>
+                            <constraint firstItem="hyu-Ng-cMJ" firstAttribute="top" secondItem="JSk-EC-kht" secondAttribute="top" id="vt6-pJ-Smd"/>
+                            <constraint firstItem="dS8-St-LHa" firstAttribute="leading" secondItem="xNG-qI-6Xr" secondAttribute="leading" id="yec-D8-hO8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="9tC-TJ-Tay"/>
+                    <connections>
+                        <outlet property="loadingIndicate" destination="cZo-iA-RXd" id="1Th-m9-ZUG"/>
+                        <outlet property="loginView" destination="xNG-qI-6Xr" id="gMq-cf-P1a"/>
+                        <outlet property="logoImage" destination="YD2-fm-uGO" id="0qA-1f-0RZ"/>
+                        <outlet property="passwordTextField" destination="fzd-ZJ-IfL" id="tDx-uM-Trg"/>
+                        <outlet property="usernameTextField" destination="Gqd-L7-cHM" id="c1c-Uy-Ncu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4xv-sd-PE5" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1194" y="-897"/>
+        </scene>
+        <!--Register View Controller-->
+        <scene sceneID="QIx-Ln-JEz">
+            <objects>
+                <viewController id="fuX-I9-KYm" customClass="RegisterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Hy-zu-lgI"/>
+                        <viewControllerLayoutGuide type="bottom" id="ksn-wd-M4t"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BiF-4H-YsE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="etG-Ru-Ffc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="在没有网络情况下，学校信息将以短信形式发送，请如实填写" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="Vla-YD-K2z">
+                                <rect key="frame" x="40" y="11" width="260" height="81"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="hxd-Bo-BkF">
+                                <rect key="frame" x="20" y="38" width="12" height="12"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jaU-wv-2La">
+                                <rect key="frame" x="20" y="148" width="280" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="下一步">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="PQG-QT-ogX" kind="push" identifier="nextStep" id="qWn-Pa-2ap"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" 请输入手机号码" minimumFontSize="20" background="6976A0BF-5D5E-49BE-B6D8-70F6B53D1DFF" translatesAutoresizingMaskIntoConstraints="NO" id="VPG-xi-Yxi">
+                                <rect key="frame" x="20" y="78" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="rtb-Sm-nhe">
+                        <barButtonItem key="leftBarButtonItem" image="back_barButton_register" id="FTZ-yd-ILw">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="back:" destination="fuX-I9-KYm" id="faH-Zo-Aou"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="phoneTextField" destination="VPG-xi-Yxi" id="gFS-Zb-R1e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I8U-62-wON" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2213" y="-897"/>
+        </scene>
+        <!--Get Code View Controller-->
+        <scene sceneID="rPi-2R-caW">
+            <objects>
+                <viewController id="PQG-QT-ogX" customClass="GetCodeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QES-yk-av0"/>
+                        <viewControllerLayoutGuide type="bottom" id="sYB-vN-RaB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eMO-Sn-i28">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="s8w-MO-5gW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="MV0-qQ-RUc">
+                                <rect key="frame" x="20" y="46" width="12" height="12"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" 请输入验证码" minimumFontSize="20" background="6976A0BF-5D5E-49BE-B6D8-70F6B53D1DFF" translatesAutoresizingMaskIntoConstraints="NO" id="zZX-tU-F0f">
+                                <rect key="frame" x="20" y="86" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" secureTextEntry="YES"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="掌上南大已把验证码发送至：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kA2-f4-IT2">
+                                <rect key="frame" x="40" y="11" width="260" height="81"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="0158B0EE-D614-42EC-A236-1F89BCB0E993" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-JV-0PT">
+                                <rect key="frame" x="20" y="208" width="12" height="12"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="没有收到验证码？" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0EB-GX-odO">
+                                <rect key="frame" x="40" y="199" width="91" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="重新发送" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85L-TC-Vei">
+                                <rect key="frame" x="209" y="199" width="91" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O5H-Tu-PIt">
+                                <rect key="frame" x="20" y="145" width="280" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="下一步">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="0nO-l6-z6N" kind="push" identifier="completeCode" id="aSy-KR-XZj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="N0b-fz-2np">
+                        <barButtonItem key="leftBarButtonItem" image="back_barButton_register" id="YQe-Tp-t9M">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="back:" destination="PQG-QT-ogX" id="eXt-1n-IDc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="confirmCodeField" destination="zZX-tU-F0f" id="V11-zC-HsK"/>
+                        <outlet property="phoneNumLabel" destination="kA2-f4-IT2" id="GFv-oX-TEF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Zs-dS-lqv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2598" y="-897"/>
+        </scene>
+        <!--Register Complete View Controller-->
+        <scene sceneID="NZW-PL-KPN">
+            <objects>
+                <viewController id="0nO-l6-z6N" customClass="RegisterCompleteViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rOV-yn-cPa"/>
+                        <viewControllerLayoutGuide type="bottom" id="WYg-YV-Q49"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4gw-eh-29e">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="wf3-Wc-6f3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="20" background="6976A0BF-5D5E-49BE-B6D8-70F6B53D1DFF" translatesAutoresizingMaskIntoConstraints="NO" id="AE2-pt-lCC">
+                                <rect key="frame" x="20" y="24" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHX-3g-gHe">
+                                <rect key="frame" x="0.0" y="-14" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resignAllResponder:" destination="0nO-l6-z6N" eventType="touchUpInside" id="h9c-Re-1AH"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="请设置密码" minimumFontSize="20" background="6976A0BF-5D5E-49BE-B6D8-70F6B53D1DFF" translatesAutoresizingMaskIntoConstraints="NO" id="aXW-e7-rcu">
+                                <rect key="frame" x="20" y="83" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="请设置昵称" minimumFontSize="20" background="6976A0BF-5D5E-49BE-B6D8-70F6B53D1DFF" translatesAutoresizingMaskIntoConstraints="NO" id="CvL-L7-VkM">
+                                <rect key="frame" x="20" y="145" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4r-m3-5qW">
+                                <rect key="frame" x="20" y="206" width="280" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="完成">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="cRp-mI-hpY" kind="push" identifier="complete regist" id="84h-rS-N29"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="vjC-Sz-n6R">
+                        <barButtonItem key="leftBarButtonItem" image="back_barButton_register" id="kZe-Tv-mLY">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="back:" destination="0nO-l6-z6N" id="qeX-iF-tmT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nicknameField" destination="CvL-L7-VkM" id="COD-E9-5BD"/>
+                        <outlet property="passwordField" destination="aXW-e7-rcu" id="6bB-P4-Xn5"/>
+                        <outlet property="phoneNumField" destination="AE2-pt-lCC" id="Qpc-PL-B0k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fIJ-8Y-xJ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3006" y="-905"/>
+        </scene>
+        <!--Main Menu View Controller - 主页-->
+        <scene sceneID="YJJ-UF-7Hw">
+            <objects>
+                <viewController id="cRp-mI-hpY" customClass="MainMenuViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TXE-fM-B8B"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xdj-ec-4uC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jGV-EZ-Rvd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vSL-yy-TgG">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="217"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="217" id="5v9-GW-oTa"/>
+                                </constraints>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Aq2-AS-jaX">
+                                <rect key="frame" x="140" y="170" width="39" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </pageControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RA1-Cn-4Du">
+                                <rect key="frame" x="0.0" y="168" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_background" translatesAutoresizingMaskIntoConstraints="NO" id="iNm-o8-YPV">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tree_line_smaller" translatesAutoresizingMaskIntoConstraints="NO" id="TWz-jv-ltW">
+                                        <rect key="frame" x="155" y="85" width="10" height="568"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tree_touch" translatesAutoresizingMaskIntoConstraints="NO" id="KMu-mB-tWd">
+                                        <rect key="frame" x="133" y="33" width="54" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="52" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="D1h-1L-AJh">
+                                        <rect key="frame" x="20" y="95" width="280" height="430"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeftCell" rowHeight="52" id="R9K-vF-mw0" customClass="HomeCell">
+                                                <rect key="frame" x="0.0" y="22" width="280" height="52"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R9K-vF-mw0" id="wcF-ta-U5G">
+                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="51"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tree-dot" translatesAutoresizingMaskIntoConstraints="NO" id="fIc-KV-vFx">
+                                                            <rect key="frame" x="135" y="21" width="10" height="10"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="10" id="VB0-U2-RYL"/>
+                                                                <constraint firstAttribute="height" constant="10" id="jMd-cL-axk"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cwm-ZG-W4L" customClass="MenuButton">
+                                                            <rect key="frame" x="7" y="0.0" width="119" height="52"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <state key="normal" image="classroom">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="centerY" secondItem="fIc-KV-vFx" secondAttribute="centerY" id="4mH-wo-9r0"/>
+                                                        <constraint firstItem="Cwm-ZG-W4L" firstAttribute="top" secondItem="wcF-ta-U5G" secondAttribute="top" id="6Ez-xn-I0B"/>
+                                                        <constraint firstAttribute="centerX" secondItem="fIc-KV-vFx" secondAttribute="centerX" id="GZP-fa-lhK"/>
+                                                        <constraint firstItem="Cwm-ZG-W4L" firstAttribute="leading" secondItem="wcF-ta-U5G" secondAttribute="leading" constant="7" id="d1B-f8-79U"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Cwm-ZG-W4L" secondAttribute="bottom" constant="-1" id="slD-lL-Tc0"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <outlet property="menuButton" destination="Cwm-ZG-W4L" id="bkJ-4B-E91"/>
+                                                </connections>
+                                            </tableViewCell>
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RightCell" rowHeight="52" id="GNz-qN-l31" customClass="HomeCell">
+                                                <rect key="frame" x="0.0" y="74" width="280" height="52"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GNz-qN-l31" id="PTp-ZY-Mp0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="51"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jh2-H3-xCw" customClass="MenuButton">
+                                                            <rect key="frame" x="152" y="0.0" width="119" height="52"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <state key="normal" image="bbs">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                        </button>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tree-dot" translatesAutoresizingMaskIntoConstraints="NO" id="6U7-Nr-dzB">
+                                                            <rect key="frame" x="135" y="20" width="10" height="10"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="10" id="2ev-Bt-Hss"/>
+                                                                <constraint firstAttribute="height" constant="10" id="u8O-x8-glE"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Jh2-H3-xCw" firstAttribute="top" secondItem="PTp-ZY-Mp0" secondAttribute="top" id="4rV-7n-tuo"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Jh2-H3-xCw" secondAttribute="bottom" constant="-1" id="Dlp-vl-uEo"/>
+                                                        <constraint firstAttribute="centerX" secondItem="6U7-Nr-dzB" secondAttribute="centerX" id="NQw-ON-Mgh"/>
+                                                        <constraint firstAttribute="centerY" secondItem="6U7-Nr-dzB" secondAttribute="centerY" id="O7x-jY-tuy"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Jh2-H3-xCw" secondAttribute="trailing" constant="9" id="SrU-mZ-93a"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <outlet property="menuButton" destination="Jh2-H3-xCw" id="5ze-z4-w35"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="cRp-mI-hpY" id="ztM-tt-cFk"/>
+                                            <outlet property="delegate" destination="cRp-mI-hpY" id="ufQ-yI-DgA"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="KMu-mB-tWd" firstAttribute="top" secondItem="RA1-Cn-4Du" secondAttribute="top" constant="33" id="06r-W9-3ka"/>
+                                    <constraint firstItem="D1h-1L-AJh" firstAttribute="top" secondItem="KMu-mB-tWd" secondAttribute="bottom" constant="8" symbolic="YES" id="A1a-n3-eWY"/>
+                                    <constraint firstItem="D1h-1L-AJh" firstAttribute="leading" secondItem="RA1-Cn-4Du" secondAttribute="leading" constant="20" symbolic="YES" id="BlJ-e2-MkY"/>
+                                    <constraint firstItem="TWz-jv-ltW" firstAttribute="top" secondItem="KMu-mB-tWd" secondAttribute="bottom" constant="-2" id="EpH-Xm-Pvy"/>
+                                    <constraint firstAttribute="bottom" secondItem="iNm-o8-YPV" secondAttribute="bottom" constant="20" symbolic="YES" id="F3O-wH-J3G"/>
+                                    <constraint firstItem="iNm-o8-YPV" firstAttribute="leading" secondItem="RA1-Cn-4Du" secondAttribute="leading" id="Olg-np-Ou2"/>
+                                    <constraint firstItem="D1h-1L-AJh" firstAttribute="centerX" secondItem="KMu-mB-tWd" secondAttribute="centerX" id="g7B-s2-6Iy"/>
+                                    <constraint firstItem="D1h-1L-AJh" firstAttribute="centerX" secondItem="TWz-jv-ltW" secondAttribute="centerX" id="ih2-L9-aC7"/>
+                                    <constraint firstAttribute="bottom" secondItem="D1h-1L-AJh" secondAttribute="bottom" constant="43" id="rMD-ra-IVQ"/>
+                                    <constraint firstItem="iNm-o8-YPV" firstAttribute="centerX" secondItem="KMu-mB-tWd" secondAttribute="centerX" id="vG3-Dd-Ptf"/>
+                                    <constraint firstItem="iNm-o8-YPV" firstAttribute="top" secondItem="RA1-Cn-4Du" secondAttribute="top" id="xDh-L0-n9Y"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="joq-1A-hoz">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSJ-OT-mMN">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.13333333333333333" green="0.15686274509803921" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="f2f-H8-TbM"/>
+                                        </constraints>
+                                        <state key="normal" image="tabBar_desk">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bN5-mb-6NV">
+                                        <rect key="frame" x="80" y="0.0" width="80" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="CZd-cF-MeM"/>
+                                        </constraints>
+                                        <state key="normal" image="tabBar_submit">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Et8-82-3tJ">
+                                        <rect key="frame" x="160" y="0.0" width="80" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="aTl-HU-SyZ"/>
+                                        </constraints>
+                                        <state key="normal" image="tabBar_activity">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWM-YJ-5Tj">
+                                        <rect key="frame" x="240" y="0.0" width="80" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="tabBar_self">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="self:" destination="cRp-mI-hpY" eventType="touchUpInside" id="Z6V-p9-MyF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18431372549019609" green="0.21176470588235294" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="dSJ-OT-mMN" firstAttribute="width" secondItem="bN5-mb-6NV" secondAttribute="width" id="7TW-43-6Ex"/>
+                                    <constraint firstItem="Et8-82-3tJ" firstAttribute="leading" secondItem="bN5-mb-6NV" secondAttribute="trailing" id="C10-94-LBl"/>
+                                    <constraint firstItem="bN5-mb-6NV" firstAttribute="top" secondItem="dSJ-OT-mMN" secondAttribute="top" id="Dn2-gY-6KY"/>
+                                    <constraint firstItem="bN5-mb-6NV" firstAttribute="top" secondItem="joq-1A-hoz" secondAttribute="top" id="Exc-EM-y9I"/>
+                                    <constraint firstItem="dSJ-OT-mMN" firstAttribute="width" secondItem="ZWM-YJ-5Tj" secondAttribute="width" id="TG3-Yr-5gt"/>
+                                    <constraint firstItem="ZWM-YJ-5Tj" firstAttribute="leading" secondItem="Et8-82-3tJ" secondAttribute="trailing" id="V7k-ef-uTC"/>
+                                    <constraint firstItem="Et8-82-3tJ" firstAttribute="top" secondItem="bN5-mb-6NV" secondAttribute="top" id="YTM-BW-eXs"/>
+                                    <constraint firstItem="dSJ-OT-mMN" firstAttribute="width" secondItem="Et8-82-3tJ" secondAttribute="width" id="bjM-CR-Jgw"/>
+                                    <constraint firstItem="bN5-mb-6NV" firstAttribute="leading" secondItem="dSJ-OT-mMN" secondAttribute="trailing" id="ksE-XW-U15"/>
+                                    <constraint firstItem="dSJ-OT-mMN" firstAttribute="leading" secondItem="joq-1A-hoz" secondAttribute="leading" id="oTm-Sm-RXc"/>
+                                    <constraint firstItem="ZWM-YJ-5Tj" firstAttribute="top" secondItem="Et8-82-3tJ" secondAttribute="top" id="raN-50-axw"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZWM-YJ-5Tj" secondAttribute="trailing" id="sfA-g2-TZH"/>
+                                    <constraint firstItem="ZWM-YJ-5Tj" firstAttribute="bottom" secondItem="Et8-82-3tJ" secondAttribute="bottom" id="vlL-t8-pHg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RA1-Cn-4Du" firstAttribute="top" secondItem="TXE-fM-B8B" secondAttribute="bottom" constant="148" id="9dy-ZN-J36"/>
+                            <constraint firstItem="vSL-yy-TgG" firstAttribute="leading" secondItem="jGV-EZ-Rvd" secondAttribute="leading" id="DM1-bi-4H2"/>
+                            <constraint firstItem="joq-1A-hoz" firstAttribute="top" secondItem="jGV-EZ-Rvd" secondAttribute="top" constant="518" id="Il0-ay-W2M"/>
+                            <constraint firstAttribute="trailing" secondItem="vSL-yy-TgG" secondAttribute="trailing" id="OYL-V7-Uzl"/>
+                            <constraint firstItem="vSL-yy-TgG" firstAttribute="leading" secondItem="RA1-Cn-4Du" secondAttribute="leading" id="UKC-38-6gk"/>
+                            <constraint firstItem="RA1-Cn-4Du" firstAttribute="trailing" secondItem="vSL-yy-TgG" secondAttribute="trailing" id="Z5T-4A-Del"/>
+                            <constraint firstItem="joq-1A-hoz" firstAttribute="leading" secondItem="vSL-yy-TgG" secondAttribute="leading" id="e24-jl-UIG"/>
+                            <constraint firstItem="vSL-yy-TgG" firstAttribute="top" secondItem="jGV-EZ-Rvd" secondAttribute="top" id="grJ-1j-FWE"/>
+                            <constraint firstItem="Aq2-AS-jaX" firstAttribute="top" secondItem="TXE-fM-B8B" secondAttribute="bottom" constant="150" id="klh-6y-Xwd"/>
+                            <constraint firstItem="Aq2-AS-jaX" firstAttribute="leading" secondItem="jGV-EZ-Rvd" secondAttribute="leading" constant="140" id="l5e-d1-QDB"/>
+                            <constraint firstAttribute="bottom" secondItem="joq-1A-hoz" secondAttribute="bottom" id="nD0-QW-Kzi"/>
+                            <constraint firstAttribute="bottom" secondItem="RA1-Cn-4Du" secondAttribute="bottom" constant="-168" id="oO2-sr-qW2"/>
+                            <constraint firstItem="joq-1A-hoz" firstAttribute="trailing" secondItem="vSL-yy-TgG" secondAttribute="trailing" id="uwq-fh-xe1"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="主页" image="tabBar_home" id="fQv-sO-x81"/>
+                    <connections>
+                        <outlet property="menuView" destination="RA1-Cn-4Du" id="QEi-HY-eQF"/>
+                        <outlet property="pageController" destination="Aq2-AS-jaX" id="rvN-dx-tsj"/>
+                        <outlet property="pageScroller" destination="vSL-yy-TgG" id="XeQ-v7-JnF"/>
+                        <outlet property="tableView" destination="D1h-1L-AJh" id="4sY-nP-uXu"/>
+                        <outlet property="touchCircle" destination="KMu-mB-tWd" id="IwC-oy-1gy"/>
+                        <segue destination="IpH-t4-fPb" kind="modal" identifier="news" id="O97-P9-ahn"/>
+                        <segue destination="wkS-op-LKz" kind="push" identifier="phone" id="WIm-Nc-AGm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qbw-Cv-Lvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1024" y="-29"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="HnH-jd-MRF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IpH-t4-fPb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="du5-xh-TZf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kHq-zv-3qk" kind="relationship" relationship="rootViewController" id="0z4-VG-2JQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cw1-TR-wfS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1959" y="247"/>
+        </scene>
+        <!--News ListTVC-->
+        <scene sceneID="4Pv-F0-uMV">
+            <objects>
+                <tableViewController id="kHq-zv-3qk" customClass="NewsListTVC" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Y8s-Hz-BNe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="8Z0-Zy-z2s">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Z0-Zy-z2s" id="OnU-H7-WGF">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="kHq-zv-3qk" id="2XU-y7-0FK"/>
+                            <outlet property="delegate" destination="kHq-zv-3qk" id="Gt6-Lw-hbf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="78B-3e-oCt">
+                        <barButtonItem key="leftBarButtonItem" image="back_barButton_newsList" id="RbF-Df-cl7">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="backToMain:" destination="kHq-zv-3qk" id="NIc-6s-TlD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="Shk-kX-aiY" kind="push" identifier="detail" id="7JV-h4-WSo"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KJt-4N-1G3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2470" y="237"/>
+        </scene>
+        <!--News DetailVC-->
+        <scene sceneID="hwq-oL-zHV">
+            <objects>
+                <viewController id="Shk-kX-aiY" customClass="NewsDetailVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HTD-j9-zK8"/>
+                        <viewControllerLayoutGuide type="bottom" id="2XP-wh-IYq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Oha-p1-h9o">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6k-qq-eGH">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="h6k-qq-eGH" firstAttribute="leading" secondItem="Oha-p1-h9o" secondAttribute="leading" id="DXM-Vb-kST"/>
+                            <constraint firstAttribute="trailing" secondItem="h6k-qq-eGH" secondAttribute="trailing" id="l6P-cx-Lb1"/>
+                            <constraint firstAttribute="bottom" secondItem="h6k-qq-eGH" secondAttribute="bottom" id="ue5-JD-Xnx"/>
+                            <constraint firstItem="h6k-qq-eGH" firstAttribute="top" secondItem="Oha-p1-h9o" secondAttribute="top" constant="64" id="zui-5y-LIO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vau-FY-lxH">
+                        <barButtonItem key="leftBarButtonItem" image="back_barButton_newsDetail" id="X3e-Qk-Fd2">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="backToList:" destination="Shk-kX-aiY" id="alK-i2-VQi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jvs-wa-PpU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2855" y="237"/>
+        </scene>
+        <!--Telephone InfoVC-->
+        <scene sceneID="cME-g9-NHW">
+            <objects>
+                <viewController id="wkS-op-LKz" customClass="TelephoneInfoVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bds-Vn-dF4"/>
+                        <viewControllerLayoutGuide type="bottom" id="uVT-Qr-2Bk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1wY-up-zuc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oWL-2b-6bu">
+                                <rect key="frame" x="0.0" y="30" width="320" height="570"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="department" rowHeight="48" id="UTg-kr-ENy" customClass="DepartmentCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UTg-kr-ENy" id="osV-yi-Vqf">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="团委" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ac-L2-7bZ">
+                                                    <rect key="frame" x="20" y="11" width="152" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="152" id="rHD-3h-twt"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UpAccessory" translatesAutoresizingMaskIntoConstraints="NO" id="uno-Gf-1t7">
+                                                    <rect key="frame" x="287" y="10" width="33" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6Ac-L2-7bZ" firstAttribute="top" secondItem="osV-yi-Vqf" secondAttribute="top" constant="11" id="CIG-Eb-tqQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="uno-Gf-1t7" secondAttribute="trailing" id="TZ1-W3-wuP"/>
+                                                <constraint firstItem="uno-Gf-1t7" firstAttribute="top" secondItem="osV-yi-Vqf" secondAttribute="top" constant="10" id="Tvl-z3-ePj"/>
+                                                <constraint firstAttribute="bottom" secondItem="uno-Gf-1t7" secondAttribute="bottom" constant="13" id="jla-Og-SH6"/>
+                                                <constraint firstItem="6Ac-L2-7bZ" firstAttribute="leading" secondItem="osV-yi-Vqf" secondAttribute="leading" constant="20" symbolic="YES" id="rWA-J1-emp"/>
+                                                <constraint firstAttribute="bottom" secondItem="6Ac-L2-7bZ" secondAttribute="bottom" constant="15" id="vHQ-My-DTV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="arrowImageView" destination="uno-Gf-1t7" id="rnE-Dg-zLT"/>
+                                            <outlet property="departmentLabel" destination="6Ac-L2-7bZ" id="EpL-IV-g3g"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="phone" rowHeight="70" id="Ptv-bH-YkS" customClass="PhoneNumCell">
+                                        <rect key="frame" x="0.0" y="70" width="320" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ptv-bH-YkS" id="wFi-Y0-vIM">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="部门" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Qu-hJ-gbB">
+                                                    <rect key="frame" x="44" y="11" width="50" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="MxV-gb-LvG"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地点" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Brm-aX-SsZ">
+                                                    <rect key="frame" x="95" y="14" width="34" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电话" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igZ-oO-oMI">
+                                                    <rect key="frame" x="44" y="40" width="34" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="igZ-oO-oMI" firstAttribute="top" secondItem="9Qu-hJ-gbB" secondAttribute="bottom" constant="2" id="Czx-rw-CZ9"/>
+                                                <constraint firstItem="9Qu-hJ-gbB" firstAttribute="top" secondItem="wFi-Y0-vIM" secondAttribute="top" constant="11" id="KCT-fV-8um"/>
+                                                <constraint firstItem="Brm-aX-SsZ" firstAttribute="leading" secondItem="9Qu-hJ-gbB" secondAttribute="trailing" constant="1" id="bj0-fN-EOt"/>
+                                                <constraint firstItem="Brm-aX-SsZ" firstAttribute="top" secondItem="wFi-Y0-vIM" secondAttribute="top" constant="14" id="fJU-wW-t3H"/>
+                                                <constraint firstItem="9Qu-hJ-gbB" firstAttribute="leading" secondItem="wFi-Y0-vIM" secondAttribute="leading" constant="44" id="fKm-KK-kc8"/>
+                                                <constraint firstItem="9Qu-hJ-gbB" firstAttribute="centerY" secondItem="Brm-aX-SsZ" secondAttribute="centerY" id="htT-ki-cWY"/>
+                                                <constraint firstItem="9Qu-hJ-gbB" firstAttribute="leading" secondItem="igZ-oO-oMI" secondAttribute="leading" id="zSY-Up-tAa"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="departmentLabel" destination="9Qu-hJ-gbB" id="Lpv-vl-QB3"/>
+                                            <outlet property="locationLabel" destination="Brm-aX-SsZ" id="u2N-Qx-gVz"/>
+                                            <outlet property="phoneLabel" destination="igZ-oO-oMI" id="juN-5u-8gm"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="wkS-op-LKz" id="yaK-rz-Bko"/>
+                                    <outlet property="delegate" destination="wkS-op-LKz" id="jVC-Fk-ELT"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="oWL-2b-6bu" secondAttribute="trailing" id="APf-Th-M0t"/>
+                            <constraint firstItem="oWL-2b-6bu" firstAttribute="leading" secondItem="1wY-up-zuc" secondAttribute="leading" id="rgS-NR-Jad"/>
+                            <constraint firstItem="oWL-2b-6bu" firstAttribute="top" secondItem="bds-Vn-dF4" secondAttribute="bottom" constant="10" id="vhW-Hv-pg4"/>
+                            <constraint firstAttribute="bottom" secondItem="oWL-2b-6bu" secondAttribute="bottom" constant="-32" id="zO6-3y-sFg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="F1y-v9-3v7"/>
+                    <connections>
+                        <outlet property="phoneTableView" destination="oWL-2b-6bu" id="pfw-LF-aLP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3ME-hi-YwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="523" y="317"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="0158B0EE-D614-42EC-A236-1F89BCB0E993" width="12" height="12">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
+GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
+c1dOU0NvbG9ygAKADRIgwAAAgAOAC1h7MTIsIDEyfdIVChYYWk5TLm9iamVjdHOhF4AEgArSFQoaHaIb
+HIAFgAaACRAA0iAKISJfEBROU1RJRkZSZXByZXNlbnRhdGlvboAHgAhPEQquTU0AKgAAAkjs9+//6fXs
+/+v47P/q+uf/6/vn/+r46f/q+Oz/6/vw/+r47//v9ez/8PLp/+/08f/o9ur/6/nv/+/37//w8+z/9vTy
+//z3/P/89///8vH3/+719f/x9e3/8vTs/+zx7P/r+Ov/7/Xt//bu8v//7vz/5sLl/6+Kr/+2jLf/7sXw
+//vx/v/08PD/8fTs//D18P/q+Of/8/Xt//3r+/+9kr3/XCRb/0cBR/9KAE3/Zidq/8elyf/77/r/8fXv
+/+z37f/p+ub/9/b1/+TA4v9ZIFj/TgBN/1kAWv9aAF7/TgBQ/18tX//q0uv/8/n0/+r57f/t++v//vj8
+/7OOs/9IBUj/WQBb/14AYP9dAF//WABY/0sOSv/Hpcj/9v36/+n46//t++3//vj+/7mOu/9LAE7/WgBe
+/10AYP9ZAFv/WABV/1QIUP/Mpcz/9P36/+j66f/p+O//9fP6/+vD7f9iImb/TgBR/1gAWP9YAFX/TQBL
+/3Iubv/z0/T/8Pj1/+v87P/t+fH/7PT0//ru/P/GpMj/YzJj/0oMR/9TBE7/dTJy/8q6yP/19fX/8PTw
+//P48f/u9Or/7/Tr//Tx8f/98vv/7dTt/8Gjwv/Ho8n/9NT2//f39v/w9O//8PPv//H08P/s8Ob/9Pft
+//T17//x9fD/8Pbx//b9+v/0/fr/7/b0//H18v/w8+//8/bx/+/x7f/x9fL/8PTx/+/07//u9+//7fvv
+/+r77P/p/On/6/zr/+/z7f/z9fH/8fXw//Hz8P8ADgEAAAMAAAABAAwAAAEBAAMAAAABAAwAAAECAAMA
+AAAEAAAC9gEDAAMAAAABAAEAAAEGAAMAAAABAAIAAAERAAQAAAABAAAACAESAAMAAAABAAEAAAEVAAMA
+AAABAAQAAAEWAAMAAAABAAwAAAEXAAQAAAABAAACQAEcAAMAAAABAAEAAAFSAAMAAAABAAEAAAFTAAMA
+AAAEAAAC/odzAAcAAAeoAAADBgAAAAAACAAIAAgACAABAAEAAQABAAAHqGFwcGwCIAAAbW50clJHQiBY
+WVogB9kAAgAZAAsAGgALYWNzcEFQUEwAAAAAYXBwbAAAAAAAAAAAAAAAAAAAAAAAAPbWAAEAAAAA0y1h
+cHBsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALZGVzYwAAAQgA
+AABvZHNjbQAAAXgAAAVsY3BydAAABuQAAAA4d3RwdAAABxwAAAAUclhZWgAABzAAAAAUZ1hZWgAAB0QA
+AAAUYlhZWgAAB1gAAAAUclRSQwAAB2wAAAAOY2hhZAAAB3wAAAAsYlRSQwAAB2wAAAAOZ1RSQwAAB2wA
+AAAOZGVzYwAAAAAAAAAUR2VuZXJpYyBSR0IgUHJvZmlsZQAAAAAAAAAAAAAAFEdlbmVyaWMgUkdCIFBy
+b2ZpbGUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG1sdWMA
+AAAAAAAAHgAAAAxza1NLAAAAKAAAAXhockhSAAAAKAAAAaBjYUVTAAAAJAAAAchwdEJSAAAAJgAAAex1
+a1VBAAAAKgAAAhJmckZVAAAAKAAAAjx6aFRXAAAAFgAAAmRpdElUAAAAKAAAAnpuYk5PAAAAJgAAAqJr
+b0tSAAAAFgAAAshjc0NaAAAAIgAAAt5oZUlMAAAAHgAAAwBkZURFAAAALAAAAx5odUhVAAAAKAAAA0pz
+dlNFAAAAJgAAAqJ6aENOAAAAFgAAA3JqYUpQAAAAGgAAA4hyb1JPAAAAJAAAA6JlbEdSAAAAIgAAA8Zw
+dFBPAAAAJgAAA+hubE5MAAAAKAAABA5lc0VTAAAAJgAAA+h0aFRIAAAAJAAABDZ0clRSAAAAIgAABFpm
+aUZJAAAAKAAABHxwbFBMAAAALAAABKRydVJVAAAAIgAABNBhckVHAAAAJgAABPJlblVTAAAAJgAABRhk
+YURLAAAALgAABT4AVgFhAGUAbwBiAGUAYwBuAP0AIABSAEcAQgAgAHAAcgBvAGYAaQBsAEcAZQBuAGUA
+cgBpAQ0AawBpACAAUgBHAEIAIABwAHIAbwBmAGkAbABQAGUAcgBmAGkAbAAgAFIARwBCACAAZwBlAG4A
+6AByAGkAYwBQAGUAcgBmAGkAbAAgAFIARwBCACAARwBlAG4A6QByAGkAYwBvBBcEMAQzBDAEOwRMBD0E
+OAQ5ACAEPwRABD4ERAQwBDkEOwAgAFIARwBCAFAAcgBvAGYAaQBsACAAZwDpAG4A6QByAGkAcQB1AGUA
+IABSAFYAQpAadSgAIABSAEcAQgAggnJfaWPPj/AAUAByAG8AZgBpAGwAbwAgAFIARwBCACAAZwBlAG4A
+ZQByAGkAYwBvAEcAZQBuAGUAcgBpAHMAawAgAFIARwBCAC0AcAByAG8AZgBpAGzHfLwYACAAUgBHAEIA
+INUEuFzTDMd8AE8AYgBlAGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbAXkBegF1QXkBdkF3AAgAFIA
+RwBCACAF2wXcBdwF2QBBAGwAbABnAGUAbQBlAGkAbgBlAHMAIABSAEcAQgAtAFAAcgBvAGYAaQBsAMEA
+bAB0AGEAbADhAG4AbwBzACAAUgBHAEIAIABwAHIAbwBmAGkAbGZukBoAIABSAEcAQgAgY8+P8GWHTvZO
+AIIsACAAUgBHAEIAIDDXMO0w1TChMKQw6wBQAHIAbwBmAGkAbAAgAFIARwBCACAAZwBlAG4AZQByAGkA
+YwOTA7UDvQO5A7oDzAAgA8ADwQO/A8YDrwO7ACAAUgBHAEIAUABlAHIAZgBpAGwAIABSAEcAQgAgAGcA
+ZQBuAOkAcgBpAGMAbwBBAGwAZwBlAG0AZQBlAG4AIABSAEcAQgAtAHAAcgBvAGYAaQBlAGwOQg4bDiMO
+RA4fDiUOTAAgAFIARwBCACAOFw4xDkgOJw5EDhsARwBlAG4AZQBsACAAUgBHAEIAIABQAHIAbwBmAGkA
+bABpAFkAbABlAGkAbgBlAG4AIABSAEcAQgAtAHAAcgBvAGYAaQBpAGwAaQBVAG4AaQB3AGUAcgBzAGEA
+bABuAHkAIABwAHIAbwBmAGkAbAAgAFIARwBCBB4EMQRJBDgEOQAgBD8EQAQ+BEQEOAQ7BEwAIABSAEcA
+QgZFBkQGQQAgBioGOQYxBkoGQQAgAFIARwBCACAGJwZEBjkGJwZFAEcAZQBuAGUAcgBpAGMAIABSAEcA
+QgAgAFAAcgBvAGYAaQBsAGUARwBlAG4AZQByAGUAbAAgAFIARwBCAC0AYgBlAHMAawByAGkAdgBlAGwA
+cwBldGV4dAAAAABDb3B5cmlnaHQgMjAwNyBBcHBsZSBJbmMuLCBhbGwgcmlnaHRzIHJlc2VydmVkLgBY
+WVogAAAAAAAA81IAAQAAAAEWz1hZWiAAAAAAAAB0TQAAPe4AAAPQWFlaIAAAAAAAAFp1AACscwAAFzRY
+WVogAAAAAAAAKBoAABWfAAC4NmN1cnYAAAAAAAAAAQHNAABzZjMyAAAAAAABDEIAAAXe///zJgAAB5IA
+AP2R///7ov///aMAAAPcAADAbNIlJicoWiRjbGFzc25hbWVYJGNsYXNzZXNfEBBOU0JpdG1hcEltYWdl
+UmVwoykqK18QEE5TQml0bWFwSW1hZ2VSZXBaTlNJbWFnZVJlcFhOU09iamVjdNIlJi0uV05TQXJyYXmi
+LSvSJSYwMV5OU011dGFibGVBcnJheaMwLSvTMzQKNTY3V05TV2hpdGVcTlNDb2xvclNwYWNlRDAgMAAQ
+A4AM0iUmOTpXTlNDb2xvcqI5K9IlJjw9V05TSW1hZ2WiPCtfEA9OU0tleWVkQXJjaGl2ZXLRQEFUcm9v
+dIABAAgAEQAaACMALQAyADcARgBMAFcAXgBlAHIAeQCBAIMAhQCKAIwAjgCXAJwApwCpAKsArQCyALUA
+twC5ALsAvQDCANkA2wDdC48LlAufC6gLuwu/C9IL3QvmC+sL8wv2C/sMCgwODBUMHQwqDC8MMQwzDDgM
+QAxDDEgMUAxTDGUMaAxtAAAAAAAAAgEAAAAAAAAAQgAAAAAAAAAAAAAAAAAADG8
+</mutableData>
+        </image>
+        <image name="6976A0BF-5D5E-49BE-B6D8-70F6B53D1DFF" width="253" height="36">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
+GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
+c1dOU0NvbG9ygAKADRIgwAAAgAOAC1l7MjUzLCAzNn3SFQoWGFpOUy5vYmplY3RzoReABIAK0hUKGh2i
+GxyABYAGgAkQANIgCiEiXxAUTlNUSUZGUmVwcmVzZW50YXRpb26AB4AITxGWvk1NACoAAI5Y8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9fD/8fTw//H08P/x9fD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fXw//H08P/x9PD/8fXw//H0
+8P/x9PD/8fTw//Dz7//v8+3/8/Xx//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8PPv//P18f/x9PD/8/Xx//Dx7f/x9PD/8fTw//D0
+8P/09fH/9Pby/+7w7P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//T29P/w9PD/8fTx/+/z7f/x8/D/8fTw//H08P/1+PL/8/by//D0
+7//x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/w8+//9Pby//T18v/x9PD/8fTw//H08P/w9O//1tnV//T28v/w8/D/8/Xx//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//Dz7//V19X/9Pby//P18f/x9PD/8PPv/77Bvf/v8e3/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//P1
+8f/r7ur/vsG9//P18f/x9PD/8fTw//Dz7//Awr7/8PPv//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/z9fH/6+7q/8DC
+vv/z9fH/8fTw//H08P/w8+//wMK+//Dz7//x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8/Xx/+vu6v/Awr7/8/Xx//H0
+8P/x9PD/8PPv/8DCvv/w8+//8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//P18f/r7ur/wMK+//P18f/x9PD/8fTw//Dz
+7//Awr7/8PPv//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/z9fH/6+7q/8DCvv/z9fH/8fTw//H08P/w8+//wMK+//Dz
+7//x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8/Xx/+vu6v/Awr7/8/Xx//H08P/x9PD/8PPv/8DCvv/w8+//8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//P18f/r7ur/wMK+//P18f/x9PD/8fTw//Dz7//Awr7/8PTw//H08f/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/z9fH/6uzo/77Cvf/z9vH/8fTw//H08P/w8+//wMK+/+/x7//09vL/8/Xx//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/9Pby/+rs
+6P/Awr7/8/Xx//Hz8P/x9PD/8PPv/73AvP/v8e3/8PPv//H08P/x8/D/8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D0
+7//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//w9O//8PTv//D07//q7Oj/wMG+//H0
+8P/y9PH/8fTw//H08P/HycX/vcG8/8DCvv/Bw7//vcG9/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DC
+vv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv/Awr7/wMK+/8DCvv++wb3/vsG9/8nLyP/1+fT/8fTw//H0
+8P/x9PD/8/Xx/+zv6//v8e//7/Ht//Dz7//v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x
+7f/v8e3/7/Ht/+/x7f/v8e3/7/Ht/+/x7f/v8e3/8PPv/+zv7P/09fL/7/Pv/+/x7f/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H08P/x9PD/8fTw//H0
+8P/x9PD/AA4BAAADAAAAAQD9AAABAQADAAAAAQAkAAABAgADAAAABAAAjwYBAwADAAAAAQABAAABBgAD
+AAAAAQACAAABEQAEAAAAAQAAAAgBEgADAAAAAQABAAABFQADAAAAAQAEAAABFgADAAAAAQAkAAABFwAE
+AAAAAQAAjlABHAADAAAAAQABAAABUgADAAAAAQABAAABUwADAAAABAAAjw6HcwAHAAAHqAAAjxYAAAAA
+AAgACAAIAAgAAQABAAEAAQAAB6hhcHBsAiAAAG1udHJSR0IgWFlaIAfZAAIAGQALABoAC2Fjc3BBUFBM
+AAAAAGFwcGwAAAAAAAAAAAAAAAAAAAAAAAD21gABAAAAANMtYXBwbAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC2Rlc2MAAAEIAAAAb2RzY20AAAF4AAAFbGNwcnQAAAbk
+AAAAOHd0cHQAAAccAAAAFHJYWVoAAAcwAAAAFGdYWVoAAAdEAAAAFGJYWVoAAAdYAAAAFHJUUkMAAAds
+AAAADmNoYWQAAAd8AAAALGJUUkMAAAdsAAAADmdUUkMAAAdsAAAADmRlc2MAAAAAAAAAFEdlbmVyaWMg
+UkdCIFByb2ZpbGUAAAAAAAAAAAAAABRHZW5lcmljIFJHQiBQcm9maWxlAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABtbHVjAAAAAAAAAB4AAAAMc2tTSwAAACgAAAF4
+aHJIUgAAACgAAAGgY2FFUwAAACQAAAHIcHRCUgAAACYAAAHsdWtVQQAAACoAAAISZnJGVQAAACgAAAI8
+emhUVwAAABYAAAJkaXRJVAAAACgAAAJ6bmJOTwAAACYAAAKia29LUgAAABYAAALIY3NDWgAAACIAAALe
+aGVJTAAAAB4AAAMAZGVERQAAACwAAAMeaHVIVQAAACgAAANKc3ZTRQAAACYAAAKiemhDTgAAABYAAANy
+amFKUAAAABoAAAOIcm9STwAAACQAAAOiZWxHUgAAACIAAAPGcHRQTwAAACYAAAPobmxOTAAAACgAAAQO
+ZXNFUwAAACYAAAPodGhUSAAAACQAAAQ2dHJUUgAAACIAAARaZmlGSQAAACgAAAR8cGxQTAAAACwAAASk
+cnVSVQAAACIAAATQYXJFRwAAACYAAATyZW5VUwAAACYAAAUYZGFESwAAAC4AAAU+AFYBYQBlAG8AYgBl
+AGMAbgD9ACAAUgBHAEIAIABwAHIAbwBmAGkAbABHAGUAbgBlAHIAaQENAGsAaQAgAFIARwBCACAAcABy
+AG8AZgBpAGwAUABlAHIAZgBpAGwAIABSAEcAQgAgAGcAZQBuAOgAcgBpAGMAUABlAHIAZgBpAGwAIABS
+AEcAQgAgAEcAZQBuAOkAcgBpAGMAbwQXBDAEMwQwBDsETAQ9BDgEOQAgBD8EQAQ+BEQEMAQ5BDsAIABS
+AEcAQgBQAHIAbwBmAGkAbAAgAGcA6QBuAOkAcgBpAHEAdQBlACAAUgBWAEKQGnUoACAAUgBHAEIAIIJy
+X2ljz4/wAFAAcgBvAGYAaQBsAG8AIABSAEcAQgAgAGcAZQBuAGUAcgBpAGMAbwBHAGUAbgBlAHIAaQBz
+AGsAIABSAEcAQgAtAHAAcgBvAGYAaQBsx3y8GAAgAFIARwBCACDVBLhc0wzHfABPAGIAZQBjAG4A/QAg
+AFIARwBCACAAcAByAG8AZgBpAGwF5AXoBdUF5AXZBdwAIABSAEcAQgAgBdsF3AXcBdkAQQBsAGwAZwBl
+AG0AZQBpAG4AZQBzACAAUgBHAEIALQBQAHIAbwBmAGkAbADBAGwAdABhAGwA4QBuAG8AcwAgAFIARwBC
+ACAAcAByAG8AZgBpAGxmbpAaACAAUgBHAEIAIGPPj/Blh072TgCCLAAgAFIARwBCACAw1zDtMNUwoTCk
+MOsAUAByAG8AZgBpAGwAIABSAEcAQgAgAGcAZQBuAGUAcgBpAGMDkwO1A70DuQO6A8wAIAPAA8EDvwPG
+A68DuwAgAFIARwBCAFAAZQByAGYAaQBsACAAUgBHAEIAIABnAGUAbgDpAHIAaQBjAG8AQQBsAGcAZQBt
+AGUAZQBuACAAUgBHAEIALQBwAHIAbwBmAGkAZQBsDkIOGw4jDkQOHw4lDkwAIABSAEcAQgAgDhcOMQ5I
+DicORA4bAEcAZQBuAGUAbAAgAFIARwBCACAAUAByAG8AZgBpAGwAaQBZAGwAZQBpAG4AZQBuACAAUgBH
+AEIALQBwAHIAbwBmAGkAaQBsAGkAVQBuAGkAdwBlAHIAcwBhAGwAbgB5ACAAcAByAG8AZgBpAGwAIABS
+AEcAQgQeBDEESQQ4BDkAIAQ/BEAEPgREBDgEOwRMACAAUgBHAEIGRQZEBkEAIAYqBjkGMQZKBkEAIABS
+AEcAQgAgBicGRAY5BicGRQBHAGUAbgBlAHIAaQBjACAAUgBHAEIAIABQAHIAbwBmAGkAbABlAEcAZQBu
+AGUAcgBlAGwAIABSAEcAQgAtAGIAZQBzAGsAcgBpAHYAZQBsAHMAZXRleHQAAAAAQ29weXJpZ2h0IDIw
+MDcgQXBwbGUgSW5jLiwgYWxsIHJpZ2h0cyByZXNlcnZlZC4AWFlaIAAAAAAAAPNSAAEAAAABFs9YWVog
+AAAAAAAAdE0AAD3uAAAD0FhZWiAAAAAAAABadQAArHMAABc0WFlaIAAAAAAAACgaAAAVnwAAuDZjdXJ2
+AAAAAAAAAAEBzQAAc2YzMgAAAAAAAQxCAAAF3v//8yYAAAeSAAD9kf//+6L///2jAAAD3AAAwGzSJSYn
+KFokY2xhc3NuYW1lWCRjbGFzc2VzXxAQTlNCaXRtYXBJbWFnZVJlcKMpKitfEBBOU0JpdG1hcEltYWdl
+UmVwWk5TSW1hZ2VSZXBYTlNPYmplY3TSJSYtLldOU0FycmF5oi0r0iUmMDFeTlNNdXRhYmxlQXJyYXmj
+MC0r0zM0CjU2N1dOU1doaXRlXE5TQ29sb3JTcGFjZUQwIDAAEAOADNIlJjk6V05TQ29sb3KiOSvSJSY8
+PVdOU0ltYWdlojwrXxAPTlNLZXllZEFyY2hpdmVy0UBBVHJvb3SAAQAIABEAGgAjAC0AMgA3AEYATABX
+AF4AZQByAHkAgQCDAIUAigCMAI4AmACdAKgAqgCsAK4AswC2ALgAugC8AL4AwwDaANwA3pegl6WXsJe5
+l8yX0Jfjl+6X95f8mASYB5gMmBuYH5gmmC6YO5hAmEKYRJhJmFGYVJhZmGGYZJh2mHmYfgAAAAAAAAIB
+AAAAAAAAAEIAAAAAAAAAAAAAAAAAAJiAA
+</mutableData>
+        </image>
+        <image name="UpAccessory" width="33" height="23"/>
+        <image name="back_barButton_newsDetail" width="100" height="40"/>
+        <image name="back_barButton_newsList" width="100" height="40"/>
+        <image name="back_barButton_register" width="100" height="40"/>
+        <image name="background" width="640" height="960"/>
+        <image name="bbs" width="119" height="52"/>
+        <image name="buttonBar" width="320" height="50"/>
+        <image name="classroom" width="119" height="52"/>
+        <image name="dot" width="12" height="12"/>
+        <image name="menu_background" width="320" height="568"/>
+        <image name="startLogo" width="320" height="568"/>
+        <image name="tabBar_activity" width="80" height="50"/>
+        <image name="tabBar_desk" width="80" height="50"/>
+        <image name="tabBar_home" width="30" height="30"/>
+        <image name="tabBar_self" width="80" height="50"/>
+        <image name="tabBar_submit" width="80" height="50"/>
+        <image name="textArea" width="253" height="36"/>
+        <image name="tree-dot" width="20" height="20"/>
+        <image name="tree_line_smaller" width="10" height="568"/>
+        <image name="tree_touch" width="54" height="54"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="oMV-JV-lxV"/>
+    </inferredMetricsTieBreakers>
 </document>

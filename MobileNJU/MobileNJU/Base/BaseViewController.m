@@ -30,7 +30,7 @@
     if([self.navigationController.navigationBar
         respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
         
-        [self.navigationController.navigationBar  setBackgroundImage:[[UIImage imageNamed:@"navigation_bg"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)]   forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar  setBackgroundImage:[[UIImage imageNamed:@"navigationBar_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)]   forBarMetrics:UIBarMetricsDefault];
         //        [self.navigationController.navigationBar setBackgroundColor:RGB(143, 60, 133)];
         
         [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
