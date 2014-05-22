@@ -14,4 +14,6 @@
 @property (nonatomic , strong) TitleView *titleView;
 -(void)closeSelf;
 - (void)addTitleView;
+- (void)setTitle:(NSString*)title;
+- (void)setSubTitle:(NSString*)subTitle;
 @end

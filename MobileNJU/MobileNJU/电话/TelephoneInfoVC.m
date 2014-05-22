@@ -33,7 +33,12 @@
     self.phoneTableView.sectionFooterHeight = 0;
     self.phoneTableView.sectionHeaderHeight = 0;
     self.isOpen = NO;
+    
+    
+    [self setTitle:@"部门电话"];
+    [self setSubTitle:@"各个部门电话"];
     [self loadData];
+    
 }
 - (void) loadData
 {

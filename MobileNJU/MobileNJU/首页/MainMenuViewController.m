@@ -315,6 +315,8 @@ static NSArray* buttonImages;
     [self performSegueWithIdentifier:@"news" sender:nil];
 }
 
+
+
 - (void)viewDidLoad
 {
     

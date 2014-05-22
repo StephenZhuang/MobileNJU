@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface NewsDetailVC : UIViewController
+#import "BaseViewController.h"
+@interface NewsDetailVC : BaseViewController
 
 @end

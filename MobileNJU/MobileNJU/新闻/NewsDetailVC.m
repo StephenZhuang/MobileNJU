@@ -14,9 +14,7 @@
 
 @implementation NewsDetailVC
 
-- (IBAction)backToList:(UIBarButtonItem *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

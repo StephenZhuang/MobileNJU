@@ -22,6 +22,13 @@
     }
     return self;
 }
+- (void)setTitle:(NSString*)title{
+    [self.titleView setTitle:title];
+}
+
+- (void)setSubTitle:(NSString*)subTitle{
+    [self.titleView setSubTitle:subTitle];
+}
 
 - (void)viewDidLoad
 {
