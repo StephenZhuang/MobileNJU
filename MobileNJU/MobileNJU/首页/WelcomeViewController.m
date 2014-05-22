@@ -32,11 +32,11 @@
 
 /*
  设置NavigationBar风格
- */
 -(void) setNavigationBarStyle
 {
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar_background.png"] forBarMetrics:UIBarMetricsDefault];
-}
+ } */
+
 
 
 
@@ -81,7 +81,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setNavigationBarStyle];
+  //  [self setNavigationBarStyle];
     [self setDelegate];
     //中间缺少加载过程
     [self showLoginView];

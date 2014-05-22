@@ -63,15 +63,16 @@
 		7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B32192D9C230066494D /* MainMenuViewController.m */; };
 		7DD25B39192D9C230066494D /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B34192D9C230066494D /* HomeCell.m */; };
 		7DD25B3A192D9C230066494D /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B36192D9C230066494D /* MenuButton.m */; };
-		7DD25B40192D9E010066494D /* TelephoneInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B3F192D9E010066494D /* TelephoneInfoVC.m */; };
-		7DD25B48192D9E1E0066494D /* RegisterCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B43192D9E1E0066494D /* RegisterCompleteViewController.m */; };
-		7DD25B49192D9E1E0066494D /* GetCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B45192D9E1E0066494D /* GetCodeViewController.m */; };
-		7DD25B4A192D9E1E0066494D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B47192D9E1E0066494D /* RegisterViewController.m */; };
-		7DD25B56192D9E620066494D /* NewsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B53192D9E620066494D /* NewsDetailVC.m */; };
-		7DD25B57192D9E620066494D /* NewsListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B55192D9E620066494D /* NewsListTVC.m */; };
-		7DD25B60192D9F1A0066494D /* SelfInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B5F192D9F1A0066494D /* SelfInfoVC.m */; };
-		7DD8698B192DAB6400D4ADAA /* DepartmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD8698A192DAB6400D4ADAA /* DepartmentCell.m */; };
-		7DD8698E192DAB7700D4ADAA /* PhoneNumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD8698D192DAB7700D4ADAA /* PhoneNumCell.m */; };
+		7DD86996192DB68A00D4ADAA /* DepartmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD86991192DB68A00D4ADAA /* DepartmentCell.m */; };
+		7DD86997192DB68A00D4ADAA /* PhoneNumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD86993192DB68A00D4ADAA /* PhoneNumCell.m */; };
+		7DD86998192DB68A00D4ADAA /* TelephoneInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD86995192DB68A00D4ADAA /* TelephoneInfoVC.m */; };
+		7DD8699E192DB6D700D4ADAA /* NewsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD8699B192DB6D700D4ADAA /* NewsDetailVC.m */; };
+		7DD8699F192DB6D700D4ADAA /* NewsListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD8699D192DB6D700D4ADAA /* NewsListTVC.m */; };
+		7DD869AF192DB73B00D4ADAA /* GetCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD869AA192DB73B00D4ADAA /* GetCodeViewController.m */; };
+		7DD869B0192DB73B00D4ADAA /* RegisterCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD869AC192DB73B00D4ADAA /* RegisterCompleteViewController.m */; };
+		7DD869B1192DB73B00D4ADAA /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD869AE192DB73B00D4ADAA /* RegisterViewController.m */; };
+		7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD869B3192DB74500D4ADAA /* SelfInfoVC.m */; };
+		7DD869B6192DB7A700D4ADAA /* Self.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD869B5192DB7A700D4ADAA /* Self.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,24 +187,25 @@
 		7DD25B34192D9C230066494D /* HomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
 		7DD25B35192D9C230066494D /* MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuButton.h; sourceTree = "<group>"; };
 		7DD25B36192D9C230066494D /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuButton.m; sourceTree = "<group>"; };
-		7DD25B3E192D9E010066494D /* TelephoneInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TelephoneInfoVC.h; sourceTree = "<group>"; };
-		7DD25B3F192D9E010066494D /* TelephoneInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TelephoneInfoVC.m; sourceTree = "<group>"; };
-		7DD25B42192D9E1E0066494D /* RegisterCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterCompleteViewController.h; sourceTree = "<group>"; };
-		7DD25B43192D9E1E0066494D /* RegisterCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterCompleteViewController.m; sourceTree = "<group>"; };
-		7DD25B44192D9E1E0066494D /* GetCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetCodeViewController.h; sourceTree = "<group>"; };
-		7DD25B45192D9E1E0066494D /* GetCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCodeViewController.m; sourceTree = "<group>"; };
-		7DD25B46192D9E1E0066494D /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
-		7DD25B47192D9E1E0066494D /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
-		7DD25B52192D9E620066494D /* NewsDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailVC.h; sourceTree = "<group>"; };
-		7DD25B53192D9E620066494D /* NewsDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailVC.m; sourceTree = "<group>"; };
-		7DD25B54192D9E620066494D /* NewsListTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListTVC.h; sourceTree = "<group>"; };
-		7DD25B55192D9E620066494D /* NewsListTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListTVC.m; sourceTree = "<group>"; };
-		7DD25B5E192D9F1A0066494D /* SelfInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfInfoVC.h; path = MobileNJU/SelfInfoVC.h; sourceTree = SOURCE_ROOT; };
-		7DD25B5F192D9F1A0066494D /* SelfInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfInfoVC.m; path = MobileNJU/SelfInfoVC.m; sourceTree = SOURCE_ROOT; };
-		7DD86989192DAB6400D4ADAA /* DepartmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepartmentCell.h; sourceTree = "<group>"; };
-		7DD8698A192DAB6400D4ADAA /* DepartmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DepartmentCell.m; sourceTree = "<group>"; };
-		7DD8698C192DAB7700D4ADAA /* PhoneNumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumCell.h; sourceTree = "<group>"; };
-		7DD8698D192DAB7700D4ADAA /* PhoneNumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumCell.m; sourceTree = "<group>"; };
+		7DD86990192DB68A00D4ADAA /* DepartmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DepartmentCell.h; path = "电话/DepartmentCell.h"; sourceTree = "<group>"; };
+		7DD86991192DB68A00D4ADAA /* DepartmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DepartmentCell.m; path = "电话/DepartmentCell.m"; sourceTree = "<group>"; };
+		7DD86992192DB68A00D4ADAA /* PhoneNumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneNumCell.h; path = "电话/PhoneNumCell.h"; sourceTree = "<group>"; };
+		7DD86993192DB68A00D4ADAA /* PhoneNumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneNumCell.m; path = "电话/PhoneNumCell.m"; sourceTree = "<group>"; };
+		7DD86994192DB68A00D4ADAA /* TelephoneInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TelephoneInfoVC.h; path = "电话/TelephoneInfoVC.h"; sourceTree = "<group>"; };
+		7DD86995192DB68A00D4ADAA /* TelephoneInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TelephoneInfoVC.m; path = "电话/TelephoneInfoVC.m"; sourceTree = "<group>"; };
+		7DD8699A192DB6D700D4ADAA /* NewsDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailVC.h; sourceTree = "<group>"; };
+		7DD8699B192DB6D700D4ADAA /* NewsDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailVC.m; sourceTree = "<group>"; };
+		7DD8699C192DB6D700D4ADAA /* NewsListTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListTVC.h; sourceTree = "<group>"; };
+		7DD8699D192DB6D700D4ADAA /* NewsListTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListTVC.m; sourceTree = "<group>"; };
+		7DD869A9192DB73B00D4ADAA /* GetCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetCodeViewController.h; sourceTree = "<group>"; };
+		7DD869AA192DB73B00D4ADAA /* GetCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCodeViewController.m; sourceTree = "<group>"; };
+		7DD869AB192DB73B00D4ADAA /* RegisterCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterCompleteViewController.h; sourceTree = "<group>"; };
+		7DD869AC192DB73B00D4ADAA /* RegisterCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterCompleteViewController.m; sourceTree = "<group>"; };
+		7DD869AD192DB73B00D4ADAA /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		7DD869AE192DB73B00D4ADAA /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		7DD869B2192DB74500D4ADAA /* SelfInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfInfoVC.h; sourceTree = "<group>"; };
+		7DD869B3192DB74500D4ADAA /* SelfInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfInfoVC.m; sourceTree = "<group>"; };
+		7DD869B5192DB7A700D4ADAA /* Self.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Self.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,8 +268,7 @@
 		77B9042E192C3F040062237D /* MobileNJU */ = {
 			isa = PBXGroup;
 			children = (
-				7DD25B51192D9E4B0066494D /* 新闻 */,
-				7DD25B41192D9E140066494D /* 注册 */,
+				7DD86999192DB6B400D4ADAA /* 新闻 */,
 				7DD25B3D192D9DF30066494D /* 电话 */,
 				77B90461192C444A0062237D /* Base */,
 				77B9045A192C434B0062237D /* 登录注册 */,
@@ -345,6 +346,12 @@
 		77B9045A192C434B0062237D /* 登录注册 */ = {
 			isa = PBXGroup;
 			children = (
+				7DD869A9192DB73B00D4ADAA /* GetCodeViewController.h */,
+				7DD869AA192DB73B00D4ADAA /* GetCodeViewController.m */,
+				7DD869AB192DB73B00D4ADAA /* RegisterCompleteViewController.h */,
+				7DD869AC192DB73B00D4ADAA /* RegisterCompleteViewController.m */,
+				7DD869AD192DB73B00D4ADAA /* RegisterViewController.h */,
+				7DD869AE192DB73B00D4ADAA /* RegisterViewController.m */,
 			);
 			path = "登录注册";
 			sourceTree = "<group>";
@@ -359,8 +366,9 @@
 		77B9045C192C434B0062237D /* 个人 */ = {
 			isa = PBXGroup;
 			children = (
-				7DD25B5E192D9F1A0066494D /* SelfInfoVC.h */,
-				7DD25B5F192D9F1A0066494D /* SelfInfoVC.m */,
+				7DD869B2192DB74500D4ADAA /* SelfInfoVC.h */,
+				7DD869B3192DB74500D4ADAA /* SelfInfoVC.m */,
+				7DD869B5192DB7A700D4ADAA /* Self.storyboard */,
 			);
 			path = "个人";
 			sourceTree = "<group>";
@@ -529,38 +537,25 @@
 		7DD25B3D192D9DF30066494D /* 电话 */ = {
 			isa = PBXGroup;
 			children = (
-				7DD25B3E192D9E010066494D /* TelephoneInfoVC.h */,
-				7DD25B3F192D9E010066494D /* TelephoneInfoVC.m */,
-				7DD86989192DAB6400D4ADAA /* DepartmentCell.h */,
-				7DD8698A192DAB6400D4ADAA /* DepartmentCell.m */,
-				7DD8698C192DAB7700D4ADAA /* PhoneNumCell.h */,
-				7DD8698D192DAB7700D4ADAA /* PhoneNumCell.m */,
+				7DD86990192DB68A00D4ADAA /* DepartmentCell.h */,
+				7DD86991192DB68A00D4ADAA /* DepartmentCell.m */,
+				7DD86992192DB68A00D4ADAA /* PhoneNumCell.h */,
+				7DD86993192DB68A00D4ADAA /* PhoneNumCell.m */,
+				7DD86994192DB68A00D4ADAA /* TelephoneInfoVC.h */,
+				7DD86995192DB68A00D4ADAA /* TelephoneInfoVC.m */,
 			);
 			name = "电话";
 			sourceTree = "<group>";
 		};
-		7DD25B41192D9E140066494D /* 注册 */ = {
+		7DD86999192DB6B400D4ADAA /* 新闻 */ = {
 			isa = PBXGroup;
 			children = (
-				7DD25B42192D9E1E0066494D /* RegisterCompleteViewController.h */,
-				7DD25B43192D9E1E0066494D /* RegisterCompleteViewController.m */,
-				7DD25B44192D9E1E0066494D /* GetCodeViewController.h */,
-				7DD25B45192D9E1E0066494D /* GetCodeViewController.m */,
-				7DD25B46192D9E1E0066494D /* RegisterViewController.h */,
-				7DD25B47192D9E1E0066494D /* RegisterViewController.m */,
+				7DD8699A192DB6D700D4ADAA /* NewsDetailVC.h */,
+				7DD8699B192DB6D700D4ADAA /* NewsDetailVC.m */,
+				7DD8699C192DB6D700D4ADAA /* NewsListTVC.h */,
+				7DD8699D192DB6D700D4ADAA /* NewsListTVC.m */,
 			);
-			name = "注册";
-			sourceTree = "<group>";
-		};
-		7DD25B51192D9E4B0066494D /* 新闻 */ = {
-			isa = PBXGroup;
-			children = (
-				7DD25B52192D9E620066494D /* NewsDetailVC.h */,
-				7DD25B53192D9E620066494D /* NewsDetailVC.m */,
-				7DD25B54192D9E620066494D /* NewsListTVC.h */,
-				7DD25B55192D9E620066494D /* NewsListTVC.m */,
-			);
-			name = "新闻";
+			path = "新闻";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -645,6 +640,7 @@
 				77B9043B192C3F040062237D /* Images.xcassets in Resources */,
 				77B904DE192C4C6F0062237D /* navigation_back_p@2x.png in Resources */,
 				77B904B9192C4B3B0062237D /* MJRefresh.bundle in Resources */,
+				7DD869B6192DB7A700D4ADAA /* Self.storyboard in Resources */,
 				77B9046E192C4ABF0062237D /* TitleView.xib in Resources */,
 				77B904C0192C4B3B0062237D /* MBProgressHUD.bundle in Resources */,
 				77B904C3192C4B3B0062237D /* MJPhotoBrowser.bundle in Resources */,
@@ -666,38 +662,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DD25B48192D9E1E0066494D /* RegisterCompleteViewController.m in Sources */,
 				77B904C4192C4B3B0062237D /* MJPhotoBrowser.m in Sources */,
-				7DD25B57192D9E620066494D /* NewsListTVC.m in Sources */,
-				7DD25B49192D9E1E0066494D /* GetCodeViewController.m in Sources */,
 				77B904D2192C4B3B0062237D /* SDWebImagePrefetcher.m in Sources */,
+				7DD8699E192DB6D700D4ADAA /* NewsDetailVC.m in Sources */,
 				77B904C6192C4B3B0062237D /* MJPhotoProgressView.m in Sources */,
-				7DD25B40192D9E010066494D /* TelephoneInfoVC.m in Sources */,
 				77B904D6192C4B3B0062237D /* UIImage+WebP.m in Sources */,
 				7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */,
 				77B904D8192C4B3B0062237D /* UIImageView+WebCache.m in Sources */,
 				7DD25B39192D9C230066494D /* HomeCell.m in Sources */,
 				7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */,
+				7DD869AF192DB73B00D4ADAA /* GetCodeViewController.m in Sources */,
 				77B904BC192C4B3B0062237D /* MJRefreshFooterView.m in Sources */,
 				77B904BA192C4B3B0062237D /* MJRefreshBaseView.m in Sources */,
+				7DD869B0192DB73B00D4ADAA /* RegisterCompleteViewController.m in Sources */,
 				77B90439192C3F040062237D /* AppDelegate.m in Sources */,
 				77B904CD192C4B3B0062237D /* SDWebImageDecoder.m in Sources */,
 				77B90464192C44A20062237D /* BaseViewController.m in Sources */,
 				77B904BB192C4B3B0062237D /* MJRefreshConst.m in Sources */,
-				7DD8698E192DAB7700D4ADAA /* PhoneNumCell.m in Sources */,
 				77B904C5192C4B3B0062237D /* MJPhotoLoadingView.m in Sources */,
-				7DD25B56192D9E620066494D /* NewsDetailVC.m in Sources */,
 				77B904D0192C4B3B0062237D /* SDWebImageManager+MJ.m in Sources */,
 				77B904BF192C4B3B0062237D /* MBProgressHUD+Add.m in Sources */,
 				77B904D1192C4B3B0062237D /* SDWebImageManager.m in Sources */,
+				7DD86997192DB68A00D4ADAA /* PhoneNumCell.m in Sources */,
 				77B904C1192C4B3B0062237D /* MBProgressHUD.m in Sources */,
 				77B904CC192C4B3B0062237D /* SDWebImageCompat.m in Sources */,
-				7DD8698B192DAB6400D4ADAA /* DepartmentCell.m in Sources */,
 				77B9046D192C4ABF0062237D /* TitleView.m in Sources */,
 				77B904BD192C4B3B0062237D /* MJRefreshHeaderView.m in Sources */,
-				7DD25B4A192D9E1E0066494D /* RegisterViewController.m in Sources */,
 				77B904D4192C4B3B0062237D /* UIImage+GIF.m in Sources */,
-				7DD25B60192D9F1A0066494D /* SelfInfoVC.m in Sources */,
 				77B904D7192C4B3B0062237D /* UIImageView+MJWebCache.m in Sources */,
 				77B904CB192C4B3B0062237D /* SDImageCache.m in Sources */,
 				77B904CE192C4B3B0062237D /* SDWebImageDownloader.m in Sources */,
@@ -706,13 +697,18 @@
 				7DD25B3A192D9C230066494D /* MenuButton.m in Sources */,
 				77B904CA192C4B3B0062237D /* NSData+GIF.m in Sources */,
 				77B904D5192C4B3B0062237D /* UIImage+MultiFormat.m in Sources */,
+				7DD869B1192DB73B00D4ADAA /* RegisterViewController.m in Sources */,
 				77B904C9192C4B3B0062237D /* MKAnnotationView+WebCache.m in Sources */,
+				7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */,
 				77B904CF192C4B3B0062237D /* SDWebImageDownloaderOperation.m in Sources */,
 				77B904C7192C4B3B0062237D /* MJPhotoToolbar.m in Sources */,
 				77B904C8192C4B3B0062237D /* MJPhotoView.m in Sources */,
 				77B904D9192C4B3B0062237D /* ToolUtils.m in Sources */,
+				7DD8699F192DB6D700D4ADAA /* NewsListTVC.m in Sources */,
 				77B904D3192C4B3B0062237D /* UIButton+WebCache.m in Sources */,
 				77B904C2192C4B3B0062237D /* MJPhoto.m in Sources */,
+				7DD86996192DB68A00D4ADAA /* DepartmentCell.m in Sources */,
+				7DD86998192DB68A00D4ADAA /* TelephoneInfoVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

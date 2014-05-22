@@ -8,6 +8,7 @@
 
 #import "MainMenuViewController.h"
 #import "HomeCell.h"
+#import "SelfInfoVC.h"
 @interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *menuView;
 @property (weak, nonatomic) IBOutlet UIImageView *touchCircle;
@@ -19,6 +20,11 @@
 @end
 
 @implementation MainMenuViewController
+- (IBAction)self:(id)sender {
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
+    SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"self"]; //test2为viewcontroller的StoryboardId
+    [self.navigationController pushViewController:selfVC animated:YES];
+}
 
 static NSArray* buttonImages;
 
