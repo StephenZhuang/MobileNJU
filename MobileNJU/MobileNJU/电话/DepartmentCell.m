@@ -31,6 +31,9 @@
     // Configure the view for the selected state
 }
 
+/*
+ 改变箭头状态
+ */
 - (void)changeArrowWithUp:(BOOL)up
 {
     if (!up) {

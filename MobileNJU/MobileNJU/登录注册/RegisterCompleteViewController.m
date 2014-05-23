@@ -17,6 +17,21 @@
 
 @implementation RegisterCompleteViewController
 
+#pragma viewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self initTextField];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 #pragma mark set
 /*初始化文本框*/
 - (void) initTextField
@@ -78,19 +93,6 @@
 - (IBAction)resignAllResponder:(UIButton *)sender {
     [self.passwordField resignFirstResponder];
     [self.nicknameField resignFirstResponder];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self initTextField];
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

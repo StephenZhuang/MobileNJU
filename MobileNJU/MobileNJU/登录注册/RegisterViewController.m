@@ -14,6 +14,22 @@
 @end
 
 @implementation RegisterViewController
+#pragma mark ViewController
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.phoneTextField.delegate = self;
+    [self.phoneTextField becomeFirstResponder];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 /*返回上一级*/
 - (IBAction)back:(UIBarButtonItem *)sender {
@@ -60,20 +76,6 @@
     [textField resignFirstResponder];
     
     return YES;
-}
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.phoneTextField.delegate = self;
-    [self.phoneTextField becomeFirstResponder];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*
