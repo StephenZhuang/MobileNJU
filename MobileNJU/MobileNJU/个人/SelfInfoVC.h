@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SelfInfoVC : UIViewController
-
+@property(nonatomic,strong)NSArray* infos;
 @end

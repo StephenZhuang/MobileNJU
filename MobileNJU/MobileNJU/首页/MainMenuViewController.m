@@ -27,14 +27,14 @@
 }
 
 static NSArray* buttonImages;
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if ( viewController ==  self) {
-        [navigationController setNavigationBarHidden:YES animated:animated];
-    } else if ( [navigationController isNavigationBarHidden] ) {
-        [navigationController setNavigationBarHidden:NO animated:animated];
-    }
-}
+//
+//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+//    if ( viewController ==  self) {
+//        [navigationController setNavigationBarHidden:YES animated:animated];
+//    } else if ( [navigationController isNavigationBarHidden] ) {
+//        [navigationController setNavigationBarHidden:NO animated:animated];
+//    }
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -159,13 +159,15 @@ static NSArray* buttonImages;
     
     CGPoint point = [recognizer locationInView:self.view];
     CGFloat windowHeight = self.view.window.bounds.size.height;
-    CGFloat minCenterHeight = windowHeight==480?270:293;
-    CGFloat shift = windowHeight==480?175:215;
-    CGFloat initCenterHeight = windowHeight==480?405:445;
+    CGFloat minCenterHeight = windowHeight==480?154:195;
+    CGFloat shift = windowHeight==480?95:155;
+    CGFloat initCenterHeight = windowHeight==480?323.5:366.5;
     point.y = point.y+shift;
     if (point.y>=minCenterHeight&&point.y<=initCenterHeight){
         point.x = self.menuView.center.x;
+    NSLog(@"%f",point.y);
         [self.menuView setCenter:point];
+    
     }
 }
 
@@ -321,7 +323,7 @@ static NSArray* buttonImages;
 {
     
     [super viewDidLoad];
-    [self.navigationController setDelegate:self];
+//    [self.navigationController setDelegate:self];
     [self initNewScroller];
     [self prepareForAnimation];
     [self prepareForNews];
