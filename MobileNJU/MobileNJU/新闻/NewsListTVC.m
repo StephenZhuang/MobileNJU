@@ -13,7 +13,7 @@
 @end
 
 @implementation NewsListTVC
-
+#pragma viewController
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -43,8 +43,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
 
+
+
+#pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 #warning Potentially incomplete method implementation.

@@ -10,6 +10,7 @@
 #import "SelfCell.h"
 @interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *flowerLabel;
 @end
 
 @implementation SelfInfoVC

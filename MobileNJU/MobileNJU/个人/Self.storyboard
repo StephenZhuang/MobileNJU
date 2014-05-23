@@ -153,6 +153,21 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flower" translatesAutoresizingMaskIntoConstraints="NO" id="h1f-QI-J7o">
+                                <rect key="frame" x="20" y="188" width="14" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="14" id="dxw-xf-Z8o"/>
+                                    <constraint firstAttribute="height" constant="20" id="lD5-J1-Leb"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbx-B5-eds">
+                                <rect key="frame" x="42" y="187" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -166,21 +181,33 @@
                             <constraint firstItem="Sp5-Rf-SFH" firstAttribute="top" secondItem="wI1-Yz-9hk" secondAttribute="bottom" constant="9" id="Bpg-1q-eQ9"/>
                             <constraint firstAttribute="trailing" secondItem="lk9-oo-ciP" secondAttribute="trailing" constant="40" id="DJ9-XP-gWE"/>
                             <constraint firstAttribute="trailing" secondItem="FGA-Bu-aZO" secondAttribute="trailing" constant="20" id="DL8-VZ-nSt"/>
+                            <constraint firstItem="mbx-B5-eds" firstAttribute="bottom" secondItem="h1f-QI-J7o" secondAttribute="bottom" id="Duh-IP-g5T"/>
                             <constraint firstItem="lk9-oo-ciP" firstAttribute="leading" secondItem="3KB-Yd-hS9" secondAttribute="leading" constant="40" id="Fg5-ij-rsZ"/>
+                            <constraint firstItem="mbx-B5-eds" firstAttribute="top" secondItem="fod-K7-fSI" secondAttribute="top" id="LXe-CB-CFx"/>
                             <constraint firstItem="mev-U9-kw0" firstAttribute="leading" secondItem="3KB-Yd-hS9" secondAttribute="leading" id="Leg-Gg-o86"/>
+                            <constraint firstItem="h1f-QI-J7o" firstAttribute="leading" secondItem="3KB-Yd-hS9" secondAttribute="leading" constant="20" id="MbZ-Ee-kxf"/>
                             <constraint firstItem="XbY-GJ-SbM" firstAttribute="top" secondItem="fod-K7-fSI" secondAttribute="bottom" constant="36" id="P2Q-T2-HFj"/>
                             <constraint firstItem="d4W-xI-png" firstAttribute="top" secondItem="Z9D-Ct-5MM" secondAttribute="bottom" constant="5" id="Wu1-tD-Una"/>
                             <constraint firstItem="XbY-GJ-SbM" firstAttribute="top" secondItem="mev-U9-kw0" secondAttribute="bottom" constant="8" id="Y76-gu-RlR"/>
                             <constraint firstItem="EEq-CU-Zi8" firstAttribute="leading" secondItem="3KB-Yd-hS9" secondAttribute="leading" constant="130" id="Z5k-oV-qOZ"/>
+                            <constraint firstItem="fod-K7-fSI" firstAttribute="leading" secondItem="mbx-B5-eds" secondAttribute="trailing" constant="55" id="aDc-un-Omt"/>
                             <constraint firstItem="lk9-oo-ciP" firstAttribute="top" secondItem="XbY-GJ-SbM" secondAttribute="bottom" constant="8" id="aTl-eh-1ic"/>
+                            <constraint firstItem="XbY-GJ-SbM" firstAttribute="top" secondItem="h1f-QI-J7o" secondAttribute="bottom" constant="36" id="ddz-9o-zhW"/>
                             <constraint firstItem="Z9D-Ct-5MM" firstAttribute="top" secondItem="lk9-oo-ciP" secondAttribute="bottom" constant="9" id="e56-NY-kag"/>
+                            <constraint firstItem="fod-K7-fSI" firstAttribute="leading" secondItem="h1f-QI-J7o" secondAttribute="trailing" constant="105" id="m6N-j6-Jdy"/>
+                            <constraint firstItem="fod-K7-fSI" firstAttribute="centerY" secondItem="h1f-QI-J7o" secondAttribute="centerY" constant="-0.5" id="m6u-ZJ-yfR"/>
+                            <constraint firstItem="mbx-B5-eds" firstAttribute="leading" secondItem="h1f-QI-J7o" secondAttribute="trailing" constant="8" symbolic="YES" id="s51-WV-OCY"/>
                             <constraint firstItem="XbY-GJ-SbM" firstAttribute="top" secondItem="EEq-CU-Zi8" secondAttribute="bottom" constant="65" id="wwZ-RT-hTQ"/>
                             <constraint firstItem="fod-K7-fSI" firstAttribute="leading" secondItem="3KB-Yd-hS9" secondAttribute="leading" constant="139" id="x6a-k4-em9"/>
+                            <constraint firstItem="fod-K7-fSI" firstAttribute="leading" secondItem="h1f-QI-J7o" secondAttribute="trailing" constant="105" id="y6o-Wy-BqS"/>
                             <constraint firstAttribute="trailing" secondItem="mev-U9-kw0" secondAttribute="trailing" id="ykw-Rr-cQq"/>
                             <constraint firstItem="Sp5-Rf-SFH" firstAttribute="leading" secondItem="3KB-Yd-hS9" secondAttribute="leading" constant="20" id="yss-9c-jF5"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="个人" image="tabBar_self" id="CkK-U4-Jq6"/>
+                    <connections>
+                        <outlet property="flowerLabel" destination="mbx-B5-eds" id="z88-Oo-hzl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MEI-Xa-wEF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -189,6 +216,7 @@
     </scenes>
     <resources>
         <image name="edit" width="36" height="44"/>
+        <image name="flower" width="13" height="20"/>
         <image name="institute" width="41" height="42"/>
         <image name="navigation_back_n.png" width="15" height="30"/>
         <image name="self_up_background" width="320" height="250"/>

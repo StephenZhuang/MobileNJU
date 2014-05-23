@@ -21,11 +21,6 @@
 @implementation TelephoneInfoVC
 
 
-
-- (IBAction)returnToMain:(id)sender {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -39,6 +34,16 @@
     [self setSubTitle:@"各个部门电话"];
     [self loadData];
     
+}
+
+
+
+/*
+ 从主页到新闻界面使用的model push 此处是直接回到主页
+ sender = backbutton
+ */
+- (IBAction)returnToMain:(id)sender {
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
 }
 - (void) loadData
 {
@@ -62,12 +67,19 @@
 
 
 #pragma mark - Table view data source
+/*
+ section = 各个部门
+ */
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [dataArray count];
 }
 
+
+/*
+ 判断状态，开启or关闭 若关闭返回1 否则返回该section里的个数
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (self.isOpen) {

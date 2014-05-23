@@ -20,27 +20,55 @@
 @end
 
 @implementation MainMenuViewController
+static NSArray* buttonImages;
+
+#pragma mark ViewController
+
+- (void)viewDidLoad
+{
+    
+    [super viewDidLoad];
+    //    [self.navigationController setDelegate:self];
+    [self initNewScroller];
+    [self prepareForAnimation];
+    [self prepareForNews];
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+    [self.pageScroller addGestureRecognizer:singleTap];
+    buttonImages= [[NSArray alloc]initWithObjects:@"bbs",@"library",@"chat",@"hole",@"ecard",@"classroom",@"lose",@"schedule",@"phone",@"bus",@"procedure",@"exercise", nil];
+    // Do any additional setup after loading the view.
+    
+}
+
+
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+
+#pragma mark 监听
+
+/*
+ 个人 跳到self的storyboard
+ */
 - (IBAction)self:(id)sender {
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
     SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"self"]; //test2为viewcontroller的StoryboardId
     [self.navigationController pushViewController:selfVC animated:YES];
 }
 
-static NSArray* buttonImages;
-//
-//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-//    if ( viewController ==  self) {
-//        [navigationController setNavigationBarHidden:YES animated:animated];
-//    } else if ( [navigationController isNavigationBarHidden] ) {
-//        [navigationController setNavigationBarHidden:NO animated:animated];
-//    }
-//}
-
+#pragma mark tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [buttonImages count]+3;
+    //此处+3 只是为下方预留空间
 }
 
+/*
+ 进入屏幕后开启动画
+ */
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeCell *homeCell = (HomeCell *)cell;
@@ -52,6 +80,10 @@ static NSArray* buttonImages;
     }
 }
 
+
+/*
+ 根据奇偶 对应左右
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeCell *cell = nil;
@@ -75,11 +107,8 @@ static NSArray* buttonImages;
    return cell;
 }
 
--(void)goToDetail:(id)sender{
-    MenuButton* menuButton = (MenuButton*)sender;
-    [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
-}
 
+#pragma mark 动画
 - (void)performBounceLeftAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
     // Start
     view.transform = CGAffineTransformMakeTranslation(300, 0);
@@ -133,27 +162,24 @@ static NSArray* buttonImages;
 }
 
 
+#pragma mark 各个按钮监听
+-(void)goToDetail:(id)sender{
+    MenuButton* menuButton = (MenuButton*)sender;
+    [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
+}
 
 
+#pragma mark 拖动监听
 
-/*
- storyBoard加的
- 得先remove再add才能移动
- 不知如何解决
- */
-
-
-
-
-/*飞入动画*/
+- (void)prepareForAnimation
+{
+    // 手势监听
+    UIPanGestureRecognizer *pan=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(moveMenu:)];
+    [self.touchCircle addGestureRecognizer:pan];
+    [self.touchCircle setUserInteractionEnabled:YES];
+}
 
 
-
-/*
- 手势响应 
- menuView的中心高度有限制
- 存在magic Number;
- */
 - (void)moveMenu:(UIPanGestureRecognizer *)recognizer
 {
     
@@ -172,6 +198,9 @@ static NSArray* buttonImages;
 }
 
 
+
+#pragma mark 新闻区
+
 #warning 此处需要改
 /*
  加载图片，此处暂时拿3张现成的
@@ -182,6 +211,7 @@ static NSArray* buttonImages;
         [self loadNewsCache:i];
     }
 }
+
 
 -(UIImage *)getEmptyUIImage
 {
@@ -276,15 +306,6 @@ static NSArray* buttonImages;
     [self.pageController addTarget:self action:@selector(pageChange:)
                   forControlEvents:UIControlEventTouchUpInside];
 }
-- (void)prepareForAnimation
-{
-    
-    // 手势监听
-    UIPanGestureRecognizer *pan=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(moveMenu:)];
-    [self.touchCircle addGestureRecognizer:pan];
-    [self.touchCircle setUserInteractionEnabled:YES];
-}
-
 
 -(void) timerChangePic
 {
@@ -315,38 +336,6 @@ static NSArray* buttonImages;
 
 -(void) onClickImage{
     [self performSegueWithIdentifier:@"news" sender:nil];
-}
-
-
-
-- (void)viewDidLoad
-{
-    
-    [super viewDidLoad];
-//    [self.navigationController setDelegate:self];
-    [self initNewScroller];
-    [self prepareForAnimation];
-    [self prepareForNews];
-    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
-    [self.pageScroller addGestureRecognizer:singleTap];
-    buttonImages= [[NSArray alloc]initWithObjects:@"bbs",@"library",@"chat",@"hole",@"ecard",@"classroom",@"lose",@"schedule",@"phone",@"bus",@"procedure",@"exercise", nil];
-        // Do any additional setup after loading the view.
-
-}
-
-
-
-/*
- appear的时候开始动画
- */
-- (void)viewDidAppear:(BOOL)animated
-{
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 /*
