@@ -28,6 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setTitle:@"新闻详情"];
+    [self setTitle:@"官方新闻"];
+    
     // Do any additional setup after loading the view from its nib.
 }
 

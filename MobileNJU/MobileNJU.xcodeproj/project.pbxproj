@@ -73,6 +73,7 @@
 		7DD869B1192DB73B00D4ADAA /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD869AE192DB73B00D4ADAA /* RegisterViewController.m */; };
 		7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD869B3192DB74500D4ADAA /* SelfInfoVC.m */; };
 		7DD869B6192DB7A700D4ADAA /* Self.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD869B5192DB7A700D4ADAA /* Self.storyboard */; };
+		7DFF3F53192E06DC00E146ED /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF3F52192E06DC00E146ED /* NewsCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -206,6 +207,8 @@
 		7DD869B2192DB74500D4ADAA /* SelfInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfInfoVC.h; sourceTree = "<group>"; };
 		7DD869B3192DB74500D4ADAA /* SelfInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfInfoVC.m; sourceTree = "<group>"; };
 		7DD869B5192DB7A700D4ADAA /* Self.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Self.storyboard; sourceTree = "<group>"; };
+		7DFF3F51192E06DC00E146ED /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
+		7DFF3F52192E06DC00E146ED /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -554,6 +557,8 @@
 				7DD8699B192DB6D700D4ADAA /* NewsDetailVC.m */,
 				7DD8699C192DB6D700D4ADAA /* NewsListTVC.h */,
 				7DD8699D192DB6D700D4ADAA /* NewsListTVC.m */,
+				7DFF3F51192E06DC00E146ED /* NewsCell.h */,
+				7DFF3F52192E06DC00E146ED /* NewsCell.m */,
 			);
 			path = "新闻";
 			sourceTree = "<group>";
@@ -664,6 +669,7 @@
 			files = (
 				77B904C4192C4B3B0062237D /* MJPhotoBrowser.m in Sources */,
 				77B904D2192C4B3B0062237D /* SDWebImagePrefetcher.m in Sources */,
+				7DFF3F53192E06DC00E146ED /* NewsCell.m in Sources */,
 				7DD8699E192DB6D700D4ADAA /* NewsDetailVC.m in Sources */,
 				77B904C6192C4B3B0062237D /* MJPhotoProgressView.m in Sources */,
 				77B904D6192C4B3B0062237D /* UIImage+WebP.m in Sources */,
