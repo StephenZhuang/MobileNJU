@@ -63,7 +63,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="01k-y9-Mor">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="self" rowHeight="55" id="01k-y9-Mor" customClass="SelfCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="01k-y9-Mor" id="gaD-xU-I56">
@@ -90,8 +90,12 @@
                                                 <constraint firstItem="VLJ-EV-tTV" firstAttribute="centerX" secondItem="gaD-xU-I56" secondAttribute="centerX" id="nbs-cp-pMf"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="contentLabel" destination="VLJ-EV-tTV" id="ocu-4T-fJS"/>
+                                            <outlet property="imageIcon" destination="eL8-54-ktT" id="lCm-g8-lP8"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="GuT-jL-7cG">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="GuT-jL-7cG" customClass="SelfCell">
                                         <rect key="frame" x="0.0" y="77" width="320" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GuT-jL-7cG" id="jPO-d5-uQH">
@@ -177,6 +181,10 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="3MI-o9-Bax" id="Tfc-JX-Ica"/>
+                                    <outlet property="delegate" destination="3MI-o9-Bax" id="NVW-Xw-O3I"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJs-QY-Ol3">
                                 <rect key="frame" x="137" y="146" width="46" height="21"/>
@@ -185,6 +193,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sp5-Rf-SFH">
+                                <rect key="frame" x="20" y="29" width="22" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="navigation_back_n.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToMain:" destination="3MI-o9-Bax" eventType="touchUpInside" id="SvK-x9-yMI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -218,6 +237,7 @@
         <image name="edit" width="36" height="44"/>
         <image name="hobby" width="41" height="42"/>
         <image name="institute" width="41" height="42"/>
+        <image name="navigation_back_n.png" width="15" height="30"/>
         <image name="self_background" width="320" height="213"/>
         <image name="sex" width="41" height="42"/>
         <image name="tabBar_self" width="80" height="50"/>

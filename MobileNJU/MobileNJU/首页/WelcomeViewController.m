@@ -7,6 +7,9 @@
 //
 
 #import "WelcomeViewController.h"
+#import "MainMenuViewController.h"
+#import "SelfInfoVC.h"
+
 
 @interface WelcomeViewController ()<UITextFieldDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
@@ -23,7 +26,9 @@
  设置rootViewController的NavigationBar 不可见
  */
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    if ( viewController ==  self) {
+    if ( [viewController class] ==  [self class]
+        || [viewController class] == [MainMenuViewController class]
+        || [viewController class]==[SelfInfoVC class]) {
         [navigationController setNavigationBarHidden:YES animated:animated];
     } else if ( [navigationController isNavigationBarHidden] ) {
         [navigationController setNavigationBarHidden:NO animated:animated];

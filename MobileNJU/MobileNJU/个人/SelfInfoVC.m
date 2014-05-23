@@ -7,13 +7,17 @@
 //
 
 #import "SelfInfoVC.h"
-
-@interface SelfInfoVC ()
+#import "SelfCell.h"
+@interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
 
 @implementation SelfInfoVC
+- (IBAction)backToMain:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
+# pragma ViewController
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -22,10 +26,27 @@
     }
     return self;
 }
+#pragma toDo
+- (void)loadData
+{
+    
+    NSArray* keys = [[NSArray alloc]initWithObjects:@"image", @"content",nil];
+    NSArray* images = [[NSArray alloc]initWithObjects:@"institute",@"sex",@"birth",@"hobby", nil];
+    NSArray* contents = [[NSArray alloc]initWithObjects:@"南京大学－中文系",@"男",@"1986-08-05",@"绘画、书法", nil];
+    NSMutableArray* mutableArray = [[NSMutableArray alloc]init];
+    for (int i = 0 ; i < 4 ; i ++){
+        NSArray* values = [[NSArray alloc]initWithObjects:[images objectAtIndex:i],[contents objectAtIndex:i], nil];
+        NSDictionary* dic = [[NSDictionary alloc]initWithObjects:values forKeys:keys];
+        [mutableArray addObject:dic];
+    }
+    self.infos = [[NSArray alloc]initWithArray:mutableArray];
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self loadData];
     // Do any additional setup after loading the view.
 }
 
@@ -35,15 +56,33 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - Table view data source
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    return 1;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.infos count];
+}
+
+- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 55;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"self";
+    SelfCell *cell = (SelfCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString *imageName = [[self.infos objectAtIndex:indexPath.row] objectForKey:@"image"];
+    [cell setImageName:imageName];
+    NSString* content = [[self.infos objectAtIndex:indexPath.row]objectForKey:@"content"];
+    [cell setContent:content];
+    return cell;
+}
+
 
 @end
