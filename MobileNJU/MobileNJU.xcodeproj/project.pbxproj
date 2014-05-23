@@ -21,7 +21,6 @@
 		77B9044E192C3F040062237D /* MobileNJUTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B9044D192C3F040062237D /* MobileNJUTests.m */; };
 		77B90464192C44A20062237D /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B90463192C44A20062237D /* BaseViewController.m */; };
 		77B90467192C48980062237D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B90466192C48980062237D /* HomeViewController.m */; };
-		77B90469192C48F10062237D /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77B90468192C48F10062237D /* Home.storyboard */; };
 		77B9046D192C4ABF0062237D /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B9046B192C4ABF0062237D /* TitleView.m */; };
 		77B9046E192C4ABF0062237D /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B9046C192C4ABF0062237D /* TitleView.xib */; };
 		77B904B9192C4B3B0062237D /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 77B90470192C4B3A0062237D /* MJRefresh.bundle */; };
@@ -74,6 +73,7 @@
 		7DD869B1192DB73B00D4ADAA /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD869AE192DB73B00D4ADAA /* RegisterViewController.m */; };
 		7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD869B3192DB74500D4ADAA /* SelfInfoVC.m */; };
 		7DD869B6192DB7A700D4ADAA /* Self.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD869B5192DB7A700D4ADAA /* Self.storyboard */; };
+		7DF0BB34192F3B35004CEE01 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DF0BB33192F3B35004CEE01 /* Home.storyboard */; };
 		7DFF3F53192E06DC00E146ED /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF3F52192E06DC00E146ED /* NewsCell.m */; };
 /* End PBXBuildFile section */
 
@@ -108,7 +108,6 @@
 		77B90463192C44A20062237D /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		77B90465192C48980062237D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		77B90466192C48980062237D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		77B90468192C48F10062237D /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		77B9046A192C4ABF0062237D /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
 		77B9046B192C4ABF0062237D /* TitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleView.m; sourceTree = "<group>"; };
 		77B9046C192C4ABF0062237D /* TitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
@@ -210,6 +209,7 @@
 		7DD869B2192DB74500D4ADAA /* SelfInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfInfoVC.h; sourceTree = "<group>"; };
 		7DD869B3192DB74500D4ADAA /* SelfInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfInfoVC.m; sourceTree = "<group>"; };
 		7DD869B5192DB7A700D4ADAA /* Self.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Self.storyboard; sourceTree = "<group>"; };
+		7DF0BB33192F3B35004CEE01 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		7DFF3F51192E06DC00E146ED /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
 		7DFF3F52192E06DC00E146ED /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -407,8 +407,8 @@
 				7DD25B35192D9C230066494D /* MenuButton.h */,
 				7DD25B36192D9C230066494D /* MenuButton.m */,
 				77B90465192C48980062237D /* HomeViewController.h */,
+				7DF0BB33192F3B35004CEE01 /* Home.storyboard */,
 				77B90466192C48980062237D /* HomeViewController.m */,
-				77B90468192C48F10062237D /* Home.storyboard */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -643,9 +643,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77B90469192C48F10062237D /* Home.storyboard in Resources */,
 				77B904DF192C4C6F0062237D /* navigation_bg@2x.png in Resources */,
 				77B90433192C3F040062237D /* InfoPlist.strings in Resources */,
+				7DF0BB34192F3B35004CEE01 /* Home.storyboard in Resources */,
 				77B904DD192C4C6F0062237D /* navigation_back_n@2x.png in Resources */,
 				77B9043B192C3F040062237D /* Images.xcassets in Resources */,
 				77B904DE192C4C6F0062237D /* navigation_back_p@2x.png in Resources */,
