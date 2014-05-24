@@ -58,6 +58,10 @@
 		77B904DD192C4C6F0062237D /* navigation_back_n@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77B904DA192C4C6F0062237D /* navigation_back_n@2x.png */; };
 		77B904DE192C4C6F0062237D /* navigation_back_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77B904DB192C4C6F0062237D /* navigation_back_p@2x.png */; };
 		77B904DF192C4C6F0062237D /* navigation_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77B904DC192C4C6F0062237D /* navigation_bg@2x.png */; };
+		7D1A1A4C193036190083A6AD /* selfInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D1A1A4B193036190083A6AD /* selfInfo.plist */; };
+		7D1A1A4F193039520083A6AD /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A1A4E193039520083A6AD /* CheckBox.m */; };
+		7D1A1A521930451D0083A6AD /* TagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A1A511930451D0083A6AD /* TagView.m */; };
+		7D1A1A55193056A30083A6AD /* TagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A1A54193056A30083A6AD /* TagButton.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
 		7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B30192D9C230066494D /* WelcomeViewController.m */; };
 		7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B32192D9C230066494D /* MainMenuViewController.m */; };
@@ -74,6 +78,8 @@
 		7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD869B3192DB74500D4ADAA /* SelfInfoVC.m */; };
 		7DD869B6192DB7A700D4ADAA /* Self.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD869B5192DB7A700D4ADAA /* Self.storyboard */; };
 		7DF0BB34192F3B35004CEE01 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DF0BB33192F3B35004CEE01 /* Home.storyboard */; };
+		7DF0BB3D192FB7B3004CEE01 /* AYHCustomComboBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0BB3B192FB7B3004CEE01 /* AYHCustomComboBox.m */; };
+		7DF0BB40192FBA97004CEE01 /* EditInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0BB3F192FBA97004CEE01 /* EditInfoVC.m */; };
 		7DFF3F53192E06DC00E146ED /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF3F52192E06DC00E146ED /* NewsCell.m */; };
 /* End PBXBuildFile section */
 
@@ -180,6 +186,13 @@
 		77B904DA192C4C6F0062237D /* navigation_back_n@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_back_n@2x.png"; sourceTree = "<group>"; };
 		77B904DB192C4C6F0062237D /* navigation_back_p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_back_p@2x.png"; sourceTree = "<group>"; };
 		77B904DC192C4C6F0062237D /* navigation_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bg@2x.png"; sourceTree = "<group>"; };
+		7D1A1A4B193036190083A6AD /* selfInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = selfInfo.plist; sourceTree = "<group>"; };
+		7D1A1A4D193039520083A6AD /* CheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
+		7D1A1A4E193039520083A6AD /* CheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
+		7D1A1A501930451D0083A6AD /* TagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagView.h; sourceTree = "<group>"; };
+		7D1A1A511930451D0083A6AD /* TagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagView.m; sourceTree = "<group>"; };
+		7D1A1A53193056A30083A6AD /* TagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagButton.h; sourceTree = "<group>"; };
+		7D1A1A54193056A30083A6AD /* TagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagButton.m; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
 		7DD25B2F192D9C230066494D /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
@@ -210,6 +223,11 @@
 		7DD869B3192DB74500D4ADAA /* SelfInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfInfoVC.m; sourceTree = "<group>"; };
 		7DD869B5192DB7A700D4ADAA /* Self.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Self.storyboard; sourceTree = "<group>"; };
 		7DF0BB33192F3B35004CEE01 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		7DF0BB3A192FB7B3004CEE01 /* AYHCustomComboBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AYHCustomComboBox.h; path = ComboBox/AYHCustomComboBox.h; sourceTree = "<group>"; };
+		7DF0BB3B192FB7B3004CEE01 /* AYHCustomComboBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AYHCustomComboBox.m; path = ComboBox/AYHCustomComboBox.m; sourceTree = "<group>"; };
+		7DF0BB3C192FB7B3004CEE01 /* AYHCustomComboBoxDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AYHCustomComboBoxDelegate.h; path = ComboBox/AYHCustomComboBoxDelegate.h; sourceTree = "<group>"; };
+		7DF0BB3E192FBA97004CEE01 /* EditInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditInfoVC.h; sourceTree = "<group>"; };
+		7DF0BB3F192FBA97004CEE01 /* EditInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInfoVC.m; sourceTree = "<group>"; };
 		7DFF3F51192E06DC00E146ED /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
 		7DFF3F52192E06DC00E146ED /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -332,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				77B904DA192C4C6F0062237D /* navigation_back_n@2x.png */,
+				7D1A1A4B193036190083A6AD /* selfInfo.plist */,
 				77B904DB192C4C6F0062237D /* navigation_back_p@2x.png */,
 				77B904DC192C4C6F0062237D /* navigation_bg@2x.png */,
 			);
@@ -341,6 +360,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7DF0BB35192FB764004CEE01 /* ComboBox */,
 				77B9046F192C4B3A0062237D /* MJRefresh */,
 				77B9047C192C4B3A0062237D /* PhotoBrowser */,
 				77B90491192C4B3A0062237D /* SDWebImage */,
@@ -377,6 +397,14 @@
 				7DD869B5192DB7A700D4ADAA /* Self.storyboard */,
 				7D2FFEDC192F16B200E6C040 /* SelfCell.h */,
 				7D2FFEDD192F16B200E6C040 /* SelfCell.m */,
+				7DF0BB3E192FBA97004CEE01 /* EditInfoVC.h */,
+				7DF0BB3F192FBA97004CEE01 /* EditInfoVC.m */,
+				7D1A1A4D193039520083A6AD /* CheckBox.h */,
+				7D1A1A4E193039520083A6AD /* CheckBox.m */,
+				7D1A1A501930451D0083A6AD /* TagView.h */,
+				7D1A1A511930451D0083A6AD /* TagView.m */,
+				7D1A1A53193056A30083A6AD /* TagButton.h */,
+				7D1A1A54193056A30083A6AD /* TagButton.m */,
 			);
 			path = "个人";
 			sourceTree = "<group>";
@@ -568,6 +596,16 @@
 			path = "新闻";
 			sourceTree = "<group>";
 		};
+		7DF0BB35192FB764004CEE01 /* ComboBox */ = {
+			isa = PBXGroup;
+			children = (
+				7DF0BB3A192FB7B3004CEE01 /* AYHCustomComboBox.h */,
+				7DF0BB3B192FB7B3004CEE01 /* AYHCustomComboBox.m */,
+				7DF0BB3C192FB7B3004CEE01 /* AYHCustomComboBoxDelegate.h */,
+			);
+			name = ComboBox;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -651,6 +689,7 @@
 				77B904DE192C4C6F0062237D /* navigation_back_p@2x.png in Resources */,
 				77B904B9192C4B3B0062237D /* MJRefresh.bundle in Resources */,
 				7DD869B6192DB7A700D4ADAA /* Self.storyboard in Resources */,
+				7D1A1A4C193036190083A6AD /* selfInfo.plist in Resources */,
 				77B9046E192C4ABF0062237D /* TitleView.xib in Resources */,
 				77B904C0192C4B3B0062237D /* MBProgressHUD.bundle in Resources */,
 				77B904C3192C4B3B0062237D /* MJPhotoBrowser.bundle in Resources */,
@@ -679,7 +718,9 @@
 				77B904C6192C4B3B0062237D /* MJPhotoProgressView.m in Sources */,
 				77B904D6192C4B3B0062237D /* UIImage+WebP.m in Sources */,
 				7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */,
+				7D1A1A521930451D0083A6AD /* TagView.m in Sources */,
 				77B904D8192C4B3B0062237D /* UIImageView+WebCache.m in Sources */,
+				7DF0BB40192FBA97004CEE01 /* EditInfoVC.m in Sources */,
 				7DD25B39192D9C230066494D /* HomeCell.m in Sources */,
 				7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */,
 				7DD869AF192DB73B00D4ADAA /* GetCodeViewController.m in Sources */,
@@ -694,6 +735,7 @@
 				77B904D0192C4B3B0062237D /* SDWebImageManager+MJ.m in Sources */,
 				77B904BF192C4B3B0062237D /* MBProgressHUD+Add.m in Sources */,
 				77B904D1192C4B3B0062237D /* SDWebImageManager.m in Sources */,
+				7D1A1A55193056A30083A6AD /* TagButton.m in Sources */,
 				7DD86997192DB68A00D4ADAA /* PhoneNumCell.m in Sources */,
 				77B904C1192C4B3B0062237D /* MBProgressHUD.m in Sources */,
 				77B904CC192C4B3B0062237D /* SDWebImageCompat.m in Sources */,
@@ -710,10 +752,12 @@
 				77B904D5192C4B3B0062237D /* UIImage+MultiFormat.m in Sources */,
 				7DD869B1192DB73B00D4ADAA /* RegisterViewController.m in Sources */,
 				77B904C9192C4B3B0062237D /* MKAnnotationView+WebCache.m in Sources */,
+				7DF0BB3D192FB7B3004CEE01 /* AYHCustomComboBox.m in Sources */,
 				7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */,
 				77B904CF192C4B3B0062237D /* SDWebImageDownloaderOperation.m in Sources */,
 				77B904C7192C4B3B0062237D /* MJPhotoToolbar.m in Sources */,
 				77B904C8192C4B3B0062237D /* MJPhotoView.m in Sources */,
+				7D1A1A4F193039520083A6AD /* CheckBox.m in Sources */,
 				77B904D9192C4B3B0062237D /* ToolUtils.m in Sources */,
 				7DD8699F192DB6D700D4ADAA /* NewsListTVC.m in Sources */,
 				7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */,

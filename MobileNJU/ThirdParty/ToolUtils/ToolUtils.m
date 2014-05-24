@@ -201,4 +201,71 @@
     }
 }
 
+
+
+#pragma mark addedForMobileNJU
+
++ (NSDictionary*) getUserInfo
+{
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"selfInfo" ofType:@"plist"];
+    NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    NSArray* keys = [data objectForKey:@"infoKeys"];
+    NSMutableArray* values = [[NSMutableArray alloc]init];
+    for (NSString* key in keys) {
+        NSString* value =[userDefaults objectForKey:key];
+        if (!value) {
+            value = [NSString stringWithFormat:@""];
+        }
+        [values addObject:value];
+    }
+    NSDictionary* info = [[NSDictionary alloc]initWithObjects:values forKeys:keys];
+    return info;
+}
+
+
++ (void)setUserInfo:(NSDictionary*)dic
+{
+    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+    for (NSString* key in dic.keyEnumerator) {
+        [userDefaults setObject:[dic objectForKey:key] forKey:key];
+    }
+    [userDefaults synchronize];
+}
+
++ (NSString*)getNickName
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"nickname"];
+
+}
++ (NSString*)getUserName
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"name"];
+
+}
++(NSString*)getFlowerCount
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"flower"];
+
+}
+
+
++(void) setUserName:(NSString*)username
+{
+    [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"name"];
+
+}
++(void) addFlowerCount;
+{
+    NSNumber* flowerCount =  [[NSUserDefaults standardUserDefaults] objectForKey:@"flower"];
+    if (!flowerCount) {
+        flowerCount = [[NSNumber alloc]initWithInt:1];
+    } else {
+        int count = flowerCount.intValue+1;
+        flowerCount = [[NSNumber alloc]initWithInt:count];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:flowerCount forKey:@"flower"];
+
+}
 @end
