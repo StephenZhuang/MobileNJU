@@ -30,10 +30,25 @@
 + (void)setHasResume:(BOOL)hasResume;
 + (void)removeUserInfo;
 
+
 + (NSString *)getVerify;
 + (void)setVerify:(NSString *)verify;
 + (NSString *)getDeviceid;
 //+ (NSURL *)getImageUrlWtihString:(NSString *)urlString;
 + (NSString *)getHeadImg;
 + (void)setHeadImg:(NSString *)headImg;
+
+
+
++ (NSDictionary*) getUserInfo;
++ (void)setUserInfo:(NSDictionary*)dic;
+
++ (NSString*)getNickName;
++ (NSString*)getUserName;
++(NSString*)getFlowerCount;
+
+
++(void) setUserName:(NSString*)username;
++(void) addFlowerCount;
+
 @end

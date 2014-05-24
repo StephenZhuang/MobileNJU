@@ -8,8 +8,10 @@
 
 #import "SelfInfoVC.h"
 #import "SelfCell.h"
+#import "ToolUtils.h"
 @interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *infoTable;
 @property (weak, nonatomic) IBOutlet UILabel *flowerLabel;
 @end
 
@@ -33,10 +35,13 @@
     
     NSArray* keys = [[NSArray alloc]initWithObjects:@"image", @"content",nil];
     NSArray* images = [[NSArray alloc]initWithObjects:@"institute",@"sex",@"birth",@"hobby", nil];
-    NSArray* contents = [[NSArray alloc]initWithObjects:@"南京大学－中文系",@"男",@"1986-08-05",@"绘画、书法", nil];
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"selfInfo" ofType:@"plist"];
+    NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    NSArray* infoKeys = [data objectForKey:@"infoKeys"];
+    NSDictionary* infos = [ToolUtils getUserInfo];
     NSMutableArray* mutableArray = [[NSMutableArray alloc]init];
     for (int i = 0 ; i < 4 ; i ++){
-        NSArray* values = [[NSArray alloc]initWithObjects:[images objectAtIndex:i],[contents objectAtIndex:i], nil];
+        NSArray* values = [[NSArray alloc]initWithObjects:[images objectAtIndex:i],[infos objectForKey:[infoKeys objectAtIndex:i+1]], nil];
         NSDictionary* dic = [[NSDictionary alloc]initWithObjects:values forKeys:keys];
         [mutableArray addObject:dic];
     }
@@ -49,6 +54,13 @@
     [super viewDidLoad];
     [self loadData];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self loadData];
+    [self.infoTable reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning
