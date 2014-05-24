@@ -10,7 +10,7 @@
 #import "MainMenuViewController.h"
 #import "SelfInfoVC.h"
 #import "ExerciseVC.h"
-
+#import "EcardVC.h"
 @interface WelcomeViewController ()<UITextFieldDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
@@ -29,7 +29,8 @@
     if ( [viewController class] ==  [self class]
         || [viewController class] == [MainMenuViewController class]
         || [viewController class]==[SelfInfoVC class]
-        || [viewController class]== [ExerciseVC class]) {
+        || [viewController class]== [ExerciseVC class]
+        || [viewController class]==[EcardVC class]) {
         [navigationController setNavigationBarHidden:YES animated:animated];
     } else if ( [navigationController isNavigationBarHidden] ) {
         [navigationController setNavigationBarHidden:NO animated:animated];
