@@ -9,7 +9,7 @@
 #import "WelcomeViewController.h"
 #import "MainMenuViewController.h"
 #import "SelfInfoVC.h"
-
+#import "ExerciseVC.h"
 
 @interface WelcomeViewController ()<UITextFieldDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
@@ -28,7 +28,8 @@
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ( [viewController class] ==  [self class]
         || [viewController class] == [MainMenuViewController class]
-        || [viewController class]==[SelfInfoVC class]) {
+        || [viewController class]==[SelfInfoVC class]
+        || [viewController class]== [ExerciseVC class]) {
         [navigationController setNavigationBarHidden:YES animated:animated];
     } else if ( [navigationController isNavigationBarHidden] ) {
         [navigationController setNavigationBarHidden:NO animated:animated];

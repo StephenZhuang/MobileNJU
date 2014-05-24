@@ -62,6 +62,8 @@
 		7D1A1A4F193039520083A6AD /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A1A4E193039520083A6AD /* CheckBox.m */; };
 		7D1A1A521930451D0083A6AD /* TagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A1A511930451D0083A6AD /* TagView.m */; };
 		7D1A1A55193056A30083A6AD /* TagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A1A54193056A30083A6AD /* TagButton.m */; };
+		7D209844193085D7002BD994 /* ExerciseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D209843193085D7002BD994 /* ExerciseVC.m */; };
+		7D20984719308A1A002BD994 /* ExerciseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20984619308A1A002BD994 /* ExerciseCell.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
 		7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B30192D9C230066494D /* WelcomeViewController.m */; };
 		7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B32192D9C230066494D /* MainMenuViewController.m */; };
@@ -193,6 +195,10 @@
 		7D1A1A511930451D0083A6AD /* TagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagView.m; sourceTree = "<group>"; };
 		7D1A1A53193056A30083A6AD /* TagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagButton.h; sourceTree = "<group>"; };
 		7D1A1A54193056A30083A6AD /* TagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagButton.m; sourceTree = "<group>"; };
+		7D209842193085D7002BD994 /* ExerciseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExerciseVC.h; path = "打卡/ExerciseVC.h"; sourceTree = "<group>"; };
+		7D209843193085D7002BD994 /* ExerciseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExerciseVC.m; path = "打卡/ExerciseVC.m"; sourceTree = "<group>"; };
+		7D20984519308A1A002BD994 /* ExerciseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExerciseCell.h; sourceTree = "<group>"; };
+		7D20984619308A1A002BD994 /* ExerciseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExerciseCell.m; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
 		7DD25B2F192D9C230066494D /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
@@ -292,6 +298,7 @@
 		77B9042E192C3F040062237D /* MobileNJU */ = {
 			isa = PBXGroup;
 			children = (
+				7D209841193085AF002BD994 /* 打卡 */,
 				7DD86999192DB6B400D4ADAA /* 新闻 */,
 				7DD25B3D192D9DF30066494D /* 电话 */,
 				77B90461192C444A0062237D /* Base */,
@@ -570,6 +577,17 @@
 			path = ToolUtils;
 			sourceTree = "<group>";
 		};
+		7D209841193085AF002BD994 /* 打卡 */ = {
+			isa = PBXGroup;
+			children = (
+				7D209842193085D7002BD994 /* ExerciseVC.h */,
+				7D209843193085D7002BD994 /* ExerciseVC.m */,
+				7D20984519308A1A002BD994 /* ExerciseCell.h */,
+				7D20984619308A1A002BD994 /* ExerciseCell.m */,
+			);
+			name = "打卡";
+			sourceTree = "<group>";
+		};
 		7DD25B3D192D9DF30066494D /* 电话 */ = {
 			isa = PBXGroup;
 			children = (
@@ -712,6 +730,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77B904C4192C4B3B0062237D /* MJPhotoBrowser.m in Sources */,
+				7D20984719308A1A002BD994 /* ExerciseCell.m in Sources */,
 				77B904D2192C4B3B0062237D /* SDWebImagePrefetcher.m in Sources */,
 				7DFF3F53192E06DC00E146ED /* NewsCell.m in Sources */,
 				7DD8699E192DB6D700D4ADAA /* NewsDetailVC.m in Sources */,
@@ -738,6 +757,7 @@
 				7D1A1A55193056A30083A6AD /* TagButton.m in Sources */,
 				7DD86997192DB68A00D4ADAA /* PhoneNumCell.m in Sources */,
 				77B904C1192C4B3B0062237D /* MBProgressHUD.m in Sources */,
+				7D209844193085D7002BD994 /* ExerciseVC.m in Sources */,
 				77B904CC192C4B3B0062237D /* SDWebImageCompat.m in Sources */,
 				77B9046D192C4ABF0062237D /* TitleView.m in Sources */,
 				77B904BD192C4B3B0062237D /* MJRefreshHeaderView.m in Sources */,
@@ -887,7 +907,7 @@
 				INFOPLIST_FILE = "MobileNJU/MobileNJU-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C10CC3E0-BB0E-4F97-9B7A-E14406DD8A75";
+				PROVISIONING_PROFILE = "FC7FCF38-53C3-4A11-83BE-C53B9FFF6986";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -903,7 +923,7 @@
 				INFOPLIST_FILE = "MobileNJU/MobileNJU-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C10CC3E0-BB0E-4F97-9B7A-E14406DD8A75";
+				PROVISIONING_PROFILE = "FC7FCF38-53C3-4A11-83BE-C53B9FFF6986";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
