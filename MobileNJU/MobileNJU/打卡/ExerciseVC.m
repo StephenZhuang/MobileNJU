@@ -9,11 +9,15 @@
 #import "ExerciseVC.h"
 #import "ExerciseCell.h"
 @interface ExerciseVC ()<UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *maskView;
+@property (weak, nonatomic) IBOutlet UITextField *schIDText;
+@property (weak, nonatomic) IBOutlet UISwitch *autoSearch;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (weak, nonatomic) IBOutlet UIView *alertView;
 @end
 
 @implementation ExerciseVC
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +31,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.alertView setHidden:YES];
+    [self.maskView setHidden:YES];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -37,7 +44,22 @@
 }
 
 
+#pragma mark 关于自定义的alertView
+- (IBAction)closeAlertView:(id)sender {
+    [self.alertView setHidden:YES];
+    [self.maskView setHidden:YES];
 
+    
+}
+- (IBAction)searchResult:(id)sender {
+}
+
+- (IBAction)showAlertView:(id)sender {
+    [self.alertView setHidden:NO];
+    [self.maskView setHidden:NO];
+    
+
+}
 
 
 #pragma mark - Table view data source
@@ -88,18 +110,5 @@
     return 40;
 }
 
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
