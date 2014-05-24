@@ -9,6 +9,8 @@
 #import "MainMenuViewController.h"
 #import "HomeCell.h"
 #import "SelfInfoVC.h"
+#import "TreeHoleListViewController.h"
+
 @interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *menuView;
 @property (weak, nonatomic) IBOutlet UIImageView *touchCircle;
@@ -77,7 +79,13 @@ static NSArray* buttonImages;
 
 -(void)goToDetail:(id)sender{
     MenuButton* menuButton = (MenuButton*)sender;
-    [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
+    if ([menuButton.desitination isEqualToString:@"hole"]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
+        TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
+    }
 }
 
 - (void)performBounceLeftAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
@@ -331,7 +339,6 @@ static NSArray* buttonImages;
     [self.pageScroller addGestureRecognizer:singleTap];
     buttonImages= [[NSArray alloc]initWithObjects:@"bbs",@"library",@"chat",@"hole",@"ecard",@"classroom",@"lose",@"schedule",@"phone",@"bus",@"procedure",@"exercise", nil];
         // Do any additional setup after loading the view.
-
 }
 
 

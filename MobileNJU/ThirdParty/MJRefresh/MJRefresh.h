@@ -1,7 +1,6 @@
 
 #import "MJRefreshFooterView.h"
 #import "MJRefreshHeaderView.h"
-#import "NoMoreView.h"
 
 /**
  MJ友情提示：
