@@ -22,8 +22,7 @@
 @property (nonatomic,strong)NSMutableArray* waitingMenusForLeft;
 @property (weak, nonatomic) IBOutlet UIImageView *menuBackground;
 @property (nonatomic,strong)NSMutableArray* waitingMenusForRight;
-
-@property(nonatomic)BOOL isFirstOpen;
+@property (nonatomic,strong)UIGestureRecognizer* pan;
 @end
 
 @implementation MainMenuViewController
@@ -45,9 +44,13 @@ static NSArray* buttonImages;
     self.lastY = 1000.0;
     self.waitingMenusForLeft = [[NSMutableArray alloc]init];
     self.waitingMenusForRight = [[NSMutableArray alloc]init];
-    self.isFirstOpen = YES;
     // Do any additional setup after loading the view.
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self changeResponder:NO];
 }
 
 
@@ -71,7 +74,7 @@ static NSArray* buttonImages;
 #pragma mark tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [buttonImages count]+3;
+    return [buttonImages count]+2;
     //此处+3 只是为下方预留空间
 }
 
@@ -82,8 +85,10 @@ static NSArray* buttonImages;
 {
     HomeCell *homeCell = (HomeCell *)cell;
     [homeCell setBackgroundColor:[UIColor clearColor]];
-    CGFloat tableButtom = self.view.window.bounds.size.height-self.menuView.frame.origin.y-self.tableView.frame.origin.y-50;
-    if (self.isFirstOpen) {
+    CGFloat tableButtom = self.view.window.bounds.size.height-
+    self.menuView.frame.origin.y-
+    self.touchView.frame.origin.y-self.tableView.frame.origin.y-50;
+    if (self.touchView.gestureRecognizers!=nil) {
         if (cell.center.y>tableButtom) {
             if (indexPath.row % 2 == 1) {
                 [self.waitingMenusForRight addObject:cell];
@@ -93,11 +98,12 @@ static NSArray* buttonImages;
                 [cell setHidden:YES];
             }
         }
+
     }
-    if (indexPath.row % 2 == 1) {
-        [self performBounceRightAnimationOnView:homeCell.menuButton duration:1.0 delay:0.2];
+        if (indexPath.row % 2 == 1) {
+        [self performBounceRightAnimationOnView:homeCell.menuButton duration:1.0 delay:0.3f];
     } else {
-        [self performBounceLeftAnimationOnView:homeCell.menuButton duration:1.0 delay:0.2];
+        [self performBounceLeftAnimationOnView:homeCell.menuButton duration:1.0 delay:0.3f];
     }
 }
 
@@ -195,9 +201,9 @@ static NSArray* buttonImages;
 - (void)prepareForAnimation
 {
     // 手势监听
-    UIPanGestureRecognizer *pan=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(moveMenu:)];
-    [self.touchView addGestureRecognizer:pan];
+    self.pan=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(moveMenu:)];
     [self.touchView setUserInteractionEnabled:YES];
+    [self changeResponder:NO];
 //    
 //    [self.menuBackground addGestureRecognizer:pan];
 //    [self.menuBackground setUserInteractionEnabled:YES];
@@ -206,7 +212,16 @@ static NSArray* buttonImages;
 //    [self.touchCircle setUserInteractionEnabled:YES];
 }
 
-
+- (void)changeResponder:(BOOL)canScroll
+{
+    if (!canScroll) {
+        [self.touchView addGestureRecognizer:self.pan];
+    } else {
+        [self.touchView removeGestureRecognizer:self.pan];
+    }
+    [self.tableView setScrollEnabled:canScroll];
+    self.lastY=1000.0;
+}
 - (void)moveMenu:(UIPanGestureRecognizer *)recognizer
 {
     
@@ -225,9 +240,7 @@ static NSArray* buttonImages;
         CGFloat initCenterHeight = windowHeight==480?323.5:366.5;
         point.y = relavativeY+self.menuView.center.y;
         if (point.y<minCenterHeight) {
-            self.isFirstOpen = NO;
-            [self.touchView setUserInteractionEnabled:NO];
-             self.lastY=1000.0;
+            [self changeResponder:YES];
         } else if (point.y>=minCenterHeight&&point.y<=initCenterHeight){
             point.x = self.menuView.center.x;
             [self.menuView setCenter:point];
@@ -235,11 +248,14 @@ static NSArray* buttonImages;
             
           
             if ([self.waitingMenusForLeft count]+[self.waitingMenusForRight count]>0) {
-                CGFloat tableButtom = self.view.window.bounds.size.height-self.menuView.frame.origin.y-self.tableView.frame.origin.y-50;
+                CGFloat tableButtom = self.view.window.bounds.size.height-
+                self.menuView.frame.origin.y-
+                self.touchView.frame.origin.y-self.tableView.frame.origin.y-50;
                 for (HomeCell* cell in self.waitingMenusForRight) {
+                    NSLog(@"%f,%f",cell.center.y,tableButtom);
                     if (cell.center.y<=tableButtom) {
                         [cell setHidden:NO];
-                        [self performBounceRightAnimationOnView:cell.menuButton duration:1.0f delay:0.2f];
+                        [self performBounceRightAnimationOnView:cell.menuButton duration:1.0f delay:0.5f];
                         [self.waitingMenusForRight removeObject:cell];
                         break;
                     }
@@ -249,7 +265,7 @@ static NSArray* buttonImages;
                 for (HomeCell* cell in self.waitingMenusForLeft) {
                     if (cell.center.y<=tableButtom) {
                         [cell setHidden:NO];
-                        [self performBounceLeftAnimationOnView:cell.menuButton duration:1.0f delay:0.2f];
+                        [self performBounceLeftAnimationOnView:cell.menuButton duration:1.0f delay:0.5f];
                         [self.waitingMenusForLeft removeObject:cell];
                         break;
                     }
@@ -258,8 +274,7 @@ static NSArray* buttonImages;
             
         } else if (point.y==initCenterHeight){
             NSLog(@"SetYesAt2");
-            self.lastY=1000.0;
-            [self.touchView setUserInteractionEnabled:YES];
+            [self changeResponder:NO];
         }
     }
 }
@@ -363,8 +378,8 @@ static NSArray* buttonImages;
             CGPoint offset = scrollView.contentOffset;
             float reload_distance = 20;
             if(- offset.y > reload_distance) {
-                [self.touchView setUserInteractionEnabled:YES];
-                self.lastY = 1000.0;
+                [self changeResponder:NO];
+
             }
             CGRect bounds = scrollView.bounds;
             CGSize size = scrollView.contentSize;
@@ -372,8 +387,7 @@ static NSArray* buttonImages;
             float y = offset.y + bounds.size.height - inset.bottom;
             float h = size.height;
         if (y-h>reload_distance) {
-            [self.touchView setUserInteractionEnabled:NO];
-            self.lastY = 1000.0;
+            [self changeResponder:YES];
         }
         
         CGFloat shift = self.view.window.bounds.size.height==480?100.0:0;
@@ -381,7 +395,7 @@ static NSArray* buttonImages;
             for (HomeCell* cell in self.waitingMenusForLeft) {
                 if (cell.center.y<=offset.y+bounds.size.height-shift) {
                     [cell setHidden:NO];
-                    [self performBounceLeftAnimationOnView:cell.menuButton duration:1.0f delay:0.2f];
+                    [self performBounceLeftAnimationOnView:cell.menuButton duration:1.0f delay:0.5f];
                     [self.waitingMenusForLeft removeObject:cell];
                     break;
                 }
@@ -390,7 +404,7 @@ static NSArray* buttonImages;
                 if (cell.center.y<=offset.y+bounds.size.height-shift) {
                     [cell setHidden:NO];
 
-                    [self performBounceRightAnimationOnView:cell.menuButton duration:1.0f delay:0.2f];
+                    [self performBounceRightAnimationOnView:cell.menuButton duration:1.0f delay:0.5f];
                     [self.waitingMenusForRight removeObject:cell];
                     break;
                 }
