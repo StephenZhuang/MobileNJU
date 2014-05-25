@@ -65,6 +65,12 @@
 		7D209844193085D7002BD994 /* ExerciseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D209843193085D7002BD994 /* ExerciseVC.m */; };
 		7D20984719308A1A002BD994 /* ExerciseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20984619308A1A002BD994 /* ExerciseCell.m */; };
 		7D20984E1930ADCE002BD994 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20984D1930ADCE002BD994 /* CustomIOS7AlertView.m */; };
+		7D2098521930B931002BD994 /* BusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2098511930B931002BD994 /* BusVC.m */; };
+		7D2098551930BECC002BD994 /* BusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2098541930BECC002BD994 /* BusCell.m */; };
+		7D2098591930C61B002BD994 /* EcardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2098581930C61B002BD994 /* EcardVC.m */; };
+		7D20985C1930C6A1002BD994 /* EcardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20985B1930C6A1002BD994 /* EcardCell.m */; };
+		7D2098601930F6FE002BD994 /* GradeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20985F1930F6FE002BD994 /* GradeVC.m */; };
+		7D20986319311CDE002BD994 /* MyAnimationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20986219311CDE002BD994 /* MyAnimationBehavior.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
 		7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B30192D9C230066494D /* WelcomeViewController.m */; };
 		7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B32192D9C230066494D /* MainMenuViewController.m */; };
@@ -202,6 +208,18 @@
 		7D20984619308A1A002BD994 /* ExerciseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExerciseCell.m; sourceTree = "<group>"; };
 		7D20984C1930ADCE002BD994 /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomIOS7AlertView.h; path = CustomIOSAlertView/CustomIOS7AlertView.h; sourceTree = "<group>"; };
 		7D20984D1930ADCE002BD994 /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomIOS7AlertView.m; path = CustomIOSAlertView/CustomIOS7AlertView.m; sourceTree = "<group>"; };
+		7D2098501930B931002BD994 /* BusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusVC.h; path = "校车/BusVC.h"; sourceTree = "<group>"; };
+		7D2098511930B931002BD994 /* BusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusVC.m; path = "校车/BusVC.m"; sourceTree = "<group>"; };
+		7D2098531930BECC002BD994 /* BusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BusCell.h; path = "校车/BusCell.h"; sourceTree = "<group>"; };
+		7D2098541930BECC002BD994 /* BusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BusCell.m; path = "校车/BusCell.m"; sourceTree = "<group>"; };
+		7D2098571930C61B002BD994 /* EcardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EcardVC.h; path = "一卡通/EcardVC.h"; sourceTree = "<group>"; };
+		7D2098581930C61B002BD994 /* EcardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EcardVC.m; path = "一卡通/EcardVC.m"; sourceTree = "<group>"; };
+		7D20985A1930C6A1002BD994 /* EcardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EcardCell.h; sourceTree = "<group>"; };
+		7D20985B1930C6A1002BD994 /* EcardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EcardCell.m; sourceTree = "<group>"; };
+		7D20985E1930F6FE002BD994 /* GradeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeVC.h; sourceTree = "<group>"; };
+		7D20985F1930F6FE002BD994 /* GradeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeVC.m; sourceTree = "<group>"; };
+		7D20986119311CDE002BD994 /* MyAnimationBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnimationBehavior.h; sourceTree = "<group>"; };
+		7D20986219311CDE002BD994 /* MyAnimationBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnimationBehavior.m; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
 		7DD25B2F192D9C230066494D /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
@@ -301,6 +319,9 @@
 		77B9042E192C3F040062237D /* MobileNJU */ = {
 			isa = PBXGroup;
 			children = (
+				7D20985D1930F697002BD994 /* 成绩查询 */,
+				7D2098561930C5F3002BD994 /* 一卡通 */,
+				7D20984F1930B908002BD994 /* 校车 */,
 				7D209841193085AF002BD994 /* 打卡 */,
 				7DD86999192DB6B400D4ADAA /* 新闻 */,
 				7DD25B3D192D9DF30066494D /* 电话 */,
@@ -601,6 +622,39 @@
 			name = CustomIOSAlertView;
 			sourceTree = "<group>";
 		};
+		7D20984F1930B908002BD994 /* 校车 */ = {
+			isa = PBXGroup;
+			children = (
+				7D2098501930B931002BD994 /* BusVC.h */,
+				7D2098511930B931002BD994 /* BusVC.m */,
+				7D2098531930BECC002BD994 /* BusCell.h */,
+				7D2098541930BECC002BD994 /* BusCell.m */,
+			);
+			name = "校车";
+			sourceTree = "<group>";
+		};
+		7D2098561930C5F3002BD994 /* 一卡通 */ = {
+			isa = PBXGroup;
+			children = (
+				7D2098571930C61B002BD994 /* EcardVC.h */,
+				7D2098581930C61B002BD994 /* EcardVC.m */,
+				7D20985A1930C6A1002BD994 /* EcardCell.h */,
+				7D20985B1930C6A1002BD994 /* EcardCell.m */,
+			);
+			name = "一卡通";
+			sourceTree = "<group>";
+		};
+		7D20985D1930F697002BD994 /* 成绩查询 */ = {
+			isa = PBXGroup;
+			children = (
+				7D20985E1930F6FE002BD994 /* GradeVC.h */,
+				7D20985F1930F6FE002BD994 /* GradeVC.m */,
+				7D20986119311CDE002BD994 /* MyAnimationBehavior.h */,
+				7D20986219311CDE002BD994 /* MyAnimationBehavior.m */,
+			);
+			name = "成绩查询";
+			sourceTree = "<group>";
+		};
 		7DD25B3D192D9DF30066494D /* 电话 */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,6 +796,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D2098591930C61B002BD994 /* EcardVC.m in Sources */,
 				77B904C4192C4B3B0062237D /* MJPhotoBrowser.m in Sources */,
 				7D20984719308A1A002BD994 /* ExerciseCell.m in Sources */,
 				77B904D2192C4B3B0062237D /* SDWebImagePrefetcher.m in Sources */,
@@ -751,10 +806,13 @@
 				77B904C6192C4B3B0062237D /* MJPhotoProgressView.m in Sources */,
 				77B904D6192C4B3B0062237D /* UIImage+WebP.m in Sources */,
 				7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */,
+				7D2098521930B931002BD994 /* BusVC.m in Sources */,
 				7D1A1A521930451D0083A6AD /* TagView.m in Sources */,
 				77B904D8192C4B3B0062237D /* UIImageView+WebCache.m in Sources */,
 				7DF0BB40192FBA97004CEE01 /* EditInfoVC.m in Sources */,
 				7DD25B39192D9C230066494D /* HomeCell.m in Sources */,
+				7D20985C1930C6A1002BD994 /* EcardCell.m in Sources */,
+				7D2098601930F6FE002BD994 /* GradeVC.m in Sources */,
 				7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */,
 				7DD869AF192DB73B00D4ADAA /* GetCodeViewController.m in Sources */,
 				77B904BC192C4B3B0062237D /* MJRefreshFooterView.m in Sources */,
@@ -779,6 +837,7 @@
 				77B904D7192C4B3B0062237D /* UIImageView+MJWebCache.m in Sources */,
 				77B904CB192C4B3B0062237D /* SDImageCache.m in Sources */,
 				77B904CE192C4B3B0062237D /* SDWebImageDownloader.m in Sources */,
+				7D20986319311CDE002BD994 /* MyAnimationBehavior.m in Sources */,
 				77B90435192C3F040062237D /* main.m in Sources */,
 				77B90467192C48980062237D /* HomeViewController.m in Sources */,
 				7DD25B3A192D9C230066494D /* MenuButton.m in Sources */,
@@ -794,6 +853,7 @@
 				7D1A1A4F193039520083A6AD /* CheckBox.m in Sources */,
 				77B904D9192C4B3B0062237D /* ToolUtils.m in Sources */,
 				7DD8699F192DB6D700D4ADAA /* NewsListTVC.m in Sources */,
+				7D2098551930BECC002BD994 /* BusCell.m in Sources */,
 				7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */,
 				77B904D3192C4B3B0062237D /* UIButton+WebCache.m in Sources */,
 				77B904C2192C4B3B0062237D /* MJPhoto.m in Sources */,
@@ -915,13 +975,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bicheng Luo (GW658U6W2B)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileNJU/MobileNJU-Prefix.pch";
 				INFOPLIST_FILE = "MobileNJU/MobileNJU-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FC7FCF38-53C3-4A11-83BE-C53B9FFF6986";
+				PROVISIONING_PROFILE = "C48D3948-FF73-4B73-98C6-33486C79E5B6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -931,13 +991,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bicheng Luo (GW658U6W2B)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileNJU/MobileNJU-Prefix.pch";
 				INFOPLIST_FILE = "MobileNJU/MobileNJU-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FC7FCF38-53C3-4A11-83BE-C53B9FFF6986";
+				PROVISIONING_PROFILE = "C48D3948-FF73-4B73-98C6-33486C79E5B6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
