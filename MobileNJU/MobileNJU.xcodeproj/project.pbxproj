@@ -72,6 +72,7 @@
 		7D2098601930F6FE002BD994 /* GradeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20985F1930F6FE002BD994 /* GradeVC.m */; };
 		7D20986319311CDE002BD994 /* MyAnimationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20986219311CDE002BD994 /* MyAnimationBehavior.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
+		7DA3773419324E7E00FF22D9 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DA3773319324E7E00FF22D9 /* Home.storyboard */; };
 		7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B30192D9C230066494D /* WelcomeViewController.m */; };
 		7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B32192D9C230066494D /* MainMenuViewController.m */; };
 		7DD25B39192D9C230066494D /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B34192D9C230066494D /* HomeCell.m */; };
@@ -86,7 +87,6 @@
 		7DD869B1192DB73B00D4ADAA /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD869AE192DB73B00D4ADAA /* RegisterViewController.m */; };
 		7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD869B3192DB74500D4ADAA /* SelfInfoVC.m */; };
 		7DD869B6192DB7A700D4ADAA /* Self.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD869B5192DB7A700D4ADAA /* Self.storyboard */; };
-		7DF0BB34192F3B35004CEE01 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DF0BB33192F3B35004CEE01 /* Home.storyboard */; };
 		7DF0BB3D192FB7B3004CEE01 /* AYHCustomComboBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0BB3B192FB7B3004CEE01 /* AYHCustomComboBox.m */; };
 		7DF0BB40192FBA97004CEE01 /* EditInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0BB3F192FBA97004CEE01 /* EditInfoVC.m */; };
 		7DFF3F53192E06DC00E146ED /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF3F52192E06DC00E146ED /* NewsCell.m */; };
@@ -222,6 +222,7 @@
 		7D20986219311CDE002BD994 /* MyAnimationBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnimationBehavior.m; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
+		7DA3773319324E7E00FF22D9 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		7DD25B2F192D9C230066494D /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		7DD25B30192D9C230066494D /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		7DD25B31192D9C230066494D /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
@@ -249,7 +250,6 @@
 		7DD869B2192DB74500D4ADAA /* SelfInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfInfoVC.h; sourceTree = "<group>"; };
 		7DD869B3192DB74500D4ADAA /* SelfInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfInfoVC.m; sourceTree = "<group>"; };
 		7DD869B5192DB7A700D4ADAA /* Self.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Self.storyboard; sourceTree = "<group>"; };
-		7DF0BB33192F3B35004CEE01 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		7DF0BB3A192FB7B3004CEE01 /* AYHCustomComboBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AYHCustomComboBox.h; path = ComboBox/AYHCustomComboBox.h; sourceTree = "<group>"; };
 		7DF0BB3B192FB7B3004CEE01 /* AYHCustomComboBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AYHCustomComboBox.m; path = ComboBox/AYHCustomComboBox.m; sourceTree = "<group>"; };
 		7DF0BB3C192FB7B3004CEE01 /* AYHCustomComboBoxDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AYHCustomComboBoxDelegate.h; path = ComboBox/AYHCustomComboBoxDelegate.h; sourceTree = "<group>"; };
@@ -466,8 +466,8 @@
 				7DD25B34192D9C230066494D /* HomeCell.m */,
 				7DD25B35192D9C230066494D /* MenuButton.h */,
 				7DD25B36192D9C230066494D /* MenuButton.m */,
+				7DA3773319324E7E00FF22D9 /* Home.storyboard */,
 				77B90465192C48980062237D /* HomeViewController.h */,
-				7DF0BB33192F3B35004CEE01 /* Home.storyboard */,
 				77B90466192C48980062237D /* HomeViewController.m */,
 			);
 			path = "首页";
@@ -768,8 +768,8 @@
 			files = (
 				77B904DF192C4C6F0062237D /* navigation_bg@2x.png in Resources */,
 				77B90433192C3F040062237D /* InfoPlist.strings in Resources */,
-				7DF0BB34192F3B35004CEE01 /* Home.storyboard in Resources */,
 				77B904DD192C4C6F0062237D /* navigation_back_n@2x.png in Resources */,
+				7DA3773419324E7E00FF22D9 /* Home.storyboard in Resources */,
 				77B9043B192C3F040062237D /* Images.xcassets in Resources */,
 				77B904DE192C4C6F0062237D /* navigation_back_p@2x.png in Resources */,
 				77B904B9192C4B3B0062237D /* MJRefresh.bundle in Resources */,
