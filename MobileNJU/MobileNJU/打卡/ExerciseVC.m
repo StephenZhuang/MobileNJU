@@ -72,7 +72,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     // set header view colour
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 40)];
-    UIImage* background = [UIImage imageNamed:@"tablehead"];
+    UIImage* background = [UIImage imageNamed:@"tableHead"];
     UIImageView* backgroundImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 40)];
     [backgroundImage setImage:background];
     [headerView addSubview:backgroundImage];
