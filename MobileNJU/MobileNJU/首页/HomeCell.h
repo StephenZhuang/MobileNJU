@@ -10,5 +10,9 @@
 #import "MenuButton.h"
 @interface HomeCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet MenuButton *menuButton;
+@property (weak, nonatomic) IBOutlet UIView *menuView;
 @property (weak,nonatomic) NSString* menuName;
+@property (weak, nonatomic) IBOutlet UILabel *menuTitle;
+@property (weak, nonatomic) IBOutlet UILabel *menuSubTitle;
+
 @end

@@ -27,7 +27,7 @@
 
 @implementation MainMenuViewController
 static NSArray* buttonImages;
-
+static NSArray* descriptions;
 #pragma mark ViewController
 
 - (void)viewDidLoad
@@ -40,7 +40,8 @@ static NSArray* buttonImages;
     [self prepareForNews];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.pageScroller addGestureRecognizer:singleTap];
-    buttonImages= [[NSArray alloc]initWithObjects:@"bbs",@"library",@"chat",@"hole",@"ecard",@"classroom",@"lose",@"schedule",@"phone",@"bus",@"procedure",@"exercise",@"grade", nil];
+    buttonImages= [[NSArray alloc]initWithObjects:@"百合十大",@"图书馆",@"南呱",@"树洞",@"一卡通",@"课程表",@"失物招领",@"空教室",@"部门电话",@"绩点",@"校车",@"打卡",@"流程", nil];
+    descriptions = [[NSArray alloc]initWithObjects:@"每天十条",@"查书/借阅情况",@"陌生人的心声",@"吐槽你的心声",@"余额及消费",@"课程一览无遗",@"捡到？丢了？",@"找没课的自习室",@"电话查询",@"不断飙升的绩点",@"校车地点/时刻表",@"打卡次数查询",@"全部在这里", nil];
     self.lastY = 1000.0;
     self.waitingMenusForLeft = [[NSMutableArray alloc]init];
     self.waitingMenusForRight = [[NSMutableArray alloc]init];
@@ -74,7 +75,7 @@ static NSArray* buttonImages;
 #pragma mark tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [buttonImages count]+2;
+    return [buttonImages count]+3;
     //此处+3 只是为下方预留空间
 }
 
@@ -101,9 +102,9 @@ static NSArray* buttonImages;
 
     }
         if (indexPath.row % 2 == 1) {
-        [self performBounceRightAnimationOnView:homeCell.menuButton duration:1.0 delay:0.3f];
+        [self performBounceRightAnimationOnView:homeCell.menuView duration:1.0 delay:0.3f];
     } else {
-        [self performBounceLeftAnimationOnView:homeCell.menuButton duration:1.0 delay:0.3f];
+        [self performBounceLeftAnimationOnView:homeCell.menuView duration:1.0 delay:0.3f];
     }
 }
 
@@ -122,14 +123,21 @@ static NSArray* buttonImages;
     }
     if (indexPath.row<=[buttonImages count]-1) {
         UIImage* image = [UIImage imageNamed:[buttonImages objectAtIndex:indexPath.row]];
+        UIImage* imageSelected = [UIImage imageNamed:[NSString stringWithFormat:@"%@选中",[buttonImages objectAtIndex:indexPath.row]]];
         [cell.menuButton setImage:image forState:UIControlStateNormal];
+        [cell.menuButton setImage:imageSelected forState:UIControlStateHighlighted];
+         [cell.menuButton setImage:imageSelected forState:UIControlStateSelected];
         [cell.menuButton setDesitination:[buttonImages objectAtIndex:indexPath.row]];
+        [cell.menuTitle setText:[buttonImages objectAtIndex:indexPath.row]];
+        [cell.menuSubTitle setText:[descriptions objectAtIndex:indexPath.row]];
         [cell.menuButton addTarget:self action:@selector(
                                                          goToDetail
                                                 :) forControlEvents:UIControlEventTouchUpInside];
 
     } else {
         [cell.menuButton setImage:nil forState:UIControlStateNormal];
+        [cell.menuTitle setText:@""];
+        [cell.menuSubTitle setText:@""];
     }
    return cell;
 }
@@ -137,6 +145,7 @@ static NSArray* buttonImages;
 
 #pragma mark 动画
 - (void)performBounceLeftAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
+    [view setHidden:NO];
     // Start
     view.transform = CGAffineTransformMakeTranslation(300, 0);
     [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
@@ -163,6 +172,7 @@ static NSArray* buttonImages;
 }
 
 - (void)performBounceRightAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
+    [view setHidden:NO];
     // Start
     view.transform = CGAffineTransformMakeTranslation(-300, 0);
     [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
@@ -252,10 +262,9 @@ static NSArray* buttonImages;
                 self.menuView.frame.origin.y-
                 self.touchView.frame.origin.y-self.tableView.frame.origin.y-50;
                 for (HomeCell* cell in self.waitingMenusForRight) {
-                    NSLog(@"%f,%f",cell.center.y,tableButtom);
                     if (cell.center.y<=tableButtom) {
                         [cell setHidden:NO];
-                        [self performBounceRightAnimationOnView:cell.menuButton duration:1.0f delay:0.5f];
+                        [self performBounceRightAnimationOnView:cell.menuView duration:1.0f delay:0.5f];
                         [self.waitingMenusForRight removeObject:cell];
                         break;
                     }
@@ -265,7 +274,7 @@ static NSArray* buttonImages;
                 for (HomeCell* cell in self.waitingMenusForLeft) {
                     if (cell.center.y<=tableButtom) {
                         [cell setHidden:NO];
-                        [self performBounceLeftAnimationOnView:cell.menuButton duration:1.0f delay:0.5f];
+                        [self performBounceLeftAnimationOnView:cell.menuView duration:1.0f delay:0.5f];
                         [self.waitingMenusForLeft removeObject:cell];
                         break;
                     }
@@ -395,7 +404,7 @@ static NSArray* buttonImages;
             for (HomeCell* cell in self.waitingMenusForLeft) {
                 if (cell.center.y<=offset.y+bounds.size.height-shift) {
                     [cell setHidden:NO];
-                    [self performBounceLeftAnimationOnView:cell.menuButton duration:1.0f delay:0.5f];
+                    [self performBounceLeftAnimationOnView:cell.menuView duration:1.0f delay:0.5f];
                     [self.waitingMenusForLeft removeObject:cell];
                     break;
                 }
@@ -403,8 +412,8 @@ static NSArray* buttonImages;
             for (HomeCell* cell in self.waitingMenusForRight) {
                 if (cell.center.y<=offset.y+bounds.size.height-shift) {
                     [cell setHidden:NO];
-
-                    [self performBounceRightAnimationOnView:cell.menuButton duration:1.0f delay:0.5f];
+                    
+                    [self performBounceRightAnimationOnView:cell.menuView duration:1.0f delay:0.5f];
                     [self.waitingMenusForRight removeObject:cell];
                     break;
                 }
