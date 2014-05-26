@@ -9,27 +9,25 @@
 #import "MainMenuViewController.h"
 #import "HomeCell.h"
 #import "SelfInfoVC.h"
+#import "NewsListTVC.h"
 @interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIView *menuView;
-@property (weak, nonatomic) IBOutlet UIImageView *touchCircle;
-@property (nonatomic)CGPoint leftCenter;
-@property (nonatomic)CGPoint rightCenter;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 @property (weak, nonatomic) IBOutlet UIScrollView *pageScroller;
-@property (weak, nonatomic) IBOutlet UIView *touchView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property(nonatomic)CGFloat lastY;
-@property (nonatomic,strong)NSMutableArray* waitingMenusForLeft;
-@property (weak, nonatomic) IBOutlet UIImageView *menuBackground;
-@property (nonatomic,strong)NSMutableArray* waitingMenusForRight;
-
-@property(nonatomic)BOOL isFirstOpen;
+@property (strong,nonatomic)UIView* headerView;
+@property (nonatomic)BOOL changeHeader;
+@property (weak, nonatomic) IBOutlet UIView *tableHeadView;
+@property (strong,nonatomic)UIImageView* newImage;
+@property (strong,nonatomic)UIImageView* touchButton;
+@property (weak, nonatomic) IBOutlet UIButton *homeBarButton;
+@property (strong,nonatomic)UIImageView* cloudBack;
 @end
 
 @implementation MainMenuViewController
 static NSArray* buttonImages;
-
+static NSArray* descriptions;
 #pragma mark ViewController
+
 
 - (void)viewDidLoad
 {
@@ -37,18 +35,16 @@ static NSArray* buttonImages;
     [super viewDidLoad];
     //    [self.navigationController setDelegate:self];
     [self initNewScroller];
-    [self prepareForAnimation];
     [self prepareForNews];
-    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
     [self.pageScroller addGestureRecognizer:singleTap];
-    buttonImages= [[NSArray alloc]initWithObjects:@"bbs",@"library",@"chat",@"hole",@"ecard",@"classroom",@"lose",@"schedule",@"phone",@"bus",@"procedure",@"exercise",@"grade", nil];
-    self.lastY = 1000.0;
-    self.waitingMenusForLeft = [[NSMutableArray alloc]init];
-    self.waitingMenusForRight = [[NSMutableArray alloc]init];
-    self.isFirstOpen = YES;
-    // Do any additional setup after loading the view.
-    
+    buttonImages= [[NSArray alloc]initWithObjects:@"百合十大",@"图书馆",@"南呱",@"树洞",@"一卡通",@"课程表",@"失物招领",@"空教室",@"部门电话",@"绩点",@"校车",@"打卡",@"流程", nil];
+    descriptions = [[NSArray alloc]initWithObjects:@"每天十条",@"查书/借阅情况",@"陌生人的心声",@"吐槽你的心声",@"余额及消费",@"课程一览无遗",@"捡到？丢了？",@"找没课的自习室",@"电话查询",@"不断飙升的绩点",@"校车地点/时刻表",@"打卡次数查询",@"全部在这里", nil];
+    self.changeHeader = NO;
+    [self.homeBarButton setSelected:YES];
 }
+
+
 
 
 - (void)didReceiveMemoryWarning
@@ -56,6 +52,16 @@ static NSArray* buttonImages;
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark segue
+#warning 此处可以根据currentPage来判断点击了哪个图片
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"news"]) {
+        UINavigationController* destinationVC = (UINavigationController*)segue.destinationViewController
+        ;
+        [destinationVC setTitle:@"啦啦啦啊啦"];
+    }
+}
 
 #pragma mark 监听
 
@@ -75,6 +81,38 @@ static NSArray* buttonImages;
     //此处+3 只是为下方预留空间
 }
 
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    // set header view colour
+    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 100)];
+    
+    [self.headerView setBackgroundColor:[UIColor clearColor]];
+    
+
+    
+    UIImage* background = [UIImage imageNamed:@"云"];
+    self.cloudBack = [[UIImageView alloc]initWithFrame:CGRectMake(0,-5.0, self.tableView.bounds.size.width, 50)];
+    [self.cloudBack setImage:background];
+    [self.headerView addSubview:self.cloudBack];
+
+    UIImage* touch = [UIImage imageNamed:@"触控区"];
+    self.touchButton = [[UIImageView alloc]initWithFrame:CGRectMake(132.5, 30, 55, 55)];
+    [self.touchButton setImage:touch];
+    [self.headerView addSubview:self.touchButton];
+    return self.headerView;
+}
+
+- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 53;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 80;
+}
+
+
 /*
  进入屏幕后开启动画
  */
@@ -82,22 +120,10 @@ static NSArray* buttonImages;
 {
     HomeCell *homeCell = (HomeCell *)cell;
     [homeCell setBackgroundColor:[UIColor clearColor]];
-    CGFloat tableButtom = self.view.window.bounds.size.height-self.menuView.frame.origin.y-self.tableView.frame.origin.y-50;
-    if (self.isFirstOpen) {
-        if (cell.center.y>tableButtom) {
-            if (indexPath.row % 2 == 1) {
-                [self.waitingMenusForRight addObject:cell];
-                [cell setHidden:YES];
-            } else {
-                [self.waitingMenusForLeft addObject:cell];
-                [cell setHidden:YES];
-            }
-        }
-    }
     if (indexPath.row % 2 == 1) {
-        [self performBounceRightAnimationOnView:homeCell.menuButton duration:1.0 delay:0.2];
+        [self performBounceRightAnimationOnView:homeCell.menuView duration:1.0 delay:0.3f];
     } else {
-        [self performBounceLeftAnimationOnView:homeCell.menuButton duration:1.0 delay:0.2];
+        [self performBounceLeftAnimationOnView:homeCell.menuView duration:1.0 delay:0.3f];
     }
 }
 
@@ -116,14 +142,21 @@ static NSArray* buttonImages;
     }
     if (indexPath.row<=[buttonImages count]-1) {
         UIImage* image = [UIImage imageNamed:[buttonImages objectAtIndex:indexPath.row]];
+        UIImage* imageSelected = [UIImage imageNamed:[NSString stringWithFormat:@"%@选中",[buttonImages objectAtIndex:indexPath.row]]];
         [cell.menuButton setImage:image forState:UIControlStateNormal];
+        [cell.menuButton setImage:imageSelected forState:UIControlStateHighlighted];
+         [cell.menuButton setImage:imageSelected forState:UIControlStateSelected];
         [cell.menuButton setDesitination:[buttonImages objectAtIndex:indexPath.row]];
+        [cell.menuTitle setText:[buttonImages objectAtIndex:indexPath.row]];
+        [cell.menuSubTitle setText:[descriptions objectAtIndex:indexPath.row]];
         [cell.menuButton addTarget:self action:@selector(
                                                          goToDetail
                                                 :) forControlEvents:UIControlEventTouchUpInside];
 
     } else {
         [cell.menuButton setImage:nil forState:UIControlStateNormal];
+        [cell.menuTitle setText:@""];
+        [cell.menuSubTitle setText:@""];
     }
    return cell;
 }
@@ -131,6 +164,7 @@ static NSArray* buttonImages;
 
 #pragma mark 动画
 - (void)performBounceLeftAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
+    [view setHidden:NO];
     // Start
     view.transform = CGAffineTransformMakeTranslation(300, 0);
     [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
@@ -157,6 +191,7 @@ static NSArray* buttonImages;
 }
 
 - (void)performBounceRightAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
+    [view setHidden:NO];
     // Start
     view.transform = CGAffineTransformMakeTranslation(-300, 0);
     [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
@@ -190,79 +225,6 @@ static NSArray* buttonImages;
 }
 
 
-#pragma mark 拖动监听
-
-- (void)prepareForAnimation
-{
-    // 手势监听
-    UIPanGestureRecognizer *pan=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(moveMenu:)];
-    [self.touchView addGestureRecognizer:pan];
-    [self.touchView setUserInteractionEnabled:YES];
-//    
-//    [self.menuBackground addGestureRecognizer:pan];
-//    [self.menuBackground setUserInteractionEnabled:YES];
-//    
-//    [self.touchCircle addGestureRecognizer:pan];
-//    [self.touchCircle setUserInteractionEnabled:YES];
-}
-
-
-- (void)moveMenu:(UIPanGestureRecognizer *)recognizer
-{
-    
-    CGPoint point = [recognizer locationInView:self.view];
-    if (self.lastY==1000.0)
-        self.lastY = point.y;
-    else {
-        CGFloat relavativeY = point.y-self.lastY;
-        self.lastY = point.y;
-        if (fabs(relavativeY)>=30) {
-            return;
-        }
-        CGFloat windowHeight = self.view.window.bounds.size.height;
-        CGFloat minCenterHeight = windowHeight==480?154:195;
-        //    CGFloat shift = windowHeight==480?95:155;
-        CGFloat initCenterHeight = windowHeight==480?323.5:366.5;
-        point.y = relavativeY+self.menuView.center.y;
-        if (point.y<minCenterHeight) {
-            self.isFirstOpen = NO;
-            [self.touchView setUserInteractionEnabled:NO];
-             self.lastY=1000.0;
-        } else if (point.y>=minCenterHeight&&point.y<=initCenterHeight){
-            point.x = self.menuView.center.x;
-            [self.menuView setCenter:point];
-            
-            
-          
-            if ([self.waitingMenusForLeft count]+[self.waitingMenusForRight count]>0) {
-                CGFloat tableButtom = self.view.window.bounds.size.height-self.menuView.frame.origin.y-self.tableView.frame.origin.y-50;
-                for (HomeCell* cell in self.waitingMenusForRight) {
-                    if (cell.center.y<=tableButtom) {
-                        [cell setHidden:NO];
-                        [self performBounceRightAnimationOnView:cell.menuButton duration:1.0f delay:0.2f];
-                        [self.waitingMenusForRight removeObject:cell];
-                        break;
-                    }
-
-                }
-                
-                for (HomeCell* cell in self.waitingMenusForLeft) {
-                    if (cell.center.y<=tableButtom) {
-                        [cell setHidden:NO];
-                        [self performBounceLeftAnimationOnView:cell.menuButton duration:1.0f delay:0.2f];
-                        [self.waitingMenusForLeft removeObject:cell];
-                        break;
-                    }
-                }
-            }
-            
-        } else if (point.y==initCenterHeight){
-            NSLog(@"SetYesAt2");
-            self.lastY=1000.0;
-            [self.touchView setUserInteractionEnabled:YES];
-        }
-    }
-}
 #pragma mark 新闻区
 
 #warning 此处需要改
@@ -348,56 +310,50 @@ static NSArray* buttonImages;
         [self.pageScroller addSubview:pageView];
     }
 }
+- (UIImageView *)newImage{
+    if (!_newImage) {
+        int page = self.pageController.currentPage;
+        _newImage = [[UIImageView alloc]initWithImage:[self.photoList objectAtIndex:page]];
+        CGRect frame;
+        frame.origin.x = 0;
+        frame.size = self.pageScroller.frame.size;
+        frame.origin.y = self.headerView.frame.size.height-frame.size.height-40;
+        _newImage.frame = frame;
 
+    }
+    return _newImage;
+}
+-(void)changeSectionHeader:(BOOL)shoudChange
+{
+    if (self.changeHeader==shoudChange) {
+        return;
+    } else {
+        self.changeHeader = shoudChange;
+        if (shoudChange) {
+            [self.pageScroller setHidden:YES];
+            [self.headerView addSubview:self.newImage];
+            [self.headerView bringSubviewToFront:self.cloudBack];
+            [self.headerView bringSubviewToFront:self.touchButton];
+                  } else {
+                      [self.pageScroller setHidden:NO];
+                      [self.newImage removeFromSuperview];
+                      self.newImage = nil;
+                      
+        }
+    }
+}
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView==self.pageScroller) {
         int index=scrollView.contentOffset.x/scrollView.frame.size.width;
         self.pageController.currentPage=index;
-        
-        
     } else if (scrollView==self.tableView){
-        
-        
-        
-            CGPoint offset = scrollView.contentOffset;
-            float reload_distance = 20;
-            if(- offset.y > reload_distance) {
-                [self.touchView setUserInteractionEnabled:YES];
-                self.lastY = 1000.0;
-            }
-            CGRect bounds = scrollView.bounds;
-            CGSize size = scrollView.contentSize;
-            UIEdgeInsets inset = scrollView.contentInset;
-            float y = offset.y + bounds.size.height - inset.bottom;
-            float h = size.height;
-        if (y-h>reload_distance) {
-            [self.touchView setUserInteractionEnabled:NO];
-            self.lastY = 1000.0;
-        }
-        
-        CGFloat shift = self.view.window.bounds.size.height==480?100.0:0;
-        if ([self.waitingMenusForRight count]+[self.waitingMenusForLeft count]>0) {
-            for (HomeCell* cell in self.waitingMenusForLeft) {
-                if (cell.center.y<=offset.y+bounds.size.height-shift) {
-                    [cell setHidden:NO];
-                    [self performBounceLeftAnimationOnView:cell.menuButton duration:1.0f delay:0.2f];
-                    [self.waitingMenusForLeft removeObject:cell];
-                    break;
-                }
-            }
-            for (HomeCell* cell in self.waitingMenusForRight) {
-                if (cell.center.y<=offset.y+bounds.size.height-shift) {
-                    [cell setHidden:NO];
 
-                    [self performBounceRightAnimationOnView:cell.menuButton duration:1.0f delay:0.2f];
-                    [self.waitingMenusForRight removeObject:cell];
-                    break;
-                }
-            }
+        if (scrollView.contentOffset.y>=155.0) {
+            [self changeSectionHeader:YES];
+        } else {
+            [self changeSectionHeader:NO];
         }
-
-        
     }
 }
 
@@ -444,7 +400,8 @@ static NSArray* buttonImages;
 
 }
 
--(void) onClickImage{
+-(void) onClickImage:(id) sender{
+  
     [self performSegueWithIdentifier:@"news" sender:nil];
 }
 
