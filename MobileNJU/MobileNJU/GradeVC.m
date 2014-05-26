@@ -8,14 +8,11 @@
 
 #import "GradeVC.h"
 #import "MyAnimationBehavior.h"
-@interface GradeVC ()<UIDynamicAnimatorDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tabieView;
+@interface GradeVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong,nonatomic)NSArray* greenList;
 @property (strong,nonatomic)NSArray* redList;
 @property (strong,nonatomic)NSArray* blueList;
-@property (strong,nonatomic)UIDynamicAnimator* animator;
-@property (strong,nonatomic)MyAnimationBehavior* behavior;
-@property (strong,nonatomic)NSMutableArray* terms;
+
 @end
 
 @implementation GradeVC
@@ -29,32 +26,11 @@
     return self;
 }
 
-
-- (UIDynamicAnimator *)animator
-{
-    if (!_animator) {
-        _animator = [[UIDynamicAnimator alloc]initWithReferenceView:self.view];
-        _animator.delegate = self;
-    }
-    return _animator;
-}
-
-- (MyAnimationBehavior *)behavior
-{
-    if (!_behavior) {
-        _behavior = [[MyAnimationBehavior alloc]init];
-        [self.animator addBehavior:_behavior];
-    }
-    return _behavior;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initNavigationBar];
     [self loadColor];
-    self.terms = [[NSMutableArray alloc]init];
-    // Do any additional setup after loading the view.
 }
 
 - (void)loadColor
@@ -67,20 +43,6 @@
     self.blueList = [data objectForKey:@"blueList"];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    for (int i = 0 ; i < 8 ; i++){
-        UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.bounds.size.height-55, self.view.bounds.size.width, 55)];
-        [view setBackgroundColor:[UIColor colorWithRed:[[self.redList objectAtIndex:i] integerValue]/255.0
-                                                 green:[[self.greenList objectAtIndex:i] integerValue]/255.0
-                                                  blue:[[self.blueList objectAtIndex:i] integerValue]/255.0
-                                                 alpha:1]];
-        UIButton* button = [[UIButton alloc]initWithFrame:CGRectMake(283, 13, 17, 28)];
-        [button setImage:[UIImage imageNamed:@"goto"] forState:UIControlStateNormal];
-        [view addSubview:button];
-        [self.terms addObject:view];
-        [NSTimer scheduledTimerWithTimeInterval:i/2.0f target:self selector:@selector(showRow:) userInfo:[self.terms objectAtIndex:i] repeats:NO];
-    }
-}
 - (void)initNavigationBar
 {
     UIBarButtonItem* selfButton = [[UIBarButtonItem alloc]initWithImage: [UIImage imageNamed:@"self_right_barButton"] style:UIBarButtonItemStylePlain target:self action:@selector(showAlert)];
@@ -89,6 +51,8 @@
     [self setTitle:@"成绩查询"];
     [self setSubTitle:@"看看有木有挂科"];
 }
+
+
 - (void)showAlert
 {
     
@@ -106,14 +70,47 @@
 
 
 
-
-- (void)showRow:(NSTimer *)timer
+#pragma mark tableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    UIView* view = (UIView*)timer.userInfo;
-    [self.view addSubview:view];
-    [self.behavior addItem:view];
+    return 8;
+    //此处+3 只是为下方预留空间
 }
 
+/*
+ 进入屏幕后开启动画
+ */
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performBounceUpAnimationOnView:cell duration:0.5f delay:indexPath.row*0.5f];
+}
+
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = nil;
+    cell = [tableView dequeueReusableCellWithIdentifier:@"term"];
+    [cell setBackgroundColor:[UIColor colorWithRed:[[self.redList objectAtIndex:indexPath.row] intValue]/255.0
+                                            green:[[self.greenList objectAtIndex:indexPath.row] intValue]/255.0
+                                             blue:[[self.blueList objectAtIndex:indexPath.row] intValue]/255.0
+                                            alpha:1]];
+    return cell;
+}
+
+
+#pragma mark 动画
+- (void)performBounceUpAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
+    [view setHidden:NO];
+    // Start
+    view.transform = CGAffineTransformMakeTranslation(0, 600);
+    [UIView animateKeyframesWithDuration:duration delay:delay options:0 animations:^{
+        // End
+        view.transform = CGAffineTransformMakeTranslation(0, 0);
+    } completion:^(BOOL finished) {
+       
+    }];
+}
 
 /*
 #pragma mark - Navigation
