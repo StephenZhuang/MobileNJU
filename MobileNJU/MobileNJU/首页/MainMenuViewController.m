@@ -9,6 +9,7 @@
 #import "MainMenuViewController.h"
 #import "HomeCell.h"
 #import "SelfInfoVC.h"
+#import "NewsListTVC.h"
 @interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 @property (weak, nonatomic) IBOutlet UIScrollView *pageScroller;
@@ -35,7 +36,7 @@ static NSArray* descriptions;
     //    [self.navigationController setDelegate:self];
     [self initNewScroller];
     [self prepareForNews];
-    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
     [self.pageScroller addGestureRecognizer:singleTap];
     buttonImages= [[NSArray alloc]initWithObjects:@"百合十大",@"图书馆",@"南呱",@"树洞",@"一卡通",@"课程表",@"失物招领",@"空教室",@"部门电话",@"绩点",@"校车",@"打卡",@"流程", nil];
     descriptions = [[NSArray alloc]initWithObjects:@"每天十条",@"查书/借阅情况",@"陌生人的心声",@"吐槽你的心声",@"余额及消费",@"课程一览无遗",@"捡到？丢了？",@"找没课的自习室",@"电话查询",@"不断飙升的绩点",@"校车地点/时刻表",@"打卡次数查询",@"全部在这里", nil];
@@ -51,6 +52,16 @@ static NSArray* descriptions;
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark segue
+#warning 此处可以根据currentPage来判断点击了哪个图片
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"news"]) {
+        UINavigationController* destinationVC = (UINavigationController*)segue.destinationViewController
+        ;
+        [destinationVC setTitle:@"啦啦啦啊啦"];
+    }
+}
 
 #pragma mark 监听
 
@@ -389,7 +400,8 @@ static NSArray* descriptions;
 
 }
 
--(void) onClickImage{
+-(void) onClickImage:(id) sender{
+  
     [self performSegueWithIdentifier:@"news" sender:nil];
 }
 

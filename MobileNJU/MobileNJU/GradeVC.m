@@ -7,11 +7,12 @@
 //
 
 #import "GradeVC.h"
-#import "MyAnimationBehavior.h"
+#import "GradeDetailVC.h"
 @interface GradeVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong,nonatomic)NSArray* greenList;
 @property (strong,nonatomic)NSArray* redList;
 @property (strong,nonatomic)NSArray* blueList;
+@property (weak, nonatomic) IBOutlet UIView *alertView;
 
 @end
 
@@ -52,10 +53,19 @@
     [self setSubTitle:@"看看有木有挂科"];
 }
 
+- (IBAction)cancelAlert:(id)sender {
+    [self.alertView setHidden:YES  ];
+    [self.maskView setHidden:YES];
+    [self removeMask];
+}
+
+
 
 - (void)showAlert
 {
-    
+    [self.alertView setHidden:NO];
+    [self.maskView setHidden:NO];
+    [self addMask];
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,6 +80,8 @@
 
 
 
+
+
 #pragma mark tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -77,6 +89,13 @@
     //此处+3 只是为下方预留空间
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat windowHeight = self.view.window.frame.size.height;
+    return windowHeight==480?50:60;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self performSegueWithIdentifier:@"gradeDetail" sender:nil];
+}
 /*
  进入屏幕后开启动画
  */
@@ -112,15 +131,19 @@
     }];
 }
 
-/*
+
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"gradeDetail"]) {
+        GradeDetailVC* nextVC = (GradeDetailVC*)segue.destinationViewController;
+        [nextVC setTerm:@"2222"];
+    }
 }
-*/
+
 
 @end

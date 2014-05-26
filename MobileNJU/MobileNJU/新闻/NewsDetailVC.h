@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 @interface NewsDetailVC : BaseViewController
-
+@property (nonatomic,strong)NSString* url;
 @end

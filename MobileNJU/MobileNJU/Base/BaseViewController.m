@@ -90,7 +90,26 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+UIView* view;
+- (void)addMask
+{
+//    if (!_view) {
+        CGRect frame = CGRectMake(0, -20, 0, 0);
+        frame.size = self.navigationController.navigationBar.frame.size;
+        frame.size.height = frame.size.height+20;
+        view = [[UIView alloc]initWithFrame:frame];
+        [view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];
+        [self.navigationController.navigationBar addSubview:view];
+//    } else{
+//        [view setHidden:NO];
+//    }
 
+}
+- (void)removeMask
+{
+    [view setHidden:YES];
+    [view removeFromSuperview];
+}
 /*
 #pragma mark - Navigation
 

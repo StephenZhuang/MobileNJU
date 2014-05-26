@@ -72,6 +72,11 @@
 		7D2098601930F6FE002BD994 /* GradeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20985F1930F6FE002BD994 /* GradeVC.m */; };
 		7D20986319311CDE002BD994 /* MyAnimationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20986219311CDE002BD994 /* MyAnimationBehavior.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
+		7DB07EF61933825100B715DB /* GradeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EF51933825100B715DB /* GradeDetailVC.m */; };
+		7DB07EF9193393DD00B715DB /* GradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EF8193393DD00B715DB /* GradeCell.m */; };
+		7DB07EFC1933A31F00B715DB /* GPAView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EFB1933A31F00B715DB /* GPAView.m */; };
+		7DB07EFF1933A35500B715DB /* Lesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EFE1933A35500B715DB /* Lesson.m */; };
+		7DB07F011933A52700B715DB /* GPAView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB07F001933A52700B715DB /* GPAView.xib */; };
 		7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B30192D9C230066494D /* WelcomeViewController.m */; };
 		7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B32192D9C230066494D /* MainMenuViewController.m */; };
 		7DD25B39192D9C230066494D /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B34192D9C230066494D /* HomeCell.m */; };
@@ -222,6 +227,16 @@
 		7D20986219311CDE002BD994 /* MyAnimationBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnimationBehavior.m; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
+		7DB07EF41933825100B715DB /* GradeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradeDetailVC.h; path = "成绩查询/GradeDetailVC.h"; sourceTree = "<group>"; };
+		7DB07EF51933825100B715DB /* GradeDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradeDetailVC.m; path = "成绩查询/GradeDetailVC.m"; sourceTree = "<group>"; };
+		7DB07EF7193393DD00B715DB /* GradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeCell.h; sourceTree = "<group>"; };
+		7DB07EF8193393DD00B715DB /* GradeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeCell.m; sourceTree = "<group>"; };
+		7DB07EFA1933A31F00B715DB /* GPAView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GPAView.h; path = "成绩查询/GPAView.h"; sourceTree = "<group>"; };
+		7DB07EFB1933A31F00B715DB /* GPAView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GPAView.m; path = "成绩查询/GPAView.m"; sourceTree = "<group>"; };
+		7DB07EFD1933A35500B715DB /* Lesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lesson.h; path = "成绩查询/Lesson.h"; sourceTree = "<group>"; };
+		7DB07EFE1933A35500B715DB /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lesson.m; path = "成绩查询/Lesson.m"; sourceTree = "<group>"; };
+		7DB07F001933A52700B715DB /* GPAView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GPAView.xib; path = "成绩查询/GPAView.xib"; sourceTree = "<group>"; };
+		7DB07F021933A95300B715DB /* GPAClose.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GPAClose.h; path = "成绩查询/GPAClose.h"; sourceTree = "<group>"; };
 		7DD25B2F192D9C230066494D /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		7DD25B30192D9C230066494D /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		7DD25B31192D9C230066494D /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
@@ -651,6 +666,16 @@
 				7D20985F1930F6FE002BD994 /* GradeVC.m */,
 				7D20986119311CDE002BD994 /* MyAnimationBehavior.h */,
 				7D20986219311CDE002BD994 /* MyAnimationBehavior.m */,
+				7DB07EF41933825100B715DB /* GradeDetailVC.h */,
+				7DB07EF51933825100B715DB /* GradeDetailVC.m */,
+				7DB07EF7193393DD00B715DB /* GradeCell.h */,
+				7DB07EF8193393DD00B715DB /* GradeCell.m */,
+				7DB07EFA1933A31F00B715DB /* GPAView.h */,
+				7DB07EFB1933A31F00B715DB /* GPAView.m */,
+				7DB07EFD1933A35500B715DB /* Lesson.h */,
+				7DB07EFE1933A35500B715DB /* Lesson.m */,
+				7DB07F001933A52700B715DB /* GPAView.xib */,
+				7DB07F021933A95300B715DB /* GPAClose.h */,
 			);
 			name = "成绩查询";
 			sourceTree = "<group>";
@@ -766,6 +791,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DB07F011933A52700B715DB /* GPAView.xib in Resources */,
 				77B904DF192C4C6F0062237D /* navigation_bg@2x.png in Resources */,
 				77B90433192C3F040062237D /* InfoPlist.strings in Resources */,
 				7DF0BB34192F3B35004CEE01 /* Home.storyboard in Resources */,
@@ -831,9 +857,11 @@
 				77B904C1192C4B3B0062237D /* MBProgressHUD.m in Sources */,
 				7D209844193085D7002BD994 /* ExerciseVC.m in Sources */,
 				77B904CC192C4B3B0062237D /* SDWebImageCompat.m in Sources */,
+				7DB07EF9193393DD00B715DB /* GradeCell.m in Sources */,
 				77B9046D192C4ABF0062237D /* TitleView.m in Sources */,
 				77B904BD192C4B3B0062237D /* MJRefreshHeaderView.m in Sources */,
 				77B904D4192C4B3B0062237D /* UIImage+GIF.m in Sources */,
+				7DB07EFF1933A35500B715DB /* Lesson.m in Sources */,
 				77B904D7192C4B3B0062237D /* UIImageView+MJWebCache.m in Sources */,
 				77B904CB192C4B3B0062237D /* SDImageCache.m in Sources */,
 				77B904CE192C4B3B0062237D /* SDWebImageDownloader.m in Sources */,
@@ -848,11 +876,13 @@
 				7DF0BB3D192FB7B3004CEE01 /* AYHCustomComboBox.m in Sources */,
 				7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */,
 				77B904CF192C4B3B0062237D /* SDWebImageDownloaderOperation.m in Sources */,
+				7DB07EFC1933A31F00B715DB /* GPAView.m in Sources */,
 				77B904C7192C4B3B0062237D /* MJPhotoToolbar.m in Sources */,
 				77B904C8192C4B3B0062237D /* MJPhotoView.m in Sources */,
 				7D1A1A4F193039520083A6AD /* CheckBox.m in Sources */,
 				77B904D9192C4B3B0062237D /* ToolUtils.m in Sources */,
 				7DD8699F192DB6D700D4ADAA /* NewsListTVC.m in Sources */,
+				7DB07EF61933825100B715DB /* GradeDetailVC.m in Sources */,
 				7D2098551930BECC002BD994 /* BusCell.m in Sources */,
 				7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */,
 				77B904D3192C4B3B0062237D /* UIButton+WebCache.m in Sources */,

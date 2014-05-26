@@ -1,0 +1,20 @@
+//
+//  GradeCell.h
+//  MobileNJU
+//
+//  Created by luck-mac on 14-5-26.
+//  Copyright (c) 2014年 Stephen Zhuang. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface GradeCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *tickButton;
+@property (weak, nonatomic) IBOutlet UILabel *lessonNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lessonTypeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *creditLabel;
+
+- (void) addLineForLabel;
+- (void)addBorder;
+@end

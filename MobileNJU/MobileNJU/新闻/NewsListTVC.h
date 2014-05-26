@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 @interface NewsListTVC : UITableViewController
-
+@property NSString* currentUrl;
 @end
