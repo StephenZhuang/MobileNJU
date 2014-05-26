@@ -51,7 +51,7 @@
         }
         
         if([self.navigationController viewControllers].count>1){
-            UIButton *button  = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+            UIButton *button  = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
             NSString *iconname=DEFAULTBACKICON;
             if(_backIcons!=nil && _backIcons.count>0){
                 if ([self.navigationController viewControllers].count-2<_backIcons.count) {
