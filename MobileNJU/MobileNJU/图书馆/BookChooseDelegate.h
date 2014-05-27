@@ -1,5 +1,5 @@
 //
-//  GPAClose.h
+//  BookChooseDelegate.h
 //  MobileNJU
 //
 //  Created by luck-mac on 14-5-27.
@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@protocol GPAClose <NSObject>
-- (void)closeAlert;
+#import "Book.h"
+@protocol BookChooseDelegate <NSObject>
+- (void) chooseBook:(Book*) book;
 @end

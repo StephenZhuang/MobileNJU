@@ -80,6 +80,11 @@
 		7D4EE16019343DA900A06398 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EE15F19343DA900A06398 /* Book.m */; };
 		7D4EE16319343E7200A06398 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EE16219343E7200A06398 /* BookViewController.m */; };
 		7D4EE16619343FD500A06398 /* HasLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EE16519343FD500A06398 /* HasLoginController.m */; };
+		7D4EE169193441B700A06398 /* BookDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EE168193441B700A06398 /* BookDetailView.m */; };
+		7D4EE16B193441C800A06398 /* BookDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D4EE16A193441C800A06398 /* BookDetailView.xib */; };
+		7D4EE16F1934519300A06398 /* BookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EE16E1934519300A06398 /* BookCell.m */; };
+		7D4EE17319346A4800A06398 /* MyLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EE17219346A4800A06398 /* MyLibraryVC.m */; };
+		7D4EE17619346F4100A06398 /* MyBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EE17519346F4100A06398 /* MyBookCell.m */; };
 		7DB07EF61933825100B715DB /* GradeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EF51933825100B715DB /* GradeDetailVC.m */; };
 		7DB07EF9193393DD00B715DB /* GradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EF8193393DD00B715DB /* GradeCell.m */; };
 		7DB07EFC1933A31F00B715DB /* GPAView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EFB1933A31F00B715DB /* GPAView.m */; };
@@ -249,6 +254,17 @@
 		7D4EE16219343E7200A06398 /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookViewController.m; path = "图书馆/BookViewController.m"; sourceTree = "<group>"; };
 		7D4EE16419343FD500A06398 /* HasLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HasLoginController.h; sourceTree = "<group>"; };
 		7D4EE16519343FD500A06398 /* HasLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HasLoginController.m; sourceTree = "<group>"; };
+		7D4EE167193441B700A06398 /* BookDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookDetailView.h; path = "图书馆/BookDetailView.h"; sourceTree = "<group>"; };
+		7D4EE168193441B700A06398 /* BookDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookDetailView.m; path = "图书馆/BookDetailView.m"; sourceTree = "<group>"; };
+		7D4EE16A193441C800A06398 /* BookDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BookDetailView.xib; path = "图书馆/BookDetailView.xib"; sourceTree = "<group>"; };
+		7D4EE16C193443AE00A06398 /* AlertCloseDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertCloseDelegate.h; sourceTree = "<group>"; };
+		7D4EE16D1934519300A06398 /* BookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookCell.h; path = "图书馆/BookCell.h"; sourceTree = "<group>"; };
+		7D4EE16E1934519300A06398 /* BookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookCell.m; path = "图书馆/BookCell.m"; sourceTree = "<group>"; };
+		7D4EE1701934648800A06398 /* BookChooseDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BookChooseDelegate.h; path = "图书馆/BookChooseDelegate.h"; sourceTree = "<group>"; };
+		7D4EE17119346A4800A06398 /* MyLibraryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLibraryVC.h; path = "图书馆/MyLibraryVC.h"; sourceTree = "<group>"; };
+		7D4EE17219346A4800A06398 /* MyLibraryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLibraryVC.m; path = "图书馆/MyLibraryVC.m"; sourceTree = "<group>"; };
+		7D4EE17419346F4100A06398 /* MyBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyBookCell.h; path = "图书馆/MyBookCell.h"; sourceTree = "<group>"; };
+		7D4EE17519346F4100A06398 /* MyBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyBookCell.m; path = "图书馆/MyBookCell.m"; sourceTree = "<group>"; };
 		7DB07EF41933825100B715DB /* GradeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradeDetailVC.h; path = "成绩查询/GradeDetailVC.h"; sourceTree = "<group>"; };
 		7DB07EF51933825100B715DB /* GradeDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradeDetailVC.m; path = "成绩查询/GradeDetailVC.m"; sourceTree = "<group>"; };
 		7DB07EF7193393DD00B715DB /* GradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeCell.h; sourceTree = "<group>"; };
@@ -258,7 +274,6 @@
 		7DB07EFD1933A35500B715DB /* Lesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lesson.h; path = "成绩查询/Lesson.h"; sourceTree = "<group>"; };
 		7DB07EFE1933A35500B715DB /* Lesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Lesson.m; path = "成绩查询/Lesson.m"; sourceTree = "<group>"; };
 		7DB07F001933A52700B715DB /* GPAView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GPAView.xib; path = "成绩查询/GPAView.xib"; sourceTree = "<group>"; };
-		7DB07F021933A95300B715DB /* GPAClose.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GPAClose.h; path = "成绩查询/GPAClose.h"; sourceTree = "<group>"; };
 		7DD25B2F192D9C230066494D /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		7DD25B30192D9C230066494D /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		7DD25B31192D9C230066494D /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
@@ -530,6 +545,7 @@
 				77B90463192C44A20062237D /* BaseViewController.m */,
 				7D4EE16419343FD500A06398 /* HasLoginController.h */,
 				7D4EE16519343FD500A06398 /* HasLoginController.m */,
+				7D4EE16C193443AE00A06398 /* AlertCloseDelegate.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -702,7 +718,6 @@
 				7DB07EFD1933A35500B715DB /* Lesson.h */,
 				7DB07EFE1933A35500B715DB /* Lesson.m */,
 				7DB07F001933A52700B715DB /* GPAView.xib */,
-				7DB07F021933A95300B715DB /* GPAClose.h */,
 			);
 			name = "成绩查询";
 			sourceTree = "<group>";
@@ -731,10 +746,20 @@
 				7D4EE15819343BBF00A06398 /* BookView.h */,
 				7D4EE15919343BBF00A06398 /* BookView.m */,
 				7D4EE15C19343BEE00A06398 /* BookView.xib */,
+				7D4EE1701934648800A06398 /* BookChooseDelegate.h */,
 				7D4EE15E19343DA900A06398 /* Book.h */,
 				7D4EE15F19343DA900A06398 /* Book.m */,
 				7D4EE16119343E7200A06398 /* BookViewController.h */,
 				7D4EE16219343E7200A06398 /* BookViewController.m */,
+				7D4EE16A193441C800A06398 /* BookDetailView.xib */,
+				7D4EE167193441B700A06398 /* BookDetailView.h */,
+				7D4EE168193441B700A06398 /* BookDetailView.m */,
+				7D4EE16D1934519300A06398 /* BookCell.h */,
+				7D4EE16E1934519300A06398 /* BookCell.m */,
+				7D4EE17119346A4800A06398 /* MyLibraryVC.h */,
+				7D4EE17219346A4800A06398 /* MyLibraryVC.m */,
+				7D4EE17419346F4100A06398 /* MyBookCell.h */,
+				7D4EE17519346F4100A06398 /* MyBookCell.m */,
 			);
 			name = "图书馆";
 			sourceTree = "<group>";
@@ -863,6 +888,7 @@
 				77B904B9192C4B3B0062237D /* MJRefresh.bundle in Resources */,
 				7DD869B6192DB7A700D4ADAA /* Self.storyboard in Resources */,
 				7D1A1A4C193036190083A6AD /* selfInfo.plist in Resources */,
+				7D4EE16B193441C800A06398 /* BookDetailView.xib in Resources */,
 				77B9046E192C4ABF0062237D /* TitleView.xib in Resources */,
 				77B904C0192C4B3B0062237D /* MBProgressHUD.bundle in Resources */,
 				77B904C3192C4B3B0062237D /* MJPhotoBrowser.bundle in Resources */,
@@ -906,6 +932,7 @@
 				7DD25B39192D9C230066494D /* HomeCell.m in Sources */,
 				7D20985C1930C6A1002BD994 /* EcardCell.m in Sources */,
 				7D2098601930F6FE002BD994 /* GradeVC.m in Sources */,
+				7D4EE169193441B700A06398 /* BookDetailView.m in Sources */,
 				7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */,
 				7DD869AF192DB73B00D4ADAA /* GetCodeViewController.m in Sources */,
 				77B904BC192C4B3B0062237D /* MJRefreshFooterView.m in Sources */,
@@ -926,6 +953,7 @@
 				77B904CC192C4B3B0062237D /* SDWebImageCompat.m in Sources */,
 				7DB07EF9193393DD00B715DB /* GradeCell.m in Sources */,
 				77B9046D192C4ABF0062237D /* TitleView.m in Sources */,
+				7D4EE16F1934519300A06398 /* BookCell.m in Sources */,
 				77B904BD192C4B3B0062237D /* MJRefreshHeaderView.m in Sources */,
 				77B904D4192C4B3B0062237D /* UIImage+GIF.m in Sources */,
 				7D45C7261933BC7300733550 /* SubscribeVC.m in Sources */,
@@ -934,6 +962,7 @@
 				77B904CB192C4B3B0062237D /* SDImageCache.m in Sources */,
 				77B904CE192C4B3B0062237D /* SDWebImageDownloader.m in Sources */,
 				7D20986319311CDE002BD994 /* MyAnimationBehavior.m in Sources */,
+				7D4EE17319346A4800A06398 /* MyLibraryVC.m in Sources */,
 				77B90435192C3F040062237D /* main.m in Sources */,
 				77B90467192C48980062237D /* HomeViewController.m in Sources */,
 				7DD25B3A192D9C230066494D /* MenuButton.m in Sources */,
@@ -951,6 +980,7 @@
 				77B904D9192C4B3B0062237D /* ToolUtils.m in Sources */,
 				7DD8699F192DB6D700D4ADAA /* NewsListTVC.m in Sources */,
 				7DB07EF61933825100B715DB /* GradeDetailVC.m in Sources */,
+				7D4EE17619346F4100A06398 /* MyBookCell.m in Sources */,
 				7D2098551930BECC002BD994 /* BusCell.m in Sources */,
 				7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */,
 				77B904D3192C4B3B0062237D /* UIButton+WebCache.m in Sources */,

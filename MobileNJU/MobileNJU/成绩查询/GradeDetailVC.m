@@ -9,8 +9,8 @@
 #import "GradeDetailVC.h"
 #import "GradeCell.h"
 #import "GPAView.h"
-#import "GPAClose.h"
-@interface GradeDetailVC ()<UITableViewDelegate,UITableViewDataSource,GPAClose>
+#import "AlertCloseDelegate.h"
+@interface GradeDetailVC ()<UITableViewDelegate,UITableViewDataSource,AlertCloseDelegate>
 @property (nonatomic,strong)GPAView* gpaView;
 @end
 
@@ -69,12 +69,17 @@
 {
     return 10;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 45;
+}
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 }
+
 
 #warning 超过6个字符就要换行了
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

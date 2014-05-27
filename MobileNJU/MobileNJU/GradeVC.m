@@ -101,7 +101,7 @@
  */
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performBounceUpAnimationOnView:cell duration:0.5f delay:indexPath.row*0.5f];
+    [self performBounceUpAnimationOnView:cell duration:0.3f delay:indexPath.row*0.2f];
 }
 
 
@@ -114,6 +114,7 @@
                                             green:[[self.greenList objectAtIndex:indexPath.row] intValue]/255.0
                                              blue:[[self.blueList objectAtIndex:indexPath.row] intValue]/255.0
                                             alpha:1]];
+    
     return cell;
 }
 

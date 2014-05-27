@@ -14,5 +14,10 @@
 @property(nonatomic,strong)NSString* press;
 @property (nonatomic,strong)NSString* hasCount;
 @property(nonatomic,strong)NSString* canLentCount;
-
+@property(nonatomic,strong)NSString* barCode;
+@property(nonatomic,strong)NSString* borrowId;
+@property(nonatomic,strong)NSString* location;
+@property(nonatomic,strong)NSString* state;
+@property (nonatomic,strong)NSString* borrowDate;
+@property(nonatomic,strong)NSString* returnDate;
 @end
