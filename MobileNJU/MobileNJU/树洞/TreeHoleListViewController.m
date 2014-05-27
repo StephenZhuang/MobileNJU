@@ -7,6 +7,7 @@
 //
 
 #import "TreeHoleListViewController.h"
+#import "TreeHoleCell.h"
 
 @interface TreeHoleListViewController ()
 
@@ -29,6 +30,18 @@
     // Do any additional setup after loading the view.
     [self setTitle:@"树洞"];
     [self setSubTitle:@"吐槽您的生活"];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
+    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 11.0f;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning
