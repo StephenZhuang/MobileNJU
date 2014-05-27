@@ -46,9 +46,14 @@
 
 - (void)initNavigationBar
 {
-    UIBarButtonItem* selfButton = [[UIBarButtonItem alloc]initWithImage: [UIImage imageNamed:@"self_right_barButton"] style:UIBarButtonItemStylePlain target:self action:@selector(showAlert)];
-    [selfButton setTintColor:[UIColor whiteColor]];
-    self.navigationItem.rightBarButtonItem = selfButton;
+    UIButton* button = [[UIButton alloc]init];
+    [button setImage:[UIImage imageNamed:@"self_right_barButton"] forState:UIControlStateNormal];
+    CGRect frame = CGRectMake(0, 0, 40, 36);
+    button.frame = frame;
+    [button addTarget:self action:@selector(showAlert) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* selfItem =  [[UIBarButtonItem alloc]initWithCustomView:button];
+    //    [selfItem setTintColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = selfItem;
     [self setTitle:@"成绩查询"];
     [self setSubTitle:@"看看有木有挂科"];
 }
@@ -101,7 +106,10 @@
  */
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performBounceUpAnimationOnView:cell duration:0.3f delay:indexPath.row*0.2f];
+    if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
+        [self performBounceUpAnimationOnView:cell duration:0.3f delay:indexPath.row*0.2f];
+    }
+
 }
 
 
@@ -123,13 +131,15 @@
 - (void)performBounceUpAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
     [view setHidden:NO];
     // Start
-    view.transform = CGAffineTransformMakeTranslation(0, 600);
-    [UIView animateKeyframesWithDuration:duration delay:delay options:0 animations:^{
-        // End
-        view.transform = CGAffineTransformMakeTranslation(0, 0);
-    } completion:^(BOOL finished) {
-       
-    }];
+        view.transform = CGAffineTransformMakeTranslation(0, 600);
+        [UIView animateKeyframesWithDuration:duration delay:delay options:0 animations:^{
+            // End
+            view.transform = CGAffineTransformMakeTranslation(0, 0);
+        } completion:^(BOOL finished) {
+            
+        }];
+    
+  
 }
 
 

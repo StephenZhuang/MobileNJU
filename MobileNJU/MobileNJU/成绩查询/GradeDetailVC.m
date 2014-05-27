@@ -31,9 +31,15 @@
 {
     [self setTitle:@"成绩查询"];
     [self setSubTitle:@"看看有没有挂科"];
-    UIBarButtonItem* selfItem =  [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"self_right_barButton"] style:UIBarButtonItemStylePlain target:self action:@selector(showAlert)];
-    [selfItem setTintColor:[UIColor whiteColor]];
+    UIButton* button = [[UIButton alloc]init];
+    [button setImage:[UIImage imageNamed:@"self_right_barButton"] forState:UIControlStateNormal];
+    CGRect frame = CGRectMake(0, 0, 40, 36);
+    button.frame = frame;
+    [button addTarget:self action:@selector(showAlert) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* selfItem =  [[UIBarButtonItem alloc]initWithCustomView:button];
+    //    [selfItem setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = selfItem;
+
 }
 
 - (IBAction)calculateGpa:(id)sender {

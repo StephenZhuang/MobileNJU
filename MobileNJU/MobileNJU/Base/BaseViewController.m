@@ -37,7 +37,7 @@
     if([self.navigationController.navigationBar
         respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
         
-        [self.navigationController.navigationBar  setBackgroundImage:[[UIImage imageNamed:@"navigationBar_background"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)]   forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar  setBackgroundImage:[[UIImage imageNamed:@"navigationBack"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)]   forBarMetrics:UIBarMetricsDefault];
         //        [self.navigationController.navigationBar setBackgroundColor:RGB(143, 60, 133)];
         
         [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -95,7 +95,11 @@ UIView* view;
 {
 //    if (!_view) {
         CGRect frame = CGRectMake(0, -20, 0, 0);
-        frame.size = self.navigationController.navigationBar.frame.size;
+    frame.size = self.navigationController.navigationBar.frame.size;
+
+    if ([[[UIDevice currentDevice]systemVersion]floatValue]<7.0) {
+        frame.size.height = frame.size.height+21;
+    }
         frame.size.height = frame.size.height+20;
         view = [[UIView alloc]initWithFrame:frame];
         [view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];

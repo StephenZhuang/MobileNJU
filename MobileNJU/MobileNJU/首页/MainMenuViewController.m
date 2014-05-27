@@ -113,7 +113,7 @@ static NSArray* descriptions;
     return self.headerView;
 }
 
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 53;
 }
@@ -178,54 +178,87 @@ static NSArray* descriptions;
     [view setHidden:NO];
     // Start
     view.transform = CGAffineTransformMakeTranslation(300, 0);
-    [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
-        // End
+   [UIView animateWithDuration:duration/4 delay:delay options:UIViewAnimationOptionCurveEaseIn animations:^{
         view.transform = CGAffineTransformMakeTranslation(-10, 0);
-    } completion:^(BOOL finished) {
-        [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-            // End
-            view.transform = CGAffineTransformMakeTranslation(5, 0);
-        } completion:^(BOOL finished) {
-            [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-                // End
+   } completion:^(BOOL finished) {
+       [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+           view.transform = CGAffineTransformMakeTranslation(5, 0);
+       } completion:^(BOOL finished) {
+           [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 view.transform = CGAffineTransformMakeTranslation(-2, 0);
-            } completion:^(BOOL finished) {
-                [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-                    // End
-                    view.transform = CGAffineTransformMakeTranslation(0, 0);
-                } completion:^(BOOL finished) {
-                    
-                }];
-            }];
-        }];
-    }];
+           } completion:^(BOOL finished) {
+               [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                   view.transform = CGAffineTransformMakeTranslation(0, 0);
+               } completion:^(BOOL finished) {
+               }];
+           }];
+       }];
+   }];
+//    [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
+//        // End
+//       
+//    } completion:^(BOOL finished) {
+//        [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//           
+//        } completion:^(BOOL finished) {
+//            [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//                // End
+//               
+//            } completion:^(BOOL finished) {
+//                [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//                    // End
+//                    view.transform = CGAffineTransformMakeTranslation(0, 0);
+//                } completion:^(BOOL finished) {
+//                    
+//                }];
+//            }];
+//        }];
+//    }];
 }
 
 - (void)performBounceRightAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
     [view setHidden:NO];
     // Start
     view.transform = CGAffineTransformMakeTranslation(-300, 0);
-    [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
-        // End
+    [UIView animateWithDuration:duration/4 delay:delay options:UIViewAnimationOptionCurveEaseIn animations:^{
         view.transform = CGAffineTransformMakeTranslation(10, 0);
     } completion:^(BOOL finished) {
-        [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-            // End
+        [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             view.transform = CGAffineTransformMakeTranslation(-5, 0);
         } completion:^(BOOL finished) {
-            [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-                // End
+            [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 view.transform = CGAffineTransformMakeTranslation(2, 0);
             } completion:^(BOOL finished) {
-                [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-                    // End
+                [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
                     view.transform = CGAffineTransformMakeTranslation(0, 0);
                 } completion:^(BOOL finished) {
-                    
                 }];
             }];
         }];
     }];
+//
+//    view.transform = CGAffineTransformMakeTranslation(-300, 0);
+//    [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
+//        // End
+//        view.transform = CGAffineTransformMakeTranslation(10, 0);
+//    } completion:^(BOOL finished) {
+//        [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//            // End
+//            view.transform = CGAffineTransformMakeTranslation(-5, 0);
+//        } completion:^(BOOL finished) {
+//            [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//                // End
+//                view.transform = CGAffineTransformMakeTranslation(2, 0);
+//            } completion:^(BOOL finished) {
+//                [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//                    // End
+//                    view.transform = CGAffineTransformMakeTranslation(0, 0);
+//                } completion:^(BOOL finished) {
+//                    
+//                }];
+//            }];
+//        }];
+//    }];
 }
 
 

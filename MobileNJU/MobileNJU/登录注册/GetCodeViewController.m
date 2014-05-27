@@ -23,7 +23,8 @@
     [super viewDidLoad];
     self.phoneNumLabel.text = [NSString stringWithFormat:
                                @"掌上南大已把验证码发送至：%@",self.phoneNum];
-    [self.confirmCodeField becomeFirstResponder];
+//    [self.confirmCodeField becomeFirstResponder];
+    
 }
 
 
