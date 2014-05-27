@@ -72,6 +72,14 @@
 		7D2098601930F6FE002BD994 /* GradeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20985F1930F6FE002BD994 /* GradeVC.m */; };
 		7D20986319311CDE002BD994 /* MyAnimationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20986219311CDE002BD994 /* MyAnimationBehavior.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
+		7D45C7261933BC7300733550 /* SubscribeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C7251933BC7300733550 /* SubscribeVC.m */; };
+		7D45C72C1933C0DC00733550 /* ActivityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C72B1933C0DC00733550 /* ActivityVC.m */; };
+		7D4EE1571934328900A06398 /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D4EE1561934328900A06398 /* News.storyboard */; };
+		7D4EE15A19343BBF00A06398 /* BookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EE15919343BBF00A06398 /* BookView.m */; };
+		7D4EE15D19343BEE00A06398 /* BookView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D4EE15C19343BEE00A06398 /* BookView.xib */; };
+		7D4EE16019343DA900A06398 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EE15F19343DA900A06398 /* Book.m */; };
+		7D4EE16319343E7200A06398 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EE16219343E7200A06398 /* BookViewController.m */; };
+		7D4EE16619343FD500A06398 /* HasLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4EE16519343FD500A06398 /* HasLoginController.m */; };
 		7DB07EF61933825100B715DB /* GradeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EF51933825100B715DB /* GradeDetailVC.m */; };
 		7DB07EF9193393DD00B715DB /* GradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EF8193393DD00B715DB /* GradeCell.m */; };
 		7DB07EFC1933A31F00B715DB /* GPAView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EFB1933A31F00B715DB /* GPAView.m */; };
@@ -227,6 +235,20 @@
 		7D20986219311CDE002BD994 /* MyAnimationBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnimationBehavior.m; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
+		7D45C7241933BC7300733550 /* SubscribeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeVC.h; sourceTree = "<group>"; };
+		7D45C7251933BC7300733550 /* SubscribeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeVC.m; sourceTree = "<group>"; };
+		7D45C72A1933C0DC00733550 /* ActivityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityVC.h; path = "活动/ActivityVC.h"; sourceTree = "<group>"; };
+		7D45C72B1933C0DC00733550 /* ActivityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityVC.m; path = "活动/ActivityVC.m"; sourceTree = "<group>"; };
+		7D4EE1561934328900A06398 /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
+		7D4EE15819343BBF00A06398 /* BookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookView.h; path = "图书馆/BookView.h"; sourceTree = "<group>"; };
+		7D4EE15919343BBF00A06398 /* BookView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookView.m; path = "图书馆/BookView.m"; sourceTree = "<group>"; };
+		7D4EE15C19343BEE00A06398 /* BookView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BookView.xib; path = "图书馆/BookView.xib"; sourceTree = "<group>"; };
+		7D4EE15E19343DA900A06398 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Book.h; path = "图书馆/Book.h"; sourceTree = "<group>"; };
+		7D4EE15F19343DA900A06398 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Book.m; path = "图书馆/Book.m"; sourceTree = "<group>"; };
+		7D4EE16119343E7200A06398 /* BookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookViewController.h; path = "图书馆/BookViewController.h"; sourceTree = "<group>"; };
+		7D4EE16219343E7200A06398 /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookViewController.m; path = "图书馆/BookViewController.m"; sourceTree = "<group>"; };
+		7D4EE16419343FD500A06398 /* HasLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HasLoginController.h; sourceTree = "<group>"; };
+		7D4EE16519343FD500A06398 /* HasLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HasLoginController.m; sourceTree = "<group>"; };
 		7DB07EF41933825100B715DB /* GradeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradeDetailVC.h; path = "成绩查询/GradeDetailVC.h"; sourceTree = "<group>"; };
 		7DB07EF51933825100B715DB /* GradeDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradeDetailVC.m; path = "成绩查询/GradeDetailVC.m"; sourceTree = "<group>"; };
 		7DB07EF7193393DD00B715DB /* GradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeCell.h; sourceTree = "<group>"; };
@@ -334,6 +356,9 @@
 		77B9042E192C3F040062237D /* MobileNJU */ = {
 			isa = PBXGroup;
 			children = (
+				7D4EE15B19343BCE00A06398 /* 图书馆 */,
+				7D45C7271933C08A00733550 /* 活动 */,
+				7D45C7211933B98E00733550 /* 订阅 */,
 				7D20985D1930F697002BD994 /* 成绩查询 */,
 				7D2098561930C5F3002BD994 /* 一卡通 */,
 				7D20984F1930B908002BD994 /* 校车 */,
@@ -503,6 +528,8 @@
 				77B9046C192C4ABF0062237D /* TitleView.xib */,
 				77B90462192C44A20062237D /* BaseViewController.h */,
 				77B90463192C44A20062237D /* BaseViewController.m */,
+				7D4EE16419343FD500A06398 /* HasLoginController.h */,
+				7D4EE16519343FD500A06398 /* HasLoginController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -680,6 +707,38 @@
 			name = "成绩查询";
 			sourceTree = "<group>";
 		};
+		7D45C7211933B98E00733550 /* 订阅 */ = {
+			isa = PBXGroup;
+			children = (
+				7D45C7241933BC7300733550 /* SubscribeVC.h */,
+				7D45C7251933BC7300733550 /* SubscribeVC.m */,
+			);
+			name = "订阅";
+			sourceTree = "<group>";
+		};
+		7D45C7271933C08A00733550 /* 活动 */ = {
+			isa = PBXGroup;
+			children = (
+				7D45C72A1933C0DC00733550 /* ActivityVC.h */,
+				7D45C72B1933C0DC00733550 /* ActivityVC.m */,
+			);
+			name = "活动";
+			sourceTree = "<group>";
+		};
+		7D4EE15B19343BCE00A06398 /* 图书馆 */ = {
+			isa = PBXGroup;
+			children = (
+				7D4EE15819343BBF00A06398 /* BookView.h */,
+				7D4EE15919343BBF00A06398 /* BookView.m */,
+				7D4EE15C19343BEE00A06398 /* BookView.xib */,
+				7D4EE15E19343DA900A06398 /* Book.h */,
+				7D4EE15F19343DA900A06398 /* Book.m */,
+				7D4EE16119343E7200A06398 /* BookViewController.h */,
+				7D4EE16219343E7200A06398 /* BookViewController.m */,
+			);
+			name = "图书馆";
+			sourceTree = "<group>";
+		};
 		7DD25B3D192D9DF30066494D /* 电话 */ = {
 			isa = PBXGroup;
 			children = (
@@ -702,6 +761,7 @@
 				7DD8699D192DB6D700D4ADAA /* NewsListTVC.m */,
 				7DFF3F51192E06DC00E146ED /* NewsCell.h */,
 				7DFF3F52192E06DC00E146ED /* NewsCell.m */,
+				7D4EE1561934328900A06398 /* News.storyboard */,
 			);
 			path = "新闻";
 			sourceTree = "<group>";
@@ -794,8 +854,10 @@
 				7DB07F011933A52700B715DB /* GPAView.xib in Resources */,
 				77B904DF192C4C6F0062237D /* navigation_bg@2x.png in Resources */,
 				77B90433192C3F040062237D /* InfoPlist.strings in Resources */,
+				7D4EE1571934328900A06398 /* News.storyboard in Resources */,
 				7DF0BB34192F3B35004CEE01 /* Home.storyboard in Resources */,
 				77B904DD192C4C6F0062237D /* navigation_back_n@2x.png in Resources */,
+				7D4EE15D19343BEE00A06398 /* BookView.xib in Resources */,
 				77B9043B192C3F040062237D /* Images.xcassets in Resources */,
 				77B904DE192C4C6F0062237D /* navigation_back_p@2x.png in Resources */,
 				77B904B9192C4B3B0062237D /* MJRefresh.bundle in Resources */,
@@ -825,15 +887,20 @@
 				7D2098591930C61B002BD994 /* EcardVC.m in Sources */,
 				77B904C4192C4B3B0062237D /* MJPhotoBrowser.m in Sources */,
 				7D20984719308A1A002BD994 /* ExerciseCell.m in Sources */,
+				7D45C72C1933C0DC00733550 /* ActivityVC.m in Sources */,
+				7D4EE16619343FD500A06398 /* HasLoginController.m in Sources */,
 				77B904D2192C4B3B0062237D /* SDWebImagePrefetcher.m in Sources */,
 				7DFF3F53192E06DC00E146ED /* NewsCell.m in Sources */,
 				7D20984E1930ADCE002BD994 /* CustomIOS7AlertView.m in Sources */,
 				7DD8699E192DB6D700D4ADAA /* NewsDetailVC.m in Sources */,
 				77B904C6192C4B3B0062237D /* MJPhotoProgressView.m in Sources */,
+				7D4EE16319343E7200A06398 /* BookViewController.m in Sources */,
 				77B904D6192C4B3B0062237D /* UIImage+WebP.m in Sources */,
 				7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */,
 				7D2098521930B931002BD994 /* BusVC.m in Sources */,
 				7D1A1A521930451D0083A6AD /* TagView.m in Sources */,
+				7D4EE15A19343BBF00A06398 /* BookView.m in Sources */,
+				7D4EE16019343DA900A06398 /* Book.m in Sources */,
 				77B904D8192C4B3B0062237D /* UIImageView+WebCache.m in Sources */,
 				7DF0BB40192FBA97004CEE01 /* EditInfoVC.m in Sources */,
 				7DD25B39192D9C230066494D /* HomeCell.m in Sources */,
@@ -861,6 +928,7 @@
 				77B9046D192C4ABF0062237D /* TitleView.m in Sources */,
 				77B904BD192C4B3B0062237D /* MJRefreshHeaderView.m in Sources */,
 				77B904D4192C4B3B0062237D /* UIImage+GIF.m in Sources */,
+				7D45C7261933BC7300733550 /* SubscribeVC.m in Sources */,
 				7DB07EFF1933A35500B715DB /* Lesson.m in Sources */,
 				77B904D7192C4B3B0062237D /* UIImageView+MJWebCache.m in Sources */,
 				77B904CB192C4B3B0062237D /* SDImageCache.m in Sources */,

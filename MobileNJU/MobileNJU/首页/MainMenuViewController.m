@@ -73,6 +73,17 @@ static NSArray* descriptions;
     SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"self"]; //test2为viewcontroller的StoryboardId
     [self.navigationController pushViewController:selfVC animated:YES];
 }
+- (IBAction)subscribe:(id)sender {
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+        SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"subscribe"]; //test2为viewcontroller的StoryboardId
+        [self.navigationController pushViewController:selfVC animated:YES];
+}
+- (IBAction)activity:(id)sender {
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+    SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"activity"]; //test2为viewcontroller的StoryboardId
+    [self.navigationController pushViewController:selfVC animated:YES];
+}
+
 
 #pragma mark tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -402,7 +413,11 @@ static NSArray* descriptions;
 
 -(void) onClickImage:(id) sender{
   
-    [self performSegueWithIdentifier:@"news" sender:nil];
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+    NewsListTVC* newsVC = (NewsListTVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
+    [self presentViewController:newsVC animated:YES completion:^{
+        
+    }];
 }
 
 /*

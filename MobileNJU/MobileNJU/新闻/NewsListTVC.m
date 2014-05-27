@@ -10,7 +10,6 @@
 #import "NewsDetailVC.h"
 #import "NewsCell.h"
 @interface NewsListTVC ()
-
 @end
 
 @implementation NewsListTVC
@@ -24,8 +23,9 @@
     return self;
 }
 - (IBAction)backToMain:(UIBarButtonItem *)sender {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
 
 - (void)viewDidLoad
 {
@@ -33,9 +33,8 @@
     [super viewDidLoad];
     self.currentUrl = self.navigationController.title;
     [self performSegueWithIdentifier:@"detail" sender:nil];
-    // Uncomment the following line to preserve selection between presentations.
+//       // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
