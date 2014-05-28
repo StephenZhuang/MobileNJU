@@ -17,4 +17,5 @@
 @property (nonatomic , strong) IBOutlet UIButton *zanButton;
 @property (nonatomic , strong) IBOutlet UIButton *commentButton;
 @property (nonatomic , strong) IBOutlet UIButton *deleteButton;
+@property (nonatomic , strong) NSMutableArray *imageArray;
 @end

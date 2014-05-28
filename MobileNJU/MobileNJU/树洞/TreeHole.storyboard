@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="400" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Bju-YY-S1i">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="348" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Bju-YY-S1i">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -47,15 +47,15 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TreeHoleCell" rowHeight="400" id="cPQ-pe-LRb" customClass="TreeHoleCell">
-                                        <rect key="frame" x="0.0" y="66" width="320" height="400"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TreeHoleCell" rowHeight="348" id="cPQ-pe-LRb" customClass="TreeHoleCell">
+                                        <rect key="frame" x="0.0" y="66" width="320" height="348"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cPQ-pe-LRb" id="PIT-dZ-IZN">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="399"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="347"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="treehole_logo_n.png" translatesAutoresizingMaskIntoConstraints="NO" id="yxJ-cP-asL">
-                                                    <rect key="frame" x="10" y="10" width="27" height="28"/>
+                                                    <rect key="frame" x="10" y="10" width="27" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="1Kh-ay-G6X"/>
@@ -91,11 +91,12 @@
                                                     <color key="textColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" scrollEnabled="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IV8-fU-CMm">
-                                                    <rect key="frame" x="45" y="73" width="230" height="230"/>
+                                                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IV8-fU-CMm">
+                                                    <rect key="frame" x="45" y="73" width="230" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" priority="230" id="NGb-F7-PHb"/>
                                                         <constraint firstAttribute="width" constant="230" id="X6F-hu-G6o"/>
                                                     </constraints>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uQw-7K-xnP">
@@ -125,12 +126,12 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                     <connections>
-                                                        <outlet property="dataSource" destination="0ge-uU-3Ri" id="rqJ-Kf-Q2z"/>
-                                                        <outlet property="delegate" destination="0ge-uU-3Ri" id="GSl-f4-5rQ"/>
+                                                        <outlet property="dataSource" destination="cPQ-pe-LRb" id="ym7-gk-ypV"/>
+                                                        <outlet property="delegate" destination="cPQ-pe-LRb" id="5cW-Hc-Emx"/>
                                                     </connections>
                                                 </collectionView>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4f-0s-uIx">
-                                                    <rect key="frame" x="45" y="311" width="59" height="27"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4f-0s-uIx">
+                                                    <rect key="frame" x="45" y="81" width="59" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="5" maxY="0.0"/>
@@ -139,8 +140,8 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwg-PT-Pd5">
-                                                    <rect key="frame" x="112" y="311" width="59" height="27"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwg-PT-Pd5">
+                                                    <rect key="frame" x="112" y="81" width="59" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="5" maxY="0.0"/>
@@ -149,10 +150,10 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Wr-gP-WwO">
-                                                    <rect key="frame" x="229" y="311" width="46" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Wr-gP-WwO">
+                                                    <rect key="frame" x="260" y="81" width="50" height="29"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button">
+                                                    <state key="normal" backgroundImage="treehole_delete.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
@@ -165,12 +166,14 @@
                                                 <constraint firstItem="RXj-qb-Pol" firstAttribute="leading" secondItem="Rpn-ts-cE9" secondAttribute="trailing" constant="8" id="JHU-3N-PZQ"/>
                                                 <constraint firstItem="yxJ-cP-asL" firstAttribute="leading" secondItem="PIT-dZ-IZN" secondAttribute="leading" constant="10" id="MQi-K4-Ggr"/>
                                                 <constraint firstItem="RXj-qb-Pol" firstAttribute="leading" secondItem="Rpn-ts-cE9" secondAttribute="trailing" constant="8" id="Ms9-2J-CTN"/>
+                                                <constraint firstItem="0Wr-gP-WwO" firstAttribute="top" secondItem="IV8-fU-CMm" secondAttribute="bottom" constant="8" id="Q3A-cl-KO3"/>
                                                 <constraint firstItem="vwg-PT-Pd5" firstAttribute="top" secondItem="IV8-fU-CMm" secondAttribute="bottom" constant="8" id="UZE-y9-rJl"/>
                                                 <constraint firstItem="Rpn-ts-cE9" firstAttribute="top" secondItem="PIT-dZ-IZN" secondAttribute="top" constant="10" id="X2V-1u-fDH"/>
                                                 <constraint firstAttribute="trailing" secondItem="IV8-fU-CMm" secondAttribute="trailing" constant="45" id="X2p-dA-JQ0"/>
                                                 <constraint firstItem="dgh-U3-QSI" firstAttribute="leading" secondItem="yxJ-cP-asL" secondAttribute="trailing" constant="8" id="au4-Vc-Ijk"/>
                                                 <constraint firstItem="vwg-PT-Pd5" firstAttribute="leading" secondItem="d4f-0s-uIx" secondAttribute="trailing" constant="8" id="dcz-AZ-Kbh"/>
                                                 <constraint firstItem="IV8-fU-CMm" firstAttribute="top" secondItem="dgh-U3-QSI" secondAttribute="bottom" constant="8" id="ddl-Od-PDE"/>
+                                                <constraint firstAttribute="trailing" secondItem="0Wr-gP-WwO" secondAttribute="trailing" constant="10" id="fmd-gf-Sog"/>
                                                 <constraint firstItem="IV8-fU-CMm" firstAttribute="leading" secondItem="PIT-dZ-IZN" secondAttribute="leading" constant="45" id="hVk-gG-q9L"/>
                                                 <constraint firstItem="yxJ-cP-asL" firstAttribute="top" secondItem="PIT-dZ-IZN" secondAttribute="top" constant="10" id="ksc-Mh-KPR"/>
                                                 <constraint firstItem="dgh-U3-QSI" firstAttribute="top" secondItem="RXj-qb-Pol" secondAttribute="bottom" id="nFw-ym-C6f"/>
@@ -182,6 +185,7 @@
                                             <outlet property="collectionView" destination="IV8-fU-CMm" id="qTN-G6-yBr"/>
                                             <outlet property="commentButton" destination="vwg-PT-Pd5" id="Q5E-ww-NQi"/>
                                             <outlet property="contentLabel" destination="dgh-U3-QSI" id="vIp-tl-1tA"/>
+                                            <outlet property="deleteButton" destination="0Wr-gP-WwO" id="EnJ-gV-BX5"/>
                                             <outlet property="logoImage" destination="yxJ-cP-asL" id="PYC-Jg-Y53"/>
                                             <outlet property="timeLabel" destination="RXj-qb-Pol" id="xUb-Wo-29r"/>
                                             <outlet property="titleLabel" destination="Rpn-ts-cE9" id="RDR-CB-e6n"/>
@@ -212,6 +216,7 @@
     </scenes>
     <resources>
         <image name="treehole_comment.png" width="59" height="27"/>
+        <image name="treehole_delete.png" width="50" height="29"/>
         <image name="treehole_logo_n.png" width="27" height="27"/>
         <image name="treehole_mine.png" width="78" height="30"/>
         <image name="treehole_news.png" width="78" height="30"/>

@@ -35,12 +35,20 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
-    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 11.0f;
+    NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"http://img0.bdstatic.com/img/image/shouye/dengni36.jpg",@"http://imgt8.bdstatic.com/it/u=2,3094647973&fm=19&gp=0.jpg",@"http://imgt8.bdstatic.com/it/u=2,3096148905&fm=19&gp=0.jpg", nil];
+//    NSMutableArray *array = [[NSMutableArray alloc] init];
+    [cell setImageArray:array];
+    return CGRectGetMaxY(cell.zanButton.frame) + 10;
+//    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 11.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
+    
+//    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"http://img0.bdstatic.com/img/image/shouye/dengni36.jpg",@"http://img0.bdstatic.com/img/image/shouye/mnwlmn-9569205918.jpg",@"http://img0.bdstatic.com/img/image/shouye/mvznns.jpg",@"http://img0.bdstatic.com/img/image/shouye/fsfss001.jpg", nil];
+    [cell setImageArray:array];
     return cell;
 }
 
