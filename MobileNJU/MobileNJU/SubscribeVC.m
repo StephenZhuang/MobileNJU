@@ -7,27 +7,21 @@
 //
 
 #import "SubscribeVC.h"
-
+#import "SegmentView.h"
 @interface SubscribeVC ()
-
+@property (weak, nonatomic) IBOutlet SegmentView *segmentView;
+@property (strong,nonatomic)NSArray* segmentContents;
 @end
 
 @implementation SubscribeVC
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self setTitle:@"订阅"];
     [self setSubTitle:@"重要信息我都有"];
+    self.segmentContents = [[NSArray alloc]initWithObjects:@"全部",@"我的订阅", nil];
+    [self.segmentView setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,6 +32,38 @@
 
 
 
+
+
+#pragma mark - segment delegate
+- (NSInteger)numOfSegments
+{
+    return self.segmentContents.count;
+}
+
+- (NSInteger)defaultSelectedSegment
+{
+    return 0;
+}
+
+- (UIColor *)colorForLine
+{
+    return [UIColor colorWithRed:139 / 255.0 green:63 / 255.0 blue:138 / 255.0 alpha:1.0];
+}
+
+- (UIColor *)colorForTint
+{
+    return [UIColor whiteColor];
+}
+
+- (NSString *)segmentView:(SegmentView *)segmentView nameForSegment:(NSInteger)index
+{
+    return [self.segmentContents objectAtIndex:index];
+}
+
+- (void)selectSegmentAtIndex:(NSInteger)index
+{
+    
+}
 
 /*
 #pragma mark - Navigation

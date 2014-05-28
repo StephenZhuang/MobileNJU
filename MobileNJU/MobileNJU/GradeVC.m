@@ -106,9 +106,9 @@
  */
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[[UIDevice currentDevice]systemVersion]floatValue]>=7.0) {
+
         [self performBounceUpAnimationOnView:cell duration:0.3f delay:indexPath.row*0.2f];
-    }
+    
 
 }
 
@@ -118,7 +118,7 @@
 {
     UITableViewCell *cell = nil;
     cell = [tableView dequeueReusableCellWithIdentifier:@"term"];
-    [cell setBackgroundColor:[UIColor colorWithRed:[[self.redList objectAtIndex:indexPath.row] intValue]/255.0
+    [cell.contentView setBackgroundColor:[UIColor colorWithRed:[[self.redList objectAtIndex:indexPath.row] intValue]/255.0
                                             green:[[self.greenList objectAtIndex:indexPath.row] intValue]/255.0
                                              blue:[[self.blueList objectAtIndex:indexPath.row] intValue]/255.0
                                             alpha:1]];
@@ -132,14 +132,13 @@
     [view setHidden:NO];
     // Start
         view.transform = CGAffineTransformMakeTranslation(0, 600);
-        [UIView animateKeyframesWithDuration:duration delay:delay options:0 animations:^{
-            // End
+        [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             view.transform = CGAffineTransformMakeTranslation(0, 0);
+ 
         } completion:^(BOOL finished) {
             
         }];
     
-  
 }
 
 

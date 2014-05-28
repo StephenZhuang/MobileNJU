@@ -8,9 +8,12 @@
 
 #import "BusVC.h"
 #import "BusCell.h"
-@interface BusVC ()<UITableViewDelegate,UITableViewDataSource>
-
+#import "SegmentView.h"
+@interface BusVC ()<UITableViewDelegate,UITableViewDataSource,SegmentViewDataSource,SegmentViewDelegate>
+@property (weak, nonatomic) IBOutlet SegmentView *segmentView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property(strong,nonatomic) NSArray *segmentArray;
+
 @end
 
 @implementation BusVC
@@ -29,6 +32,8 @@
     [super viewDidLoad];
     [self setTitle:@"校车"];
     [self setSubTitle:@"方便您的来回"];
+    self.segmentArray = [[NSArray alloc]initWithObjects:@"仙林",@"鼓楼", nil];
+    [self.segmentView setBackgroundColor:[UIColor clearColor]];
     // Do any additional setup after loading the view.
 }
 
@@ -86,6 +91,39 @@
     return 30;
 }
 
+
+
+
+#pragma mark - segment delegate
+- (NSInteger)numOfSegments
+{
+    return self.segmentArray.count;
+}
+
+- (NSInteger)defaultSelectedSegment
+{
+    return 0;
+}
+
+- (UIColor *)colorForLine
+{
+    return [UIColor colorWithRed:139 / 255.0 green:63 / 255.0 blue:138 / 255.0 alpha:1.0];
+}
+
+- (UIColor *)colorForTint
+{
+    return [UIColor whiteColor];
+}
+
+- (NSString *)segmentView:(SegmentView *)segmentView nameForSegment:(NSInteger)index
+{
+    return [self.segmentArray objectAtIndex:index];
+}
+
+- (void)selectSegmentAtIndex:(NSInteger)index
+{
+    
+}
 
 /*
 #pragma mark - Navigation

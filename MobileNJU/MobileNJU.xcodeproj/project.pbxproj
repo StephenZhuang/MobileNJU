@@ -58,6 +58,8 @@
 		77B904DD192C4C6F0062237D /* navigation_back_n@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77B904DA192C4C6F0062237D /* navigation_back_n@2x.png */; };
 		77B904DE192C4C6F0062237D /* navigation_back_p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77B904DB192C4C6F0062237D /* navigation_back_p@2x.png */; };
 		77B904DF192C4C6F0062237D /* navigation_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77B904DC192C4C6F0062237D /* navigation_bg@2x.png */; };
+		7D0587F81936357800C5E136 /* BBSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0587F71936357800C5E136 /* BBSCell.m */; };
+		7D0587FB193642F900C5E136 /* BBSDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0587FA193642F900C5E136 /* BBSDetail.m */; };
 		7D1A1A4C193036190083A6AD /* selfInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D1A1A4B193036190083A6AD /* selfInfo.plist */; };
 		7D1A1A4F193039520083A6AD /* CheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A1A4E193039520083A6AD /* CheckBox.m */; };
 		7D1A1A521930451D0083A6AD /* TagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A1A511930451D0083A6AD /* TagView.m */; };
@@ -71,6 +73,8 @@
 		7D20985C1930C6A1002BD994 /* EcardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20985B1930C6A1002BD994 /* EcardCell.m */; };
 		7D2098601930F6FE002BD994 /* GradeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20985F1930F6FE002BD994 /* GradeVC.m */; };
 		7D20986319311CDE002BD994 /* MyAnimationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D20986219311CDE002BD994 /* MyAnimationBehavior.m */; };
+		7D2A741F19361907006F1735 /* SegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2A741E19361907006F1735 /* SegmentView.m */; };
+		7D2A742319362780006F1735 /* BBSVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2A742219362780006F1735 /* BBSVC.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
 		7D45C7261933BC7300733550 /* SubscribeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C7251933BC7300733550 /* SubscribeVC.m */; };
 		7D45C72C1933C0DC00733550 /* ActivityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D45C72B1933C0DC00733550 /* ActivityVC.m */; };
@@ -213,6 +217,10 @@
 		77B904DA192C4C6F0062237D /* navigation_back_n@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_back_n@2x.png"; sourceTree = "<group>"; };
 		77B904DB192C4C6F0062237D /* navigation_back_p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_back_p@2x.png"; sourceTree = "<group>"; };
 		77B904DC192C4C6F0062237D /* navigation_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bg@2x.png"; sourceTree = "<group>"; };
+		7D0587F61936357800C5E136 /* BBSCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBSCell.h; path = "百合十大/BBSCell.h"; sourceTree = "<group>"; };
+		7D0587F71936357800C5E136 /* BBSCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBSCell.m; path = "百合十大/BBSCell.m"; sourceTree = "<group>"; };
+		7D0587F9193642F900C5E136 /* BBSDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBSDetail.h; path = "百合十大/BBSDetail.h"; sourceTree = "<group>"; };
+		7D0587FA193642F900C5E136 /* BBSDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBSDetail.m; path = "百合十大/BBSDetail.m"; sourceTree = "<group>"; };
 		7D1A1A4B193036190083A6AD /* selfInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = selfInfo.plist; sourceTree = "<group>"; };
 		7D1A1A4D193039520083A6AD /* CheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBox.h; sourceTree = "<group>"; };
 		7D1A1A4E193039520083A6AD /* CheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBox.m; sourceTree = "<group>"; };
@@ -238,6 +246,10 @@
 		7D20985F1930F6FE002BD994 /* GradeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeVC.m; sourceTree = "<group>"; };
 		7D20986119311CDE002BD994 /* MyAnimationBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnimationBehavior.h; sourceTree = "<group>"; };
 		7D20986219311CDE002BD994 /* MyAnimationBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnimationBehavior.m; sourceTree = "<group>"; };
+		7D2A741B1935C3F9006F1735 /* SegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentView.h; sourceTree = "<group>"; };
+		7D2A741E19361907006F1735 /* SegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentView.m; sourceTree = "<group>"; };
+		7D2A742119362780006F1735 /* BBSVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BBSVC.h; path = "百合十大/BBSVC.h"; sourceTree = "<group>"; };
+		7D2A742219362780006F1735 /* BBSVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BBSVC.m; path = "百合十大/BBSVC.m"; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
 		7D45C7241933BC7300733550 /* SubscribeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeVC.h; sourceTree = "<group>"; };
@@ -371,6 +383,7 @@
 		77B9042E192C3F040062237D /* MobileNJU */ = {
 			isa = PBXGroup;
 			children = (
+				7D2A742019362764006F1735 /* 百合 */,
 				7D4EE15B19343BCE00A06398 /* 图书馆 */,
 				7D45C7271933C08A00733550 /* 活动 */,
 				7D45C7211933B98E00733550 /* 订阅 */,
@@ -446,6 +459,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7D2A741A1935C3DF006F1735 /* CustomSegment */,
 				7D2098481930AD8C002BD994 /* CustomIOSAlertView */,
 				7DF0BB35192FB764004CEE01 /* ComboBox */,
 				77B9046F192C4B3A0062237D /* MJRefresh */,
@@ -722,6 +736,28 @@
 			name = "成绩查询";
 			sourceTree = "<group>";
 		};
+		7D2A741A1935C3DF006F1735 /* CustomSegment */ = {
+			isa = PBXGroup;
+			children = (
+				7D2A741E19361907006F1735 /* SegmentView.m */,
+				7D2A741B1935C3F9006F1735 /* SegmentView.h */,
+			);
+			name = CustomSegment;
+			sourceTree = "<group>";
+		};
+		7D2A742019362764006F1735 /* 百合 */ = {
+			isa = PBXGroup;
+			children = (
+				7D2A742119362780006F1735 /* BBSVC.h */,
+				7D2A742219362780006F1735 /* BBSVC.m */,
+				7D0587F61936357800C5E136 /* BBSCell.h */,
+				7D0587F71936357800C5E136 /* BBSCell.m */,
+				7D0587F9193642F900C5E136 /* BBSDetail.h */,
+				7D0587FA193642F900C5E136 /* BBSDetail.m */,
+			);
+			name = "百合";
+			sourceTree = "<group>";
+		};
 		7D45C7211933B98E00733550 /* 订阅 */ = {
 			isa = PBXGroup;
 			children = (
@@ -931,7 +967,9 @@
 				7DF0BB40192FBA97004CEE01 /* EditInfoVC.m in Sources */,
 				7DD25B39192D9C230066494D /* HomeCell.m in Sources */,
 				7D20985C1930C6A1002BD994 /* EcardCell.m in Sources */,
+				7D2A742319362780006F1735 /* BBSVC.m in Sources */,
 				7D2098601930F6FE002BD994 /* GradeVC.m in Sources */,
+				7D2A741F19361907006F1735 /* SegmentView.m in Sources */,
 				7D4EE169193441B700A06398 /* BookDetailView.m in Sources */,
 				7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */,
 				7DD869AF192DB73B00D4ADAA /* GetCodeViewController.m in Sources */,
@@ -967,6 +1005,7 @@
 				77B90467192C48980062237D /* HomeViewController.m in Sources */,
 				7DD25B3A192D9C230066494D /* MenuButton.m in Sources */,
 				77B904CA192C4B3B0062237D /* NSData+GIF.m in Sources */,
+				7D0587F81936357800C5E136 /* BBSCell.m in Sources */,
 				77B904D5192C4B3B0062237D /* UIImage+MultiFormat.m in Sources */,
 				7DD869B1192DB73B00D4ADAA /* RegisterViewController.m in Sources */,
 				77B904C9192C4B3B0062237D /* MKAnnotationView+WebCache.m in Sources */,
@@ -975,6 +1014,7 @@
 				77B904CF192C4B3B0062237D /* SDWebImageDownloaderOperation.m in Sources */,
 				7DB07EFC1933A31F00B715DB /* GPAView.m in Sources */,
 				77B904C7192C4B3B0062237D /* MJPhotoToolbar.m in Sources */,
+				7D0587FB193642F900C5E136 /* BBSDetail.m in Sources */,
 				77B904C8192C4B3B0062237D /* MJPhotoView.m in Sources */,
 				7D1A1A4F193039520083A6AD /* CheckBox.m in Sources */,
 				77B904D9192C4B3B0062237D /* ToolUtils.m in Sources */,

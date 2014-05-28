@@ -124,7 +124,7 @@
                                     <constraint firstAttribute="bottom" secondItem="g7M-a0-VNf" secondAttribute="bottom" id="kVR-lp-B67"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5C-2v-7x7">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5C-2v-7x7">
                                 <rect key="frame" x="30" y="112" width="261" height="190"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -293,7 +293,7 @@
                             <constraint firstItem="OOH-na-Wso" firstAttribute="bottom" secondItem="Rt4-K3-zby" secondAttribute="bottom" id="CaS-jS-wOg"/>
                             <constraint firstAttribute="bottom" secondItem="OOH-na-Wso" secondAttribute="bottom" id="NGT-rN-q4h"/>
                             <constraint firstItem="m5C-2v-7x7" firstAttribute="leading" secondItem="q3G-JJ-GeI" secondAttribute="leading" constant="30" id="UJZ-Ya-WLL"/>
-                            <constraint firstItem="m5C-2v-7x7" firstAttribute="top" secondItem="br2-BW-rdd" secondAttribute="bottom" constant="92" id="Y0t-em-gBh"/>
+                            <constraint firstItem="m5C-2v-7x7" firstAttribute="top" secondItem="br2-BW-rdd" secondAttribute="bottom" constant="48" id="Y0t-em-gBh"/>
                             <constraint firstAttribute="trailing" secondItem="Rt4-K3-zby" secondAttribute="trailing" id="dsT-pz-Bdv"/>
                             <constraint firstItem="OOH-na-Wso" firstAttribute="top" secondItem="Rt4-K3-zby" secondAttribute="top" id="eKz-Lx-dOS"/>
                             <constraint firstItem="OOH-na-Wso" firstAttribute="leading" secondItem="q3G-JJ-GeI" secondAttribute="leading" id="eTe-FT-Lt1"/>
@@ -352,40 +352,44 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMb-M3-vLG">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e1K-Nk-Myz">
-                                        <rect key="frame" x="20" y="13" width="280" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.5450980392" green="0.2470588235" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
-                                        <segments>
-                                            <segment title="全部"/>
-                                            <segment title="我的订阅"/>
-                                        </segments>
-                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2y-WH-7lp" customClass="SegmentView">
+                                        <rect key="frame" x="20" y="20" width="280" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Asu-PT-jhq" id="AGP-zw-k19"/>
+                                            <outlet property="delegate" destination="Asu-PT-jhq" id="nQA-DA-OPe"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.5450980392" green="0.2470588235" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="kby-qk-lIa"/>
+                                    <constraint firstItem="d2y-WH-7lp" firstAttribute="top" secondItem="hMb-M3-vLG" secondAttribute="top" constant="20" symbolic="YES" id="9PO-ZQ-whn"/>
+                                    <constraint firstItem="d2y-WH-7lp" firstAttribute="leading" secondItem="hMb-M3-vLG" secondAttribute="leading" constant="20" symbolic="YES" id="Xtx-Gl-rhb"/>
+                                    <constraint firstAttribute="trailing" secondItem="d2y-WH-7lp" secondAttribute="trailing" constant="20" symbolic="YES" id="dGU-T0-vH1"/>
+                                    <constraint firstAttribute="bottom" secondItem="d2y-WH-7lp" secondAttribute="bottom" constant="19" id="tNv-qN-jFq"/>
+                                    <constraint firstAttribute="height" constant="79" id="tme-28-L8i"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="hMb-M3-vLG" secondAttribute="trailing" id="5iu-L7-a2R"/>
-                            <constraint firstItem="hMb-M3-vLG" firstAttribute="leading" secondItem="EXY-Jo-5wY" secondAttribute="leading" id="Mca-Ef-0Sx"/>
-                            <constraint firstItem="hMb-M3-vLG" firstAttribute="top" secondItem="EXY-Jo-5wY" secondAttribute="top" id="bpt-6J-9M9"/>
+                            <constraint firstAttribute="trailing" secondItem="hMb-M3-vLG" secondAttribute="trailing" id="Z6Z-TI-frq"/>
+                            <constraint firstItem="hMb-M3-vLG" firstAttribute="top" secondItem="nM5-gm-pVX" secondAttribute="bottom" id="h9S-0E-HN3"/>
+                            <constraint firstItem="hMb-M3-vLG" firstAttribute="leading" secondItem="EXY-Jo-5wY" secondAttribute="leading" id="wsj-Fd-Czh"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="segmentView" destination="d2y-WH-7lp" id="ZeZ-TM-wCO"/>
                         <segue destination="zx9-lb-EqO" kind="push" identifier="newsList" id="vcN-r9-f9I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="908-aA-f18" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2549" y="680"/>
+            <point key="canvasLocation" x="2549" y="712"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nRd-Jz-CtD">
