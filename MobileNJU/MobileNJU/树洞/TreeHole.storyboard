@@ -55,7 +55,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="treehole_logo_n.png" translatesAutoresizingMaskIntoConstraints="NO" id="yxJ-cP-asL">
-                                                    <rect key="frame" x="10" y="10" width="27" height="0.0"/>
+                                                    <rect key="frame" x="10" y="10" width="60" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="1Kh-ay-G6X"/>
@@ -92,7 +92,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" scrollEnabled="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IV8-fU-CMm">
-                                                    <rect key="frame" x="45" y="73" width="230" height="230"/>
+                                                    <rect key="frame" x="45" y="73" width="263" height="230"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uQw-7K-xnP">
@@ -145,6 +145,9 @@
                                                         <color key="titleColor" red="0.29411764709999999" green="0.29411764709999999" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <segue destination="LYS-Ol-EDz" kind="push" id="6Mg-YL-YrY"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Wr-gP-WwO">
                                                     <rect key="frame" x="260" y="311" width="50" height="29"/>
@@ -182,6 +185,7 @@
                                             <outlet property="timeLabel" destination="RXj-qb-Pol" id="xUb-Wo-29r"/>
                                             <outlet property="titleLabel" destination="Rpn-ts-cE9" id="RDR-CB-e6n"/>
                                             <outlet property="zanButton" destination="d4f-0s-uIx" id="SdO-g0-scv"/>
+                                            <segue destination="LYS-Ol-EDz" kind="custom" id="X5z-6W-Xvd"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -205,6 +209,43 @@
             </objects>
             <point key="canvasLocation" x="395" y="84"/>
         </scene>
+        <!--Tree Hole Detail View Controller-->
+        <scene sceneID="j4z-as-BsF">
+            <objects>
+                <viewController storyboardIdentifier="TreeHoleDetailViewController" id="LYS-Ol-EDz" customClass="TreeHoleDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OxS-j1-xKn"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pze-A4-wRM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oQ8-Rk-7GD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="O7n-iH-Igc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="LYS-Ol-EDz" id="mlm-1B-QT7"/>
+                                    <outlet property="delegate" destination="LYS-Ol-EDz" id="TdG-pz-efz"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Pze-A4-wRM" firstAttribute="top" secondItem="O7n-iH-Igc" secondAttribute="bottom" id="4oN-N7-CQc"/>
+                            <constraint firstItem="O7n-iH-Igc" firstAttribute="top" secondItem="oQ8-Rk-7GD" secondAttribute="top" id="KL0-rR-9xt"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="8sX-mi-ldC"/>
+                    <connections>
+                        <outlet property="tableView" destination="O7n-iH-Igc" id="qkB-dD-vk6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pIO-gE-eZN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="760" y="82"/>
+        </scene>
     </scenes>
     <resources>
         <image name="treehole_comment.png" width="59" height="27"/>
@@ -219,4 +260,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="X5z-6W-Xvd"/>
+    </inferredMetricsTieBreakers>
 </document>

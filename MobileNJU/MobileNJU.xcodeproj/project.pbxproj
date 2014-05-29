@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		777F54C019375CD100A0B0F2 /* TreeHoleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 777F54BF19375CD100A0B0F2 /* TreeHoleDetailViewController.m */; };
 		779A398F1934922600E3D50B /* TreeHole.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 779A398A1934922600E3D50B /* TreeHole.storyboard */; };
 		779A39901934922600E3D50B /* TreeHoleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 779A398C1934922600E3D50B /* TreeHoleCell.m */; };
 		779A39911934922600E3D50B /* TreeHoleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 779A398E1934922600E3D50B /* TreeHoleListViewController.m */; };
@@ -319,6 +320,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		777F54BE19375CD100A0B0F2 /* TreeHoleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeHoleDetailViewController.h; sourceTree = "<group>"; };
+		777F54BF19375CD100A0B0F2 /* TreeHoleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeHoleDetailViewController.m; sourceTree = "<group>"; };
 		779A398A1934922600E3D50B /* TreeHole.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TreeHole.storyboard; sourceTree = "<group>"; };
 		779A398B1934922600E3D50B /* TreeHoleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeHoleCell.h; sourceTree = "<group>"; };
 		779A398C1934922600E3D50B /* TreeHoleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeHoleCell.m; sourceTree = "<group>"; };
@@ -750,6 +753,8 @@
 				779A398E1934922600E3D50B /* TreeHoleListViewController.m */,
 				779A39921934926A00E3D50B /* TreeHoleImageCell.h */,
 				779A39931934926A00E3D50B /* TreeHoleImageCell.m */,
+				777F54BE19375CD100A0B0F2 /* TreeHoleDetailViewController.h */,
+				777F54BF19375CD100A0B0F2 /* TreeHoleDetailViewController.m */,
 			);
 			path = "树洞";
 			sourceTree = "<group>";
@@ -1715,6 +1720,7 @@
 				77B904CB192C4B3B0062237D /* SDImageCache.m in Sources */,
 				77B904CE192C4B3B0062237D /* SDWebImageDownloader.m in Sources */,
 				77B90435192C3F040062237D /* main.m in Sources */,
+				777F54C019375CD100A0B0F2 /* TreeHoleDetailViewController.m in Sources */,
 				77B90467192C48980062237D /* HomeViewController.m in Sources */,
 				7DD25B3A192D9C230066494D /* MenuButton.m in Sources */,
 				779A39911934922600E3D50B /* TreeHoleListViewController.m in Sources */,
