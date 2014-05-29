@@ -7,6 +7,8 @@
 //
 
 #import "TreeHoleDetailViewController.h"
+#import "TreeHoleCell.h"
+#import "CommentCell.h"
 
 @interface TreeHoleDetailViewController ()
 
@@ -27,6 +29,51 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setTitle:@"树洞详情"];
+    [self setSubTitle:@"您可以回复和点赞"];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 1;
+    } else {
+        return self.dataArray.count;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
+        NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"http://img0.bdstatic.com/img/image/shouye/dengni36.jpg",@"http://imgt8.bdstatic.com/it/u=2,3094647973&fm=19&gp=0.jpg",@"http://imgt8.bdstatic.com/it/u=2,3096148905&fm=19&gp=0.jpg", nil];
+        //    NSMutableArray *array = [[NSMutableArray alloc] init];
+        [cell setImageArray:array];
+        return CGRectGetMaxY(cell.zanButton.frame) + 10;
+    } else {
+        return 44;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        
+        TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
+        
+        //    NSMutableArray *array = [[NSMutableArray alloc] init];
+        NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"http://img0.bdstatic.com/img/image/shouye/dengni36.jpg",@"http://img0.bdstatic.com/img/image/shouye/mnwlmn-9569205918.jpg",@"http://img0.bdstatic.com/img/image/shouye/mvznns.jpg",@"http://img0.bdstatic.com/img/image/shouye/fsfss001.jpg", nil];
+        [cell setImageArray:array];
+        return cell;
+    } else {
+        CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+        return cell;
+    }
 }
 
 - (void)didReceiveMemoryWarning

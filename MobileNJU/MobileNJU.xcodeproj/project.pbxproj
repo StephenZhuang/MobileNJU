@@ -223,6 +223,7 @@
 		779A3B3B1934B4B200E3D50B /* HBCoreLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 779A3A6F1934B4B200E3D50B /* HBCoreLabel.m */; };
 		779A3B3C1934B4B200E3D50B /* MatchParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 779A3A711934B4B200E3D50B /* MatchParser.m */; };
 		779A3B401934C28100E3D50B /* NSString+unicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 779A3B3F1934C28100E3D50B /* NSString+unicode.m */; };
+		77AC815E193778C200003218 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77AC815D193778C200003218 /* CommentCell.m */; };
 		77B90429192C3F040062237D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B90428192C3F030062237D /* Foundation.framework */; };
 		77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042A192C3F040062237D /* CoreGraphics.framework */; };
 		77B9042D192C3F040062237D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042C192C3F040062237D /* UIKit.framework */; };
@@ -543,6 +544,8 @@
 		779A3A711934B4B200E3D50B /* MatchParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchParser.m; sourceTree = "<group>"; };
 		779A3B3E1934C28100E3D50B /* NSString+unicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+unicode.h"; sourceTree = "<group>"; };
 		779A3B3F1934C28100E3D50B /* NSString+unicode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+unicode.m"; sourceTree = "<group>"; };
+		77AC815C193778C200003218 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		77AC815D193778C200003218 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		77B90425192C3F030062237D /* MobileNJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileNJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B90428192C3F030062237D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77B9042A192C3F040062237D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -755,6 +758,8 @@
 				779A39931934926A00E3D50B /* TreeHoleImageCell.m */,
 				777F54BE19375CD100A0B0F2 /* TreeHoleDetailViewController.h */,
 				777F54BF19375CD100A0B0F2 /* TreeHoleDetailViewController.m */,
+				77AC815C193778C200003218 /* CommentCell.h */,
+				77AC815D193778C200003218 /* CommentCell.m */,
 			);
 			path = "树洞";
 			sourceTree = "<group>";
@@ -1723,6 +1728,7 @@
 				777F54C019375CD100A0B0F2 /* TreeHoleDetailViewController.m in Sources */,
 				77B90467192C48980062237D /* HomeViewController.m in Sources */,
 				7DD25B3A192D9C230066494D /* MenuButton.m in Sources */,
+				77AC815E193778C200003218 /* CommentCell.m in Sources */,
 				779A39911934922600E3D50B /* TreeHoleListViewController.m in Sources */,
 				77B904CA192C4B3B0062237D /* NSData+GIF.m in Sources */,
 				77B904D5192C4B3B0062237D /* UIImage+MultiFormat.m in Sources */,
