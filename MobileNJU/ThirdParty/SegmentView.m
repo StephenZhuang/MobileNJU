@@ -29,9 +29,8 @@
     
     self.layer.cornerRadius = 5;
     self.layer.borderWidth = 1;
-    self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.layer.borderColor = [UIColor colorWithRed:110/255.0 green:15/255.0 blue:109/255.0 alpha:1.0].CGColor;
     [self setBackgroundColor:[_dataSource colorForLine]];
-    
     
     int itemCount = [_dataSource numOfSegments];
     CGFloat buttonWidth = self.frame.size.width / itemCount;

@@ -62,12 +62,12 @@
 - (IBAction)resignAllResponders:(id)sender {
     [self.usernameTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
-//    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-//        self.loginView.center = CGPointMake(self.loginView.center.x, 250);
-//        self.logoImage.center = CGPointMake(self.logoImage.center.x, 200);
-//        
-//    } completion:^(BOOL finished) {
-//    }];
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
+        self.loginView.center = CGPointMake(self.loginView.center.x, 250);
+        self.logoImage.center = CGPointMake(self.logoImage.center.x, 200);
+        
+    } completion:^(BOOL finished) {
+    }];
 }
 
 /*
@@ -90,12 +90,12 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
    
-//    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-//        self.loginView.center = CGPointMake(self.loginView.center.x, 80);
-//        self.logoImage.center = CGPointMake(self.logoImage.center.x, 30);
-//        
-//    } completion:^(BOOL finished) {
-//    }];
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
+        self.loginView.center = CGPointMake(self.loginView.center.x, 80);
+        self.logoImage.center = CGPointMake(self.logoImage.center.x, 30);
+        
+    } completion:^(BOOL finished) {
+    }];
 
     return YES;
 }

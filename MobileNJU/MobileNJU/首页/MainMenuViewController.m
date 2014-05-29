@@ -102,7 +102,7 @@ static NSArray* descriptions;
 
     
     UIImage* background = [UIImage imageNamed:@"云"];
-    self.cloudBack = [[UIImageView alloc]initWithFrame:CGRectMake(0,-5.0, self.tableView.bounds.size.width, 50)];
+    self.cloudBack = [[UIImageView alloc]initWithFrame:CGRectMake(0,-5.0, self.tableView.bounds.size.width, 87)];
     [self.cloudBack setImage:background];
     [self.headerView addSubview:self.cloudBack];
 
