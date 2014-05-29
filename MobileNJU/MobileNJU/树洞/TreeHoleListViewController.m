@@ -39,7 +39,7 @@
 //    NSMutableArray *array = [[NSMutableArray alloc] init];
     [cell setImageArray:array];
     return CGRectGetMaxY(cell.zanButton.frame) + 10;
-//    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 11.0f;
+    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

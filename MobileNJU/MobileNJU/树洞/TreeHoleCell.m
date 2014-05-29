@@ -65,6 +65,18 @@
     }
 //    rect.size = _collectionView.contentSize;
     [_collectionView setFrame:rect];
+    
+    CGRect zanFrame = _zanButton.frame;
+    zanFrame.origin.y = CGRectGetMaxY(rect) + 8;
+    [_zanButton setFrame:zanFrame];
+    
+    CGRect commentFrame = _commentButton.frame;
+    commentFrame.origin.y = CGRectGetMaxY(rect) + 8;
+    [_commentButton setFrame:commentFrame];
+    
+    CGRect deleteFrame = _deleteButton.frame;
+    deleteFrame.origin.y = CGRectGetMaxY(rect) + 8;
+    [_deleteButton setFrame:deleteFrame];
 }
 
 @end
