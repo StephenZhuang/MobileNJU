@@ -128,6 +128,7 @@
 		7DFF4B5A1938617C0018A934 /* SubscribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF4B591938617C0018A934 /* SubscribeCell.m */; };
 		7DFF4B5D193862460018A934 /* NewsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF4B5C193862460018A934 /* NewsListView.m */; };
 		7DFF4B5F193862640018A934 /* NewsListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFF4B5E193862640018A934 /* NewsListView.xib */; };
+		7DFF4B671938F33E0018A934 /* MySubscribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF4B661938F33E0018A934 /* MySubscribeCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -366,6 +367,8 @@
 		7DFF4B5B193862460018A934 /* NewsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsListView.h; path = "新闻/NewsListView.h"; sourceTree = "<group>"; };
 		7DFF4B5C193862460018A934 /* NewsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsListView.m; path = "新闻/NewsListView.m"; sourceTree = "<group>"; };
 		7DFF4B5E193862640018A934 /* NewsListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewsListView.xib; path = "新闻/NewsListView.xib"; sourceTree = "<group>"; };
+		7DFF4B651938F33E0018A934 /* MySubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MySubscribeCell.h; path = "MobileNJU/订阅/MySubscribeCell.h"; sourceTree = SOURCE_ROOT; };
+		7DFF4B661938F33E0018A934 /* MySubscribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MySubscribeCell.m; path = "MobileNJU/订阅/MySubscribeCell.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -824,6 +827,8 @@
 		7D45C7211933B98E00733550 /* 订阅 */ = {
 			isa = PBXGroup;
 			children = (
+				7DFF4B651938F33E0018A934 /* MySubscribeCell.h */,
+				7DFF4B661938F33E0018A934 /* MySubscribeCell.m */,
 				7DFF4B581938617C0018A934 /* SubscribeCell.h */,
 				7DFF4B591938617C0018A934 /* SubscribeCell.m */,
 				7D45C7241933BC7300733550 /* SubscribeVC.h */,
@@ -1116,6 +1121,7 @@
 				7D4EE17319346A4800A06398 /* MyLibraryVC.m in Sources */,
 				77B90435192C3F040062237D /* main.m in Sources */,
 				77B90467192C48980062237D /* HomeViewController.m in Sources */,
+				7DFF4B671938F33E0018A934 /* MySubscribeCell.m in Sources */,
 				7DD25B3A192D9C230066494D /* MenuButton.m in Sources */,
 				77B904CA192C4B3B0062237D /* NSData+GIF.m in Sources */,
 				7D66FC0D19372A300079D38E /* ClassroomDetailVC.m in Sources */,

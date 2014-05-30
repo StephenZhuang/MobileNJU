@@ -9,8 +9,11 @@
 #import "SubscribeVC.h"
 #import "SegmentView.h"
 #import "SubscribeCell.h"
+#import "MySubscribeCell.h"
 @interface SubscribeVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet SegmentView *segmentView;
+@property (weak, nonatomic) IBOutlet UITableView *mySubscribeTable;
+@property (weak, nonatomic) IBOutlet UITableView *allSubscribeTable;
 @property (strong,nonatomic)NSArray* segmentContents;
 @end
 
@@ -39,17 +42,25 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SubscribeCell* cell = (SubscribeCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return 36+cell.newsView.frame.size.height;
+    if (tableView==self.allSubscribeTable) {
+        SubscribeCell* cell = (SubscribeCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return 38+cell.newsView.frame.size.height;
+    } else
+        return 70;
 }
 
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SubscribeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"subscribe"];
-    NSArray* news = [[NSArray alloc]initWithObjects:[[NSDictionary alloc]init],  [[NSDictionary alloc]init],[[NSDictionary alloc]init],nil];
-    [cell addNews:news];
-    return cell;
+    if (tableView==self.allSubscribeTable) {
+        SubscribeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"subscribe"];
+        NSArray* news = [[NSArray alloc]initWithObjects:[[NSDictionary alloc]init],  [[NSDictionary alloc]init],[[NSDictionary alloc]init],nil];
+        [cell addNews:news];
+        return cell;
+    } else {
+        MySubscribeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"mySubscribeCell"];
+        return cell;
+    }
 }
 
 
@@ -81,7 +92,13 @@
 
 - (void)selectSegmentAtIndex:(NSInteger)index
 {
-    
+    if (index==1) {
+        [self.mySubscribeTable setHidden:NO];
+        [self.mySubscribeTable reloadData];
+    } else {
+        [self.mySubscribeTable setHidden:YES];
+        [self.allSubscribeTable reloadData];
+    }
 }
 
 /*

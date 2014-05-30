@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *newsImage;
 - (void)addNews:(NSArray*) news;
 @property (weak, nonatomic) IBOutlet UIView *newsView;
+@property (strong,nonatomic)NSMutableArray* myNews;
 @end
