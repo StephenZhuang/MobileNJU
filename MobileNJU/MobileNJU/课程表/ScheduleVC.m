@@ -11,11 +11,13 @@
 #import "ScheduleView.h"
 #import "LessonDetailView.h"
 #import "AlertCloseDelegate.h"
-@interface ScheduleVC ()<AlertCloseDelegate,ScheduleViewDelegate>
+@interface ScheduleVC ()<AlertCloseDelegate,ScheduleViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *alertView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UIView *dayView;
+@property (weak, nonatomic) IBOutlet UITextField *schIdField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong,nonatomic)LessonDetailView* lessonDetail;
 @end
 
@@ -45,7 +47,12 @@
       // Do any additional setup after loading the view.
 }
 
-
+#pragma mark textFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 - (void) initLessonDetail
 {
     self.lessonDetail = [[[NSBundle mainBundle] loadNibNamed:@"LessonDetailView" owner:self options:nil] firstObject];
@@ -138,6 +145,8 @@
 }
 
 - (IBAction)cancelAlert:(id)sender {
+    [self.schIdField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
     [self.maskView setHidden:YES];
     [self.alertView setHidden:YES];
     [self.lessonDetail setHidden:YES];

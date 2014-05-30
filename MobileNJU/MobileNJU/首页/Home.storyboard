@@ -286,7 +286,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="301A8318-F3F9-4455-A79B-B1FB6BE96EFA" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-JV-0PT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BC915422-35E1-4A90-992B-8579851E45DB" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-JV-0PT">
                                 <rect key="frame" x="35" y="241" width="12" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -1567,6 +1567,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="lEN-Hm-0iI" id="muz-Ri-OCl"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwY-eK-vAB">
                                         <rect key="frame" x="254" y="20" width="55" height="34"/>
@@ -1632,7 +1635,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kna-EG-zQg">
-                                <rect key="frame" x="29" y="100" width="261" height="239"/>
+                                <rect key="frame" x="29" y="80" width="261" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29D-V0-Jct">
@@ -1650,6 +1653,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="lEN-Hm-0iI" id="sQP-K4-aOL"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="图书馆密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="li6-Ke-v7q">
                                         <rect key="frame" x="20" y="100" width="221" height="30"/>
@@ -1659,6 +1665,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="lEN-Hm-0iI" id="zOn-YD-KDa"/>
+                                        </connections>
                                     </textField>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEx-wz-JPJ">
                                         <rect key="frame" x="20" y="138" width="51" height="31"/>
@@ -1742,7 +1751,7 @@
                             <constraint firstItem="uvx-0H-bL7" firstAttribute="top" secondItem="YUn-x9-e4v" secondAttribute="bottom" id="aai-I0-Ip1"/>
                             <constraint firstItem="qNN-1I-uXg" firstAttribute="trailing" secondItem="YUn-x9-e4v" secondAttribute="trailing" id="bLf-6N-Dcc"/>
                             <constraint firstItem="YUn-x9-e4v" firstAttribute="top" secondItem="u1a-tW-419" secondAttribute="bottom" id="crH-15-JaD"/>
-                            <constraint firstItem="Kna-EG-zQg" firstAttribute="top" secondItem="zdK-KT-GLa" secondAttribute="bottom" constant="80" id="hTN-wM-rhH"/>
+                            <constraint firstItem="Kna-EG-zQg" firstAttribute="top" secondItem="zdK-KT-GLa" secondAttribute="bottom" constant="60" id="hTN-wM-rhH"/>
                             <constraint firstAttribute="trailing" secondItem="u1a-tW-419" secondAttribute="trailing" id="kvm-pL-nSJ"/>
                             <constraint firstItem="uvx-0H-bL7" firstAttribute="top" secondItem="YUn-x9-e4v" secondAttribute="bottom" id="oep-8c-DkW"/>
                             <constraint firstItem="Kna-EG-zQg" firstAttribute="leading" secondItem="DD8-pp-zRL" secondAttribute="leading" constant="29" id="r09-Wp-GeD"/>
@@ -1755,6 +1764,9 @@
                     <connections>
                         <outlet property="alertView" destination="Kna-EG-zQg" id="5zf-4y-81I"/>
                         <outlet property="maskView" destination="qNN-1I-uXg" id="Rjt-Fd-cG1"/>
+                        <outlet property="passwordField" destination="li6-Ke-v7q" id="lRd-Zs-2wB"/>
+                        <outlet property="schIdField" destination="KTd-l9-vZ4" id="swF-YS-K5p"/>
+                        <outlet property="searchField" destination="f5K-KP-vbw" id="Okc-Va-QvB"/>
                         <segue destination="lP4-vl-qFi" kind="push" identifier="myLibrary" id="O3S-fg-CL5"/>
                     </connections>
                 </viewController>
@@ -2044,6 +2056,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="0Kn-vJ-RX8" id="aC3-l2-wxO"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="教务处密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WMV-Jv-iaK">
                                         <rect key="frame" x="20" y="100" width="221" height="30"/>
@@ -2053,6 +2068,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="0Kn-vJ-RX8" id="uUP-Xp-i07"/>
+                                        </connections>
                                     </textField>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="94k-zl-JFN">
                                         <rect key="frame" x="20" y="138" width="51" height="31"/>
@@ -2151,6 +2169,8 @@
                         <outlet property="alertView" destination="8gN-aA-y0j" id="0Ri-PU-IiZ"/>
                         <outlet property="dayView" destination="mFx-si-Jnl" id="SnC-0B-cLX"/>
                         <outlet property="maskView" destination="bvo-Lf-FFI" id="5AO-1j-X9T"/>
+                        <outlet property="passwordField" destination="WMV-Jv-iaK" id="K1l-Nc-SRG"/>
+                        <outlet property="schIdField" destination="Va6-zM-uIW" id="Spa-Ew-a4w"/>
                         <outlet property="scrollView" destination="6ml-Ph-cGb" id="cgL-wz-mRR"/>
                     </connections>
                 </viewController>
@@ -2256,6 +2276,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="3wr-bO-RDy" id="sJj-Up-EiK"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="教务处密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SlZ-9k-iAe">
                                         <rect key="frame" x="20" y="100" width="221" height="30"/>
@@ -2265,6 +2288,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="3wr-bO-RDy" id="wLC-Ch-Hsk"/>
+                                        </connections>
                                     </textField>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s7U-5p-PqV">
                                         <rect key="frame" x="20" y="138" width="51" height="31"/>
@@ -2337,9 +2363,9 @@
                             <constraint firstItem="72Y-8s-uf5" firstAttribute="trailing" secondItem="wzB-fb-Pdq" secondAttribute="trailing" id="4Jd-Pi-NlP"/>
                             <constraint firstAttribute="trailing" secondItem="zMc-RM-ijy" secondAttribute="trailing" constant="30" id="72k-Jb-fo3"/>
                             <constraint firstAttribute="bottom" secondItem="wzB-fb-Pdq" secondAttribute="bottom" id="7HU-UW-1nL"/>
-                            <constraint firstItem="zMc-RM-ijy" firstAttribute="top" secondItem="cBF-Tw-n1d" secondAttribute="bottom" constant="30" id="9B3-IN-Elc"/>
                             <constraint firstItem="72Y-8s-uf5" firstAttribute="top" secondItem="wzB-fb-Pdq" secondAttribute="top" id="ApE-di-8gj"/>
                             <constraint firstItem="72Y-8s-uf5" firstAttribute="leading" secondItem="yva-6p-1db" secondAttribute="leading" id="Dcd-rn-GGn"/>
+                            <constraint firstItem="zMc-RM-ijy" firstAttribute="top" secondItem="cBF-Tw-n1d" secondAttribute="bottom" constant="30" id="U6Y-5a-pCT"/>
                             <constraint firstItem="72Y-8s-uf5" firstAttribute="bottom" secondItem="wzB-fb-Pdq" secondAttribute="bottom" id="b6F-ar-azs"/>
                             <constraint firstItem="wzB-fb-Pdq" firstAttribute="leading" secondItem="72Y-8s-uf5" secondAttribute="leading" id="iMW-Hr-exZ"/>
                             <constraint firstItem="72Y-8s-uf5" firstAttribute="top" secondItem="yva-6p-1db" secondAttribute="top" id="ogE-8f-Mb0"/>
@@ -2351,6 +2377,8 @@
                     <connections>
                         <outlet property="alertView" destination="zMc-RM-ijy" id="NiB-TQ-V2K"/>
                         <outlet property="maskView" destination="wzB-fb-Pdq" id="nAZ-fo-5yw"/>
+                        <outlet property="passwordTextField" destination="SlZ-9k-iAe" id="3Gr-Dg-Pbj"/>
+                        <outlet property="schIdTextField" destination="XbC-ah-xe3" id="7a2-CK-JtO"/>
                         <segue destination="XhI-OR-CZf" kind="push" identifier="gradeDetail" id="q5D-47-CjA"/>
                     </connections>
                 </viewController>
@@ -2706,7 +2734,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YbQ-JF-WDH">
-                                <rect key="frame" x="30" y="125" width="261" height="281"/>
+                                <rect key="frame" x="30" y="90" width="261" height="281"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7v-Au-ty9">
@@ -2724,6 +2752,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="eWv-Bq-41c" id="Nib-fC-KxN"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="校园卡密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hht-T0-w9e">
                                         <rect key="frame" x="20" y="100" width="221" height="30"/>
@@ -2733,6 +2764,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="eWv-Bq-41c" id="jkh-Rt-dFc"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="不区分大小写" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eaj-1S-rVQ">
                                         <rect key="frame" x="20" y="177" width="125" height="30"/>
@@ -2742,6 +2776,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="eWv-Bq-41c" id="WSD-9O-ZL8"/>
+                                        </connections>
                                     </textField>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W3K-S2-6b2">
                                         <rect key="frame" x="20" y="138" width="51" height="31"/>
@@ -2876,7 +2913,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <constraint firstItem="KlI-iz-k7S" firstAttribute="top" secondItem="sMV-yL-Y5j" secondAttribute="top" id="kkK-RO-Q1z"/>
                             <constraint firstAttribute="trailing" secondItem="TDQ-Id-Fjn" secondAttribute="trailing" constant="20" symbolic="YES" id="l2r-aj-c6m"/>
                             <constraint firstItem="5Cp-rB-oS4" firstAttribute="leading" secondItem="sMV-yL-Y5j" secondAttribute="leading" constant="50" id="lYy-Qq-Pmy"/>
-                            <constraint firstItem="YbQ-JF-WDH" firstAttribute="top" secondItem="Qvn-nX-Hqv" secondAttribute="bottom" id="ldo-wA-UFE"/>
+                            <constraint firstItem="YbQ-JF-WDH" firstAttribute="top" secondItem="Qvn-nX-Hqv" secondAttribute="bottom" constant="-35" id="ldo-wA-UFE"/>
                             <constraint firstItem="xdZ-bJ-8CJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sMV-yL-Y5j" secondAttribute="leading" constant="20" id="mdc-Mz-ipc"/>
                             <constraint firstItem="YbQ-JF-WDH" firstAttribute="leading" secondItem="sMV-yL-Y5j" secondAttribute="leading" constant="30" id="nrt-7R-5X3"/>
                             <constraint firstItem="aIr-iP-i68" firstAttribute="top" secondItem="Ajy-Ld-iqh" secondAttribute="bottom" id="o9a-cD-Rxy"/>
@@ -2887,7 +2924,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <constraint firstItem="xdZ-bJ-8CJ" firstAttribute="leading" secondItem="sMV-yL-Y5j" secondAttribute="leading" constant="20" symbolic="YES" id="r7x-AA-9oF"/>
                             <constraint firstItem="xdZ-bJ-8CJ" firstAttribute="top" secondItem="sMV-yL-Y5j" secondAttribute="top" constant="20" symbolic="YES" id="teS-fn-nwo"/>
                             <constraint firstItem="Cj7-eG-UZO" firstAttribute="top" secondItem="r8G-UC-b9E" secondAttribute="bottom" id="uAV-GU-RsA"/>
-                            <constraint firstItem="qnT-yn-xQy" firstAttribute="bottom" secondItem="YbQ-JF-WDH" secondAttribute="bottom" constant="38" id="uOz-uQ-wv0"/>
+                            <constraint firstItem="qnT-yn-xQy" firstAttribute="bottom" secondItem="YbQ-JF-WDH" secondAttribute="bottom" constant="73" id="uOz-uQ-wv0"/>
                             <constraint firstItem="Ajy-Ld-iqh" firstAttribute="top" secondItem="a2F-VW-tp5" secondAttribute="bottom" constant="2" id="v3b-X4-Q9T"/>
                             <constraint firstItem="5Cp-rB-oS4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sMV-yL-Y5j" secondAttribute="leading" constant="50" id="xhd-CN-M5R"/>
                             <constraint firstItem="Ajy-Ld-iqh" firstAttribute="trailing" secondItem="KlI-iz-k7S" secondAttribute="trailing" id="ylN-x0-QOw"/>
@@ -3783,7 +3820,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="301A8318-F3F9-4455-A79B-B1FB6BE96EFA" width="12" height="12">
+        <image name="BC915422-35E1-4A90-992B-8579851E45DB" width="12" height="12">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

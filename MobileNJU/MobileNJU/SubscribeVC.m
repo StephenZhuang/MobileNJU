@@ -8,7 +8,8 @@
 
 #import "SubscribeVC.h"
 #import "SegmentView.h"
-@interface SubscribeVC ()
+#import "SubscribeCell.h"
+@interface SubscribeVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet SegmentView *segmentView;
 @property (strong,nonatomic)NSArray* segmentContents;
 @end
@@ -31,7 +32,25 @@
 }
 
 
+#pragma mark -table
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SubscribeCell* cell = (SubscribeCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return 36+cell.newsView.frame.size.height;
+}
 
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SubscribeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"subscribe"];
+    NSArray* news = [[NSArray alloc]initWithObjects:[[NSDictionary alloc]init],  [[NSDictionary alloc]init],[[NSDictionary alloc]init],nil];
+    [cell addNews:news];
+    return cell;
+}
 
 
 #pragma mark - segment delegate

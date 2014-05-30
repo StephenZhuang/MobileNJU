@@ -447,8 +447,10 @@ static NSArray* descriptions;
 -(void) onClickImage:(id) sender{
   
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
-    NewsListTVC* newsVC = (NewsListTVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
-    [self presentViewController:newsVC animated:YES completion:^{
+    UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
+    NewsListTVC* newsList = (NewsListTVC*)[unc.childViewControllers firstObject];
+    newsList.jump = YES;
+    [self presentViewController:unc animated:YES completion:^{
         
     }];
 }

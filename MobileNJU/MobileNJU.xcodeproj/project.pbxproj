@@ -125,6 +125,9 @@
 		7DFF3F53192E06DC00E146ED /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF3F52192E06DC00E146ED /* NewsCell.m */; };
 		7DFF4B551938328A0018A934 /* LessonDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF4B541938328A0018A934 /* LessonDetailView.m */; };
 		7DFF4B57193832A00018A934 /* LessonDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFF4B56193832A00018A934 /* LessonDetailView.xib */; };
+		7DFF4B5A1938617C0018A934 /* SubscribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF4B591938617C0018A934 /* SubscribeCell.m */; };
+		7DFF4B5D193862460018A934 /* NewsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF4B5C193862460018A934 /* NewsListView.m */; };
+		7DFF4B5F193862640018A934 /* NewsListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFF4B5E193862640018A934 /* NewsListView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -358,6 +361,11 @@
 		7DFF4B531938328A0018A934 /* LessonDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LessonDetailView.h; path = "课程表/LessonDetailView.h"; sourceTree = "<group>"; };
 		7DFF4B541938328A0018A934 /* LessonDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LessonDetailView.m; path = "课程表/LessonDetailView.m"; sourceTree = "<group>"; };
 		7DFF4B56193832A00018A934 /* LessonDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LessonDetailView.xib; path = "课程表/LessonDetailView.xib"; sourceTree = "<group>"; };
+		7DFF4B581938617C0018A934 /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscribeCell.h; path = "新闻/SubscribeCell.h"; sourceTree = "<group>"; };
+		7DFF4B591938617C0018A934 /* SubscribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscribeCell.m; path = "新闻/SubscribeCell.m"; sourceTree = "<group>"; };
+		7DFF4B5B193862460018A934 /* NewsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsListView.h; path = "新闻/NewsListView.h"; sourceTree = "<group>"; };
+		7DFF4B5C193862460018A934 /* NewsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsListView.m; path = "新闻/NewsListView.m"; sourceTree = "<group>"; };
+		7DFF4B5E193862640018A934 /* NewsListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewsListView.xib; path = "新闻/NewsListView.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -816,8 +824,13 @@
 		7D45C7211933B98E00733550 /* 订阅 */ = {
 			isa = PBXGroup;
 			children = (
+				7DFF4B581938617C0018A934 /* SubscribeCell.h */,
+				7DFF4B591938617C0018A934 /* SubscribeCell.m */,
 				7D45C7241933BC7300733550 /* SubscribeVC.h */,
 				7D45C7251933BC7300733550 /* SubscribeVC.m */,
+				7DFF4B5B193862460018A934 /* NewsListView.h */,
+				7DFF4B5E193862640018A934 /* NewsListView.xib */,
+				7DFF4B5C193862460018A934 /* NewsListView.m */,
 			);
 			name = "订阅";
 			sourceTree = "<group>";
@@ -1010,6 +1023,7 @@
 				77B904B9192C4B3B0062237D /* MJRefresh.bundle in Resources */,
 				7DD869B6192DB7A700D4ADAA /* Self.storyboard in Resources */,
 				7D1A1A4C193036190083A6AD /* selfInfo.plist in Resources */,
+				7DFF4B5F193862640018A934 /* NewsListView.xib in Resources */,
 				7D4EE16B193441C800A06398 /* BookDetailView.xib in Resources */,
 				7D66FC20193759D10079D38E /* ScheduleView.xib in Resources */,
 				77B9046E192C4ABF0062237D /* TitleView.xib in Resources */,
@@ -1062,6 +1076,7 @@
 				7D2098601930F6FE002BD994 /* GradeVC.m in Sources */,
 				7DFF4B551938328A0018A934 /* LessonDetailView.m in Sources */,
 				7D2A741F19361907006F1735 /* SegmentView.m in Sources */,
+				7DFF4B5A1938617C0018A934 /* SubscribeCell.m in Sources */,
 				7D4EE169193441B700A06398 /* BookDetailView.m in Sources */,
 				7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */,
 				7DD869AF192DB73B00D4ADAA /* GetCodeViewController.m in Sources */,
@@ -1091,6 +1106,7 @@
 				77B904D4192C4B3B0062237D /* UIImage+GIF.m in Sources */,
 				7D45C7261933BC7300733550 /* SubscribeVC.m in Sources */,
 				7DB07EFF1933A35500B715DB /* Lesson.m in Sources */,
+				7DFF4B5D193862460018A934 /* NewsListView.m in Sources */,
 				77B904D7192C4B3B0062237D /* UIImageView+MJWebCache.m in Sources */,
 				77B904CB192C4B3B0062237D /* SDImageCache.m in Sources */,
 				77B904CE192C4B3B0062237D /* SDWebImageDownloader.m in Sources */,

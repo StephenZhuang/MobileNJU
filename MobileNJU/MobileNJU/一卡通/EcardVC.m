@@ -8,7 +8,7 @@
 
 #import "EcardVC.h"
 #import "EcardCell.h"
-@interface EcardVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface EcardVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UITextField *schIDText;
 @property (weak, nonatomic) IBOutlet UITextField *passwordText;
@@ -55,6 +55,7 @@
 {
     [super viewDidLoad];
     [self.maskView setHidden:YES];
+    
     [self.alertView setHidden:YES];
     // Do any additional setup after loading the view.
 }
@@ -65,13 +66,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+#pragma mark UITextFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 #pragma mark 关于自定义的alertView
 - (IBAction)closeAlertView:(id)sender {
+    [self.passwordText resignFirstResponder];
+    [self.schIDText resignFirstResponder];
+    [self.confirmCode resignFirstResponder];
+    [self.pickerView setHidden:YES];
     [self.alertView setHidden:YES];
     [self.maskView setHidden:YES];
 }
 - (IBAction)searchResult:(id)sender {
+    
 }
 
 - (IBAction)showAlertView:(id)sender {

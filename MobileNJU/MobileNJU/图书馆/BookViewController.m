@@ -12,10 +12,13 @@
 #import "BookDetailView.h"
 #import "AlertCloseDelegate.h"
 #import "BookChooseDelegate.h"
-@interface BookViewController ()<UITableViewDataSource,UITableViewDelegate,BookChooseDelegate,AlertCloseDelegate>
+@interface BookViewController ()<UITableViewDataSource,UITableViewDelegate,BookChooseDelegate,AlertCloseDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)NSMutableArray* books;
 @property (weak, nonatomic) IBOutlet UIView *alertView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
+@property (weak, nonatomic) IBOutlet UITextField *searchField;
+@property (weak, nonatomic) IBOutlet UITextField *schIdField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong,nonatomic)BookDetailView* bookDetail;
 @end
 
@@ -80,7 +83,12 @@
     [self cancelAlert:nil];
     [self performSegueWithIdentifier:@"myLibrary" sender:nil];
 }
-
+#pragma mark delegateTextField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 #pragma mark delegate_AlertChoose
 - (void)closeAlert{
     [self cancelAlert:nil];
@@ -96,6 +104,9 @@
 }
 
 - (IBAction)cancelAlert:(id)sender {
+    [self.passwordField resignFirstResponder];
+    [self.schIdField resignFirstResponder];
+    [self.searchField resignFirstResponder];
     [self.maskView setHidden:YES];
     [self.alertView setHidden:YES];
     [self.bookDetail setHidden:YES];

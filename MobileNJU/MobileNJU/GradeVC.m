@@ -8,12 +8,13 @@
 
 #import "GradeVC.h"
 #import "GradeDetailVC.h"
-@interface GradeVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface GradeVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property (strong,nonatomic)NSArray* greenList;
 @property (strong,nonatomic)NSArray* redList;
 @property (strong,nonatomic)NSArray* blueList;
 @property (weak, nonatomic) IBOutlet UIView *alertView;
-
+@property (weak, nonatomic) IBOutlet UITextField *schIdTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @end
 
 @implementation GradeVC
@@ -59,6 +60,8 @@
 }
 
 - (IBAction)cancelAlert:(id)sender {
+    [self.passwordTextField resignFirstResponder];
+    [self.schIdTextField resignFirstResponder];;
     [self.alertView setHidden:YES  ];
     [self.maskView setHidden:YES];
     [self removeMask];
@@ -83,7 +86,12 @@
 
 
 
-
+#pragma mark textFieldDelegate
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 
 
