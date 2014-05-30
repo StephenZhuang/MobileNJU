@@ -90,9 +90,9 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
    
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-        self.loginView.center = CGPointMake(self.loginView.center.x, 80);
-        self.logoImage.center = CGPointMake(self.logoImage.center.x, 30);
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
+        self.loginView.center = CGPointMake(self.loginView.center.x, 150);
+        self.logoImage.center = CGPointMake(self.logoImage.center.x, 100);
         
     } completion:^(BOOL finished) {
     }];

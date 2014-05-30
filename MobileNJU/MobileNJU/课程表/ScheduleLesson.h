@@ -12,5 +12,9 @@
 @property (nonatomic)NSInteger start;
 @property (nonatomic)NSInteger length;
 @property (nonatomic)NSInteger day;
-@property (nonatomic)NSString* name;
+@property (nonatomic,strong)NSString* name;
+@property (nonatomic,strong)NSString* location;
+@property (nonatomic,strong)NSString* teacher;
+@property (nonatomic,strong)NSString* week;
+@property (nonatomic,strong)NSString* time;
 @end

@@ -21,11 +21,12 @@
    
     return self;
 }
-- (void)addLessons:(NSArray *)lessons
+- (void)addLessons:(NSArray *)lessons delegate:(id<ScheduleViewDelegate>) delegate
 {
     for (ScheduleLesson* lesson in lessons) {
         LessonButton* button = [[LessonButton alloc]init];
         [button setMyLesson:lesson];
+        [button setDelegate:delegate];
         [self addSubview:button];
     }
 }

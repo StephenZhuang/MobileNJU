@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ScheduleLesson.h"
+#import "LessonButton.h"
 @interface ScheduleView : UIView
--(void)addLessons:(NSArray*)lessons;
+-(void)addLessons:(NSArray*)lessons delegate:(id<ScheduleViewDelegate>) delegate
+;
 @end

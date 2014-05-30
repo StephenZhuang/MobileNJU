@@ -51,7 +51,7 @@
         }
         
         if([self.navigationController viewControllers].count>1){
-            UIButton *button  = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+            UIButton *button  = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 30)];
             NSString *iconname=DEFAULTBACKICON;
             if(_backIcons!=nil && _backIcons.count>0){
                 if ([self.navigationController viewControllers].count-2<_backIcons.count) {
@@ -75,6 +75,8 @@
 {
     self.titleView = [[[NSBundle mainBundle] loadNibNamed:@"TitleView" owner:self options:nil] firstObject];
     [self.navigationItem setTitleView:self.titleView];
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeSelf)];
+    [self.titleView addGestureRecognizer:singleTap];
 }
 
 -(void)closeSelf{

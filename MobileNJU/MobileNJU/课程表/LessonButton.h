@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ScheduleLesson.h"
+
+@protocol ScheduleViewDelegate<NSObject>
+@required
+- (void) showSchedule:(ScheduleLesson*)lesson;
+@end
+
 @interface LessonButton : UIButton
 @property (nonatomic,strong)ScheduleLesson* myLesson;
+@property (nonatomic , assign) IBOutlet id<ScheduleViewDelegate> delegate;
 @end

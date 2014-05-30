@@ -9,10 +9,14 @@
 #import "ScheduleVC.h"
 #import "AlertCloseDelegate.h"
 #import "ScheduleView.h"
-@interface ScheduleVC ()<AlertCloseDelegate>
+#import "LessonDetailView.h"
+#import "AlertCloseDelegate.h"
+@interface ScheduleVC ()<AlertCloseDelegate,ScheduleViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *alertView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
+@property (weak, nonatomic) IBOutlet UIView *dayView;
+@property (strong,nonatomic)LessonDetailView* lessonDetail;
 @end
 
 @implementation ScheduleVC
@@ -22,8 +26,44 @@
     [super viewDidLoad];
     [self initNavigationBar];
     [self loadSchedule];
+    [self initLessonDetail];
+    NSCalendar*calendar = [NSCalendar currentCalendar];
+    NSDate* date = [[NSDate alloc]init];
+    NSDateComponents* compos =[calendar components:(NSWeekCalendarUnit | NSWeekdayCalendarUnit |NSWeekdayOrdinalCalendarUnit)
+                                        fromDate:date];
+//    NSInteger week = [compos week]; // 今年的第几周
+    NSInteger weekday = [compos weekday]; // 星期几（注意，周日是“1”，周一是“2”。。。。）
+    for (UIView* view in self.dayView.subviews) {
+        UILabel* label = (UILabel*)view;
+        NSLog(@"%@",label.text);
+        [label setBackgroundColor:[UIColor colorWithRed:235/255.0 green:234/255.0 blue:231/255.0 alpha:1]];
+         [label setTextColor:[UIColor colorWithRed:129/255.0 green:129/255.0 blue:129/255.0 alpha:1]];
+    }
+    UILabel* currentDay = [self.dayView.subviews objectAtIndex:(weekday-2)];
+    [currentDay setTextColor:[UIColor whiteColor]];
+    [currentDay setBackgroundColor:[UIColor blackColor]];
       // Do any additional setup after loading the view.
 }
+
+
+- (void) initLessonDetail
+{
+    self.lessonDetail = [[[NSBundle mainBundle] loadNibNamed:@"LessonDetailView" owner:self options:nil] firstObject];
+    [self.lessonDetail setFrame:CGRectMake(30, 100,260,200)];
+    [self.lessonDetail setHidden:YES];
+    [self.lessonDetail setMydelegate:self];
+    [self.view addSubview:self.lessonDetail];
+    
+}
+
+- (void)showSchedule:(ScheduleLesson *)lesson
+{
+    [self.lessonDetail setLesson:lesson];
+    [self.lessonDetail setHidden:NO];
+    [self.maskView setHidden:NO];
+    [self addMask];
+}
+
 - (void)loadSchedule
 {
     ScheduleView* schedule = [[[NSBundle mainBundle] loadNibNamed:@"ScheduleView" owner:self options:nil] firstObject];
@@ -38,6 +78,9 @@
     lesson1.length=2;
     lesson1.day=1;
     lesson1.name = @"微积分@仙一202";
+    lesson1.time = @"周一1-2节";
+    lesson1.teacher = @"肖源明";
+    lesson1.location = @"仙1 211";
     self.lessons = [[NSArray alloc]initWithObjects:lesson1,nil];
     
     
@@ -63,7 +106,7 @@
     
     self.lessons = [[NSArray alloc]initWithObjects:lesson1,lesson2,lesson3,lesson4,nil];
 
-    [schedule addLessons:self.lessons];
+    [schedule addLessons:self.lessons delegate:self];
 }
 
 
@@ -97,6 +140,7 @@
 - (IBAction)cancelAlert:(id)sender {
     [self.maskView setHidden:YES];
     [self.alertView setHidden:YES];
+    [self.lessonDetail setHidden:YES];
     [super removeMask];
     
 }

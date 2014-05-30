@@ -33,8 +33,13 @@
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.numberOfLines = 0;
     self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
+    [self addTarget:self action:@selector(showDetail) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void) showDetail
+{
+    [self.delegate showSchedule:self.myLesson];
+}
 
 - (UIColor*)randomColor
 {

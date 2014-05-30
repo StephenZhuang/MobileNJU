@@ -123,6 +123,8 @@
 		7DF0BB3D192FB7B3004CEE01 /* AYHCustomComboBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0BB3B192FB7B3004CEE01 /* AYHCustomComboBox.m */; };
 		7DF0BB40192FBA97004CEE01 /* EditInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0BB3F192FBA97004CEE01 /* EditInfoVC.m */; };
 		7DFF3F53192E06DC00E146ED /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF3F52192E06DC00E146ED /* NewsCell.m */; };
+		7DFF4B551938328A0018A934 /* LessonDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF4B541938328A0018A934 /* LessonDetailView.m */; };
+		7DFF4B57193832A00018A934 /* LessonDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DFF4B56193832A00018A934 /* LessonDetailView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -353,6 +355,9 @@
 		7DF0BB3F192FBA97004CEE01 /* EditInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInfoVC.m; sourceTree = "<group>"; };
 		7DFF3F51192E06DC00E146ED /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
 		7DFF3F52192E06DC00E146ED /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
+		7DFF4B531938328A0018A934 /* LessonDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LessonDetailView.h; path = "课程表/LessonDetailView.h"; sourceTree = "<group>"; };
+		7DFF4B541938328A0018A934 /* LessonDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LessonDetailView.m; path = "课程表/LessonDetailView.m"; sourceTree = "<group>"; };
+		7DFF4B56193832A00018A934 /* LessonDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LessonDetailView.xib; path = "课程表/LessonDetailView.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -837,7 +842,6 @@
 				7D4EE15F19343DA900A06398 /* Book.m */,
 				7D4EE16119343E7200A06398 /* BookViewController.h */,
 				7D4EE16219343E7200A06398 /* BookViewController.m */,
-				7D4EE16A193441C800A06398 /* BookDetailView.xib */,
 				7D4EE167193441B700A06398 /* BookDetailView.h */,
 				7D4EE168193441B700A06398 /* BookDetailView.m */,
 				7D4EE16D1934519300A06398 /* BookCell.h */,
@@ -846,6 +850,7 @@
 				7D4EE17219346A4800A06398 /* MyLibraryVC.m */,
 				7D4EE17419346F4100A06398 /* MyBookCell.h */,
 				7D4EE17519346F4100A06398 /* MyBookCell.m */,
+				7D4EE16A193441C800A06398 /* BookDetailView.xib */,
 			);
 			name = "图书馆";
 			sourceTree = "<group>";
@@ -873,6 +878,9 @@
 				7D66FC25193764980079D38E /* LessonButton.m */,
 				7D66FC271937690B0079D38E /* ScheduleLesson.h */,
 				7D66FC281937690B0079D38E /* ScheduleLesson.m */,
+				7DFF4B531938328A0018A934 /* LessonDetailView.h */,
+				7DFF4B541938328A0018A934 /* LessonDetailView.m */,
+				7DFF4B56193832A00018A934 /* LessonDetailView.xib */,
 			);
 			name = "课程表";
 			sourceTree = "<group>";
@@ -996,6 +1004,7 @@
 				7DF0BB34192F3B35004CEE01 /* Home.storyboard in Resources */,
 				77B904DD192C4C6F0062237D /* navigation_back_n@2x.png in Resources */,
 				7D4EE15D19343BEE00A06398 /* BookView.xib in Resources */,
+				7DFF4B57193832A00018A934 /* LessonDetailView.xib in Resources */,
 				77B9043B192C3F040062237D /* Images.xcassets in Resources */,
 				77B904DE192C4C6F0062237D /* navigation_back_p@2x.png in Resources */,
 				77B904B9192C4B3B0062237D /* MJRefresh.bundle in Resources */,
@@ -1051,6 +1060,7 @@
 				7D66FC1019372B060079D38E /* ClassroomCell.m in Sources */,
 				7D2A742319362780006F1735 /* BBSVC.m in Sources */,
 				7D2098601930F6FE002BD994 /* GradeVC.m in Sources */,
+				7DFF4B551938328A0018A934 /* LessonDetailView.m in Sources */,
 				7D2A741F19361907006F1735 /* SegmentView.m in Sources */,
 				7D4EE169193441B700A06398 /* BookDetailView.m in Sources */,
 				7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */,
@@ -1237,7 +1247,7 @@
 				INFOPLIST_FILE = "MobileNJU/MobileNJU-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6C7EA2BE-8E2D-4BD3-9F97-598BEF0D478E";
+				PROVISIONING_PROFILE = "C48D3948-FF73-4B73-98C6-33486C79E5B6";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1254,7 +1264,7 @@
 				INFOPLIST_FILE = "MobileNJU/MobileNJU-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6C7EA2BE-8E2D-4BD3-9F97-598BEF0D478E";
+				PROVISIONING_PROFILE = "C48D3948-FF73-4B73-98C6-33486C79E5B6";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
