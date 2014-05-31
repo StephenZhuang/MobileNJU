@@ -36,4 +36,30 @@
     self.lessonNameLabel.numberOfLines = 3;
 	self.lessonNameLabel.font = [UIFont fontWithName:self.lessonNameLabel.font.fontName size:12];
 }
+
+- (void)setTick:(BOOL)tick
+{
+    _tick = tick;
+    if (tick) {
+        [self.tickButton setTitle:@"✓" forState:UIControlStateNormal];
+        [self.tickButton setTitle:@"" forState:UIControlStateHighlighted];
+        [self.tickButton setTitle:@"" forState:UIControlStateSelected];
+
+    } else {
+        [self.tickButton setTitle:@"" forState:UIControlStateNormal];
+        [self.tickButton setTitle:@"✓" forState:UIControlStateHighlighted];
+        [self.tickButton setTitle:@"✓" forState:UIControlStateSelected];
+
+
+    }
+}
+
+- (IBAction)tick:(id)sender {
+    if (self.tick) {
+        [self setTick:NO];
+    } else {
+        [self setTick:YES];
+    }
+}
+
 @end

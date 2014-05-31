@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Lesson.h"
-#import "GPAClose.h"
+#import "AlertCloseDelegate.h"
 @interface GPAView : UIView
 {
-    id<GPAClose> myDelegate;
+    id<AlertCloseDelegate> myDelegate;
 }
+- (void) setDelegate:(id<AlertCloseDelegate>)delegate;
+
 @property (nonatomic,strong)NSArray* lessonList;
 @property (weak, nonatomic) IBOutlet UILabel *gpaLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentLabel;
-- (void) setDelegate:(id<GPAClose>)delegate;
 @end

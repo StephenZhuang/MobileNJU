@@ -8,12 +8,13 @@
 
 #import "GradeVC.h"
 #import "GradeDetailVC.h"
-@interface GradeVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface GradeVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property (strong,nonatomic)NSArray* greenList;
 @property (strong,nonatomic)NSArray* redList;
 @property (strong,nonatomic)NSArray* blueList;
 @property (weak, nonatomic) IBOutlet UIView *alertView;
-
+@property (weak, nonatomic) IBOutlet UITextField *schIdTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @end
 
 @implementation GradeVC
@@ -46,14 +47,21 @@
 
 - (void)initNavigationBar
 {
-    UIBarButtonItem* selfButton = [[UIBarButtonItem alloc]initWithImage: [UIImage imageNamed:@"self_right_barButton"] style:UIBarButtonItemStylePlain target:self action:@selector(showAlert)];
-    [selfButton setTintColor:[UIColor whiteColor]];
-    self.navigationItem.rightBarButtonItem = selfButton;
+    UIButton* button = [[UIButton alloc]init];
+    [button setImage:[UIImage imageNamed:@"self_right_barButton"] forState:UIControlStateNormal];
+    CGRect frame = CGRectMake(0, 0, 40, 36);
+    button.frame = frame;
+    [button addTarget:self action:@selector(showAlert) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* selfItem =  [[UIBarButtonItem alloc]initWithCustomView:button];
+    //    [selfItem setTintColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = selfItem;
     [self setTitle:@"成绩查询"];
     [self setSubTitle:@"看看有木有挂科"];
 }
 
 - (IBAction)cancelAlert:(id)sender {
+    [self.passwordTextField resignFirstResponder];
+    [self.schIdTextField resignFirstResponder];;
     [self.alertView setHidden:YES  ];
     [self.maskView setHidden:YES];
     [self removeMask];
@@ -78,7 +86,12 @@
 
 
 
-
+#pragma mark textFieldDelegate
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 
 
@@ -101,7 +114,10 @@
  */
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performBounceUpAnimationOnView:cell duration:0.5f delay:indexPath.row*0.5f];
+
+        [self performBounceUpAnimationOnView:cell duration:0.3f delay:indexPath.row*0.2f];
+    
+
 }
 
 
@@ -110,10 +126,11 @@
 {
     UITableViewCell *cell = nil;
     cell = [tableView dequeueReusableCellWithIdentifier:@"term"];
-    [cell setBackgroundColor:[UIColor colorWithRed:[[self.redList objectAtIndex:indexPath.row] intValue]/255.0
+    [cell.contentView setBackgroundColor:[UIColor colorWithRed:[[self.redList objectAtIndex:indexPath.row] intValue]/255.0
                                             green:[[self.greenList objectAtIndex:indexPath.row] intValue]/255.0
                                              blue:[[self.blueList objectAtIndex:indexPath.row] intValue]/255.0
                                             alpha:1]];
+    
     return cell;
 }
 
@@ -122,13 +139,14 @@
 - (void)performBounceUpAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
     [view setHidden:NO];
     // Start
-    view.transform = CGAffineTransformMakeTranslation(0, 600);
-    [UIView animateKeyframesWithDuration:duration delay:delay options:0 animations:^{
-        // End
-        view.transform = CGAffineTransformMakeTranslation(0, 0);
-    } completion:^(BOOL finished) {
-       
-    }];
+        view.transform = CGAffineTransformMakeTranslation(0, 600);
+        [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            view.transform = CGAffineTransformMakeTranslation(0, 0);
+ 
+        } completion:^(BOOL finished) {
+            
+        }];
+    
 }
 
 

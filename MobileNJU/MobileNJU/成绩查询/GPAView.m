@@ -31,7 +31,7 @@
     [myDelegate closeAlert];
 }
 
-- (void)setDelegate:(id<GPAClose>)delegate
+- (void)setDelegate:(id<AlertCloseDelegate>)delegate
 {
     myDelegate = delegate;
 }

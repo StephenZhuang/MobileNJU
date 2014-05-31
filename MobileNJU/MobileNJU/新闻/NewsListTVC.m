@@ -9,36 +9,43 @@
 #import "NewsListTVC.h"
 #import "NewsDetailVC.h"
 #import "NewsCell.h"
-@interface NewsListTVC ()
-
+@interface NewsListTVC ()<UITableViewDelegate,UITableViewDataSource>
 @end
 
 @implementation NewsListTVC
 #pragma viewController
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 - (IBAction)backToMain:(UIBarButtonItem *)sender {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+    if (self.jump) {
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    } else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
+
 
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
     self.currentUrl = self.navigationController.title;
-    [self performSegueWithIdentifier:@"detail" sender:nil];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    if (self.jump) {
+        [self performSegueWithIdentifier:@"detail" sender:nil];
+        
+        [self setTitle:@""];
+        [self setSubTitle:@""];
+    } else {
+        [self setTitle:@"新闻列表"];
+        [self setSubTitle:@"官方新闻"];
+    }
+   
+}
     
+//       // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

@@ -8,7 +8,7 @@
 
 #import "ExerciseVC.h"
 #import "ExerciseCell.h"
-@interface ExerciseVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface ExerciseVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UITextField *schIDText;
 @property (weak, nonatomic) IBOutlet UISwitch *autoSearch;
@@ -19,21 +19,13 @@
 @implementation ExerciseVC
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self.alertView setHidden:YES];
     [self.maskView setHidden:YES];
-    
+    [self.schIDText setDelegate:self];
     // Do any additional setup after loading the view.
 }
 
@@ -43,11 +35,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark UITextViewDelegate
 
 #pragma mark 关于自定义的alertView
 - (IBAction)closeAlertView:(id)sender {
     [self.alertView setHidden:YES];
     [self.maskView setHidden:YES];
+    [self.schIDText resignFirstResponder];
 }
 - (IBAction)searchResult:(id)sender {
 }
@@ -83,7 +77,7 @@
 {
     return 20;
 }
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 40;
 }

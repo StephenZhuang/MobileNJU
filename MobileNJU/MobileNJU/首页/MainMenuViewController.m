@@ -73,6 +73,17 @@ static NSArray* descriptions;
     SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"self"]; //test2为viewcontroller的StoryboardId
     [self.navigationController pushViewController:selfVC animated:YES];
 }
+- (IBAction)subscribe:(id)sender {
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+        SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"subscribe"]; //test2为viewcontroller的StoryboardId
+        [self.navigationController pushViewController:selfVC animated:YES];
+}
+- (IBAction)activity:(id)sender {
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+    SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"activity"]; //test2为viewcontroller的StoryboardId
+    [self.navigationController pushViewController:selfVC animated:YES];
+}
+
 
 #pragma mark tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -91,7 +102,7 @@ static NSArray* descriptions;
 
     
     UIImage* background = [UIImage imageNamed:@"云"];
-    self.cloudBack = [[UIImageView alloc]initWithFrame:CGRectMake(0,-5.0, self.tableView.bounds.size.width, 50)];
+    self.cloudBack = [[UIImageView alloc]initWithFrame:CGRectMake(0,-5.0, self.tableView.bounds.size.width, 87)];
     [self.cloudBack setImage:background];
     [self.headerView addSubview:self.cloudBack];
 
@@ -102,7 +113,7 @@ static NSArray* descriptions;
     return self.headerView;
 }
 
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 53;
 }
@@ -167,54 +178,87 @@ static NSArray* descriptions;
     [view setHidden:NO];
     // Start
     view.transform = CGAffineTransformMakeTranslation(300, 0);
-    [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
-        // End
+   [UIView animateWithDuration:duration/4 delay:delay options:UIViewAnimationOptionCurveEaseIn animations:^{
         view.transform = CGAffineTransformMakeTranslation(-10, 0);
-    } completion:^(BOOL finished) {
-        [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-            // End
-            view.transform = CGAffineTransformMakeTranslation(5, 0);
-        } completion:^(BOOL finished) {
-            [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-                // End
+   } completion:^(BOOL finished) {
+       [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+           view.transform = CGAffineTransformMakeTranslation(5, 0);
+       } completion:^(BOOL finished) {
+           [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 view.transform = CGAffineTransformMakeTranslation(-2, 0);
-            } completion:^(BOOL finished) {
-                [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-                    // End
-                    view.transform = CGAffineTransformMakeTranslation(0, 0);
-                } completion:^(BOOL finished) {
-                    
-                }];
-            }];
-        }];
-    }];
+           } completion:^(BOOL finished) {
+               [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                   view.transform = CGAffineTransformMakeTranslation(0, 0);
+               } completion:^(BOOL finished) {
+               }];
+           }];
+       }];
+   }];
+//    [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
+//        // End
+//       
+//    } completion:^(BOOL finished) {
+//        [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//           
+//        } completion:^(BOOL finished) {
+//            [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//                // End
+//               
+//            } completion:^(BOOL finished) {
+//                [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//                    // End
+//                    view.transform = CGAffineTransformMakeTranslation(0, 0);
+//                } completion:^(BOOL finished) {
+//                    
+//                }];
+//            }];
+//        }];
+//    }];
 }
 
 - (void)performBounceRightAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
     [view setHidden:NO];
     // Start
     view.transform = CGAffineTransformMakeTranslation(-300, 0);
-    [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
-        // End
+    [UIView animateWithDuration:duration/4 delay:delay options:UIViewAnimationOptionCurveEaseIn animations:^{
         view.transform = CGAffineTransformMakeTranslation(10, 0);
     } completion:^(BOOL finished) {
-        [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-            // End
+        [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             view.transform = CGAffineTransformMakeTranslation(-5, 0);
         } completion:^(BOOL finished) {
-            [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-                // End
+            [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
                 view.transform = CGAffineTransformMakeTranslation(2, 0);
             } completion:^(BOOL finished) {
-                [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-                    // End
+                [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
                     view.transform = CGAffineTransformMakeTranslation(0, 0);
                 } completion:^(BOOL finished) {
-                    
                 }];
             }];
         }];
     }];
+//
+//    view.transform = CGAffineTransformMakeTranslation(-300, 0);
+//    [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
+//        // End
+//        view.transform = CGAffineTransformMakeTranslation(10, 0);
+//    } completion:^(BOOL finished) {
+//        [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//            // End
+//            view.transform = CGAffineTransformMakeTranslation(-5, 0);
+//        } completion:^(BOOL finished) {
+//            [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//                // End
+//                view.transform = CGAffineTransformMakeTranslation(2, 0);
+//            } completion:^(BOOL finished) {
+//                [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
+//                    // End
+//                    view.transform = CGAffineTransformMakeTranslation(0, 0);
+//                } completion:^(BOOL finished) {
+//                    
+//                }];
+//            }];
+//        }];
+//    }];
 }
 
 
@@ -402,7 +446,13 @@ static NSArray* descriptions;
 
 -(void) onClickImage:(id) sender{
   
-    [self performSegueWithIdentifier:@"news" sender:nil];
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+    UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
+    NewsListTVC* newsList = (NewsListTVC*)[unc.childViewControllers firstObject];
+    newsList.jump = YES;
+    [self presentViewController:unc animated:YES completion:^{
+        
+    }];
 }
 
 /*

@@ -89,7 +89,7 @@
     }
     return 1;
 }
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.isOpen&&self.selectIndex.section == indexPath.section&&indexPath.row!=0) {
         return 70;
@@ -160,8 +160,8 @@
     
     [self.phoneTableView beginUpdates];
     
-    int section = self.selectIndex.section;
-    int contentCount = [[[dataArray objectAtIndex:section] objectForKey:@"list"] count];
+    NSInteger section = self.selectIndex.section;
+    NSInteger contentCount = [[[dataArray objectAtIndex:section] objectForKey:@"list"] count];
 	NSMutableArray* rowToInsert = [[NSMutableArray alloc] init];
 	for (NSUInteger i = 1; i < contentCount + 1; i++) {
 		NSIndexPath* indexPathToInsert = [NSIndexPath indexPathForRow:i inSection:section];

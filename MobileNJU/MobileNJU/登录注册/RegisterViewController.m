@@ -21,8 +21,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setTitle:@"注册"];
+    [self setSubTitle:@"手机号一键注册"];
     self.phoneTextField.delegate = self;
-    [self.phoneTextField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning

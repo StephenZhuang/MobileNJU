@@ -13,4 +13,5 @@
 @property (nonatomic,strong)NSString* lessonType;
 @property (nonatomic)int score;
 @property(nonatomic)double credit;
+
 @end
