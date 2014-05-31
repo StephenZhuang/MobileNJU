@@ -100,6 +100,8 @@
 		7D66FC20193759D10079D38E /* ScheduleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D66FC1F193759D10079D38E /* ScheduleView.xib */; };
 		7D66FC26193764980079D38E /* LessonButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D66FC25193764980079D38E /* LessonButton.m */; };
 		7D66FC291937690B0079D38E /* ScheduleLesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D66FC281937690B0079D38E /* ScheduleLesson.m */; };
+		7DA0BB6119397F8100CC8AEF /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB6019397F8100CC8AEF /* ActivityCell.m */; };
+		7DA0BB64193982D800CC8AEF /* ActivityDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB63193982D800CC8AEF /* ActivityDetailVC.m */; };
 		7DB07EF61933825100B715DB /* GradeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EF51933825100B715DB /* GradeDetailVC.m */; };
 		7DB07EF9193393DD00B715DB /* GradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EF8193393DD00B715DB /* GradeCell.m */; };
 		7DB07EFC1933A31F00B715DB /* GPAView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EFB1933A31F00B715DB /* GPAView.m */; };
@@ -315,6 +317,10 @@
 		7D66FC25193764980079D38E /* LessonButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LessonButton.m; path = "课程表/LessonButton.m"; sourceTree = "<group>"; };
 		7D66FC271937690B0079D38E /* ScheduleLesson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleLesson.h; path = "课程表/ScheduleLesson.h"; sourceTree = "<group>"; };
 		7D66FC281937690B0079D38E /* ScheduleLesson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleLesson.m; path = "课程表/ScheduleLesson.m"; sourceTree = "<group>"; };
+		7DA0BB5F19397F8100CC8AEF /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityCell.h; path = "活动/ActivityCell.h"; sourceTree = "<group>"; };
+		7DA0BB6019397F8100CC8AEF /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityCell.m; path = "活动/ActivityCell.m"; sourceTree = "<group>"; };
+		7DA0BB62193982D800CC8AEF /* ActivityDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailVC.h; path = "活动/ActivityDetailVC.h"; sourceTree = "<group>"; };
+		7DA0BB63193982D800CC8AEF /* ActivityDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailVC.m; path = "活动/ActivityDetailVC.m"; sourceTree = "<group>"; };
 		7DB07EF41933825100B715DB /* GradeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradeDetailVC.h; path = "成绩查询/GradeDetailVC.h"; sourceTree = "<group>"; };
 		7DB07EF51933825100B715DB /* GradeDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradeDetailVC.m; path = "成绩查询/GradeDetailVC.m"; sourceTree = "<group>"; };
 		7DB07EF7193393DD00B715DB /* GradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeCell.h; sourceTree = "<group>"; };
@@ -845,6 +851,10 @@
 			children = (
 				7D45C72A1933C0DC00733550 /* ActivityVC.h */,
 				7D45C72B1933C0DC00733550 /* ActivityVC.m */,
+				7DA0BB5F19397F8100CC8AEF /* ActivityCell.h */,
+				7DA0BB6019397F8100CC8AEF /* ActivityCell.m */,
+				7DA0BB62193982D800CC8AEF /* ActivityDetailVC.h */,
+				7DA0BB63193982D800CC8AEF /* ActivityDetailVC.m */,
 			);
 			name = "活动";
 			sourceTree = "<group>";
@@ -1094,6 +1104,7 @@
 				77B90464192C44A20062237D /* BaseViewController.m in Sources */,
 				77B904BB192C4B3B0062237D /* MJRefreshConst.m in Sources */,
 				7D374E681936CB830039487E /* ClassroomVC.m in Sources */,
+				7DA0BB64193982D800CC8AEF /* ActivityDetailVC.m in Sources */,
 				77B904C5192C4B3B0062237D /* MJPhotoLoadingView.m in Sources */,
 				7D66FC26193764980079D38E /* LessonButton.m in Sources */,
 				77B904D0192C4B3B0062237D /* SDWebImageManager+MJ.m in Sources */,
@@ -1138,6 +1149,7 @@
 				77B904C8192C4B3B0062237D /* MJPhotoView.m in Sources */,
 				7D1A1A4F193039520083A6AD /* CheckBox.m in Sources */,
 				77B904D9192C4B3B0062237D /* ToolUtils.m in Sources */,
+				7DA0BB6119397F8100CC8AEF /* ActivityCell.m in Sources */,
 				7DD8699F192DB6D700D4ADAA /* NewsListTVC.m in Sources */,
 				7DB07EF61933825100B715DB /* GradeDetailVC.m in Sources */,
 				7D4EE17619346F4100A06398 /* MyBookCell.m in Sources */,
