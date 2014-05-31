@@ -286,7 +286,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3F5FFAF9-0F57-4E9E-8F24-DCB2095D53FD" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-JV-0PT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="6F962BDA-8CCA-44B2-82FA-6C39B0E1673D" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-JV-0PT">
                                 <rect key="frame" x="35" y="241" width="12" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -3574,6 +3574,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                 <constraint firstAttribute="bottom" secondItem="xHM-BD-igw" secondAttribute="bottom" constant="3" id="xlG-LM-Azw"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="destinationLabel" destination="xHM-BD-igw" id="tPo-b3-cE4"/>
                                             <outlet property="numbersLabel" destination="N7V-SH-Qgs" id="p7m-cU-hxO"/>
@@ -4070,7 +4071,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="3F5FFAF9-0F57-4E9E-8F24-DCB2095D53FD" width="12" height="12">
+        <image name="6F962BDA-8CCA-44B2-82FA-6C39B0E1673D" width="12" height="12">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
