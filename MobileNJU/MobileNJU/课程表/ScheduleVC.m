@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong,nonatomic)LessonDetailView* lessonDetail;
 @end
-
 @implementation ScheduleVC
 
 - (void)viewDidLoad
@@ -37,14 +36,15 @@
     NSInteger weekday = [compos weekday]; // 星期几（注意，周日是“1”，周一是“2”。。。。）
     for (UIView* view in self.dayView.subviews) {
         UILabel* label = (UILabel*)view;
-        NSLog(@"%@",label.text);
         [label setBackgroundColor:[UIColor colorWithRed:235/255.0 green:234/255.0 blue:231/255.0 alpha:1]];
          [label setTextColor:[UIColor colorWithRed:129/255.0 green:129/255.0 blue:129/255.0 alpha:1]];
     }
-    UILabel* currentDay = [self.dayView.subviews objectAtIndex:(weekday-2)];
-    [currentDay setTextColor:[UIColor whiteColor]];
-    [currentDay setBackgroundColor:[UIColor blackColor]];
-      // Do any additional setup after loading the view.
+    if (weekday-2<=4) {
+        UILabel* currentDay = [self.dayView.subviews objectAtIndex:(weekday-2)];
+        [currentDay setTextColor:[UIColor whiteColor]];
+        [currentDay setBackgroundColor:[UIColor blackColor]];
+    }
+        // Do any additional setup after loading the view.
 }
 
 #pragma mark textFieldDelegate
