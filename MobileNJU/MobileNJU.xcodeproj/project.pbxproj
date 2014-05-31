@@ -102,6 +102,10 @@
 		7D66FC291937690B0079D38E /* ScheduleLesson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D66FC281937690B0079D38E /* ScheduleLesson.m */; };
 		7DA0BB6119397F8100CC8AEF /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB6019397F8100CC8AEF /* ActivityCell.m */; };
 		7DA0BB64193982D800CC8AEF /* ActivityDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB63193982D800CC8AEF /* ActivityDetailVC.m */; };
+		7DA0BB681939840C00CC8AEF /* LostVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB671939840C00CC8AEF /* LostVC.m */; };
+		7DA0BB6B193997B400CC8AEF /* LostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB6A193997B400CC8AEF /* LostCell.m */; };
+		7DA0BB6E1939A1DB00CC8AEF /* LostReleaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB6D1939A1DB00CC8AEF /* LostReleaseVC.m */; };
+		7DA0BB711939AACC00CC8AEF /* UtilMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA0BB701939AACC00CC8AEF /* UtilMethods.m */; };
 		7DB07EF61933825100B715DB /* GradeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EF51933825100B715DB /* GradeDetailVC.m */; };
 		7DB07EF9193393DD00B715DB /* GradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EF8193393DD00B715DB /* GradeCell.m */; };
 		7DB07EFC1933A31F00B715DB /* GPAView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB07EFB1933A31F00B715DB /* GPAView.m */; };
@@ -321,6 +325,14 @@
 		7DA0BB6019397F8100CC8AEF /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityCell.m; path = "活动/ActivityCell.m"; sourceTree = "<group>"; };
 		7DA0BB62193982D800CC8AEF /* ActivityDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailVC.h; path = "活动/ActivityDetailVC.h"; sourceTree = "<group>"; };
 		7DA0BB63193982D800CC8AEF /* ActivityDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailVC.m; path = "活动/ActivityDetailVC.m"; sourceTree = "<group>"; };
+		7DA0BB661939840C00CC8AEF /* LostVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostVC.h; path = "失物招领/LostVC.h"; sourceTree = "<group>"; };
+		7DA0BB671939840C00CC8AEF /* LostVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LostVC.m; path = "失物招领/LostVC.m"; sourceTree = "<group>"; };
+		7DA0BB69193997B400CC8AEF /* LostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostCell.h; path = "失物招领/LostCell.h"; sourceTree = "<group>"; };
+		7DA0BB6A193997B400CC8AEF /* LostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LostCell.m; path = "失物招领/LostCell.m"; sourceTree = "<group>"; };
+		7DA0BB6C1939A1DB00CC8AEF /* LostReleaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostReleaseVC.h; path = "失物招领/LostReleaseVC.h"; sourceTree = "<group>"; };
+		7DA0BB6D1939A1DB00CC8AEF /* LostReleaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LostReleaseVC.m; path = "失物招领/LostReleaseVC.m"; sourceTree = "<group>"; };
+		7DA0BB6F1939AACC00CC8AEF /* UtilMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilMethods.h; sourceTree = "<group>"; };
+		7DA0BB701939AACC00CC8AEF /* UtilMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilMethods.m; sourceTree = "<group>"; };
 		7DB07EF41933825100B715DB /* GradeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradeDetailVC.h; path = "成绩查询/GradeDetailVC.h"; sourceTree = "<group>"; };
 		7DB07EF51933825100B715DB /* GradeDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GradeDetailVC.m; path = "成绩查询/GradeDetailVC.m"; sourceTree = "<group>"; };
 		7DB07EF7193393DD00B715DB /* GradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeCell.h; sourceTree = "<group>"; };
@@ -437,6 +449,7 @@
 		77B9042E192C3F040062237D /* MobileNJU */ = {
 			isa = PBXGroup;
 			children = (
+				7DA0BB651939839200CC8AEF /* 失物招领 */,
 				7D66FC18193753320079D38E /* 课程表 */,
 				7D66FC1119374A3A0079D38E /* 办理流程 */,
 				7D374E651936CB620039487E /* 空教室 */,
@@ -617,6 +630,8 @@
 				7D4EE16419343FD500A06398 /* HasLoginController.h */,
 				7D4EE16519343FD500A06398 /* HasLoginController.m */,
 				7D4EE16C193443AE00A06398 /* AlertCloseDelegate.h */,
+				7DA0BB6F1939AACC00CC8AEF /* UtilMethods.h */,
+				7DA0BB701939AACC00CC8AEF /* UtilMethods.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -913,6 +928,19 @@
 			name = "课程表";
 			sourceTree = "<group>";
 		};
+		7DA0BB651939839200CC8AEF /* 失物招领 */ = {
+			isa = PBXGroup;
+			children = (
+				7DA0BB661939840C00CC8AEF /* LostVC.h */,
+				7DA0BB671939840C00CC8AEF /* LostVC.m */,
+				7DA0BB69193997B400CC8AEF /* LostCell.h */,
+				7DA0BB6A193997B400CC8AEF /* LostCell.m */,
+				7DA0BB6C1939A1DB00CC8AEF /* LostReleaseVC.h */,
+				7DA0BB6D1939A1DB00CC8AEF /* LostReleaseVC.m */,
+			);
+			name = "失物招领";
+			sourceTree = "<group>";
+		};
 		7DD25B3D192D9DF30066494D /* 电话 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1077,11 +1105,13 @@
 				7D374E6B1936D6B60039487E /* ClassroomChooseCell.m in Sources */,
 				77B904D6192C4B3B0062237D /* UIImage+WebP.m in Sources */,
 				7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */,
+				7DA0BB711939AACC00CC8AEF /* UtilMethods.m in Sources */,
 				7D2098521930B931002BD994 /* BusVC.m in Sources */,
 				7D1A1A521930451D0083A6AD /* TagView.m in Sources */,
 				7D4EE15A19343BBF00A06398 /* BookView.m in Sources */,
 				7D4EE16019343DA900A06398 /* Book.m in Sources */,
 				77B904D8192C4B3B0062237D /* UIImageView+WebCache.m in Sources */,
+				7DA0BB681939840C00CC8AEF /* LostVC.m in Sources */,
 				7DF0BB40192FBA97004CEE01 /* EditInfoVC.m in Sources */,
 				7DD25B39192D9C230066494D /* HomeCell.m in Sources */,
 				7D66FC1B1937536A0079D38E /* ScheduleVC.m in Sources */,
@@ -1143,6 +1173,7 @@
 				7DF0BB3D192FB7B3004CEE01 /* AYHCustomComboBox.m in Sources */,
 				7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */,
 				77B904CF192C4B3B0062237D /* SDWebImageDownloaderOperation.m in Sources */,
+				7DA0BB6E1939A1DB00CC8AEF /* LostReleaseVC.m in Sources */,
 				7DB07EFC1933A31F00B715DB /* GPAView.m in Sources */,
 				77B904C7192C4B3B0062237D /* MJPhotoToolbar.m in Sources */,
 				7D0587FB193642F900C5E136 /* BBSDetail.m in Sources */,
@@ -1156,6 +1187,7 @@
 				7D2098551930BECC002BD994 /* BusCell.m in Sources */,
 				7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */,
 				77B904D3192C4B3B0062237D /* UIButton+WebCache.m in Sources */,
+				7DA0BB6B193997B400CC8AEF /* LostCell.m in Sources */,
 				77B904C2192C4B3B0062237D /* MJPhoto.m in Sources */,
 				7DD86996192DB68A00D4ADAA /* DepartmentCell.m in Sources */,
 				7DD86998192DB68A00D4ADAA /* TelephoneInfoVC.m in Sources */,
