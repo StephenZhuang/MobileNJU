@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong,nonatomic)LessonDetailView* lessonDetail;
 @end
-
 @implementation ScheduleVC
 
 - (void)viewDidLoad
