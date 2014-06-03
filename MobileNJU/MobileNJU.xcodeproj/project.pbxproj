@@ -223,6 +223,9 @@
 		779A3B3B1934B4B200E3D50B /* HBCoreLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 779A3A6F1934B4B200E3D50B /* HBCoreLabel.m */; };
 		779A3B3C1934B4B200E3D50B /* MatchParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 779A3A711934B4B200E3D50B /* MatchParser.m */; };
 		779A3B401934C28100E3D50B /* NSString+unicode.m in Sources */ = {isa = PBXBuildFile; fileRef = 779A3B3F1934C28100E3D50B /* NSString+unicode.m */; };
+		77A15ADF193DA292005800F3 /* FaceAndTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A15ADB193DA292005800F3 /* FaceAndTextLabel.m */; };
+		77A15AE0193DA292005800F3 /* FaceList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77A15ADC193DA292005800F3 /* FaceList.plist */; };
+		77A15AE1193DA292005800F3 /* FaceMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A15ADE193DA292005800F3 /* FaceMatch.m */; };
 		77AC815E193778C200003218 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77AC815D193778C200003218 /* CommentCell.m */; };
 		77B90429192C3F040062237D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B90428192C3F030062237D /* Foundation.framework */; };
 		77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042A192C3F040062237D /* CoreGraphics.framework */; };
@@ -544,6 +547,11 @@
 		779A3A711934B4B200E3D50B /* MatchParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchParser.m; sourceTree = "<group>"; };
 		779A3B3E1934C28100E3D50B /* NSString+unicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+unicode.h"; sourceTree = "<group>"; };
 		779A3B3F1934C28100E3D50B /* NSString+unicode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+unicode.m"; sourceTree = "<group>"; };
+		77A15ADA193DA292005800F3 /* FaceAndTextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceAndTextLabel.h; sourceTree = "<group>"; };
+		77A15ADB193DA292005800F3 /* FaceAndTextLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceAndTextLabel.m; sourceTree = "<group>"; };
+		77A15ADC193DA292005800F3 /* FaceList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FaceList.plist; sourceTree = "<group>"; };
+		77A15ADD193DA292005800F3 /* FaceMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceMatch.h; sourceTree = "<group>"; };
+		77A15ADE193DA292005800F3 /* FaceMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceMatch.m; sourceTree = "<group>"; };
 		77AC815C193778C200003218 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
 		77AC815D193778C200003218 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		77B90425192C3F030062237D /* MobileNJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileNJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -767,6 +775,7 @@
 		779A39A31934B4B100E3D50B /* 图文混排 */ = {
 			isa = PBXGroup;
 			children = (
+				77A15AD9193DA292005800F3 /* TreeHole */,
 				779A39A41934B4B100E3D50B /* face */,
 				779A3A6D1934B4B200E3D50B /* faceMap_ch.plist */,
 				779A3A6E1934B4B200E3D50B /* HBCoreLabel.h */,
@@ -984,6 +993,18 @@
 				779A3A6C1934B4B200E3D50B /* f099@2x.png */,
 			);
 			path = face;
+			sourceTree = "<group>";
+		};
+		77A15AD9193DA292005800F3 /* TreeHole */ = {
+			isa = PBXGroup;
+			children = (
+				77A15ADA193DA292005800F3 /* FaceAndTextLabel.h */,
+				77A15ADB193DA292005800F3 /* FaceAndTextLabel.m */,
+				77A15ADC193DA292005800F3 /* FaceList.plist */,
+				77A15ADD193DA292005800F3 /* FaceMatch.h */,
+				77A15ADE193DA292005800F3 /* FaceMatch.m */,
+			);
+			path = TreeHole;
 			sourceTree = "<group>";
 		};
 		77B9041C192C3F030062237D = {
@@ -1472,6 +1493,7 @@
 				779A3AAF1934B4B200E3D50B /* f030@2x.png in Resources */,
 				779A3B351934B4B200E3D50B /* f097@2x.png in Resources */,
 				779A3ACA1934B4B200E3D50B /* f044.png in Resources */,
+				77A15AE0193DA292005800F3 /* FaceList.plist in Resources */,
 				779A3AC31934B4B200E3D50B /* f040@2x.png in Resources */,
 				779A3B1D1934B4B200E3D50B /* f085@2x.png in Resources */,
 				779A3A831934B4B200E3D50B /* f008@2x.png in Resources */,
@@ -1719,6 +1741,7 @@
 				77B904CC192C4B3B0062237D /* SDWebImageCompat.m in Sources */,
 				77B9046D192C4ABF0062237D /* TitleView.m in Sources */,
 				77B904BD192C4B3B0062237D /* MJRefreshHeaderView.m in Sources */,
+				77A15AE1193DA292005800F3 /* FaceMatch.m in Sources */,
 				77B904D4192C4B3B0062237D /* UIImage+GIF.m in Sources */,
 				779A3B3B1934B4B200E3D50B /* HBCoreLabel.m in Sources */,
 				77B904D7192C4B3B0062237D /* UIImageView+MJWebCache.m in Sources */,
@@ -1728,6 +1751,7 @@
 				777F54C019375CD100A0B0F2 /* TreeHoleDetailViewController.m in Sources */,
 				77B90467192C48980062237D /* HomeViewController.m in Sources */,
 				7DD25B3A192D9C230066494D /* MenuButton.m in Sources */,
+				77A15ADF193DA292005800F3 /* FaceAndTextLabel.m in Sources */,
 				77AC815E193778C200003218 /* CommentCell.m in Sources */,
 				779A39911934922600E3D50B /* TreeHoleListViewController.m in Sources */,
 				77B904CA192C4B3B0062237D /* NSData+GIF.m in Sources */,

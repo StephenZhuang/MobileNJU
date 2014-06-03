@@ -9,6 +9,7 @@
 #import "TreeHoleDetailViewController.h"
 #import "TreeHoleCell.h"
 #import "CommentCell.h"
+#import "FaceAndTextLabel.h"
 
 @interface TreeHoleDetailViewController ()
 
@@ -56,6 +57,14 @@
         [cell setImageArray:array];
         return CGRectGetMaxY(cell.zanButton.frame) + 10;
     } else {
+        CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+        if (!cell.commentLabel) {
+            cell.commentLabel = [[FaceAndTextLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 500)];
+        }
+//        FaceAndTextLabel * label  = [[FaceAndTextLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 500)];
+        cell.commentLabel.font = [UIFont systemFontOfSize:14];
+        [cell.commentLabel  setFaceAndText:@"姑妈[月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗][月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗]"];
+        return cell.commentLabel.frame.size.height + 20;
         return 44;
     }
 }
@@ -72,6 +81,22 @@
         return cell;
     } else {
         CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+//        for (UIView *view in cell.contentView.subviews) {
+//            [view removeFromSuperview];
+//        }
+        
+        if (!cell.commentLabel) {
+            cell.commentLabel = [[FaceAndTextLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 500)];
+            [cell.contentView addSubview:cell.commentLabel];
+        }
+        //        FaceAndTextLabel * label  = [[FaceAndTextLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 500)];
+        cell.commentLabel.font = [UIFont systemFontOfSize:14];
+        [cell.commentLabel  setFaceAndText:@"姑妈[月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗][月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗]"];
+        
+//        FaceAndTextLabel * label  = [[FaceAndTextLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 500)];
+//        label.font = [UIFont systemFontOfSize:14];
+//        [label  setFaceAndText:@"姑妈[月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗][月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗]"];
+//        [cell.contentView addSubview:label];
         return cell;
     }
 }

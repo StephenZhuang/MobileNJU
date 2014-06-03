@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FaceAndTextLabel.h"
 
 @interface CommentCell : UITableViewCell
-@property (nonatomic , strong) IBOutlet UILabel *commentLabel;
+@property (nonatomic , strong) IBOutlet FaceAndTextLabel *commentLabel;
 @end
