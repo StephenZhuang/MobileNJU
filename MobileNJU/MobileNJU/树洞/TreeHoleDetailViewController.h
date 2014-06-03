@@ -9,5 +9,5 @@
 #import "RefreshTableViewController.h"
 
 @interface TreeHoleDetailViewController : RefreshTableViewController
-
+@property (nonatomic , weak) IBOutlet UIView *bottomView;
 @end

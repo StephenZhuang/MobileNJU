@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		777F54C019375CD100A0B0F2 /* TreeHoleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 777F54BF19375CD100A0B0F2 /* TreeHoleDetailViewController.m */; };
+		77873C29193E02DF00F83C7B /* btn_emoji@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77873C27193E02DF00F83C7B /* btn_emoji@2x.png */; };
+		77873C2A193E02DF00F83C7B /* btn_send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77873C28193E02DF00F83C7B /* btn_send@2x.png */; };
 		779A398F1934922600E3D50B /* TreeHole.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 779A398A1934922600E3D50B /* TreeHole.storyboard */; };
 		779A39901934922600E3D50B /* TreeHoleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 779A398C1934922600E3D50B /* TreeHoleCell.m */; };
 		779A39911934922600E3D50B /* TreeHoleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 779A398E1934922600E3D50B /* TreeHoleListViewController.m */; };
@@ -326,6 +328,8 @@
 /* Begin PBXFileReference section */
 		777F54BE19375CD100A0B0F2 /* TreeHoleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeHoleDetailViewController.h; sourceTree = "<group>"; };
 		777F54BF19375CD100A0B0F2 /* TreeHoleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeHoleDetailViewController.m; sourceTree = "<group>"; };
+		77873C27193E02DF00F83C7B /* btn_emoji@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_emoji@2x.png"; sourceTree = "<group>"; };
+		77873C28193E02DF00F83C7B /* btn_send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_send@2x.png"; sourceTree = "<group>"; };
 		779A398A1934922600E3D50B /* TreeHole.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TreeHole.storyboard; sourceTree = "<group>"; };
 		779A398B1934922600E3D50B /* TreeHoleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeHoleCell.h; sourceTree = "<group>"; };
 		779A398C1934922600E3D50B /* TreeHoleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeHoleCell.m; sourceTree = "<group>"; };
@@ -1108,6 +1112,8 @@
 		77B90458192C433F0062237D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77873C27193E02DF00F83C7B /* btn_emoji@2x.png */,
+				77873C28193E02DF00F83C7B /* btn_send@2x.png */,
 				779A39951934B42300E3D50B /* treehole_comment@2x.png */,
 				779A39961934B42300E3D50B /* treehole_delete@2x.png */,
 				779A39971934B42300E3D50B /* treehole_logo_n@2x.png */,
@@ -1579,6 +1585,7 @@
 				77B904DE192C4C6F0062237D /* navigation_back_p@2x.png in Resources */,
 				779A3ADB1934B4B200E3D50B /* f052@2x.png in Resources */,
 				779A3AC81934B4B200E3D50B /* f043.png in Resources */,
+				77873C2A193E02DF00F83C7B /* btn_send@2x.png in Resources */,
 				779A3B161934B4B200E3D50B /* f082.png in Resources */,
 				779A3B1F1934B4B200E3D50B /* f086@2x.png in Resources */,
 				779A3AA21934B4B200E3D50B /* f024.png in Resources */,
@@ -1601,6 +1608,7 @@
 				779A3AFC1934B4B200E3D50B /* f069.png in Resources */,
 				779A3AC01934B4B200E3D50B /* f039.png in Resources */,
 				779A3A771934B4B200E3D50B /* f002@2x.png in Resources */,
+				77873C29193E02DF00F83C7B /* btn_emoji@2x.png in Resources */,
 				779A3AE21934B4B200E3D50B /* f056.png in Resources */,
 				779A3B381934B4B200E3D50B /* f099.png in Resources */,
 				779A3AEA1934B4B200E3D50B /* f060.png in Resources */,
