@@ -13,6 +13,8 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+#import "ToolUtils.h"
+#import "Frame.h"
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
 #define DEFAULTBACKICON @"navigation_back"
