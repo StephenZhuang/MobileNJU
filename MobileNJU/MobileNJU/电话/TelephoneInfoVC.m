@@ -21,11 +21,6 @@
 @implementation TelephoneInfoVC
 
 
-
-- (IBAction)returnToMain:(id)sender {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -39,6 +34,16 @@
     [self setSubTitle:@"各个部门电话"];
     [self loadData];
     
+}
+
+
+
+/*
+ 从主页到新闻界面使用的model push 此处是直接回到主页
+ sender = backbutton
+ */
+- (IBAction)returnToMain:(id)sender {
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
 }
 - (void) loadData
 {
@@ -62,12 +67,19 @@
 
 
 #pragma mark - Table view data source
+/*
+ section = 各个部门
+ */
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [dataArray count];
 }
 
+
+/*
+ 判断状态，开启or关闭 若关闭返回1 否则返回该section里的个数
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (self.isOpen) {
@@ -77,7 +89,7 @@
     }
     return 1;
 }
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.isOpen&&self.selectIndex.section == indexPath.section&&indexPath.row!=0) {
         return 70;
@@ -148,8 +160,8 @@
     
     [self.phoneTableView beginUpdates];
     
-    int section = self.selectIndex.section;
-    int contentCount = [[[dataArray objectAtIndex:section] objectForKey:@"list"] count];
+    NSInteger section = self.selectIndex.section;
+    NSInteger contentCount = [[[dataArray objectAtIndex:section] objectForKey:@"list"] count];
 	NSMutableArray* rowToInsert = [[NSMutableArray alloc] init];
 	for (NSUInteger i = 1; i < contentCount + 1; i++) {
 		NSIndexPath* indexPathToInsert = [NSIndexPath indexPathForRow:i inSection:section];

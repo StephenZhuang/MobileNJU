@@ -16,4 +16,6 @@
 - (void)addTitleView;
 - (void)setTitle:(NSString*)title;
 - (void)setSubTitle:(NSString*)subTitle;
+- (void)addMask;
+- (void)removeMask;
 @end

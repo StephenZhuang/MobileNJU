@@ -8,12 +8,30 @@
 
 #import "RegisterViewController.h"
 #import "GetCodeViewController.h"
+#import "ToolUtils.h"
 @interface RegisterViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 
 @end
 
 @implementation RegisterViewController
+#pragma mark ViewController
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self setTitle:@"注册"];
+    [self setSubTitle:@"手机号一键注册"];
+    self.phoneTextField.delegate = self;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 /*返回上一级*/
 - (IBAction)back:(UIBarButtonItem *)sender {
@@ -34,11 +52,10 @@
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     if ([identifier isEqualToString:@"nextStep"]) {
-        if ([self.phoneTextField.text length]==11 ) {
+        if ([ToolUtils checkTel:self.phoneTextField.text]  ) {
             return YES;
         } else
         {
-            [self showAlert:@"请输入正确的手机手机号码"];
             return NO;
         }
     }
@@ -60,20 +77,6 @@
     [textField resignFirstResponder];
     
     return YES;
-}
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.phoneTextField.delegate = self;
-    [self.phoneTextField becomeFirstResponder];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

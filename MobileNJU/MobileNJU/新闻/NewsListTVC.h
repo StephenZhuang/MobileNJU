@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
-@interface NewsListTVC : UITableViewController
-
+@interface NewsListTVC : BaseViewController
+@property (nonatomic,strong)NSString* currentUrl;
+@property (nonatomic)BOOL jump;
 @end

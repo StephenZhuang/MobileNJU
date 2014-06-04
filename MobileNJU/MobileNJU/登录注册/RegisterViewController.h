@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RegisterViewController : UIViewController<UITextFieldDelegate>
+#import "BaseViewController.h"
+@interface RegisterViewController : BaseViewController<UITextFieldDelegate>
 - (void) showAlert:(NSString*) msg;
 @end

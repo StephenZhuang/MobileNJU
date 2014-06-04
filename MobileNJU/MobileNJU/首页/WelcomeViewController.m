@@ -9,18 +9,40 @@
 #import "WelcomeViewController.h"
 #import "MainMenuViewController.h"
 #import "SelfInfoVC.h"
-
-
+#import "ExerciseVC.h"
+#import "EcardVC.h"
+#import "MyLibraryVC.h"
 @interface WelcomeViewController ()<UITextFieldDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
-@property (weak, nonatomic) IBOutlet UIPageControl *loadingIndicate;
+@property (weak, nonatomic) IBOutlet UIImageView *indicateView;
+@property (nonatomic)NSInteger page;
 
 @end
 
 @implementation WelcomeViewController
+
+
+#pragma mark UIViewController
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    //  [self setNavigationBarStyle];
+    [self setDelegate];
+    //中间缺少加载过程
+    [self showLoginView];
+    self.page = 1;
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timeChangeIndicate) userInfo:nil repeats:YES];
+    // Do any additional setup after loading the view.
+    
+    
+    //not need
+    [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(hideLoad) userInfo:nil repeats:NO];
+}
+
 #pragma mark -UINavigationDelegate,UINavigationBarDelegate
 /*
  设置rootViewController的NavigationBar 不可见
@@ -28,11 +50,24 @@
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ( [viewController class] ==  [self class]
         || [viewController class] == [MainMenuViewController class]
-        || [viewController class]==[SelfInfoVC class]) {
+        || [viewController class]==[SelfInfoVC class]
+        || [viewController class]== [ExerciseVC class]
+        || [viewController class]==[EcardVC class]
+        || [viewController class]==[MyLibraryVC class]) {
         [navigationController setNavigationBarHidden:YES animated:animated];
     } else if ( [navigationController isNavigationBarHidden] ) {
         [navigationController setNavigationBarHidden:NO animated:animated];
     }
+}
+- (IBAction)resignAllResponders:(id)sender {
+    [self.usernameTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
+        self.loginView.center = CGPointMake(self.loginView.center.x, 250);
+        self.logoImage.center = CGPointMake(self.logoImage.center.x, 200);
+        
+    } completion:^(BOOL finished) {
+    }];
 }
 
 /*
@@ -49,9 +84,22 @@
 /*Return返回*/
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    [self resignAllResponders:nil];
     return YES;
 }
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+   
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
+        self.loginView.center = CGPointMake(self.loginView.center.x, 150);
+        self.logoImage.center = CGPointMake(self.logoImage.center.x, 100);
+        
+    } completion:^(BOOL finished) {
+    }];
+
+    return YES;
+}
+
 
 /*Show Alert*/
 - (void) showAlert:(NSString*)msg
@@ -82,38 +130,15 @@
     return YES;
 }
 
-#pragma mark UIViewController
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-  //  [self setNavigationBarStyle];
-    [self setDelegate];
-    //中间缺少加载过程
-    [self showLoginView];
-    
-    
-    [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timeChangeIndicate) userInfo:nil repeats:YES];
-    // Do any additional setup after loading the view.
-    
-    
-    //not need
-    [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(hideLoad) userInfo:nil repeats:NO];
-}
-
 //not need
 - (void)hideLoad{
-    self.loadingIndicate.hidden = YES;
+    [self.indicateView setHidden:YES];
 }
 - (void)timeChangeIndicate{
-    if (self.loadingIndicate.currentPage == self.loadingIndicate.numberOfPages-1)
-    {
-        [self.loadingIndicate setCurrentPage:0];
-    }
-    else
-    {
-        [self.loadingIndicate setCurrentPage:self.loadingIndicate.currentPage+1];
-    }
-
+    self.page = (self.page)%6+1;
+    
+    NSString* imageUrl = [NSString stringWithFormat:@"加载点%d",self.page];
+    [self.indicateView setImage:[UIImage imageNamed:imageUrl]];
 }
 
 
@@ -133,8 +158,7 @@
     [self.logoImage removeFromSuperview];
     [self.view addSubview:self.loginView];
     [self.view addSubview:self.logoImage];
-    
-    
+
     
     [UIView animateWithDuration:1.0 delay:5.0 options:UIViewAnimationOptionTransitionNone animations:^{
         self.loginView.center = CGPointMake(self.loginView.center.x, 250);

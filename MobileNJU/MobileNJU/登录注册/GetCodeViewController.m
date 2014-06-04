@@ -15,6 +15,27 @@
 
 @implementation GetCodeViewController
 
+
+#pragma viewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.phoneNumLabel.text = [NSString stringWithFormat:
+                               @"掌上南大已把验证码发送至：%@",self.phoneNum];
+//    [self.confirmCodeField becomeFirstResponder];
+    
+}
+
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
 #pragma mark set
 /*设置phoneNum同时设置上方Label*/
 - (void)setPhoneNum:(NSString *)phoneNum
@@ -45,22 +66,6 @@
         }
     }
     return YES;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.phoneNumLabel.text = [NSString stringWithFormat:
-                               @"掌上南大已把验证码发送至：%@",self.phoneNum];
-    [self.confirmCodeField becomeFirstResponder];
-}
-
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*
