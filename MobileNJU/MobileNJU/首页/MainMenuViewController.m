@@ -10,6 +10,8 @@
 #import "HomeCell.h"
 #import "SelfInfoVC.h"
 #import "NewsListTVC.h"
+#import "TreeHoleListViewController.h"
+
 @interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 @property (weak, nonatomic) IBOutlet UIScrollView *pageScroller;
@@ -265,7 +267,13 @@ static NSArray* descriptions;
 #pragma mark 各个按钮监听
 -(void)goToDetail:(id)sender{
     MenuButton* menuButton = (MenuButton*)sender;
-    [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
+    if ([menuButton.desitination isEqualToString:@"树洞"]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
+        TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
+    }
 }
 
 
