@@ -26,14 +26,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kog-5Y-glw">
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kog-5Y-glw">
                                             <rect key="frame" x="78" y="7" width="78" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" backgroundImage="treehole_mine.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="goToMine:" destination="0ge-uU-3Ri" eventType="touchUpInside" id="hfi-2s-1xw"/>
+                                            </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0de-Z9-THk">
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0de-Z9-THk">
                                             <rect key="frame" x="164" y="7" width="78" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -45,6 +48,9 @@
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="0de-Z9-THk" firstAttribute="leading" secondItem="kog-5Y-glw" secondAttribute="trailing" constant="8" id="gY8-Fn-pZ4"/>
+                                    </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TreeHoleCell" rowHeight="348" id="cPQ-pe-LRb" customClass="TreeHoleCell">
@@ -203,6 +209,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="messageButton" destination="0de-Z9-THk" id="uwp-UD-pN3"/>
+                        <outlet property="myTreeHoleButton" destination="kog-5Y-glw" id="J6P-cc-EMo"/>
                         <outlet property="tableView" destination="Bju-YY-S1i" id="RMr-2Y-vle"/>
                     </connections>
                 </viewController>
@@ -222,7 +230,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="O7n-iH-Igc">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="O7n-iH-Igc">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="523"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -393,6 +401,9 @@
                                         <state key="normal" backgroundImage="btn_emoji.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="emojiAction:" destination="LYS-Ol-EDz" eventType="touchUpInside" id="Vhk-0b-pT7"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -414,12 +425,83 @@
                     <navigationItem key="navigationItem" id="8sX-mi-ldC"/>
                     <connections>
                         <outlet property="bottomView" destination="4Z8-4B-ZGg" id="nyW-aw-1Gr"/>
+                        <outlet property="messageField" destination="f3i-VA-1c1" id="1tA-wJ-Ulv"/>
                         <outlet property="tableView" destination="O7n-iH-Igc" id="qkB-dD-vk6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pIO-gE-eZN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="760" y="82"/>
+        </scene>
+        <!--Emoji View Controller-->
+        <scene sceneID="BpL-w1-5w0">
+            <objects>
+                <viewController storyboardIdentifier="EmojiViewController" id="yHq-Pr-mm2" customClass="EmojiViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vCH-GA-S4z"/>
+                        <viewControllerLayoutGuide type="bottom" id="Je9-uw-eMW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0gQ-Uq-zxE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nCg-nz-wST">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jgd-7H-llq">
+                                    <size key="itemSize" width="40" height="40"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmojiCell" id="yKc-QQ-qI5" customClass="EmojiCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GKP-gj-4sq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="GKP-gj-4sq" firstAttribute="leading" secondItem="yKc-QQ-qI5" secondAttribute="leading" id="5yl-td-Pgh"/>
+                                            <constraint firstAttribute="bottom" secondItem="GKP-gj-4sq" secondAttribute="bottom" id="IW8-YP-ia2"/>
+                                            <constraint firstAttribute="trailing" secondItem="GKP-gj-4sq" secondAttribute="trailing" id="ZNu-ZB-6Se"/>
+                                            <constraint firstItem="GKP-gj-4sq" firstAttribute="top" secondItem="yKc-QQ-qI5" secondAttribute="top" id="ttv-nK-9Le"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="emojiImage" destination="GKP-gj-4sq" id="Iqt-dD-QDx"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="yHq-Pr-mm2" id="NWD-Ah-04E"/>
+                                    <outlet property="delegate" destination="yHq-Pr-mm2" id="TEK-VO-Upv"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nCg-nz-wST" firstAttribute="top" secondItem="0gQ-Uq-zxE" secondAttribute="top" id="1mT-v8-ahw"/>
+                            <constraint firstAttribute="trailing" secondItem="nCg-nz-wST" secondAttribute="trailing" id="5Wk-0E-TYE"/>
+                            <constraint firstItem="nCg-nz-wST" firstAttribute="leading" secondItem="0gQ-Uq-zxE" secondAttribute="leading" id="eTf-Gi-2pv"/>
+                            <constraint firstAttribute="bottom" secondItem="nCg-nz-wST" secondAttribute="bottom" id="qtH-6E-cMA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="nCg-nz-wST" id="euJ-ve-ghL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FhJ-mh-Vyj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-51" y="783"/>
         </scene>
     </scenes>
     <resources>

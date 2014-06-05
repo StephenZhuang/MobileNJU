@@ -9,5 +9,7 @@
 #import "RefreshTableViewController.h"
 
 @interface TreeHoleListViewController : RefreshTableViewController
-
+@property (nonatomic , assign) BOOL isMyTreeHole;
+@property (nonatomic , weak) IBOutlet UIButton *myTreeHoleButton;
+@property (nonatomic , weak) IBOutlet UIButton *messageButton;
 @end

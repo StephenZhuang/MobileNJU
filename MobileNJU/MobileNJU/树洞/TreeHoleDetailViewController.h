@@ -10,4 +10,5 @@
 
 @interface TreeHoleDetailViewController : RefreshTableViewController
 @property (nonatomic , weak) IBOutlet UIView *bottomView;
+@property (nonatomic , weak) IBOutlet UITextField *messageField;
 @end

@@ -28,8 +28,23 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setTitle:@"树洞"];
     [self setSubTitle:@"吐槽您的生活"];
+    if (_isMyTreeHole) {
+        [self setTitle:@"我的树洞"];
+        [_myTreeHoleButton setHidden:YES];
+//        [_messageButton setCenter:CGPointMake(self.view.center.x, _messageButton.center.y)];
+        [_messageButton setFrame:CGRectMake(100, 8, 100, 30)];
+    } else {
+        [self setTitle:@"树洞"];
+    }
+}
+
+- (IBAction)goToMine:(id)sender
+{
+    UIStoryboard *storyboard = [self storyboard];
+    TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
+    vc.isMyTreeHole = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -49,6 +64,11 @@
 //    NSMutableArray *array = [[NSMutableArray alloc] init];
     NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"http://img0.bdstatic.com/img/image/shouye/dengni36.jpg",@"http://img0.bdstatic.com/img/image/shouye/mnwlmn-9569205918.jpg",@"http://img0.bdstatic.com/img/image/shouye/mvznns.jpg",@"http://img0.bdstatic.com/img/image/shouye/fsfss001.jpg", nil];
     [cell setImageArray:array];
+    if (_isMyTreeHole) {
+        [cell.deleteButton setHidden:NO];
+    } else {
+        [cell.deleteButton setHidden:YES];
+    }
     return cell;
 }
 
