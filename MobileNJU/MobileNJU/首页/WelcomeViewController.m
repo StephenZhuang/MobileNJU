@@ -9,7 +9,7 @@
 #import "WelcomeViewController.h"
 #import "MainMenuViewController.h"
 #import "SelfInfoVC.h"
-
+#import "ZsndSystem.pb.h"
 
 @interface WelcomeViewController ()<UITextFieldDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
@@ -98,6 +98,22 @@
     
     //not need
     [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(hideLoad) userInfo:nil repeats:NO];
+    
+    //api调用方式 可以点进去查看，也可按option + 左键查看 ， 回调函数统一写作disposMessage ， 如下
+    [[ApisFactory getApiMGetWelcomePage] load:self selecter:@selector(disposMessage:)];
+}
+
+- (void)disposMessage:(Son *)son
+{
+    //error = 0 表示接口调用成功
+    if ([son getError] == 0) {
+        //判断接口名
+        if ([[son getMethod] isEqualToString:@"MGetWelcomePage"]) {
+            //获得返回类
+            MRet_Builder *ret = (MRet_Builder *)[son getBuild];
+            NSLog(@"=======%@",ret.msg);
+        }
+    }
 }
 
 //not need
