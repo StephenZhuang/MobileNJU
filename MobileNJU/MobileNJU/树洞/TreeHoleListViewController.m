@@ -31,21 +31,31 @@
     [self setSubTitle:@"吐槽您的生活"];
     if (_isMyTreeHole) {
         [self setTitle:@"我的树洞"];
-        [_myTreeHoleButton setHidden:YES];
-//        [_messageButton setCenter:CGPointMake(self.view.center.x, _messageButton.center.y)];
-        [_messageButton setFrame:CGRectMake(100, 8, 100, 30)];
     } else {
         [self setTitle:@"树洞"];
     }
+    
+    UIButton* button = [[UIButton alloc]init];
+    [button setImage:[UIImage imageNamed:@"发布"] forState:UIControlStateNormal];
+    CGRect frame = CGRectMake(0, 0, 53, 28);
+    button.frame = frame;
+    [button addTarget:self action:@selector(goToAdd) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* releaseItem =  [[UIBarButtonItem alloc]initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = releaseItem;
 }
 
-- (IBAction)goToMine:(id)sender
+- (void)goToAdd
 {
-    UIStoryboard *storyboard = [self storyboard];
-    TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
-    vc.isMyTreeHole = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self performSegueWithIdentifier:@"add" sender:nil];
 }
+
+//- (IBAction)goToMine:(id)sender
+//{
+//    UIStoryboard *storyboard = [self storyboard];
+//    TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
+//    vc.isMyTreeHole = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -78,7 +88,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -86,7 +96,11 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"myTreeHole"]) {
+        TreeHoleListViewController *vc = [segue destinationViewController];
+        vc.isMyTreeHole = YES;
+    }
 }
-*/
+
 
 @end

@@ -18,6 +18,9 @@
 		771EDF4C193F37A200A3DCBB /* NewsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 771EDF47193F37A200A3DCBB /* NewsListView.m */; };
 		771EDF4D193F37A200A3DCBB /* NewsListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771EDF48193F37A200A3DCBB /* NewsListView.xib */; };
 		771EDF4E193F37A200A3DCBB /* SubscribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 771EDF4A193F37A200A3DCBB /* SubscribeCell.m */; };
+		7765DB4719416C8E00EDDA68 /* NewMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */; };
+		7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4919416CA800EDDA68 /* NewMessageCell.m */; };
+		7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */; };
 		77B90429192C3F040062237D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B90428192C3F030062237D /* Foundation.framework */; };
 		77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042A192C3F040062237D /* CoreGraphics.framework */; };
 		77B9042D192C3F040062237D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042C192C3F040062237D /* UIKit.framework */; };
@@ -479,6 +482,12 @@
 		771EDF48193F37A200A3DCBB /* NewsListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListView.xib; sourceTree = "<group>"; };
 		771EDF49193F37A200A3DCBB /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
 		771EDF4A193F37A200A3DCBB /* SubscribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeCell.m; sourceTree = "<group>"; };
+		7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageListViewController.h; sourceTree = "<group>"; };
+		7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageListViewController.m; sourceTree = "<group>"; };
+		7765DB4819416CA800EDDA68 /* NewMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageCell.h; sourceTree = "<group>"; };
+		7765DB4919416CA800EDDA68 /* NewMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageCell.m; sourceTree = "<group>"; };
+		7765DB4B19418FFC00EDDA68 /* AddTreeHoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTreeHoleViewController.h; sourceTree = "<group>"; };
+		7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTreeHoleViewController.m; sourceTree = "<group>"; };
 		77B90425192C3F030062237D /* MobileNJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileNJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B90428192C3F030062237D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77B9042A192C3F040062237D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1836,6 +1845,12 @@
 				77E072C4194043140098BA09 /* TreeHoleImageCell.m */,
 				77E072C5194043140098BA09 /* TreeHoleListViewController.h */,
 				77E072C6194043140098BA09 /* TreeHoleListViewController.m */,
+				7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */,
+				7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */,
+				7765DB4819416CA800EDDA68 /* NewMessageCell.h */,
+				7765DB4919416CA800EDDA68 /* NewMessageCell.m */,
+				7765DB4B19418FFC00EDDA68 /* AddTreeHoleViewController.h */,
+				7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */,
 			);
 			path = "树洞";
 			sourceTree = "<group>";
@@ -2695,6 +2710,7 @@
 				77B904BC192C4B3B0062237D /* MJRefreshFooterView.m in Sources */,
 				77B904BA192C4B3B0062237D /* MJRefreshBaseView.m in Sources */,
 				77E073C51940435D0098BA09 /* ApiMLoginCardCode.m in Sources */,
+				7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */,
 				77E072C7194043140098BA09 /* CommentCell.m in Sources */,
 				77E075A5194043B20098BA09 /* AYHCustomComboBox.m in Sources */,
 				77E0740F194043A20098BA09 /* FaceAndTextLabel.m in Sources */,
@@ -2801,6 +2817,7 @@
 				77B904C9192C4B3B0062237D /* MKAnnotationView+WebCache.m in Sources */,
 				771EDF22193F367600A3DCBB /* SegmentView.m in Sources */,
 				77E07630194044340098BA09 /* BookViewController.m in Sources */,
+				7765DB4719416C8E00EDDA68 /* NewMessageListViewController.m in Sources */,
 				7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */,
 				77E0762A194044340098BA09 /* Book.m in Sources */,
 				77E073D11940435D0098BA09 /* ApiMRoomSearch.m in Sources */,
@@ -2838,6 +2855,7 @@
 				77E073D61940435D0098BA09 /* ApiMTreeHoleComment.m in Sources */,
 				77E073E51940435D0098BA09 /* ZsndNews.pb.m in Sources */,
 				7DD86998192DB68A00D4ADAA /* TelephoneInfoVC.m in Sources */,
+				7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */,
 				77E073AD1940435D0098BA09 /* ApiMBookRenew.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
