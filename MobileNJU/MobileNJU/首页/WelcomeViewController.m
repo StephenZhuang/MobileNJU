@@ -13,7 +13,7 @@
 #import "EcardVC.h"
 #import "MyLibraryVC.h"
 #import "ZsndSystem.pb.h"
-
+#import "ZsndUser.pb.h"
 @interface WelcomeViewController ()<UITextFieldDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
@@ -34,23 +34,43 @@
     //  [self setNavigationBarStyle];
     [self setDelegate];
     //中间缺少加载过程
-    [self showLoginView];
     self.page = 1;
-    
     [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timeChangeIndicate) userInfo:nil repeats:YES];
-    // Do any additional setup after loading the view.
-    
-    
-    //not need
-    [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(hideLoad) userInfo:nil repeats:NO];
+//  [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(hideLoad) userInfo:nil repeats:NO];
     
     //api调用方式 可以点进去查看，也可按option + 左键查看 ， 回调函数统一写作disposMessage ， 如下
     [[ApisFactory getApiMGetWelcomePage] load:self selecter:@selector(disposMessage:)];
+    [self.usernameTextField setText:@"test"];
+    [self.passwordTextField setText:@"1"];
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)login:(UIButton *)sender {
+    if ([self.usernameTextField.text isEqualToString:@""]) {
+        [self showAlert:@"请输入您的手机号"];
+        return;
+    }
+    if ([self.passwordTextField.text isEqualToString:@""]) {
+        [self showAlert:@"密码不能为空"];
+        return;
+    }
+#warning 注意加密
+    
+    [[ApisFactory getApiMLogin] load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:
+                                                                                                                         self.passwordTextField.text];
+//    [self performSegueWithIdentifier:@"main" sender:nil];
+}
+
 
 #pragma - mark api回调
 - (void)disposMessage:(Son *)son
 {
+    NSLog(@"回调了");
     //error = 0 表示接口调用成功
     if ([son getError] == 0) {
         //判断接口名
@@ -58,9 +78,16 @@
             //获得返回类
             MRet_Builder *ret = (MRet_Builder *)[son getBuild];
             NSLog(@"=======%@",ret.msg);
+            [self showLoginView];
+        } else if ([[son getMethod] isEqualToString:@"MLogin"])
+        {
+            MUser_Builder *user = (MUser_Builder *)[son getBuild];
+            NSLog(@"account%@  nickname%@ verify  %@ ",user.account,user.nickname,user.verify);
+            [self performSegueWithIdentifier:@"main" sender:nil];
         }
     }
 }
+
 
 #pragma mark -UINavigationDelegate,UINavigationBarDelegate
 /*
@@ -149,37 +176,32 @@
     return YES;
 }
 
-//not need
+
+
+
+
 - (void)hideLoad{
     [self.indicateView setHidden:YES];
 }
+
+
 - (void)timeChangeIndicate{
     self.page = (self.page)%6+1;
     
     NSString* imageUrl = [NSString stringWithFormat:@"加载点%d",self.page];
     [self.indicateView setImage:[UIImage imageNamed:imageUrl]];
 }
-
-
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 //加载完毕，显示登录界面。
 - (void)showLoginView
 {
+    [self hideLoad];
     [self.loginView removeFromSuperview];
     [self.logoImage removeFromSuperview];
     [self.view addSubview:self.loginView];
     [self.view addSubview:self.logoImage];
 
     
-    [UIView animateWithDuration:1.0 delay:5.0 options:UIViewAnimationOptionTransitionNone animations:^{
+    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
         self.loginView.center = CGPointMake(self.loginView.center.x, 250);
         self.logoImage.center = CGPointMake(self.logoImage.center.x, 200);
 

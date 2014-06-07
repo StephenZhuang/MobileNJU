@@ -26,7 +26,11 @@
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
 		[array addObject:[NSString stringWithFormat:@"phone=%@",phone==nil?@"":phone]];
 		[array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MLogin" params:array delegate:delegate selecter:select];
+        NSString* pushId = [[NSUserDefaults standardUserDefaults]objectForKey:@"pushId"];
+        NSLog(@"pushId%@",pushId);
+        [array addObject:[NSString stringWithFormat:@"pushId=%@",pushId==nil?@"":pushId]];
+        
+        UpdateOne *updateone=[[UpdateOne alloc] init:@"MLogin" params:array delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 
@@ -41,7 +45,8 @@
 	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  phone:(NSString*)phone password:(NSString*)password {
 		UpdateOne *update=[self get:delegate selecter:select phone:phone password:password];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
-		return update;
+
+        return update;
 	}
 
 

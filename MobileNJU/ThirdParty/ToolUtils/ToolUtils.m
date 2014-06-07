@@ -253,8 +253,9 @@
 
 +(void) setUserName:(NSString*)username
 {
-    [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"name"];
-
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [ userDefaults setObject:username forKey:@"name"];
+    [userDefaults synchronize];
 }
 +(void) addFlowerCount;
 {
@@ -265,7 +266,10 @@
         int count = flowerCount.intValue+1;
         flowerCount = [[NSNumber alloc]initWithInt:count];
     }
-    [[NSUserDefaults standardUserDefaults] setObject:flowerCount forKey:@"flower"];
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:flowerCount forKey:@"flower"];
+    [userDefaults synchronize];
 
 }
 @end

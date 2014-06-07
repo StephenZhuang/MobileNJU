@@ -8,6 +8,7 @@
 
 #import "BBSVC.h"
 #import "BBSCell.h"
+#import "ZsndSystem.pb.h"
 @interface BBSVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSArray* colorArray;
 @end
@@ -21,12 +22,32 @@
     [self setSubTitle:@"显示南大每天十条新闻"];
     self.colorArray = [[NSArray alloc]initWithObjects:@"一",@"二",@"三",@"四",@"五",@"六",@"七",@"八",@"九",@"十", nil];
     // Do any additional setup after loading the view.
+    [[ApisFactory getApiMBaiheNewsList] load:self selecter:@selector(disposMessage:)];
+
 }
+
+
+
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+#pragma - mark api回调
+- (void)disposMessage:(Son *)son
+{
+    if ([son getError] == 0) {
+        //判断接口名
+        if ([[son getMethod] isEqualToString:@"MBaiheNewsList"]) {
+            //获得返回类
+            
+        }
+    }
 }
 
 /*
