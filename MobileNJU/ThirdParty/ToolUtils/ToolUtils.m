@@ -268,4 +268,20 @@
     [[NSUserDefaults standardUserDefaults] setObject:flowerCount forKey:@"flower"];
 
 }
+
++ (NSURL *)getImageUrlWtihString:(NSString *)urlString
+{
+    if (urlString == nil || [urlString isEqualToString:@""]) {
+        return [NSURL URLWithString:@""];
+    }
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[[Frame INITCONFIG] getDUrl],urlString]];
+}
+
++ (NSURL *)getImageUrlWtihString:(NSString *)urlString width:(CGFloat)width height:(CGFloat)height
+{
+    if (urlString == nil || [urlString isEqualToString:@""]) {
+        return [NSURL URLWithString:@""];
+    }
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@&w=%.0f&h=%.0f",[[Frame INITCONFIG] getDUrl],urlString , width , height]];
+}
 @end

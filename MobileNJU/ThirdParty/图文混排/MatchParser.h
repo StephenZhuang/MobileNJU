@@ -86,5 +86,7 @@
 -(void)match:(NSString *)source  atCallBack:(BOOL (^)(NSString *))atString title:(NSAttributedString*)title;
 
 -(void)match:(NSString *)source   atCallBack:(BOOL (^)(NSString *))atString   title:(NSAttributedString *)title   link:(void(^)(NSMutableAttributedString*attrString,NSRange range))link;
++(NSDictionary*)getFaceMap;
++(NSString*)faceKeyForValue:(NSString*)value  map:(NSDictionary*) map;
 
 @end

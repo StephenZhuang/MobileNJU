@@ -10,6 +10,7 @@
 #import "TreeHoleCell.h"
 #import "CommentCell.h"
 #import "FaceAndTextLabel.h"
+#import "EmojiViewController.h"
 
 @interface TreeHoleDetailViewController ()
 
@@ -32,6 +33,10 @@
     // Do any additional setup after loading the view.
     [self setTitle:@"树洞详情"];
     [self setSubTitle:@"您可以回复和点赞"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -101,11 +106,46 @@
     }
 }
 
+#pragma mark - 键盘处理
+#pragma mark 键盘即将显示
+- (void)keyBoardWillShow:(NSNotification *)note{
+    
+    CGRect rect = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat ty = - rect.size.height;
+    [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0, ty);
+    }];
+    
+}
+#pragma mark 键盘即将退出
+- (void)keyBoardWillHide:(NSNotification *)note{
+    
+    [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
+        self.view.transform = CGAffineTransformIdentity;
+    }];
+}
+
+- (IBAction)emojiAction:(id)sender
+{
+    [_messageField resignFirstResponder];
+    UIStoryboard *storyboard = [self storyboard];
+    EmojiViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"EmojiViewController"];
+    vc.emojiBlock = ^(NSString *string) {
+        _messageField.text = [_messageField.text stringByAppendingString:[NSString stringWithFormat:@"%@" , string]];
+    };
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.navigationController presentViewController:nav animated:YES completion:^(){
+        
+    }];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

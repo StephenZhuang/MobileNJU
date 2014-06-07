@@ -18,6 +18,9 @@
 		771EDF4C193F37A200A3DCBB /* NewsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 771EDF47193F37A200A3DCBB /* NewsListView.m */; };
 		771EDF4D193F37A200A3DCBB /* NewsListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771EDF48193F37A200A3DCBB /* NewsListView.xib */; };
 		771EDF4E193F37A200A3DCBB /* SubscribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 771EDF4A193F37A200A3DCBB /* SubscribeCell.m */; };
+		7765DB4719416C8E00EDDA68 /* NewMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */; };
+		7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4919416CA800EDDA68 /* NewMessageCell.m */; };
+		7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */; };
 		77B90429192C3F040062237D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B90428192C3F030062237D /* Foundation.framework */; };
 		77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042A192C3F040062237D /* CoreGraphics.framework */; };
 		77B9042D192C3F040062237D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042C192C3F040062237D /* UIKit.framework */; };
@@ -417,6 +420,8 @@
 		77E0764B194044670098BA09 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E07646194044670098BA09 /* ActivityCell.m */; };
 		77E0764C194044670098BA09 /* ActivityDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E07648194044670098BA09 /* ActivityDetailVC.m */; };
 		77E0764D194044670098BA09 /* ActivityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0764A194044670098BA09 /* ActivityVC.m */; };
+		77E0765019405C730098BA09 /* EmojiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0764F19405C730098BA09 /* EmojiViewController.m */; };
+		77E0765319405DDD0098BA09 /* EmojiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0765219405DDD0098BA09 /* EmojiCell.m */; };
 		77E7D9E21930896A00BFA983 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E7D9E11930896A00BFA983 /* SystemConfiguration.framework */; };
 		77E7D9E41930897500BFA983 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E7D9E31930897500BFA983 /* MessageUI.framework */; };
 		77E7D9E61930897C00BFA983 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E7D9E51930897C00BFA983 /* QuartzCore.framework */; };
@@ -477,6 +482,12 @@
 		771EDF48193F37A200A3DCBB /* NewsListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListView.xib; sourceTree = "<group>"; };
 		771EDF49193F37A200A3DCBB /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
 		771EDF4A193F37A200A3DCBB /* SubscribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeCell.m; sourceTree = "<group>"; };
+		7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageListViewController.h; sourceTree = "<group>"; };
+		7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageListViewController.m; sourceTree = "<group>"; };
+		7765DB4819416CA800EDDA68 /* NewMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageCell.h; sourceTree = "<group>"; };
+		7765DB4919416CA800EDDA68 /* NewMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageCell.m; sourceTree = "<group>"; };
+		7765DB4B19418FFC00EDDA68 /* AddTreeHoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTreeHoleViewController.h; sourceTree = "<group>"; };
+		7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTreeHoleViewController.m; sourceTree = "<group>"; };
 		77B90425192C3F030062237D /* MobileNJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileNJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B90428192C3F030062237D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77B9042A192C3F040062237D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1123,6 +1134,10 @@
 		77E07648194044670098BA09 /* ActivityDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailVC.m; sourceTree = "<group>"; };
 		77E07649194044670098BA09 /* ActivityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityVC.h; sourceTree = "<group>"; };
 		77E0764A194044670098BA09 /* ActivityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityVC.m; sourceTree = "<group>"; };
+		77E0764E19405C730098BA09 /* EmojiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiViewController.h; sourceTree = "<group>"; };
+		77E0764F19405C730098BA09 /* EmojiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiViewController.m; sourceTree = "<group>"; };
+		77E0765119405DDD0098BA09 /* EmojiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiCell.h; sourceTree = "<group>"; };
+		77E0765219405DDD0098BA09 /* EmojiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiCell.m; sourceTree = "<group>"; };
 		77E7D9E11930896A00BFA983 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		77E7D9E31930897500BFA983 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		77E7D9E51930897C00BFA983 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1815,6 +1830,10 @@
 		77B90460192C434B0062237D /* 树洞 */ = {
 			isa = PBXGroup;
 			children = (
+				77E0765119405DDD0098BA09 /* EmojiCell.h */,
+				77E0765219405DDD0098BA09 /* EmojiCell.m */,
+				77E0764E19405C730098BA09 /* EmojiViewController.h */,
+				77E0764F19405C730098BA09 /* EmojiViewController.m */,
 				77E072BC194043140098BA09 /* CommentCell.h */,
 				77E072BD194043140098BA09 /* CommentCell.m */,
 				77E072BE194043140098BA09 /* TreeHole.storyboard */,
@@ -1826,6 +1845,12 @@
 				77E072C4194043140098BA09 /* TreeHoleImageCell.m */,
 				77E072C5194043140098BA09 /* TreeHoleListViewController.h */,
 				77E072C6194043140098BA09 /* TreeHoleListViewController.m */,
+				7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */,
+				7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */,
+				7765DB4819416CA800EDDA68 /* NewMessageCell.h */,
+				7765DB4919416CA800EDDA68 /* NewMessageCell.m */,
+				7765DB4B19418FFC00EDDA68 /* AddTreeHoleViewController.h */,
+				7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */,
 			);
 			path = "树洞";
 			sourceTree = "<group>";
@@ -2668,6 +2693,7 @@
 				7DD8699E192DB6D700D4ADAA /* NewsDetailVC.m in Sources */,
 				77E073BC1940435D0098BA09 /* ApiMGetMobileVerify.m in Sources */,
 				77E0760D1940441F0098BA09 /* ClassroomChooseCell.m in Sources */,
+				77E0765019405C730098BA09 /* EmojiViewController.m in Sources */,
 				77E075FE194044110098BA09 /* LessonDetailView.m in Sources */,
 				77B904C6192C4B3B0062237D /* MJPhotoProgressView.m in Sources */,
 				77B904D6192C4B3B0062237D /* UIImage+WebP.m in Sources */,
@@ -2684,6 +2710,7 @@
 				77B904BC192C4B3B0062237D /* MJRefreshFooterView.m in Sources */,
 				77B904BA192C4B3B0062237D /* MJRefreshBaseView.m in Sources */,
 				77E073C51940435D0098BA09 /* ApiMLoginCardCode.m in Sources */,
+				7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */,
 				77E072C7194043140098BA09 /* CommentCell.m in Sources */,
 				77E075A5194043B20098BA09 /* AYHCustomComboBox.m in Sources */,
 				77E0740F194043A20098BA09 /* FaceAndTextLabel.m in Sources */,
@@ -2790,6 +2817,7 @@
 				77B904C9192C4B3B0062237D /* MKAnnotationView+WebCache.m in Sources */,
 				771EDF22193F367600A3DCBB /* SegmentView.m in Sources */,
 				77E07630194044340098BA09 /* BookViewController.m in Sources */,
+				7765DB4719416C8E00EDDA68 /* NewMessageListViewController.m in Sources */,
 				7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */,
 				77E0762A194044340098BA09 /* Book.m in Sources */,
 				77E073D11940435D0098BA09 /* ApiMRoomSearch.m in Sources */,
@@ -2810,6 +2838,7 @@
 				77E073D91940435D0098BA09 /* ApiMTreeHoleNews.m in Sources */,
 				77E07618194044290098BA09 /* LostVC.m in Sources */,
 				77E0740D194043A20098BA09 /* MatchParser.m in Sources */,
+				77E0765319405DDD0098BA09 /* EmojiCell.m in Sources */,
 				77E073BE1940435D0098BA09 /* ApiMGetVerifyUserCode.m in Sources */,
 				7DD8699F192DB6D700D4ADAA /* NewsListTVC.m in Sources */,
 				7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */,
@@ -2826,6 +2855,7 @@
 				77E073D61940435D0098BA09 /* ApiMTreeHoleComment.m in Sources */,
 				77E073E51940435D0098BA09 /* ZsndNews.pb.m in Sources */,
 				7DD86998192DB68A00D4ADAA /* TelephoneInfoVC.m in Sources */,
+				7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */,
 				77E073AD1940435D0098BA09 /* ApiMBookRenew.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
