@@ -34,7 +34,8 @@
 + (NSString *)getVerify;
 + (void)setVerify:(NSString *)verify;
 + (NSString *)getDeviceid;
-//+ (NSURL *)getImageUrlWtihString:(NSString *)urlString;
++ (NSURL *)getImageUrlWtihString:(NSString *)urlString;
++ (NSURL *)getImageUrlWtihString:(NSString *)urlString width:(CGFloat)width height:(CGFloat)height;
 + (NSString *)getHeadImg;
 + (void)setHeadImg:(NSString *)headImg;
 
