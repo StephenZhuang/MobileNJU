@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "HomeViewController.h"
+#import "WelcomeViewController.h"
 #import <Frontia/Frontia.h>
 #include <sys/socket.h>
 #include <sys/sysctl.h>
@@ -31,15 +31,16 @@
     [self initDeviceid];
     [self initApiFrame];
     [self initShare:application options:launchOptions];
+
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
-    HomeViewController *vc = [storyboard instantiateInitialViewController];
+    WelcomeViewController *vc = [storyboard instantiateInitialViewController];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    return YES;
+      return YES;
 }
 
 #pragma - mark init param
@@ -62,6 +63,7 @@
 
 - (void)initShare:(UIApplication *)application options:(NSDictionary *)launchOptions
 {
+
     //初始化Frontia
     [Frontia initWithApiKey:APP_KEY];
     
@@ -83,18 +85,22 @@
     statTracker.sessionResumeInterval = 60;//设置应用进入后台再回到前台为同一次session的间隔时间[0~600s],超过600s则设为600s，默认为30s
     statTracker.shortAppVersion  = IosAppVersion; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
     [statTracker startWithReportId:REPORT_ID];//设置您在mtj网站上添加的app的appkey
-    
     [self onBindClick:nil];
 }
 
 //绑定，以获取通知
 - (IBAction)onBindClick:(id)sender {
     FrontiaPush *push = [Frontia getPush];
-    
+
     if(push) {
+
         [push bindChannel:^(NSString *appId, NSString *userId, NSString *channelId) {
             NSString *message = [[NSString alloc] initWithFormat:@"appid:%@ \nuserid:%@ \nchannelID:%@", appId, userId, channelId];
-            
+            NSLog(@"2333333333333333");
+            NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:userId forKey:@"pushId"];
+            [userDefaults synchronize];
+
 //            self.appidText.text = appId;
 //            self.useridText.text = userId;
 //            self.channelidText.text = channelId;
@@ -102,10 +108,13 @@
 //            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
             
         } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
-            
+            NSLog(@"3333333333333333");
+
             NSString *message = [[NSString alloc] initWithFormat:@"string is %@ error code : %d error message %@", action, errorCode, errorMessage];
 //            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
         }];
+    } else {
+        NSLog(@"2333333333");
     }
 }
 

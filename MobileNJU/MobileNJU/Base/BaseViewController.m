@@ -30,6 +30,13 @@
     [self.titleView setSubTitle:subTitle];
 }
 
+/*Show Alert*/
+- (void) showAlert:(NSString*)msg
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"注册" message:msg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil] ;
+    [alert show];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

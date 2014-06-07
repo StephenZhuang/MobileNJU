@@ -18,4 +18,5 @@
 - (void)setSubTitle:(NSString*)subTitle;
 - (void)addMask;
 - (void)removeMask;
+- (void) showAlert:(NSString*)msg;
 @end
