@@ -71,7 +71,7 @@
                                             <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="cRp-mI-hpY" kind="push" identifier="login in" id="oMV-JV-lxV"/>
+                                            <action selector="login:" destination="Vd6-tb-kEi" eventType="touchUpInside" id="KQW-da-PDV"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="Phb-5b-RHY">
@@ -140,6 +140,7 @@
                         <outlet property="logoImage" destination="YD2-fm-uGO" id="0qA-1f-0RZ"/>
                         <outlet property="passwordTextField" destination="fzd-ZJ-IfL" id="tDx-uM-Trg"/>
                         <outlet property="usernameTextField" destination="Gqd-L7-cHM" id="c1c-Uy-Ncu"/>
+                        <segue destination="cRp-mI-hpY" kind="push" identifier="main" id="DE0-aW-f8m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4xv-sd-PE5" sceneMemberID="firstResponder"/>
@@ -286,7 +287,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="223ABEE0-B685-4DFE-96A0-4FC859F180E9" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-JV-0PT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CB4861B4-1D09-405E-B9BC-7A58F68C363D" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-JV-0PT">
                                 <rect key="frame" x="35" y="241" width="12" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -746,6 +747,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="主页" image="tabBar_home" id="fQv-sO-x81"/>
+                    <navigationItem key="navigationItem" id="3E4-4I-TI2"/>
                     <connections>
                         <outlet property="homeBarButton" destination="dSJ-OT-mMN" id="4MZ-lb-kFP"/>
                         <outlet property="pageController" destination="Aq2-AS-jaX" id="rvN-dx-tsj"/>
@@ -4071,7 +4073,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="223ABEE0-B685-4DFE-96A0-4FC859F180E9" width="12" height="12">
+        <image name="CB4861B4-1D09-405E-B9BC-7A58F68C363D" width="12" height="12">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -4174,6 +4176,6 @@ QAxDDEgMUAxTDGUMaAxtAAAAAAAAAgEAAAAAAAAAQgAAAAAAAAAAAAAAAAAADG8
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="oMV-JV-lxV"/>
+        <segue reference="DE0-aW-f8m"/>
     </inferredMetricsTieBreakers>
 </document>
