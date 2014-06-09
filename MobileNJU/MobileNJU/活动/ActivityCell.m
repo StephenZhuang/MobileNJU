@@ -21,7 +21,7 @@
 - (void)setImageName:(NSString *)imageName
 {
     _imageName = imageName;
-    
+
 }
 - (void)awakeFromNib
 {

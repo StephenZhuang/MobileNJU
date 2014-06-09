@@ -290,7 +290,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DD41D053-7F80-4AB2-B1F8-40916D50F4AA" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-JV-0PT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="62DC4CFE-0AB3-4652-B78F-29CA67B24C5C" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-JV-0PT">
                                 <rect key="frame" x="35" y="241" width="12" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -837,35 +837,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="部门" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Qu-hJ-gbB">
-                                                    <rect key="frame" x="44" y="11" width="50" height="27"/>
+                                                    <rect key="frame" x="44" y="14" width="38" height="23"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="MxV-gb-LvG"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地点" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Brm-aX-SsZ">
-                                                    <rect key="frame" x="95" y="14" width="34" height="21"/>
+                                                    <rect key="frame" x="90" y="19" width="30" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电话" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igZ-oO-oMI">
-                                                    <rect key="frame" x="44" y="40" width="34" height="21"/>
+                                                    <rect key="frame" x="44" y="45" width="30" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="igZ-oO-oMI" firstAttribute="top" secondItem="9Qu-hJ-gbB" secondAttribute="bottom" constant="2" id="Czx-rw-CZ9"/>
-                                                <constraint firstItem="9Qu-hJ-gbB" firstAttribute="top" secondItem="wFi-Y0-vIM" secondAttribute="top" constant="11" id="YIQ-U1-rzJ"/>
-                                                <constraint firstItem="Brm-aX-SsZ" firstAttribute="leading" secondItem="9Qu-hJ-gbB" secondAttribute="trailing" constant="1" id="bj0-fN-EOt"/>
-                                                <constraint firstItem="9Qu-hJ-gbB" firstAttribute="leading" secondItem="wFi-Y0-vIM" secondAttribute="leading" constant="44" id="eD8-MD-7sr"/>
-                                                <constraint firstItem="9Qu-hJ-gbB" firstAttribute="centerY" secondItem="Brm-aX-SsZ" secondAttribute="centerY" id="htT-ki-cWY"/>
-                                                <constraint firstItem="Brm-aX-SsZ" firstAttribute="top" secondItem="wFi-Y0-vIM" secondAttribute="top" constant="14" id="qyG-vt-3g0"/>
-                                                <constraint firstItem="9Qu-hJ-gbB" firstAttribute="leading" secondItem="igZ-oO-oMI" secondAttribute="leading" id="zSY-Up-tAa"/>
+                                                <constraint firstItem="igZ-oO-oMI" firstAttribute="top" secondItem="9Qu-hJ-gbB" secondAttribute="bottom" constant="8" symbolic="YES" id="0rW-1q-zQh"/>
+                                                <constraint firstItem="9Qu-hJ-gbB" firstAttribute="leading" secondItem="wFi-Y0-vIM" secondAttribute="leading" constant="44" id="VP3-YT-mRq"/>
+                                                <constraint firstItem="Brm-aX-SsZ" firstAttribute="baseline" secondItem="9Qu-hJ-gbB" secondAttribute="baseline" constant="1" id="aCI-bq-Unz"/>
+                                                <constraint firstItem="Brm-aX-SsZ" firstAttribute="leading" secondItem="9Qu-hJ-gbB" secondAttribute="trailing" constant="8" id="eET-ty-uHG"/>
+                                                <constraint firstItem="9Qu-hJ-gbB" firstAttribute="top" secondItem="wFi-Y0-vIM" secondAttribute="top" constant="14" id="gp9-H0-NMh"/>
+                                                <constraint firstItem="igZ-oO-oMI" firstAttribute="leading" secondItem="9Qu-hJ-gbB" secondAttribute="leading" id="h8R-iB-q1S"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -4107,7 +4103,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="DD41D053-7F80-4AB2-B1F8-40916D50F4AA" width="12" height="12">
+        <image name="62DC4CFE-0AB3-4652-B78F-29CA67B24C5C" width="12" height="12">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

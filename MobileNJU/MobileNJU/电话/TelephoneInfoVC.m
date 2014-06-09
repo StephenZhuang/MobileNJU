@@ -68,15 +68,12 @@
             if ([[son getMethod] isEqualToString:@"MContacts"]) {
                 //获得返回类
                 MContactList_Builder *contacts = (MContactList_Builder *)[son getBuild];
-                NSLog(@"%@",contacts.name);
-                NSLog(@"%d",contacts.contactList.count);
-                
-//                NSArray* keys = [[NSArray alloc]initWithObjects:@"name" ,@"list" ,nil];
-//                for (MContactList* list in contacts.contactList) {
-//                    NSArray* value = [[NSArray alloc]initWithObjects:list.name,list.contactList ,nil];
-//                    NSDictionary* dic = [[NSDictionary alloc]initWithObjects:value forKeys:keys];
-//                    [dataArray addObject:dic];
-//                }
+                NSArray* keys = [[NSArray alloc]initWithObjects:@"name" ,@"list" ,nil];
+                for (MContacts* list in contacts.listList) {
+                    NSArray* value = [[NSArray alloc]initWithObjects:list.name,list.contactList ,nil];
+                    NSDictionary* dic = [[NSDictionary alloc]initWithObjects:value forKeys:keys];
+                    [dataArray addObject:dic];
+                }
                 [self doneWithView:_header];
             }
         }
