@@ -27,6 +27,12 @@
 		778EA77B194558FD007B6C7E /* NewsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA777194558FD007B6C7E /* NewsListView.m */; };
 		778EA77C194558FD007B6C7E /* NewsListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778EA778194558FD007B6C7E /* NewsListView.xib */; };
 		778EA77D194558FD007B6C7E /* SubscribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA77A194558FD007B6C7E /* SubscribeCell.m */; };
+		778EA7821945D405007B6C7E /* Nangua.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 778EA7811945D405007B6C7E /* Nangua.storyboard */; };
+		778EA7851945D415007B6C7E /* NanguaBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA7841945D415007B6C7E /* NanguaBaseViewController.m */; };
+		778EA7881945D5D6007B6C7E /* NanguaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA7871945D5D6007B6C7E /* NanguaViewController.m */; };
+		778EA78A1945D9A8007B6C7E /* navigation_bg_clear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778EA7891945D9A8007B6C7E /* navigation_bg_clear@2x.png */; };
+		778EA78C1945DA83007B6C7E /* nangua_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778EA78B1945DA83007B6C7E /* nangua_bg@2x.png */; };
+		778EA78E1945DCF7007B6C7E /* nangua_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778EA78D1945DCF7007B6C7E /* nangua_back@2x.png */; };
 		77B90429192C3F040062237D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B90428192C3F030062237D /* Foundation.framework */; };
 		77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042A192C3F040062237D /* CoreGraphics.framework */; };
 		77B9042D192C3F040062237D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042C192C3F040062237D /* UIKit.framework */; };
@@ -505,6 +511,14 @@
 		778EA778194558FD007B6C7E /* NewsListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewsListView.xib; path = "MobileNJU/新闻/NewsListView.xib"; sourceTree = SOURCE_ROOT; };
 		778EA779194558FD007B6C7E /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscribeCell.h; path = "MobileNJU/新闻/SubscribeCell.h"; sourceTree = SOURCE_ROOT; };
 		778EA77A194558FD007B6C7E /* SubscribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscribeCell.m; path = "MobileNJU/新闻/SubscribeCell.m"; sourceTree = SOURCE_ROOT; };
+		778EA7811945D405007B6C7E /* Nangua.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Nangua.storyboard; sourceTree = "<group>"; };
+		778EA7831945D415007B6C7E /* NanguaBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanguaBaseViewController.h; sourceTree = "<group>"; };
+		778EA7841945D415007B6C7E /* NanguaBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanguaBaseViewController.m; sourceTree = "<group>"; };
+		778EA7861945D5D6007B6C7E /* NanguaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NanguaViewController.h; sourceTree = "<group>"; };
+		778EA7871945D5D6007B6C7E /* NanguaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NanguaViewController.m; sourceTree = "<group>"; };
+		778EA7891945D9A8007B6C7E /* navigation_bg_clear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bg_clear@2x.png"; sourceTree = "<group>"; };
+		778EA78B1945DA83007B6C7E /* nangua_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nangua_bg@2x.png"; sourceTree = "<group>"; };
+		778EA78D1945DCF7007B6C7E /* nangua_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nangua_back@2x.png"; sourceTree = "<group>"; };
 		77B90425192C3F030062237D /* MobileNJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileNJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B90428192C3F030062237D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77B9042A192C3F040062237D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1623,6 +1637,18 @@
 			path = CustomIOSAlertView;
 			sourceTree = "<group>";
 		};
+		778EA7801945D3F8007B6C7E /* 南呱 */ = {
+			isa = PBXGroup;
+			children = (
+				778EA7811945D405007B6C7E /* Nangua.storyboard */,
+				778EA7831945D415007B6C7E /* NanguaBaseViewController.h */,
+				778EA7841945D415007B6C7E /* NanguaBaseViewController.m */,
+				778EA7861945D5D6007B6C7E /* NanguaViewController.h */,
+				778EA7871945D5D6007B6C7E /* NanguaViewController.m */,
+			);
+			path = "南呱";
+			sourceTree = "<group>";
+		};
 		77B9041C192C3F030062237D = {
 			isa = PBXGroup;
 			children = (
@@ -1667,6 +1693,7 @@
 		77B9042E192C3F040062237D /* MobileNJU */ = {
 			isa = PBXGroup;
 			children = (
+				778EA7801945D3F8007B6C7E /* 南呱 */,
 				771EDE97193F363D00A3DCBB /* 百合十大 */,
 				771EDE9E193F363D00A3DCBB /* 办理流程 */,
 				771EDEA3193F363D00A3DCBB /* 成绩查询 */,
@@ -1684,7 +1711,6 @@
 				77B9045B192C434B0062237D /* 订阅 */,
 				77B9045C192C434B0062237D /* 个人 */,
 				77B9045D192C434B0062237D /* 活动 */,
-				77B9045E192C434B0062237D /* 南呱 */,
 				77B9045F192C434B0062237D /* 首页 */,
 				77B90460192C434B0062237D /* 树洞 */,
 				77B90437192C3F040062237D /* AppDelegate.h */,
@@ -1727,6 +1753,9 @@
 		77B90458192C433F0062237D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				778EA78D1945DCF7007B6C7E /* nangua_back@2x.png */,
+				778EA78B1945DA83007B6C7E /* nangua_bg@2x.png */,
+				778EA7891945D9A8007B6C7E /* navigation_bg_clear@2x.png */,
 				7DC4C58C19443D97007C6888 /* loading@2x.gif */,
 				77E073EA1940436E0098BA09 /* btn_emoji@2x.png */,
 				77E073EB1940436E0098BA09 /* btn_send@2x.png */,
@@ -1822,13 +1851,6 @@
 				77E0764A194044670098BA09 /* ActivityVC.m */,
 			);
 			path = "活动";
-			sourceTree = "<group>";
-		};
-		77B9045E192C434B0062237D /* 南呱 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "南呱";
 			sourceTree = "<group>";
 		};
 		77B9045F192C434B0062237D /* 首页 */ = {
@@ -2486,6 +2508,7 @@
 				77E074F6194043A90098BA09 /* f014.png in Resources */,
 				77E07552194043A90098BA09 /* f060.png in Resources */,
 				77E0757A194043A90098BA09 /* f080.png in Resources */,
+				778EA7821945D405007B6C7E /* Nangua.storyboard in Resources */,
 				77E07570194043A90098BA09 /* f075.png in Resources */,
 				77E07509194043A90098BA09 /* f023@2x.png in Resources */,
 				77E075FF194044110098BA09 /* LessonDetailView.xib in Resources */,
@@ -2530,6 +2553,7 @@
 				77E07515194043A90098BA09 /* f029@2x.png in Resources */,
 				77E07551194043A90098BA09 /* f059@2x.png in Resources */,
 				7DC4C58D19443D97007C6888 /* loading@2x.gif in Resources */,
+				778EA78C1945DA83007B6C7E /* nangua_bg@2x.png in Resources */,
 				77E074F2194043A90098BA09 /* f012.png in Resources */,
 				77E07564194043A90098BA09 /* f069.png in Resources */,
 				77E0753C194043A90098BA09 /* f049.png in Resources */,
@@ -2559,6 +2583,7 @@
 				77E0759B194043A90098BA09 /* f096@2x.png in Resources */,
 				77E074FD194043A90098BA09 /* f017@2x.png in Resources */,
 				77E0750A194043A90098BA09 /* f024.png in Resources */,
+				778EA78A1945D9A8007B6C7E /* navigation_bg_clear@2x.png in Resources */,
 				77E07571194043A90098BA09 /* f075@2x.png in Resources */,
 				77E074FF194043A90098BA09 /* f018@2x.png in Resources */,
 				77E07544194043A90098BA09 /* f053.png in Resources */,
@@ -2647,6 +2672,7 @@
 				77E07575194043A90098BA09 /* f077@2x.png in Resources */,
 				77E07546194043A90098BA09 /* f054.png in Resources */,
 				77E074F3194043A90098BA09 /* f012@2x.png in Resources */,
+				778EA78E1945DCF7007B6C7E /* nangua_back@2x.png in Resources */,
 				77E0740B194043A20098BA09 /* faceMap_ch.plist in Resources */,
 				77E07581194043A90098BA09 /* f083@2x.png in Resources */,
 				77E0753B194043A90098BA09 /* f048@2x.png in Resources */,
@@ -2719,6 +2745,7 @@
 				77E0762B194044340098BA09 /* BookCell.m in Sources */,
 				77E0760F1940441F0098BA09 /* ClassroomVC.m in Sources */,
 				7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */,
+				778EA7851945D415007B6C7E /* NanguaBaseViewController.m in Sources */,
 				77B904D8192C4B3B0062237D /* UIImageView+WebCache.m in Sources */,
 				7DD25B39192D9C230066494D /* HomeCell.m in Sources */,
 				7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */,
@@ -2754,6 +2781,7 @@
 				77E073E11940435D0098BA09 /* ZsndChat.pb.m in Sources */,
 				77E075EA194043F10098BA09 /* Lesson.m in Sources */,
 				77E073BD1940435D0098BA09 /* ApiMGetUserInfo.m in Sources */,
+				778EA7881945D5D6007B6C7E /* NanguaViewController.m in Sources */,
 				77E073B01940435D0098BA09 /* ApiMCardInfo.m in Sources */,
 				77E073AF1940435D0098BA09 /* ApiMCardHistory.m in Sources */,
 				77E073D31940435D0098BA09 /* ApiMSearchBook.m in Sources */,

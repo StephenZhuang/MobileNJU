@@ -11,6 +11,7 @@
 #import "SelfInfoVC.h"
 #import "NewsListTVC.h"
 #import "TreeHoleListViewController.h"
+#import "NanguaViewController.h"
 
 @interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
@@ -270,6 +271,10 @@ static NSArray* descriptions;
     if ([menuButton.desitination isEqualToString:@"树洞"]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
         TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([menuButton.desitination isEqualToString:@"南呱"]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
+        NanguaViewController *vc = [storyboard instantiateInitialViewController];
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
