@@ -469,6 +469,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="Pwt-UX-bJc" id="rgJ-5V-6Hf"/>
                         <segue destination="gjW-z7-ieA" kind="push" identifier="detail" id="edG-up-2vM"/>
                     </connections>
                 </viewController>
@@ -503,6 +504,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0aV-09-hnw"/>
+                    <connections>
+                        <outlet property="webView" destination="N5Q-Qy-YOn" id="Mcw-BZ-mBg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCa-Si-dcV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

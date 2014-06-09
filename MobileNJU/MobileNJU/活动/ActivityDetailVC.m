@@ -8,8 +8,9 @@
 
 #import "ActivityDetailVC.h"
 
-@interface ActivityDetailVC ()
+@interface ActivityDetailVC ()<UIWebViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @end
 
 @implementation ActivityDetailVC
@@ -23,11 +24,15 @@
     return self;
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self setTitle:@"活动"];
     [self setSubTitle:@"好吃好玩的福利"];
+    self.webView.delegate = self;
+    [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     // Do any additional setup after loading the view.
 }
 
@@ -47,5 +52,14 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self.loginIndicator removeFromSuperview];
+}
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [self waiting];
+}
 
 @end

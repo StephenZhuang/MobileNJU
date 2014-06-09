@@ -9,11 +9,12 @@
 #import "BusVC.h"
 #import "BusCell.h"
 #import "SegmentView.h"
+#import "ZsndSystem.pb.h"
 @interface BusVC ()<UITableViewDelegate,UITableViewDataSource,SegmentViewDataSource,SegmentViewDelegate>
 @property (weak, nonatomic) IBOutlet SegmentView *segmentView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong,nonatomic) NSArray *segmentArray;
-
+@property(strong,nonatomic)NSMutableArray* busList;
 @end
 
 @implementation BusVC
@@ -34,6 +35,7 @@
     [self setSubTitle:@"方便您的来回"];
     self.segmentArray = [[NSArray alloc]initWithObjects:@"仙林",@"鼓楼", nil];
     [self.segmentView setBackgroundColor:[UIColor clearColor]];
+    
     // Do any additional setup after loading the view.
 }
 

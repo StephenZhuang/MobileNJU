@@ -21,6 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *newsImage;
 @property (strong,nonatomic)NSURL* url;
 @property (weak, nonatomic) IBOutlet UIControl *activityView;
-
+@property (nonatomic,strong)NSString* imageName;
 - (void)setActivity:(NSDictionary*)activity;
 @end

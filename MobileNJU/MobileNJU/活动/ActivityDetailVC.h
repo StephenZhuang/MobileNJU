@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface ActivityDetailVC : BaseViewController
-
+@property (nonatomic,strong)NSURL* url;
 @end

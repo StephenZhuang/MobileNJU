@@ -7,7 +7,7 @@
 //
 
 #import "ActivityCell.h"
-
+#import "Utilities.h"
 @implementation ActivityCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -18,7 +18,11 @@
     }
     return self;
 }
-
+- (void)setImageName:(NSString *)imageName
+{
+    _imageName = imageName;
+    
+}
 - (void)awakeFromNib
 {
     // Initialization code
