@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface NewsCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *newsType;
 @property (weak, nonatomic) IBOutlet UILabel *newsDate;
@@ -20,7 +19,5 @@
 @property (strong,nonatomic)NSString* type;
 @property (strong,nonatomic)NSString* date;
 @property (strong,nonatomic)NSString* title;
-
 @property (strong,nonatomic)NSString* detail;
-
 @end

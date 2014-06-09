@@ -12,6 +12,8 @@
 @interface BaseViewController : UIViewController
 @property (strong, nonatomic) NSArray *backIcons;
 @property (nonatomic , strong) TitleView *titleView;
+@property (weak, nonatomic) IBOutlet UIView *maskView;
+@property (nonatomic,strong)UIActivityIndicatorView* loginIndicator;
 -(void)closeSelf;
 - (void)addTitleView;
 - (void)setTitle:(NSString*)title;
@@ -19,4 +21,6 @@
 - (void)addMask;
 - (void)removeMask;
 - (void) showAlert:(NSString*)msg;
+- (void) waiting;
+- (void)disposMessage:(Son *)son;
 @end

@@ -40,16 +40,24 @@
 + (void)setHeadImg:(NSString *)headImg;
 
 
++ (BOOL) firstLogin:(NSString*) userId;
++ (void)setHasLogined:(NSString*) userId;
 
-+ (NSDictionary*) getUserInfo;
-+ (void)setUserInfo:(NSDictionary*)dic;
 
++ (NSString*)getTags;
++ (NSString*)getBirthday;
++ (NSString*)getBelong;
++ (NSString*)getSex;
 + (NSString*)getNickName;
 + (NSString*)getUserName;
-+(NSString*)getFlowerCount;
++(NSInteger)getFlowerCount;
 
 
 +(void) setUserName:(NSString*)username;
-+(void) addFlowerCount;
-
++(void) setFlowerCount:(NSInteger)flowerCount;
++(void) setNickname:(NSString*)nickName;
++ (void)setBirthday:(NSString*)birthday;
++ (void)setSex:(NSString*)sex;
++ (void)setTags:(NSString*)tags;
++ (void)setBelong:(NSString*)belong;
 @end

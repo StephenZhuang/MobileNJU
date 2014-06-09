@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
-@interface TelephoneInfoVC : BaseViewController
+#import "RefreshTableViewController.h"
+@interface TelephoneInfoVC : RefreshTableViewController
 
 @end

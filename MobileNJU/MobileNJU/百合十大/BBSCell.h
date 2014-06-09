@@ -13,6 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
-
+@property (strong,nonatomic)NSString* url;
 @property (weak, nonatomic) IBOutlet UIControl *Content;
 @end

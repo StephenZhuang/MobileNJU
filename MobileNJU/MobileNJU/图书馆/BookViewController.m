@@ -12,13 +12,15 @@
 #import "BookDetailView.h"
 #import "AlertCloseDelegate.h"
 #import "BookChooseDelegate.h"
-@interface BookViewController ()<UITableViewDataSource,UITableViewDelegate,BookChooseDelegate,AlertCloseDelegate,UITextFieldDelegate>
+#import "BookCollectionCell.h"
+@interface BookViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,AlertCloseDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)NSMutableArray* books;
 @property (weak, nonatomic) IBOutlet UIView *alertView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UITextField *searchField;
 @property (weak, nonatomic) IBOutlet UITextField *schIdField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UICollectionView *myCollectionView;
 @property (strong,nonatomic)BookDetailView* bookDetail;
 @end
 
@@ -120,27 +122,56 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -table
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.books count]/3+1;
+    return [self.books count];
 }
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 142;
+    return 1;
 }
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+
 {
-    BookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"book"];
-    NSMutableArray* myBook = [[NSMutableArray alloc]init];
-    for (int i = 0; i<3; i++) {
-        if (indexPath.row*3+i<[self.books count]) {
-            [myBook addObject:[self.books objectAtIndex:indexPath.row*3+i]];
-        }
-    }
-    [cell setBooks:myBook delegate:self];
-    return cell;
+    BookCollectionCell* bookView = [collectionView dequeueReusableCellWithReuseIdentifier:@"result" forIndexPath:indexPath];
+    [bookView setBook:[self.books objectAtIndex:indexPath.row ]];
+    return bookView;
 }
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self chooseBook:[self.books objectAtIndex:indexPath.row]];
+}
+//
+//-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+//{
+//    return UIEdgeInsetsMake(5, 5, 5, 5);
+//}
+//
+
+
+//#pragma mark -table
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return [self.books count]/3+1;
+//}
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 142;
+//}
+//-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    BookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"book"];
+//    NSMutableArray* myBook = [[NSMutableArray alloc]init];
+//    for (int i = 0; i<3; i++) {
+//        if (indexPath.row*3+i<[self.books count]) {
+//            [myBook addObject:[self.books objectAtIndex:indexPath.row*3+i]];
+//        }
+//    }
+//    [cell setBooks:myBook delegate:self];
+//    return cell;
+//}
 
 /*
 #pragma mark - Navigation

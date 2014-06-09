@@ -9,6 +9,8 @@
 #import "SelfInfoVC.h"
 #import "SelfCell.h"
 #import "ToolUtils.h"
+#import "ZsndUser.pb.h"
+
 @interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *infoTable;
@@ -16,6 +18,74 @@
 @end
 
 @implementation SelfInfoVC
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self loadData];
+    
+    // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self loadData];
+    [self.infoTable reloadData];
+    [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)logout:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)disposMessage:(Son *)son
+{
+    if ([son getError] == 0) {
+        //判断接口名
+        if ([[son getMethod] isEqualToString:@"MGetUserInfo"]) {
+            //获得返回类
+            MUser_Builder *user = (MUser_Builder *)[son getBuild];
+            [ToolUtils setBelong:user.belong];
+            [ToolUtils setBirthday:user.birthday];
+            [ToolUtils setNickname:user.nickname];
+            switch (user.sex) {
+                case 0:
+                    [ToolUtils setSex:@"女"];
+                    break;
+                case 1:
+                    [ToolUtils setSex:@"男"];
+                    break;
+                case 2:
+                    [ToolUtils setSex:@"未知"];
+                    break;
+                default:
+                    break;
+            }
+            self.flowerCount = user.flower;
+            NSMutableString* tagsString = [[NSMutableString alloc]init];
+            for (int i = 0 ; i < user.tagsList.count-1; i++)
+            {
+                [tagsString appendString:[user.tagsList objectAtIndex:i]];
+                [tagsString appendString:@";"];
+            }
+            [tagsString appendString:[user.tagsList lastObject]];
+            [ToolUtils setTags:tagsString];
+            [self loadData];
+            [self.infoTable reloadData];
+            [ToolUtils setFlowerCount:user.flower];
+            [self.flowerLabel setText:[NSString stringWithFormat:@"%d",self.flowerCount]];
+        }
+    }
+
+}
+
 - (IBAction)backToMain:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -29,45 +99,31 @@
     }
     return self;
 }
+
+
+
+
 #pragma toDo
 - (void)loadData
 {
-    
+    [self.flowerLabel setText:[NSString stringWithFormat:@"%d",[ToolUtils getFlowerCount]]];
     NSArray* keys = [[NSArray alloc]initWithObjects:@"image", @"content",nil];
     NSArray* images = [[NSArray alloc]initWithObjects:@"institute",@"sex",@"birth",@"hobby", nil];
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"selfInfo" ofType:@"plist"];
-    NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    NSArray* infoKeys = [data objectForKey:@"infoKeys"];
-    NSDictionary* infos = [ToolUtils getUserInfo];
+    NSArray* content = [[NSArray alloc]initWithObjects:
+                        [ToolUtils getBelong]==nil?@"":[ToolUtils getBelong],
+                        [ToolUtils getSex]==nil?@"":[ToolUtils getSex],
+                        [ToolUtils getBirthday]==nil?@"":[ToolUtils getBirthday],
+                        [ToolUtils getTags]==nil?@"":[ToolUtils getTags], nil];
     NSMutableArray* mutableArray = [[NSMutableArray alloc]init];
-    for (int i = 0 ; i < 4 ; i ++){
-        NSArray* values = [[NSArray alloc]initWithObjects:[images objectAtIndex:i],[infos objectForKey:[infoKeys objectAtIndex:i+1]], nil];
-        NSDictionary* dic = [[NSDictionary alloc]initWithObjects:values forKeys:keys];
+    for (int i = 0 ; i < images.count; i++)
+    {
+        NSArray* rows = [[NSArray alloc]initWithObjects:[images objectAtIndex:i],[content objectAtIndex:i], nil];
+        NSDictionary* dic = [[NSDictionary alloc]initWithObjects:rows forKeys:keys];
         [mutableArray addObject:dic];
     }
     self.infos = [[NSArray alloc]initWithArray:mutableArray];
 }
 
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self loadData];
-    // Do any additional setup after loading the view.
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self loadData];
-    [self.infoTable reloadData];
-    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 

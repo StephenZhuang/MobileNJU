@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 @interface BBSDetail : BaseViewController
-
+@property NSURL* url;
 @end

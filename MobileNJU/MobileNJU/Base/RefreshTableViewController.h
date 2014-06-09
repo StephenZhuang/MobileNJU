@@ -24,4 +24,6 @@
 @property (nonatomic , strong) NSMutableArray *dataArray;
 - (void)doneWithView:(MJRefreshBaseView *)refreshView;
 - (void)addHeader;
+- (void)addFooter;
+- (void)loadData;
 @end

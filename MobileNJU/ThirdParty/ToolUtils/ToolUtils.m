@@ -205,35 +205,6 @@
 
 #pragma mark addedForMobileNJU
 
-+ (NSDictionary*) getUserInfo
-{
-    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"selfInfo" ofType:@"plist"];
-    NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    NSArray* keys = [data objectForKey:@"infoKeys"];
-    NSMutableArray* values = [[NSMutableArray alloc]init];
-    for (NSString* key in keys) {
-        NSString* value =[userDefaults objectForKey:key];
-        if (!value) {
-            value = [NSString stringWithFormat:@""];
-        }
-        [values addObject:value];
-    }
-    NSDictionary* info = [[NSDictionary alloc]initWithObjects:values forKeys:keys];
-    return info;
-}
-
-
-+ (void)setUserInfo:(NSDictionary*)dic
-{
-    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-    for (NSString* key in dic.keyEnumerator) {
-        [userDefaults setObject:[dic objectForKey:key] forKey:key];
-    }
-    [userDefaults synchronize];
-}
-
 + (NSString*)getNickName
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"nickname"];
@@ -244,9 +215,9 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"name"];
 
 }
-+(NSString*)getFlowerCount
++(NSInteger)getFlowerCount
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"flower"];
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"flower"];
 
 }
 
@@ -257,20 +228,12 @@
     [ userDefaults setObject:username forKey:@"name"];
     [userDefaults synchronize];
 }
-+(void) addFlowerCount;
-{
-    NSNumber* flowerCount =  [[NSUserDefaults standardUserDefaults] objectForKey:@"flower"];
-    if (!flowerCount) {
-        flowerCount = [[NSNumber alloc]initWithInt:1];
-    } else {
-        int count = flowerCount.intValue+1;
-        flowerCount = [[NSNumber alloc]initWithInt:count];
-    }
-    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
-    
-    [userDefaults setObject:flowerCount forKey:@"flower"];
-    [userDefaults synchronize];
 
++ (void)setFlowerCount:(NSInteger)flowerCount
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger:flowerCount forKey:@"flower"];
+    [userDefaults synchronize];
 }
 
 + (NSURL *)getImageUrlWtihString:(NSString *)urlString
@@ -288,4 +251,66 @@
     }
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@&w=%.0f&h=%.0f",[[Frame INITCONFIG] getDUrl],urlString , width , height]];
 }
+
+
++ (BOOL)firstLogin:(NSString*) userId
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:userId];
+}
+
++ (void)setHasLogined:(NSString*) userId
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:YES forKey:userId];
+    [userDefaults synchronize];
+
+}
++ (void)setSex:(NSString *)sex
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:sex forKey:@"sex"];
+    [userDefaults synchronize];
+}
++ (void)setBirthday:(NSString *)birthday
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:birthday forKey:@"birthday"];
+    [userDefaults synchronize];
+}
++(void)setTags:(NSString *)tags
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:tags forKey:@"tags"];
+    [userDefaults synchronize];
+}
++(void)setBelong:(NSString *)belong
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:belong forKey:@"belong"];
+    [userDefaults synchronize];
+}
++ (NSString *)getBelong
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"belong"];
+}
++ (NSString *)getTags
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"tags"];
+}
++ (NSString *)getBirthday
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"birthday"];
+}
++ (NSString *)getSex
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"sex"];
+}
++ (void)setNickname:(NSString *)nickName
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:nickName forKey:@"nickname"];
+    [userDefaults synchronize];
+
+}
+
 @end

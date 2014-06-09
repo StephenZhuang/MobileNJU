@@ -21,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *indicateView;
 @property (nonatomic)NSInteger page;
-
 @end
 
 @implementation WelcomeViewController
@@ -59,18 +58,17 @@
         [self showAlert:@"密码不能为空"];
         return;
     }
-#warning 注意加密
-    
+    [self waiting];
+    #warning 注意加密
     [[ApisFactory getApiMLogin] load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:
                                                                                                                          self.passwordTextField.text];
+   
 //    [self performSegueWithIdentifier:@"main" sender:nil];
 }
-
-
 #pragma - mark api回调
 - (void)disposMessage:(Son *)son
 {
-    NSLog(@"回调了");
+    [self.loginIndicator removeFromSuperview];
     //error = 0 表示接口调用成功
     if ([son getError] == 0) {
         //判断接口名
@@ -104,7 +102,8 @@
         || [viewController class]==[SelfInfoVC class]
         || [viewController class]== [ExerciseVC class]
         || [viewController class]==[EcardVC class]
-        || [viewController class]==[MyLibraryVC class]) {
+        || [viewController class]==[MyLibraryVC class]
+        ) {
         [navigationController setNavigationBarHidden:YES animated:animated];
     } else if ( [navigationController isNavigationBarHidden] ) {
         [navigationController setNavigationBarHidden:NO animated:animated];
@@ -151,13 +150,6 @@
     return YES;
 }
 
-
-/*Show Alert*/
-- (void) showAlert:(NSString*)msg
-{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"登录" message:msg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil] ;
-    [alert show];
-}
 /*设置代理*/
 - (void) setDelegate
 {

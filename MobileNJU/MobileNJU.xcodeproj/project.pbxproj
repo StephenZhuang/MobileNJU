@@ -407,7 +407,7 @@
 		77E0762C194044340098BA09 /* BookDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0761F194044340098BA09 /* BookDetailView.m */; };
 		77E0762D194044340098BA09 /* BookDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E07620194044340098BA09 /* BookDetailView.xib */; };
 		77E0762E194044340098BA09 /* BookView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E07622194044340098BA09 /* BookView.m */; };
-		77E0762F194044340098BA09 /* BookView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E07623194044340098BA09 /* BookView.xib */; };
+		77E0762F194044340098BA09 /* BookCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E07623194044340098BA09 /* BookCollectionCell.xib */; };
 		77E07630194044340098BA09 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E07625194044340098BA09 /* BookViewController.m */; };
 		77E07631194044340098BA09 /* MyBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E07627194044340098BA09 /* MyBookCell.m */; };
 		77E07632194044340098BA09 /* MyLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E07629194044340098BA09 /* MyLibraryVC.m */; };
@@ -432,6 +432,8 @@
 		77E7D9F0193089BE00BFA983 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E7D9EF193089BE00BFA983 /* libz.dylib */; };
 		77E7D9F319308BE400BFA983 /* RefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7D9F219308BE400BFA983 /* RefreshTableViewController.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
+		7DBC8D6519435C6C0086E28B /* BookCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */; };
+		7DC4C58D19443D97007C6888 /* loading@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7DC4C58C19443D97007C6888 /* loading@2x.gif */; };
 		7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B30192D9C230066494D /* WelcomeViewController.m */; };
 		7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B32192D9C230066494D /* MainMenuViewController.m */; };
 		7DD25B39192D9C230066494D /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B34192D9C230066494D /* HomeCell.m */; };
@@ -477,11 +479,11 @@
 		771EDF3F193F377100A3DCBB /* TagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagView.h; sourceTree = "<group>"; };
 		771EDF40193F377100A3DCBB /* TagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagView.m; sourceTree = "<group>"; };
 		771EDF45193F37A200A3DCBB /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
-		771EDF46193F37A200A3DCBB /* NewsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListView.h; sourceTree = "<group>"; };
-		771EDF47193F37A200A3DCBB /* NewsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListView.m; sourceTree = "<group>"; };
-		771EDF48193F37A200A3DCBB /* NewsListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListView.xib; sourceTree = "<group>"; };
-		771EDF49193F37A200A3DCBB /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
-		771EDF4A193F37A200A3DCBB /* SubscribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeCell.m; sourceTree = "<group>"; };
+		771EDF46193F37A200A3DCBB /* NewsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsListView.h; path = "../新闻/NewsListView.h"; sourceTree = "<group>"; };
+		771EDF47193F37A200A3DCBB /* NewsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsListView.m; path = "../新闻/NewsListView.m"; sourceTree = "<group>"; };
+		771EDF48193F37A200A3DCBB /* NewsListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewsListView.xib; path = "../新闻/NewsListView.xib"; sourceTree = "<group>"; };
+		771EDF49193F37A200A3DCBB /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscribeCell.h; path = "../新闻/SubscribeCell.h"; sourceTree = "<group>"; };
+		771EDF4A193F37A200A3DCBB /* SubscribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscribeCell.m; path = "../新闻/SubscribeCell.m"; sourceTree = "<group>"; };
 		7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageListViewController.h; sourceTree = "<group>"; };
 		7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageListViewController.m; sourceTree = "<group>"; };
 		7765DB4819416CA800EDDA68 /* NewMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageCell.h; sourceTree = "<group>"; };
@@ -1109,7 +1111,7 @@
 		77E07620194044340098BA09 /* BookDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookDetailView.xib; sourceTree = "<group>"; };
 		77E07621194044340098BA09 /* BookView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookView.h; sourceTree = "<group>"; };
 		77E07622194044340098BA09 /* BookView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookView.m; sourceTree = "<group>"; };
-		77E07623194044340098BA09 /* BookView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookView.xib; sourceTree = "<group>"; };
+		77E07623194044340098BA09 /* BookCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookCollectionCell.xib; sourceTree = "<group>"; };
 		77E07624194044340098BA09 /* BookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewController.h; sourceTree = "<group>"; };
 		77E07625194044340098BA09 /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewController.m; sourceTree = "<group>"; };
 		77E07626194044340098BA09 /* MyBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBookCell.h; sourceTree = "<group>"; };
@@ -1150,6 +1152,9 @@
 		77E7D9F219308BE400BFA983 /* RefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshTableViewController.m; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
+		7DBC8D6319435C6C0086E28B /* BookCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCollectionCell.h; sourceTree = "<group>"; };
+		7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCollectionCell.m; sourceTree = "<group>"; };
+		7DC4C58C19443D97007C6888 /* loading@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "loading@2x.gif"; sourceTree = "<group>"; };
 		7DD25B2F192D9C230066494D /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
 		7DD25B30192D9C230066494D /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		7DD25B31192D9C230066494D /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
@@ -1332,13 +1337,15 @@
 				77E07620194044340098BA09 /* BookDetailView.xib */,
 				77E07621194044340098BA09 /* BookView.h */,
 				77E07622194044340098BA09 /* BookView.m */,
-				77E07623194044340098BA09 /* BookView.xib */,
+				77E07623194044340098BA09 /* BookCollectionCell.xib */,
 				77E07624194044340098BA09 /* BookViewController.h */,
 				77E07625194044340098BA09 /* BookViewController.m */,
 				77E07626194044340098BA09 /* MyBookCell.h */,
 				77E07627194044340098BA09 /* MyBookCell.m */,
 				77E07628194044340098BA09 /* MyLibraryVC.h */,
 				77E07629194044340098BA09 /* MyLibraryVC.m */,
+				7DBC8D6319435C6C0086E28B /* BookCollectionCell.h */,
+				7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */,
 			);
 			path = "图书馆";
 			sourceTree = "<group>";
@@ -1711,6 +1718,7 @@
 		77B90458192C433F0062237D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7DC4C58C19443D97007C6888 /* loading@2x.gif */,
 				77E073EA1940436E0098BA09 /* btn_emoji@2x.png */,
 				77E073EB1940436E0098BA09 /* btn_send@2x.png */,
 				77E073EC1940436E0098BA09 /* selfInfo.plist */,
@@ -1761,6 +1769,11 @@
 		77B9045B192C434B0062237D /* 订阅 */ = {
 			isa = PBXGroup;
 			children = (
+				771EDF49193F37A200A3DCBB /* SubscribeCell.h */,
+				771EDF4A193F37A200A3DCBB /* SubscribeCell.m */,
+				771EDF46193F37A200A3DCBB /* NewsListView.h */,
+				771EDF47193F37A200A3DCBB /* NewsListView.m */,
+				771EDF48193F37A200A3DCBB /* NewsListView.xib */,
 				77E0763F1940445C0098BA09 /* MySubscribeCell.h */,
 				77E076401940445C0098BA09 /* MySubscribeCell.m */,
 				77E076411940445C0098BA09 /* SubscribeVC.h */,
@@ -2329,11 +2342,6 @@
 			isa = PBXGroup;
 			children = (
 				771EDF45193F37A200A3DCBB /* News.storyboard */,
-				771EDF46193F37A200A3DCBB /* NewsListView.h */,
-				771EDF47193F37A200A3DCBB /* NewsListView.m */,
-				771EDF48193F37A200A3DCBB /* NewsListView.xib */,
-				771EDF49193F37A200A3DCBB /* SubscribeCell.h */,
-				771EDF4A193F37A200A3DCBB /* SubscribeCell.m */,
 				7DD8699A192DB6D700D4ADAA /* NewsDetailVC.h */,
 				7DD8699B192DB6D700D4ADAA /* NewsDetailVC.m */,
 				7DD8699C192DB6D700D4ADAA /* NewsListTVC.h */,
@@ -2513,6 +2521,7 @@
 				77E07507194043A90098BA09 /* f022@2x.png in Resources */,
 				77E07515194043A90098BA09 /* f029@2x.png in Resources */,
 				77E07551194043A90098BA09 /* f059@2x.png in Resources */,
+				7DC4C58D19443D97007C6888 /* loading@2x.gif in Resources */,
 				77E074F2194043A90098BA09 /* f012.png in Resources */,
 				77E07564194043A90098BA09 /* f069.png in Resources */,
 				77E0753C194043A90098BA09 /* f049.png in Resources */,
@@ -2635,7 +2644,7 @@
 				77E0753B194043A90098BA09 /* f048@2x.png in Resources */,
 				77E0755F194043A90098BA09 /* f066@2x.png in Resources */,
 				77E0757C194043A90098BA09 /* f081.png in Resources */,
-				77E0762F194044340098BA09 /* BookView.xib in Resources */,
+				77E0762F194044340098BA09 /* BookCollectionCell.xib in Resources */,
 				77E0758A194043A90098BA09 /* f088.png in Resources */,
 				77E072C8194043140098BA09 /* TreeHole.storyboard in Resources */,
 				77E0753E194043A90098BA09 /* f050.png in Resources */,
@@ -2680,6 +2689,7 @@
 				77E073E71940435D0098BA09 /* ZsndTreehole.pb.m in Sources */,
 				77E073C01940435D0098BA09 /* ApiMGradeSearch.m in Sources */,
 				7DFF3F53192E06DC00E146ED /* NewsCell.m in Sources */,
+				7DBC8D6519435C6C0086E28B /* BookCollectionCell.m in Sources */,
 				77E0740E194043A20098BA09 /* NSString+unicode.m in Sources */,
 				77E07616194044290098BA09 /* LostCell.m in Sources */,
 				77E075D3194043DA0098BA09 /* BBSVC.m in Sources */,

@@ -21,13 +21,13 @@
 	 * @param select  回调函数
 	 * @callback MNewsList_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select ;
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select page:(NSInteger) page ;
 	/**
 	 * 新闻列表(分页)
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @callback MNewsList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select ;
+    -(UpdateOne*)load:(id)delegate selecter:(SEL)select page:(NSInteger) page;
 
 @end

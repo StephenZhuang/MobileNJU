@@ -22,6 +22,7 @@
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+        
 		UpdateOne *updateone=[[UpdateOne alloc] init:@"MSchedule" params:array delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}

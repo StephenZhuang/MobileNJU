@@ -9,7 +9,9 @@
 #import "NewsListTVC.h"
 #import "NewsDetailVC.h"
 #import "NewsCell.h"
+#import "ZsndNews.pb.h"
 @interface NewsListTVC ()<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic,strong)NSMutableArray* newsList;
 @end
 
 @implementation NewsListTVC
@@ -31,16 +33,51 @@
     self.currentUrl = self.navigationController.title;
     if (self.jump) {
         [self performSegueWithIdentifier:@"detail" sender:nil];
-        
         [self setTitle:@""];
         [self setSubTitle:@""];
     } else {
         [self setTitle:@"新闻列表"];
         [self setSubTitle:@"官方新闻"];
     }
-   
 }
-    
+- (NSMutableArray *)newsList
+{
+    if (!_newsList) {
+        _newsList = [[NSMutableArray alloc]init];
+    }
+    return _newsList;
+}
+- (void)loadData
+{
+    [[ApisFactory getApiMNewsList] load:self selecter:@selector(disposMessage:) page:page];
+}
+- (void)disposMessage:(Son *)son
+{
+    if ([son getError] == 0) {
+        if ([[son getMethod] isEqualToString:@"MNewsList"]) {
+            //获得返回类
+            MNewsList_Builder *newsList = (MNewsList_Builder *)[son getBuild];
+            for (MNews* news in newsList.newsList) {
+                BOOL has = NO;
+                for (MNews* currentNews in self.newsList) {
+                    if ([news.id isEqualToString:currentNews.id]) {
+                        has = YES;
+                        break;
+                    }
+                }
+                if (!has) {
+                    [self.newsList addObject:news];
+                }
+            }
+            if (page==1) {
+                [self doneWithView:_header];
+            } else {
+                [self doneWithView:_footer];
+            }
+        }
+    }
+}
+
 //       // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -72,7 +109,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 10;
+    return [self.newsList count];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -81,16 +118,22 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    self.currentUrl = [NSString stringWithFormat:@"%d",indexPath.row];
+    MNews* new = [self.newsList objectAtIndex:indexPath.row];
+    self.currentUrl = new.url;
+    NSLog(@"%@",new.url);
     [self performSegueWithIdentifier:@"detail" sender:nil];
-    
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"news" forIndexPath:indexPath];
-    
+    MNews* new = [self.newsList objectAtIndex:indexPath.row];
+    cell.title = new.title;
+    cell.type = new.source;
+    cell.detail = new.content;
+    cell.date = new.time;
+    cell.imageName = new.img;
+    NSLog(@"imageName%@",new.img);
     return cell;
 }
 

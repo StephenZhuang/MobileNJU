@@ -94,6 +94,12 @@
     }
 }
 
+- (void)setSelectedIndex:(int)selectedIndex
+{
+    _selectedIndex = selectedIndex;
+    [self buttonAction:[buttonArray objectAtIndex:selectedIndex]];
+}
+
 
 - (void)drawLine:(CGFloat)x end:(CGFloat)y
 {
