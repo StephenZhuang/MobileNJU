@@ -149,34 +149,25 @@
     if (topic.hasPraise == 0) {
         [button setTitle:[NSString stringWithFormat:@"%d" , topic.praiseCnt + 1] forState:UIControlStateNormal];
         [newTopic setPraiseCnt:topic.praiseCnt +1];
-        [newTopic setCommentCnt:topic.commentCnt];
         [newTopic setHasPraise:1];
-        [newTopic setId:topic.id];
-        [newTopic setTitle:topic.title];
-        [newTopic setContent:topic.content];
-        [newTopic setTime:topic.time];
-        [newTopic setImgs:topic.imgs];
-        [newTopic setCreateTime:topic.createTime];
-        [newTopic setAuthor:topic.author];
         
-        [self.dataArray replaceObjectAtIndex:button.tag withObject:newTopic.build];
     } else {
         [button setTitle:[NSString stringWithFormat:@"%d" , topic.praiseCnt - 1] forState:UIControlStateNormal];
         [newTopic setPraiseCnt:topic.praiseCnt - 1];
-        [newTopic setCommentCnt:topic.commentCnt];
         [newTopic setHasPraise:0];
-        [newTopic setId:topic.id];
-        [newTopic setTitle:topic.title];
-        [newTopic setContent:topic.content];
-        [newTopic setTime:topic.time];
-        [newTopic setImgs:topic.imgs];
-        [newTopic setCreateTime:topic.createTime];
-        [newTopic setAuthor:topic.author];
-        
-        [self.dataArray replaceObjectAtIndex:button.tag withObject:newTopic.build];
     }
+    [newTopic setCommentCnt:topic.commentCnt];
+    [newTopic setId:topic.id];
+    [newTopic setTitle:topic.title];
+    [newTopic setContent:topic.content];
+    [newTopic setTime:topic.time];
+    [newTopic setImgs:topic.imgs];
+    [newTopic setCreateTime:topic.createTime];
+    [newTopic setAuthor:topic.author];
+    
+    [self.dataArray replaceObjectAtIndex:button.tag withObject:newTopic.build];
 //    [self.tableView reloadData];
-    [[ApisFactory getApiMPraise] load:self selecter:@selector(disposMessage:) id:newTopic.id type:newTopic.hasPraise == 0?2:1];
+    [[ApisFactory getApiMPraise] load:self selecter:@selector(disposMessage:) id:topic.id type:topic.hasPraise == 0?1:2];
 }
 
 - (IBAction)deleteAction:(id)sender
