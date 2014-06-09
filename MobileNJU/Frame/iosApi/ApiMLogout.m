@@ -1,5 +1,5 @@
 //
-//  ApiMAddLostAndFound
+//  ApiMLogout
 //
 //  Created by ryan on 2014-06-09 10:27:58
 //  Copyright (c) ryan All rights reserved.
@@ -9,25 +9,25 @@
    
 */
 
-#import "ApiMAddLostAndFound.h"
+#import "ApiMLogout.h"
 
-@implementation ApiMAddLostAndFound
+@implementation ApiMLogout
 
 
 	/**
-	 *  添加失物招领:MAddLostOrFound /mobile?methodno=MAddLostAndFound&debug=&appid=&deviceid=&userid=&verify=
+	 * 退出登录   /mobile?methodno=MLogout&debug=1&deviceid=&appid=&userid=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @callback MRet_Builder
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddLostAndFound" params:array delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MLogout" params:array delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 
 	/**
-	 *  添加失物招领:MAddLostOrFound /mobile?methodno=MAddLostAndFound&debug=&appid=&deviceid=&userid=&verify=
+	 * 退出登录   /mobile?methodno=MLogout&debug=1&deviceid=&appid=&userid=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @callback MRet_Builder

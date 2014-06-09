@@ -1,7 +1,7 @@
 //
 //  ApiMAddLostAndFound
 //
-//  Created by ryan on 2014-06-04 18:30:33
+//  Created by ryan on 2014-06-09 10:27:58
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -16,14 +16,14 @@
 
 
 	/**
-	 *  添加失物招领:MAddLostOrFound 
+	 *  添加失物招领:MAddLostOrFound /mobile?methodno=MAddLostAndFound&debug=&appid=&deviceid=&userid=&verify=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @callback MRet_Builder
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select ;
 	/**
-	 *  添加失物招领:MAddLostOrFound 
+	 *  添加失物招领:MAddLostOrFound /mobile?methodno=MAddLostAndFound&debug=&appid=&deviceid=&userid=&verify=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @callback MRet_Builder
