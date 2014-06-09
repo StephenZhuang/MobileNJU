@@ -11,6 +11,5 @@
 
 @interface NewMessageCell : UITableViewCell
 @property (nonatomic , strong) IBOutlet UILabel *titleLabel;
-@property (nonatomic , strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic , strong) IBOutlet HBCoreLabel *contentLabel;
 @end

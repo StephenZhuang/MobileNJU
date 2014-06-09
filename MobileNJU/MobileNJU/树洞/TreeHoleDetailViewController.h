@@ -7,8 +7,13 @@
 //
 
 #import "RefreshTableViewController.h"
+#import "ZsndTreehole.pb.h"
 
-@interface TreeHoleDetailViewController : RefreshTableViewController
+@interface TreeHoleDetailViewController : RefreshTableViewController<UITextFieldDelegate>
 @property (nonatomic , weak) IBOutlet UIView *bottomView;
 @property (nonatomic , weak) IBOutlet UITextField *messageField;
+@property (nonatomic , copy) NSString *treeHoleid;
+@property (nonatomic , strong) MTopic_Builder *topic;
+@property (nonatomic , copy) NSString *targetid;
+@property (nonatomic , copy) NSString *commentid;
 @end

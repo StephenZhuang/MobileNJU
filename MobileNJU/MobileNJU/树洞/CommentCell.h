@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FaceAndTextLabel.h"
+#import "HBCoreLabel.h"
+#import "ZsndTreehole.pb.h"
 
 @interface CommentCell : UITableViewCell
-@property (nonatomic , strong) IBOutlet FaceAndTextLabel *commentLabel;
+@property (nonatomic , strong) IBOutlet HBCoreLabel *commentLabel;
+- (void)setComment:(MComment *)comment;
+- (CGFloat)matchContent:(MComment *)comment;
 @end

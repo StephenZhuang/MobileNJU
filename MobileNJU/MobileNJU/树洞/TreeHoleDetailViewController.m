@@ -9,8 +9,8 @@
 #import "TreeHoleDetailViewController.h"
 #import "TreeHoleCell.h"
 #import "CommentCell.h"
-#import "FaceAndTextLabel.h"
 #import "EmojiViewController.h"
+#import "NSString+unicode.h"
 
 @interface TreeHoleDetailViewController ()
 
@@ -33,10 +33,38 @@
     // Do any additional setup after loading the view.
     [self setTitle:@"树洞详情"];
     [self setSubTitle:@"您可以回复和点赞"];
+    _targetid = @"";
+    _commentid = @"";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)loadData
+{
+    [[ApisFactory getApiMTreeHole] load:self selecter:@selector(disposMessage:) id:_treeHoleid];
+}
+
+- (void)addFooter
+{
+    
+}
+
+- (void)disposMessage:(Son *)son
+{
+    if ([son getError] == 0) {
+        if ([[son getMethod] isEqualToString:@"MTreeHole"]) {
+            _topic = (MTopic_Builder *)[son getBuild];
+            [self.dataArray removeAllObjects];
+            [self.dataArray addObjectsFromArray:_topic.commentList];
+        } else if ([[son getMethod] isEqualToString:@"MTreeHoleComment"]) {
+            [self loadData];
+        }
+    }
+    if ([[son getMethod] isEqualToString:@"MTreeHole"]) {
+        [self doneWithView:_header];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -57,20 +85,22 @@
 {
     if (indexPath.section == 0) {
         TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
-        NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"http://img0.bdstatic.com/img/image/shouye/dengni36.jpg",@"http://imgt8.bdstatic.com/it/u=2,3094647973&fm=19&gp=0.jpg",@"http://imgt8.bdstatic.com/it/u=2,3096148905&fm=19&gp=0.jpg", nil];
-        //    NSMutableArray *array = [[NSMutableArray alloc] init];
+        [cell.contentLabel setText:[_topic.content replaceUnicode]];
+        
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        if (_topic.imgs.length > 0) {
+            NSArray *imgStrArr = [_topic.imgs componentsSeparatedByString:@","];
+            
+            for (NSString *str in imgStrArr) {
+                [array addObject:[ToolUtils getImageUrlWtihString:str].absoluteString];
+            }
+        }
         [cell setImageArray:array];
-        return CGRectGetMaxY(cell.zanButton.frame) + 10;
+        return CGRectGetMaxY(cell.commentButton.frame) + 10;
     } else {
         CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
-        if (!cell.commentLabel) {
-            cell.commentLabel = [[FaceAndTextLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 500)];
-        }
-//        FaceAndTextLabel * label  = [[FaceAndTextLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 500)];
-        cell.commentLabel.font = [UIFont systemFontOfSize:14];
-        [cell.commentLabel  setFaceAndText:@"姑妈[月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗][月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗]"];
-        return cell.commentLabel.frame.size.height + 20;
-        return 44;
+        MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
+        return [cell matchContent:comment] + 20;
     }
 }
 
@@ -80,29 +110,45 @@
         
         TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
         
-        //    NSMutableArray *array = [[NSMutableArray alloc] init];
-        NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"http://img0.bdstatic.com/img/image/shouye/dengni36.jpg",@"http://img0.bdstatic.com/img/image/shouye/mnwlmn-9569205918.jpg",@"http://img0.bdstatic.com/img/image/shouye/mvznns.jpg",@"http://img0.bdstatic.com/img/image/shouye/fsfss001.jpg", nil];
+        [cell.titleLabel setText:[_topic.title replaceUnicode]];
+        [cell.contentLabel setText:[_topic.content replaceUnicode]];
+        [cell.timeLabel setText:_topic.time];
+        [cell.zanButton setTag:indexPath.row];
+        [cell.commentButton setTag:indexPath.row];
+        [cell.deleteButton setTag:indexPath.row];
+        [cell.zanButton setTitle:[NSString stringWithFormat:@"%i" , _topic.praiseCnt] forState:UIControlStateNormal];
+        [cell.commentButton setTitle:[NSString stringWithFormat:@"%i" , _topic.commentCnt] forState:UIControlStateNormal];
+        
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        if (_topic.imgs.length > 0) {
+            NSArray *imgStrArr = [_topic.imgs componentsSeparatedByString:@","];
+            
+            for (NSString *str in imgStrArr) {
+                [array addObject:[ToolUtils getImageUrlWtihString:str].absoluteString];
+            }
+        }
         [cell setImageArray:array];
         return cell;
     } else {
         CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
-//        for (UIView *view in cell.contentView.subviews) {
-//            [view removeFromSuperview];
-//        }
-        
-        if (!cell.commentLabel) {
-            cell.commentLabel = [[FaceAndTextLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 500)];
-            [cell.contentView addSubview:cell.commentLabel];
-        }
-        //        FaceAndTextLabel * label  = [[FaceAndTextLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 500)];
-        cell.commentLabel.font = [UIFont systemFontOfSize:14];
-        [cell.commentLabel  setFaceAndText:@"姑妈[月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗][月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗]"];
-        
-//        FaceAndTextLabel * label  = [[FaceAndTextLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 500)];
-//        label.font = [UIFont systemFontOfSize:14];
-//        [label  setFaceAndText:@"姑妈[月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗][月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗]"];
-//        [cell.contentView addSubview:label];
+        MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
+        [cell setComment:comment];
+
         return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
+        if (![comment.userid1 isEqualToString:[ToolUtils getLoginId]]) {            
+            _targetid = comment.userid1;
+            _commentid = comment.id;
+            
+            [_messageField setPlaceholder:[NSString stringWithFormat:@"回复 %@：" , comment.nickname1]];
+            [_messageField becomeFirstResponder];
+        }
     }
 }
 
@@ -119,7 +165,8 @@
 }
 #pragma mark 键盘即将退出
 - (void)keyBoardWillHide:(NSNotification *)note{
-    
+    _targetid = @"";
+    _commentid = @"";
     [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
         self.view.transform = CGAffineTransformIdentity;
     }];
@@ -137,6 +184,40 @@
     [self.navigationController presentViewController:nav animated:YES completion:^(){
         
     }];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self sendAction:nil];
+    return YES;
+}
+
+- (IBAction)sendAction:(id)sender
+{
+    NSString *string = _messageField.text;
+    if (string.length > 0) {
+        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_topic.id content:[string utf8ToUnicode] reply:_targetid commentid:@""];
+    }
+    [_messageField resignFirstResponder];
+    [_messageField setText:@""];
+}
+
+- (IBAction)zanAction:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    //0:没赞 1：已赞
+    if (_topic.hasPraise == 0) {
+        [button setTitle:[NSString stringWithFormat:@"%d" , _topic.praiseCnt + 1] forState:UIControlStateNormal];
+        [_topic setPraiseCnt:_topic.praiseCnt +1];
+        [_topic setHasPraise:1];
+
+    } else {
+        [button setTitle:[NSString stringWithFormat:@"%d" , _topic.praiseCnt - 1] forState:UIControlStateNormal];
+        [_topic setPraiseCnt:_topic.praiseCnt - 1];
+        [_topic setHasPraise:0];
+    }
+    //    [self.tableView reloadData];
+    [[ApisFactory getApiMPraise] load:self selecter:@selector(disposMessage:) id:_topic.id type:_topic.hasPraise == 0?2:1];
 }
 
 - (void)didReceiveMemoryWarning
