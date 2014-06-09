@@ -103,6 +103,7 @@ UIView* view;
 - (void)addMask
 {
 //    if (!_view) {
+    [self.maskView setHidden:NO];
         CGRect frame = CGRectMake(0, -20, 0, 0);
     frame.size = self.navigationController.navigationBar.frame.size;
 
@@ -118,8 +119,25 @@ UIView* view;
 //    }
 
 }
+
+
+- (void) waiting
+{
+    self.loginIndicator = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [self.loginIndicator setColor:[UIColor purpleColor]];
+    [self.view addSubview:self.loginIndicator];
+    [self.loginIndicator setCenter:self.view.center];
+    [self.loginIndicator startAnimating];
+    
+}
+
+- (void)disposMessage:(Son *)son
+{
+    
+}
 - (void)removeMask
 {
+    [self.maskView setHidden:YES];
     [view setHidden:YES];
     [view removeFromSuperview];
 }

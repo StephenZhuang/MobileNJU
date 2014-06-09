@@ -8,7 +8,7 @@
 
 #import "BBSDetail.h"
 
-@interface BBSDetail ()
+@interface BBSDetail ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
@@ -29,7 +29,8 @@
     [super viewDidLoad];
     [self setTitle:@"百合十大"];
     [self setSubTitle:@"显示南大每天十条新闻"];
-
+    [self.webView setDelegate:self];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     // Do any additional setup after loading the view.
 }
 
@@ -49,5 +50,14 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self.loginIndicator removeFromSuperview];
+}
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [self waiting];
+}
 
 @end

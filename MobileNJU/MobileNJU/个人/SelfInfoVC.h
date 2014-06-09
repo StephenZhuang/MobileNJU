@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SelfInfoVC : UIViewController
+#import "BaseViewController.h"
+@interface SelfInfoVC : BaseViewController
 @property(nonatomic,strong)NSArray* infos;
+@property (nonatomic)int flowerCount;
 @end

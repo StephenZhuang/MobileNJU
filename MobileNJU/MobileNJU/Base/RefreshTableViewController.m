@@ -91,7 +91,6 @@ NSString *const MJTableViewCellIdentifier = @"Cell";
         hasMore = YES;
         [self loadData];
         
-        
         NSLog(@"%@----开始进入刷新状态", refreshView.class);
     };
     header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
@@ -123,7 +122,6 @@ NSString *const MJTableViewCellIdentifier = @"Cell";
 - (void)doneWithView:(MJRefreshBaseView *)refreshView
 {
     // 刷新表格
-    
     [self.tableView reloadData];
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [refreshView endRefreshing];
@@ -142,7 +140,6 @@ NSString *const MJTableViewCellIdentifier = @"Cell";
         int random = arc4random_uniform(1000000);
         [self.dataArray addObject:[NSString stringWithFormat:@"随机数据---%d", random]];
     }
-    
     [self performSelector:@selector(getData) withObject:nil afterDelay:2];
     
 }

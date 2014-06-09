@@ -7,10 +7,12 @@
 //
 
 #import "BBSVC.h"
+#import "BBSDetail.h"
 #import "BBSCell.h"
-#import "ZsndSystem.pb.h"
+#import "ZsndNews.pb.h"
 @interface BBSVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSArray* colorArray;
+@property (nonatomic,strong)NSArray* newsList;
 @end
 
 @implementation BBSVC
@@ -22,13 +24,10 @@
     [self setSubTitle:@"显示南大每天十条新闻"];
     self.colorArray = [[NSArray alloc]initWithObjects:@"一",@"二",@"三",@"四",@"五",@"六",@"七",@"八",@"九",@"十", nil];
     // Do any additional setup after loading the view.
-    [[ApisFactory getApiMBaiheNewsList] load:self selecter:@selector(disposMessage:)];
-
+//    [self waiting];
+//    [[ApisFactory getApiMBaiheNewsList] load:self selecter:@selector(disposMessage:)];
+    
 }
-
-
-
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -36,16 +35,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
+- (void)loadData
+{
+    [[ApisFactory getApiMBaiheNewsList] load:self selecter:@selector(disposMessage:)];
+}
+- (void)addFooter
+{
+    
+}
 #pragma - mark api回调
 - (void)disposMessage:(Son *)son
 {
+//    [self.loginIndicator removeFromSuperview];
     if ([son getError] == 0) {
         //判断接口名
         if ([[son getMethod] isEqualToString:@"MBaiheNewsList"]) {
-            //获得返回类
-            
+            MNewsList_Builder* list = (MNewsList_Builder*)[son getBuild];
+            self.newsList = list.newsList;
+            [self doneWithView:_header];
         }
     }
 }
@@ -60,13 +67,12 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (IBAction)goToDetail:(id)sender {
-    [self performSegueWithIdentifier:@"bbsDetail" sender:sender];
-}
+
+
 #pragma mark -table
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.newsList.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -87,11 +93,15 @@
     cell.Content.layer.borderWidth=1.0;
     cell.Content.layer.cornerRadius=5.0;
     [cell.idImage setImage:[UIImage imageNamed:[self.colorArray objectAtIndex:indexPath.row]]];
+    MNews* new = [self.newsList objectAtIndex:indexPath.row];
+    [cell.titleLabel setText:new.title];
+    [cell.commentCountLabel setText:[NSString stringWithFormat:@"%d",new.comment]];
+    [cell.authorLabel setText:new.author];
+    cell.url = new.url;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     BBSCell* bbsCell = (BBSCell*)cell;
     bbsCell.Content.transform = CGAffineTransformMakeTranslation(300, 0);
     [UIView animateWithDuration:0.3 delay:indexPath.row*0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
@@ -102,4 +112,18 @@
 
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"bbsDetail" sender:indexPath];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"bbsDetail"]) {
+        BBSDetail* detail = (BBSDetail*)segue.destinationViewController;
+        MNews* new = [self.newsList objectAtIndex:((NSIndexPath*)sender).row];
+        NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",new.url]];
+        [detail setUrl:url];
+    }
+}
 @end

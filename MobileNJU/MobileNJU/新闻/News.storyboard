@@ -9,49 +9,73 @@
         <scene sceneID="qnI-ac-vKk">
             <objects>
                 <tableViewController id="aV3-aa-XTB" customClass="NewsListTVC" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7OM-jz-Dga">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7OM-jz-Dga">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.96470588235294119" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="news" rowHeight="100" id="4Of-jL-cAU" customClass="NewsCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="100"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="news" rowHeight="80" id="4Of-jL-cAU" customClass="NewsCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Of-jL-cAU" id="736-JS-d2X">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cj9-c3-eu9">
-                                            <rect key="frame" x="20" y="7" width="85" height="85"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cj9-c3-eu9">
+                                            <rect key="frame" x="15" y="5" width="70" height="70"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="uuz-XE-ggR"/>
+                                                <constraint firstAttribute="height" constant="70" id="zUq-To-wIg"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="党委新闻" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEt-bW-SiM">
-                                            <rect key="frame" x="113" y="7" width="114" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="党委新闻" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEt-bW-SiM">
+                                            <rect key="frame" x="88" y="7" width="114" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="114" id="FZG-xw-haY"/>
+                                                <constraint firstAttribute="height" constant="21" id="y5e-eO-rfu"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2014-05-21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irz-nc-bfm">
-                                            <rect key="frame" x="233" y="7" width="114" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-05-21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irz-nc-bfm">
+                                            <rect key="frame" x="233" y="7" width="65" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="南京大学举行党委书记任免大会" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOi-Yo-jZk">
-                                            <rect key="frame" x="113" y="29" width="187" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="南京大学举行党委书记任免大会" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOi-Yo-jZk">
+                                            <rect key="frame" x="88" y="25" width="212" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="扬子晚报网5月21日讯 据南京日报官方微博5月21日下午2点46分发布消息称南京大学换书记了。“南京大学党委书记任免大会正在进行。张异宾(图" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="187" translatesAutoresizingMaskIntoConstraints="NO" id="qTQ-tP-A2H">
-                                            <rect key="frame" x="113" y="58" width="187" height="34"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扬子晚报网5月21日讯 据南京日报官方微博5月21日下午2点46分发布消息称南京大学换书记了。“南京大学党委书记任免大会正在进行。张异宾(图" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="212" translatesAutoresizingMaskIntoConstraints="NO" id="qTQ-tP-A2H">
+                                            <rect key="frame" x="88" y="38" width="212" height="34"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="fOi-Yo-jZk" firstAttribute="top" secondItem="736-JS-d2X" secondAttribute="top" constant="25" id="3BI-17-9PA"/>
+                                        <constraint firstItem="cj9-c3-eu9" firstAttribute="top" secondItem="736-JS-d2X" secondAttribute="top" constant="5" id="3zm-ca-Lwh"/>
+                                        <constraint firstItem="OEt-bW-SiM" firstAttribute="top" secondItem="cj9-c3-eu9" secondAttribute="top" constant="2" id="5bP-k7-ldz"/>
+                                        <constraint firstItem="qTQ-tP-A2H" firstAttribute="bottom" secondItem="cj9-c3-eu9" secondAttribute="bottom" constant="-3" id="7rJ-5r-5xK"/>
+                                        <constraint firstItem="OEt-bW-SiM" firstAttribute="baseline" secondItem="irz-nc-bfm" secondAttribute="baseline" id="9f8-mk-sxh"/>
+                                        <constraint firstItem="OEt-bW-SiM" firstAttribute="top" secondItem="irz-nc-bfm" secondAttribute="top" id="Hyc-cf-jse"/>
+                                        <constraint firstItem="irz-nc-bfm" firstAttribute="leading" secondItem="OEt-bW-SiM" secondAttribute="trailing" constant="31" id="IKa-Z7-FQ4"/>
+                                        <constraint firstItem="qTQ-tP-A2H" firstAttribute="trailing" secondItem="fOi-Yo-jZk" secondAttribute="trailing" id="Nf7-uA-kdn"/>
+                                        <constraint firstItem="qTQ-tP-A2H" firstAttribute="leading" secondItem="fOi-Yo-jZk" secondAttribute="leading" id="QsT-4z-cwd"/>
+                                        <constraint firstItem="OEt-bW-SiM" firstAttribute="leading" secondItem="cj9-c3-eu9" secondAttribute="trailing" constant="3" id="liW-qa-zBb"/>
+                                        <constraint firstItem="cj9-c3-eu9" firstAttribute="leading" secondItem="736-JS-d2X" secondAttribute="leading" constant="15" id="pmh-MX-TRU"/>
+                                        <constraint firstItem="qTQ-tP-A2H" firstAttribute="top" secondItem="irz-nc-bfm" secondAttribute="bottom" constant="10" id="u6Y-HN-Y8Y"/>
+                                        <constraint firstAttribute="trailing" secondItem="fOi-Yo-jZk" secondAttribute="trailing" constant="20" symbolic="YES" id="yFf-1j-mmb"/>
+                                        <constraint firstItem="fOi-Yo-jZk" firstAttribute="leading" secondItem="OEt-bW-SiM" secondAttribute="leading" id="ytI-b9-6lR"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="newsDate" destination="irz-nc-bfm" id="njJ-Yv-BjP"/>
@@ -76,6 +100,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableView" destination="7OM-jz-Dga" id="Qw3-d0-8ko"/>
                         <segue destination="OTm-be-dhq" kind="push" identifier="detail" id="QkL-gf-ite"/>
                     </connections>
                 </tableViewController>
@@ -374,7 +399,9 @@
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="240" translatesAutoresizingMaskIntoConstraints="NO" id="ReD-gO-8OW">
                                                             <rect key="frame" x="20" y="218" width="240" height="53"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <string key="text">想出国旅行？先来测试一下你的“旅行商数”吧！想出国旅行？先来测试你的“旅行商数”吧！想出国旅行？？</string>
+                                                            <string key="text">想出国旅行？先来测试一下你的“旅行
+商数”吧！想出国旅行？先来测试你的“旅行商
+数”吧！想出国旅行？？</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -632,6 +659,9 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="onTintColor" red="0.5450980392" green="0.2470588235" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="changeState:" destination="bZY-YY-1nq" eventType="valueChanged" id="uFq-Ne-kVj"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -650,6 +680,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="delegate" destination="Asu-PT-jhq" id="Kfh-3j-7hA"/>
                                             <outlet property="myImageView" destination="Ape-Fz-xhj" id="zop-Y0-vyH"/>
                                             <outlet property="subscribeSwitch" destination="bFp-p4-5Ad" id="0Af-Uy-W4c"/>
                                             <outlet property="typeDetail" destination="MFA-WX-guh" id="Oxf-cY-com"/>
@@ -679,8 +710,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="allSubscribeTable" destination="c6l-Zy-le4" id="JYy-Ls-ROP"/>
-                        <outlet property="mySubscribeTable" destination="Y15-rh-h6X" id="9GO-Jt-pG8"/>
+                        <outlet property="allSubscribeTable" destination="Y15-rh-h6X" id="gA0-F6-GLZ"/>
+                        <outlet property="mySubscribeTable" destination="c6l-Zy-le4" id="onN-4K-N2L"/>
                         <outlet property="segmentView" destination="d2y-WH-7lp" id="ZeZ-TM-wCO"/>
                     </connections>
                 </viewController>

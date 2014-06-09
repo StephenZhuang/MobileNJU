@@ -9,11 +9,11 @@
 #import "TelephoneInfoVC.h"
 #import "DepartmentCell.h"
 #import "PhoneNumCell.h"
+#import "ZsndSystem.pb.h"
 @interface TelephoneInfoVC ()<UITableViewDelegate,UITableViewDataSource>{
     NSMutableArray* dataArray;
 
 }
-@property (weak, nonatomic) IBOutlet UITableView *phoneTableView;
 @property (assign) BOOL isOpen;
 @property (nonatomic,retain)NSIndexPath *selectIndex;
 @end
@@ -25,17 +25,15 @@
 {
     [super viewDidLoad];
     dataArray = [[NSMutableArray alloc]init];
-    self.phoneTableView.sectionFooterHeight = 0;
-    self.phoneTableView.sectionHeaderHeight = 0;
+    self.tableView.sectionFooterHeight = 0;
+    self.tableView.sectionHeaderHeight = 0;
     self.isOpen = NO;
     
     
     [self setTitle:@"部门电话"];
     [self setSubTitle:@"各个部门电话"];
-    [self loadData];
     
 }
-
 
 
 /*
@@ -47,16 +45,41 @@
 }
 - (void) loadData
 {
-    NSArray* keys = [[NSArray alloc]initWithObjects:@"name" ,@"list" ,nil];
-    for (int i = 0 ; i < 5 ; i ++){
-        NSMutableArray* list = [[NSMutableArray alloc]init];
-        for (int j = 0 ; j < 5; j++){
-            [list addObject:@"123456" ];
+    [[ApisFactory getApiMContacts]load:self selecter:@selector(disposMessage:)];
+//    NSArray* keys = [[NSArray alloc]initWithObjects:@"name" ,@"list" ,nil];
+//    for (int i = 0 ; i < 5 ; i ++){
+//        NSMutableArray* list = [[NSMutableArray alloc]init];
+//        for (int j = 0 ; j < 5; j++){
+//            [list addObject:@"123456" ];
+//        }
+//        NSArray* value = [[NSArray alloc]initWithObjects:@"团委",list, nil];
+//        NSDictionary* dic = [[NSDictionary alloc]initWithObjects:value forKeys:keys];
+//        [dataArray addObject:dic];
+//    }
+}
+- (void)addFooter
+{
+    
+}
+
+- (void)disposMessage:(Son *)son
+{
+    if ([son getError] == 0) {
+            if ([[son getMethod] isEqualToString:@"MContacts"]) {
+                //获得返回类
+                MContactList_Builder *contacts = (MContactList_Builder *)[son getBuild];
+                NSLog(@"%@",contacts.name);
+                NSLog(@"%d",contacts.contactList.count);
+                
+//                NSArray* keys = [[NSArray alloc]initWithObjects:@"name" ,@"list" ,nil];
+//                for (MContactList* list in contacts.contactList) {
+//                    NSArray* value = [[NSArray alloc]initWithObjects:list.name,list.contactList ,nil];
+//                    NSDictionary* dic = [[NSDictionary alloc]initWithObjects:value forKeys:keys];
+//                    [dataArray addObject:dic];
+//                }
+                [self doneWithView:_header];
+            }
         }
-        NSArray* value = [[NSArray alloc]initWithObjects:@"团委",list, nil];
-        NSDictionary* dic = [[NSDictionary alloc]initWithObjects:value forKeys:keys];
-        [dataArray addObject:dic];
-    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -106,7 +129,16 @@
         static NSString *CellIdentifier = @"phone";
         PhoneNumCell *cell = (PhoneNumCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         NSArray *list = [[dataArray objectAtIndex:self.selectIndex.section] objectForKey:@"list"];
-        cell.phoneLabel.text = [list objectAtIndex:indexPath.row-1];
+        MContact* contact = [list objectAtIndex:indexPath.row-1];
+        
+        cell.locationLabel.text = contact.desc;
+        cell.departmentLabel.text = contact.name;
+        NSMutableString* str = [[NSMutableString alloc]init];
+        for (NSString* each_phone in contact.phoneList) {
+            [str appendString:each_phone];
+            [str appendString:@" "];
+        }
+        cell.phoneLabel.text = str;
         return cell;
     }else
     {
@@ -155,10 +187,10 @@
 {
     self.isOpen = firstDoInsert;
     
-    DepartmentCell *cell = (DepartmentCell *)[self.phoneTableView cellForRowAtIndexPath:self.selectIndex];
+    DepartmentCell *cell = (DepartmentCell *)[self.tableView cellForRowAtIndexPath:self.selectIndex];
     [cell changeArrowWithUp:firstDoInsert];
     
-    [self.phoneTableView beginUpdates];
+    [self.tableView beginUpdates];
     
     NSInteger section = self.selectIndex.section;
     NSInteger contentCount = [[[dataArray objectAtIndex:section] objectForKey:@"list"] count];
@@ -169,21 +201,21 @@
 	}
 	
 	if (firstDoInsert)
-    {   [self.phoneTableView insertRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationTop];
+    {   [self.tableView insertRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationTop];
     }
 	else
     {
-        [self.phoneTableView deleteRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView deleteRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationTop];
     }
     
 	
-	[self.phoneTableView endUpdates];
+	[self.tableView endUpdates];
     if (nextDoInsert) {
         self.isOpen = YES;
-        self.selectIndex = [self.phoneTableView indexPathForSelectedRow];
+        self.selectIndex = [self.tableView indexPathForSelectedRow];
         [self didSelectCellRowFirstDo:YES nextDo:NO];
     }
-    if (self.isOpen) [self.phoneTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionTop animated:YES];
+    if (self.isOpen) [self.tableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 /*

@@ -57,29 +57,34 @@
                                     <rect key="frame" x="0.0" y="67" width="320" height="120"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lk9-oo-ciP">
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lk9-oo-ciP">
                                             <rect key="frame" x="40" y="7" width="240" height="46"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.5" alpha="0.0" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="5kT-UA-fwA"/>
                                             </constraints>
-                                            <state key="normal" title="修改账号及密码">
+                                            <state key="normal" title="修改账号及密码" backgroundImage="purpleButton">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <state key="highlighted" backgroundImage="purpleButtonhighlighted"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9D-Ct-5MM">
                                             <rect key="frame" x="40" y="61" width="240" height="46"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.0" green="0.640625" blue="0.640625" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="46" id="ygS-Vz-UsM"/>
                                             </constraints>
-                                            <state key="normal" title="注销登录">
+                                            <state key="normal" title="注销登录" backgroundImage="greenButton">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <state key="highlighted" backgroundImage="greenButtonhighlited"/>
+                                            <connections>
+                                                <action selector="logout:" destination="3MI-o9-Bax" eventType="touchUpInside" id="fPM-9h-E96"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -222,14 +227,15 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGD-gV-R2l">
                                 <rect key="frame" x="20" y="514" width="280" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="GmV-hC-lZt"/>
                                 </constraints>
-                                <state key="normal" title="保存">
+                                <state key="normal" title="保存" backgroundImage="purpleButton">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <state key="highlighted" backgroundImage="purpleButtonhighlighted"/>
                                 <connections>
                                     <action selector="save:" destination="D68-ft-VPq" eventType="touchUpInside" id="JH5-6v-sKL"/>
                                 </connections>
@@ -632,9 +638,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="check_box_unselected" width="27" height="27"/>
         <image name="edit" width="36" height="44"/>
         <image name="flower" width="13" height="20"/>
+        <image name="greenButton" width="320" height="54"/>
+        <image name="greenButtonhighlited" width="320" height="54"/>
         <image name="institute" width="41" height="42"/>
         <image name="navigation_back_n.png" width="15" height="30"/>
         <image name="plus" width="30" height="30"/>
+        <image name="purpleButton" width="320" height="54"/>
+        <image name="purpleButtonhighlighted" width="320" height="54"/>
         <image name="self_up_background" width="320" height="250"/>
         <image name="tabBar_self" width="80" height="50"/>
     </resources>

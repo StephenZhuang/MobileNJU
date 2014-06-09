@@ -38,7 +38,7 @@
     } else if (self.selectedTag2==nil){
         return self.selectedTag1.tagContent;
     } else {
-        return [NSString stringWithFormat:@"%@、%@",self.selectedTag1.tagContent,self.selectedTag2.tagContent];
+        return [NSString stringWithFormat:@"%@;%@",self.selectedTag1.tagContent,self.selectedTag2.tagContent];
     }
 }
 

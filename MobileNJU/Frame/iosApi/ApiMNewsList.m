@@ -20,8 +20,10 @@
 	 * @param select  回调函数
 	 * @callback MNewsList_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  {
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select page:(NSInteger)page{
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+        [array addObject:[NSString stringWithFormat:@"page=%d",page]];
+        [array addObject:[NSString stringWithFormat:@"limit=%d",10]];
 		UpdateOne *updateone=[[UpdateOne alloc] init:@"MNewsList" params:array delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
@@ -32,8 +34,8 @@
 	 * @param select  回调函数
 	 * @callback MNewsList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  {
-		UpdateOne *update=[self get:delegate selecter:select];
+    -(UpdateOne*)load:(id)delegate selecter:(SEL)select page:(NSInteger)page{
+		UpdateOne *update=[self get:delegate selecter:select page:page];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
 		return update;
 	}
