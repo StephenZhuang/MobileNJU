@@ -1,7 +1,7 @@
 //
 //  ApiMVerifyUser
 //
-//  Created by ryan on 2014-06-04 18:30:33
+//  Created by ryan on 2014-06-09 10:27:58
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -15,7 +15,7 @@
 
 
 	/**
-	 * 用户身份认证
+	 * 用户身份认证 /mobile?methodno=MVerifyUser&debug=1&deviceid=1&userid=&verify=&num=&pwd=&code=&appid=nju
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @param num * 学号
@@ -33,7 +33,7 @@
 	}
 
 	/**
-	 * 用户身份认证
+	 * 用户身份认证 /mobile?methodno=MVerifyUser&debug=1&deviceid=1&userid=&verify=&num=&pwd=&code=&appid=nju
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @param num * 学号

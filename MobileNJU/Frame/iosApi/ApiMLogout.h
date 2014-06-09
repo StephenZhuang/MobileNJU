@@ -1,5 +1,5 @@
 //
-//  ApiMChatIndex
+//  ApiMLogout
 //
 //  Created by ryan on 2014-06-09 10:27:58
 //  Copyright (c) ryan All rights reserved.
@@ -12,21 +12,21 @@
 #import "ApiUpdate.h"
 
 
-@interface ApiMChatIndex : ApiUpdate
+@interface ApiMLogout : ApiUpdate
 
 
 	/**
-	 *  南呱首页 /mobile?methodno=MChatIndex&debug=1&appid=nju&deviceid=1&userid=1&verify=1
+	 * 退出登录   /mobile?methodno=MLogout&debug=1&deviceid=&appid=&userid=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @callback MChatList_Builder
+	 * @callback MRet_Builder
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select ;
 	/**
-	 *  南呱首页 /mobile?methodno=MChatIndex&debug=1&appid=nju&deviceid=1&userid=1&verify=1
+	 * 退出登录   /mobile?methodno=MLogout&debug=1&deviceid=&appid=&userid=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @callback MChatList_Builder
+	 * @callback MRet_Builder
 	*/
 	-(UpdateOne*)load:(id)delegate selecter:(SEL)select ;
 
