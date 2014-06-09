@@ -1,5 +1,5 @@
 //
-//  ApiMChatMsg
+//  ApiMBookDetail
 //
 //  Created by ryan on 2014-06-09 08:52:47
 //  Copyright (c) ryan All rights reserved.
@@ -9,31 +9,31 @@
    
 */
 
-#import "ApiMChatMsg.h"
+#import "ApiMBookDetail.h"
 
-@implementation ApiMChatMsg
+@implementation ApiMBookDetail
 
 
 	/**
-	 *  南呱单条记录 /mobile?methodno=MChatMsg&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=
+	 *  图书详情查询  /mobile?methodno=MBookDetail&debug=1&userid=&verify=&deviceid=&appid=&id=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @param id * 聊天id
-	 * @callback MChat_Builder
+	 * @param id * url
+	 * @callback MBook_Builder
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  id:(NSString*)id {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
 		[array addObject:[NSString stringWithFormat:@"id=%@",id==nil?@"":id]];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MChatMsg" params:array delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MBookDetail" params:array delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 
 	/**
-	 *  南呱单条记录 /mobile?methodno=MChatMsg&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=
+	 *  图书详情查询  /mobile?methodno=MBookDetail&debug=1&userid=&verify=&deviceid=&appid=&id=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @param id * 聊天id
-	 * @callback MChat_Builder
+	 * @param id * url
+	 * @callback MBook_Builder
 	*/
 	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  id:(NSString*)id {
 		UpdateOne *update=[self get:delegate selecter:select id:id];

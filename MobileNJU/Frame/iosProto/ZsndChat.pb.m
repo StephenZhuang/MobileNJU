@@ -629,6 +629,7 @@ static MChatIndex* defaultMChatIndexInstance = nil;
 @property (retain) NSMutableArray* mutableChatList;
 @property (retain) NSString* targetid;
 @property int32_t headImg;
+@property (retain) NSString* pushId;
 @end
 
 @implementation MChats
@@ -648,15 +649,24 @@ static MChatIndex* defaultMChatIndexInstance = nil;
   hasHeadImg_ = !!value;
 }
 @synthesize headImg;
+- (BOOL) hasPushId {
+  return !!hasPushId_;
+}
+- (void) setHasPushId:(BOOL) value {
+  hasPushId_ = !!value;
+}
+@synthesize pushId;
 - (void) dealloc {
   self.mutableChatList = nil;
   self.targetid = nil;
+  self.pushId = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
     self.targetid = @"";
     self.headImg = 0;
+    self.pushId = @"";
   }
   return self;
 }
@@ -692,6 +702,9 @@ static MChats* defaultMChatsInstance = nil;
   if (self.hasHeadImg) {
     [output writeInt32:3 value:self.headImg];
   }
+  if (self.hasPushId) {
+    [output writeString:4 value:self.pushId];
+  }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -709,6 +722,9 @@ static MChats* defaultMChatsInstance = nil;
   }
   if (self.hasHeadImg) {
     size += computeInt32Size(3, self.headImg);
+  }
+  if (self.hasPushId) {
+    size += computeStringSize(4, self.pushId);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -797,6 +813,9 @@ static MChats* defaultMChatsInstance = nil;
   if (other.hasHeadImg) {
     [self setHeadImg:other.headImg];
   }
+  if (other.hasPushId) {
+    [self setPushId:other.pushId];
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -830,6 +849,10 @@ static MChats* defaultMChatsInstance = nil;
       }
       case 24: {
         [self setHeadImg:[input readInt32]];
+        break;
+      }
+      case 34: {
+        [self setPushId:[input readString]];
         break;
       }
     }
@@ -894,6 +917,22 @@ static MChats* defaultMChatsInstance = nil;
 - (MChats_Builder*) clearHeadImg {
   result.hasHeadImg = NO;
   result.headImg = 0;
+  return self;
+}
+- (BOOL) hasPushId {
+  return result.hasPushId;
+}
+- (NSString*) pushId {
+  return result.pushId;
+}
+- (MChats_Builder*) setPushId:(NSString*) value {
+  result.hasPushId = YES;
+  result.pushId = value;
+  return self;
+}
+- (MChats_Builder*) clearPushId {
+  result.hasPushId = NO;
+  result.pushId = @"";
   return self;
 }
 @end

@@ -1,7 +1,7 @@
 //
 //  ApiMSearchBook
 //
-//  Created by ryan on 2014-06-04 18:30:33
+//  Created by ryan on 2014-06-09 08:52:47
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -15,7 +15,7 @@
 
 
 	/**
-	 *  图书馆检索(分页)  /mobile?methodno=MSearchBook&debug=1&userid=&verify=&deviceid=&appid=&page=&pagecount=&keyword=
+	 *  图书馆检索(分页)  /mobile?methodno=MSearchBook&debug=1&userid=&verify=&deviceid=&appid=&page=&limit=&keyword=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @param keyword * 关键字
@@ -29,7 +29,7 @@
 	}
 
 	/**
-	 *  图书馆检索(分页)  /mobile?methodno=MSearchBook&debug=1&userid=&verify=&deviceid=&appid=&page=&pagecount=&keyword=
+	 *  图书馆检索(分页)  /mobile?methodno=MSearchBook&debug=1&userid=&verify=&deviceid=&appid=&page=&limit=&keyword=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @param keyword * 关键字

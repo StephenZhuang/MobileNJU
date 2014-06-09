@@ -21,8 +21,12 @@
 
 @interface MTreeHole : PBGeneratedMessage {
 @private
+  BOOL hasNewsCnt_:1;
+  int32_t newsCnt;
   NSMutableArray* mutableTopicsList;
 }
+- (BOOL) hasNewsCnt;
+@property (readonly) int32_t newsCnt;
 - (NSArray*) topicsList;
 - (MTopic*) topicsAtIndex:(int32_t) index;
 
@@ -66,6 +70,11 @@
 - (MTreeHole_Builder*) addTopics:(MTopic*) value;
 - (MTreeHole_Builder*) addAllTopics:(NSArray*) values;
 - (MTreeHole_Builder*) clearTopicsList;
+
+- (BOOL) hasNewsCnt;
+- (int32_t) newsCnt;
+- (MTreeHole_Builder*) setNewsCnt:(int32_t) value;
+- (MTreeHole_Builder*) clearNewsCnt;
 @end
 
 @interface MTopic : PBGeneratedMessage {
@@ -338,8 +347,12 @@
 
 @interface MNewComments : PBGeneratedMessage {
 @private
+  BOOL hasCnt_:1;
+  int32_t cnt;
   NSMutableArray* mutableNewsList;
 }
+- (BOOL) hasCnt;
+@property (readonly) int32_t cnt;
 - (NSArray*) newsList;
 - (MComment*) newsAtIndex:(int32_t) index;
 
@@ -383,6 +396,11 @@
 - (MNewComments_Builder*) addNews:(MComment*) value;
 - (MNewComments_Builder*) addAllNews:(NSArray*) values;
 - (MNewComments_Builder*) clearNewsList;
+
+- (BOOL) hasCnt;
+- (int32_t) cnt;
+- (MNewComments_Builder*) setCnt:(int32_t) value;
+- (MNewComments_Builder*) clearCnt;
 @end
 
 @interface MAddTopic : PBGeneratedMessage {
