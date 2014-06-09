@@ -23,6 +23,10 @@
 		7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4919416CA800EDDA68 /* NewMessageCell.m */; };
 		7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */; };
 		778EA76919454C25007B6C7E /* ApiMBookDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA76819454C25007B6C7E /* ApiMBookDetail.m */; };
+		778EA77219455467007B6C7E /* ApiMLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA76B19455467007B6C7E /* ApiMLogout.m */; };
+		778EA77319455467007B6C7E /* ApiMRss.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA76D19455467007B6C7E /* ApiMRss.m */; };
+		778EA77419455467007B6C7E /* ApiMSignInInDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA76F19455467007B6C7E /* ApiMSignInInDetail.m */; };
+		778EA77519455467007B6C7E /* ApiMTermList.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA77119455467007B6C7E /* ApiMTermList.m */; };
 		77B90429192C3F040062237D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B90428192C3F030062237D /* Foundation.framework */; };
 		77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042A192C3F040062237D /* CoreGraphics.framework */; };
 		77B9042D192C3F040062237D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042C192C3F040062237D /* UIKit.framework */; };
@@ -496,6 +500,14 @@
 		7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTreeHoleViewController.m; sourceTree = "<group>"; };
 		778EA76719454C25007B6C7E /* ApiMBookDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMBookDetail.h; sourceTree = "<group>"; };
 		778EA76819454C25007B6C7E /* ApiMBookDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMBookDetail.m; sourceTree = "<group>"; };
+		778EA76A19455467007B6C7E /* ApiMLogout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMLogout.h; sourceTree = "<group>"; };
+		778EA76B19455467007B6C7E /* ApiMLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMLogout.m; sourceTree = "<group>"; };
+		778EA76C19455467007B6C7E /* ApiMRss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMRss.h; sourceTree = "<group>"; };
+		778EA76D19455467007B6C7E /* ApiMRss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMRss.m; sourceTree = "<group>"; };
+		778EA76E19455467007B6C7E /* ApiMSignInInDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMSignInInDetail.h; sourceTree = "<group>"; };
+		778EA76F19455467007B6C7E /* ApiMSignInInDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMSignInInDetail.m; sourceTree = "<group>"; };
+		778EA77019455467007B6C7E /* ApiMTermList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMTermList.h; sourceTree = "<group>"; };
+		778EA77119455467007B6C7E /* ApiMTermList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMTermList.m; sourceTree = "<group>"; };
 		77B90425192C3F030062237D /* MobileNJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileNJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B90428192C3F030062237D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77B9042A192C3F040062237D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -2125,6 +2137,14 @@
 		77E0731D1940435D0098BA09 /* iosApi */ = {
 			isa = PBXGroup;
 			children = (
+				778EA76A19455467007B6C7E /* ApiMLogout.h */,
+				778EA76B19455467007B6C7E /* ApiMLogout.m */,
+				778EA76C19455467007B6C7E /* ApiMRss.h */,
+				778EA76D19455467007B6C7E /* ApiMRss.m */,
+				778EA76E19455467007B6C7E /* ApiMSignInInDetail.h */,
+				778EA76F19455467007B6C7E /* ApiMSignInInDetail.m */,
+				778EA77019455467007B6C7E /* ApiMTermList.h */,
+				778EA77119455467007B6C7E /* ApiMTermList.m */,
 				778EA76719454C25007B6C7E /* ApiMBookDetail.h */,
 				778EA76819454C25007B6C7E /* ApiMBookDetail.m */,
 				77E0731E1940435D0098BA09 /* ApiMActivity.h */,
@@ -2708,6 +2728,7 @@
 				77E07602194044110098BA09 /* ScheduleView.m in Sources */,
 				77E075E9194043F10098BA09 /* GradeVC.m in Sources */,
 				77E073BA1940435D0098BA09 /* ApiMChatMsg.m in Sources */,
+				778EA77319455467007B6C7E /* ApiMRss.m in Sources */,
 				77E073B21940435D0098BA09 /* ApiMChat.m in Sources */,
 				77E073D01940435D0098BA09 /* ApiMRegist.m in Sources */,
 				7DD8699E192DB6D700D4ADAA /* NewsDetailVC.m in Sources */,
@@ -2749,6 +2770,7 @@
 				77E075F0194044020098BA09 /* ExerciseVC.m in Sources */,
 				77B904CD192C4B3B0062237D /* SDWebImageDecoder.m in Sources */,
 				77E073DE1940435D0098BA09 /* ApiMVerifyUser.m in Sources */,
+				778EA77219455467007B6C7E /* ApiMLogout.m in Sources */,
 				77E073CF1940435D0098BA09 /* ApiMPraise.m in Sources */,
 				77E073C91940435D0098BA09 /* ApiMLoginSignIn.m in Sources */,
 				77E073E21940435D0098BA09 /* ZsndIndex.pb.m in Sources */,
@@ -2761,7 +2783,9 @@
 				77E073AF1940435D0098BA09 /* ApiMCardHistory.m in Sources */,
 				77E073D31940435D0098BA09 /* ApiMSearchBook.m in Sources */,
 				77E075D2194043DA0098BA09 /* BBSDetail.m in Sources */,
+				778EA77419455467007B6C7E /* ApiMSignInInDetail.m in Sources */,
 				77E073E01940435D0098BA09 /* ApiUpdate.m in Sources */,
+				778EA77519455467007B6C7E /* ApiMTermList.m in Sources */,
 				77E07601194044110098BA09 /* ScheduleVC.m in Sources */,
 				77B90464192C44A20062237D /* BaseViewController.m in Sources */,
 				77E073AC1940435D0098BA09 /* ApiMBaiheNewsList.m in Sources */,
