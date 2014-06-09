@@ -317,6 +317,18 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>MRss</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MRss</string>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>MPraise</string>
 			<key>type</key>
 			<string>1</string>
@@ -557,11 +569,23 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>MSignInInDetail</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MSignInList_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MSignInInDetail</string>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>MHelp</string>
 			<key>type</key>
 			<string>1</string>
 			<key>classname</key>
-			<string>MContactList_Builder</string>
+			<string>MContacts_Builder</string>
 			<key>errortype</key>
 			<string>0</string>
 			<key>value</key>

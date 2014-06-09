@@ -10,6 +10,7 @@
 #import "TreeHoleImageCell.h"
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
+#import "ZsndTreehole.pb.h"
 
 @interface AddTreeHoleViewController ()
 
@@ -50,7 +51,24 @@
 
 - (void)commitTreeHole
 {
+    NSString *title = [_titleTextField text];
+    NSString *content = [_contentTextView text];
+    if (title.length == 0) {
+        [ProgressHUD showError:@"标题不能为空"];
+        return;
+    } else if (title.length > 20) {
+        [ProgressHUD showError:@"标题不能超过20字"];
+        return;
+    }
     
+    if (content.length == 0) {
+        [ProgressHUD showError:@"内容不能为空"];
+        return;
+    } else if (content.length > 500) {
+        [ProgressHUD showError:@"内容不能超过500字"];
+        return;
+    }
+    MAddTopic_Builder *addTopic = [MAddTopic_Builder new];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
