@@ -21,17 +21,26 @@ static PBExtensionRegistry* extensionRegistry = nil;
 
 @interface MTreeHole ()
 @property (retain) NSMutableArray* mutableTopicsList;
+@property int32_t newsCnt;
 @end
 
 @implementation MTreeHole
 
 @synthesize mutableTopicsList;
+- (BOOL) hasNewsCnt {
+  return !!hasNewsCnt_;
+}
+- (void) setHasNewsCnt:(BOOL) value {
+  hasNewsCnt_ = !!value;
+}
+@synthesize newsCnt;
 - (void) dealloc {
   self.mutableTopicsList = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
+    self.newsCnt = 0;
   }
   return self;
 }
@@ -61,6 +70,9 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
   for (MTopic* element in self.topicsList) {
     [output writeMessage:1 value:element];
   }
+  if (self.hasNewsCnt) {
+    [output writeInt32:2 value:self.newsCnt];
+  }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -72,6 +84,9 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
   size = 0;
   for (MTopic* element in self.topicsList) {
     size += computeMessageSize(1, element);
+  }
+  if (self.hasNewsCnt) {
+    size += computeInt32Size(2, self.newsCnt);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -154,6 +169,9 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
     }
     [result.mutableTopicsList addObjectsFromArray:other.mutableTopicsList];
   }
+  if (other.hasNewsCnt) {
+    [self setNewsCnt:other.newsCnt];
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -179,6 +197,10 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
         MTopic_Builder* subBuilder = [MTopic builder];
         [input readMessage:subBuilder extensionRegistry:extensionRegistry];
         [self addTopics:[subBuilder buildPartial]];
+        break;
+      }
+      case 16: {
+        [self setNewsCnt:[input readInt32]];
         break;
       }
     }
@@ -211,6 +233,22 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
     result.mutableTopicsList = [NSMutableArray array];
   }
   [result.mutableTopicsList addObject:value];
+  return self;
+}
+- (BOOL) hasNewsCnt {
+  return result.hasNewsCnt;
+}
+- (int32_t) newsCnt {
+  return result.newsCnt;
+}
+- (MTreeHole_Builder*) setNewsCnt:(int32_t) value {
+  result.hasNewsCnt = YES;
+  result.newsCnt = value;
+  return self;
+}
+- (MTreeHole_Builder*) clearNewsCnt {
+  result.hasNewsCnt = NO;
+  result.newsCnt = 0;
   return self;
 }
 @end
@@ -1329,17 +1367,26 @@ static MComment* defaultMCommentInstance = nil;
 
 @interface MNewComments ()
 @property (retain) NSMutableArray* mutableNewsList;
+@property int32_t cnt;
 @end
 
 @implementation MNewComments
 
 @synthesize mutableNewsList;
+- (BOOL) hasCnt {
+  return !!hasCnt_;
+}
+- (void) setHasCnt:(BOOL) value {
+  hasCnt_ = !!value;
+}
+@synthesize cnt;
 - (void) dealloc {
   self.mutableNewsList = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
+    self.cnt = 0;
   }
   return self;
 }
@@ -1369,6 +1416,9 @@ static MNewComments* defaultMNewCommentsInstance = nil;
   for (MComment* element in self.newsList) {
     [output writeMessage:1 value:element];
   }
+  if (self.hasCnt) {
+    [output writeInt32:2 value:self.cnt];
+  }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -1380,6 +1430,9 @@ static MNewComments* defaultMNewCommentsInstance = nil;
   size = 0;
   for (MComment* element in self.newsList) {
     size += computeMessageSize(1, element);
+  }
+  if (self.hasCnt) {
+    size += computeInt32Size(2, self.cnt);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -1462,6 +1515,9 @@ static MNewComments* defaultMNewCommentsInstance = nil;
     }
     [result.mutableNewsList addObjectsFromArray:other.mutableNewsList];
   }
+  if (other.hasCnt) {
+    [self setCnt:other.cnt];
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -1487,6 +1543,10 @@ static MNewComments* defaultMNewCommentsInstance = nil;
         MComment_Builder* subBuilder = [MComment builder];
         [input readMessage:subBuilder extensionRegistry:extensionRegistry];
         [self addNews:[subBuilder buildPartial]];
+        break;
+      }
+      case 16: {
+        [self setCnt:[input readInt32]];
         break;
       }
     }
@@ -1519,6 +1579,22 @@ static MNewComments* defaultMNewCommentsInstance = nil;
     result.mutableNewsList = [NSMutableArray array];
   }
   [result.mutableNewsList addObject:value];
+  return self;
+}
+- (BOOL) hasCnt {
+  return result.hasCnt;
+}
+- (int32_t) cnt {
+  return result.cnt;
+}
+- (MNewComments_Builder*) setCnt:(int32_t) value {
+  result.hasCnt = YES;
+  result.cnt = value;
+  return self;
+}
+- (MNewComments_Builder*) clearCnt {
+  result.hasCnt = NO;
+  result.cnt = 0;
   return self;
 }
 @end

@@ -1,7 +1,7 @@
 //
 //  ApiMLostAndFound
 //
-//  Created by ryan on 2014-06-04 18:30:33
+//  Created by ryan on 2014-06-09 08:52:47
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -16,7 +16,7 @@
 
 
 	/**
-	 *  失物招领(分页)
+	 *  失物招领(分页) /mobile?methodno=MLostAndFound&debug=1&deviceid=1&userid=&verify=&type=&page=&limit=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @callback MLostAndFoundList_Builder
@@ -24,7 +24,7 @@
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  type:(double)type;
 	/**
-	 *  失物招领(分页)
+	 *  失物招领(分页) /mobile?methodno=MLostAndFound&debug=1&deviceid=1&userid=&verify=&type=&page=&limit=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @param type * 1：捡到 2：丢失

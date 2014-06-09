@@ -18,6 +18,8 @@
 @class MContactList;
 @class MContactList_Builder;
 @class MContact_Builder;
+@class MContacts;
+@class MContacts_Builder;
 @class MCourse;
 @class MCourseList;
 @class MCourseList_Builder;
@@ -827,14 +829,10 @@
 
 @interface MContactList : PBGeneratedMessage {
 @private
-  BOOL hasName_:1;
-  NSString* name;
-  NSMutableArray* mutableContactList;
+  NSMutableArray* mutableListList;
 }
-- (BOOL) hasName;
-@property (readonly, retain) NSString* name;
-- (NSArray*) contactList;
-- (MContact*) contactAtIndex:(int32_t) index;
+- (NSArray*) listList;
+- (MContacts*) listAtIndex:(int32_t) index;
 
 + (MContactList*) defaultInstance;
 - (MContactList*) defaultInstance;
@@ -870,17 +868,70 @@
 - (MContactList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
 - (MContactList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 
+- (NSArray*) listList;
+- (MContacts*) listAtIndex:(int32_t) index;
+- (MContactList_Builder*) replaceListAtIndex:(int32_t) index with:(MContacts*) value;
+- (MContactList_Builder*) addList:(MContacts*) value;
+- (MContactList_Builder*) addAllList:(NSArray*) values;
+- (MContactList_Builder*) clearListList;
+@end
+
+@interface MContacts : PBGeneratedMessage {
+@private
+  BOOL hasName_:1;
+  NSString* name;
+  NSMutableArray* mutableContactList;
+}
+- (BOOL) hasName;
+@property (readonly, retain) NSString* name;
+- (NSArray*) contactList;
+- (MContact*) contactAtIndex:(int32_t) index;
+
++ (MContacts*) defaultInstance;
+- (MContacts*) defaultInstance;
+
+- (BOOL) isInitialized;
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
+- (MContacts_Builder*) builder;
++ (MContacts_Builder*) builder;
++ (MContacts_Builder*) builderWithPrototype:(MContacts*) prototype;
+
++ (MContacts*) parseFromData:(NSData*) data;
++ (MContacts*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MContacts*) parseFromInputStream:(NSInputStream*) input;
++ (MContacts*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MContacts*) parseFromCodedInputStream:(PBCodedInputStream*) input;
++ (MContacts*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+@end
+
+@interface MContacts_Builder : PBGeneratedMessage_Builder {
+@private
+  MContacts* result;
+}
+
+- (MContacts*) defaultInstance;
+
+- (MContacts_Builder*) clear;
+- (MContacts_Builder*) clone;
+
+- (MContacts*) build;
+- (MContacts*) buildPartial;
+
+- (MContacts_Builder*) mergeFrom:(MContacts*) other;
+- (MContacts_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
+- (MContacts_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+
 - (BOOL) hasName;
 - (NSString*) name;
-- (MContactList_Builder*) setName:(NSString*) value;
-- (MContactList_Builder*) clearName;
+- (MContacts_Builder*) setName:(NSString*) value;
+- (MContacts_Builder*) clearName;
 
 - (NSArray*) contactList;
 - (MContact*) contactAtIndex:(int32_t) index;
-- (MContactList_Builder*) replaceContactAtIndex:(int32_t) index with:(MContact*) value;
-- (MContactList_Builder*) addContact:(MContact*) value;
-- (MContactList_Builder*) addAllContact:(NSArray*) values;
-- (MContactList_Builder*) clearContactList;
+- (MContacts_Builder*) replaceContactAtIndex:(int32_t) index with:(MContact*) value;
+- (MContacts_Builder*) addContact:(MContact*) value;
+- (MContacts_Builder*) addAllContact:(NSArray*) values;
+- (MContacts_Builder*) clearContactList;
 @end
 
 @interface MContact : PBGeneratedMessage {
