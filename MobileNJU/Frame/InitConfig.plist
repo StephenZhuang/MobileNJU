@@ -137,6 +137,18 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>MBookDetail</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MBook_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MBookDetail</string>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>MMyLibrary</string>
 			<key>type</key>
 			<string>1</string>
@@ -233,6 +245,18 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>MLogout</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MLogout</string>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>MGetWelcomePage</string>
 			<key>type</key>
 			<string>1</string>
@@ -278,18 +302,6 @@
 			<string>0</string>
 			<key>value</key>
 			<string>MUpdateHeadImg</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MGetVerifyUserCode</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MGetVerifyUserCode</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -410,18 +422,6 @@
 			<string>0</string>
 			<key>value</key>
 			<string>MChatCallBack</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MLoginLibrary</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MLoginLibrary</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -461,30 +461,6 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>MLoginScheduleCode</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MLoginScheduleCode</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MLoginSchedule</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MLoginSchedule</string>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>MSchedule</string>
 			<key>type</key>
 			<string>1</string>
@@ -497,6 +473,18 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>MTermList</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MTermList_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MTermList</string>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>MGradeSearch</string>
 			<key>type</key>
 			<string>1</string>
@@ -506,30 +494,6 @@
 			<string>0</string>
 			<key>value</key>
 			<string>MGradeSearch</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MLoginCardCode</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MLoginCardCode</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MLoginCard</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MLoginCard</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -578,18 +542,6 @@
 			<string>0</string>
 			<key>value</key>
 			<string>MBusSearch</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MLoginSignIn</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MLoginSignIn</string>
 		</dict>
 		<dict>
 			<key>name</key>

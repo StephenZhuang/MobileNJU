@@ -174,14 +174,18 @@
 @private
   BOOL hasHeadImg_:1;
   BOOL hasTargetid_:1;
+  BOOL hasPushId_:1;
   int32_t headImg;
   NSString* targetid;
+  NSString* pushId;
   NSMutableArray* mutableChatList;
 }
 - (BOOL) hasTargetid;
 - (BOOL) hasHeadImg;
+- (BOOL) hasPushId;
 @property (readonly, retain) NSString* targetid;
 @property (readonly) int32_t headImg;
+@property (readonly, retain) NSString* pushId;
 - (NSArray*) chatList;
 - (MChat*) chatAtIndex:(int32_t) index;
 
@@ -235,6 +239,11 @@
 - (int32_t) headImg;
 - (MChats_Builder*) setHeadImg:(int32_t) value;
 - (MChats_Builder*) clearHeadImg;
+
+- (BOOL) hasPushId;
+- (NSString*) pushId;
+- (MChats_Builder*) setPushId:(NSString*) value;
+- (MChats_Builder*) clearPushId;
 @end
 
 @interface MChat : PBGeneratedMessage {

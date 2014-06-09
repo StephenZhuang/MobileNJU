@@ -3124,28 +3124,18 @@ static MCard* defaultMCardInstance = nil;
 @end
 
 @interface MContactList ()
-@property (retain) NSString* name;
-@property (retain) NSMutableArray* mutableContactList;
+@property (retain) NSMutableArray* mutableListList;
 @end
 
 @implementation MContactList
 
-- (BOOL) hasName {
-  return !!hasName_;
-}
-- (void) setHasName:(BOOL) value {
-  hasName_ = !!value;
-}
-@synthesize name;
-@synthesize mutableContactList;
+@synthesize mutableListList;
 - (void) dealloc {
-  self.name = nil;
-  self.mutableContactList = nil;
+  self.mutableListList = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
-    self.name = @"";
   }
   return self;
 }
@@ -3161,22 +3151,19 @@ static MContactList* defaultMContactListInstance = nil;
 - (MContactList*) defaultInstance {
   return defaultMContactListInstance;
 }
-- (NSArray*) contactList {
-  return mutableContactList;
+- (NSArray*) listList {
+  return mutableListList;
 }
-- (MContact*) contactAtIndex:(int32_t) index {
-  id value = [mutableContactList objectAtIndex:index];
+- (MContacts*) listAtIndex:(int32_t) index {
+  id value = [mutableListList objectAtIndex:index];
   return value;
 }
 - (BOOL) isInitialized {
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
-  if (self.hasName) {
-    [output writeString:1 value:self.name];
-  }
-  for (MContact* element in self.contactList) {
-    [output writeMessage:2 value:element];
+  for (MContacts* element in self.listList) {
+    [output writeMessage:1 value:element];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -3187,11 +3174,8 @@ static MContactList* defaultMContactListInstance = nil;
   }
 
   size = 0;
-  if (self.hasName) {
-    size += computeStringSize(1, self.name);
-  }
-  for (MContact* element in self.contactList) {
-    size += computeMessageSize(2, element);
+  for (MContacts* element in self.listList) {
+    size += computeMessageSize(1, element);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -3268,6 +3252,218 @@ static MContactList* defaultMContactListInstance = nil;
   if (other == [MContactList defaultInstance]) {
     return self;
   }
+  if (other.mutableListList.count > 0) {
+    if (result.mutableListList == nil) {
+      result.mutableListList = [NSMutableArray array];
+    }
+    [result.mutableListList addObjectsFromArray:other.mutableListList];
+  }
+  [self mergeUnknownFields:other.unknownFields];
+  return self;
+}
+- (MContactList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
+}
+- (MContactList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+  while (YES) {
+    int32_t tag = [input readTag];
+    switch (tag) {
+      case 0:
+        [self setUnknownFields:[unknownFields build]];
+        return self;
+      default: {
+        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
+          [self setUnknownFields:[unknownFields build]];
+          return self;
+        }
+        break;
+      }
+      case 10: {
+        MContacts_Builder* subBuilder = [MContacts builder];
+        [input readMessage:subBuilder extensionRegistry:extensionRegistry];
+        [self addList:[subBuilder buildPartial]];
+        break;
+      }
+    }
+  }
+}
+- (NSArray*) listList {
+  if (result.mutableListList == nil) { return [NSArray array]; }
+  return result.mutableListList;
+}
+- (MContacts*) listAtIndex:(int32_t) index {
+  return [result listAtIndex:index];
+}
+- (MContactList_Builder*) replaceListAtIndex:(int32_t) index with:(MContacts*) value {
+  [result.mutableListList replaceObjectAtIndex:index withObject:value];
+  return self;
+}
+- (MContactList_Builder*) addAllList:(NSArray*) values {
+  if (result.mutableListList == nil) {
+    result.mutableListList = [NSMutableArray array];
+  }
+  [result.mutableListList addObjectsFromArray:values];
+  return self;
+}
+- (MContactList_Builder*) clearListList {
+  result.mutableListList = nil;
+  return self;
+}
+- (MContactList_Builder*) addList:(MContacts*) value {
+  if (result.mutableListList == nil) {
+    result.mutableListList = [NSMutableArray array];
+  }
+  [result.mutableListList addObject:value];
+  return self;
+}
+@end
+
+@interface MContacts ()
+@property (retain) NSString* name;
+@property (retain) NSMutableArray* mutableContactList;
+@end
+
+@implementation MContacts
+
+- (BOOL) hasName {
+  return !!hasName_;
+}
+- (void) setHasName:(BOOL) value {
+  hasName_ = !!value;
+}
+@synthesize name;
+@synthesize mutableContactList;
+- (void) dealloc {
+  self.name = nil;
+  self.mutableContactList = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.name = @"";
+  }
+  return self;
+}
+static MContacts* defaultMContactsInstance = nil;
++ (void) initialize {
+  if (self == [MContacts class]) {
+    defaultMContactsInstance = [[MContacts alloc] init];
+  }
+}
++ (MContacts*) defaultInstance {
+  return defaultMContactsInstance;
+}
+- (MContacts*) defaultInstance {
+  return defaultMContactsInstance;
+}
+- (NSArray*) contactList {
+  return mutableContactList;
+}
+- (MContact*) contactAtIndex:(int32_t) index {
+  id value = [mutableContactList objectAtIndex:index];
+  return value;
+}
+- (BOOL) isInitialized {
+  return YES;
+}
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  if (self.hasName) {
+    [output writeString:1 value:self.name];
+  }
+  for (MContact* element in self.contactList) {
+    [output writeMessage:2 value:element];
+  }
+  [self.unknownFields writeToCodedOutputStream:output];
+}
+- (int32_t) serializedSize {
+  int32_t size = memoizedSerializedSize;
+  if (size != -1) {
+    return size;
+  }
+
+  size = 0;
+  if (self.hasName) {
+    size += computeStringSize(1, self.name);
+  }
+  for (MContact* element in self.contactList) {
+    size += computeMessageSize(2, element);
+  }
+  size += self.unknownFields.serializedSize;
+  memoizedSerializedSize = size;
+  return size;
+}
++ (MContacts*) parseFromData:(NSData*) data {
+  return (MContacts*)[[[MContacts builder] mergeFromData:data] build];
+}
++ (MContacts*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MContacts*)[[[MContacts builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
+}
++ (MContacts*) parseFromInputStream:(NSInputStream*) input {
+  return (MContacts*)[[[MContacts builder] mergeFromInputStream:input] build];
+}
++ (MContacts*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MContacts*)[[[MContacts builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MContacts*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MContacts*)[[[MContacts builder] mergeFromCodedInputStream:input] build];
+}
++ (MContacts*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MContacts*)[[[MContacts builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MContacts_Builder*) builder {
+  return [[[MContacts_Builder alloc] init] autorelease];
+}
++ (MContacts_Builder*) builderWithPrototype:(MContacts*) prototype {
+  return [[MContacts builder] mergeFrom:prototype];
+}
+- (MContacts_Builder*) builder {
+  return [MContacts builder];
+}
+@end
+
+@interface MContacts_Builder()
+@property (retain) MContacts* result;
+@end
+
+@implementation MContacts_Builder
+@synthesize result;
+- (void) dealloc {
+  self.result = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.result = [[[MContacts alloc] init] autorelease];
+  }
+  return self;
+}
+- (PBGeneratedMessage*) internalGetResult {
+  return result;
+}
+- (MContacts_Builder*) clear {
+  self.result = [[[MContacts alloc] init] autorelease];
+  return self;
+}
+- (MContacts_Builder*) clone {
+  return [MContacts builderWithPrototype:result];
+}
+- (MContacts*) defaultInstance {
+  return [MContacts defaultInstance];
+}
+- (MContacts*) build {
+  [self checkInitialized];
+  return [self buildPartial];
+}
+- (MContacts*) buildPartial {
+  MContacts* returnMe = [[result retain] autorelease];
+  self.result = nil;
+  return returnMe;
+}
+- (MContacts_Builder*) mergeFrom:(MContacts*) other {
+  if (other == [MContacts defaultInstance]) {
+    return self;
+  }
   if (other.hasName) {
     [self setName:other.name];
   }
@@ -3280,10 +3476,10 @@ static MContactList* defaultMContactListInstance = nil;
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
-- (MContactList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+- (MContacts_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
   return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
 }
-- (MContactList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+- (MContacts_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
   PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
   while (YES) {
     int32_t tag = [input readTag];
@@ -3317,12 +3513,12 @@ static MContactList* defaultMContactListInstance = nil;
 - (NSString*) name {
   return result.name;
 }
-- (MContactList_Builder*) setName:(NSString*) value {
+- (MContacts_Builder*) setName:(NSString*) value {
   result.hasName = YES;
   result.name = value;
   return self;
 }
-- (MContactList_Builder*) clearName {
+- (MContacts_Builder*) clearName {
   result.hasName = NO;
   result.name = @"";
   return self;
@@ -3334,22 +3530,22 @@ static MContactList* defaultMContactListInstance = nil;
 - (MContact*) contactAtIndex:(int32_t) index {
   return [result contactAtIndex:index];
 }
-- (MContactList_Builder*) replaceContactAtIndex:(int32_t) index with:(MContact*) value {
+- (MContacts_Builder*) replaceContactAtIndex:(int32_t) index with:(MContact*) value {
   [result.mutableContactList replaceObjectAtIndex:index withObject:value];
   return self;
 }
-- (MContactList_Builder*) addAllContact:(NSArray*) values {
+- (MContacts_Builder*) addAllContact:(NSArray*) values {
   if (result.mutableContactList == nil) {
     result.mutableContactList = [NSMutableArray array];
   }
   [result.mutableContactList addObjectsFromArray:values];
   return self;
 }
-- (MContactList_Builder*) clearContactList {
+- (MContacts_Builder*) clearContactList {
   result.mutableContactList = nil;
   return self;
 }
-- (MContactList_Builder*) addContact:(MContact*) value {
+- (MContacts_Builder*) addContact:(MContact*) value {
   if (result.mutableContactList == nil) {
     result.mutableContactList = [NSMutableArray array];
   }
