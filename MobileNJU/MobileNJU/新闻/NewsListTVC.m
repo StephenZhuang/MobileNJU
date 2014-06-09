@@ -49,7 +49,7 @@
 }
 - (void)loadData
 {
-    [[ApisFactory getApiMNewsList] load:self selecter:@selector(disposMessage:) page:page];
+    [[ApisFactory getApiMNewsList] load:self selecter:@selector(disposMessage:)];
 }
 - (void)disposMessage:(Son *)son
 {

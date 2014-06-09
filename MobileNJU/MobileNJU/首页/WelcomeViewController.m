@@ -60,8 +60,7 @@
     }
     [self waiting];
     #warning 注意加密
-    [[ApisFactory getApiMLogin] load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:
-                                                                                                                         self.passwordTextField.text];
+    [[ApisFactory getApiMLogin] load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:self.passwordTextField.text pushid:[ToolUtils getPushid]];
    
 //    [self performSegueWithIdentifier:@"main" sender:nil];
 }

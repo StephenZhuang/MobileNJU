@@ -60,4 +60,5 @@
 + (void)setSex:(NSString*)sex;
 + (void)setTags:(NSString*)tags;
 + (void)setBelong:(NSString*)belong;
++ (NSString *)getPushid;
 @end

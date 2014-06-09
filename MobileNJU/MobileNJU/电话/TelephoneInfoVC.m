@@ -68,8 +68,8 @@
             if ([[son getMethod] isEqualToString:@"MContacts"]) {
                 //获得返回类
                 MContactList_Builder *contacts = (MContactList_Builder *)[son getBuild];
-                NSLog(@"%@",contacts.name);
-                NSLog(@"%d",contacts.contactList.count);
+//                NSLog(@"%@",contacts.name);
+//                NSLog(@"%d",contacts.contactList.count);
                 
 //                NSArray* keys = [[NSArray alloc]initWithObjects:@"name" ,@"list" ,nil];
 //                for (MContactList* list in contacts.contactList) {

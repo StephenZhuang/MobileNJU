@@ -313,4 +313,9 @@
 
 }
 
++ (NSString *)getPushid
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"];
+}
+
 @end

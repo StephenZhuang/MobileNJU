@@ -8,9 +8,12 @@
 
 #import "BaseViewController.h"
 
+typedef void(^AddSuccessBlock)(void);
+
 @interface AddTreeHoleViewController : BaseViewController<UICollectionViewDataSource , UICollectionViewDelegate ,UIImagePickerControllerDelegate , UIActionSheetDelegate>
 @property (nonatomic , weak) IBOutlet UITextField *titleTextField;
 @property (nonatomic , weak) IBOutlet UITextView *contentTextView;
 @property (nonatomic , weak) IBOutlet UICollectionView *photoCollectionView;
 @property (nonatomic , strong) NSMutableArray *photoArray;
+@property (nonatomic , copy) AddSuccessBlock addSuccessBlock;
 @end
