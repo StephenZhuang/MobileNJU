@@ -52,6 +52,7 @@
 
 - (void)commitTreeHole
 {
+    [self.view endEditing:YES];
     NSString *title = [_titleTextField text];
     NSString *content = [_contentTextView text];
     if (title.length == 0) {

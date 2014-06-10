@@ -82,9 +82,6 @@
         fromStr = @"南大树洞";
     }
     
-    if (comment.userid2.length == 0) {
-        fromStr = [fromStr stringByAppendingString:@"："];
-    }
     NSMutableAttributedString *fromString = [[NSMutableAttributedString alloc] initWithString:fromStr attributes:@{NSForegroundColorAttributeName : RGB(110, 15, 109),   NSFontAttributeName : [UIFont systemFontOfSize:14]}];
     
 //    if (comment.userid2.length > 0) {

@@ -11,6 +11,7 @@
 #import "CommentCell.h"
 #import "EmojiViewController.h"
 #import "NSString+unicode.h"
+#import "ProgressHUD.h"
 
 @interface TreeHoleDetailViewController ()
 
@@ -212,8 +213,13 @@
 - (IBAction)sendAction:(id)sender
 {
     NSString *string = _messageField.text;
+    if (string.length > 100) {
+        [_messageField resignFirstResponder];
+        [ProgressHUD showError:@"回复不能超过100字"];
+        return;
+    }
     if (string.length > 0) {
-        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_topic.id content:[string utf8ToUnicode] reply:_targetid commentid:@""];
+        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_topic.id content:[string utf8ToUnicode] reply:_targetid commentid:_commentid];
     }
     [_messageField resignFirstResponder];
     [_messageField setText:@""];
