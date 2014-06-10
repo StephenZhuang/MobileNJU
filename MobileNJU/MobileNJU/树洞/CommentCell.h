@@ -12,6 +12,6 @@
 
 @interface CommentCell : UITableViewCell
 @property (nonatomic , strong) IBOutlet HBCoreLabel *commentLabel;
-- (void)setComment:(MComment *)comment;
-- (CGFloat)matchContent:(MComment *)comment;
+- (void)setComment:(MComment *)comment author:(NSString *)author;
+- (CGFloat)matchContent:(MComment *)comment author:(NSString *)author;
 @end

@@ -75,6 +75,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
+        if (!_topic) {
+            return 0;
+        }
         return 1;
     } else {
         return self.dataArray.count;
@@ -84,23 +87,27 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
-        [cell.contentLabel setText:[_topic.content replaceUnicode]];
-        
-        NSMutableArray *array = [[NSMutableArray alloc] init];
-        if (_topic.imgs.length > 0) {
-            NSArray *imgStrArr = [_topic.imgs componentsSeparatedByString:@","];
-            
-            for (NSString *str in imgStrArr) {
-                [array addObject:[ToolUtils getImageUrlWtihString:str].absoluteString];
-            }
-        }
-        [cell setImageArray:array];
+//        TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
+//        
+//        [cell.contentLabel setText:[_topic.content replaceUnicode]];
+//        [cell.contentLabel sizeToFit];
+//
+//        NSMutableArray *array = [[NSMutableArray alloc] init];
+//        if (_topic.imgs.length > 0) {
+//            NSArray *imgStrArr = [_topic.imgs componentsSeparatedByString:@","];
+//            
+//            for (NSString *str in imgStrArr) {
+//                [array addObject:[ToolUtils getImageUrlWtihString:str].absoluteString];
+//            }
+//        }
+//        [cell setImageArray:array];
+        TreeHoleCell *cell = (TreeHoleCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.frame.size.height;
         return CGRectGetMaxY(cell.commentButton.frame) + 10;
     } else {
         CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
         MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
-        return [cell matchContent:comment] + 20;
+        return [cell matchContent:comment author:_topic.author] + 10;
     }
 }
 
@@ -109,9 +116,12 @@
     if (indexPath.section == 0) {
         
         TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
+
+        [cell.contentLabel setText:[_topic.content replaceUnicode]];
+//        [cell.contentLabel sizeToFit];
         
         [cell.titleLabel setText:[_topic.title replaceUnicode]];
-        [cell.contentLabel setText:[_topic.content replaceUnicode]];
+//        [cell.contentLabel setText:[_topic.content replaceUnicode]];
         [cell.timeLabel setText:_topic.time];
         [cell.zanButton setTag:indexPath.row];
         [cell.commentButton setTag:indexPath.row];
@@ -128,11 +138,15 @@
             }
         }
         [cell setImageArray:array];
+        
+        CGRect rect = cell.frame;
+        rect.size.height = CGRectGetMaxY(cell.zanButton.frame) + 10;
+        cell.frame = rect;
         return cell;
     } else {
         CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
         MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
-        [cell setComment:comment];
+        [cell setComment:comment author:_topic.author];
 
         return cell;
     }
@@ -142,11 +156,13 @@
 {
     if (indexPath.section == 1) {
         MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
-        if (![comment.userid1 isEqualToString:[ToolUtils getLoginId]]) {            
-            _targetid = comment.userid1;
-            _commentid = comment.id;
-            
-            [_messageField setPlaceholder:[NSString stringWithFormat:@"回复 %@：" , comment.nickname1]];
+        if (![comment.userid1 isEqualToString:[ToolUtils getLoginId]]) {
+            if (![comment.userid1 isEqualToString:_topic.author]) {                
+                _targetid = comment.userid1;
+                _commentid = comment.id;
+                
+                [_messageField setPlaceholder:[NSString stringWithFormat:@"回复 %@：" , comment.nickname1]];
+            }
             [_messageField becomeFirstResponder];
         }
     }
@@ -167,6 +183,7 @@
 - (void)keyBoardWillHide:(NSNotification *)note{
     _targetid = @"";
     _commentid = @"";
+    [_messageField setPlaceholder:@""];
     [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
         self.view.transform = CGAffineTransformIdentity;
     }];
@@ -174,7 +191,7 @@
 
 - (IBAction)emojiAction:(id)sender
 {
-    [_messageField resignFirstResponder];
+//    [_messageField resignFirstResponder];
     UIStoryboard *storyboard = [self storyboard];
     EmojiViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"EmojiViewController"];
     vc.emojiBlock = ^(NSString *string) {

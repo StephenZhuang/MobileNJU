@@ -87,9 +87,9 @@
     }
     NSMutableAttributedString *fromString = [[NSMutableAttributedString alloc] initWithString:fromStr attributes:@{NSForegroundColorAttributeName : RGB(110, 15, 109),   NSFontAttributeName : [UIFont systemFontOfSize:14]}];
     
-    if (comment.userid2.length > 0) {
+//    if (comment.userid2.length > 0) {
         NSString *toStr = comment.nickname2;
-        if ([comment.userid2 isEqualToString:comment.author]) {
+        if ([comment.userid2 isEqualToString:comment.author] || comment.userid2.length == 0) {
             toStr = @"南大树洞";
         }
         toStr = [toStr stringByAppendingString:@"："];
@@ -98,7 +98,7 @@
         
         [fromString appendAttributedString:replyString];
         [fromString appendAttributedString:toString];
-    }
+//    }
     
     
     MatchParser * match=[[MatchParser alloc]init];
@@ -128,7 +128,7 @@
     NewMessageCell *cell = sender;
     TreeHoleDetailViewController *vc = [segue destinationViewController];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    vc.treeHoleid = [[self.dataArray objectAtIndex:indexPath.row] id];
+    vc.treeHoleid = [[self.dataArray objectAtIndex:indexPath.row] pid];
 }
 
 
