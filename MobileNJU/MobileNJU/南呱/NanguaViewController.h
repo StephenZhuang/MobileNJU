@@ -8,6 +8,7 @@
 
 #import "NanguaBaseViewController.h"
 
-@interface NanguaViewController : NanguaBaseViewController
-
+@interface NanguaViewController : NanguaBaseViewController<UITableViewDataSource , UITableViewDelegate>
+@property (nonatomic , weak) IBOutlet UITableView *tableView;
+@property (nonatomic , strong) NSMutableArray *dataArray;
 @end

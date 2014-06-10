@@ -7,6 +7,7 @@
 //
 
 #import "NanguaViewController.h"
+#import "LeaveMessageCell.h"
 
 @interface NanguaViewController ()
 
@@ -29,6 +30,76 @@
     // Do any additional setup after loading the view.
     [self setTitle:@"南呱"];
     [self setSubTitle:@"和水果聊天"];
+    _dataArray = [[NSMutableArray alloc] init];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 20;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LeaveMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LeaveMessageCell"];
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipLeft:)];
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [cell addGestureRecognizer:swipeLeft];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    [cell addGestureRecognizer:swipeRight];
+    return cell;
+}
+
+- (void)swipLeft:(UISwipeGestureRecognizer *)swipe
+{
+    LeaveMessageCell *cell = (LeaveMessageCell *)swipe.view;
+    [cell.contentView bringSubviewToFront:cell.deleteButton];
+    [cell.contentView bringSubviewToFront:cell.blackListButton];
+//    [UIView animateWithDuration:0.2 animations:^(void) {
+//        CGRect rect = cell.logoImage.frame;
+//        rect.origin.x = -90;
+//        [cell.logoImage setFrame:rect];
+//        
+//        CGRect rect1 = cell.contentLabel.frame;
+//        rect1.origin.x = -29;
+//        [cell.contentLabel setFrame:rect1];
+//    } completion:^(BOOL isFinished) {
+//    }];
+    [self performSelector:@selector(doAnimation:) withObject:cell afterDelay:0.2];
+}
+
+- (void)doAnimation:(LeaveMessageCell *)cell
+{
+    [UIView animateWithDuration:0.2 animations:^(void) {
+        CGRect rect = cell.logoImage.frame;
+        rect.origin.x = -10;
+        [cell.logoImage setFrame:rect];
+        
+        CGRect rect1 = cell.contentLabel.frame;
+        rect1.origin.x = 51;
+        [cell.contentLabel setFrame:rect1];
+    } completion:^(BOOL isFinished) {
+    }];
+}
+
+- (void)swipeRight:(UISwipeGestureRecognizer *)swipe
+{
+    LeaveMessageCell *cell = (LeaveMessageCell *)swipe.view;
+    [cell.contentView sendSubviewToBack:cell.deleteButton];
+    [cell.contentView sendSubviewToBack:cell.blackListButton];
+    [UIView animateWithDuration:0.2 animations:^(void) {
+        CGRect rect = cell.logoImage.frame;
+        rect.origin.x = 10;
+        [cell.logoImage setFrame:rect];
+        
+        CGRect rect1 = cell.contentLabel.frame;
+        rect1.origin.x = 71;
+        [cell.contentLabel setFrame:rect1];
+    } completion:^(BOOL isFinished) {
+//        [cell bringSubviewToFront:cell.deleteButton];
+//        [cell bringSubviewToFront:cell.blackListButton];
+    }];
 }
 
 - (void)didReceiveMemoryWarning

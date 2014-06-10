@@ -47,6 +47,9 @@
 		778F9B1F1946B3AE00F89E66 /* fruit_3_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778F9B191946B3AE00F89E66 /* fruit_3_s@2x.png */; };
 		778F9B201946B3AE00F89E66 /* fruit_4_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778F9B1A1946B3AE00F89E66 /* fruit_4_s@2x.png */; };
 		778F9B211946B3AE00F89E66 /* fruit_5_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778F9B1B1946B3AE00F89E66 /* fruit_5_s@2x.png */; };
+		778F9B231946D99500F89E66 /* leave_message_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778F9B221946D99500F89E66 /* leave_message_bg@2x.png */; };
+		778F9B261946E6EF00F89E66 /* nangua_blacklist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778F9B241946E6EF00F89E66 /* nangua_blacklist@2x.png */; };
+		778F9B271946E6EF00F89E66 /* nangua_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778F9B251946E6EF00F89E66 /* nangua_delete@2x.png */; };
 		77B90429192C3F040062237D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B90428192C3F030062237D /* Foundation.framework */; };
 		77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042A192C3F040062237D /* CoreGraphics.framework */; };
 		77B9042D192C3F040062237D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042C192C3F040062237D /* UIKit.framework */; };
@@ -548,6 +551,9 @@
 		778F9B191946B3AE00F89E66 /* fruit_3_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fruit_3_s@2x.png"; sourceTree = "<group>"; };
 		778F9B1A1946B3AE00F89E66 /* fruit_4_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fruit_4_s@2x.png"; sourceTree = "<group>"; };
 		778F9B1B1946B3AE00F89E66 /* fruit_5_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fruit_5_s@2x.png"; sourceTree = "<group>"; };
+		778F9B221946D99500F89E66 /* leave_message_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leave_message_bg@2x.png"; sourceTree = "<group>"; };
+		778F9B241946E6EF00F89E66 /* nangua_blacklist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nangua_blacklist@2x.png"; sourceTree = "<group>"; };
+		778F9B251946E6EF00F89E66 /* nangua_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nangua_delete@2x.png"; sourceTree = "<group>"; };
 		77B90425192C3F030062237D /* MobileNJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileNJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B90428192C3F030062237D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77B9042A192C3F040062237D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1784,6 +1790,9 @@
 		77B90458192C433F0062237D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				778F9B241946E6EF00F89E66 /* nangua_blacklist@2x.png */,
+				778F9B251946E6EF00F89E66 /* nangua_delete@2x.png */,
+				778F9B221946D99500F89E66 /* leave_message_bg@2x.png */,
 				778F9B161946B3AE00F89E66 /* fruit_0_s@2x.png */,
 				778F9B171946B3AE00F89E66 /* fruit_1_s@2x.png */,
 				778F9B181946B3AE00F89E66 /* fruit_2_s@2x.png */,
@@ -2508,6 +2517,7 @@
 				77E07572194043A90098BA09 /* f076.png in Resources */,
 				77E074F1194043A90098BA09 /* f011@2x.png in Resources */,
 				77B904DF192C4C6F0062237D /* navigation_bg@2x.png in Resources */,
+				778F9B261946E6EF00F89E66 /* nangua_blacklist@2x.png in Resources */,
 				77E0754F194043A90098BA09 /* f058@2x.png in Resources */,
 				77E07557194043A90098BA09 /* f062@2x.png in Resources */,
 				77E07563194043A90098BA09 /* f068@2x.png in Resources */,
@@ -2601,6 +2611,7 @@
 				77E07551194043A90098BA09 /* f059@2x.png in Resources */,
 				7DC4C58D19443D97007C6888 /* loading@2x.gif in Resources */,
 				778EA78C1945DA83007B6C7E /* nangua_bg@2x.png in Resources */,
+				778F9B271946E6EF00F89E66 /* nangua_delete@2x.png in Resources */,
 				77E074F2194043A90098BA09 /* f012.png in Resources */,
 				77E07564194043A90098BA09 /* f069.png in Resources */,
 				77E0753C194043A90098BA09 /* f049.png in Resources */,
@@ -2673,6 +2684,7 @@
 				778F9B1C1946B3AE00F89E66 /* fruit_0_s@2x.png in Resources */,
 				77E07512194043A90098BA09 /* f028.png in Resources */,
 				7DD869B6192DB7A700D4ADAA /* Self.storyboard in Resources */,
+				778F9B231946D99500F89E66 /* leave_message_bg@2x.png in Resources */,
 				77E074FE194043A90098BA09 /* f018.png in Resources */,
 				77E07561194043A90098BA09 /* f067@2x.png in Resources */,
 				77E0750E194043A90098BA09 /* f026.png in Resources */,
