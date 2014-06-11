@@ -31,6 +31,9 @@
                                             <state key="normal" image="gua.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="goToCheck:" destination="Ny4-IP-yBR" eventType="touchUpInside" id="Cn7-Wq-htg"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="呱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vup-Ip-rPS">
                                             <rect key="frame" x="139" y="75" width="42" height="21"/>
@@ -125,19 +128,130 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="fXJ-cA-Ez9" id="MUW-gR-SdQ"/>
+                        <segue destination="8WK-SR-h57" kind="push" identifier="chat" id="lXs-9T-5Gh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="caE-ih-Mm4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="135" y="3"/>
         </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="8Kx-XP-6q7">
+            <objects>
+                <viewController storyboardIdentifier="ChatViewController" id="8WK-SR-h57" customClass="ChatViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eaV-2q-bJT"/>
+                        <viewControllerLayoutGuide type="bottom" id="C7k-jD-UA0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oD7-4Y-ETY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aox-3D-JaX">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="MUD-EU-wfi" customClass="ConnectVIew">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KUb-tp-Xez">
+                                            <rect key="frame" x="0.0" y="207" width="320" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="16" minimumInteritemSpacing="16" id="1Dc-RL-5Ks">
+                                                <size key="itemSize" width="40" height="40"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TreeHoleImageCell" id="wTa-wz-OgD" customClass="TreeHoleImageCell">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QKU-Y6-9bK">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                    <connections>
+                                                        <outlet property="contentImage" destination="QKU-Y6-9bK" id="3ao-aa-Jyw"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                            </cells>
+                                            <connections>
+                                                <outlet property="dataSource" destination="MUD-EU-wfi" id="Kfm-I6-LAZ"/>
+                                                <outlet property="delegate" destination="MUD-EU-wfi" id="jkO-kK-UcR"/>
+                                            </connections>
+                                        </collectionView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nangua_logo_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="vNa-bp-qMf">
+                                            <rect key="frame" x="134" y="28" width="53" height="53"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="杨老板" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JrF-pb-AEW">
+                                            <rect key="frame" x="20" y="89" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="鲜花数：77" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAl-NS-ZyK">
+                                            <rect key="frame" x="20" y="110" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nangua_connect_line1.png" translatesAutoresizingMaskIntoConstraints="NO" id="sP8-NK-bjJ">
+                                            <rect key="frame" x="159" y="131" width="3" height="192"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fruit_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZPh-Li-Hpc">
+                                            <rect key="frame" x="110" y="177" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outlet property="collectionView" destination="KUb-tp-Xez" id="pK3-Yc-lXs"/>
+                                        <outlet property="fruitImage" destination="ZPh-Li-Hpc" id="Iaw-3f-i8i"/>
+                                    </connections>
+                                </view>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aox-3D-JaX" secondAttribute="trailing" id="1SV-Ja-fm3"/>
+                            <constraint firstItem="aox-3D-JaX" firstAttribute="top" secondItem="oD7-4Y-ETY" secondAttribute="top" id="B7f-PB-Kcb"/>
+                            <constraint firstItem="C7k-jD-UA0" firstAttribute="top" secondItem="aox-3D-JaX" secondAttribute="bottom" id="TVX-t1-jbc"/>
+                            <constraint firstItem="aox-3D-JaX" firstAttribute="leading" secondItem="oD7-4Y-ETY" secondAttribute="leading" id="XaO-cZ-xLi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Yet-wl-ArG"/>
+                    <connections>
+                        <outlet property="connentView" destination="MUD-EU-wfi" id="HMQ-Y0-yA9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ubY-KP-dVT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="557" y="3"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="fruit_0.png" width="73" height="73"/>
         <image name="fruit_0_s.png" width="53" height="53"/>
         <image name="gua.png" width="57" height="57"/>
         <image name="leave_message_bg.png" width="280" height="50"/>
         <image name="nangua_blacklist.png" width="50" height="50"/>
+        <image name="nangua_connect_line1.png" width="3" height="192"/>
         <image name="nangua_delete.png" width="50" height="50"/>
+        <image name="nangua_logo_bg.png" width="53" height="53"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

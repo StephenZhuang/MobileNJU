@@ -33,6 +33,11 @@
     _dataArray = [[NSMutableArray alloc] init];
 }
 
+- (IBAction)goToCheck:(id)sender
+{
+    [self performSegueWithIdentifier:@"chat" sender:sender];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 20;
@@ -49,6 +54,11 @@
     [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
     [cell addGestureRecognizer:swipeRight];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"chat" sender:indexPath];
 }
 
 - (void)swipLeft:(UISwipeGestureRecognizer *)swipe
