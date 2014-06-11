@@ -11,4 +11,5 @@
 
 @interface ChatViewController : NanguaBaseViewController
 @property (nonatomic , weak) IBOutlet ConnectVIew *connentView;
+@property (nonatomic , assign) BOOL isFromGua;
 @end

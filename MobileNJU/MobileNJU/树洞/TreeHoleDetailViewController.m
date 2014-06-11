@@ -169,6 +169,13 @@
     }
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    _targetid = @"";
+    _commentid = @"";
+    [_messageField setPlaceholder:@""];
+}
+
 #pragma mark - 键盘处理
 #pragma mark 键盘即将显示
 - (void)keyBoardWillShow:(NSNotification *)note{
@@ -182,9 +189,6 @@
 }
 #pragma mark 键盘即将退出
 - (void)keyBoardWillHide:(NSNotification *)note{
-    _targetid = @"";
-    _commentid = @"";
-    [_messageField setPlaceholder:@""];
     [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
         self.view.transform = CGAffineTransformIdentity;
     }];
@@ -223,6 +227,9 @@
     }
     [_messageField resignFirstResponder];
     [_messageField setText:@""];
+    _targetid = @"";
+    _commentid = @"";
+    [_messageField setPlaceholder:@""];
 }
 
 - (IBAction)zanAction:(id)sender

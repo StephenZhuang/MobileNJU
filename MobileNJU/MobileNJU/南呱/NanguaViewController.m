@@ -8,6 +8,8 @@
 
 #import "NanguaViewController.h"
 #import "LeaveMessageCell.h"
+#import "ChatViewController.h"
+#import "ZsndChat.pb.h"
 
 @interface NanguaViewController ()
 
@@ -31,6 +33,7 @@
     [self setTitle:@"南呱"];
     [self setSubTitle:@"和水果聊天"];
     _dataArray = [[NSMutableArray alloc] init];
+    [[ApisFactory getApiMChatIndex] load:self selecter:@selector(disposMessage:)];
 }
 
 - (IBAction)goToCheck:(id)sender
@@ -38,14 +41,31 @@
     [self performSegueWithIdentifier:@"chat" sender:sender];
 }
 
+- (void)disposMessage:(Son *)son
+{
+    if ([son getError] == 0) {
+        if ([[son getMethod] isEqualToString:@"MChatIndex"]) {
+            MChatList_Builder *chatList = (MChatList_Builder *)[son getBuild];
+            [_dataArray removeAllObjects];
+            [_dataArray addObjectsFromArray:chatList.chatList];
+            [_tableView reloadData];
+        }
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return _dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LeaveMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LeaveMessageCell"];
+    MChatIndex *chatIndex = [_dataArray objectAtIndex:indexPath.row];
+    [cell.logoImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i" , chatIndex.headImg]]];
+    [cell.contentLabel setText:chatIndex.content];
+    [cell.timeLabel setText:chatIndex.time];
+    
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipLeft:)];
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
     [cell addGestureRecognizer:swipeLeft];
@@ -118,7 +138,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -126,7 +146,13 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"chat"]) {
+        if ([sender isKindOfClass:NSClassFromString(@"UIButton")]) {
+            ChatViewController *vc = segue.destinationViewController;
+            vc.isFromGua = YES;
+        }
+    }
 }
-*/
+
 
 @end
