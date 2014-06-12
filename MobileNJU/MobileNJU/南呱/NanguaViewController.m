@@ -150,6 +150,11 @@
         if ([sender isKindOfClass:NSClassFromString(@"UIButton")]) {
             ChatViewController *vc = segue.destinationViewController;
             vc.isFromGua = YES;
+        } else {
+            ChatViewController *vc = segue.destinationViewController;
+            NSIndexPath *indexPath = sender;
+            MChatIndex *chatIndex = [self.dataArray objectAtIndex:indexPath.row];
+            vc.targetid = chatIndex.targetid;
         }
     }
 }

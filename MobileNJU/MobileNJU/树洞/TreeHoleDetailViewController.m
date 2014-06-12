@@ -118,10 +118,10 @@
         
         TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
 
-        [cell.contentLabel setText:[_topic.content replaceUnicode]];
+        [cell.contentLabel setText:_topic.content];
 //        [cell.contentLabel sizeToFit];
         
-        [cell.titleLabel setText:[_topic.title replaceUnicode]];
+        [cell.titleLabel setText:_topic.title];
 //        [cell.contentLabel setText:[_topic.content replaceUnicode]];
         [cell.timeLabel setText:_topic.time];
         [cell.zanButton setTag:indexPath.row];
@@ -223,7 +223,7 @@
         return;
     }
     if (string.length > 0) {
-        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_topic.id content:[string utf8ToUnicode] reply:_targetid commentid:_commentid];
+        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_topic.id content:string reply:_targetid commentid:_commentid];
     }
     [_messageField resignFirstResponder];
     [_messageField setText:@""];

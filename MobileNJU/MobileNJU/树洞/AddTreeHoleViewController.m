@@ -71,8 +71,8 @@
         return;
     }
     MAddTopic_Builder *addTopic = [MAddTopic_Builder new];
-    [addTopic setTitle:[title utf8ToUnicode]];
-    [addTopic setContent:[content utf8ToUnicode]];
+    [addTopic setTitle:title];
+    [addTopic setContent:content];
     for (UIImage *image in _photoArray) {
         [addTopic addImgs:UIImagePNGRepresentation(image)];
     }

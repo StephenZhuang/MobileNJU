@@ -95,12 +95,8 @@
         [_fruitImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i" , i]]];
     }];
     
-//    if (time == 5) {
-//        [self timedout];
-//    }
-    
     if (time == 20) {
-        [self stopAnimation];
+        [self timedout];
     }
 }
 

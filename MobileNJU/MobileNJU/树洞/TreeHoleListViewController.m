@@ -94,7 +94,7 @@
 {
     TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
     MTopic *topic = [self.dataArray objectAtIndex:indexPath.row];
-    [cell.contentLabel setText:[topic.content replaceUnicode]];
+    [cell.contentLabel setText:topic.content];
     
     NSMutableArray *array = [[NSMutableArray alloc] init];
     if (topic.imgs.length > 0) {
@@ -114,8 +114,8 @@
     TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
     
     MTopic *topic = [self.dataArray objectAtIndex:indexPath.row];
-    [cell.titleLabel setText:[topic.title replaceUnicode]];
-    [cell.contentLabel setText:[topic.content replaceUnicode]];
+    [cell.titleLabel setText:topic.title];
+    [cell.contentLabel setText:topic.content];
     [cell.timeLabel setText:topic.time];
     [cell.zanButton setTag:indexPath.row];
     [cell.commentButton setTag:indexPath.row];

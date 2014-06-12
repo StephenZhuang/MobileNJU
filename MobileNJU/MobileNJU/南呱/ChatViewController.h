@@ -7,9 +7,18 @@
 //
 
 #import "NanguaBaseViewController.h"
-#import "ConnectVIew.h"
+#import "MJRefresh.h"
 
-@interface ChatViewController : NanguaBaseViewController
-@property (nonatomic , weak) IBOutlet ConnectVIew *connentView;
+@interface ChatViewController : NanguaBaseViewController<UITableViewDataSource , UITableViewDelegate>
+{
+    MJRefreshHeaderView *_header;
+}
+@property (nonatomic , weak) IBOutlet UITableView *tableView;
+@property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , assign) BOOL isFromGua;
+@property (nonatomic , weak) IBOutlet UIView *bottomView;
+@property (nonatomic , weak) IBOutlet UITextField *messageField;
+@property (nonatomic , copy) NSString *targetid;
+@property (nonatomic , assign) int targetHead;
+@property (nonatomic , copy) NSString *headImg;
 @end

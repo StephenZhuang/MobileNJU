@@ -68,7 +68,7 @@
     MatchParser * match=[[MatchParser alloc]init];
     match.width=290;
 //    [match match:@"[月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗][月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗" ];
-    [match match:[comment.content replaceUnicode] atCallBack:^BOOL(NSString *string) {
+    [match match:comment.content atCallBack:^BOOL(NSString *string) {
         return YES;
     }title:fromString];
     self.commentLabel.match=match;
@@ -106,7 +106,7 @@
     MatchParser * match=[[MatchParser alloc]init];
     match.width=290;
 //    [match match:@"[月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗][月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗" ];
-    [match match:[comment.content replaceUnicode] atCallBack:^BOOL(NSString *string) {
+    [match match:comment.content atCallBack:^BOOL(NSString *string) {
         return YES;
     }title:fromString];
     return match.height;
