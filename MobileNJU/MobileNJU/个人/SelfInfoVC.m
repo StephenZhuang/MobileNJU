@@ -53,9 +53,9 @@
         if ([[son getMethod] isEqualToString:@"MGetUserInfo"]) {
             //获得返回类
             MUser_Builder *user = (MUser_Builder *)[son getBuild];
-            [ToolUtils setBelong:user.belong];
-            [ToolUtils setBirthday:user.birthday];
-            [ToolUtils setNickname:user.nickname];
+            [ToolUtils setBelong:user.belong==nil?@"":user.belong];
+            [ToolUtils setBirthday:user.birthday==nil?@"":user.birthday];
+            [ToolUtils setNickname:user.nickname==nil?@"":user.nickname];
             switch (user.sex) {
                 case 0:
                     [ToolUtils setSex:@"女"];
