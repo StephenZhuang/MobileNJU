@@ -74,6 +74,7 @@
 		7796F1E619496FD000015307 /* HBTalkTableViewTextRightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7796F1DF19496FD000015307 /* HBTalkTableViewTextRightCell.m */; };
 		7796F1E919498B3600015307 /* ReceiverTextNodeBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7796F1E819498B3600015307 /* ReceiverTextNodeBkg@2x.png */; };
 		7796F1EB19498B3C00015307 /* SenderTextNodeBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7796F1EA19498B3C00015307 /* SenderTextNodeBkg@2x.png */; };
+		7796F1ED1949B84B00015307 /* nangua_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7796F1EC1949B84B00015307 /* nangua_add@2x.png */; };
 		77B90429192C3F040062237D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B90428192C3F030062237D /* Foundation.framework */; };
 		77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042A192C3F040062237D /* CoreGraphics.framework */; };
 		77B9042D192C3F040062237D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042C192C3F040062237D /* UIKit.framework */; };
@@ -612,6 +613,7 @@
 		7796F1DF19496FD000015307 /* HBTalkTableViewTextRightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTalkTableViewTextRightCell.m; sourceTree = "<group>"; };
 		7796F1E819498B3600015307 /* ReceiverTextNodeBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkg@2x.png"; sourceTree = "<group>"; };
 		7796F1EA19498B3C00015307 /* SenderTextNodeBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderTextNodeBkg@2x.png"; sourceTree = "<group>"; };
+		7796F1EC1949B84B00015307 /* nangua_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nangua_add@2x.png"; sourceTree = "<group>"; };
 		77B90425192C3F030062237D /* MobileNJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileNJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B90428192C3F030062237D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77B9042A192C3F040062237D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1884,6 +1886,7 @@
 		77B90458192C433F0062237D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7796F1EC1949B84B00015307 /* nangua_add@2x.png */,
 				7796F1EA19498B3C00015307 /* SenderTextNodeBkg@2x.png */,
 				7796F1E819498B3600015307 /* ReceiverTextNodeBkg@2x.png */,
 				77883D4F1947F7AF00197F59 /* nangua_connect_line1@2x.png */,
@@ -2851,6 +2854,7 @@
 				77E07575194043A90098BA09 /* f077@2x.png in Resources */,
 				77E07546194043A90098BA09 /* f054.png in Resources */,
 				77E074F3194043A90098BA09 /* f012@2x.png in Resources */,
+				7796F1ED1949B84B00015307 /* nangua_add@2x.png in Resources */,
 				778EA78E1945DCF7007B6C7E /* nangua_back@2x.png in Resources */,
 				77E0740B194043A20098BA09 /* faceMap_ch.plist in Resources */,
 				77E07581194043A90098BA09 /* f083@2x.png in Resources */,

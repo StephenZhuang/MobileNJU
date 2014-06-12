@@ -16,6 +16,7 @@
 #import "HBTalkTableViewImageRightCell.h"
 #import "HBTalkTableViewTextLeftCell.h"
 #import "HBTalkTableViewTextRightCell.h"
+#import "ZsndSystem.pb.h"
 
 @interface ChatViewController ()
 
@@ -163,6 +164,18 @@
                 _targetHead = chats.headImg;
                 _headImg = [ToolUtils getHeadImg];
             }
+        } else if ([[son getMethod] isEqualToString:@"MAddChat"]){
+            if ([[son getParam:@"content"] length] <= 0) {
+                MChat_Builder *chat = (MChat_Builder *)[son getBuild];
+                
+//                MChat_Builder *chat = [MChat_Builder new];
+//                [chat setUserid:[ToolUtils getLoginId]];
+//                [chat setContent:@""];
+//                [chat setImg:ret.msg];
+                [self.dataArray addObject:chat.build];
+                [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            }
         }
     }
     if ([[son getMethod] isEqualToString:@"MChat"]) {
@@ -278,6 +291,7 @@
 - (IBAction)sendAction:(id)sender
 {
     NSString *string = _messageField.text;
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (string.length > 100) {
         [_messageField resignFirstResponder];
         [ProgressHUD showError:@"不能超过100字"];
@@ -290,12 +304,150 @@
         [chat setImg:@""];
         [self.dataArray addObject:chat.build];
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         
         [[ApisFactory getApiMAddChat] load:self selecter:@selector(disposMessage:) id:_targetid content:string];
     }
     [_messageField resignFirstResponder];
     [_messageField setText:@""];
 
+}
+
+- (IBAction)addImageAction:(id)sender
+{
+    UIActionSheet *sheet;
+    // 判断是否支持相机
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册选择", nil];
+    }
+    else {
+        
+        sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+    }
+    
+    sheet.tag = 255;
+    
+    [sheet showInView:[UIApplication sharedApplication].keyWindow];
+}
+
+#pragma mark - 保存图片至沙盒
+- (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
+{
+    //    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    NSData *imageData = UIImagePNGRepresentation(currentImage);
+    // 获取沙盒目录
+    
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+    
+    // 将图片写入文件
+    
+    [imageData writeToFile:fullPath atomically:NO];
+}
+
+#pragma mark - image picker delegte
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    //    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowPhotoTabbar" object:nil];
+	[picker dismissViewControllerAnimated:YES completion:^{}];
+    
+    //    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    _image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    _image = [self useImage:_image];
+    
+    [self uploadImg];
+    //    [_userInfoView.logoButton setBackgroundImage:image forState:UIControlStateNormal];
+    //    [self updateHeadImg];
+}
+
+- (void)uploadImg
+{
+    MImg_Builder *img = [MImg_Builder new];
+    [img setImg:UIImagePNGRepresentation(_image)];
+    
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddChat" params:img  delegate:self selecter:@selector(disposMessage:)];
+    [updateone addParam:@"id" value:_targetid];
+    [updateone addParam:@"content" value:@""];
+    [updateone setShowLoading:YES];
+    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
+}
+
+- (UIImage *)useImage:(UIImage *)image {
+    //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // Create a graphics image context
+    CGSize newSize = CGSizeMake(640, 640 * image.size.height / image.size.width);
+    UIGraphicsBeginImageContext(newSize);
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    //    [pool release];
+    return newImage;
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    //    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowPhotoTabbar" object:nil];
+	[self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+#pragma mark - actionsheet delegate
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 255) {
+        
+        NSUInteger sourceType = 0;
+        
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            
+            switch (buttonIndex) {
+                case 0:
+                    // 相机
+                    sourceType = UIImagePickerControllerSourceTypeCamera;
+                    break;
+                case 1:
+                    // 相册
+                    sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+                    
+                case 2:
+                    // 取消
+                    return;
+                    break;
+                default:
+                    return;
+                    break;
+            }
+        }
+        else {
+            if (buttonIndex == 0) {
+                
+                sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            } else {
+                return;
+            }
+        }
+        // 跳转到相机或相册页面
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        
+        imagePickerController.delegate = self;
+        
+        imagePickerController.allowsEditing = NO;
+        
+        imagePickerController.sourceType = sourceType;
+        
+        [self presentViewController:imagePickerController animated:YES completion:^{}];
+        
+        //        [imagePickerController release];
+        
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"HidePhotoTabbar" object:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
