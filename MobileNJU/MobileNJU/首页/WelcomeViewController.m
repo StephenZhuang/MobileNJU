@@ -13,7 +13,9 @@
 #import "EcardVC.h"
 #import "MyLibraryVC.h"
 #import "ZsndSystem.pb.h"
+#import "UtilMethods.h"
 #import "ZsndUser.pb.h"
+
 @interface WelcomeViewController ()<UITextFieldDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
@@ -21,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *indicateView;
 @property (nonatomic)NSInteger page;
+@property(nonatomic)BOOL hasLoad;
 @end
 
 @implementation WelcomeViewController
@@ -30,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasLoad = NO;
     //  [self setNavigationBarStyle];
     [self setDelegate];
     //中间缺少加载过程
@@ -39,8 +43,8 @@
     
     //api调用方式 可以点进去查看，也可按option + 左键查看 ， 回调函数统一写作disposMessage ， 如下
     [[ApisFactory getApiMGetWelcomePage] load:self selecter:@selector(disposMessage:)];
-    [self.usernameTextField setText:@"test"];
-    [self.passwordTextField setText:@"1"];
+    [self.usernameTextField setText:[UtilMethods getLoginId]==nil?@"":[UtilMethods getLoginId]];
+    [self.passwordTextField setText:[UtilMethods getPassword]==nil?@"":[UtilMethods getPassword]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,20 +54,27 @@
 }
 
 - (IBAction)login:(UIButton *)sender {
+    
     if ([self.usernameTextField.text isEqualToString:@""]) {
-        [self showAlert:@"请输入您的手机号"];
+        [ProgressHUD showError:@"请输入您的手机号"];
         return;
     }
     if ([self.passwordTextField.text isEqualToString:@""]) {
-        [self showAlert:@"密码不能为空"];
+        [ProgressHUD showError:@"密码不能为空"];
         return;
     }
+    [self resignAllResponders:nil];
     [self waiting];
     #warning 注意加密
-    [[ApisFactory getApiMLogin] load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:
-                                                                                                                         self.passwordTextField.text];
-   
+    [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:self.passwordTextField.text pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"]];
 //    [self performSegueWithIdentifier:@"main" sender:nil];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (self.hasLoad) {
+        
+        [self showLoginView];
+    }
 }
 #pragma - mark api回调
 - (void)disposMessage:(Son *)son
@@ -76,7 +87,12 @@
             //获得返回类
             MRet_Builder *ret = (MRet_Builder *)[son getBuild];
             NSLog(@"=======%@",ret.msg);
-            [self showLoginView];
+            self.hasLoad=YES;
+            if ([UtilMethods isLogin]) {
+                [self login:nil];
+            } else {
+                [self showLoginView];
+            }
         } else if ([[son getMethod] isEqualToString:@"MLogin"])
         {
             MUser_Builder *user = (MUser_Builder *)[son getBuild];
@@ -86,6 +102,9 @@
             [ToolUtils setHeadImg:user.headImg];
             NSArray *array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],nil];
             [Frame setAutoAddParams:array];
+            [UtilMethods setIsLogin:YES];
+            [UtilMethods setLoginId:self.usernameTextField.text];
+            [UtilMethods setPassword:self.passwordTextField.text];
             [self performSegueWithIdentifier:@"main" sender:nil];
         }
     }
@@ -158,20 +177,11 @@
     self.usernameTextField.delegate = self;
 }
 
-#pragma mark segue
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    if ([identifier isEqualToString:@"login in"]){
-        return [self login];
-    }
-    return YES;
-}
-
-- (BOOL)login
-{
-    
-    return YES;
-}
+//#pragma mark segue
+//- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+//{
+//
+//}
 
 
 

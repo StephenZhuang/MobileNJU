@@ -15,7 +15,7 @@
     MJRefreshHeaderView *_header;
     MJRefreshFooterView *_footer;
 //    FootView *_footer;
-    NSInteger page;
+    int page;
     NSInteger pageCount;
     BOOL hasMore;
     BOOL isLoading;

@@ -18,7 +18,7 @@
                         <rect key="frame" x="8" y="10" width="120" height="169"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="卡片" translatesAutoresizingMaskIntoConstraints="NO" id="dlg-Pb-YzN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="卡片" translatesAutoresizingMaskIntoConstraints="NO" id="dlg-Pb-YzN">
                                 <rect key="frame" x="0.0" y="0.0" width="92" height="131"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -83,6 +83,7 @@
                             <constraint firstItem="NZP-Um-rHt" firstAttribute="leading" secondItem="Vhx-I2-8rR" secondAttribute="leading" id="QkY-Mq-bkU"/>
                             <constraint firstItem="dlg-Pb-YzN" firstAttribute="top" secondItem="M5D-jM-lWG" secondAttribute="top" id="T8G-W3-LUV"/>
                             <constraint firstItem="Er9-OP-raY" firstAttribute="top" secondItem="kh3-IZ-un3" secondAttribute="bottom" constant="3" id="ZXL-Hf-KqS"/>
+                            <constraint firstItem="dlg-Pb-YzN" firstAttribute="leading" secondItem="M5D-jM-lWG" secondAttribute="leading" id="f5j-A8-rQc"/>
                             <constraint firstItem="TZo-vp-qXJ" firstAttribute="baseline" secondItem="o1h-aK-b23" secondAttribute="baseline" id="fRt-ck-IZN"/>
                             <constraint firstItem="o1h-aK-b23" firstAttribute="leading" secondItem="TZo-vp-qXJ" secondAttribute="trailing" id="h3d-Ms-6LF"/>
                             <constraint firstItem="NZP-Um-rHt" firstAttribute="trailing" secondItem="o1h-aK-b23" secondAttribute="trailing" id="lFr-tc-AZQ"/>

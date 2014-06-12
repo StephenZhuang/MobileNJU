@@ -23,6 +23,10 @@
 		7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4919416CA800EDDA68 /* NewMessageCell.m */; };
 		7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */; };
 		778EA76919454C25007B6C7E /* ApiMBookDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA76819454C25007B6C7E /* ApiMBookDetail.m */; };
+		778EA77219455467007B6C7E /* ApiMLogout.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA76B19455467007B6C7E /* ApiMLogout.m */; };
+		778EA77319455467007B6C7E /* ApiMRss.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA76D19455467007B6C7E /* ApiMRss.m */; };
+		778EA77419455467007B6C7E /* ApiMSignInInDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA76F19455467007B6C7E /* ApiMSignInInDetail.m */; };
+		778EA77519455467007B6C7E /* ApiMTermList.m in Sources */ = {isa = PBXBuildFile; fileRef = 778EA77119455467007B6C7E /* ApiMTermList.m */; };
 		77B90429192C3F040062237D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B90428192C3F030062237D /* Foundation.framework */; };
 		77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042A192C3F040062237D /* CoreGraphics.framework */; };
 		77B9042D192C3F040062237D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B9042C192C3F040062237D /* UIKit.framework */; };
@@ -434,6 +438,7 @@
 		77E7D9F0193089BE00BFA983 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E7D9EF193089BE00BFA983 /* libz.dylib */; };
 		77E7D9F319308BE400BFA983 /* RefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7D9F219308BE400BFA983 /* RefreshTableViewController.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
+		7D54A7B01945F3040082909E /* BookDetailScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */; };
 		7DBC8D6519435C6C0086E28B /* BookCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */; };
 		7DC4C58D19443D97007C6888 /* loading@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7DC4C58C19443D97007C6888 /* loading@2x.gif */; };
 		7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B30192D9C230066494D /* WelcomeViewController.m */; };
@@ -484,7 +489,6 @@
 		771EDF46193F37A200A3DCBB /* NewsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListView.h; sourceTree = "<group>"; };
 		771EDF47193F37A200A3DCBB /* NewsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListView.m; sourceTree = "<group>"; };
 		771EDF48193F37A200A3DCBB /* NewsListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListView.xib; sourceTree = "<group>"; };
-		771EDF49193F37A200A3DCBB /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
 		771EDF4A193F37A200A3DCBB /* SubscribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeCell.m; sourceTree = "<group>"; };
 		774972021942EFF3006767A7 /* CheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewController.h; sourceTree = "<group>"; };
 		774972031942EFF3006767A7 /* CheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewController.m; sourceTree = "<group>"; };
@@ -496,6 +500,14 @@
 		7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTreeHoleViewController.m; sourceTree = "<group>"; };
 		778EA76719454C25007B6C7E /* ApiMBookDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMBookDetail.h; sourceTree = "<group>"; };
 		778EA76819454C25007B6C7E /* ApiMBookDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMBookDetail.m; sourceTree = "<group>"; };
+		778EA76A19455467007B6C7E /* ApiMLogout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMLogout.h; sourceTree = "<group>"; };
+		778EA76B19455467007B6C7E /* ApiMLogout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMLogout.m; sourceTree = "<group>"; };
+		778EA76C19455467007B6C7E /* ApiMRss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMRss.h; sourceTree = "<group>"; };
+		778EA76D19455467007B6C7E /* ApiMRss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMRss.m; sourceTree = "<group>"; };
+		778EA76E19455467007B6C7E /* ApiMSignInInDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMSignInInDetail.h; sourceTree = "<group>"; };
+		778EA76F19455467007B6C7E /* ApiMSignInInDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMSignInInDetail.m; sourceTree = "<group>"; };
+		778EA77019455467007B6C7E /* ApiMTermList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMTermList.h; sourceTree = "<group>"; };
+		778EA77119455467007B6C7E /* ApiMTermList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMTermList.m; sourceTree = "<group>"; };
 		77B90425192C3F030062237D /* MobileNJU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileNJU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B90428192C3F030062237D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77B9042A192C3F040062237D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1158,6 +1170,9 @@
 		77E7D9F219308BE400BFA983 /* RefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshTableViewController.m; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
+		7D54A7A9194550670082909E /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
+		7D54A7AE1945F3040082909E /* BookDetailScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailScrollerView.h; sourceTree = "<group>"; };
+		7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailScrollerView.m; sourceTree = "<group>"; };
 		7DBC8D6319435C6C0086E28B /* BookCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCollectionCell.h; sourceTree = "<group>"; };
 		7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCollectionCell.m; sourceTree = "<group>"; };
 		7DC4C58C19443D97007C6888 /* loading@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "loading@2x.gif"; sourceTree = "<group>"; };
@@ -1352,6 +1367,8 @@
 				77E07629194044340098BA09 /* MyLibraryVC.m */,
 				7DBC8D6319435C6C0086E28B /* BookCollectionCell.h */,
 				7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */,
+				7D54A7AE1945F3040082909E /* BookDetailScrollerView.h */,
+				7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */,
 			);
 			path = "图书馆";
 			sourceTree = "<group>";
@@ -1745,6 +1762,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				77B904B6192C4B3B0062237D /* ToolUtils */,
 				77E075A9194043CD0098BA09 /* Frontia */,
 				771EDF15193F367600A3DCBB /* 图文混排 */,
 				771EDF17193F367600A3DCBB /* ComboBox */,
@@ -1754,7 +1772,6 @@
 				77B9046F192C4B3A0062237D /* MJRefresh */,
 				77B9047C192C4B3A0062237D /* PhotoBrowser */,
 				77B90491192C4B3A0062237D /* SDWebImage */,
-				77B904B6192C4B3B0062237D /* ToolUtils */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -1775,7 +1792,7 @@
 		77B9045B192C434B0062237D /* 订阅 */ = {
 			isa = PBXGroup;
 			children = (
-				771EDF49193F37A200A3DCBB /* SubscribeCell.h */,
+				7D54A7A9194550670082909E /* SubscribeCell.h */,
 				771EDF4A193F37A200A3DCBB /* SubscribeCell.m */,
 				771EDF46193F37A200A3DCBB /* NewsListView.h */,
 				771EDF47193F37A200A3DCBB /* NewsListView.m */,
@@ -2125,6 +2142,14 @@
 		77E0731D1940435D0098BA09 /* iosApi */ = {
 			isa = PBXGroup;
 			children = (
+				778EA76A19455467007B6C7E /* ApiMLogout.h */,
+				778EA76B19455467007B6C7E /* ApiMLogout.m */,
+				778EA76C19455467007B6C7E /* ApiMRss.h */,
+				778EA76D19455467007B6C7E /* ApiMRss.m */,
+				778EA76E19455467007B6C7E /* ApiMSignInInDetail.h */,
+				778EA76F19455467007B6C7E /* ApiMSignInInDetail.m */,
+				778EA77019455467007B6C7E /* ApiMTermList.h */,
+				778EA77119455467007B6C7E /* ApiMTermList.m */,
 				778EA76719454C25007B6C7E /* ApiMBookDetail.h */,
 				778EA76819454C25007B6C7E /* ApiMBookDetail.m */,
 				77E0731E1940435D0098BA09 /* ApiMActivity.h */,
@@ -2708,6 +2733,7 @@
 				77E07602194044110098BA09 /* ScheduleView.m in Sources */,
 				77E075E9194043F10098BA09 /* GradeVC.m in Sources */,
 				77E073BA1940435D0098BA09 /* ApiMChatMsg.m in Sources */,
+				778EA77319455467007B6C7E /* ApiMRss.m in Sources */,
 				77E073B21940435D0098BA09 /* ApiMChat.m in Sources */,
 				77E073D01940435D0098BA09 /* ApiMRegist.m in Sources */,
 				7DD8699E192DB6D700D4ADAA /* NewsDetailVC.m in Sources */,
@@ -2749,6 +2775,7 @@
 				77E075F0194044020098BA09 /* ExerciseVC.m in Sources */,
 				77B904CD192C4B3B0062237D /* SDWebImageDecoder.m in Sources */,
 				77E073DE1940435D0098BA09 /* ApiMVerifyUser.m in Sources */,
+				778EA77219455467007B6C7E /* ApiMLogout.m in Sources */,
 				77E073CF1940435D0098BA09 /* ApiMPraise.m in Sources */,
 				77E073C91940435D0098BA09 /* ApiMLoginSignIn.m in Sources */,
 				77E073E21940435D0098BA09 /* ZsndIndex.pb.m in Sources */,
@@ -2760,8 +2787,11 @@
 				77E073B01940435D0098BA09 /* ApiMCardInfo.m in Sources */,
 				77E073AF1940435D0098BA09 /* ApiMCardHistory.m in Sources */,
 				77E073D31940435D0098BA09 /* ApiMSearchBook.m in Sources */,
+				7D54A7B01945F3040082909E /* BookDetailScrollerView.m in Sources */,
 				77E075D2194043DA0098BA09 /* BBSDetail.m in Sources */,
+				778EA77419455467007B6C7E /* ApiMSignInInDetail.m in Sources */,
 				77E073E01940435D0098BA09 /* ApiUpdate.m in Sources */,
+				778EA77519455467007B6C7E /* ApiMTermList.m in Sources */,
 				77E07601194044110098BA09 /* ScheduleVC.m in Sources */,
 				77B90464192C44A20062237D /* BaseViewController.m in Sources */,
 				77E073AC1940435D0098BA09 /* ApiMBaiheNewsList.m in Sources */,

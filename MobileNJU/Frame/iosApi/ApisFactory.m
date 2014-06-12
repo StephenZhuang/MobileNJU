@@ -1,7 +1,7 @@
 //
 //  ApisFactory
 //
-//  Created by ryan on 2014-06-04 18:30:34
+//  Created by ryan on 2014-06-09 10:27:58
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -51,24 +51,31 @@
 	}
 	
 	/**
-	 * 首页
+	 * 首页 /mobile?methodno=MIndex&debug=1&deviceid=1&userid=fe34a40e-eac6-11e3-b696-ac853d9d52b1&verify=cf09a009-d221-466a-b9f0-d7d3b43dce7c&appid=nju&appid=nju
 	 */
 	+(ApiMIndex*) getApiMIndex{
 		return [[ApiMIndex alloc ] init];
 	}
 	
 	/**
-	 *  未读消息
+	 *  未读消息  /mobile?methodno=MUnreadModule&debug=1&deviceid=1&userid=dffeda04-eb07-11e3-b696-ac853d9d52b1&verify=753bd4cd-590a-4fa2-b5b3-f390d3bc1d01&appid=nju
 	 */
 	+(ApiMUnreadModule*) getApiMUnreadModule{
 		return [[ApiMUnreadModule alloc ] init];
 	}
 	
 	/**
-	 *  图书馆检索(分页)  /mobile?methodno=MSearchBook&debug=1&userid=&verify=&deviceid=&appid=&page=&pagecount=&keyword=
+	 *  图书馆检索(分页)  /mobile?methodno=MSearchBook&debug=1&userid=&verify=&deviceid=&appid=&page=&limit=&keyword=
 	 */
 	+(ApiMSearchBook*) getApiMSearchBook{
 		return [[ApiMSearchBook alloc ] init];
+	}
+	
+	/**
+	 *  图书详情查询  /mobile?methodno=MBookDetail&debug=1&userid=&verify=&deviceid=&appid=&id=
+	 */
+	+(ApiMBookDetail*) getApiMBookDetail{
+		return [[ApiMBookDetail alloc ] init];
 	}
 	
 	/**
@@ -79,14 +86,14 @@
 	}
 	
 	/**
-	 *  失物招领(分页)
+	 *  失物招领(分页) /mobile?methodno=MLostAndFound&debug=1&deviceid=1&userid=&verify=&type=&page=&limit=
 	 */
 	+(ApiMLostAndFound*) getApiMLostAndFound{
 		return [[ApiMLostAndFound alloc ] init];
 	}
 	
 	/**
-	 * 新闻列表(分页)
+	 * 新闻列表(分页) /mobile?methodno=MNewsList&debug=1&deviceid=1&userid=fe34a40e-eac6-11e3-b696-ac853d9d52b1&verify=cf09a009-d221-466a-b9f0-d7d3b43dce7c&page=2&limit=10&appid=nju
 	 */
 	+(ApiMNewsList*) getApiMNewsList{
 		return [[ApiMNewsList alloc ] init];
@@ -100,31 +107,38 @@
 	}
 	
 	/**
-	 *  百合十大
+	 *  百合十大 /mobile?methodno=MBaiheNewsList&debug=1&deviceid=1&userid=fe34a40e-eac6-11e3-b696-ac853d9d52b1&verify=cf09a009-d221-466a-b9f0-d7d3b43dce7c&appid=nju
 	 */
 	+(ApiMBaiheNewsList*) getApiMBaiheNewsList{
 		return [[ApiMBaiheNewsList alloc ] init];
 	}
 	
 	/**
-	 *  全部订阅
+	 *  全部订阅 /mobile?methodno=MAllRss&debug=1&deviceid=1&userid=&verify=&appid=
 	 */
 	+(ApiMAllRss*) getApiMAllRss{
 		return [[ApiMAllRss alloc ] init];
 	}
 	
 	/**
-	 *  我的订阅
+	 *  我的订阅 /mobile?methodno=MMyRss&debug=1&deviceid=1&userid=&verify=&appid=
 	 */
 	+(ApiMMyRss*) getApiMMyRss{
 		return [[ApiMMyRss alloc ] init];
 	}
 	
 	/**
-	 *  活动
+	 *  活动  /mobile?methodno=MNewsList&debug=1&deviceid=1&userid=fe34a40e-eac6-11e3-b696-ac853d9d52b1&verify=cf09a009-d221-466a-b9f0-d7d3b43dce7c&page=2&limit=10&appid=nju
 	 */
 	+(ApiMActivity*) getApiMActivity{
 		return [[ApiMActivity alloc ] init];
+	}
+	
+	/**
+	 * 退出登录   /mobile?methodno=MLogout&debug=1&deviceid=&appid=&userid=
+	 */
+	+(ApiMLogout*) getApiMLogout{
+		return [[ApiMLogout alloc ] init];
 	}
 	
 	/**
@@ -156,17 +170,17 @@
 	}
 	
 	/**
-	 * 获取用户身份认证校验码
-	 */
-	+(ApiMGetVerifyUserCode*) getApiMGetVerifyUserCode{
-		return [[ApiMGetVerifyUserCode alloc ] init];
-	}
-	
-	/**
-	 * 用户身份认证
+	 * 用户身份认证 /mobile?methodno=MVerifyUser&debug=1&deviceid=1&userid=&verify=&num=&pwd=&code=&appid=nju
 	 */
 	+(ApiMVerifyUser*) getApiMVerifyUser{
 		return [[ApiMVerifyUser alloc ] init];
+	}
+	
+	/**
+	 *  订阅 /mobile?methodno=MRss&debug=1&deviceid=1&userid=&verify=&rssid=&appid=
+	 */
+	+(ApiMRss*) getApiMRss{
+		return [[ApiMRss alloc ] init];
 	}
 	
 	/**
@@ -233,13 +247,6 @@
 	}
 	
 	/**
-	 *  图书馆登录 
-	 */
-	+(ApiMLoginLibrary*) getApiMLoginLibrary{
-		return [[ApiMLoginLibrary alloc ] init];
-	}
-	
-	/**
 	 *  图书馆续借  mobile?methodno=MBookRenew&debug=&deviceid=&appid=1&userid=&verify=&account=&password=&id=
 	 */
 	+(ApiMBookRenew*) getApiMBookRenew{
@@ -247,105 +254,84 @@
 	}
 	
 	/**
-	 *  空教室搜索
+	 *  空教室搜索 /mobile?methodno=MRoomSearch&debug=1&deviceid=1&userid=&verify=&type=&day=&begin=&end=
 	 */
 	+(ApiMRoomSearch*) getApiMRoomSearch{
 		return [[ApiMRoomSearch alloc ] init];
 	}
 	
 	/**
-	 *  添加失物招领:MAddLostOrFound 
+	 *  添加失物招领:MAddLostOrFound /mobile?methodno=MAddLostAndFound&debug=&appid=&deviceid=&userid=&verify=
 	 */
 	+(ApiMAddLostAndFound*) getApiMAddLostAndFound{
 		return [[ApiMAddLostAndFound alloc ] init];
 	}
 	
 	/**
-	 *  一卡通验证码
-	 */
-	+(ApiMLoginScheduleCode*) getApiMLoginScheduleCode{
-		return [[ApiMLoginScheduleCode alloc ] init];
-	}
-	
-	/**
-	 *  课程表/成绩查询登录
-	 */
-	+(ApiMLoginSchedule*) getApiMLoginSchedule{
-		return [[ApiMLoginSchedule alloc ] init];
-	}
-	
-	/**
-	 *  课程表
+	 *  课程表 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
 	 */
 	+(ApiMSchedule*) getApiMSchedule{
 		return [[ApiMSchedule alloc ] init];
 	}
 	
 	/**
-	 * 成绩查询
+	 *  获取学期列表  /mobile?methodno=MTermList&debug=1&deviceid=1&userid=&verify=&account=&password=
+	 */
+	+(ApiMTermList*) getApiMTermList{
+		return [[ApiMTermList alloc ] init];
+	}
+	
+	/**
+	 * 成绩查询  /mobile?methodno=MGradeSearch&debug=1&deviceid=1&userid=&verify=&account=&password=&url=
 	 */
 	+(ApiMGradeSearch*) getApiMGradeSearch{
 		return [[ApiMGradeSearch alloc ] init];
 	}
 	
 	/**
-	 *  一卡通验证码
-	 */
-	+(ApiMLoginCardCode*) getApiMLoginCardCode{
-		return [[ApiMLoginCardCode alloc ] init];
-	}
-	
-	/**
-	 * 一卡通登录
-	 */
-	+(ApiMLoginCard*) getApiMLoginCard{
-		return [[ApiMLoginCard alloc ] init];
-	}
-	
-	/**
-	 *  一卡通余额
+	 *  一卡通余额 /mobile?methodno=MCardInfo&debug=1&deviceid=1&userid=&verify=&account=&password=
 	 */
 	+(ApiMCardInfo*) getApiMCardInfo{
 		return [[ApiMCardInfo alloc ] init];
 	}
 	
 	/**
-	 *  一卡通消费记录
+	 *  一卡通消费记录  /mobile?methodno=MCardHistory&debug=1&deviceid=1&userid=&verify=&begin=&end=&account=&password=
 	 */
 	+(ApiMCardHistory*) getApiMCardHistory{
 		return [[ApiMCardHistory alloc ] init];
 	}
 	
 	/**
-	 *  部门电话
+	 *  部门电话 /mobile?methodno=MContacts&debug=1&deviceid=1&userid=&verify=
 	 */
 	+(ApiMContacts*) getApiMContacts{
 		return [[ApiMContacts alloc ] init];
 	}
 	
 	/**
-	 *  校车
+	 *  校车 /mobile?methodno=MBusSearch&debug=1&deviceid=1&userid=&verify=&type=&page=&limit=
 	 */
 	+(ApiMBusSearch*) getApiMBusSearch{
 		return [[ApiMBusSearch alloc ] init];
 	}
 	
 	/**
-	 *  打卡登录
-	 */
-	+(ApiMLoginSignIn*) getApiMLoginSignIn{
-		return [[ApiMLoginSignIn alloc ] init];
-	}
-	
-	/**
-	 *  打卡信息(分页)
+	 *  打卡信息 /mobile?methodno=MSignInInfo&debug=1&deviceid=1&userid=&verify=&account=&password=
 	 */
 	+(ApiMSignInInfo*) getApiMSignInInfo{
 		return [[ApiMSignInInfo alloc ] init];
 	}
 	
 	/**
-	 *  办理流程(分页)
+	 *  打卡详情 /mobile?methodno= MSignInInDetail&debug=1&deviceid=1&userid=&verify=&account=&password=
+	 */
+	+(ApiMSignInInDetail*) getApiMSignInInDetail{
+		return [[ApiMSignInInDetail alloc ] init];
+	}
+	
+	/**
+	 *  办理流程(分页) /mobile?methodno=MHelp&debug=1&deviceid=1&userid=&verify=&page=&limit=
 	 */
 	+(ApiMHelp*) getApiMHelp{
 		return [[ApiMHelp alloc ] init];
@@ -373,14 +359,14 @@
 	}
 	
 	/**
-	 * 登录 /mobile?methodno=MLogin&debug=1&phone=&password=&deviceid=&appid=
+	 * 登录 /mobile?methodno=MLogin&debug=1&phone=&password=&deviceid=&appid=&pushId=
 	 */
 	+(ApiMLogin*) getApiMLogin{
 		return [[ApiMLogin alloc ] init];
 	}
 	
 	/**
-	 * 注册或忘记密码 /mobile?methodno=MRegist&debug=1&deviceid=1&phone=&password=&nickname=&code=&appid=
+	 * 注册或忘记密码 /mobile?methodno=MRegist&debug=1&deviceid=1&phone=&password=&nickname=&code=&appid=&pushId=
 	 */
 	+(ApiMRegist*) getApiMRegist{
 		return [[ApiMRegist alloc ] init];

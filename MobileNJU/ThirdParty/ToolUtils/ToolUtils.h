@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ToolUtils : NSObject
+@interface ToolUtils : NSObject+ (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize;
 + (BOOL)checkTel:(NSString *)str;
 + (BOOL)checkEmail:(NSString *)email;
 + (void)showMessage:(NSString *)message;
@@ -51,8 +51,8 @@
 + (NSString*)getNickName;
 + (NSString*)getUserName;
 +(NSInteger)getFlowerCount;
-
-
++(NSString*)getPhoneNum;
++(void)setPhoneNum:(NSString*)phoneNum;
 +(void) setUserName:(NSString*)username;
 +(void) setFlowerCount:(NSInteger)flowerCount;
 +(void) setNickname:(NSString*)nickName;
@@ -60,4 +60,6 @@
 + (void)setSex:(NSString*)sex;
 + (void)setTags:(NSString*)tags;
 + (void)setBelong:(NSString*)belong;
++(void)setPassword:(NSString*)password;
++(NSString*)getPassword;
 @end

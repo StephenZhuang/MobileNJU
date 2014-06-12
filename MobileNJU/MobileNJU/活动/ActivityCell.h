@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *newsImage;
 @property (strong,nonatomic)NSURL* url;
 @property (weak, nonatomic) IBOutlet UIControl *activityView;
 @property (nonatomic,strong)NSString* imageName;

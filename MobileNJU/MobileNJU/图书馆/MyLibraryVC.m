@@ -9,8 +9,8 @@
 #import "MyLibraryVC.h"
 #import "Book.h"
 #import "MyBookCell.h"
+#import "ZsndLibrary.pb.h"
 @interface MyLibraryVC ()<UITableViewDataSource,UITableViewDelegate>
-@property (nonatomic,strong)NSMutableArray* myBooks;
 @end
 
 @implementation MyLibraryVC
@@ -19,31 +19,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadMyBooks];
-//    [self initNavigationBar];
-   
     // Do any additional setup after loading the view.
 }
-//- (void)initNavigationBar
-//{
-//    [self setTitle:@"个人登录"];
-//    [self setSubTitle:@"借阅信息"];
-//}
 - (IBAction)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)loadMyBooks
-{
-    self.myBooks = [[NSMutableArray alloc]init];
-    for (int i = 0 ; i < 10 ; i ++){
-        Book* book = [[Book alloc]init];
-        book.bookName = @"乌合之众，大众心理研究：a study of the popular mind";
-        book.returnDate = @"2014-4-20";
-        book.borrowDate = @"2014-5-20";
-        [self.myBooks addObject:book];
-    }
-}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -52,13 +34,18 @@
 #pragma mark -table
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.myBooks count];
+    return [self.myBookList count];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MyBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"myBook"];
-    [cell setBook:[self.myBooks objectAtIndex:indexPath.row]];
+    Book* myBook = [[Book alloc]init];
+    MBook* book = [self.myBookList objectAtIndex:indexPath.row];
+    myBook.bookName = book.title;
+    myBook.borrowDate = book.borrowTime;
+    myBook.returnDate = book.backTime;
+    [cell setBook:myBook];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

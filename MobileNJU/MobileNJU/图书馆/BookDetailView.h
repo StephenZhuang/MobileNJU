@@ -10,14 +10,10 @@
 #import "AlertCloseDelegate.h"
 #import "Book.h"
 @interface BookDetailView : UIView
-
-{
-    id<AlertCloseDelegate> myDelegate;
-}
-- (void) setDelegate:(id<AlertCloseDelegate>)delegate;
 @property (weak, nonatomic) IBOutlet UILabel *borrowId;
 @property (weak, nonatomic) IBOutlet UILabel *location;
 @property (weak, nonatomic) IBOutlet UILabel *barCode;
 @property (weak, nonatomic) IBOutlet UILabel *state;
+@property (weak, nonatomic) IBOutlet UILabel *bookName;
 @property(nonatomic,strong)Book* book;
 @end

@@ -1,7 +1,7 @@
 //
 //  ApiMGradeSearch
 //
-//  Created by ryan on 2014-06-04 18:30:33
+//  Created by ryan on 2014-06-09 10:27:58
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -16,20 +16,20 @@
 
 
 	/**
-	 * 成绩查询
+	 * 成绩查询  /mobile?methodno=MGradeSearch&debug=1&deviceid=1&userid=&verify=&account=&password=&url=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @callback MCourseList_Builder
-	 * @param time * 学期：如2012-2013-1
+	 * @param url * url
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  time:(NSString*)time;
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  url:(NSString*)url;
 	/**
-	 * 成绩查询
+	 * 成绩查询  /mobile?methodno=MGradeSearch&debug=1&deviceid=1&userid=&verify=&account=&password=&url=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @param time * 学期：如2012-2013-1
+	 * @param url * url
 	 * @callback MCourseList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  time:(NSString*)time;
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  url:(NSString*)url;
 
 @end

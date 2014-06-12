@@ -42,6 +42,7 @@
 }
 
 - (IBAction)logout:(id)sender {
+    [ToolUtils setIsLogin:NO];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

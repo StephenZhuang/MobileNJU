@@ -18,14 +18,8 @@
     }
     return self;
 }
-- (IBAction)closeAlert:(id)sender {
-    [myDelegate closeAlert];
-}
 
-- (void)setDelegate:(id<AlertCloseDelegate>)delegate
-{
-    myDelegate = delegate;
-}
+
 
 - (void)setBook:(Book *)book
 {
@@ -34,6 +28,7 @@
     [self.barCode setText:book.barCode];
     [self.location setText:book.location];
     [self.state setText:book.state];
+    [self.bookName setText:book.bookName];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -1,7 +1,7 @@
 //
 //  ApiMCardHistory
 //
-//  Created by ryan on 2014-06-04 18:30:34
+//  Created by ryan on 2014-06-09 10:27:58
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -16,7 +16,7 @@
 
 
 	/**
-	 *  一卡通消费记录
+	 *  一卡通消费记录  /mobile?methodno=MCardHistory&debug=1&deviceid=1&userid=&verify=&begin=&end=&account=&password=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @callback MCardList_Builder
@@ -25,7 +25,7 @@
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end;
 	/**
-	 *  一卡通消费记录
+	 *  一卡通消费记录  /mobile?methodno=MCardHistory&debug=1&deviceid=1&userid=&verify=&begin=&end=&account=&password=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @param begin * 起始

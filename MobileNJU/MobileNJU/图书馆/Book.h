@@ -20,4 +20,5 @@
 @property(nonatomic,strong)NSString* state;
 @property (nonatomic,strong)NSString* borrowDate;
 @property(nonatomic,strong)NSString* returnDate;
+@property (nonatomic,strong)NSString* id;
 @end

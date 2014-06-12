@@ -8,13 +8,19 @@
 
 #import "LostReleaseVC.h"
 #import "UtilMethods.h"
-#import <MobileCoreServices/MobileCoreServices.h>   // kUTTypeImage
+#import "ZsndLost.pb.h"
+#import "ZsndSystem.pb.h"
+#import "CheckBox.h"
+@interface LostReleaseVC ()<UITextFieldDelegate,UITextViewDelegate>
 
-@interface LostReleaseVC ()<UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UITextView *contentArea;
-@property (weak, nonatomic) IBOutlet UITextField *titleField;
-@property (strong,nonatomic)NSMutableArray* photos;
-@property (weak, nonatomic) IBOutlet UIButton *addPhotoButton;
+@property (weak, nonatomic) IBOutlet UITextField *describeField;
+@property (weak, nonatomic) IBOutlet UITextField *contactField;
+@property (weak, nonatomic) IBOutlet UITextField *timeField;
+@property (weak, nonatomic) IBOutlet CheckBox *loss;
+@property (weak, nonatomic) IBOutlet CheckBox *pickUp;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet UIView *pickerView;
+@property (weak, nonatomic) IBOutlet UITextField *locationField;
 @end
 
 @implementation LostReleaseVC
@@ -24,13 +30,54 @@
 {
     [super viewDidLoad];
     [self initNavigationBar];
-    self.titleField.layer.borderWidth=1;
-    self.titleField.layer.borderColor=[UIColor lightGrayColor].CGColor;
-    self.contentArea.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.contentArea.layer.borderWidth=1;
+    [self initField];
     // Do any additional setup after loading the view.
 }
+- (IBAction)changeType:(id)sender {
+    if (sender==self.loss) {
+        [self.loss setChoose:YES];
+        [self.pickUp setChoose:NO];
+    } else {
+        [self.loss setChoose:NO];
+        [self.pickUp setChoose:YES];
+    }
+}
 
+- (IBAction)chooseDate:(id)sender {
+    [self.pickerView setHidden:YES];
+    [self.maskView setHidden:YES];
+    NSDate *selected = [self.datePicker date];
+    // 创建一个日期格式器
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    // 为日期格式器设置格式字符串
+    [dateFormatter setDateFormat:@"MM-dd-hh HH:mm:ss"];
+    // 使用日期格式器格式化日期、时间
+    NSString *destDateString = [dateFormatter stringFromDate:selected];
+    [self.timeField setText:destDateString];
+    
+}
+
+- (IBAction)showDataPicker:(UIButton *)sender {
+    [self.pickerView setHidden:NO];
+}
+
+
+-(void)initField
+{
+    self.describeField.layer.borderWidth=1;
+    self.describeField.layer.borderColor=[UIColor lightGrayColor].CGColor;
+    self.timeField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.timeField.layer.borderWidth=1;
+    [self.timeField setEnabled:NO];
+    
+    self.locationField.layer.borderWidth=1;
+    self.locationField.layer.borderColor=[UIColor lightGrayColor].CGColor;
+    
+    self.contactField.layer.borderWidth=1;
+    self.contactField.layer.borderColor=[UIColor lightGrayColor].CGColor;
+    
+    
+}
 -(void)initNavigationBar
 {
     [self setTitle:@"失物招领发布"];
@@ -44,84 +91,64 @@
     self.navigationItem.rightBarButtonItem = releaseItem;
 
 }
-- (NSMutableArray *)photos
+
+-(void)submitInfo
 {
-    if (!_photos) {
-        _photos = [[NSMutableArray alloc]init];
+    NSString *desc = [self.describeField text];
+    NSString *contact = [self.contactField text];
+    NSString* time = [self.timeField text];
+    NSString* location = [self.locationField text];
+    if (desc.length == 0) {
+        [ProgressHUD showError:@"描述不能为空"];
+        return;
+    } else if (desc.length > 100) {
+        [ProgressHUD showError:@"描述不能超过100字"];
+        return;
     }
-    return _photos;
-}
-
-//去除输入框键盘相应
-- (IBAction)resignAllResponder:(id)sender {
-    [self.titleField resignFirstResponder];
-    [self.contentArea resignFirstResponder];
-}
-
-
-//调用照相机
-- (IBAction)addPhotos:(id)sender {
-    UIImagePickerController *uiipc = [[UIImagePickerController alloc] init];
-    uiipc.delegate = self;
-    uiipc.mediaTypes = @[(NSString *)kUTTypeImage];
-    uiipc.sourceType = UIImagePickerControllerSourceTypeCamera|UIImagePickerControllerSourceTypePhotoLibrary;
-    uiipc.allowsEditing = YES;
-    [self presentViewController:uiipc animated:YES completion:NULL];
-}
-//点击cancel
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-//获取照片
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    UIImage *image = info[UIImagePickerControllerEditedImage];
-    if (!image) image = info[UIImagePickerControllerOriginalImage];
-    [self.photos addObject:image];
-    UIImage *scaledImage = [UtilMethods imageWithImageSimple:image scaledToSize:CGSizeMake(70.0, 70.0)];
-    [self addImage:scaledImage];
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-//添加缩略图。
-- (void)addImage:(UIImage*)image
-{
-    UIImageView* imageView = [[UIImageView alloc]initWithFrame:self.addPhotoButton.frame];
-    imageView.image = image;
-    [self.view addSubview:imageView];
     
-    [self.addPhotoButton removeFromSuperview];
-    CGPoint center = self.addPhotoButton.center;
-    center.x = center.x+80;
-    self.addPhotoButton.center = center;
-    [self.view addSubview:self.addPhotoButton];
+    if (contact.length == 0) {
+        [ProgressHUD showError:@"联系方式不能为空"];
+        return;
+    }
+    if (time.length==0){
+        [ProgressHUD showError:@"时间不能为空"];
+        return;
+    }
+    if (location.length==0){
+        [ProgressHUD showError:@"地点不能为空"];
+        return;
+    }
+
+    MAddLostOrFound_Builder* builder =[MAddLostOrFound_Builder new];
+    builder.type = self.loss.choose?2:1;
+    
+    builder.contact = self.contactField.text;
+    builder.desc = self.describeField.text;
+    builder.time = self.timeField.text;
+    builder.address = self.locationField.text;
+    NSLog(@"%@ time",time);
+    if (self.photoArray.count>0) {
+        builder.img1 =  UIImageJPEGRepresentation([self.photoArray firstObject], 1.0);
+    }
+    if (self.photoArray.count>1) {
+        builder.img2 =  UIImageJPEGRepresentation([self.photoArray objectAtIndex:1], 1.0);
+    }
+    if (self.photoArray.count>2) {
+        builder.img3 =  UIImageJPEGRepresentation([self.photoArray objectAtIndex:2], 1.0);
+    }
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddLostAndFound" params:builder  delegate:self selecter:@selector(disposMessage:)];
+    [updateone setShowLoading:NO];
+    
+    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
 }
 
-- (void)submitInfo
+- (void)disposMessage:(Son *)son
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([son getError]==0) {
+        if ([[son getMethod] isEqualToString:@"MAddLostAndFound"]) {
+            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+            NSLog(@"return %@",ret.msg);
+        }
+    }
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark -textFieldDelegate
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

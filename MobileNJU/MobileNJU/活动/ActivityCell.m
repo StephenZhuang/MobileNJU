@@ -7,7 +7,7 @@
 //
 
 #import "ActivityCell.h"
-#import "Utilities.h"
+#import "UtilMethods.h"
 @implementation ActivityCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -21,6 +21,9 @@
 - (void)setImageName:(NSString *)imageName
 {
     _imageName = imageName;
+    UIImageView* img = [[UIImageView alloc]initWithFrame:CGRectMake(7, 70, 267, 140)];
+    [img setImageWithURL:[UtilMethods getImageUrlWtihString:imageName width:267 height:140]];
+    [self.activityView addSubview:img];
     
 }
 - (void)awakeFromNib
@@ -44,7 +47,6 @@
     self.activityView.layer.cornerRadius = 5;
     self.activityView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.activityView.layer.borderWidth=1;
-    
 }
 
 
