@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface MyLibraryVC : BaseViewController
-
+@property (nonatomic,strong)NSArray* myBookList;
 @end

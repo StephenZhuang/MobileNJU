@@ -12,9 +12,8 @@
 #import "ZsndSystem.pb.h"
 @interface BusVC ()<UITableViewDelegate,UITableViewDataSource,SegmentViewDataSource,SegmentViewDelegate>
 @property (weak, nonatomic) IBOutlet SegmentView *segmentView;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong,nonatomic) NSArray *segmentArray;
-@property(strong,nonatomic)NSMutableArray* busList;
+@property(strong,nonatomic)NSArray* busList;
 @end
 
 @implementation BusVC
@@ -28,6 +27,13 @@
     return self;
 }
 
+- (NSMutableArray *)busList
+{
+    if (!_busList) {
+        _busList = [[NSMutableArray alloc]init];
+    }
+    return _busList;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -45,7 +51,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)loadData
+{
+    [[[ApisFactory getApiMBusSearch]setPage:page pageCount:20]load:self selecter:@selector(disposMessage:) type:self.segmentView.selectedIndex?1:2];
+}
 
+- (void)disposMessage:(Son *)son
+{
+    if ([son getError]==0) {
+        if ([[son getMethod] isEqualToString:@"MBusSearch"]) {
+            MBusList_Builder* busList = (MBusList_Builder*)[son getBuild];
+            if (page==1) {
+                self.busList = busList.busList;
+                [self doneWithView:_header];
+            } else {
+                NSMutableArray* array = [[NSMutableArray alloc]init];
+                [array addObjectsFromArray:self.busList];
+                [array addObjectsFromArray:busList.busList];
+                self.busList = array;
+                [self doneWithView:_footer];
+            }
+        }
+    }
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -65,7 +93,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return self.busList.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -77,7 +105,12 @@
 {
     static NSString *CellIdentifier = @"bus";
     BusCell *cell = (BusCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+    MBus* bus = [self.busList objectAtIndex:indexPath.row];
+    [cell.destinationLabel setText:bus.name];
+    [cell.passLabel setText:bus.process];
+    [cell.numbersLabel setText:[NSString stringWithFormat:@"%d",bus.count]];
+    [cell.otherLabel setText:bus.info];
+    [cell.startTimeLabel setText:bus.begin];
     return cell;
 }
 
@@ -124,7 +157,8 @@
 
 - (void)selectSegmentAtIndex:(NSInteger)index
 {
-    
+    page=1;
+    [[[ApisFactory getApiMBusSearch]setPage:page pageCount:20]load:self selecter:@selector(disposMessage:) type:index==0?2:1];
 }
 
 /*

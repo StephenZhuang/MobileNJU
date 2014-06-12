@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 Stephen Zhuang. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "AddTreeHoleViewController.h"
 
-@interface LostReleaseVC : BaseViewController
-
+@interface LostReleaseVC : AddTreeHoleViewController
+@property (nonatomic)int type;
 @end

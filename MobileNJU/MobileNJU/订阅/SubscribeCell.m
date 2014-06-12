@@ -8,6 +8,8 @@
 
 #import "SubscribeCell.h"
 #import "NewsListView.h"
+#import "ZsndNews.pb.h"
+#import "UtilMethods.h"
 @implementation SubscribeCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -54,11 +56,15 @@
         NewsListView* view  = [[[NSBundle mainBundle] loadNibNamed:@"NewsListView" owner:self options:nil] firstObject];
         CGRect frame = CGRectMake(2, 153+60*i, 280, 59);
         view.frame = frame;
+        MNews* new = [news objectAtIndex:i];
+        [view.newsTitle setText:new.title];
+        [view.newsDetail setText:new.content];
+        [view.newsImage setImageWithURL:[UtilMethods getImageUrlWtihString:new.url width:60 height:60]];
         [self.newsView addSubview:view];
         CGRect frame_of_newsView = self.newsView.frame;
         frame_of_newsView.size.height = frame_of_newsView.size.height+60;
         self.newsView.frame = frame_of_newsView;
-        [self.myNews addObject:[news objectAtIndex:i]];
+        [self.myNews addObject:new];
         if (self.myNews.count==3) {
             return;
         }

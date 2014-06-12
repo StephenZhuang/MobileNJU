@@ -67,13 +67,15 @@
     if ([son getError] == 0) {
             if ([[son getMethod] isEqualToString:@"MContacts"]) {
                 //获得返回类
+                NSMutableArray* array = [[NSMutableArray alloc]init];
                 MContactList_Builder *contacts = (MContactList_Builder *)[son getBuild];
                 NSArray* keys = [[NSArray alloc]initWithObjects:@"name" ,@"list" ,nil];
                 for (MContacts* list in contacts.listList) {
                     NSArray* value = [[NSArray alloc]initWithObjects:list.name,list.contactList ,nil];
                     NSDictionary* dic = [[NSDictionary alloc]initWithObjects:value forKeys:keys];
-                    [dataArray addObject:dic];
+                    [array addObject:dic];
                 }
+                dataArray = array;
                 [self doneWithView:_header];
             }
         }

@@ -9,19 +9,27 @@
 #import "BookViewController.h"
 #import "Book.h"
 #import "BookCell.h"
-#import "BookDetailView.h"
+#import "BookDetailScrollerView.h"
 #import "AlertCloseDelegate.h"
 #import "BookChooseDelegate.h"
 #import "BookCollectionCell.h"
+#import "ZsndLibrary.pb.h"
+#import "UtilMethods.h"
+#import "MyLibraryVC.h"
 @interface BookViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,AlertCloseDelegate,UITextFieldDelegate>
-@property(nonatomic,strong)NSMutableArray* books;
+@property(nonatomic,strong)NSArray* books;
 @property (weak, nonatomic) IBOutlet UIView *alertView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UITextField *searchField;
 @property (weak, nonatomic) IBOutlet UITextField *schIdField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UICollectionView *myCollectionView;
-@property (strong,nonatomic)BookDetailView* bookDetail;
+@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
+@property (strong,nonatomic)BookDetailScrollerView* bookDetail;
+@property (nonatomic)int page;
+@property (nonatomic,strong)NSString* selectedBookName;
+@property(nonatomic)BOOL loading;
+@property (weak, nonatomic) IBOutlet UISwitch *rememberSwitch;
 @end
 
 @implementation BookViewController
@@ -30,35 +38,76 @@
 {
     [super viewDidLoad];
     [self initNavigationBar];
-    [self loadBooks];
     [self initBookDetail];
+    self.page = 1;
+    self.loading=NO;
     // Do any additional setup after loading the view.
 }
 
 - (void) initBookDetail
 {
-     self.bookDetail = [[[NSBundle mainBundle] loadNibNamed:@"BookDetailView" owner:self options:nil] firstObject];
+     self.bookDetail = [[[NSBundle mainBundle] loadNibNamed:@"BookDetailView" owner:self options:nil] objectAtIndex:1];
     [self.bookDetail setFrame:CGRectMake(30, 100,260,180)];
     [self.bookDetail setHidden:YES];
     [self.bookDetail setDelegate:self];
     [self.view addSubview:self.bookDetail];
     
 }
+- (IBAction)searchBook:(id)sender {
+    if ([self.searchField.text isEqualToString:@""]) {
+        [UtilMethods showMessage:@"关键字不能为空"];
+    } else {
+        [self.searchField resignFirstResponder];
+        [self waiting];
+        [[[[ApisFactory getApiMSearchBook]setPage:self.page pageCount:100] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
+    }
+}
 
-- (void)loadBooks
+- (void)disposMessage:(Son *)son
 {
-    self.books = [[NSMutableArray alloc]init];
-    for (int i = 0 ; i<20; i++){
-        Book* book = [[Book alloc]init];
-        book.bookName = @"三重门";
-        book.location = @"鼓楼校区一样本库";
-        book.borrowId = @"123456";
-        book.barCode = @"2123123124";
-        book.author = @"韩寒";
-        book.press= @"作家出版社2000";
-        book.canLentCount = @"6";
-        book.hasCount=@"6";
-        [self.books addObject:book];
+    [self.loginIndicator removeFromSuperview];
+    if ([son getError]==0) {
+        if ([[son getMethod] isEqualToString:@"MSearchBook"]) {
+            MBookList_Builder* bookList = (MBookList_Builder*)[son getBuild];
+            self.books = bookList.newsList;
+            [self.resultLabel setText:[NSString stringWithFormat:@"共找到%d个结果",bookList.cnt]];
+            [self.myCollectionView reloadData];
+            
+        }else if ([[son getMethod] isEqualToString:@"MBookDetail"])
+        {
+            self.loading=NO;
+            MBook_Builder* books = (MBook_Builder*)[son getBuild];
+            NSMutableArray* myBooks = [[NSMutableArray alloc]init];
+            for (MBookDetail* detail in books.detailsList) {
+                Book* book = [[Book alloc]init];
+                book.location = detail.address;
+                book.barCode = detail.code;
+                book.state = detail.state;
+                book.borrowId = detail.num;
+                book.bookName = self.selectedBookName;
+                [myBooks addObject:book];
+            }
+            [self.bookDetail addBooks:myBooks];
+            [self.bookDetail setHidden:NO];
+            [self.maskView setHidden:NO];
+            [self addMask];
+        } else if ([[son getMethod] isEqualToString:@"MMyLibrary"]){
+            
+            [self.loginIndicator removeFromSuperview];
+            
+            MBookList_Builder* myBookList = (MBookList_Builder*)[son getBuild];
+            [self cancelAlert:nil];
+            [self performSegueWithIdentifier:@"myLibrary" sender:myBookList.newsList];
+            
+        }
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"myLibrary"]) {
+        MyLibraryVC* nextVC = (MyLibraryVC*)segue.destinationViewController;
+        nextVC.myBookList = sender;
     }
 }
 - (void)initNavigationBar
@@ -82,13 +131,23 @@
     [self addMask];
 }
 - (IBAction)gotoMyLibrary:(id)sender {
-    [self cancelAlert:nil];
-    [self performSegueWithIdentifier:@"myLibrary" sender:nil];
+    
+    [self waiting];
+    [[ApisFactory getApiMMyLibrary]load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
+    
 }
 #pragma mark delegateTextField
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    if (textField==self.searchField) {
+        [self searchBook:nil];
+    } else if (textField==self.schIdField)
+    {
+        [self.passwordField becomeFirstResponder];
+    } else if (textField==self.passwordField){
+        
+    }
     return YES;
 }
 #pragma mark delegate_AlertChoose
@@ -99,10 +158,8 @@
 #pragma mark - chooseBookDelegate
 - (void)chooseBook:(Book *)book
 {
-    [self.bookDetail setBook:book];
-    [self.bookDetail setHidden:NO];
-    [self.maskView setHidden:NO];
-    [self addMask];
+    [self waiting];
+    [[[ApisFactory getApiMBookDetail]load:self selecter:@selector(disposMessage:) id:book.id] setShowLoading:YES];
 }
 
 - (IBAction)cancelAlert:(id)sender {
@@ -136,52 +193,22 @@
 
 {
     BookCollectionCell* bookView = [collectionView dequeueReusableCellWithReuseIdentifier:@"result" forIndexPath:indexPath];
-    [bookView setBook:[self.books objectAtIndex:indexPath.row ]];
+    MBook* book = [self.books objectAtIndex:indexPath.row];
+    Book* myBook = [[Book alloc]init];
+    myBook.id = book.id;
+    myBook.hasCount = [NSString stringWithFormat:@"%d",book.total];
+    myBook.canLentCount = [NSString stringWithFormat:@"%d",book.canBorrow];
+    myBook.press = book.publish;
+    myBook.bookName = book.title;
+    myBook.author = book.author;
+    [bookView setBook:myBook];
     return bookView;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self chooseBook:[self.books objectAtIndex:indexPath.row]];
-}
-//
-//-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-//{
-//    return UIEdgeInsetsMake(5, 5, 5, 5);
-//}
-//
-
-
-//#pragma mark -table
-//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return [self.books count]/3+1;
-//}
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 142;
-//}
-//-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    BookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"book"];
-//    NSMutableArray* myBook = [[NSMutableArray alloc]init];
-//    for (int i = 0; i<3; i++) {
-//        if (indexPath.row*3+i<[self.books count]) {
-//            [myBook addObject:[self.books objectAtIndex:indexPath.row*3+i]];
-//        }
-//    }
-//    [cell setBooks:myBook delegate:self];
-//    return cell;
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
+    if (!self.loading) {
+        self.loading=YES;
+        self.selectedBookName = ((MBook*)[self.books objectAtIndex:indexPath.row]).title;
+        [self chooseBook:[self.books objectAtIndex:indexPath.row]];
+    }}
 @end

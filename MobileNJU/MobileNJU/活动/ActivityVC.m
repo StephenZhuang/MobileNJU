@@ -10,6 +10,7 @@
 #import "ActivityCell.h"
 #import "ZsndNews.pb.h"
 #import "ActivityDetailVC.h"
+#import "UtilMethods.h"
 @interface ActivityVC ()<UITableViewDataSource,UITableViewDelegate,ActivityCellDelegate>
 @property (nonatomic,strong)NSMutableArray* activityList;
 @end
@@ -100,6 +101,12 @@
     [cell.titleLabel setText:news.title];
     [cell.timeLabel setText:news.time];
     [cell.contentLabel setText:news.content];
+//    [cell.imageView setImageWithURL:[UtilMethods getImageUrlWtihString:news.img width:267 height:140]];
+    [cell setImageName:news.img];
+    NSLog(@"%f   %f",cell.imageView.center.x,cell.center.x);
+    CGPoint center = cell.imageView.center;
+    center.x = cell.center.x;
+    cell.imageView.center = center;
     cell.url = [NSURL URLWithString:news.url];
     
     return cell;

@@ -96,7 +96,6 @@
 
         [push bindChannel:^(NSString *appId, NSString *userId, NSString *channelId) {
             NSString *message = [[NSString alloc] initWithFormat:@"appid:%@ \nuserid:%@ \nchannelID:%@", appId, userId, channelId];
-            NSLog(@"2333333333333333");
             NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setObject:userId forKey:@"pushId"];
             [userDefaults synchronize];
@@ -108,13 +107,11 @@
 //            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
             
         } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
-            NSLog(@"3333333333333333");
 
             NSString *message = [[NSString alloc] initWithFormat:@"string is %@ error code : %d error message %@", action, errorCode, errorMessage];
 //            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
         }];
     } else {
-        NSLog(@"2333333333");
     }
 }
 

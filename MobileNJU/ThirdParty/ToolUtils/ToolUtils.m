@@ -10,6 +10,26 @@
 
 @implementation ToolUtils
 
++ (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
+}
+
+
 + (BOOL)checkTel:(NSString *)str
 
 {
@@ -61,9 +81,9 @@
 + (BOOL)checkTextRange:(NSString *)text min:(NSInteger)min max:(NSInteger)max
 {
     if (text.length < min || text.length > max) {
-//        NSString *message = [NSString stringWithFormat:@"长度应在%i-%i位之间", min , max];
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//        [alert show];
+        //        NSString *message = [NSString stringWithFormat:@"长度应在%i-%i位之间", min , max];
+        //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        //        [alert show];
         return NO;
     } else {
         return YES;
@@ -208,17 +228,17 @@
 + (NSString*)getNickName
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"nickname"];
-
+    
 }
 + (NSString*)getUserName
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"name"];
-
+    
 }
 +(NSInteger)getFlowerCount
 {
     return [[NSUserDefaults standardUserDefaults] integerForKey:@"flower"];
-
+    
 }
 
 
@@ -263,7 +283,7 @@
     NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
     [userDefaults setBool:YES forKey:userId];
     [userDefaults synchronize];
-
+    
 }
 + (void)setSex:(NSString *)sex
 {
@@ -310,7 +330,30 @@
     NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
     [userDefaults setObject:nickName forKey:@"nickname"];
     [userDefaults synchronize];
-
+    
 }
 
++(NSString*)getPhoneNum {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"phone"];
+}
++ (void)setPhoneNum:(NSString *)phoneNum
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:phoneNum forKey:@"phoneNum"];
+    [userDefaults synchronize];
+    
+}
+
++(void)setPassword:(NSString*)password
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:password forKey:@"password"];
+    [userDefaults synchronize];
+    
+}
+
++(NSString *)getPassword
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+}
 @end

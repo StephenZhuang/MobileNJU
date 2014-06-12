@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
-@interface BusVC : BaseViewController
+#import "RefreshTableViewController.h"
+@interface BusVC : RefreshTableViewController
 
 @end

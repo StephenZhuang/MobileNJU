@@ -196,26 +196,6 @@ static NSArray* descriptions;
            }];
        }];
    }];
-//    [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
-//        // End
-//       
-//    } completion:^(BOOL finished) {
-//        [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-//           
-//        } completion:^(BOOL finished) {
-//            [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-//                // End
-//               
-//            } completion:^(BOOL finished) {
-//                [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-//                    // End
-//                    view.transform = CGAffineTransformMakeTranslation(0, 0);
-//                } completion:^(BOOL finished) {
-//                    
-//                }];
-//            }];
-//        }];
-//    }];
 }
 
 - (void)performBounceRightAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
@@ -238,29 +218,6 @@ static NSArray* descriptions;
             }];
         }];
     }];
-//
-//    view.transform = CGAffineTransformMakeTranslation(-300, 0);
-//    [UIView animateKeyframesWithDuration:duration/4 delay:delay options:0 animations:^{
-//        // End
-//        view.transform = CGAffineTransformMakeTranslation(10, 0);
-//    } completion:^(BOOL finished) {
-//        [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-//            // End
-//            view.transform = CGAffineTransformMakeTranslation(-5, 0);
-//        } completion:^(BOOL finished) {
-//            [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-//                // End
-//                view.transform = CGAffineTransformMakeTranslation(2, 0);
-//            } completion:^(BOOL finished) {
-//                [UIView animateKeyframesWithDuration:duration/4 delay:0 options:0 animations:^{
-//                    // End
-//                    view.transform = CGAffineTransformMakeTranslation(0, 0);
-//                } completion:^(BOOL finished) {
-//                    
-//                }];
-//            }];
-//        }];
-//    }];
 }
 
 
@@ -320,20 +277,6 @@ static NSArray* descriptions;
 //加载新的cache (在此之前需要访问服务器 看是否需要下载新的图片
 - (void)loadNewsCache:(NSInteger)site
 {
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-//    NSString *newsPic = [NSString stringWithFormat:@"news_%d.jpg", (int)site];
-//    NSString *imgPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:newsPic];
-//    NSLog(@"%@",imgPath);
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    BOOL exist = [fileManager fileExistsAtPath:imgPath];
-//    if (exist)
-//    {
-//        NSLog(@"exist");
-//        NSData *data=[NSData dataWithContentsOfFile:imgPath];
-//        UIImage *img=[UIImage imageWithData:data];
-//        [self.photoList replaceObjectAtIndex:site-1 withObject:img];
-//        [self reloadNews:site];
-//    }
     NSArray* tempPhoto = [[NSArray alloc]initWithObjects:@"news",@"news2",@"news3", nil];
     UIImage* img = [UIImage imageNamed:[tempPhoto objectAtIndex:site-1]];
     [self.photoList replaceObjectAtIndex:site-1 withObject:img];
@@ -364,7 +307,7 @@ static NSArray* descriptions;
 }
 - (UIImageView *)newImage{
     if (!_newImage) {
-        int page = self.pageController.currentPage;
+        NSInteger page = self.pageController.currentPage;
         _newImage = [[UIImageView alloc]initWithImage:[self.photoList objectAtIndex:page]];
         CGRect frame;
         frame.origin.x = 0;

@@ -11,6 +11,7 @@
 #import "SubscribeCell.h"
 #import "MySubscribeCell.h"
 #import "ZsndNews.pb.h"
+#import "ZsndSystem.pb.h"
 @interface SubscribeVC ()<UITableViewDataSource,UITableViewDelegate,RssDelegate>
 @property (weak, nonatomic) IBOutlet SegmentView *segmentView;
 @property (weak, nonatomic) IBOutlet UITableView *mySubscribeTable;
@@ -42,7 +43,6 @@
             //获得返回类
             MMyRssList_Builder *RssList = (MMyRssList_Builder *)[son getBuild];
             self.mySubscribes = RssList.listList;
-            NSLog(@"mySubscribe%d",self.mySubscribes.count);
             if (self.mySubscribes.count==0)
             {
                 [self.segmentView setSelectedIndex:0];
@@ -58,6 +58,9 @@
             self.allSubscribes = allRssList.listList;
             [self.allSubscribeTable reloadData];
             
+        } else if ([[son getMethod]isEqualToString:@"MRss"]){
+            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+            NSLog(@"code:%d msg%@",ret.code,ret.msg);
         }
     }
 }
@@ -97,8 +100,10 @@
     if (tableView==self.mySubscribeTable) {
         SubscribeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"subscribe"];
         
-        NSArray* news = [[NSArray alloc]initWithObjects:[[NSDictionary alloc]init],  [[NSDictionary alloc]init],[[NSDictionary alloc]init],nil];
-        [cell addNews:news];
+//        NSArray* news = [[NSArray alloc]initWithObjects:[[NSDictionary alloc]init],  [[NSDictionary alloc]init],[[NSDictionary alloc]init],nil];
+        MMyRss* rss = [self.mySubscribes objectAtIndex:indexPath.row];
+        [cell.typeLabel setText:rss.title];
+        [cell addNews:rss.newsList];
         return cell;
     } else {
         MySubscribeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"mySubscribeCell"];
@@ -144,13 +149,15 @@
     if (index==1) {
         [self.mySubscribeTable setHidden:NO];
         [self.allSubscribeTable setHidden:YES];
-        [self.mySubscribeTable reloadData];
+//        [self.mySubscribeTable reloadData];
         [[ApisFactory getApiMMyRss]load:self selecter:@selector(disposMessage:)];
         [self waiting];
     } else {
         [self.mySubscribeTable setHidden:YES];
         [self.allSubscribeTable setHidden:NO];
-        [self.allSubscribeTable reloadData];
+        [[ApisFactory getApiMAllRss] load:self
+                                 selecter:@selector(disposMessage:)];
+//        [self.allSubscribeTable reloadData];
         
     }
 }
@@ -158,8 +165,7 @@
 #pragma mark -RssDelegate
 - (void)changeState:(NSString *)id
 {
-    NSLog(@"%@....23333",id);
-    
+    [[ApisFactory getApiMRss]load:self selecter:@selector(disposMessage:) rssid:id];
 //    [[ApisFactory getApiMAllRss]load:self selecter:@selector(disposMessage:)];
 }
 
