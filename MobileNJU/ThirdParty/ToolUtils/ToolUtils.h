@@ -62,4 +62,5 @@
 + (void)setBelong:(NSString*)belong;
 +(void)setPassword:(NSString*)password;
 +(NSString*)getPassword;
++ (NSString *)getPushid;
 @end

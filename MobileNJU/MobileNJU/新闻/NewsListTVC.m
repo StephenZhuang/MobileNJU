@@ -50,6 +50,7 @@
 - (void)loadData
 {
     [[[ApisFactory getApiMNewsList]setPage:page pageCount:10]load:self selecter:@selector(disposMessage:)];
+
 }
 - (void)disposMessage:(Son *)son
 {

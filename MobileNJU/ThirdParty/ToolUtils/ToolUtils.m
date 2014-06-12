@@ -356,4 +356,9 @@
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
 }
++ (NSString *)getPushid
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"];
+}
+
 @end

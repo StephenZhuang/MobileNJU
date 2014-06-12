@@ -11,6 +11,7 @@
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
 #import "ZsndTreehole.pb.h"
+#import "NSString+unicode.h"
 
 @interface AddTreeHoleViewController ()
 
@@ -69,6 +70,27 @@
         return;
     }
     MAddTopic_Builder *addTopic = [MAddTopic_Builder new];
+    [addTopic setTitle:[title utf8ToUnicode]];
+    [addTopic setContent:[content utf8ToUnicode]];
+    for (UIImage *image in _photoArray) {
+        [addTopic addImgs:UIImagePNGRepresentation(image)];
+    }
+    
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddTreeHole" params:addTopic  delegate:self selecter:@selector(disposMessage:)];
+    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
+}
+
+- (void)disposMessage:(Son *)son
+{
+    if ([son getError] == 0) {
+        if ([[son getMethod] isEqualToString:@"MAddTreeHole"]) {
+            [ProgressHUD showSuccess:@"发布成功"];
+            if (_addSuccessBlock) {
+                _addSuccessBlock();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
