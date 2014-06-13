@@ -57,11 +57,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    self.OK = YES;
     [self.loginIndicator removeFromSuperview];
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    [self waiting];
+    [self waiting:@"加载中"];
 }
 
 @end

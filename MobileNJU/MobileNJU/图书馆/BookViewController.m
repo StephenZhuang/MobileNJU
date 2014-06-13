@@ -58,13 +58,14 @@
         [UtilMethods showMessage:@"关键字不能为空"];
     } else {
         [self.searchField resignFirstResponder];
-        [self waiting];
+        [self waiting:@"正在搜索"];
         [[[[ApisFactory getApiMSearchBook]setPage:self.page pageCount:100] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
     }
 }
 
 - (void)disposMessage:(Son *)son
 {
+    self.OK=YES;
     [self.loginIndicator removeFromSuperview];
     if ([son getError]==0) {
         if ([[son getMethod] isEqualToString:@"MSearchBook"]) {
@@ -132,7 +133,7 @@
 }
 - (IBAction)gotoMyLibrary:(id)sender {
     
-    [self waiting];
+    [self waiting:@"加载中"];
     [[ApisFactory getApiMMyLibrary]load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
     
 }
@@ -158,7 +159,7 @@
 #pragma mark - chooseBookDelegate
 - (void)chooseBook:(Book *)book
 {
-    [self waiting];
+    [self waiting:@"加载中"];
     [[[ApisFactory getApiMBookDetail]load:self selecter:@selector(disposMessage:) id:book.id] setShowLoading:YES];
 }
 

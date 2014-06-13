@@ -31,12 +31,15 @@
     [self setSubTitle:@"重要信息我都有"];
     self.segmentContents = [[NSArray alloc]initWithObjects:@"全部",@"我的订阅", nil];
     [self.segmentView setBackgroundColor:[UIColor clearColor]];
+    [self waiting:@"加载中"];
+
     [[ApisFactory getApiMMyRss]load:self selecter:@selector(disposMessage:)];
-    [self waiting];
 }
 
 - (void)disposMessage:(Son *)son
 {
+    self.OK=YES;
+    [self.loginIndicator removeFromSuperview];
     if ([son getError] == 0) {
 
         if ([[son getMethod] isEqualToString:@"MMyRss"]) {
@@ -53,7 +56,6 @@
                 [self.mySubscribeTable reloadData];
             }
         } else if ([[son getMethod] isEqualToString:@"MAllRss"]){
-            [self.loginIndicator removeFromSuperview];
             MRssList_Builder *allRssList = (MRssList_Builder*)[son getBuild];
             self.allSubscribes = allRssList.listList;
             [self.allSubscribeTable reloadData];
@@ -151,7 +153,6 @@
         [self.allSubscribeTable setHidden:YES];
 //        [self.mySubscribeTable reloadData];
         [[ApisFactory getApiMMyRss]load:self selecter:@selector(disposMessage:)];
-        [self waiting];
     } else {
         [self.mySubscribeTable setHidden:YES];
         [self.allSubscribeTable setHidden:NO];

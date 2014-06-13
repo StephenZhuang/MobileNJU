@@ -19,7 +19,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *confirmCode;
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
 @property (weak, nonatomic) IBOutlet UIDatePicker *dataPicker;
+@property (weak, nonatomic) IBOutlet UILabel *ecardTitle;
+@property (weak, nonatomic) IBOutlet UILabel *ecardDesc;
 @property(strong,nonatomic)UIButton* selectedButton;
+
 @end
 
 @implementation EcardVC
@@ -43,8 +46,10 @@
     // 使用日期格式器格式化日期、时间
     NSString *destDateString = [dateFormatter stringFromDate:selected];
     [self.selectedButton setTitle:destDateString forState:UIControlStateNormal];
-    
 }
+
+
+
 - (IBAction)showDataPicker:(UIButton *)sender {
     self.selectedButton = sender;
     [self.pickerView setHidden:NO];
@@ -57,6 +62,9 @@
     [self.maskView setHidden:YES];
     
     [self.alertView setHidden:YES];
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backToMain:)];
+    [self.ecardDesc addGestureRecognizer:singleTap];
+    [self.ecardTitle addGestureRecognizer:singleTap];
     // Do any additional setup after loading the view.
 }
 
@@ -67,11 +75,20 @@
 }
 
 #pragma mark UITextFieldDelegate
--(BOOL)textFieldShouldReturn:(UITextField *)textField
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [textField resignFirstResponder];
-    return YES;
+    
+    if (self.view.window.frame.size.height==480) {
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
+            self.alertView.transform = CGAffineTransformMakeTranslation(0, -50);
+            //    self.logoImage.center = CGPointMake(self.logoImage.center.x, 100);
+        } completion:^(BOOL finished) {
+        }];
+    }
+
 }
+
 #pragma mark 关于自定义的alertView
 - (IBAction)closeAlertView:(id)sender {
     [self.passwordText resignFirstResponder];
@@ -80,6 +97,7 @@
     [self.pickerView setHidden:YES];
     [self.alertView setHidden:YES];
     [self.maskView setHidden:YES];
+    self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
 }
 - (IBAction)searchResult:(id)sender {
     

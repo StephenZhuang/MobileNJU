@@ -9,8 +9,13 @@
 #import "LostVC.h"
 #import "SegmentView.h"
 #import "LostCell.h"
+#import "ZsndLost.pb.h"
+#import "ToolUtils.h"
 @interface LostVC ()<UITableViewDelegate,UITableViewDataSource,SegmentViewDataSource,SegmentViewDelegate>
 @property (nonatomic,strong)NSArray* segmentContents;
+@property (weak, nonatomic) IBOutlet SegmentView *segmentView;
+@property (nonatomic,strong)NSMutableArray* lostList;
+@property (nonatomic,strong)NSMutableArray* foundList;
 @end
 
 @implementation LostVC
@@ -21,7 +26,13 @@
 {
     [super viewDidLoad];
     [self initNavigationBar];
+    self.lostList = [[NSMutableArray alloc]init];
+    self.foundList = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
+}
+- (void) viewWillAppear:(BOOL)animated
+{
+    [_header beginRefreshing];
 }
 - (void)initNavigationBar
 {
@@ -39,6 +50,57 @@
 - (void) releaseInfo
 {
     [self performSegueWithIdentifier:@"release" sender:nil];
+    
+}
+
+- (void)loadData
+{
+    
+    [[[ApisFactory getApiMLostAndFound]setPage:page pageCount:20]load:self selecter:@selector(disposMessage:)  type:self.segmentView.selectedIndex+1];
+}
+
+- (void)disposMessage:(Son *)son
+{
+    if ([son getError]==0) {
+        if ([[son getMethod] isEqualToString:@"MLostAndFound"]) {
+            MLostAndFoundList_Builder* list = (MLostAndFoundList_Builder*)[son getBuild];
+            if (self.segmentView.selectedIndex==0) {
+                for (MLostAndFound* new in list.lfList) {
+                    BOOL has=NO;
+                    for (MLostAndFound* each in self.foundList) {
+                        if ([each.address isEqualToString:new.address]&&[each.time isEqualToString:new.time]&&[each.desc isEqualToString:new.desc]) {
+                            has=YES;
+                            break;
+                        }
+                    }
+                    if (!has) {
+                        [self.foundList addObject:new];
+                    }
+                }
+                
+                
+            } else{
+                for (MLostAndFound* new in list.lfList) {
+                    BOOL has=NO;
+                    for (MLostAndFound* each in self.lostList) {
+                        if ([each.address isEqualToString:new.address]&&[each.time isEqualToString:new.time]&&[each.desc isEqualToString:new.desc]) {
+                            has=YES;
+                            break;
+                        }
+                    }
+                    if (!has) {
+                        [self.lostList addObject:new];
+                    }
+                }
+            }
+            if (page==1) {
+                [self doneWithView:_header];
+            } else {
+                [self doneWithView:_footer];
+            }
+            
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,18 +139,35 @@
 
 - (void)selectSegmentAtIndex:(NSInteger)index
 {
-    
+    [_header beginRefreshing];
 }
 
 
 #pragma mark -table
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    if (self.segmentView.selectedIndex==0) {
+        return self.foundList.count;
+    } else {
+        return self.lostList.count;
+    }
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LostCell* cell = [tableView dequeueReusableCellWithIdentifier:@"lost"];
+    MLostAndFound* each;
+    if (self.segmentView.selectedIndex==0) {
+       each = [self.foundList objectAtIndex:indexPath.row];
+    } else {
+        each = [self.lostList objectAtIndex:indexPath.row];
+    }
+    [cell.locationLabel setText:each.address];
+    [cell.titleLabel setText:each.desc];
+    [cell.contactAndDateLabel setText:[NSString stringWithFormat:@"/%@/%@",each.contact,each.time]];
+    NSArray* imageList = each.imgList;
+    if (imageList.count>0) {
+        [cell.firstImage setImageWithURL:[ToolUtils getImageUrlWtihString:[imageList firstObject] width:60 height:60]];
+    }
     return cell;
 }
 /*

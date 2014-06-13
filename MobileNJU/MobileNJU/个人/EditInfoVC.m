@@ -67,7 +67,7 @@
 }
 #warning 保存在哪儿还未确定
 - (IBAction)save:(id)sender {
-    [self waiting];
+    [self waiting:@"正在保存"];
 //    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"selfInfo" ofType:@"plist"];
 //    NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
 //    NSArray* keys = [data objectForKey:@"infoKeys"];
@@ -90,6 +90,7 @@
 
 - (void)disposMessage:(Son *)son
 {
+    self.OK=YES;
     [self.loginIndicator removeFromSuperview];
     if ([[son getMethod] isEqualToString:@"MUpdateUserInfo"])
     {

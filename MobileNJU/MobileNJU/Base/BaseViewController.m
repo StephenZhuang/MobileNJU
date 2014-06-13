@@ -122,14 +122,22 @@ UIView* view;
 }
 
 
-- (void) waiting
+- (void) waiting:(NSString*)msg
 {
-    self.loginIndicator = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
-    [self.loginIndicator setColor:[UIColor purpleColor]];
-    [self.view addSubview:self.loginIndicator];
-    [self.loginIndicator setCenter:self.view.center];
-    [self.loginIndicator startAnimating];
-    
+    self.OK=NO;
+    self.loginIndicator = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+	[self.navigationController.view addSubview:self.loginIndicator];
+	
+	self.loginIndicator.labelText =msg;
+	
+	[self.loginIndicator showAnimated:YES whileExecutingBlock:^{
+        while (!self.OK) {
+            sleep(100);
+            NSLog(@"sleep");
+        }
+    } completionBlock:^{
+        [self.loginIndicator removeFromSuperview];
+    }];
 }
 
 - (void)disposMessage:(Son *)son
@@ -141,8 +149,7 @@ UIView* view;
     [self.maskView setHidden:YES];
     [view setHidden:YES];
     [view removeFromSuperview];
-}
-/*
+}/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

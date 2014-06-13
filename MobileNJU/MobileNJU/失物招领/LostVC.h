@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 Stephen Zhuang. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "RefreshTableViewController.h"
 
-@interface LostVC : BaseViewController
+@interface LostVC : RefreshTableViewController
 
 @end

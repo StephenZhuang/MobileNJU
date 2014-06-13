@@ -64,7 +64,7 @@
         return;
     }
     [self resignAllResponders:nil];
-    [self waiting];
+    [self waiting:@"登陆中"];
     #warning 注意加密
     [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:self.passwordTextField.text pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"]];
 //    [self performSegueWithIdentifier:@"main" sender:nil];
@@ -80,6 +80,7 @@
 - (void)disposMessage:(Son *)son
 {
     [self.loginIndicator removeFromSuperview];
+    self.OK=YES;
     //error = 0 表示接口调用成功
     if ([son getError] == 0) {
         //判断接口名
@@ -107,6 +108,8 @@
             [UtilMethods setPassword:self.passwordTextField.text];
             [self performSegueWithIdentifier:@"main" sender:nil];
         }
+    } else {
+        [self showLoginView];
     }
 }
 

@@ -27,10 +27,10 @@
     return self;
 }
 
-- (NSMutableArray *)busList
+- (NSArray *)busList
 {
     if (!_busList) {
-        _busList = [[NSMutableArray alloc]init];
+        _busList = [[NSArray alloc]init];
     }
     return _busList;
 }
@@ -158,7 +158,8 @@
 - (void)selectSegmentAtIndex:(NSInteger)index
 {
     page=1;
-    [[[ApisFactory getApiMBusSearch]setPage:page pageCount:20]load:self selecter:@selector(disposMessage:) type:index==0?2:1];
+    [_header beginRefreshing];
+//    [[[ApisFactory getApiMBusSearch]setPage:page pageCount:20]load:self selecter:@selector(disposMessage:) type:index==0?2:1];
 }
 
 /*

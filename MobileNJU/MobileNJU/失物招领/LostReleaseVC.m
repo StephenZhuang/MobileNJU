@@ -21,25 +21,28 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
 @property (weak, nonatomic) IBOutlet UITextField *locationField;
+@property (nonatomic)NSInteger releaseType;
 @end
 
 @implementation LostReleaseVC
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initNavigationBar];
     [self initField];
+    self.releaseType = 2;
     // Do any additional setup after loading the view.
 }
 - (IBAction)changeType:(id)sender {
     if (sender==self.loss) {
         [self.loss setChoose:YES];
         [self.pickUp setChoose:NO];
+        self.releaseType = 2;
     } else {
         [self.loss setChoose:NO];
         [self.pickUp setChoose:YES];
+        self.releaseType = 1;
     }
 }
 
@@ -50,7 +53,7 @@
     // 创建一个日期格式器
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     // 为日期格式器设置格式字符串
-    [dateFormatter setDateFormat:@"MM-dd-hh HH:mm:ss"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     // 使用日期格式器格式化日期、时间
     NSString *destDateString = [dateFormatter stringFromDate:selected];
     [self.timeField setText:destDateString];
@@ -94,6 +97,7 @@
 
 -(void)submitInfo
 {
+//    NSLog(@"捡到是1 丢失是2 现在是 %d",self.loss.choose?2:1);
     NSString *desc = [self.describeField text];
     NSString *contact = [self.contactField text];
     NSString* time = [self.timeField text];
@@ -118,10 +122,9 @@
         [ProgressHUD showError:@"地点不能为空"];
         return;
     }
-
+    [self waiting:@"正在提交"];
     MAddLostOrFound_Builder* builder =[MAddLostOrFound_Builder new];
-    builder.type = self.loss.choose?2:1;
-    
+    builder.type = self.releaseType;
     builder.contact = self.contactField.text;
     builder.desc = self.describeField.text;
     builder.time = self.timeField.text;
@@ -144,10 +147,13 @@
 
 - (void)disposMessage:(Son *)son
 {
+    self.OK  = YES;
+    [self.loginIndicator removeFromSuperview];
     if ([son getError]==0) {
         if ([[son getMethod] isEqualToString:@"MAddLostAndFound"]) {
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
             NSLog(@"return %@",ret.msg);
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }
