@@ -50,7 +50,7 @@
     
     //    NSString *regex = @"[0-9]{11}";
     
-    NSString *regex = @"^0{0,1}(13[0-9]|15[1-9]|18[1-9])[0-9]{8}|(?:0(?:10|2[0-57-9]|[3-9]\\d{2}))?\\d{7,8}$";
+    NSString *regex = @"^0{0,1}(13[0-9]|15[0-9]|18[0-9])[0-9]{8}|(?:0(?:10|2[0-57-9]|[3-9]\\d{2}))?\\d{7,8}$";
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     

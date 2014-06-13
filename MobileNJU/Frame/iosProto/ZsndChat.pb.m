@@ -944,6 +944,7 @@ static MChats* defaultMChatsInstance = nil;
 @property (retain) NSString* img;
 @property (retain) NSString* time;
 @property (retain) NSString* createtime;
+@property (retain) NSString* size;
 @end
 
 @implementation MChat
@@ -990,6 +991,13 @@ static MChats* defaultMChatsInstance = nil;
   hasCreatetime_ = !!value;
 }
 @synthesize createtime;
+- (BOOL) hasSize {
+  return !!hasSize_;
+}
+- (void) setHasSize:(BOOL) value {
+  hasSize_ = !!value;
+}
+@synthesize size;
 - (void) dealloc {
   self.id = nil;
   self.userid = nil;
@@ -997,6 +1005,7 @@ static MChats* defaultMChatsInstance = nil;
   self.img = nil;
   self.time = nil;
   self.createtime = nil;
+  self.size = nil;
   [super dealloc];
 }
 - (id) init {
@@ -1007,6 +1016,7 @@ static MChats* defaultMChatsInstance = nil;
     self.img = @"";
     self.time = @"";
     self.createtime = @"";
+    self.size = @"";
   }
   return self;
 }
@@ -1044,6 +1054,9 @@ static MChat* defaultMChatInstance = nil;
   if (self.hasCreatetime) {
     [output writeString:6 value:self.createtime];
   }
+  if (self.hasSize) {
+    [output writeString:7 value:self.size];
+  }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -1070,6 +1083,9 @@ static MChat* defaultMChatInstance = nil;
   }
   if (self.hasCreatetime) {
     size += computeStringSize(6, self.createtime);
+  }
+  if (self.hasSize) {
+    size += computeStringSize(7, self.size);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -1164,6 +1180,9 @@ static MChat* defaultMChatInstance = nil;
   if (other.hasCreatetime) {
     [self setCreatetime:other.createtime];
   }
+  if (other.hasSize) {
+    [self setSize:other.size];
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -1207,6 +1226,10 @@ static MChat* defaultMChatInstance = nil;
       }
       case 50: {
         [self setCreatetime:[input readString]];
+        break;
+      }
+      case 58: {
+        [self setSize:[input readString]];
         break;
       }
     }
@@ -1306,6 +1329,22 @@ static MChat* defaultMChatInstance = nil;
 - (MChat_Builder*) clearCreatetime {
   result.hasCreatetime = NO;
   result.createtime = @"";
+  return self;
+}
+- (BOOL) hasSize {
+  return result.hasSize;
+}
+- (NSString*) size {
+  return result.size;
+}
+- (MChat_Builder*) setSize:(NSString*) value {
+  result.hasSize = YES;
+  result.size = value;
+  return self;
+}
+- (MChat_Builder*) clearSize {
+  result.hasSize = NO;
+  result.size = @"";
   return self;
 }
 @end

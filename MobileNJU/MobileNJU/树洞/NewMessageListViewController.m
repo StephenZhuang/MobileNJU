@@ -73,7 +73,7 @@
 {
     NewMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewMessageCell"];
     MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
-    [cell.titleLabel setText:[comment.title replaceUnicode]];
+    [cell.titleLabel setText:comment.title];
     
     cell.contentLabel.font = [UIFont systemFontOfSize:14];
     
@@ -82,14 +82,11 @@
         fromStr = @"南大树洞";
     }
     
-    if (comment.userid2.length == 0) {
-        fromStr = [fromStr stringByAppendingString:@"："];
-    }
     NSMutableAttributedString *fromString = [[NSMutableAttributedString alloc] initWithString:fromStr attributes:@{NSForegroundColorAttributeName : RGB(110, 15, 109),   NSFontAttributeName : [UIFont systemFontOfSize:14]}];
     
-    if (comment.userid2.length > 0) {
+//    if (comment.userid2.length > 0) {
         NSString *toStr = comment.nickname2;
-        if ([comment.userid2 isEqualToString:comment.author]) {
+        if ([comment.userid2 isEqualToString:comment.author] || comment.userid2.length == 0) {
             toStr = @"南大树洞";
         }
         toStr = [toStr stringByAppendingString:@"："];
@@ -98,13 +95,13 @@
         
         [fromString appendAttributedString:replyString];
         [fromString appendAttributedString:toString];
-    }
+//    }
     
     
     MatchParser * match=[[MatchParser alloc]init];
     match.width=290;
     //    [match match:@"[月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗][月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗" ];
-    [match match:[comment.content replaceUnicode] atCallBack:^BOOL(NSString *string) {
+    [match match:comment.content atCallBack:^BOOL(NSString *string) {
         return YES;
     }title:fromString];
     cell.contentLabel.match=match;
@@ -128,7 +125,7 @@
     NewMessageCell *cell = sender;
     TreeHoleDetailViewController *vc = [segue destinationViewController];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    vc.treeHoleid = [[self.dataArray objectAtIndex:indexPath.row] id];
+    vc.treeHoleid = [[self.dataArray objectAtIndex:indexPath.row] pid];
 }
 
 

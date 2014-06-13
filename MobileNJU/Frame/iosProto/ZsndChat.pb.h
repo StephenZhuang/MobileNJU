@@ -254,12 +254,14 @@
   BOOL hasImg_:1;
   BOOL hasTime_:1;
   BOOL hasCreatetime_:1;
+  BOOL hasSize_:1;
   NSString* id;
   NSString* userid;
   NSString* content;
   NSString* img;
   NSString* time;
   NSString* createtime;
+  NSString* size;
 }
 - (BOOL) hasId;
 - (BOOL) hasUserid;
@@ -267,12 +269,14 @@
 - (BOOL) hasImg;
 - (BOOL) hasTime;
 - (BOOL) hasCreatetime;
+- (BOOL) hasSize;
 @property (readonly, retain) NSString* id;
 @property (readonly, retain) NSString* userid;
 @property (readonly, retain) NSString* content;
 @property (readonly, retain) NSString* img;
 @property (readonly, retain) NSString* time;
 @property (readonly, retain) NSString* createtime;
+@property (readonly, retain) NSString* size;
 
 + (MChat*) defaultInstance;
 - (MChat*) defaultInstance;
@@ -337,6 +341,11 @@
 - (NSString*) createtime;
 - (MChat_Builder*) setCreatetime:(NSString*) value;
 - (MChat_Builder*) clearCreatetime;
+
+- (BOOL) hasSize;
+- (NSString*) size;
+- (MChat_Builder*) setSize:(NSString*) value;
+- (MChat_Builder*) clearSize;
 @end
 
 @interface MMatch : PBGeneratedMessage {

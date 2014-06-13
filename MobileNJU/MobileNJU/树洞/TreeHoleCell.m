@@ -84,8 +84,9 @@
     [_collectionView reloadData];
     
     CGRect rect = _collectionView.frame;
+    rect.origin.y = CGRectGetMaxY(_contentLabel.frame) + 8;
     if (_imageArray.count == 0) {
-        rect.size.height = 0;
+        rect.size.height = 0.1;
     } else if (_imageArray.count < 3) {
         rect.size.height = 110;
     } else {

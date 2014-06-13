@@ -32,17 +32,17 @@
     // Configure the view for the selected state
 }
 
-- (void)setComment:(MComment *)comment
+- (void)setComment:(MComment *)comment author:(NSString *)author
 {
     if (!self.commentLabel) {
-        self.commentLabel = [[HBCoreLabel alloc]initWithFrame:CGRectMake(10, 10, 300, 500)];
+        self.commentLabel = [[HBCoreLabel alloc]initWithFrame:CGRectMake(10, 5, 300, 500)];
         [self.contentView addSubview:self.commentLabel];
     }
     
     self.commentLabel.font = [UIFont systemFontOfSize:14];
     
     NSString *fromStr = comment.nickname1;
-    if ([comment.userid1 isEqualToString:comment.author]) {
+    if ([comment.userid1 isEqualToString:author]) {
         fromStr = @"南大树洞";
     }
     
@@ -53,7 +53,7 @@
     
     if (comment.userid2.length > 0) {
         NSString *toStr = comment.nickname2;
-        if ([comment.userid2 isEqualToString:comment.author]) {
+        if ([comment.userid2 isEqualToString:author]) {
             toStr = @"南大树洞";
         }
         toStr = [toStr stringByAppendingString:@"："];
@@ -68,7 +68,7 @@
     MatchParser * match=[[MatchParser alloc]init];
     match.width=290;
 //    [match match:@"[月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗][月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗" ];
-    [match match:[comment.content replaceUnicode] atCallBack:^BOOL(NSString *string) {
+    [match match:comment.content atCallBack:^BOOL(NSString *string) {
         return YES;
     }title:fromString];
     self.commentLabel.match=match;
@@ -77,10 +77,10 @@
     [self.commentLabel setFrame:rect];
 }
 
-- (CGFloat)matchContent:(MComment *)comment
+- (CGFloat)matchContent:(MComment *)comment author:(NSString *)author
 {
     NSString *fromStr = comment.nickname1;
-    if ([comment.userid1 isEqualToString:comment.author]) {
+    if ([comment.userid1 isEqualToString:author]) {
         fromStr = @"南大树洞";
     }
     
@@ -91,7 +91,7 @@
     
     if (comment.userid2.length > 0) {
         NSString *toStr = comment.nickname2;
-        if ([comment.userid2 isEqualToString:comment.author]) {
+        if ([comment.userid2 isEqualToString:author]) {
             toStr = @"南大树洞";
         }
         toStr = [toStr stringByAppendingString:@"："];
@@ -106,7 +106,7 @@
     MatchParser * match=[[MatchParser alloc]init];
     match.width=290;
 //    [match match:@"[月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗][月亮]开始这是MyFaceAndTextLabel的测试[转圈][发怒][抠鼻]中间这是MyFaceAndTextLabel的测试[傲慢][得意][吐][弱]最后这是MyFaceAndTextLabel的测试[晕][擦汗" ];
-    [match match:[comment.content replaceUnicode] atCallBack:^BOOL(NSString *string) {
+    [match match:comment.content atCallBack:^BOOL(NSString *string) {
         return YES;
     }title:fromString];
     return match.height;

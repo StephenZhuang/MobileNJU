@@ -215,17 +215,23 @@
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     NSLog(@"frontia applciation receive Notify: %@", [userInfo description]);
-    NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+//    NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if (application.applicationState == UIApplicationStateActive) {
         // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive a Remote Notification"
-                                                            message:[NSString stringWithFormat:@"The application received this remote notification while it was running:\n%@", alert]
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive a Remote Notification"
+//                                                            message:[NSString stringWithFormat:@"The application received this remote notification while it was running:\n%@", alert]
+//                                                           delegate:self
+//                                                  cancelButtonTitle:@"OK"
+//                                                  otherButtonTitles:nil];
+//        [alertView show];
+        if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getNanguaMessage" object:nil userInfo:userInfo];
+        }
+        [application setApplicationIconBadgeNumber:0];
+    } else {
+        int bage = application.applicationIconBadgeNumber + 1;
+        [application setApplicationIconBadgeNumber:bage];
     }
-    [application setApplicationIconBadgeNumber:0];
     
     [FrontiaPush handleNotification:userInfo];
     
