@@ -223,6 +223,7 @@
 - (IBAction)sendAction:(id)sender
 {
     NSString *string = _messageField.text;
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (string.length > 100) {
         [_messageField resignFirstResponder];
         [ProgressHUD showError:@"回复不能超过100字"];
