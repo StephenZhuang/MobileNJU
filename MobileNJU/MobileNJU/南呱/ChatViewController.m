@@ -40,18 +40,50 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNewMessage:) name:@"getNanguaMessage" object:nil];
     [self setTitle:@"南呱"];
     [self setSubTitle:@"和水果聊天"];
     _dataArray = [[NSMutableArray alloc] init];
     
     if (_isFromGua) {
-        ConnectViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ConnectViewController"];
-        [self addChildViewController:vc];
-        [self.view addSubview:vc.view];
+        [self addConnect];
     } else {
         [self addCall];
         [self addHeader];
     }
+}
+
+- (void)addConnect
+{
+    ConnectViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ConnectViewController"];
+    vc.matchSuccessBlock = ^(NSString *targetid , int targethead ,NSString *headImg) {
+        _targetid = targetid;
+        _targetHead = targethead;
+        _headImg = headImg;
+        [self addChangge];
+        
+        for (int i = 0; i < 2; i++) {
+            MChat_Builder *chat = [MChat_Builder new];
+            if (i == 0) {
+                [chat setUserid:_targetid];
+            } else {
+                [chat setUserid:[ToolUtils getLoginId]];
+            }
+            [chat setContent:@"Hi~"];
+            [chat setImg:@""];
+            NSDate *date = [NSDate new];
+            NSDateFormatter *dateFomatter = [[NSDateFormatter alloc] init];
+            [dateFomatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSString *time = [dateFomatter stringFromDate:date];
+            [chat setCreatetime:time];
+            
+            [self.dataArray addObject:chat.build];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+    };
+    [self addChildViewController:vc];
+    [self.view addSubview:vc.view];
 }
 
 - (void)addHeader
@@ -115,6 +147,12 @@
     [[ApisFactory getApiMChat] load:self selecter:@selector(disposMessage:) id:_targetid begin:beginStr];
 }
 
+- (void)getNewMessage:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    [[ApisFactory getApiMChatMsg] load:self selecter:@selector(disposMessage:) id:[userInfo objectForKey:@"id"]];
+}
+
 - (void)addCall
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -131,7 +169,7 @@
 
 - (void)callAction:(id)sender
 {
-    
+    [[ApisFactory getApiMChatCall] load:self selecter:@selector(disposMessage:) id:_targetid];
 }
 
 - (void)addChangge
@@ -140,7 +178,7 @@
     [button setFrame:CGRectMake(0, 0, 45, 30)];
     [button setTitle:@"换人" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(callAction:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(changeAction:) forControlEvents:UIControlEventTouchUpInside];
     button.layer.borderColor = [UIColor blackColor].CGColor;
     button.layer.borderWidth = 1;
     button.layer.cornerRadius = 5;
@@ -150,7 +188,22 @@
 
 - (void)changeAction:(id)sender
 {
+    self.navigationItem.rightBarButtonItem = nil;
+    _targetid = @"";
+    [self.dataArray removeAllObjects];
+    [self.tableView reloadData];
     
+    
+//    [UIView transitionFromView:self.view
+//                        toView:self.view
+//                      duration:1
+//                       options: UIViewAnimationOptionTransitionFlipFromRight
+//                    completion:^(BOOL finished) {
+//                        if (finished) {
+//                            
+//                        }
+//                    }];
+    [self addConnect];
 }
 
 - (void)disposMessage:(Son *)son
@@ -176,6 +229,11 @@
                 [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
             }
+        } else if ([[son getMethod] isEqualToString:@"MChatMsg"]){
+            MChat_Builder *chat = (MChat_Builder *)[son getBuild];
+            [self.dataArray addObject:chat.build];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
     }
     if ([[son getMethod] isEqualToString:@"MChat"]) {

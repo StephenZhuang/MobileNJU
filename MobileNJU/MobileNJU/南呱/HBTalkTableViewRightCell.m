@@ -16,8 +16,8 @@
     if (self) {
         // Initialization code
         _mLogo.frame=CGRectMake(270, 10, 40, 40);
-        _backView.frame=CGRectMake(250, 0, 35, 30);
-        _content.frame=CGRectMake(10, 5, 10, 10);
+        _backView.frame=CGRectMake(250, 15, 35, 30);
+        _content.frame=CGRectMake(8, 8, 10, 10);
         UIImage* image=[UIImage imageNamed:@"SenderTextNodeBkg"];
         image=[image stretchableImageWithLeftCapWidth:30 topCapHeight:30];
         _backView.image=image;
@@ -30,8 +30,8 @@
 -(void)clear
 {
     [super clear];
-    _backView.frame=CGRectMake(250, 0, 35, 30);
-    _content.frame=CGRectMake(10, 5, 10, 10);
+    _backView.frame=CGRectMake(250, 15, 35, 30);
+    _content.frame=CGRectMake(8, 8, 10, 10);
 }
 
 -(void)layoutSubviews

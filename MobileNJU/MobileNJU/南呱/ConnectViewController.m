@@ -29,6 +29,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _headImg = @"";
     [_connentView startConnecting];
     [[ApisFactory getApiMGetUserInfo] load:self selecter:@selector(disposMessage:)];
     [[ApisFactory getApiMChatMatch] load:self selecter:@selector(disposMessage:)];
@@ -40,6 +42,7 @@
         if ([[son getMethod] isEqualToString:@"MGetUserInfo"]) {
             MUser_Builder *user = (MUser_Builder *)[son getBuild];
             [_connentView.logoImage setImageWithURL:[ToolUtils getImageUrlWtihString:user.headImg] placeholderImage:[UIImage imageNamed:@""]];
+            _headImg = user.headImg;
             [_connentView.nameLabel setText:user.nickname];
             [_connentView.flowerLabel setText:[NSString stringWithFormat:@"鲜花数：%i",user.flower]];
             
@@ -52,8 +55,29 @@
             [_connentView.tipLabel setHidden:YES];
             [_connentView.cancelButton setHidden:YES];
             [_connentView.collectionView setHidden:YES];
+            
+            if (_matchSuccessBlock) {
+                _matchSuccessBlock(match.userid , match.headImg , _headImg);
+            }
+            
+            [self performSelector:@selector(doAnimation) withObject:nil afterDelay:2];
         }
     }
+}
+
+- (void)doAnimation
+{
+    [UIView transitionFromView:self.view
+                        toView:self.view
+                      duration:1
+                       options: UIViewAnimationOptionTransitionCurlUp
+                    completion:^(BOOL finished) {
+                        if (finished) {
+                            
+                        }
+                    }];
+    [self removeFromParentViewController];
+    [self.view removeFromSuperview];
 }
 
 - (IBAction)buttonAction:(id)sender
@@ -62,8 +86,14 @@
     if ([button.titleLabel.text isEqualToString:@"取消"]) {
         [self.parentViewController.navigationController popViewControllerAnimated:YES];
     } else {
+        [[ApisFactory getApiMChatMatch] load:self selecter:@selector(disposMessage:)];
         [_connentView startConnecting];
     }
+}
+
+- (void)closeSelf
+{
+    [self.parentViewController.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

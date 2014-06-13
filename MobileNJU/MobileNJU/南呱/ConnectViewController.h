@@ -9,6 +9,10 @@
 #import "NanguaBaseViewController.h"
 #import "ConnectVIew.h"
 
+typedef void(^MatchSuccessBlcok)(NSString *targetid , int targethead ,NSString *headImg);
+
 @interface ConnectViewController : NanguaBaseViewController
 @property (nonatomic , weak) IBOutlet ConnectVIew *connentView;
+@property (nonatomic , copy) NSString *headImg;
+@property (nonatomic , copy) MatchSuccessBlcok matchSuccessBlock;
 @end

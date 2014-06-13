@@ -17,8 +17,8 @@
     if (self) {
         // Initialization code
         _mLogo.frame=CGRectMake(10, 10, 40, 40);
-        _backView.frame=CGRectMake(55,0, 35, 30);
-        _content.frame=CGRectMake(15, 5, 10, 10);
+        _backView.frame=CGRectMake(55,15, 35, 30);
+        _content.frame=CGRectMake(12, 8, 10, 10);
 
         UIImage* image=[UIImage imageNamed:@"ReceiverTextNodeBkg"];
         image=[image stretchableImageWithLeftCapWidth:30 topCapHeight:30];
@@ -40,8 +40,8 @@
 {
     [super clear];
     
-    _backView.frame=CGRectMake(55,0, 35, 30);
-    _content.frame=CGRectMake(15, 5, 10, 10);
+    _backView.frame=CGRectMake(55,15, 35, 30);
+    _content.frame=CGRectMake(12, 8, 10, 10);
 }
 #pragma -mark 事件响应方法
 

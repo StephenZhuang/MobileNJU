@@ -24,7 +24,7 @@
 {
     _text= [[HBCoreLabel alloc]initWithFrame:CGRectMake(0, 0, 200, 21)];
     _text.backgroundColor=[UIColor clearColor];
-    [_text setFont:[UIFont systemFontOfSize:15]];
+    [_text setFont:[UIFont systemFontOfSize:17]];
     MatchParser *match = [[MatchParser alloc] init];
     match.width = _text.frame.size.width;
     [match match:text];

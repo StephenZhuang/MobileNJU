@@ -83,9 +83,10 @@
             return IMAGE_MAX_WIDTH+10+height;
         else
             return MAX(40, [[arr lastObject] floatValue]+10+height);
-    } else if([data.content isKindOfClass:[NSString class]]){
+    } else {
         MatchParser *match = [[MatchParser alloc] init];
         match.width = 200;
+        match.font = [UIFont systemFontOfSize:17];
         [match match:data.content];
         return MAX(19, match.height) + 40 + height;
     }
@@ -130,8 +131,8 @@
 {
     [super layoutSubviews];
     CGRect frame=_backView.frame;
-    frame.size.width=_content.frame.size.width+25;
-    frame.size.height=_content.frame.size.height+20;
+    frame.size.width=_content.frame.size.width+20;
+    frame.size.height=_content.frame.size.height+16;
     _backView.frame=frame;
     
     frame=_cellContent.frame;

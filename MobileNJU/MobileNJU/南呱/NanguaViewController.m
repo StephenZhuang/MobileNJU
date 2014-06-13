@@ -65,6 +65,8 @@
     [cell.logoImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i" , chatIndex.headImg]]];
     [cell.contentLabel setText:chatIndex.content];
     [cell.timeLabel setText:chatIndex.time];
+    cell.blackListButton.tag = indexPath.row;
+    cell.deleteButton.tag = indexPath.row;
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipLeft:)];
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
@@ -130,6 +132,24 @@
 //        [cell bringSubviewToFront:cell.deleteButton];
 //        [cell bringSubviewToFront:cell.blackListButton];
     }];
+}
+
+- (IBAction)blackListAction:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    MChatIndex *chatIndex = [_dataArray objectAtIndex:button.tag];
+    [[ApisFactory getApiMChatBlack] load:self selecter:@selector(disposMessage:) id:chatIndex.targetid];
+    [self.dataArray removeObjectAtIndex:button.tag];
+    [self.tableView reloadData];
+}
+
+- (IBAction)deleteAction:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    MChatIndex *chatIndex = [_dataArray objectAtIndex:button.tag];
+    [[ApisFactory getApiMChatDel] load:self selecter:@selector(disposMessage:) id:chatIndex.targetid];
+    [self.dataArray removeObjectAtIndex:button.tag];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
