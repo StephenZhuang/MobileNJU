@@ -64,6 +64,8 @@
 		778F9B231946D99500F89E66 /* leave_message_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778F9B221946D99500F89E66 /* leave_message_bg@2x.png */; };
 		778F9B261946E6EF00F89E66 /* nangua_blacklist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778F9B241946E6EF00F89E66 /* nangua_blacklist@2x.png */; };
 		778F9B271946E6EF00F89E66 /* nangua_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 778F9B251946E6EF00F89E66 /* nangua_delete@2x.png */; };
+		77932CA1194AF2F300FBDFEF /* DetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77932CA0194AF2F300FBDFEF /* DetailView.m */; };
+		77932CA3194AF30700FBDFEF /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77932CA2194AF30700FBDFEF /* DetailView.xib */; };
 		7796F1D119492EB500015307 /* ConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7796F1D019492EB500015307 /* ConnectViewController.m */; };
 		7796F1E019496FD000015307 /* HBTalkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7796F1D319496FD000015307 /* HBTalkTableViewCell.m */; };
 		7796F1E119496FD000015307 /* HBTalkTableViewImageLeftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7796F1D519496FD000015307 /* HBTalkTableViewImageLeftCell.m */; };
@@ -595,6 +597,9 @@
 		778F9B221946D99500F89E66 /* leave_message_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leave_message_bg@2x.png"; sourceTree = "<group>"; };
 		778F9B241946E6EF00F89E66 /* nangua_blacklist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nangua_blacklist@2x.png"; sourceTree = "<group>"; };
 		778F9B251946E6EF00F89E66 /* nangua_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nangua_delete@2x.png"; sourceTree = "<group>"; };
+		77932C9F194AF2F300FBDFEF /* DetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailView.h; sourceTree = "<group>"; };
+		77932CA0194AF2F300FBDFEF /* DetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailView.m; sourceTree = "<group>"; };
+		77932CA2194AF30700FBDFEF /* DetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
 		7796F1CF19492EB500015307 /* ConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectViewController.h; sourceTree = "<group>"; };
 		7796F1D019492EB500015307 /* ConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectViewController.m; sourceTree = "<group>"; };
 		7796F1D219496FD000015307 /* HBTalkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTalkTableViewCell.h; sourceTree = "<group>"; };
@@ -2041,6 +2046,9 @@
 				77E072C0194043140098BA09 /* TreeHoleCell.m */,
 				77E072C1194043140098BA09 /* TreeHoleDetailViewController.h */,
 				77E072C2194043140098BA09 /* TreeHoleDetailViewController.m */,
+				77932C9F194AF2F300FBDFEF /* DetailView.h */,
+				77932CA0194AF2F300FBDFEF /* DetailView.m */,
+				77932CA2194AF30700FBDFEF /* DetailView.xib */,
 				77E072C3194043140098BA09 /* TreeHoleImageCell.h */,
 				77E072C4194043140098BA09 /* TreeHoleImageCell.m */,
 				77E072C5194043140098BA09 /* TreeHoleListViewController.h */,
@@ -2725,6 +2733,7 @@
 				77E07594194043A90098BA09 /* f093.png in Resources */,
 				77E0751B194043A90098BA09 /* f032@2x.png in Resources */,
 				77E0759C194043A90098BA09 /* f097.png in Resources */,
+				77932CA3194AF30700FBDFEF /* DetailView.xib in Resources */,
 				77E073FD1940436E0098BA09 /* treehole_zan@2x.png in Resources */,
 				77E07574194043A90098BA09 /* f077.png in Resources */,
 				77E0753D194043A90098BA09 /* f049@2x.png in Resources */,
@@ -2975,6 +2984,7 @@
 				77E073AF1940435D0098BA09 /* ApiMCardHistory.m in Sources */,
 				77E073D31940435D0098BA09 /* ApiMSearchBook.m in Sources */,
 				77E075D2194043DA0098BA09 /* BBSDetail.m in Sources */,
+				77932CA1194AF2F300FBDFEF /* DetailView.m in Sources */,
 				778EA77419455467007B6C7E /* ApiMSignInInDetail.m in Sources */,
 				77E073E01940435D0098BA09 /* ApiUpdate.m in Sources */,
 				778EA77519455467007B6C7E /* ApiMTermList.m in Sources */,
