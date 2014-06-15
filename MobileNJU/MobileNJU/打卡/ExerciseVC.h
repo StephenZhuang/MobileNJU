@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ExerciseVC : UIViewController
+#import "RefreshTableViewController.h"
+@interface ExerciseVC : RefreshTableViewController
 
 
 @end

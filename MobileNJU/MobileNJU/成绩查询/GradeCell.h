@@ -14,8 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lessonTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *creditLabel;
-@property (nonatomic)BOOL tick;
+@property (nonatomic)BOOL isTicked;
 - (void) addLineForLabel;
 - (void)addBorder;
-
+- (void)setTick:(BOOL)tick;
 @end

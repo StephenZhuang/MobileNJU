@@ -12,6 +12,7 @@
 
 - (void)addBorder
 {
+    self.isTicked = NO;
     self.tickButton.layer.borderWidth=1.0;
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     
@@ -39,7 +40,7 @@
 
 - (void)setTick:(BOOL)tick
 {
-    _tick = tick;
+    self.isTicked = tick;
     if (tick) {
         [self.tickButton setTitle:@"✓" forState:UIControlStateNormal];
         [self.tickButton setTitle:@"" forState:UIControlStateHighlighted];
@@ -55,7 +56,7 @@
 }
 
 - (IBAction)tick:(id)sender {
-    if (self.tick) {
+    if (self.isTicked) {
         [self setTick:NO];
     } else {
         [self setTick:YES];

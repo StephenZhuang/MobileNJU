@@ -17,4 +17,6 @@
 @property (nonatomic,strong)NSString* teacher;
 @property (nonatomic,strong)NSString* week;
 @property (nonatomic,strong)NSString* time;
+-(NSDictionary*) getDic;
+-(void)loadDic:(NSDictionary*)dic;
 @end

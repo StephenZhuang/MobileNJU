@@ -25,7 +25,10 @@
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-		[array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
+        if (code!=nil) {
+            [array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
+        }
+		
 		[array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
 		[array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
 		UpdateOne *updateone=[[UpdateOne alloc] init:@"MTermList" params:array delegate:delegate selecter:select];

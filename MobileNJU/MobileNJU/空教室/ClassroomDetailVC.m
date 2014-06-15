@@ -18,7 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"空闲教师"];
+    [self setTitle:@"空闲教室"];
     [self setSubTitle:@"为您找到地方自习，不受打扰"];
     
     [self loadData];
@@ -26,12 +26,19 @@
 
 -(void)loadData
 {
-    self.floors = [[NSArray alloc]initWithObjects:@"1楼教室列表",@"2楼教室列表",@"3楼教室列表",@"4楼教室列表", nil];
+    
+    NSMutableArray* floors = [[NSMutableArray alloc]init];
     NSMutableArray* classrooms = [[NSMutableArray alloc]init];
-    for (int i = 0 ; i < 4 ; i++){
-        NSArray* c  = [[NSArray alloc]initWithObjects:@"201",@"201",@"201",@"201",@"201",@"201",@"201", nil];
-        [classrooms addObject:c];
+    for (MRoom* room in self.roomList) {
+        [floors addObject:room.name];
+        [classrooms addObject:room.numList];
     }
+    self.floors= floors;
+//    self.floors = [[NSArray alloc]initWithObjects:@"1楼教室列表",@"2楼教室列表",@"3楼教室列表",@"4楼教室列表", nil];
+//    for (int i = 0 ; i < 4 ; i++){
+//        NSArray* c  = [[NSArray alloc]initWithObjects:@"201",@"201",@"201",@"201",@"201",@"201",@"201", nil];
+//        [classrooms addObject:c];
+//    }
     self.classrooms = [[NSDictionary alloc]initWithObjects:classrooms forKeys:self.floors];
 }
 - (void)didReceiveMemoryWarning

@@ -14,6 +14,7 @@
 #import "MyLibraryVC.h"
 #import "ZsndSystem.pb.h"
 #import "UtilMethods.h"
+#import "ExerciseVC.h"
 #import "ZsndUser.pb.h"
 
 @interface WelcomeViewController ()<UITextFieldDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>
@@ -23,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *indicateView;
 @property (nonatomic)NSInteger page;
-@property(nonatomic)BOOL hasLoad;
+@property(nonatomic)BOOL firstOpen;
 @end
 
 @implementation WelcomeViewController
@@ -33,7 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.hasLoad = NO;
+    self.firstOpen = YES;
     //  [self setNavigationBarStyle];
     [self setDelegate];
     //中间缺少加载过程
@@ -71,9 +72,12 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (self.hasLoad) {
-        
+    if (!self.firstOpen) {
+        NSLog(@"调用showLoginView");
         [self showLoginView];
+    } else {
+        NSLog(@"firstOpen设为YES");
+        self.firstOpen = NO;
     }
 }
 #pragma - mark api回调
@@ -88,7 +92,6 @@
             //获得返回类
             MRet_Builder *ret = (MRet_Builder *)[son getBuild];
             NSLog(@"=======%@",ret.msg);
-            self.hasLoad=YES;
             if ([UtilMethods isLogin]) {
                 [self login:nil];
             } else {
@@ -125,6 +128,7 @@
         || [viewController class]== [ExerciseVC class]
         || [viewController class]==[EcardVC class]
         || [viewController class]==[MyLibraryVC class]
+        || [viewController class]==[ExerciseVC class]
         ) {
         [navigationController setNavigationBarHidden:YES animated:animated];
     } else if ( [navigationController isNavigationBarHidden] ) {
@@ -204,6 +208,7 @@
 //加载完毕，显示登录界面。
 - (void)showLoginView
 {
+    
     [self hideLoad];
     [self.loginView removeFromSuperview];
     [self.logoImage removeFromSuperview];
