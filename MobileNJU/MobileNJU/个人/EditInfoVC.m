@@ -53,6 +53,9 @@
     {
         [self.maleCheckBox setChoose:NO];
         [self.femaleCheckBox setChoose:YES];
+    } else {
+        [self.maleCheckBox setChoose:YES];
+        [self.femaleCheckBox setChoose:NO];
     }
     [self.birthField setText:[ToolUtils getBirthday]==nil?@"":[ToolUtils getBirthday]];
     
@@ -85,7 +88,7 @@
 //    [ToolUtils setBirthday:self.birthField.text];
 //    [ToolUtils setSex:(self.maleCheckBox.choose)?@"男":@"女"];
 //    [ToolUtils setTags:[self.tagView getHobbies]];
-    [[ApisFactory getApiMUpdateUserInfo]load:self selecter:@selector(disposMessage:) nickname:self.nickNameField.text belong:self.instituteField.text sex:(self.maleCheckBox.choose)?1:2 birthday:self.birthField.text tags:[[self.tagView getHobbies]stringByReplacingOccurrencesOfString:@";" withString:@","]];
+    [[ApisFactory getApiMUpdateUserInfo]load:self selecter:@selector(disposMessage:) nickname:self.nickNameField.text belong:self.instituteField.text sex:(self.maleCheckBox.choose)?1:0 birthday:self.birthField.text tags:[[self.tagView getHobbies]stringByReplacingOccurrencesOfString:@";" withString:@","]];
 }
 
 - (void)disposMessage:(Son *)son

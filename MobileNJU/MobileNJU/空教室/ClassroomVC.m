@@ -9,10 +9,13 @@
 #import "ClassroomVC.h"
 #import "SegmentView.h"
 #import "ClassroomChooseCell.h"
+#import "ZsndSystem.pb.h"
+#import "ClassroomDetailVC.h"
 #define CHOOSEDAY 1
 #define CHOOSESTART 2
 #define CHOOSEEND 3
 @interface ClassroomVC ()<SegmentViewDataSource,SegmentViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet SegmentView *segmentView;
 @property (strong,nonatomic)NSArray* segmentContents;
 @property (weak, nonatomic) IBOutlet UITextField *dayField;
 @property (weak, nonatomic) IBOutlet UITextField *startField;
@@ -23,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *chooseEndTable;
 @property (strong,nonatomic)NSArray* day;
 @property (strong,nonatomic)NSArray* classCount;
+
 @end
 
 @implementation ClassroomVC
@@ -30,7 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"空闲教师"];
+    [self setTitle:@"空闲教室"];
     [self setSubTitle:@"为您找到地方自习，不受打扰"];
     self.segmentContents = [[NSArray alloc]initWithObjects:@"仙1",@"仙2",@"逸夫楼",nil];
     self.day = [[NSArray alloc]initWithObjects:@"星期一", @"星期二",@"星期三",@"星期四",@"星期五", nil];
@@ -38,11 +42,50 @@
     [self initFieldBorder];
     // Do any additional setup after loading the view.
 }
+//- (double)searchStringInArray:(NSString*)str inArray:(NSArray*)array
+//{
+//    for (NSString* each_str in array) {
+//        if ([each_str isEqualToString:str]) {
+//            return [array indexOfObject:each_str];
+//        }
+//    }
+//    
+//    return -1;
+//}
 - (IBAction)search:(id)sender {
-    [self performSegueWithIdentifier:@"search" sender:nil];
+    [self waiting:@"正在搜素"];
+    [[ApisFactory getApiMRoomSearch]load:self selecter:@selector(disposMessage:) type:self.segmentView.selectedIndex+1 day:[self.day indexOfObject:[self.dayField.text stringByReplacingOccurrencesOfString:@" " withString:@""]]+1
+                                   begin:[self.classCount indexOfObject:[self.startField.text stringByReplacingOccurrencesOfString:@" " withString:@""]]+1
+                                     end:[self.classCount indexOfObject:[self.endField.text stringByReplacingOccurrencesOfString:@" " withString:@""]]+1];
+//    [self performSegueWithIdentifier:@"search" sender:nil];
+}
+-(void)disposMessage:(Son *)son
+{
+    self.OK=YES;
+    [self.loginIndicator removeFromSuperview];
+    if ([son getError]==0) {
+        if ([[son getMethod] isEqualToString:@"MRoomSearch"]) {
+            MRoomList_Builder* roomList = (MRoomList_Builder*)[son getBuild];
+            [self performSegueWithIdentifier:@"search" sender:roomList.roomList];
+            
+        }
+    }
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"search"]) {
+        ClassroomDetailVC* nextVC = (ClassroomDetailVC*)segue.destinationViewController;
+        nextVC.roomList = sender;
+    }
+    
 }
 - (IBAction)showDay:(id)sender {
+    if (self.chooseDayTable.isHidden==NO) {
+        [self.chooseDayTable setHidden:YES];
+        return;
+    }
     self.selectTag = CHOOSEDAY;
+
     [self.chooseDayTable reloadData];
     [self.chooseDayTable setHidden:NO];
     [self.chooseEndTable setHidden:YES];
@@ -50,7 +93,12 @@
     
 }
 - (IBAction)showStart:(id)sender {
+    if (self.chooseStartTable.isHidden==NO) {
+        [self.chooseStartTable setHidden:YES];
+        return;
+    }
     self.selectTag = CHOOSESTART;
+
     [self.chooseStartTable reloadData];
     [self.chooseDayTable setHidden:YES];
     [self.chooseEndTable setHidden:YES];
@@ -58,6 +106,10 @@
     
 }
 - (IBAction)showEnd:(id)sender {
+    if (self.chooseEndTable.isHidden==NO) {
+        [self.chooseEndTable setHidden:YES];
+        return;
+    }
     self.selectTag = CHOOSEEND;
     [self.chooseEndTable reloadData];
     [self.chooseDayTable setHidden:YES];

@@ -7,7 +7,7 @@
 //
 
 #import "GPAView.h"
-
+#import "ZsndSystem.pb.h"
 @implementation GPAView
 @synthesize lessonList = _lessonList;
 - (id)initWithFrame:(CGRect)frame
@@ -41,12 +41,15 @@
     _lessonList = lessonList;
     double totalScore = 0.0;
     double credit = 0.0;
-    for (Lesson* lesson in lessonList) {
-        totalScore = totalScore + lesson.score*lesson.credit;
-        credit = credit + lesson.credit;
+    for (MCourse* lesson in lessonList) {
+        if (lesson.grade.integerValue==0) {
+            continue;
+        }
+        totalScore = totalScore + lesson.grade.integerValue*lesson.point.integerValue;
+        credit = credit + lesson.point.integerValue;
     }
     double GPA = totalScore/credit/20.0;
-    [self.gpaLabel setText:[NSString stringWithFormat:@"%f",GPA]];
+    [self.gpaLabel setText:[NSString stringWithFormat:@"%.2f",GPA]];
     
 }
 

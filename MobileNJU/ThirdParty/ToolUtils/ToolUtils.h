@@ -63,4 +63,18 @@
 +(void)setPassword:(NSString*)password;
 +(NSString*)getPassword;
 + (NSString *)getPushid;
++ (NSString*)getSchId;
++ (void) setSchId:(NSString*) schId;
++(void)setJWId:(NSString*)jwId;
++(NSString*)getJWID;
++(NSString*)getJWPassword;
++(void)setJWPassword:(NSString*)password;
++(void)setCurrentWeek:(int)week;
++(void)setMySchedule:(NSArray*)schedule;
++(NSArray*)getMySchedule;
++(NSInteger)getCurrentWeek;
++(NSArray*)getTermList;
++(void)setTermList:(NSArray*)termList;
++ (NSInteger)getIsVeryfy;
++(void)setIsVeryfy:(NSInteger)verify;
 @end

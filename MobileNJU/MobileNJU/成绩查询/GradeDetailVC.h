@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GradeVC.h"
-@interface GradeDetailVC : GradeVC
+#import "BaseViewController.h"
+@interface GradeDetailVC : BaseViewController
 @property (nonatomic,strong)NSString* term;
+@property (nonatomic,strong)NSString* account;
+@property(nonatomic,strong)NSString* password;
 @end

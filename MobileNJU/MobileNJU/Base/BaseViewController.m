@@ -84,7 +84,7 @@
     self.titleView = [[[NSBundle mainBundle] loadNibNamed:@"TitleView" owner:self options:nil] firstObject];
     [self.navigationItem setTitleView:self.titleView];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeSelf)];
-    [self.titleView addGestureRecognizer:singleTap];
+    [self.titleView.touchView addGestureRecognizer:singleTap];
 }
 
 -(void)closeSelf{

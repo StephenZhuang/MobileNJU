@@ -360,5 +360,99 @@
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"];
 }
++ (void)setSchId:(NSString *)schId
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:schId forKey:@"schId"];
+    [userDefaults synchronize];
+}
+
++ (NSString *)getSchId
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"schId"];
+
+}
+
++ (void)setJWId:(NSString *)jwId
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:jwId forKey:@"jwId"];
+    [userDefaults synchronize];
+
+}
+
++ (void)setJWPassword:(NSString *)password
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:password forKey:@"jwPassword"];
+    [userDefaults synchronize];
+
+}
+
++ (NSString *)getJWID
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"jwId"];
+    
+
+}
++ (NSString *)getJWPassword
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"jwPassword"];
+    
+
+}
+
++ (void)setCurrentWeek:(int)week
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger:week forKey:@"currentWeek"];
+    [userDefaults synchronize];
+    
+
+}
++ (NSInteger)getCurrentWeek
+{
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"currentWeek"];
+    
+}
++(NSArray *)getMySchedule
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"mySchedule"];
+    
+}
++ (void)setMySchedule:(NSArray *)schedule
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:schedule  forKey:@"mySchedule"];
+    [userDefaults synchronize];
+    
+}
+
++ (NSArray *)getTermList
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"termList"];
+
+}
+
++ (void)setTermList:(NSArray *)termList
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:termList  forKey:@"termList"];
+    [userDefaults synchronize];
+    
+    
+}
++(void)setIsVeryfy:(NSInteger)verify
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setInteger: verify  forKey:@"isVeryfy"];
+    [userDefaults synchronize];
+    
+}
++ (NSInteger)getIsVeryfy
+{
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"isVeryfy"];
+}
+
 
 @end

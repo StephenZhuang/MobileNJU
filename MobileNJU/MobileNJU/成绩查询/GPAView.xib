@@ -29,8 +29,8 @@
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4.5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBs-sT-Pqc">
-                    <rect key="frame" x="97" y="78" width="66" height="44"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBs-sT-Pqc">
+                    <rect key="frame" x="102" y="76" width="57" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="41"/>
                     <nil key="highlightedColor"/>
@@ -47,6 +47,10 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerY" secondItem="DBs-sT-Pqc" secondAttribute="centerY" id="1nB-xN-S5w"/>
+                <constraint firstAttribute="centerX" secondItem="DBs-sT-Pqc" secondAttribute="centerX" id="EqG-dG-cNC"/>
+            </constraints>
             <connections>
                 <outlet property="commentLabel" destination="9IA-kh-gYm" id="234-gV-aoM"/>
                 <outlet property="gpaLabel" destination="DBs-sT-Pqc" id="dng-tk-YqF"/>
