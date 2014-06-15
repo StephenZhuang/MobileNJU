@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "ZsndSystem.pb.h"
 @interface ClassroomDetailVC : BaseViewController
 @property (nonatomic,strong)NSDictionary* classrooms;
 @property (nonatomic,strong)NSArray* floors;
+@property (nonatomic,strong)NSArray* roomList;
 @end

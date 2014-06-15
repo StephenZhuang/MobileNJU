@@ -10,10 +10,12 @@
 #import "SelfCell.h"
 #import "ToolUtils.h"
 #import "ZsndUser.pb.h"
-
-@interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate>
+#import "ZsndSystem.pb.h"
+@interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *infoTable;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *headImage;
 @property (weak, nonatomic) IBOutlet UILabel *flowerLabel;
 @end
 
@@ -24,10 +26,20 @@
 {
     [super viewDidLoad];
     [self loadData];
-    
+    self.headImage.layer.borderColor=[UIColor whiteColor].CGColor ;
+    self.headImage.layer.borderWidth=5;
+    self.headImage.layer.cornerRadius=40;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+    [self.headImage addGestureRecognizer:singleTap];
+//    [self.headImage setImage:[UIImage imageNamed:@"head"]];
+    [self.headImage setClipsToBounds:YES];
     // Do any additional setup after loading the view.
 }
-
+-(void)onClickImage
+{
+    NSLog(@"show");
+    [self showActionSheet];
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [self loadData];
@@ -48,6 +60,8 @@
 
 - (void)disposMessage:(Son *)son
 {
+    self.OK = YES;
+    [self.loginIndicator removeFromSuperview];
     if ([son getError] == 0) {
         //判断接口名
         if ([[son getMethod] isEqualToString:@"MGetUserInfo"]) {
@@ -56,6 +70,9 @@
             [ToolUtils setBelong:user.belong==nil?@"":user.belong];
             [ToolUtils setBirthday:user.birthday==nil?@"":user.birthday];
             [ToolUtils setNickname:user.nickname==nil?@"":user.nickname];
+            [ToolUtils setHeadImg:user.headImg==nil?@"":user.headImg];
+            [ToolUtils setIsVeryfy:user.isV];
+            NSLog(@"%d 性别",user.sex);
             switch (user.sex) {
                 case 0:
                     [ToolUtils setSex:@"女"];
@@ -82,6 +99,15 @@
             [self.infoTable reloadData];
             [ToolUtils setFlowerCount:user.flower];
             [self.flowerLabel setText:[NSString stringWithFormat:@"%d",self.flowerCount]];
+        }
+        else if ([[son getMethod] isEqualToString:@"MUpdateHeadImg"])
+        {
+            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+            NSLog(@"%d",ret.code);
+            if (ret.code==1) {
+                [ToolUtils setHeadImg:ret.msg];
+                [self loadData];
+            }
         }
     }
 
@@ -115,6 +141,13 @@
                         [ToolUtils getSex]==nil?@"":[ToolUtils getSex],
                         [ToolUtils getBirthday]==nil?@"":[ToolUtils getBirthday],
                         [ToolUtils getTags]==nil?@"":[ToolUtils getTags], nil];
+    if ([ToolUtils getHeadImg]!=nil) {
+        NSLog(@"%@ headImage",[ToolUtils getHeadImg]);
+        [self.headImage setImageWithURL:[ToolUtils getImageUrlWtihString:[ToolUtils getHeadImg] width:80 height:80]];
+    } else {
+        [self.headImage setImage:[UIImage imageNamed:@"head"]];
+    }
+    [self.nameLabel setText:[ToolUtils getNickName]==nil?@"":[ToolUtils getNickName]];
     NSMutableArray* mutableArray = [[NSMutableArray alloc]init];
     for (int i = 0 ; i < images.count; i++)
     {
@@ -138,7 +171,7 @@
     return [self.infos count];
 }
 
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 55;
 }
@@ -158,5 +191,145 @@
 {
     [cell setBackgroundColor:[UIColor clearColor]];
 }
+
+
+
+- (void) showActionSheet
+{
+        UIActionSheet *sheet;
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册选择", nil];
+        }
+        else {
+            
+            sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+        }
+        
+        sheet.tag = 255;
+        
+        [sheet showInView:[UIApplication sharedApplication].keyWindow];
+    
+}
+
+
+
+#pragma mark - image picker delegte
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    //    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowPhotoTabbar" object:nil];
+	[picker dismissViewControllerAnimated:YES completion:^{}];
+    
+    //    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    image = [self useImage:image];
+    [self upLoadImage:image];
+//    [self.headImage setImage:image];
+}
+
+- (UIImage *)useImage:(UIImage *)image {
+    //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // Create a graphics image context
+    CGSize newSize = CGSizeMake(80, 80);
+    UIGraphicsBeginImageContext(newSize);
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    //    [pool release];
+    return newImage;
+}
+
+- (void)upLoadImage:(UIImage*)image
+{
+    
+    MImg_Builder* img = [MImg_Builder new];
+    [img setImg: UIImagePNGRepresentation(image)];
+    
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MUpdateHeadImg" params:img  delegate:self selecter:@selector(disposMessage:)];
+    [updateone setShowLoading:NO];
+    [self waiting:@"正在上传"];
+    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
+
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    //    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowPhotoTabbar" object:nil];
+	[self dismissViewControllerAnimated:YES completion:^{}];
+}
+
+#pragma mark - actionsheet delegate
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 255) {
+        
+        NSUInteger sourceType = 0;
+        
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            
+            switch (buttonIndex) {
+                case 0:
+                    // 相机
+                    sourceType = UIImagePickerControllerSourceTypeCamera;
+                    break;
+                case 1:
+                    // 相册
+                    sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+                    
+                case 2:
+                    // 取消
+                    return;
+                    break;
+                default:
+                    return;
+                    break;
+            }
+        }
+        else {
+            if (buttonIndex == 0) {
+                
+                sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            } else {
+                return;
+            }
+        }
+        // 跳转到相机或相册页面
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        
+        imagePickerController.delegate = self;
+        
+        imagePickerController.allowsEditing = YES;
+        
+        imagePickerController.sourceType = sourceType;
+        
+        [self presentViewController:imagePickerController animated:YES completion:^{}];
+        
+        //        [imagePickerController release];
+        
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"HidePhotoTabbar" object:nil];
+    } else {
+        switch (buttonIndex) {
+            case 0:
+                // 删除
+            {
+                [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:YES];
+            }
+                
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 
 @end

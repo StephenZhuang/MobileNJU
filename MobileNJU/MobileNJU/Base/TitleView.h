@@ -12,5 +12,6 @@
 @property (nonatomic , weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic , weak) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic,strong)NSString* title;
+@property (weak, nonatomic) IBOutlet UIView *touchView;
 @property (nonatomic,strong)NSString* subTitle;
 @end

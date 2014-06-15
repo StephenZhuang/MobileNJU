@@ -44,6 +44,7 @@ static NSArray* descriptions;
     descriptions = [[NSArray alloc]initWithObjects:@"每天十条",@"查书/借阅情况",@"陌生人的心声",@"吐槽你的心声",@"余额及消费",@"课程一览无遗",@"捡到？丢了？",@"找没课的自习室",@"电话查询",@"不断飙升的绩点",@"校车地点/时刻表",@"打卡次数查询",@"全部在这里", nil];
     self.changeHeader = NO;
     [self.homeBarButton setSelected:YES];
+    [self.tableView setAllowsSelection:NO];
 }
 
 

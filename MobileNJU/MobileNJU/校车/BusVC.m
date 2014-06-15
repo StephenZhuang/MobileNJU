@@ -72,6 +72,8 @@
                 [self doneWithView:_footer];
             }
         }
+    } else {
+        [self doneWithView:page==1?_header:_footer];
     }
 }
 

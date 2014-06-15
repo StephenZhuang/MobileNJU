@@ -22,7 +22,7 @@
 	 * @callback MCourseList_Builder
 	 * @param url * url
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  url:(NSString*)url;
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  url:(NSString*)url account:(NSString*)account password:(NSString*)password;
 	/**
 	 * 成绩查询  /mobile?methodno=MGradeSearch&debug=1&deviceid=1&userid=&verify=&account=&password=&url=
 	 * @param delegate 回调类
@@ -30,6 +30,6 @@
 	 * @param url * url
 	 * @callback MCourseList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  url:(NSString*)url;
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  url:(NSString*)url account:(NSString*)account password:(NSString*)password;
 
 @end
