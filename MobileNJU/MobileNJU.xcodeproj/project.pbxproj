@@ -439,6 +439,7 @@
 		77E7D9F319308BE400BFA983 /* RefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7D9F219308BE400BFA983 /* RefreshTableViewController.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
 		7D54A7B01945F3040082909E /* BookDetailScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */; };
+		7D655025194DF166004C2016 /* TermCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D655024194DF166004C2016 /* TermCell.m */; };
 		7DBC8D6519435C6C0086E28B /* BookCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */; };
 		7DC4C58D19443D97007C6888 /* loading@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7DC4C58C19443D97007C6888 /* loading@2x.gif */; };
 		7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B30192D9C230066494D /* WelcomeViewController.m */; };
@@ -1173,6 +1174,8 @@
 		7D54A7A9194550670082909E /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
 		7D54A7AE1945F3040082909E /* BookDetailScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailScrollerView.h; sourceTree = "<group>"; };
 		7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailScrollerView.m; sourceTree = "<group>"; };
+		7D655023194DF166004C2016 /* TermCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermCell.h; sourceTree = "<group>"; };
+		7D655024194DF166004C2016 /* TermCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermCell.m; sourceTree = "<group>"; };
 		7DBC8D6319435C6C0086E28B /* BookCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCollectionCell.h; sourceTree = "<group>"; };
 		7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCollectionCell.m; sourceTree = "<group>"; };
 		7DC4C58C19443D97007C6888 /* loading@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "loading@2x.gif"; sourceTree = "<group>"; };
@@ -1274,6 +1277,8 @@
 			children = (
 				77E075DA194043F10098BA09 /* GPAView.h */,
 				77E075DB194043F10098BA09 /* GPAView.m */,
+				7D655023194DF166004C2016 /* TermCell.h */,
+				7D655024194DF166004C2016 /* TermCell.m */,
 				77E075DC194043F10098BA09 /* GPAView.xib */,
 				77E075DD194043F10098BA09 /* GradeCell.h */,
 				77E075DE194043F10098BA09 /* GradeCell.m */,
@@ -2779,6 +2784,7 @@
 				77E073CF1940435D0098BA09 /* ApiMPraise.m in Sources */,
 				77E073C91940435D0098BA09 /* ApiMLoginSignIn.m in Sources */,
 				77E073E21940435D0098BA09 /* ZsndIndex.pb.m in Sources */,
+				7D655025194DF166004C2016 /* TermCell.m in Sources */,
 				77E075FD194044110098BA09 /* LessonButton.m in Sources */,
 				77E073E31940435D0098BA09 /* ZsndLibrary.pb.m in Sources */,
 				77E073E11940435D0098BA09 /* ZsndChat.pb.m in Sources */,
