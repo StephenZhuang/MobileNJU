@@ -238,6 +238,16 @@
     }
     if ([[son getMethod] isEqualToString:@"MChat"]) {
         [self doneWithView:_header];
+        if (self.dataArray.count > 0) {
+            if ([[son getParam:@"begin"] isEqualToString:@""]) {
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            } else {
+                MChats_Builder *chats = (MChats_Builder *)[son getBuild];
+                if (self.dataArray.count > chats.chatList.count) {
+                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:chats.chatList.count inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                }
+            }
+        }
     }
 }
 
@@ -373,6 +383,7 @@
 
 - (IBAction)addImageAction:(id)sender
 {
+    [_messageField resignFirstResponder];
     UIActionSheet *sheet;
     // 判断是否支持相机
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])

@@ -38,6 +38,11 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = nav;
     
+    NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        [self operaUserInfo:userInfo appliccation:application];
+    }
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
       return YES;
@@ -95,7 +100,7 @@
     if(push) {
 
         [push bindChannel:^(NSString *appId, NSString *userId, NSString *channelId) {
-            NSString *message = [[NSString alloc] initWithFormat:@"appid:%@ \nuserid:%@ \nchannelID:%@", appId, userId, channelId];
+//            NSString *message = [[NSString alloc] initWithFormat:@"appid:%@ \nuserid:%@ \nchannelID:%@", appId, userId, channelId];
             NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setObject:userId forKey:@"pushId"];
             [userDefaults synchronize];
@@ -108,7 +113,7 @@
             
         } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
 
-            NSString *message = [[NSString alloc] initWithFormat:@"string is %@ error code : %d error message %@", action, errorCode, errorMessage];
+//            NSString *message = [[NSString alloc] initWithFormat:@"string is %@ error code : %d error message %@", action, errorCode, errorMessage];
 //            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
         }];
     } else {
@@ -224,10 +229,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 //                                                  cancelButtonTitle:@"OK"
 //                                                  otherButtonTitles:nil];
 //        [alertView show];
-        if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"getNanguaMessage" object:nil userInfo:userInfo];
-        }
-        [application setApplicationIconBadgeNumber:0];
+        [self operaUserInfo:userInfo appliccation:application];
     } else {
         int bage = application.applicationIconBadgeNumber + 1;
         [application setApplicationIconBadgeNumber:bage];
@@ -235,6 +237,14 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     
     [FrontiaPush handleNotification:userInfo];
     
+}
+
+- (void)operaUserInfo:(NSDictionary *)userInfo appliccation:(UIApplication *)application
+{
+    if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getNanguaMessage" object:nil userInfo:userInfo];
+    }
+    [application setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
