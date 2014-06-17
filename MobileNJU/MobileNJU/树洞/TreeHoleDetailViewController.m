@@ -39,6 +39,7 @@
     [self setSubTitle:@"您可以回复和点赞"];
     _targetid = @"";
     _commentid = @"";
+    _cometName = @"";
     _imageArray = [[NSMutableArray alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -68,7 +69,7 @@
             [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:_topic.commentList];
         } else if ([[son getMethod] isEqualToString:@"MTreeHoleComment"]) {
-            [self loadData];
+//            [self loadData];
         }
     }
     if ([[son getMethod] isEqualToString:@"MTreeHole"]) {
@@ -168,6 +169,7 @@
         if (![comment.userid1 isEqualToString:_topic.author]) {                
             _targetid = comment.userid1;
             _commentid = comment.id;
+            _cometName = comment.nickname1;
             
             [_messageField setPlaceholder:[NSString stringWithFormat:@"回复 %@：" , comment.nickname1]];
         }
@@ -179,6 +181,7 @@
 {
     _targetid = @"";
     _commentid = @"";
+    _cometName = @"";
     [_messageField setPlaceholder:@""];
 }
 
@@ -223,18 +226,34 @@
 - (IBAction)sendAction:(id)sender
 {
     NSString *string = _messageField.text;
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (string.length > 100) {
         [_messageField resignFirstResponder];
         [ProgressHUD showError:@"回复不能超过100字"];
         return;
     }
     if (string.length > 0) {
+        MComment_Builder *comment = [MComment_Builder new];
+        [comment setUserid1:[ToolUtils getLoginId]];
+        [comment setNickname1:[ToolUtils getNickName]];
+        [comment setUserid2:_commentid];
+        [comment setNickname2:_cometName];
+        [comment setContent:string];
+        [comment setAuthor:_topic.author];
+        
+        [self.dataArray addObject:comment.build];
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        
+        [_topic setCommentCnt:_topic.commentCnt + 1];
+        [_detailView.commentButton setTitle:[NSString stringWithFormat:@"%i",_topic.commentCnt] forState:UIControlStateNormal];
         [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_topic.id content:string reply:_targetid commentid:_commentid];
     }
     [_messageField resignFirstResponder];
     [_messageField setText:@""];
     _targetid = @"";
     _commentid = @"";
+    _cometName = @"";
     [_messageField setPlaceholder:@""];
 }
 

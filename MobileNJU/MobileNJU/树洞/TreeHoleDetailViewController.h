@@ -17,6 +17,7 @@
 @property (nonatomic , strong) MTopic_Builder *topic;
 @property (nonatomic , copy) NSString *targetid;
 @property (nonatomic , copy) NSString *commentid;
+@property (nonatomic , copy) NSString *cometName;
 @property (nonatomic , weak) IBOutlet DetailView *detailView;
 @property (nonatomic , strong) NSMutableArray *imageArray;
 @end
