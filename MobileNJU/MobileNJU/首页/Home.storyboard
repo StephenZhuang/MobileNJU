@@ -290,7 +290,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="78530369-9D67-4754-B94E-9B77D978B98D" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-JV-0PT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="C2E98EDE-AB4F-414F-B84A-9CF41D9D8560" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-JV-0PT">
                                 <rect key="frame" x="35" y="241" width="12" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -754,9 +754,11 @@
                     <tabBarItem key="tabBarItem" title="主页" image="tabBar_home" id="fQv-sO-x81"/>
                     <navigationItem key="navigationItem" id="3E4-4I-TI2"/>
                     <connections>
+                        <outlet property="activityButton" destination="Et8-82-3tJ" id="JCA-el-oH5"/>
                         <outlet property="homeBarButton" destination="dSJ-OT-mMN" id="4MZ-lb-kFP"/>
                         <outlet property="pageController" destination="Aq2-AS-jaX" id="rvN-dx-tsj"/>
                         <outlet property="pageScroller" destination="vSL-yy-TgG" id="XeQ-v7-JnF"/>
+                        <outlet property="subscribeButton" destination="bN5-mb-6NV" id="nv9-QQ-cQS"/>
                         <outlet property="tableHeadView" destination="8pD-hB-bbo" id="Dgn-5d-O6P"/>
                         <outlet property="tableView" destination="D1h-1L-AJh" id="4sY-nP-uXu"/>
                         <segue destination="wkS-op-LKz" kind="push" identifier="部门电话" id="WIm-Nc-AGm"/>
@@ -3918,7 +3920,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="78530369-9D67-4754-B94E-9B77D978B98D" width="12" height="12">
+        <image name="C2E98EDE-AB4F-414F-B84A-9CF41D9D8560" width="12" height="12">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

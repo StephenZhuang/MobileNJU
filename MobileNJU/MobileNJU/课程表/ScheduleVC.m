@@ -103,9 +103,31 @@
     if (sender!=nil) {
         [self waiting:@"正在查询"];
     }
-    [[ApisFactory getApiMSchedule]load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text];
+    [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
+    
 }
 
+/**
+ *  课程表 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+ * @param delegate 回调类
+ * @param select  回调函数
+ * @param code * 第一次登录时不需要，如果有验证码，则第二次请求时必须
+ * @param account * account
+ * @param password * password
+ * @callback MClassList_Builder
+ */
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    if (code!=nil) {
+        [array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
+    }
+    [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
+    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MSchedule" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
+}
 - (void)disposMessage:(Son *)son
 {
     self.OK=YES;
@@ -233,39 +255,7 @@
     }
     self.lessons= schedules;
     [ToolUtils setMySchedule:canSaveLessons];
-//    
-//    ScheduleLesson* lesson1 = [[ScheduleLesson alloc]init];
-//    lesson1.start=1;
-//    lesson1.length=2;
-//    lesson1.day=1;
-//    lesson1.name = @"微积分@仙一202";
-//    lesson1.time = @"周一1-2节";
-//    lesson1.teacher = @"肖源明";
-//    lesson1.location = @"仙1 211";
-//    self.lessons = [[NSArray alloc]initWithObjects:lesson1,nil];
-//    
-//    
-//    ScheduleLesson* lesson2 = [[ScheduleLesson alloc]init];
-//    lesson2.start=5;
-//    lesson2.length=3;
-//    lesson2.day=1;
-//    lesson2.name = @"英语文体风格鉴赏@仙一202";
-//    
-//    
-//    ScheduleLesson* lesson3 = [[ScheduleLesson alloc]init];
-//    lesson3.start=2;
-//    lesson3.length=2;
-//    lesson3.day=2;
-//    lesson3.name = @"大学生心理健康学@仙一202";
-//
-//    
-//    ScheduleLesson* lesson4 = [[ScheduleLesson alloc]init];
-//    lesson4.start=1;
-//    lesson4.length=2;
-//    lesson4.day=5;
-//    lesson4.name = @"大学生心理健康学@仙一202";
-//    
-//    self.lessons = [[NSArray alloc]initWithObjects:lesson1,lesson2,lesson3,lesson4,nil];
+
 
     [schedule addLessons:self.lessons delegate:self];
 }

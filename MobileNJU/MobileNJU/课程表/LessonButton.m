@@ -27,7 +27,7 @@
     _myLesson = myLesson;
     CGRect frame = CGRectMake(STARTX+(myLesson.day-1)*WIDTH, STARTY+(myLesson.start-1)*HEIGHT, WIDTH, HEIGHT*myLesson.length);
     self.frame = frame;
-    self.backgroundColor = [self randomColor];
+    self.backgroundColor = [self getColor];
     [self setTitle:myLesson.name forState:UIControlStateNormal];
     self.titleLabel.font = [UIFont systemFontOfSize: 14.0];
     self.titleLabel.textColor = [UIColor whiteColor];
@@ -41,9 +41,9 @@
     [self.delegate showSchedule:self.myLesson];
 }
 
-- (UIColor*)randomColor
+- (UIColor*)getColor
 {
-    switch (arc4random()%8) {
+    switch (self.lessonId%9) {
         case 0:return [UIColor colorWithRed:250/255.0 green:120/255.0 blue:134/255.0 alpha:1];
         case 1:return [UIColor colorWithRed:252/255.0 green:220/255.0 blue:54/255.0 alpha:1];
         case 2:return [UIColor colorWithRed:255/255.0 green:169/255.0 blue:65/255.0 alpha:1];

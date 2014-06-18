@@ -15,6 +15,7 @@
 @end
 
 @interface LessonButton : UIButton
+@property (nonatomic)int lessonId;
 @property (nonatomic,strong)ScheduleLesson* myLesson;
 @property (nonatomic , assign) IBOutlet id<ScheduleViewDelegate> delegate;
 @end
