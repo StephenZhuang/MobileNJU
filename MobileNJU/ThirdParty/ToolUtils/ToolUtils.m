@@ -453,6 +453,16 @@
 {
     return [[NSUserDefaults standardUserDefaults] integerForKey:@"isVeryfy"];
 }
++ (NSString*)getAccount
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"account"];
 
+}
 
++ (void)setAccount:(NSString*)account
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: account  forKey:@"account"];
+    [userDefaults synchronize];
+}
 @end

@@ -13,7 +13,7 @@
 #import "EcardVC.h"
 #import "MyLibraryVC.h"
 #import "ZsndSystem.pb.h"
-#import "UtilMethods.h"
+#import "ToolUtils.h"
 #import "ExerciseVC.h"
 #import "ZsndUser.pb.h"
 
@@ -44,8 +44,8 @@
     
     //api调用方式 可以点进去查看，也可按option + 左键查看 ， 回调函数统一写作disposMessage ， 如下
     [[ApisFactory getApiMGetWelcomePage] load:self selecter:@selector(disposMessage:)];
-    [self.usernameTextField setText:[UtilMethods getLoginId]==nil?@"":[UtilMethods getLoginId]];
-    [self.passwordTextField setText:[UtilMethods getPassword]==nil?@"":[UtilMethods getPassword]];
+    [self.usernameTextField setText:[ToolUtils getAccount]==nil?@"":[ToolUtils getAccount]];
+    [self.passwordTextField setText:[ToolUtils getPassword]==nil?@"":[ToolUtils getPassword]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,8 +92,8 @@
             //获得返回类
             MRet_Builder *ret = (MRet_Builder *)[son getBuild];
             NSLog(@"=======%@",ret.msg);
-            if ([UtilMethods isLogin]) {
-                [self login:nil];
+            if ([ToolUtils isLogin]) {
+                [self performSegueWithIdentifier:@"main" sender:nil];
             } else {
                 [self showLoginView];
             }
@@ -106,11 +106,11 @@
             [ToolUtils setHeadImg:user.headImg];
             NSArray *array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],nil];
             [Frame setAutoAddParams:array];
-            
+    
 #warning 这里写的很有问题，UtilMethods不需要的，然后loginid要存user.id的，这些东西统一存到toolutils里面， 注意字段不要冲突
-            [UtilMethods setIsLogin:YES];
-            [UtilMethods setLoginId:self.usernameTextField.text];
-            [UtilMethods setPassword:self.passwordTextField.text];
+            [ToolUtils setIsLogin:YES];
+            [ToolUtils setAccount:self.usernameTextField.text];
+            [ToolUtils setPassword:self.passwordTextField.text];
             [self performSegueWithIdentifier:@"main" sender:nil];
         }
     } else {
