@@ -107,7 +107,9 @@
     [self waiting:@"正在加载"];
     [self.passwordTextField setText:self.password];
     [self.schIdTextField setText:self.account];
-    [[ApisFactory getApiMGradeSearch]load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
+#warning api更改，原有api错误，需要更正
+//    [[ApisFactory getApiMGradeSearch] load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
+    [[ApisFactory getApiMGradeSearch] load:self selecter:@selector(disposMessage:) url:self.term];
 }
 
 

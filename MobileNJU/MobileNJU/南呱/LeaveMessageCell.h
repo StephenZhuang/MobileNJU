@@ -15,4 +15,5 @@
 @property (nonatomic , strong) IBOutlet UIButton *blackListButton;
 @property (nonatomic , strong) IBOutlet UIButton *deleteButton;
 @property (nonatomic , strong) IBOutlet UILabel *timeLabel;
+@property (nonatomic , strong) IBOutlet UIView *hasMessgeView;
 @end

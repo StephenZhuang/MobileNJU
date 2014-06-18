@@ -275,6 +275,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     if (badge > 0) {
         badge = 0;
         [application setApplicationIconBadgeNumber:badge];
+        [[ApisFactory getApiMPushClear] load:self selecter:@selector(disposMessage:)];
     }
 }
 

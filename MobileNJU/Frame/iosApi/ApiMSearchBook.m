@@ -1,7 +1,7 @@
 //
 //  ApiMSearchBook
 //
-//  Created by ryan on 2014-06-12 13:12:48
+//  Created by ryan on 2014-06-18 15:39:58
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -24,7 +24,7 @@
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  keyword:(NSString*)keyword {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
 		[array addObject:[NSString stringWithFormat:@"keyword=%@",keyword==nil?@"":keyword]];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MSearchBook" params:array delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MSearchBook" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 

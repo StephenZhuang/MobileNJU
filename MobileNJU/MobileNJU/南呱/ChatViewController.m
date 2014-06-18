@@ -41,13 +41,13 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNewMessage:) name:@"getNanguaMessage" object:nil];
-    [self setTitle:@"南呱"];
-    [self setSubTitle:@"和水果聊天"];
     _dataArray = [[NSMutableArray alloc] init];
     
     if (_isFromGua) {
         [self addConnect];
     } else {
+        [self setTitle:@"聊天"];
+        [self setSubTitle:@"西瓜和猕猴桃的故事"];
         [self addCall];
         [self addHeader];
     }
@@ -55,8 +55,12 @@
 
 - (void)addConnect
 {
+    [self setTitle:@"南呱"];
+    [self setSubTitle:@"和水果聊天"];
     ConnectViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ConnectViewController"];
     vc.matchSuccessBlock = ^(NSString *targetid , int targethead ,NSString *headImg) {
+        [self setTitle:@"聊天"];
+        [self setSubTitle:@"西瓜和猕猴桃的故事"];
         _targetid = targetid;
         _targetHead = targethead;
         _headImg = headImg;
@@ -246,7 +250,7 @@
             } else {
                 MChats_Builder *chats = (MChats_Builder *)[son getBuild];
                 if (self.dataArray.count > chats.chatList.count) {
-                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:chats.chatList.count inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:chats.chatList.count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
                 }
             }
         }

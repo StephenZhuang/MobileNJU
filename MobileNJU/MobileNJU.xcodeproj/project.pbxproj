@@ -21,6 +21,9 @@
 		774972041942EFF3006767A7 /* CheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774972031942EFF3006767A7 /* CheckViewController.m */; };
 		774B92CD1951194C007CB817 /* CallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 774B92CC1951194C007CB817 /* CallView.m */; };
 		774B92CF1951196D007CB817 /* CallView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774B92CE1951196D007CB817 /* CallView.xib */; };
+		774B92D1195163F4007CB817 /* TreeHoleListHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774B92D0195163F3007CB817 /* TreeHoleListHeader.xib */; };
+		774B92D419516405007CB817 /* TreeHoleListHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 774B92D319516405007CB817 /* TreeHoleListHeader.m */; };
+		774B92D719517B64007CB817 /* ApiMPushClear.m in Sources */ = {isa = PBXBuildFile; fileRef = 774B92D619517B64007CB817 /* ApiMPushClear.m */; };
 		7765DB4719416C8E00EDDA68 /* NewMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */; };
 		7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4919416CA800EDDA68 /* NewMessageCell.m */; };
 		7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */; };
@@ -545,6 +548,11 @@
 		774B92CB1951194C007CB817 /* CallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallView.h; sourceTree = "<group>"; };
 		774B92CC1951194C007CB817 /* CallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallView.m; sourceTree = "<group>"; };
 		774B92CE1951196D007CB817 /* CallView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CallView.xib; sourceTree = "<group>"; };
+		774B92D0195163F3007CB817 /* TreeHoleListHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TreeHoleListHeader.xib; sourceTree = "<group>"; };
+		774B92D219516405007CB817 /* TreeHoleListHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeHoleListHeader.h; sourceTree = "<group>"; };
+		774B92D319516405007CB817 /* TreeHoleListHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeHoleListHeader.m; sourceTree = "<group>"; };
+		774B92D519517B64007CB817 /* ApiMPushClear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMPushClear.h; sourceTree = "<group>"; };
+		774B92D619517B64007CB817 /* ApiMPushClear.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMPushClear.m; sourceTree = "<group>"; };
 		7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageListViewController.h; sourceTree = "<group>"; };
 		7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageListViewController.m; sourceTree = "<group>"; };
 		7765DB4819416CA800EDDA68 /* NewMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageCell.h; sourceTree = "<group>"; };
@@ -2071,6 +2079,9 @@
 				77E072C4194043140098BA09 /* TreeHoleImageCell.m */,
 				77E072C5194043140098BA09 /* TreeHoleListViewController.h */,
 				77E072C6194043140098BA09 /* TreeHoleListViewController.m */,
+				774B92D0195163F3007CB817 /* TreeHoleListHeader.xib */,
+				774B92D219516405007CB817 /* TreeHoleListHeader.h */,
+				774B92D319516405007CB817 /* TreeHoleListHeader.m */,
 				7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */,
 				7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */,
 				7765DB4819416CA800EDDA68 /* NewMessageCell.h */,
@@ -2332,6 +2343,8 @@
 		77E0731D1940435D0098BA09 /* iosApi */ = {
 			isa = PBXGroup;
 			children = (
+				774B92D519517B64007CB817 /* ApiMPushClear.h */,
+				774B92D619517B64007CB817 /* ApiMPushClear.m */,
 				778EA76A19455467007B6C7E /* ApiMLogout.h */,
 				778EA76B19455467007B6C7E /* ApiMLogout.m */,
 				778EA76C19455467007B6C7E /* ApiMRss.h */,
@@ -2707,6 +2720,7 @@
 				77E0755E194043A90098BA09 /* f066.png in Resources */,
 				77E07505194043A90098BA09 /* f021@2x.png in Resources */,
 				778F9B1E1946B3AE00F89E66 /* fruit_2_s@2x.png in Resources */,
+				774B92D1195163F4007CB817 /* TreeHoleListHeader.xib in Resources */,
 				77E074EC194043A90098BA09 /* f009.png in Resources */,
 				77E07596194043A90098BA09 /* f094.png in Resources */,
 				77E074F9194043A90098BA09 /* f015@2x.png in Resources */,
@@ -2964,6 +2978,7 @@
 				778EA7851945D415007B6C7E /* NanguaBaseViewController.m in Sources */,
 				77B904D8192C4B3B0062237D /* UIImageView+WebCache.m in Sources */,
 				778F9B091946B20A00F89E66 /* LeaveMessageCell.m in Sources */,
+				774B92D719517B64007CB817 /* ApiMPushClear.m in Sources */,
 				7DD25B39192D9C230066494D /* HomeCell.m in Sources */,
 				7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */,
 				7DD869AF192DB73B00D4ADAA /* GetCodeViewController.m in Sources */,
@@ -3018,6 +3033,7 @@
 				77E073CD1940435D0098BA09 /* ApiMNews.m in Sources */,
 				77E0763D194044470098BA09 /* EcardCell.m in Sources */,
 				77B904BB192C4B3B0062237D /* MJRefreshConst.m in Sources */,
+				774B92D419516405007CB817 /* TreeHoleListHeader.m in Sources */,
 				77E076431940445C0098BA09 /* MySubscribeCell.m in Sources */,
 				77B904C5192C4B3B0062237D /* MJPhotoLoadingView.m in Sources */,
 				77E073E61940435D0098BA09 /* ZsndSystem.pb.m in Sources */,

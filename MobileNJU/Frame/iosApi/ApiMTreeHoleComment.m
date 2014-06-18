@@ -1,7 +1,7 @@
 //
 //  ApiMTreeHoleComment
 //
-//  Created by ryan on 2014-06-12 13:12:48
+//  Created by ryan on 2014-06-18 15:39:59
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -30,7 +30,7 @@
 		[array addObject:[NSString stringWithFormat:@"content=%@",content==nil?@"":content]];
 		[array addObject:[NSString stringWithFormat:@"reply=%@",reply==nil?@"":reply]];
 		[array addObject:[NSString stringWithFormat:@"commentId=%@",commentId==nil?@"":commentId]];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MTreeHoleComment" params:array delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MTreeHoleComment" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 

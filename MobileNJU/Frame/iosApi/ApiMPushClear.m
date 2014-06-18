@@ -1,5 +1,5 @@
 //
-//  ApiMChatMatch
+//  ApiMPushClear
 //
 //  Created by ryan on 2014-06-18 15:39:58
 //  Copyright (c) ryan All rights reserved.
@@ -9,28 +9,28 @@
    
 */
 
-#import "ApiMChatMatch.h"
+#import "ApiMPushClear.h"
 
-@implementation ApiMChatMatch
+@implementation ApiMPushClear
 
 
 	/**
-	 *  南呱匹配 /mobile?methodno=MChatMatch&debug=1&appid=nju&deviceid=1&userid=1&verify=1
+	 * 清空推送   /mobile?methodno=MPushClear&debug=1&deviceid=&appid=&userid=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @callback MMatch_Builder
+	 * @callback MRet_Builder
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MChatMatch" params:array  delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MPushClear" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 
 	/**
-	 *  南呱匹配 /mobile?methodno=MChatMatch&debug=1&appid=nju&deviceid=1&userid=1&verify=1
+	 * 清空推送   /mobile?methodno=MPushClear&debug=1&deviceid=&appid=&userid=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @callback MMatch_Builder
+	 * @callback MRet_Builder
 	*/
 	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  {
 		UpdateOne *update=[self get:delegate selecter:select];

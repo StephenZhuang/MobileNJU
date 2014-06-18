@@ -33,6 +33,12 @@
     [self setTitle:@"南呱"];
     [self setSubTitle:@"和水果聊天"];
     _dataArray = [[NSMutableArray alloc] init];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [[ApisFactory getApiMChatIndex] load:self selecter:@selector(disposMessage:)];
 }
 
@@ -74,6 +80,12 @@
     cell.blackListButton.tag = indexPath.row;
     cell.deleteButton.tag = indexPath.row;
     
+    if (chatIndex.total > 0) {
+        [cell.hasMessgeView setHidden:NO];
+    } else {
+        [cell.hasMessgeView setHidden:YES];
+    }
+    
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipLeft:)];
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
     [cell addGestureRecognizer:swipeLeft];
@@ -114,6 +126,10 @@
         rect.origin.x = -10;
         [cell.logoImage setFrame:rect];
         
+        rect = cell.hasMessgeView.frame;
+        rect.origin.x = 39;
+        [cell.hasMessgeView setFrame:rect];
+        
         CGRect rect1 = cell.contentLabel.frame;
         rect1.origin.x = 51;
         [cell.contentLabel setFrame:rect1];
@@ -130,6 +146,10 @@
         CGRect rect = cell.logoImage.frame;
         rect.origin.x = 10;
         [cell.logoImage setFrame:rect];
+        
+        rect = cell.hasMessgeView.frame;
+        rect.origin.x = 59;
+        [cell.hasMessgeView setFrame:rect];
         
         CGRect rect1 = cell.contentLabel.frame;
         rect1.origin.x = 71;

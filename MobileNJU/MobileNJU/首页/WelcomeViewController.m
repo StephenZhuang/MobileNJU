@@ -67,7 +67,7 @@
     [self resignAllResponders:nil];
     [self waiting:@"登陆中"];
     #warning 注意加密
-    [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:self.passwordTextField.text pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"]];
+    [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:self.passwordTextField.text pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"] device:@"ios"];
 //    [self performSegueWithIdentifier:@"main" sender:nil];
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -106,6 +106,8 @@
             [ToolUtils setHeadImg:user.headImg];
             NSArray *array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],nil];
             [Frame setAutoAddParams:array];
+            
+#warning 这里写的很有问题，UtilMethods不需要的，然后loginid要存user.id的，这些东西统一存到toolutils里面， 注意字段不要冲突
             [UtilMethods setIsLogin:YES];
             [UtilMethods setLoginId:self.usernameTextField.text];
             [UtilMethods setPassword:self.passwordTextField.text];

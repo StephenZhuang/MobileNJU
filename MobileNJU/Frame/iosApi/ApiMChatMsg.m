@@ -1,7 +1,7 @@
 //
 //  ApiMChatMsg
 //
-//  Created by ryan on 2014-06-12 13:12:48
+//  Created by ryan on 2014-06-18 15:39:58
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -24,7 +24,7 @@
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  id:(NSString*)id {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
 		[array addObject:[NSString stringWithFormat:@"id=%@",id==nil?@"":id]];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MChatMsg" params:array delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MChatMsg" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 

@@ -13,6 +13,7 @@
 #import "ZsndIndex.pb.h"
 #import "AddTreeHoleViewController.h"
 #import "TreeHoleDetailViewController.h"
+#import "NewMessageListViewController.h"
 
 @interface TreeHoleListViewController ()
 
@@ -38,6 +39,12 @@
         [self setTitle:@"我的树洞"];
     } else {
         [self setTitle:@"树洞"];
+    }
+    
+    _treeHoleListHeader = [[[NSBundle mainBundle] loadNibNamed:@"TreeHoleListHeader" owner:self options:nil] firstObject];
+    self.tableView.tableHeaderView = _treeHoleListHeader;
+    if (_isMyTreeHole) {
+        [_treeHoleListHeader setMyTreeHoleButtonHidden];
     }
     
     UIButton* button = [[UIButton alloc]init];
@@ -78,7 +85,8 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:treeHole.topicsList];
-            [_messageButton setTitle:[NSString stringWithFormat:@"%i" , treeHole.newsCnt] forState:UIControlStateNormal];
+            [_treeHoleListHeader.messageButton setTitle:[NSString stringWithFormat:@"%i" , treeHole.newsCnt] forState:UIControlStateNormal];
+            [_treeHoleListHeader setMessageButtonHidden:(treeHole.newsCnt <=0)];
         }
     }
     if ([[son getMethod] isEqualToString:@"MTreeHoleList"]) {
@@ -191,6 +199,18 @@
     }
 }
 
+- (IBAction)myTreeHoleAction:(id)sender
+{
+    TreeHoleListViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"TreeHoleListViewController"];
+    vc.isMyTreeHole = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)newMessageAction:(id)sender
+{
+    [self performSegueWithIdentifier:@"NewMessage" sender:sender];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -224,6 +244,12 @@
             NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
             vc.treeHoleid = [[self.dataArray objectAtIndex:indexPath.row] id];
         }
+    } else if ([segue.identifier isEqualToString:@"NewMessage"]) {
+        NewMessageListViewController *vc = [segue destinationViewController];
+        vc.readMessageBlock = ^(NSInteger num) {
+            [_treeHoleListHeader.messageButton setTitle:[NSString stringWithFormat:@"%i" , num] forState:UIControlStateNormal];
+            [_treeHoleListHeader setMessageButtonHidden:(num <=0)];
+        };
     }
 }
 

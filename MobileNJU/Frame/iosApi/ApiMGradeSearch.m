@@ -1,7 +1,7 @@
 //
 //  ApiMGradeSearch
 //
-//  Created by ryan on 2014-06-12 13:12:48
+//  Created by ryan on 2014-06-18 15:39:59
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -21,13 +21,10 @@
 	 * @param url * url
 	 * @callback MCourseList_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  url:(NSString*)url account:(NSString *)account password:(NSString *)password{
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  url:(NSString*)url {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
 		[array addObject:[NSString stringWithFormat:@"url=%@",url==nil?@"":url]];
-        [array addObject:[NSString stringWithFormat:@"account=%@",url==nil?@"":account]];
-		[array addObject:[NSString stringWithFormat:@"password=%@",url==nil?@"":password]];
-
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MGradeSearch" params:array delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MGradeSearch" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 
@@ -38,8 +35,8 @@
 	 * @param url * url
 	 * @callback MCourseList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  url:(NSString*)url account:(NSString *)account password:(NSString *)password{
-		UpdateOne *update=[self get:delegate selecter:select url:url account:account password:password];
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  url:(NSString*)url {
+		UpdateOne *update=[self get:delegate selecter:select url:url];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
 		return update;
 	}

@@ -60,6 +60,9 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:commentList.newsList];
+            if (_readMessageBlock) {
+                _readMessageBlock(self.dataArray.count);
+            }
         }
     }
     if (page == 1) {
@@ -106,6 +109,12 @@
     }title:fromString];
     cell.contentLabel.match=match;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    page = 1;
+    [self loadData];
 }
 
 - (void)didReceiveMemoryWarning

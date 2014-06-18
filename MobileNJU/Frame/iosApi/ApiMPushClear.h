@@ -1,5 +1,5 @@
 //
-//  ApiMChatMatch
+//  ApiMPushClear
 //
 //  Created by ryan on 2014-06-18 15:39:58
 //  Copyright (c) ryan All rights reserved.
@@ -12,21 +12,21 @@
 #import "ApiUpdate.h"
 
 
-@interface ApiMChatMatch : ApiUpdate
+@interface ApiMPushClear : ApiUpdate
 
 
 	/**
-	 *  南呱匹配 /mobile?methodno=MChatMatch&debug=1&appid=nju&deviceid=1&userid=1&verify=1
+	 * 清空推送   /mobile?methodno=MPushClear&debug=1&deviceid=&appid=&userid=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @callback MMatch_Builder
+	 * @callback MRet_Builder
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select ;
 	/**
-	 *  南呱匹配 /mobile?methodno=MChatMatch&debug=1&appid=nju&deviceid=1&userid=1&verify=1
+	 * 清空推送   /mobile?methodno=MPushClear&debug=1&deviceid=&appid=&userid=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @callback MMatch_Builder
+	 * @callback MRet_Builder
 	*/
 	-(UpdateOne*)load:(id)delegate selecter:(SEL)select ;
 

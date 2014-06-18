@@ -1,7 +1,7 @@
 //
 //  ApiMVerifyUser
 //
-//  Created by ryan on 2014-06-12 13:12:48
+//  Created by ryan on 2014-06-18 15:39:59
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -28,7 +28,7 @@
 		[array addObject:[NSString stringWithFormat:@"num=%@",num==nil?@"":num]];
 		[array addObject:[NSString stringWithFormat:@"pwd=%@",pwd==nil?@"":pwd]];
 		[array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MVerifyUser" params:array delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MVerifyUser" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 

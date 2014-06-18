@@ -1,7 +1,7 @@
 //
 //  ApisFactory
 //
-//  Created by ryan on 2014-06-12 13:12:48
+//  Created by ryan on 2014-06-18 15:39:59
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -132,6 +132,13 @@
 	 */
 	+(ApiMActivity*) getApiMActivity{
 		return [[ApiMActivity alloc ] init];
+	}
+	
+	/**
+	 * 清空推送   /mobile?methodno=MPushClear&debug=1&deviceid=&appid=&userid=
+	 */
+	+(ApiMPushClear*) getApiMPushClear{
+		return [[ApiMPushClear alloc ] init];
 	}
 	
 	/**
@@ -359,14 +366,14 @@
 	}
 	
 	/**
-	 * 登录 /mobile?methodno=MLogin&debug=1&phone=&password=&deviceid=&appid=&pushId=
+	 * 登录 /mobile?methodno=MLogin&debug=1&phone=&password=&deviceid=&appid=&pushId=&device=
 	 */
 	+(ApiMLogin*) getApiMLogin{
 		return [[ApiMLogin alloc ] init];
 	}
 	
 	/**
-	 * 注册或忘记密码 /mobile?methodno=MRegist&debug=1&deviceid=1&phone=&password=&nickname=&code=&appid=&pushId=
+	 * 注册或忘记密码 /mobile?methodno=MRegist&debug=1&deviceid=1&phone=&password=&nickname=&code=&appid=&pushId=&device=
 	 */
 	+(ApiMRegist*) getApiMRegist{
 		return [[ApiMRegist alloc ] init];
