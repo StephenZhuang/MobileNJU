@@ -1,7 +1,7 @@
 //
 //  ApisFactory
 //
-//  Created by ryan on 2014-06-12 13:12:48
+//  Created by ryan on 2014-06-18 15:39:59
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -26,6 +26,7 @@
 #import "ApiMAllRss.h"
 #import "ApiMMyRss.h"
 #import "ApiMActivity.h"
+#import "ApiMPushClear.h"
 #import "ApiMLogout.h"
 #import "ApiMGetWelcomePage.h"
 #import "ApiMGetMobileVerify.h"
@@ -152,6 +153,11 @@
 	 *  活动  /mobile?methodno=MNewsList&debug=1&deviceid=1&userid=fe34a40e-eac6-11e3-b696-ac853d9d52b1&verify=cf09a009-d221-466a-b9f0-d7d3b43dce7c&page=2&limit=10&appid=nju
 	 */
 	+(ApiMActivity*) getApiMActivity;
+	
+	/**
+	 * 清空推送   /mobile?methodno=MPushClear&debug=1&deviceid=&appid=&userid=
+	 */
+	+(ApiMPushClear*) getApiMPushClear;
 	
 	/**
 	 * 退出登录   /mobile?methodno=MLogout&debug=1&deviceid=&appid=&userid=
@@ -314,12 +320,12 @@
 	+(ApiMTreeHole*) getApiMTreeHole;
 	
 	/**
-	 * 登录 /mobile?methodno=MLogin&debug=1&phone=&password=&deviceid=&appid=&pushId=
+	 * 登录 /mobile?methodno=MLogin&debug=1&phone=&password=&deviceid=&appid=&pushId=&device=
 	 */
 	+(ApiMLogin*) getApiMLogin;
 	
 	/**
-	 * 注册或忘记密码 /mobile?methodno=MRegist&debug=1&deviceid=1&phone=&password=&nickname=&code=&appid=&pushId=
+	 * 注册或忘记密码 /mobile?methodno=MRegist&debug=1&deviceid=1&phone=&password=&nickname=&code=&appid=&pushId=&device=
 	 */
 	+(ApiMRegist*) getApiMRegist;
 	

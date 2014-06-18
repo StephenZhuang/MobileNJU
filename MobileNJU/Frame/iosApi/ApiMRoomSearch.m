@@ -1,7 +1,7 @@
 //
 //  ApiMRoomSearch
 //
-//  Created by ryan on 2014-06-12 13:12:48
+//  Created by ryan on 2014-06-18 15:39:59
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -30,7 +30,7 @@
 		[array addObject:[NSString stringWithFormat:@"day=%@",[Frame number2String:day]]];
 		[array addObject:[NSString stringWithFormat:@"begin=%@",[Frame number2String:begin]]];
 		[array addObject:[NSString stringWithFormat:@"end=%@",[Frame number2String:end]]];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MRoomSearch" params:array delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MRoomSearch" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 

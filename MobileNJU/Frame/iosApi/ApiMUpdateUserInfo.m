@@ -1,7 +1,7 @@
 //
 //  ApiMUpdateUserInfo
 //
-//  Created by ryan on 2014-06-12 13:12:48
+//  Created by ryan on 2014-06-18 15:39:59
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -32,7 +32,7 @@
 		[array addObject:[NSString stringWithFormat:@"sex=%@",[Frame number2String:sex]]];
 		[array addObject:[NSString stringWithFormat:@"birthday=%@",birthday==nil?@"":birthday]];
 		[array addObject:[NSString stringWithFormat:@"tags=%@",tags==nil?@"":tags]];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MUpdateUserInfo" params:array delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MUpdateUserInfo" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 

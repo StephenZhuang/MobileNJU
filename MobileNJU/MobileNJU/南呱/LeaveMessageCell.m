@@ -22,6 +22,7 @@
 - (void)awakeFromNib
 {
     // Initialization code
+    _hasMessgeView.layer.cornerRadius = 4;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

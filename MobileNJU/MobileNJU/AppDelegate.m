@@ -231,7 +231,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 //        [alertView show];
         [self operaUserInfo:userInfo appliccation:application];
     } else {
-        int bage = application.applicationIconBadgeNumber + 1;
+        int bage = [[userInfo objectForKey:@"badge"] intValue];
         [application setApplicationIconBadgeNumber:bage];
     }
     
@@ -243,6 +243,10 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getNanguaMessage" object:nil userInfo:userInfo];
+    } else if ([[userInfo objectForKey:@"type"] integerValue] == 3) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getCall" object:nil userInfo:userInfo];        
+    } else if ([[userInfo objectForKey:@"type"] integerValue] == 4) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"receivedCall" object:nil userInfo:userInfo];
     }
     [application setApplicationIconBadgeNumber:0];
 }
@@ -267,6 +271,12 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSInteger badge = application.applicationIconBadgeNumber;
+    if (badge > 0) {
+        badge = 0;
+        [application setApplicationIconBadgeNumber:badge];
+        [[ApisFactory getApiMPushClear] load:self selecter:@selector(disposMessage:)];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

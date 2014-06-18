@@ -1,7 +1,7 @@
 //
 //  ApiMSchedule
 //
-//  Created by ryan on 2014-06-12 13:12:48
+//  Created by ryan on 2014-06-18 15:39:59
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -25,15 +25,10 @@
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-        
-        if (code) {
-            [array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
-        }
-		
-        
+		[array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
 		[array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
 		[array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MSchedule" params:array delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MSchedule" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 

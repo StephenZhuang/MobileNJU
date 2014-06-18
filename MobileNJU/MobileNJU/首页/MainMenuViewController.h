@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "BaseViewController.h"
+#import "CallView.h"
 @interface MainMenuViewController : UIViewController
 @property(nonatomic,strong)NSMutableArray* photoList;
+@property (nonatomic , strong) CallView *callView;
+@property (nonatomic , strong) UIView *maskView;
 @end

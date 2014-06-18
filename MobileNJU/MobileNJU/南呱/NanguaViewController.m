@@ -33,6 +33,12 @@
     [self setTitle:@"南呱"];
     [self setSubTitle:@"和水果聊天"];
     _dataArray = [[NSMutableArray alloc] init];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [[ApisFactory getApiMChatIndex] load:self selecter:@selector(disposMessage:)];
 }
 
@@ -63,10 +69,22 @@
     LeaveMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LeaveMessageCell"];
     MChatIndex *chatIndex = [_dataArray objectAtIndex:indexPath.row];
     [cell.logoImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i" , chatIndex.headImg]]];
-    [cell.contentLabel setText:chatIndex.content];
+//    [cell.contentLabel setText:chatIndex.content];
+    MatchParser *match = [[MatchParser alloc] init];
+    match.width = cell.contentLabel.frame.size.width;
+    match.numberOfLimitLines = 1;
+    match.font = [UIFont systemFontOfSize:17];
+    [match match:chatIndex.content];
+    cell.contentLabel.match = match;
     [cell.timeLabel setText:chatIndex.time];
     cell.blackListButton.tag = indexPath.row;
     cell.deleteButton.tag = indexPath.row;
+    
+    if (chatIndex.total > 0) {
+        [cell.hasMessgeView setHidden:NO];
+    } else {
+        [cell.hasMessgeView setHidden:YES];
+    }
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipLeft:)];
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
@@ -108,6 +126,10 @@
         rect.origin.x = -10;
         [cell.logoImage setFrame:rect];
         
+        rect = cell.hasMessgeView.frame;
+        rect.origin.x = 39;
+        [cell.hasMessgeView setFrame:rect];
+        
         CGRect rect1 = cell.contentLabel.frame;
         rect1.origin.x = 51;
         [cell.contentLabel setFrame:rect1];
@@ -124,6 +146,10 @@
         CGRect rect = cell.logoImage.frame;
         rect.origin.x = 10;
         [cell.logoImage setFrame:rect];
+        
+        rect = cell.hasMessgeView.frame;
+        rect.origin.x = 59;
+        [cell.hasMessgeView setFrame:rect];
         
         CGRect rect1 = cell.contentLabel.frame;
         rect1.origin.x = 71;

@@ -85,7 +85,7 @@
                                                         <constraint firstAttribute="height" constant="53" id="cxW-kC-6gQ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="深夜睡不着，求开导" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utU-hi-0PU">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="深夜睡不着，求开导" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utU-hi-0PU" customClass="HBCoreLabel">
                                                     <rect key="frame" x="71" y="16" width="229" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -98,6 +98,11 @@
                                                     <color key="textColor" red="0.63529411764705879" green="0.63529411764705879" blue="0.63529411764705879" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PlB-gt-Xim">
+                                                    <rect key="frame" x="59" y="9" width="8" height="8"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.91372549020000005" green="0.058823529409999999" blue="0.058823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -115,6 +120,7 @@
                                             <outlet property="blackListButton" destination="cxe-NR-21f" id="sZy-Sq-dcK"/>
                                             <outlet property="contentLabel" destination="utU-hi-0PU" id="x0x-Cl-KNn"/>
                                             <outlet property="deleteButton" destination="X9f-pH-96f" id="P3A-Zo-sjH"/>
+                                            <outlet property="hasMessgeView" destination="PlB-gt-Xim" id="8Yv-87-GXJ"/>
                                             <outlet property="logoImage" destination="kma-eE-hBZ" id="Vsf-KN-jUA"/>
                                             <outlet property="timeLabel" destination="dTW-EX-nRr" id="ldt-tS-7TP"/>
                                         </connections>

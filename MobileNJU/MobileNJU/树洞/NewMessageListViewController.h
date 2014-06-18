@@ -8,6 +8,8 @@
 
 #import "RefreshTableViewController.h"
 
-@interface NewMessageListViewController : RefreshTableViewController
+typedef void(^ReadMessageBlock)(NSInteger num);
 
+@interface NewMessageListViewController : RefreshTableViewController
+@property (nonatomic , copy) ReadMessageBlock readMessageBlock;
 @end
