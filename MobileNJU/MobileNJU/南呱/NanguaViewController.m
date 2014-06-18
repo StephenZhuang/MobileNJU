@@ -63,7 +63,13 @@
     LeaveMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LeaveMessageCell"];
     MChatIndex *chatIndex = [_dataArray objectAtIndex:indexPath.row];
     [cell.logoImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i" , chatIndex.headImg]]];
-    [cell.contentLabel setText:chatIndex.content];
+//    [cell.contentLabel setText:chatIndex.content];
+    MatchParser *match = [[MatchParser alloc] init];
+    match.width = cell.contentLabel.frame.size.width;
+    match.numberOfLimitLines = 1;
+    match.font = [UIFont systemFontOfSize:17];
+    [match match:chatIndex.content];
+    cell.contentLabel.match = match;
     [cell.timeLabel setText:chatIndex.time];
     cell.blackListButton.tag = indexPath.row;
     cell.deleteButton.tag = indexPath.row;

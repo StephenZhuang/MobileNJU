@@ -150,7 +150,9 @@
 - (void)getNewMessage:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
-    [[ApisFactory getApiMChatMsg] load:self selecter:@selector(disposMessage:) id:[userInfo objectForKey:@"id"]];
+    if ([[userInfo objectForKey:@"target"] isEqualToString:_targetid]) {
+        [[ApisFactory getApiMChatMsg] load:self selecter:@selector(disposMessage:) id:[userInfo objectForKey:@"id"]];
+    }
 }
 
 - (void)addCall

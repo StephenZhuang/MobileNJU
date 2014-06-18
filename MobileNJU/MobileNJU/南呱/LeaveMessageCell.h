@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HBCoreLabel.h"
 
 @interface LeaveMessageCell : UITableViewCell
 @property (nonatomic , strong) IBOutlet UIImageView *logoImage;
-@property (nonatomic , strong) IBOutlet UILabel *contentLabel;
+@property (nonatomic , strong) IBOutlet HBCoreLabel *contentLabel;
 @property (nonatomic , strong) IBOutlet UIButton *blackListButton;
 @property (nonatomic , strong) IBOutlet UIButton *deleteButton;
 @property (nonatomic , strong) IBOutlet UILabel *timeLabel;

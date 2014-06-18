@@ -19,6 +19,8 @@
 		771EDF4D193F37A200A3DCBB /* NewsListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771EDF48193F37A200A3DCBB /* NewsListView.xib */; };
 		771EDF4E193F37A200A3DCBB /* SubscribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 771EDF4A193F37A200A3DCBB /* SubscribeCell.m */; };
 		774972041942EFF3006767A7 /* CheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774972031942EFF3006767A7 /* CheckViewController.m */; };
+		774B92CD1951194C007CB817 /* CallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 774B92CC1951194C007CB817 /* CallView.m */; };
+		774B92CF1951196D007CB817 /* CallView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774B92CE1951196D007CB817 /* CallView.xib */; };
 		7765DB4719416C8E00EDDA68 /* NewMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */; };
 		7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4919416CA800EDDA68 /* NewMessageCell.m */; };
 		7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */; };
@@ -540,6 +542,9 @@
 		771EDF4A193F37A200A3DCBB /* SubscribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeCell.m; sourceTree = "<group>"; };
 		774972021942EFF3006767A7 /* CheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewController.h; sourceTree = "<group>"; };
 		774972031942EFF3006767A7 /* CheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewController.m; sourceTree = "<group>"; };
+		774B92CB1951194C007CB817 /* CallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallView.h; sourceTree = "<group>"; };
+		774B92CC1951194C007CB817 /* CallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallView.m; sourceTree = "<group>"; };
+		774B92CE1951196D007CB817 /* CallView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CallView.xib; sourceTree = "<group>"; };
 		7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageListViewController.h; sourceTree = "<group>"; };
 		7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageListViewController.m; sourceTree = "<group>"; };
 		7765DB4819416CA800EDDA68 /* NewMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageCell.h; sourceTree = "<group>"; };
@@ -2031,6 +2036,9 @@
 				7DD25B30192D9C230066494D /* WelcomeViewController.m */,
 				7DD25B31192D9C230066494D /* MainMenuViewController.h */,
 				7DD25B32192D9C230066494D /* MainMenuViewController.m */,
+				774B92CB1951194C007CB817 /* CallView.h */,
+				774B92CC1951194C007CB817 /* CallView.m */,
+				774B92CE1951196D007CB817 /* CallView.xib */,
 				7DD25B33192D9C230066494D /* HomeCell.h */,
 				7DD25B34192D9C230066494D /* HomeCell.m */,
 				7DD25B35192D9C230066494D /* MenuButton.h */,
@@ -2814,6 +2822,7 @@
 				77E07512194043A90098BA09 /* f028.png in Resources */,
 				7DD869B6192DB7A700D4ADAA /* Self.storyboard in Resources */,
 				778F9B231946D99500F89E66 /* leave_message_bg@2x.png in Resources */,
+				774B92CF1951196D007CB817 /* CallView.xib in Resources */,
 				77E074FE194043A90098BA09 /* f018.png in Resources */,
 				77E07561194043A90098BA09 /* f067@2x.png in Resources */,
 				77E0750E194043A90098BA09 /* f026.png in Resources */,
@@ -3115,6 +3124,7 @@
 				77E075E5194043F10098BA09 /* GPAView.m in Sources */,
 				77E076441940445C0098BA09 /* SubscribeVC.m in Sources */,
 				77E073E81940435D0098BA09 /* ZsndUser.pb.m in Sources */,
+				774B92CD1951194C007CB817 /* CallView.m in Sources */,
 				77E073E41940435D0098BA09 /* ZsndLost.pb.m in Sources */,
 				77B904D3192C4B3B0062237D /* UIButton+WebCache.m in Sources */,
 				77B904C2192C4B3B0062237D /* MJPhoto.m in Sources */,
