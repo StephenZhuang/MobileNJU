@@ -226,6 +226,12 @@
 //                            
 //                        }
 //                    }];
+    [UIView transitionWithView:self.view duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^(void){
+    } completion:^(BOOL isFinished) {
+        if (isFinished) {
+            
+        }
+    }];
     [self addConnect];
 }
 
@@ -245,19 +251,6 @@
                 
                 [self loadData];
             }}];
-        
-//    [UIView transitionFromView:self.tableView
-//                        toView:self.tableView
-//                      duration:1
-//                       options: UIViewAnimationOptionTransitionFlipFromRight
-//                    completion:^(BOOL finished) {
-//                        if (finished) {
-//
-//                            _targetid = [notification.userInfo objectForKey:@"target"];
-//                            
-//                            [self loadData];
-//                        }
-//                    }];
         
     }
 }
