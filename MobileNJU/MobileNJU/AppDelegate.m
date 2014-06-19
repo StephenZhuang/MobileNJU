@@ -15,6 +15,7 @@
 #include <net/if_dl.h>
 #import <Frontia/FrontiaPush.h>
 #import <Frontia/Frontia.h>
+#import "JDStatusBarNotification.h"
 
 #define APP_KEY @"ezHXvwFL0chMGB3h2L2Girtg"
 #define REPORT_ID @"d5dd317228"
@@ -90,7 +91,18 @@
     statTracker.sessionResumeInterval = 60;//设置应用进入后台再回到前台为同一次session的间隔时间[0~600s],超过600s则设为600s，默认为30s
     statTracker.shortAppVersion  = IosAppVersion; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
     [statTracker startWithReportId:REPORT_ID];//设置您在mtj网站上添加的app的appkey
-    [self onBindClick:nil];
+    
+    BOOL isFirstOpen = NO;
+    if ([[ToolUtils getVersion] isEqualToString:IosAppVersion]) {
+        isFirstOpen = NO;
+    } else {
+        isFirstOpen = YES;
+    }
+    
+    if (isFirstOpen) {
+        [self onBindClick:nil];
+    }
+    [ToolUtils setVersion:IosAppVersion];
 }
 
 //绑定，以获取通知
@@ -221,7 +233,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     NSLog(@"frontia applciation receive Notify: %@", [userInfo description]);
 //    NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-    if (application.applicationState == UIApplicationStateActive) {
+    if (application.applicationState == UIApplicationStateActive || application.applicationState == UIApplicationStateInactive) {
         // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
 //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive a Remote Notification"
 //                                                            message:[NSString stringWithFormat:@"The application received this remote notification while it was running:\n%@", alert]
@@ -242,7 +254,26 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 - (void)operaUserInfo:(NSDictionary *)userInfo appliccation:(UIApplication *)application
 {
     if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"getNanguaMessage" object:nil userInfo:userInfo];
+        UINavigationController *nav = (UINavigationController *)application.keyWindow.rootViewController;
+        if (![[nav.viewControllers lastObject] isKindOfClass:NSClassFromString(@"ChatViewController")]) {
+            [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
+                style.font = [UIFont systemFontOfSize:12];
+                style.textColor = [UIColor whiteColor];
+                style.barColor = RGB(60, 139, 253);
+                style.animationType = JDStatusBarAnimationTypeMove;
+                
+                //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
+                //        style.progressBarPosition = self.progressBarPosition;
+                //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
+                
+                return style;
+            }];
+            [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
+                                          styleName:@"style" object:@"1" userInfo:userInfo];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getNanguaMessage" object:nil userInfo:userInfo];
+        }
+
     } else if ([[userInfo objectForKey:@"type"] integerValue] == 3) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getCall" object:nil userInfo:userInfo];        
     } else if ([[userInfo objectForKey:@"type"] integerValue] == 4) {

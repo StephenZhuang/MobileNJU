@@ -44,6 +44,7 @@ static NSArray* descriptions;
     //    [self.navigationController setDelegate:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCall:) name:@"getCall" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedCall:) name:@"receivedCall" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToChat:) name:@"getPushInfo" object:nil];
     [self initNewScroller];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
     [self.pageScroller addGestureRecognizer:singleTap];
@@ -586,6 +587,18 @@ static NSArray* descriptions;
         [ProgressHUD showError:@"呱友拒绝了你的呼叫"];
     } else {
         [ProgressHUD showSuccess:@"呱友接受了你的呼叫"];
+    }
+}
+
+- (void)goToChat:(NSNotification *)notification
+{
+    NSString *type = notification.object;
+    if (type.integerValue == 1) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
+        ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+        vc.targetid = [notification.userInfo objectForKey:@"target"];
+        [self.navigationController pushViewController:vc animated:YES];
+        [self dismissCallView];
     }
 }
 /*

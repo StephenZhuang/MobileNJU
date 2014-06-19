@@ -18,6 +18,9 @@
 		771EDF4C193F37A200A3DCBB /* NewsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 771EDF47193F37A200A3DCBB /* NewsListView.m */; };
 		771EDF4D193F37A200A3DCBB /* NewsListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771EDF48193F37A200A3DCBB /* NewsListView.xib */; };
 		771EDF4E193F37A200A3DCBB /* SubscribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 771EDF4A193F37A200A3DCBB /* SubscribeCell.m */; };
+		7747D0FB1952C2230008C36C /* JDStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7747D0F61952C2230008C36C /* JDStatusBarNotification.m */; };
+		7747D0FC1952C2230008C36C /* JDStatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7747D0F81952C2230008C36C /* JDStatusBarStyle.m */; };
+		7747D0FD1952C2230008C36C /* JDStatusBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7747D0FA1952C2230008C36C /* JDStatusBarView.m */; };
 		774972041942EFF3006767A7 /* CheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774972031942EFF3006767A7 /* CheckViewController.m */; };
 		774B92CD1951194C007CB817 /* CallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 774B92CC1951194C007CB817 /* CallView.m */; };
 		774B92CF1951196D007CB817 /* CallView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774B92CE1951196D007CB817 /* CallView.xib */; };
@@ -543,6 +546,12 @@
 		771EDF47193F37A200A3DCBB /* NewsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListView.m; sourceTree = "<group>"; };
 		771EDF48193F37A200A3DCBB /* NewsListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListView.xib; sourceTree = "<group>"; };
 		771EDF4A193F37A200A3DCBB /* SubscribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeCell.m; sourceTree = "<group>"; };
+		7747D0F51952C2230008C36C /* JDStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarNotification.h; sourceTree = "<group>"; };
+		7747D0F61952C2230008C36C /* JDStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarNotification.m; sourceTree = "<group>"; };
+		7747D0F71952C2230008C36C /* JDStatusBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarStyle.h; sourceTree = "<group>"; };
+		7747D0F81952C2230008C36C /* JDStatusBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarStyle.m; sourceTree = "<group>"; };
+		7747D0F91952C2230008C36C /* JDStatusBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarView.h; sourceTree = "<group>"; };
+		7747D0FA1952C2230008C36C /* JDStatusBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarView.m; sourceTree = "<group>"; };
 		774972021942EFF3006767A7 /* CheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckViewController.h; sourceTree = "<group>"; };
 		774972031942EFF3006767A7 /* CheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckViewController.m; sourceTree = "<group>"; };
 		774B92CB1951194C007CB817 /* CallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallView.h; sourceTree = "<group>"; };
@@ -1768,6 +1777,19 @@
 			path = CustomIOSAlertView;
 			sourceTree = "<group>";
 		};
+		7747D0F41952C2230008C36C /* NotificationStatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				7747D0F51952C2230008C36C /* JDStatusBarNotification.h */,
+				7747D0F61952C2230008C36C /* JDStatusBarNotification.m */,
+				7747D0F71952C2230008C36C /* JDStatusBarStyle.h */,
+				7747D0F81952C2230008C36C /* JDStatusBarStyle.m */,
+				7747D0F91952C2230008C36C /* JDStatusBarView.h */,
+				7747D0FA1952C2230008C36C /* JDStatusBarView.m */,
+			);
+			path = NotificationStatusBar;
+			sourceTree = "<group>";
+		};
 		778EA7801945D3F8007B6C7E /* 南呱 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1961,6 +1983,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7747D0F41952C2230008C36C /* NotificationStatusBar */,
 				77B904B6192C4B3B0062237D /* ToolUtils */,
 				77E075A9194043CD0098BA09 /* Frontia */,
 				771EDF15193F367600A3DCBB /* 图文混排 */,
@@ -3052,6 +3075,7 @@
 				77E073B31940435D0098BA09 /* ApiMChatBlack.m in Sources */,
 				77E073C71940435D0098BA09 /* ApiMLoginSchedule.m in Sources */,
 				77B904CC192C4B3B0062237D /* SDWebImageCompat.m in Sources */,
+				7747D0FD1952C2230008C36C /* JDStatusBarView.m in Sources */,
 				771EDF44193F377100A3DCBB /* TagView.m in Sources */,
 				77E073A91940435D0098BA09 /* ApiMAddLostAndFound.m in Sources */,
 				77E073C21940435D0098BA09 /* ApiMIndex.m in Sources */,
@@ -3065,6 +3089,7 @@
 				77E073CE1940435D0098BA09 /* ApiMNewsList.m in Sources */,
 				77B904D4192C4B3B0062237D /* UIImage+GIF.m in Sources */,
 				77E073BB1940435D0098BA09 /* ApiMContacts.m in Sources */,
+				7747D0FC1952C2230008C36C /* JDStatusBarStyle.m in Sources */,
 				7796F1E419496FD000015307 /* HBTalkTableViewRightCell.m in Sources */,
 				77E0740C194043A20098BA09 /* HBCoreLabel.m in Sources */,
 				77883D4B1947F09C00197F59 /* ChatViewController.m in Sources */,
@@ -3140,6 +3165,7 @@
 				77E075E5194043F10098BA09 /* GPAView.m in Sources */,
 				77E076441940445C0098BA09 /* SubscribeVC.m in Sources */,
 				77E073E81940435D0098BA09 /* ZsndUser.pb.m in Sources */,
+				7747D0FB1952C2230008C36C /* JDStatusBarNotification.m in Sources */,
 				774B92CD1951194C007CB817 /* CallView.m in Sources */,
 				77E073E41940435D0098BA09 /* ZsndLost.pb.m in Sources */,
 				77B904D3192C4B3B0062237D /* UIButton+WebCache.m in Sources */,

@@ -17,6 +17,7 @@
 #import "HBTalkTableViewTextLeftCell.h"
 #import "HBTalkTableViewTextRightCell.h"
 #import "ZsndSystem.pb.h"
+#import "JDStatusBarNotification.h"
 
 @interface ChatViewController ()
 
@@ -41,6 +42,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNewMessage:) name:@"getNanguaMessage" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeChat:) name:@"getPushInfo" object:nil];
     _dataArray = [[NSMutableArray alloc] init];
     
     if (_isFromGua) {
@@ -156,6 +158,21 @@
     NSDictionary *userInfo = notification.userInfo;
     if ([[userInfo objectForKey:@"target"] isEqualToString:_targetid]) {
         [[ApisFactory getApiMChatMsg] load:self selecter:@selector(disposMessage:) id:[userInfo objectForKey:@"id"]];
+    } else {
+        [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
+            style.font = [UIFont systemFontOfSize:12];
+            style.textColor = [UIColor whiteColor];
+            style.barColor = RGB(60, 139, 253);
+            style.animationType = JDStatusBarAnimationTypeMove;
+            
+            //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
+            //        style.progressBarPosition = self.progressBarPosition;
+            //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
+            
+            return style;
+        }];
+        [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
+                                      styleName:@"style" object:@"2" userInfo:userInfo];
     }
 }
 
@@ -210,6 +227,39 @@
 //                        }
 //                    }];
     [self addConnect];
+}
+
+- (void)changeChat:(NSNotification *)notification
+{
+    NSString *type = notification.object;
+    if (type.integerValue == 2) {
+        [self.dataArray removeAllObjects];
+        [self.tableView reloadData];
+        
+        [UIView transitionWithView:self.view duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^(void){
+            
+        }completion:^(BOOL finished) {
+            if (finished) {
+                
+                _targetid = [notification.userInfo objectForKey:@"target"];
+                
+                [self loadData];
+            }}];
+        
+//    [UIView transitionFromView:self.tableView
+//                        toView:self.tableView
+//                      duration:1
+//                       options: UIViewAnimationOptionTransitionFlipFromRight
+//                    completion:^(BOOL finished) {
+//                        if (finished) {
+//
+//                            _targetid = [notification.userInfo objectForKey:@"target"];
+//                            
+//                            [self loadData];
+//                        }
+//                    }];
+        
+    }
 }
 
 - (void)disposMessage:(Son *)son
