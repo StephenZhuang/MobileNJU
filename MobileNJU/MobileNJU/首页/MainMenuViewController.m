@@ -55,12 +55,13 @@ static NSArray* descriptions;
 -(void)viewWillAppear:(BOOL)animated
 {
 //    [self.tableView reloadData];
-    [self addUnreadMsg];
+//    [self addUnreadMsg];
+    [[ApisFactory getApiMUnreadModule]load:self selecter:@selector(disposeMessage:)];
+
 }
 - (void)loadIndex
 {
     [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
-     [[ApisFactory getApiMUnreadModule]load:self selecter:@selector(disposMessage:)];
 }
 
 
@@ -79,54 +80,74 @@ static NSArray* descriptions;
 //                [array addObject:model.name];
 //            }
             self.focusList = index.focusList;
-            buttonImages= [[NSArray alloc]initWithObjects:@"百合十大",@"图书馆",@"南呱",@"树洞",@"一卡通",@"课程表",@"失物招领",@"空教室",@"部门电话",@"绩点",@"校车",@"打卡",@"流程", nil];
-            descriptions = [[NSArray alloc]initWithObjects:@"每天十条",@"查书/借阅情况",@"陌生人的心声",@"吐槽你的心声",@"余额及消费",@"课程一览无遗",@"捡到？丢了？",@"找没课的自习室",@"电话查询",@"不断飙升的绩点",@"校车地点/时刻表",@"打卡次数查询",@"全部在这里", nil];
-            [self.tableView reloadData];
-//            [self addUnreadMsg];
+           
+            
+            [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(loadTableData) userInfo:nil repeats:NO];
+            [self addUnreadMsg];
             [self prepareForNews];
 
         } else if ([[son getMethod]isEqualToString:@"MUnreadModule"])
         {
-            NSLog(@"lalalal");
             self.unread = (MUnread_Builder*)[son getBuild];
             [self addUnreadMsg];
         }
     }
 }
-
+- (void)loadTableData
+{
+    buttonImages= [[NSArray alloc]initWithObjects:@"百合十大",@"图书馆",@"南呱",@"树洞",@"一卡通",@"课程表",@"失物招领",@"空教室",@"部门电话",@"绩点",@"校车",@"打卡",@"流程", nil];
+    descriptions = [[NSArray alloc]initWithObjects:@"每天十条",@"查书/借阅情况",@"陌生人的心声",@"吐槽你的心声",@"余额及消费",@"课程一览无遗",@"捡到？丢了？",@"找没课的自习室",@"电话查询",@"不断飙升的绩点",@"校车地点/时刻表",@"打卡次数查询",@"全部在这里", nil];
+    [self.tableView reloadData];
+}
 - (void)addUnreadMsg
 {
-    if (self.unread!=nil) {
+    if (self.unread!=nil&&buttonImages.count>0) {
         NSLog(@"不为nil");
         if (self.unread.module1>0) {
-            NSLog(@"南呱");
             NSIndexPath* index = [NSIndexPath indexPathForRow:[buttonImages indexOfObject:@"南呱"] inSection:0];
             HomeCell* cell = (HomeCell*)[self.tableView cellForRowAtIndexPath:index];
             [cell.menuButton setImage: [UIImage imageNamed:@"南呱消息"] forState:UIControlStateNormal];
             [cell.menuButton setImage:[UIImage imageNamed:@"南呱消息选中"]  forState:UIControlStateHighlighted];
             [cell.menuButton setImage:[UIImage imageNamed:@"南呱消息选中"] forState:UIControlStateSelected];
+        } else {
+            NSIndexPath* index = [NSIndexPath indexPathForRow:[buttonImages indexOfObject:@"南呱"] inSection:0];
+            HomeCell* cell = (HomeCell*)[self.tableView cellForRowAtIndexPath:index];
+            [cell.menuButton setImage: [UIImage imageNamed:@"南呱"] forState:UIControlStateNormal];
+            [cell.menuButton setImage:[UIImage imageNamed:@"南呱选中"]  forState:UIControlStateHighlighted];
+            [cell.menuButton setImage:[UIImage imageNamed:@"南呱选中"] forState:UIControlStateSelected];
         }
         if (self.unread.module2>0) {
-            NSLog(@"树洞");
 
             NSIndexPath* index = [NSIndexPath indexPathForRow:[buttonImages indexOfObject:@"树洞"] inSection:0];
             HomeCell* cell = (HomeCell*)[self.tableView cellForRowAtIndexPath:index];
             [cell.menuButton setImage: [UIImage imageNamed:@"树洞消息"] forState:UIControlStateNormal];
             [cell.menuButton setImage:[UIImage imageNamed:@"树洞消息选中"]  forState:UIControlStateHighlighted];
             [cell.menuButton setImage:[UIImage imageNamed:@"树洞消息选中"] forState:UIControlStateSelected];
+        } else {
+            NSIndexPath* index = [NSIndexPath indexPathForRow:[buttonImages indexOfObject:@"树洞"] inSection:0];
+            HomeCell* cell = (HomeCell*)[self.tableView cellForRowAtIndexPath:index];
+            [cell.menuButton setImage: [UIImage imageNamed:@"树洞"] forState:UIControlStateNormal];
+            [cell.menuButton setImage:[UIImage imageNamed:@"树洞选中"]  forState:UIControlStateHighlighted];
+            [cell.menuButton setImage:[UIImage imageNamed:@"树洞选中"] forState:UIControlStateSelected];
         }
         if (self.unread.module3>0) {
-            NSLog(@"订阅");
             [self.subscribeButton setImage: [UIImage imageNamed:@"订阅消息"] forState:UIControlStateNormal];
             [self.subscribeButton setImage:[UIImage imageNamed:@"订阅消息选中"]  forState:UIControlStateHighlighted];
             [self.subscribeButton setImage:[UIImage imageNamed:@"订阅消息选中"] forState:UIControlStateSelected];
+        } else {
+            [self.subscribeButton setImage: [UIImage imageNamed:@"订阅"] forState:UIControlStateNormal];
+            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅选中"]  forState:UIControlStateHighlighted];
+            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅选中"] forState:UIControlStateSelected];
         }
         if (self.unread.module4>0) {
-            NSLog(@"活动");
 
             [self.activityButton setImage: [UIImage imageNamed:@"活动消息"] forState:UIControlStateNormal];
             [self.activityButton setImage:[UIImage imageNamed:@"活动消息选中"]  forState:UIControlStateHighlighted];
             [self.activityButton setImage:[UIImage imageNamed:@"活动消息选中"] forState:UIControlStateSelected];
+        } else {
+            [self.activityButton setImage: [UIImage imageNamed:@"活动"] forState:UIControlStateNormal];
+            [self.activityButton setImage:[UIImage imageNamed:@"活动选中"]  forState:UIControlStateHighlighted];
+            [self.activityButton setImage:[UIImage imageNamed:@"活动选中"] forState:UIControlStateSelected];
         }
         
 
