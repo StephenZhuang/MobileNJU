@@ -30,6 +30,7 @@
 @property (nonatomic , weak) IBOutlet UILabel *tipLabel;
 @property (nonatomic , weak) IBOutlet UIButton *cancelButton;
 @property (nonatomic , weak) IBOutlet CardView *cardView;
+@property (nonatomic , assign) BOOL isCall;
 - (void)startConnecting;
 - (void)stopAnimation;
 @end

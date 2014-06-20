@@ -87,13 +87,15 @@
                     break;
             }
             self.flowerCount = user.flower;
-            NSMutableString* tagsString = [[NSMutableString alloc]init];
-            for (int i = 0 ; i < user.tagsList.count-1; i++)
-            {
-                [tagsString appendString:[user.tagsList objectAtIndex:i]];
-                [tagsString appendString:@";"];
-            }
-            [tagsString appendString:[user.tagsList lastObject]];
+            //用这个方法把array 里的string 组合起来
+            NSString *tagsString = [user.tagsList componentsJoinedByString:@";"];
+//            NSMutableString* tagsString = [[NSMutableString alloc]init];
+//            for (int i = 0 ; i < user.tagsList.count-1; i++)
+//            {
+//                [tagsString appendString:[user.tagsList objectAtIndex:i]];
+//                [tagsString appendString:@";"];
+//            }
+//            [tagsString appendString:[user.tagsList lastObject]];
             [ToolUtils setTags:tagsString];
             [self loadData];
             [self.infoTable reloadData];
