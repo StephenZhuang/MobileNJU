@@ -43,7 +43,6 @@ static NSArray* descriptions;
     [super viewDidLoad];
     //    [self.navigationController setDelegate:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCall:) name:@"getCall" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedCall:) name:@"receivedCall" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToChat:) name:@"getPushInfo" object:nil];
     [self initNewScroller];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
@@ -578,16 +577,6 @@ static NSArray* descriptions;
             [self.callView removeFromSuperview];
         }];
     }];
-}
-
-- (void)receivedCall:(NSNotification *)notification
-{
-    NSDictionary *userInfo = notification.userInfo;
-    if ([[userInfo objectForKey:@"state"] isEqualToString:@"0"]) {
-        [ProgressHUD showError:@"呱友拒绝了你的呼叫"];
-    } else {
-        [ProgressHUD showSuccess:@"呱友接受了你的呼叫"];
-    }
 }
 
 - (void)goToChat:(NSNotification *)notification

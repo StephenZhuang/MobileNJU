@@ -15,4 +15,6 @@ typedef void(^MatchSuccessBlcok)(NSString *targetid , int targethead ,NSString *
 @property (nonatomic , weak) IBOutlet ConnectVIew *connentView;
 @property (nonatomic , copy) NSString *headImg;
 @property (nonatomic , copy) MatchSuccessBlcok matchSuccessBlock;
+@property (nonatomic , assign) BOOL isCall;
+@property (nonatomic , assign) int targetHead;
 @end

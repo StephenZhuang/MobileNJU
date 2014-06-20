@@ -31,9 +31,17 @@
     // Do any additional setup after loading the view.
     
     _headImg = @"";
-    [_connentView startConnecting];
+    [_connentView setIsCall:_isCall];
     [[ApisFactory getApiMGetUserInfo] load:self selecter:@selector(disposMessage:)];
-    [[ApisFactory getApiMChatMatch] load:self selecter:@selector(disposMessage:)];
+    
+    if (_isCall) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedCall:) name:@"receivedCall" object:nil];
+        [_connentView.fruitImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i",_targetHead]]];
+        [_connentView.collectionView setHidden:YES];
+    } else {
+        [[ApisFactory getApiMChatMatch] load:self selecter:@selector(disposMessage:)];
+    }
+    [_connentView startConnecting];
 }
 
 - (void)disposMessage:(Son *)son
@@ -94,6 +102,22 @@
 - (void)closeSelf
 {
     [self.parentViewController.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)receivedCall:(NSNotification *)notification
+{
+    [_connentView stopAnimation];
+    NSDictionary *userInfo = notification.userInfo;
+    if ([[userInfo objectForKey:@"state"] isEqualToString:@"0"]) {
+//        [ProgressHUD showError:@"呱友拒绝了你的呼叫"];
+        [_connentView.fruitImage setImage:[UIImage imageNamed:@"nangua_connect_timedout@2x"]];
+        [_connentView.tipLabel setText:@"对方拒绝了你的请求"];
+    } else {
+//        [ProgressHUD showSuccess:@"呱友接受了你的呼叫"];
+        [_connentView.tipLabel setText:@"对方接受了你的请求"];
+        [_connentView.fruitImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i",_targetHead]]];
+        [self performSelector:@selector(doAnimation) withObject:nil afterDelay:2];
+    }
 }
 
 - (void)didReceiveMemoryWarning

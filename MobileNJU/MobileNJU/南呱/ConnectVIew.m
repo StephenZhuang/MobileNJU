@@ -64,7 +64,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 100;
+    return 30;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -78,22 +78,28 @@
 - (void)startConnecting
 {
     time = 0;
-    [_collectionView setHidden:NO];
-    [_tipLabel setText:@"正在为您匹配南呱，请您稍等……"];
-    [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-    [_cancelButton setFrame:CGRectMake(126, 352, 68, 30)];
-    [_fruitImage setImage:[UIImage imageNamed:@"fruit_0"]];
+    if (_isCall) {
+        [_tipLabel setText:@"等待对方回应"];
+    } else {
+        [_collectionView setHidden:NO];
+        [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancelButton setFrame:CGRectMake(126, 352, 68, 30)];
+        [_fruitImage setImage:[UIImage imageNamed:@"fruit_0"]];
+    }
     timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(scrollAnimation) userInfo:nil repeats:YES];
 }
 
 - (void)scrollAnimation
 {
     time ++;
-    [_collectionView setContentOffset:CGPointMake(56 * time, 0) animated:YES];
-    int i = time % 6;
-    [UIView animateWithDuration:0.2 animations:^(void) {
-        [_fruitImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i" , i]]];
-    }];
+    
+    if (!_isCall) {
+        [_collectionView setContentOffset:CGPointMake(56 * time, 0) animated:YES];
+        int i = time % 6;
+        [UIView animateWithDuration:0.2 animations:^(void) {
+            [_fruitImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i" , i]]];
+        }];
+    }
     
     if (time == 20) {
         [self timedout];
@@ -106,8 +112,10 @@
     [self stopAnimation];
     [_fruitImage setImage:[UIImage imageNamed:@"nangua_connect_timedout@2x"]];
     [_tipLabel setText:@"连接超时"];
-    [_cancelButton setTitle:@"重新匹配" forState:UIControlStateNormal];
-    [_cancelButton setFrame:CGRectMake(0, 0, 100, 30)];
+    if (!_isCall) {
+        [_cancelButton setTitle:@"重新匹配" forState:UIControlStateNormal];
+    }
+//    [_cancelButton setFrame:CGRectMake(0, 0, 100, 30)];
 }
 
 - (void)stopAnimation
