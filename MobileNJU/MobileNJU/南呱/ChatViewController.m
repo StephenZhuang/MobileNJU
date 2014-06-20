@@ -193,6 +193,17 @@
 - (void)callAction:(id)sender
 {
     [[ApisFactory getApiMChatCall] load:self selecter:@selector(disposMessage:) id:_targetid];
+    [UIView transitionWithView:self.view duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^(void){
+    } completion:^(BOOL isFinished) {
+        if (isFinished) {
+            
+        }
+    }];
+    ConnectViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ConnectViewController"];
+    vc.isCall = YES;
+    vc.targetHead = _targetHead;
+    [self addChildViewController:vc];
+    [self.view addSubview:vc.view];
 }
 
 - (void)addChangge
