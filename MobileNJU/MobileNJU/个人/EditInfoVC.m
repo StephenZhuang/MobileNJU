@@ -67,26 +67,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#warning 保存在哪儿还未确定
+
+
 - (IBAction)save:(id)sender {
     [self waiting:@"正在保存"];
-//    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"selfInfo" ofType:@"plist"];
-//    NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-//    NSArray* keys = [data objectForKey:@"infoKeys"];
-//    NSArray* infos = [[NSArray alloc]initWithObjects:
-//        self.nickNameField.text,
-//        self.instituteField.text,
-//        (self.maleCheckBox.choose)?@"男":@"女",
-//        self.birthField.text,
-//                      [self.tagView getHobbies],nil];
-//    NSDictionary* dic = [[NSDictionary alloc]initWithObjects:infos forKeys:keys];
-//    [ToolUtils setUserInfo:dic];
-//    [self.navigationController popViewControllerAnimated:YES];
-//    [ToolUtils setNickname:self.nickNameField.text];
-//    [ToolUtils setBelong:self.instituteField.text];
-//    [ToolUtils setBirthday:self.birthField.text];
-//    [ToolUtils setSex:(self.maleCheckBox.choose)?@"男":@"女"];
-//    [ToolUtils setTags:[self.tagView getHobbies]];
     [[ApisFactory getApiMUpdateUserInfo]load:self selecter:@selector(disposMessage:) nickname:self.nickNameField.text belong:self.instituteField.text sex:(self.maleCheckBox.choose)?1:0 birthday:self.birthField.text tags:[[self.tagView getHobbies]stringByReplacingOccurrencesOfString:@";" withString:@","]];
 }
 

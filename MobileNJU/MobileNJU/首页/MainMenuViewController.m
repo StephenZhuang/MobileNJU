@@ -52,11 +52,6 @@ static NSArray* descriptions;
     [self loadTableData];
     
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    [[ApisFactory getApiMUnreadModule]load:self selecter:@selector(disposeMessage:)];
-}
-
 - (void)loadIndex
 {
     [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];

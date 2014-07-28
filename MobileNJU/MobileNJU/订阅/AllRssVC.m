@@ -1,19 +1,18 @@
 //
-//  BBSDetail.m
+//  AllRssVC.m
 //  MobileNJU
 //
-//  Created by luck-mac on 14-5-29.
+//  Created by luck-mac on 14-7-28.
 //  Copyright (c) 2014年 Stephen Zhuang. All rights reserved.
 //
 
-#import "BBSDetail.h"
-
-@interface BBSDetail ()<UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+#import "AllRssVC.h"
+#import "MySubscribeCell.h"
+@interface AllRssVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
-@implementation BBSDetail
+@implementation AllRssVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,9 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"详情"];
-    [self.webView setDelegate:self];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    [self setTitle:@"全部订阅"];
     // Do any additional setup after loading the view.
 }
 
@@ -39,6 +36,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+#warning  todo
+- (void)loadData
+{
+    [self disposMessage:nil];
+}
+- (void)disposMessage:(Son *)son
+{
+    [self doneWithView:_header];
+}
+
+#pragma -mark tableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MySubscribeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"allRss" forIndexPath:indexPath];
+    return cell;
+}
 /*
 #pragma mark - Navigation
 
@@ -49,15 +66,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [self.loginIndicator removeFromSuperview];
-    self.OK = YES;
-}
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    [self waiting:@"加载中"];
-}
 
 @end

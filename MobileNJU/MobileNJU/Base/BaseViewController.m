@@ -53,14 +53,15 @@
     // Do any additional setup after loading the view.
     if([self.navigationController.navigationBar
         respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
-        
         [self.navigationController.navigationBar  setBackgroundImage:[[UIImage imageNamed:@"navigationBack"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)]   forBarMetrics:UIBarMetricsDefault];
         //        [self.navigationController.navigationBar setBackgroundColor:RGB(143, 60, 133)];
-        
         [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                          [UIColor colorWithRed:1 green:1 blue:1 alpha:1], NSForegroundColorAttributeName,
                                                                          [UIColor colorWithRed:1 green:1 blue:1 alpha:1], UITextAttributeTextShadowColor,
-                                                                         [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset,
+                                                                         [NSValue valueWithUIOffset:UIOffsetMake(0, 0)],
+                                                                         UITextAttributeTextShadowOffset,
+                                                                                                                                    [UIFont fontWithName:@"Helvetica" size:24.0],
+                                                                        UITextAttributeFont,
                                                                          nil]];
         
         if([self.navigationController respondsToSelector:@selector(backIcons)]){
@@ -102,8 +103,10 @@
 }
 
 -(void)closeSelf{
-    [self.loginIndicator setHidden:YES];
-    [self.loginIndicator removeFromSuperview];
+    if (self.loginIndicator) {
+        [self.loginIndicator setHidden:YES];
+        [self.loginIndicator removeFromSuperview];
+    }
     if([self.navigationController viewControllers].count>0){
         [self.navigationController popViewControllerAnimated:YES];
     }else{

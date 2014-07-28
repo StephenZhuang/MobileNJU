@@ -36,14 +36,9 @@
 {
     
     _imageName = imageName;
-    UIImage* loading = [UIImage sd_animatedGIFNamed:@"loading"];
-    [self.imageView setImage:loading];
-    
-
-    [self.imageView setImageWithURL:[ToolUtils getImageUrlWtihString:imageName width:70 height:70]];
-    self.imageView.layer.cornerRadius=5;
-    [self.imageView setClipsToBounds:YES];
-//    [self.newsImage setImage:[UIImage imageNamed:imageName]];
+    UIImage* loading = [UIImage imageNamed:@"news_loading"];
+    [self.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:imageName width:89 height:67] placeholderImage:loading];
+    [self.newsImage setClipsToBounds:YES];
 }
 - (void)setType:(NSString *)type
 {

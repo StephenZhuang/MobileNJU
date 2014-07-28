@@ -29,14 +29,24 @@
 - (void)viewDidLoad
 {
     
+    
     [super viewDidLoad];
+    [self setTitle:@"新 闻"];
+    UIButton *button  = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 30)];
+    NSString *iconname=DEFAULTBACKICON;
+    [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_n",iconname]] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_p",iconname]] forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(backToMain:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *myAddButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    NSArray *myButtonArray = [[NSArray alloc] initWithObjects: myAddButton, nil];
+    self.navigationItem.leftBarButtonItems = myButtonArray;
+
+    
     self.currentUrl = self.navigationController.title;
     if (self.jump) {
         [self performSegueWithIdentifier:@"detail" sender:nil];
-        [self setTitle:@""];
-    } else {
-        [self setTitle:@"新闻列表"];
     }
+    
 }
 - (NSMutableArray *)newsList
 {
@@ -48,7 +58,6 @@
 - (void)loadData
 {
     [[[ApisFactory getApiMNewsList]setPage:page pageCount:10]load:self selecter:@selector(disposMessage:)];
-
 }
 - (void)disposMessage:(Son *)son
 {
@@ -120,7 +129,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MNews* new = [self.newsList objectAtIndex:indexPath.row];
     self.currentUrl = new.url;
-    NSLog(@"%@",new.url);
     [self performSegueWithIdentifier:@"detail" sender:nil];
 }
 
@@ -138,43 +146,7 @@
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark - Navigation

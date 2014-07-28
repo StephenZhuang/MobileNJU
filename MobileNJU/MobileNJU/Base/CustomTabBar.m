@@ -12,7 +12,9 @@
 #import "SubscribeVC.h"
 #import "ActivityCell.h"
 #import "ActivityVC.h"
-@interface CustomTabBar ()
+#import "myNavigationControllerDelegate.h"
+#import "MyNavigationController.h"
+@interface CustomTabBar ()<myNavigationControllerDelegate>
 
 @end
 
@@ -46,8 +48,8 @@
     
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
     SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"self"]; //test2为viewcontroller的StoryboardId
-    UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:selfVC];
-    
+    MyNavigationController *nav4 = [[MyNavigationController alloc] initWithRootViewController:selfVC];
+    [nav4 setMyDelegate:self];
     
     UIStoryboard *thirdStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
     SubscribeVC* subVC = (SubscribeVC*)[thirdStoryBoard instantiateViewControllerWithIdentifier:@"subscribe"]; //test2为viewcontroller的StoryboardId
@@ -110,6 +112,11 @@ int preTag = 100;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)logOut
+{
+    NSLog(@"退出来了");
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -12,8 +12,7 @@
 - (void)setImageName:(NSString *)imageName
 {
     _imageName = imageName;
-    [self.imageIcon setImage:[UIImage imageNamed:imageName]];
-    
+    [self.typeLabel setText:imageName];
 }
 
 - (void)setContent:(NSString *)content

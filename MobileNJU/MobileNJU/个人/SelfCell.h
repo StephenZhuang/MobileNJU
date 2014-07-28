@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface SelfCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *imageIcon;
 
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
-
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property(strong,nonatomic)NSString* imageName;
 @property(strong,nonatomic)NSString* content;
 @end

@@ -1,19 +1,18 @@
 //
-//  BBSDetail.m
+//  MyNavigationController.m
 //  MobileNJU
 //
-//  Created by luck-mac on 14-5-29.
+//  Created by luck-mac on 14-7-29.
 //  Copyright (c) 2014年 Stephen Zhuang. All rights reserved.
 //
 
-#import "BBSDetail.h"
+#import "MyNavigationController.h"
 
-@interface BBSDetail ()<UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@interface MyNavigationController ()
 
 @end
 
-@implementation BBSDetail
+@implementation MyNavigationController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,9 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"详情"];
-    [self.webView setDelegate:self];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     // Do any additional setup after loading the view.
 }
 
@@ -38,7 +34,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)logOut
+{
+    [self.myDelegate logOut];
+}
 /*
 #pragma mark - Navigation
 
@@ -49,15 +48,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [self.loginIndicator removeFromSuperview];
-    self.OK = YES;
-}
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    [self waiting:@"加载中"];
-}
 
 @end

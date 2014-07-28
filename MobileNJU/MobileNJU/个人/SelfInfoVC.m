@@ -11,11 +11,16 @@
 #import "ToolUtils.h"
 #import "ZsndUser.pb.h"
 #import "ZsndSystem.pb.h"
+#import "UIImageView+LBBlurredImage.h"
+#import "MyNavigationController.h"
 @interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
+
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImg;
 
 @property (weak, nonatomic) IBOutlet UITableView *infoTable;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *headImage;
+@property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UILabel *flowerLabel;
 @end
 
@@ -26,9 +31,7 @@
 {
     [super viewDidLoad];
     [self loadData];
-    self.headImage.layer.borderColor=[UIColor whiteColor].CGColor ;
-    self.headImage.layer.borderWidth=5;
-    self.headImage.layer.cornerRadius=40;
+    self.headImage.layer.cornerRadius=55;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.headImage addGestureRecognizer:singleTap];
 //    [self.headImage setImage:[UIImage imageNamed:@"head"]];
@@ -55,7 +58,9 @@
 
 - (IBAction)logout:(id)sender {
     [ToolUtils setIsLogin:NO];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    MyNavigationController *controller = (MyNavigationController*)self.navigationController;
+    [controller logOut];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)disposMessage:(Son *)son
@@ -72,7 +77,6 @@
             [ToolUtils setNickname:user.nickname==nil?@"":user.nickname];
             [ToolUtils setHeadImg:user.headImg==nil?@"":user.headImg];
             [ToolUtils setIsVeryfy:user.isV];
-            NSLog(@"%d 性别",user.sex);
             switch (user.sex) {
                 case 0:
                     [ToolUtils setSex:@"女"];
@@ -137,19 +141,36 @@
 {
     [self.flowerLabel setText:[NSString stringWithFormat:@"%d",[ToolUtils getFlowerCount]]];
     NSArray* keys = [[NSArray alloc]initWithObjects:@"image", @"content",nil];
-    NSArray* images = [[NSArray alloc]initWithObjects:@"institute",@"sex",@"birth",@"hobby", nil];
+    NSArray* images = [[NSArray alloc]initWithObjects:@"昵称",@"院系",@"性别",@"生日",@"版本号", nil];
     NSArray* content = [[NSArray alloc]initWithObjects:
+                        [ToolUtils getNickName]==nil?@"":[ToolUtils getNickName],
                         [ToolUtils getBelong]==nil?@"":[ToolUtils getBelong],
                         [ToolUtils getSex]==nil?@"":[ToolUtils getSex],
-                        [ToolUtils getBirthday]==nil?@"":[ToolUtils getBirthday],
-                        [ToolUtils getTags]==nil?@"":[ToolUtils getTags], nil];
+                        [ToolUtils getBirthday]==nil?@"":[ToolUtils getBirthday], [ToolUtils getVersion]==nil?@"":[ToolUtils getVersion],nil];
     if ([ToolUtils getHeadImg]!=nil) {
         NSLog(@"%@ headImage",[ToolUtils getHeadImg]);
-        [self.headImage setImageWithURL:[ToolUtils getImageUrlWtihString:[ToolUtils getHeadImg] width:80 height:80]];
-    } else {
-        [self.headImage setImage:[UIImage imageNamed:@"head"]];
+        [self.headImage setImageWithURL:[ToolUtils getImageUrlWtihString:[ToolUtils getHeadImg] width:111 height:111] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+//            CGRect frame = CGRectMake(0, 0, 320, 240);
+//            self.backgroundImg = [[UIImageView alloc]initWithFrame:frame];
+//            [self.backgroundImg setImage:image];
+            [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
+            [self.backgroundImg setImageToBlur:image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:nil];
+            [self.backgroundImg setClipsToBounds:YES];
+          
+        }];
+        } else {
+        
+        [self.headImage setImage:[UIImage imageNamed:@"05个人－个人头像"]];
+//        CGRect frame = CGRectMake(0, 0, 320, 240);
+//        self.backgroundImg = [[UIImageView alloc]initWithFrame:frame];
+        [self.backgroundImg setImage:[UIImage imageNamed:@"05个人－个人头像"]];
+        [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
+        [self.backgroundImg setImageToBlur:self.headImage.image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:nil];
+            [self.backgroundImg setClipsToBounds:YES];
+           
     }
-    [self.nameLabel setText:[ToolUtils getNickName]==nil?@"":[ToolUtils getNickName]];
+    
+       [self.nameLabel setText:[ToolUtils getNickName]==nil?@"":[ToolUtils getNickName]];
     NSMutableArray* mutableArray = [[NSMutableArray alloc]init];
     for (int i = 0 ; i < images.count; i++)
     {
