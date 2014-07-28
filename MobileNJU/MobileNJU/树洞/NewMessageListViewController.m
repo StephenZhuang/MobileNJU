@@ -32,7 +32,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setTitle:@"树洞的回复"];
-    [self setSubTitle:@"吐槽您的生活"];
     
 }
 

@@ -28,7 +28,6 @@
 {
     [super viewDidLoad];
     [self setTitle:@"百合十大"];
-    [self setSubTitle:@"显示南大每天十条新闻"];
     [self.webView setDelegate:self];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     // Do any additional setup after loading the view.

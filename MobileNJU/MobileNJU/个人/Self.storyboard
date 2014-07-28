@@ -221,7 +221,7 @@
                         <viewControllerLayoutGuide type="top" id="3xT-dd-3EO"/>
                         <viewControllerLayoutGuide type="bottom" id="4mL-Pa-e04"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="1nX-1p-3ak">
+                    <view key="view" contentMode="scaleToFill" id="1nX-1p-3ak" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -616,6 +616,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <constraint firstItem="5FU-Fa-ec5" firstAttribute="trailing" secondItem="mGD-gV-R2l" secondAttribute="trailing" id="xBD-i1-L2S"/>
                             <constraint firstItem="OTr-JQ-ZfY" firstAttribute="top" secondItem="yAd-Ia-uog" secondAttribute="bottom" constant="35" id="yhZ-cL-HLv"/>
                         </constraints>
+                        <connections>
+                            <action selector="closeIns:" destination="D68-ft-VPq" eventType="touchDown" id="Ncc-Nf-Ui8"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Lax-oI-Y60"/>
                     <connections>
@@ -644,8 +647,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="institute" width="41" height="42"/>
         <image name="navigation_back_n.png" width="15" height="30"/>
         <image name="plus" width="30" height="30"/>
-        <image name="purpleButton" width="320" height="54"/>
-        <image name="purpleButtonhighlighted" width="320" height="54"/>
+        <image name="purpleButton" width="245" height="40"/>
+        <image name="purpleButtonhighlighted" width="245" height="40"/>
         <image name="self_up_background" width="320" height="250"/>
         <image name="tabBar_self" width="80" height="50"/>
     </resources>

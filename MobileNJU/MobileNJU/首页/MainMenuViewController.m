@@ -23,69 +23,77 @@
 @property (weak, nonatomic) IBOutlet UIView *tableHeadView;
 @property (strong,nonatomic)UIImageView* newImage;
 @property (strong,nonatomic)UIImageView* touchButton;
-@property (weak, nonatomic) IBOutlet UIButton *homeBarButton;
 @property (strong,nonatomic)UIImageView* cloudBack;
 @property (strong,nonatomic)MUnread_Builder* unread;
 @property (strong,nonatomic)NSArray* focusList;
-@property (weak, nonatomic) IBOutlet UIButton *subscribeButton;
-@property (weak, nonatomic) IBOutlet UIButton *activityButton;
+@property (strong,nonatomic)NSMutableArray* imageArrays;
+@property (strong,nonatomic)NSMutableArray* imageArraysSelected;
+
 @end
 
 @implementation MainMenuViewController
+static NSArray* functionNames;
 static NSArray* buttonImages;
 static NSArray* descriptions;
+
 #pragma mark ViewController
-
-
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
-    //    [self.navigationController setDelegate:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCall:) name:@"getCall" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToChat:) name:@"getPushInfo" object:nil];
     [self initNewScroller];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
     [self.pageScroller addGestureRecognizer:singleTap];
     self.changeHeader = NO;
-    [self.homeBarButton setSelected:YES];
     [self.tableView setAllowsSelection:NO];
     [self loadIndex];
+    [self loadTableData];
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-//    [self.tableView reloadData];
-//    [self addUnreadMsg];
     [[ApisFactory getApiMUnreadModule]load:self selecter:@selector(disposeMessage:)];
-
 }
+
 - (void)loadIndex
 {
     [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
 }
 
-
-
-
 - (void)disposeMessage:(Son*)son
 {
     if ([son getError]==0) {
-        NSLog(@"son method %@",[son getMethod]);
         if ([[son getMethod] isEqualToString:@"MIndex"]) {
             MIndex_Builder* index = (MIndex_Builder*)[son getBuild];
-//            NSMutableArray* image = [[NSMutableArray alloc]init];
-//
-//            for (MMdoule* model in index.moduleList) {
-//                NSLog(@"model %@ %@",model.name,model.desc);
-//                [array addObject:model.name];
-//            }
+            NSMutableArray* image = [[NSMutableArray alloc]init];
+            NSMutableArray* names = [[NSMutableArray alloc]init];
+            NSMutableArray* details = [[NSMutableArray alloc]init];
+            for (MMdoule* model in index.moduleList) {
+                [names addObject:model.name];
+                [image addObject:model.img];
+                [details addObject:model.desc];
+            }
+            if (functionNames==nil) {
+                functionNames=names;
+                buttonImages=image;
+                descriptions=details;
+                [self loadImages];
+            } else {
+                if (![ToolUtils compareArray:functionNames newArray:names]) {
+                    functionNames=names;
+                    buttonImages=image;
+                    descriptions=details;
+                    [self loadImages];
+                }
+            }
+            [ToolUtils setFunctionDetails:descriptions];
+            [ToolUtils setFunctionNames:functionNames];
+            [ToolUtils setButtonImage:buttonImages];
             self.focusList = index.focusList;
-           
-            
-            [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(loadTableData) userInfo:nil repeats:NO];
             [self addUnreadMsg];
             [self prepareForNews];
-
         } else if ([[son getMethod]isEqualToString:@"MUnreadModule"])
         {
             self.unread = (MUnread_Builder*)[son getBuild];
@@ -93,10 +101,42 @@ static NSArray* descriptions;
         }
     }
 }
+#warning 这里需要加上从服务器载下来的临时功能
 - (void)loadTableData
 {
-    buttonImages= [[NSArray alloc]initWithObjects:@"百合十大",@"图书馆",@"南呱",@"树洞",@"一卡通",@"课程表",@"失物招领",@"空教室",@"部门电话",@"绩点",@"校车",@"打卡",@"流程", nil];
-    descriptions = [[NSArray alloc]initWithObjects:@"每天十条",@"查书/借阅情况",@"陌生人的心声",@"吐槽你的心声",@"余额及消费",@"课程一览无遗",@"捡到？丢了？",@"找没课的自习室",@"电话查询",@"不断飙升的绩点",@"校车地点/时刻表",@"打卡次数查询",@"全部在这里", nil];
+    
+    functionNames = [ToolUtils getFunctionName];
+    buttonImages= [ToolUtils getButtonImage];
+    descriptions = [ToolUtils getFunctionDetails];
+    if (functionNames!=nil) {
+        [self loadImages];
+    }
+}
+-(void)loadImages
+{
+    self.imageArrays = [[NSMutableArray alloc]init];
+    self.imageArraysSelected = [[NSMutableArray alloc]init];
+    for (NSString* imageUrl in buttonImages) {
+        CGRect frame = CGRectMake(0, 0, 52, 52);
+        NSArray* imageUrls = [imageUrl componentsSeparatedByString:@","];;
+        UIImageView* image = [[UIImageView alloc]init];
+        image.frame = frame;
+        [image setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls firstObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            if (self.imageArrays.count==buttonImages.count) {
+                [self.tableView reloadData];
+
+            }
+        }];
+        UIImageView* imageSelected = [[UIImageView alloc]init];
+        imageSelected.frame = frame;
+        [imageSelected setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls lastObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            if (self.imageArrays.count==buttonImages.count) {
+                [self.tableView reloadData];
+            }
+        }];
+        [self.imageArrays addObject:image];
+        [self.imageArraysSelected addObject:imageSelected];
+    }
     [self.tableView reloadData];
 }
 - (void)addUnreadMsg
@@ -131,23 +171,23 @@ static NSArray* descriptions;
             [cell.menuButton setImage:[UIImage imageNamed:@"树洞选中"] forState:UIControlStateSelected];
         }
         if (self.unread.module3>0) {
-            [self.subscribeButton setImage: [UIImage imageNamed:@"订阅消息"] forState:UIControlStateNormal];
-            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅消息选中"]  forState:UIControlStateHighlighted];
-            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅消息选中"] forState:UIControlStateSelected];
+//            [self.subscribeButton setImage: [UIImage imageNamed:@"订阅消息"] forState:UIControlStateNormal];
+//            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅消息选中"]  forState:UIControlStateHighlighted];
+//            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅消息选中"] forState:UIControlStateSelected];
         } else {
-            [self.subscribeButton setImage: [UIImage imageNamed:@"订阅"] forState:UIControlStateNormal];
-            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅选中"]  forState:UIControlStateHighlighted];
-            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅选中"] forState:UIControlStateSelected];
+//            [self.subscribeButton setImage: [UIImage imageNamed:@"订阅"] forState:UIControlStateNormal];
+//            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅选中"]  forState:UIControlStateHighlighted];
+//            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅选中"] forState:UIControlStateSelected];
         }
         if (self.unread.module4>0) {
 
-            [self.activityButton setImage: [UIImage imageNamed:@"活动消息"] forState:UIControlStateNormal];
-            [self.activityButton setImage:[UIImage imageNamed:@"活动消息选中"]  forState:UIControlStateHighlighted];
-            [self.activityButton setImage:[UIImage imageNamed:@"活动消息选中"] forState:UIControlStateSelected];
+//            [self.activityButton setImage: [UIImage imageNamed:@"活动消息"] forState:UIControlStateNormal];
+//            [self.activityButton setImage:[UIImage imageNamed:@"活动消息选中"]  forState:UIControlStateHighlighted];
+//            [self.activityButton setImage:[UIImage imageNamed:@"活动消息选中"] forState:UIControlStateSelected];
         } else {
-            [self.activityButton setImage: [UIImage imageNamed:@"活动"] forState:UIControlStateNormal];
-            [self.activityButton setImage:[UIImage imageNamed:@"活动选中"]  forState:UIControlStateHighlighted];
-            [self.activityButton setImage:[UIImage imageNamed:@"活动选中"] forState:UIControlStateSelected];
+//            [self.activityButton setImage: [UIImage imageNamed:@"活动"] forState:UIControlStateNormal];
+//            [self.activityButton setImage:[UIImage imageNamed:@"活动选中"]  forState:UIControlStateHighlighted];
+//            [self.activityButton setImage:[UIImage imageNamed:@"活动选中"] forState:UIControlStateSelected];
         }
         
 
@@ -170,51 +210,26 @@ static NSArray* descriptions;
     }
 }
 
-#pragma mark 监听
 
-/*
- 个人 跳到self的storyboard
- */
-- (IBAction)self:(id)sender {
-    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
-    SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"self"]; //test2为viewcontroller的StoryboardId
-    [self.navigationController pushViewController:selfVC animated:YES];
-}
-- (IBAction)subscribe:(id)sender {
-        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
-        SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"subscribe"]; //test2为viewcontroller的StoryboardId
-        [self.navigationController pushViewController:selfVC animated:YES];
-}
-- (IBAction)activity:(id)sender {
-    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
-    SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"activity"]; //test2为viewcontroller的StoryboardId
-    [self.navigationController pushViewController:selfVC animated:YES];
-}
 
 
 #pragma mark tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [buttonImages count]+3;
-    //此处+3 只是为下方预留空间
 }
-
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     // set header view colour
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 100)];
-    
     [self.headerView setBackgroundColor:[UIColor clearColor]];
-    
-
-    
     UIImage* background = [UIImage imageNamed:@"云"];
-    self.cloudBack = [[UIImageView alloc]initWithFrame:CGRectMake(0,-5.0, self.tableView.bounds.size.width, 87)];
+    self.cloudBack = [[UIImageView alloc]initWithFrame:CGRectMake(0,40, self.tableView.bounds.size.width, 30)];
     [self.cloudBack setImage:background];
     [self.headerView addSubview:self.cloudBack];
 
     UIImage* touch = [UIImage imageNamed:@"触控区"];
-    self.touchButton = [[UIImageView alloc]initWithFrame:CGRectMake(132.5, 30, 55, 55)];
+    self.touchButton = [[UIImageView alloc]initWithFrame:CGRectMake(132.5, 15, 55, 75)];
     [self.touchButton setImage:touch];
     [self.headerView addSubview:self.touchButton];
     return self.headerView;
@@ -229,23 +244,6 @@ static NSArray* descriptions;
 {
     return 80;
 }
-
-
-/*
- 进入屏幕后开启动画
- */
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    HomeCell *homeCell = (HomeCell *)cell;
-    [homeCell setBackgroundColor:[UIColor clearColor]];
-    if (indexPath.row % 2 == 1) {
-        [self performBounceRightAnimationOnView:homeCell.menuView duration:1.0 delay:0.3f];
-    } else {
-        [self performBounceLeftAnimationOnView:homeCell.menuView duration:1.0 delay:0.3f];
-    }
-}
-
-
 /*
  根据奇偶 对应左右
  */
@@ -259,14 +257,14 @@ static NSArray* descriptions;
         cell = [tableView dequeueReusableCellWithIdentifier:@"RightCell"];
     }
     if (indexPath.row<=[buttonImages count]-1) {
-        UIImage* image = [UIImage imageNamed:[buttonImages objectAtIndex:indexPath.row]];
-        UIImage* imageSelected = [UIImage imageNamed:[NSString stringWithFormat:@"%@选中",[buttonImages objectAtIndex:indexPath.row]]];
-        [cell.menuButton setImage:image forState:UIControlStateNormal];
-        [cell.menuButton setImage:imageSelected forState:UIControlStateHighlighted];
-         [cell.menuButton setImage:imageSelected forState:UIControlStateSelected];
-        [cell.menuButton setDesitination:[buttonImages objectAtIndex:indexPath.row]];
-        [cell.menuTitle setText:[buttonImages objectAtIndex:indexPath.row]];
-        [cell.menuSubTitle setText:[descriptions objectAtIndex:indexPath.row]];
+        UIImageView* image = [self.imageArrays objectAtIndex:indexPath.row];
+        UIImageView* imageSelected = [self.imageArraysSelected objectAtIndex:indexPath.row];
+        [cell.menuButton setImage:image.image forState:UIControlStateNormal];
+        [cell.menuButton setImage:imageSelected.image forState:UIControlStateHighlighted];
+         [cell.menuButton setImage:imageSelected.image forState:UIControlStateSelected];
+        [cell.menuButton setDesitination:[functionNames objectAtIndex:indexPath.row]];
+        [cell.menuTitle setText:[functionNames objectAtIndex:indexPath.row]];
+//        [cell.menuSubTitle setText:[descriptions objectAtIndex:indexPath.row]];
         [cell.menuButton addTarget:self action:@selector(
                                                          goToDetail
                                                 :) forControlEvents:UIControlEventTouchUpInside];
@@ -277,52 +275,6 @@ static NSArray* descriptions;
         [cell.menuSubTitle setText:@""];
     }
    return cell;
-}
-
-
-#pragma mark 动画
-- (void)performBounceLeftAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
-    [view setHidden:NO];
-    // Start
-    view.transform = CGAffineTransformMakeTranslation(300, 0);
-   [UIView animateWithDuration:duration/4 delay:delay options:UIViewAnimationOptionCurveEaseIn animations:^{
-        view.transform = CGAffineTransformMakeTranslation(-10, 0);
-   } completion:^(BOOL finished) {
-       [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-           view.transform = CGAffineTransformMakeTranslation(5, 0);
-       } completion:^(BOOL finished) {
-           [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-                view.transform = CGAffineTransformMakeTranslation(-2, 0);
-           } completion:^(BOOL finished) {
-               [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-                   view.transform = CGAffineTransformMakeTranslation(0, 0);
-               } completion:^(BOOL finished) {
-               }];
-           }];
-       }];
-   }];
-}
-
-- (void)performBounceRightAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {
-    [view setHidden:NO];
-    // Start
-    view.transform = CGAffineTransformMakeTranslation(-300, 0);
-    [UIView animateWithDuration:duration/4 delay:delay options:UIViewAnimationOptionCurveEaseIn animations:^{
-        view.transform = CGAffineTransformMakeTranslation(10, 0);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            view.transform = CGAffineTransformMakeTranslation(-5, 0);
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-                view.transform = CGAffineTransformMakeTranslation(2, 0);
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:duration/4 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-                    view.transform = CGAffineTransformMakeTranslation(0, 0);
-                } completion:^(BOOL finished) {
-                }];
-            }];
-        }];
-    }];
 }
 
 
@@ -345,10 +297,8 @@ static NSArray* descriptions;
 
 #pragma mark 新闻区
 
-#warning 此处需要改
 /*
- 加载图片，此处暂时拿3张现成的
- */
+ 加载图片 */
 -(void)loadPhotos
 {
     for (int i = 1; i < 3 ; i ++){
@@ -380,7 +330,6 @@ static NSArray* descriptions;
 //加载新的cache (在此之前需要访问服务器 看是否需要下载新的图片
 - (void)loadNewsCache:(NSInteger)site
 {
-//    NSArray* tempPhoto = [[NSArray alloc]initWithObjects:@"news",@"news2",@"news3", nil];
     [self reloadNews:site];
 }
 
@@ -600,6 +549,7 @@ static NSArray* descriptions;
     }];
 }
 
+
 - (void)goToChat:(NSNotification *)notification
 {
     NSString *type = notification.object;
@@ -611,15 +561,6 @@ static NSArray* descriptions;
         [self dismissCallView];
     }
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

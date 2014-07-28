@@ -7,8 +7,14 @@
 //
 
 #import "BaseViewController.h"
-
-@interface BaseViewController ()
+#import "MainMenuViewController.h"
+#import "SelfInfoVC.h"
+#import "ExerciseVC.h"
+#import "EcardVC.h"
+#import "MyLibraryVC.h"
+#import "ExerciseVC.h"
+#import "WelcomeViewController.h"
+@interface BaseViewController ()<UINavigationBarDelegate,UINavigationControllerDelegate>
 
 @end
 
@@ -22,13 +28,15 @@
     }
     return self;
 }
-- (void)setTitle:(NSString*)title{
-    [self.titleView setTitle:title];
-}
-
-- (void)setSubTitle:(NSString*)subTitle{
-    [self.titleView setSubTitle:subTitle];
-}
+//}
+//- (void)setTitle:(NSString*)title{
+////    [self.titleView setTitle:title];
+//    [self setTitle:title];
+//}
+//
+//- (void)setSubTitle:(NSString*)subTitle{
+//    [self.titleView setSubTitle:subTitle];
+//}
 
 /*Show Alert*/
 - (void) showAlert:(NSString*)msg
@@ -41,6 +49,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.delegate = self;
     // Do any additional setup after loading the view.
     if([self.navigationController.navigationBar
         respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
@@ -57,7 +66,6 @@
         if([self.navigationController respondsToSelector:@selector(backIcons)]){
             _backIcons=[self.navigationController performSelector:@selector(backIcons)];
         }
-        
         if([self.navigationController viewControllers].count>1){
             UIButton *button  = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 30)];
             NSString *iconname=DEFAULTBACKICON;
@@ -76,7 +84,7 @@
             self.navigationItem.leftBarButtonItems = myButtonArray;
         }
     }
-    [self addTitleView];
+//    [self addTitleView];
 }
 
 - (void)addTitleView
@@ -87,7 +95,15 @@
     [self.titleView.touchView addGestureRecognizer:singleTap];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.loginIndicator setHidden:YES];
+    [self.loginIndicator removeFromSuperview];
+}
+
 -(void)closeSelf{
+    [self.loginIndicator setHidden:YES];
+    [self.loginIndicator removeFromSuperview];
     if([self.navigationController viewControllers].count>0){
         [self.navigationController popViewControllerAnimated:YES];
     }else{
@@ -124,20 +140,16 @@ UIView* view;
 
 - (void) waiting:(NSString*)msg
 {
-    self.OK=NO;
-    self.loginIndicator = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-	[self.navigationController.view addSubview:self.loginIndicator];
-	
-	self.loginIndicator.labelText =msg;
-	
-	[self.loginIndicator showAnimated:YES whileExecutingBlock:^{
-        while (!self.OK) {
-            sleep(100);
-            NSLog(@"sleep");
-        }
-    } completionBlock:^{
-        [self.loginIndicator removeFromSuperview];
-    }];
+    [self.loginIndicator removeFromSuperview];
+    CGRect frame = CGRectMake(100, 100, self.view.center.x-50, self.view.center.y);
+    self.loginIndicator = [[UIActivityIndicatorView alloc] initWithFrame:frame];
+    
+	[self.loginIndicator setTintColor:[UIColor purpleColor]];
+    [self.loginIndicator setColor:[UIColor purpleColor]];
+    [self.navigationController.view addSubview:self.loginIndicator];
+    [self.navigationController.view bringSubviewToFront:self.loginIndicator];
+    [self.loginIndicator startAnimating];
+    [self.loginIndicator setHidden:NO];
 }
 
 - (void)disposMessage:(Son *)son
@@ -149,7 +161,29 @@ UIView* view;
     [self.maskView setHidden:YES];
     [view setHidden:YES];
     [view removeFromSuperview];
-}/*
+}
+#pragma mark -UINavigationDelegate,UINavigationBarDelegate
+/*
+ 设置rootViewController的NavigationBar 不可见
+ */
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if (
+        [viewController class]==[WelcomeViewController class]||
+        [viewController class] == [MainMenuViewController class]
+        || [viewController class]==[SelfInfoVC class]
+        || [viewController class]== [ExerciseVC class]
+        || [viewController class]==[EcardVC class]
+        || [viewController class]==[MyLibraryVC class]
+        || [viewController class]==[ExerciseVC class]
+        ) {
+        [navigationController setNavigationBarHidden:YES animated:animated];
+    } else if ( [navigationController isNavigationBarHidden] ) {
+        [navigationController setNavigationBarHidden:NO animated:animated];
+    }
+}
+
+
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

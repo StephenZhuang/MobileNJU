@@ -10,8 +10,9 @@
 #import "GradeCell.h"
 #import "GPAView.h"
 #import "AlertCloseDelegate.h"
+#import "GradeCellChooseDelegate.h"
 #import "ZsndSystem.pb.h"
-@interface GradeDetailVC ()<UITableViewDelegate,UITableViewDataSource,AlertCloseDelegate,UITextFieldDelegate>
+@interface GradeDetailVC ()<UITableViewDelegate,UITableViewDataSource,AlertCloseDelegate,UITextFieldDelegate,GradeCellChooseDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *schIdTextField;
 @property (nonatomic,strong)GPAView* gpaView;
 @property (weak, nonatomic) IBOutlet UIView *alertView;
@@ -22,6 +23,7 @@
 @property (strong,nonatomic)UITextField* codeField;
 @property (strong,nonatomic)NSArray* gradeList;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (strong,nonatomic)NSMutableDictionary* LessonChooseDic;
 @end
 
 @implementation GradeDetailVC
@@ -39,12 +41,12 @@
     [self.tableView setAllowsSelection:NO];
 
     [self loadSavedState];
+    self.LessonChooseDic = [[NSMutableDictionary alloc]init];
     // Do any additional setup after loading the view.
 }
 - (void)initNavigationBar
 {
     [self setTitle:@"成绩查询"];
-    [self setSubTitle:@"看看有没有挂科"];
     UIButton* button = [[UIButton alloc]init];
     [button setImage:[UIImage imageNamed:@"self_right_barButton"] forState:UIControlStateNormal];
     CGRect frame = CGRectMake(0, 0, 40, 36);
@@ -108,8 +110,19 @@
     [self.passwordTextField setText:self.password];
     [self.schIdTextField setText:self.account];
 #warning api更改，原有api错误，需要更正
-//    [[ApisFactory getApiMGradeSearch] load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
-    [[ApisFactory getApiMGradeSearch] load:self selecter:@selector(disposMessage:) url:self.term];
+    [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
+//    [[ApisFactory getApiMGradeSearch] load:self selecter:@selector(disposMessage:) url:self.term];
+}
+
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  url:url account:(NSString*)account password:(NSString*)password {
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    [array addObject:[NSString stringWithFormat:@"url=%@",url==nil?@"":url]];
+    [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
+    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MGradeSearch" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
 }
 
 
@@ -245,25 +258,31 @@
         case 2:
             cell.lessonTypeLabel.text = @"平台";
             [cell setTick:YES];
-
-
             break;
         case 3:
             cell.lessonTypeLabel.text = @"通修";
             [cell setTick:YES];
-
             break;
         default:
             cell.lessonTypeLabel.text =@"选修";
             [cell setTick:NO];
-
             break;
     }
-    NSLog(@"%d类型",course.type);
-    
+    if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
+        NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);
+        [cell setTick:[[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text] isEqualToString:@"YES"]?YES:NO];
+    }
+    [cell setDelegate:self];
     [cell.scoreLabel setText:course.grade];
     [cell.creditLabel setText:course.point];
     return cell;
+}
+
+#pragma mark gradeCellDelegate
+- (void)chooseLesson:(NSString*)select lesson:(NSString *)lesson
+{
+    NSLog(@"%@  %@",lesson,select);
+    [self.LessonChooseDic setValue:select forKey:lesson];
 }
 
 @end

@@ -49,7 +49,6 @@
         [self addConnect];
     } else {
         [self setTitle:@"聊天"];
-        [self setSubTitle:@"西瓜和猕猴桃的故事"];
         [self addCall];
         [self addHeader];
     }
@@ -58,11 +57,9 @@
 - (void)addConnect
 {
     [self setTitle:@"南呱"];
-    [self setSubTitle:@"和水果聊天"];
     ConnectViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"ConnectViewController"];
     vc.matchSuccessBlock = ^(NSString *targetid , int targethead ,NSString *headImg) {
         [self setTitle:@"聊天"];
-        [self setSubTitle:@"西瓜和猕猴桃的故事"];
         _targetid = targetid;
         _targetHead = targethead;
         _headImg = headImg;

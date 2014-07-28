@@ -68,7 +68,7 @@
     if ([self.schIDText.text isEqualToString:@""]) {
         [self doneWithView:_header];
     } else {
-        [self waiting:@"正在查询"];
+//        [self waiting:@"正在查询"];
         [self closeAlertView:nil];
         [[ApisFactory getApiMSignInInfo]load:self selecter:@selector(disposMessage:) account:self.schIDText.text password:self.schIDText.text];
         [[ApisFactory getApiMSignInInDetail]load:self selecter:@selector(disposMessage:

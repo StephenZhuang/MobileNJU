@@ -42,7 +42,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"系统表情";
-    [self setSubTitle:@"选择最适合你的吧"];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(0, 0, 45, 45)];

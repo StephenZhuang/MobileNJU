@@ -30,7 +30,6 @@
 {
     [super viewDidLoad];
     [self setTitle:@"活动"];
-    [self setSubTitle:@"好吃好玩的福利"];
     self.webView.delegate = self;
     NSLog(@"%@网址。。",self.url.absoluteString
           );

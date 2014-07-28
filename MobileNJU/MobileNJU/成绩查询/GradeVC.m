@@ -37,18 +37,13 @@
     }
     return self;
 }
-- (void)viewDidAppear:(BOOL)animated
-{
-    self.termList = [ToolUtils getTermList];
-    [self.tableView reloadData];
-}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initNavigationBar];
     [self loadColor];
     [self loadSavedState];
-    
 }
 - (void)loadSavedState
 {
@@ -57,6 +52,7 @@
     if (![self.schIdTextField.text isEqualToString:@""]&&![self.passwordTextField.text isEqualToString:@""]) {
         [self search:nil];
     }
+//    self.termList = [ToolUtils getTermList];
   
 }
 - (IBAction)search:(id)sender {
@@ -65,10 +61,23 @@
     [self.codeField resignFirstResponder];
     if (sender!=nil) {
         [self waiting:@"正在加载"];
-
     }
-    [[ApisFactory getApiMTermList]load:self selecter:@selector(disposMessage:) code:nil account:self.schIdTextField.text password:self.passwordTextField.text];
+    [self load:self selecter:@selector(disposMessage:) code:self.codeField==nil?nil:self.codeField.text account:self.schIdTextField.text password:self.passwordTextField.text];
 }
+
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    if (code!=nil) {
+        [array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
+    }
+    [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
+    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MTermList" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
+}
+
 - (void)disposMessage:(Son *)son
 {
     self.OK=YES;
@@ -95,9 +104,9 @@
                     [termArray addObject:arr];
                 }
                 [ToolUtils setTermList:termArray];
-            
                 self.termList = termArray;
                 [self.tableView reloadData];
+                
             }
         }
     }
@@ -123,7 +132,6 @@
     //    [selfItem setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = selfItem;
     [self setTitle:@"成绩查询"];
-    [self setSubTitle:@"看看有木有挂科"];
 }
 
 - (IBAction)cancelAlert:(id)sender {

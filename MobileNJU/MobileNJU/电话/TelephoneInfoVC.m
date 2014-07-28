@@ -31,7 +31,6 @@
     
     
     [self setTitle:@"部门电话"];
-    [self setSubTitle:@"各个部门电话"];
     
 }
 

@@ -38,7 +38,6 @@
 {
     [super viewDidLoad];
     [self setTitle:@"校车"];
-    [self setSubTitle:@"方便您的来回"];
     self.segmentArray = [[NSArray alloc]initWithObjects:@"仙林",@"鼓楼", nil];
     [self.segmentView setBackgroundColor:[UIColor clearColor]];
     

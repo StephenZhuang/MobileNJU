@@ -13,12 +13,10 @@
 @property (strong, nonatomic) NSArray *backIcons;
 @property (nonatomic , strong) TitleView *titleView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
-@property (nonatomic,strong)MBProgressHUD* loginIndicator;
+@property (nonatomic,strong)UIActivityIndicatorView* loginIndicator;
 @property (nonatomic)BOOL OK;
 -(void)closeSelf;
 - (void)addTitleView;
-- (void)setTitle:(NSString*)title;
-- (void)setSubTitle:(NSString*)subTitle;
 - (void)addMask;
 - (void)removeMask;
 

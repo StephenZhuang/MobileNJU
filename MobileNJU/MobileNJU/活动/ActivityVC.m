@@ -23,7 +23,6 @@
 {
     [super viewDidLoad];
     [self setTitle:@"活动"];
-    [self setSubTitle:@"好吃好玩的福利"];
     // Do any additional setup after loading the view.
 }
 - (NSMutableArray *)activityList

@@ -28,7 +28,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setTitle:@"身份认证"];
-    [self setSubTitle:@"确认南大人"];
 }
 
 - (void)closeSelf

@@ -20,8 +20,6 @@
 {
     [super viewDidLoad];
     [self setTitle:@"新闻详情"];
-    [self setSubTitle:@"官方新闻"];
-    NSLog(@"%@",self.url);
     // Do any additional setup after loading the view from its nib.
 }
 

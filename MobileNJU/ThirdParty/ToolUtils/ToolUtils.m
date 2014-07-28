@@ -465,4 +465,68 @@
     [userDefaults setObject: account  forKey:@"account"];
     [userDefaults synchronize];
 }
+
++(NSString *)getEcardId
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ecardId"];
+}
+
++(NSString *)getEcardPassword
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ecardPassword"];
+}
+
+
++(void)setEcardId:(NSString*) ecardId
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: ecardId  forKey:@"ecardId"];
+    [userDefaults synchronize];
+}
++(void)setEcardPassword:(NSString*) password
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: password  forKey:@"ecardPassword"];
+    [userDefaults synchronize];
+}
++ (void)setButtonImage:(NSArray *)buttonImage
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: buttonImage  forKey:@"buttonImage"];
+    [userDefaults synchronize];
+
+}
++ (NSArray *)getButtonImage
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"buttonImage"];
+}
++ (NSArray *)getFunctionName
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"functionName"];
+}
++ (NSArray *)getFunctionDetails
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"functionDetail"];
+}
++ (void)setFunctionDetails:(NSArray *)details
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: details  forKey:@"functionDetail"];
+    [userDefaults synchronize];
+}
++(void)setFunctionNames:(NSArray *)functionName
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: functionName  forKey:@"functionName"];
+    [userDefaults synchronize];
+}
++(BOOL)compareArray:(NSArray *)oldArray newArray:(NSArray *)newArray
+{
+    for (int i = 0 ; i < oldArray.count; i++) {
+        if (![[oldArray objectAtIndex:i] isEqualToString:[newArray objectAtIndex:i]]) {
+            return NO;
+        }
+    }
+    return YES;
+}
 @end

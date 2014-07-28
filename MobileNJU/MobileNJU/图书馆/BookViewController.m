@@ -114,7 +114,6 @@
 - (void)initNavigationBar
 {
     [self setTitle:@"图书馆"];
-    [self setSubTitle:@"搜索藏书和借阅情况"];
     UIButton* button = [[UIButton alloc]init];
     [button setImage:[UIImage imageNamed:@"self_right_barButton"] forState:UIControlStateNormal];
     CGRect frame = CGRectMake(0, 0, 40, 36);
@@ -133,8 +132,15 @@
 }
 - (IBAction)gotoMyLibrary:(id)sender {
     
-    [self waiting:@"加载中"];
-    [[ApisFactory getApiMMyLibrary]load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
+    if (self.schIdField.text.length==0) {
+        [ToolUtils showMessage:@"学工号不能为空"];
+    } else if (self.passwordField.text.length==0)
+    {
+        [ToolUtils showMessage:@"密码不能为空"];
+    } else {
+        [self waiting:@"加载中"];
+        [[ApisFactory getApiMMyLibrary]load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
+    }
     
 }
 #pragma mark delegateTextField
@@ -147,9 +153,24 @@
     {
         [self.passwordField becomeFirstResponder];
     } else if (textField==self.passwordField){
-        
+        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
+        [self gotoMyLibrary:nil];
     }
     return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (self.view.window.frame.size.height==480) {
+        [UIView animateWithDuration:0.3f animations:^{
+            //        self.alertView.center = newCenter;
+        }];
+        [UIView animateWithDuration:0.3f animations:^{
+            self.alertView.transform = CGAffineTransformMakeTranslation(0, -40);
+        } completion:^(BOOL finished) {
+        }];
+        
+    }
 }
 #pragma mark delegate_AlertChoose
 - (void)closeAlert{
@@ -164,6 +185,7 @@
 }
 
 - (IBAction)cancelAlert:(id)sender {
+    self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
     [self.passwordField resignFirstResponder];
     [self.schIdField resignFirstResponder];
     [self.searchField resignFirstResponder];

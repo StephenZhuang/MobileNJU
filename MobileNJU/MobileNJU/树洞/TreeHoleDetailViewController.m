@@ -36,7 +36,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setTitle:@"树洞详情"];
-    [self setSubTitle:@"您可以回复和点赞"];
     _targetid = @"";
     _commentid = @"";
     _cometName = @"";

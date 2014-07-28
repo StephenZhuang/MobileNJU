@@ -33,7 +33,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setTitle:@"发布树洞"];
-    [self setSubTitle:@"吐槽您的生活"];
     
     UIButton* button = [[UIButton alloc]init];
     [button setImage:[UIImage imageNamed:@"提交"] forState:UIControlStateNormal];

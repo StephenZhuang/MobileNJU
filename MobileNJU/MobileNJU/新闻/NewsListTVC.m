@@ -34,10 +34,8 @@
     if (self.jump) {
         [self performSegueWithIdentifier:@"detail" sender:nil];
         [self setTitle:@""];
-        [self setSubTitle:@""];
     } else {
         [self setTitle:@"新闻列表"];
-        [self setSubTitle:@"官方新闻"];
     }
 }
 - (NSMutableArray *)newsList

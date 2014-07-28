@@ -68,6 +68,10 @@
 +(void)setJWId:(NSString*)jwId;
 +(NSString*)getJWID;
 +(NSString*)getJWPassword;
++(NSString*)getEcardId;
++(NSString*)getEcardPassword;
++(void)setEcardId:(NSString*) ecardId;
++(void)setEcardPassword:(NSString*) password;
 +(void)setJWPassword:(NSString*)password;
 +(void)setCurrentWeek:(int)week;
 +(void)setMySchedule:(NSArray*)schedule;
@@ -79,4 +83,11 @@
 +(void)setIsVeryfy:(NSInteger)verify;
 + (NSString*)getAccount;
 + (void)setAccount:(NSString*)account;
++ (void)setButtonImage:(NSArray*)buttonImage;
++ (NSArray*)getButtonImage;
++ (void)setFunctionNames:(NSArray*)functionName;
++ (NSArray*)getFunctionName;
++ (void)setFunctionDetails:(NSArray*)details;
++ (NSArray*)getFunctionDetails;
++ (BOOL)compareArray:(NSArray*)oldArray newArray:(NSArray*)newArray;
 @end

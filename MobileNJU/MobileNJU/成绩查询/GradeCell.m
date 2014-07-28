@@ -33,7 +33,6 @@
 
 - (void)addLineForLabel
 {
-   NSLog(@"字体%@",self.lessonNameLabel.font.fontName);
     self.lessonNameLabel.numberOfLines = 3;
 	self.lessonNameLabel.font = [UIFont fontWithName:self.lessonNameLabel.font.fontName size:12];
 }
@@ -58,9 +57,12 @@
 - (IBAction)tick:(id)sender {
     if (self.isTicked) {
         [self setTick:NO];
+        [self.delegate chooseLesson:@"NO" lesson:self.lessonNameLabel.text];
     } else {
         [self setTick:YES];
+        [self.delegate chooseLesson:@"YES" lesson:self.lessonNameLabel.text];
     }
+    
 }
 
 @end

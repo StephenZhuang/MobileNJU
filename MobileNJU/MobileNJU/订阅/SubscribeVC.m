@@ -28,7 +28,6 @@
 {
     [super viewDidLoad];
     [self setTitle:@"订阅"];
-    [self setSubTitle:@"重要信息我都有"];
     self.segmentContents = [[NSArray alloc]initWithObjects:@"全部",@"我的订阅", nil];
     [self.segmentView setBackgroundColor:[UIColor clearColor]];
     [self waiting:@"加载中"];

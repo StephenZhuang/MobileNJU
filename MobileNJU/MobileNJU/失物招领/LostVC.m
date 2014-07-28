@@ -37,7 +37,6 @@
 - (void)initNavigationBar
 {
     [self setTitle:@"失物招领"];
-    [self setSubTitle:@"谁捡到我的手机"];
     UIButton* button = [[UIButton alloc]init];
     [button setImage:[UIImage imageNamed:@"发布"] forState:UIControlStateNormal];
     CGRect frame = CGRectMake(0, 0, 53, 28);

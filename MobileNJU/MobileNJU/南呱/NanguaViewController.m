@@ -31,7 +31,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setTitle:@"南呱"];
-    [self setSubTitle:@"和水果聊天"];
     _dataArray = [[NSMutableArray alloc] init];
     
 }

@@ -8,6 +8,8 @@
 
 #import "EcardVC.h"
 #import "EcardCell.h"
+#import "ZsndSystem.pb.h"
+
 @interface EcardVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UITextField *schIDText;
@@ -22,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *ecardTitle;
 @property (weak, nonatomic) IBOutlet UILabel *ecardDesc;
 @property(strong,nonatomic)UIButton* selectedButton;
-
+@property(strong,nonatomic)NSArray* detaiList;
 @end
 
 @implementation EcardVC
@@ -35,6 +37,52 @@
     }
     return self;
 }
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self.maskView setHidden:YES];
+    
+    [self.alertView setHidden:YES];
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backToMain:)];
+    [self.ecardDesc addGestureRecognizer:singleTap];
+    [self.ecardTitle addGestureRecognizer:singleTap];
+    [self.schIDText setText:[ToolUtils getEcardId]==nil?@"":[ToolUtils getEcardId]];
+    [self.passwordText setText:[ToolUtils getEcardPassword]==nil?@"":[ToolUtils getPassword]];
+    [self getCode];
+    
+    // Do any additional setup after loading the view.
+}
+
+- (void)getCode
+{
+    [self load:self selecter:@selector(disposMessage:) code:nil account:@"1" password:@"1"];
+}
+
+
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    if (code!=nil) {
+        [array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
+    }
+    [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
+    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MCardInfo" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
+}
+
+- (void)disposMessage:(Son *)son
+{
+    [self.loginIndicator removeFromSuperview];
+    if ([son getError]==0) {
+        NSLog(@"...");
+        if ([[son getMethod]isEqualToString:@"MCardInfo"]) {
+       }
+    }
+}
+
 - (IBAction)chooseDate:(id)sender {
     [self.pickerView setHidden:YES];
     [self.maskView setHidden:YES];
@@ -56,17 +104,6 @@
     [self.maskView setHidden:NO];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self.maskView setHidden:YES];
-    
-    [self.alertView setHidden:YES];
-    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backToMain:)];
-    [self.ecardDesc addGestureRecognizer:singleTap];
-    [self.ecardTitle addGestureRecognizer:singleTap];
-    // Do any additional setup after loading the view.
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -100,7 +137,14 @@
     self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
 }
 - (IBAction)searchResult:(id)sender {
-    
+    if ([self.schIDText.text isEqualToString:@""]) {
+        [ToolUtils showMessage:@"请输入您的学号"];
+    } else if ([self.passwordText.text isEqualToString:@""])
+    {
+        [ToolUtils showMessage:@"密码不得为空"];
+    } else
+    {
+    }
 }
 
 - (IBAction)showAlertView:(id)sender {

@@ -31,7 +31,6 @@
 {
     [super viewDidLoad];
     [self setTitle:@"完善资料"];
-    [self setSubTitle:@"完善个人信息"];
     [self addComboBox];
     [self.nickNameField setDelegate:self];
     [self.tagView initialTags];
@@ -134,9 +133,15 @@
     [textField resignFirstResponder];
     return YES;
 }
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [self.instituteBox removeFromSuperview];
+    return YES;
 
+}
 - (void)addComboBox
 {
+    [self.nickNameField resignFirstResponder];
     self.instituteBox = [[AYHCustomComboBox alloc] initWithFrame:CGRectMake(81, 100, 219, 200) DataCount:3 NotificationName:@"AYHComboBoxInstituteChanged"];
     [self.instituteBox setTag:200];
     [self.instituteBox setDelegate:self];
@@ -202,6 +207,10 @@
         [self.instituteBox removeFromSuperview];
     }
   
+}
+- (IBAction)closeIns:(id)sender {
+    [self.nickNameField resignFirstResponder];
+    [self.instituteBox removeFromSuperview ];
 }
 /*
 #pragma mark - Navigation

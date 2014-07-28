@@ -19,8 +19,6 @@
 {
     [super viewDidLoad];
     [self setTitle:@"办理流程"];
-    [self setSubTitle:@"减少你的麻烦"];
-
     // Do any additional setup after loading the view.
 }
 

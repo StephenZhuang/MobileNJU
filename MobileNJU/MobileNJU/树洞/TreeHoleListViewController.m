@@ -34,7 +34,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setSubTitle:@"吐槽您的生活"];
     if (_isMyTreeHole) {
         [self setTitle:@"我的树洞"];
     } else {

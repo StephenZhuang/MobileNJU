@@ -35,7 +35,6 @@
 {
     [super viewDidLoad];
     [self setTitle:@"空闲教室"];
-    [self setSubTitle:@"为您找到地方自习，不受打扰"];
     self.segmentContents = [[NSArray alloc]initWithObjects:@"仙1",@"仙2",@"逸夫楼",nil];
     self.day = [[NSArray alloc]initWithObjects:@"星期一", @"星期二",@"星期三",@"星期四",@"星期五", nil];
     self.classCount = [[NSArray alloc]initWithObjects:@"第一节", @"第二节", @"第三节", @"第四节", @"第五节", @"第六节", @"第七节", @"第八节", @"第九节", @"第十节", nil];
@@ -53,6 +52,14 @@
 //    return -1;
 //}
 - (IBAction)search:(id)sender {
+    if ([self.startField.text isEqualToString:@"  开始时间"]) {
+        [ToolUtils showMessage:@"请选择开始时间"];
+        return;
+    } else if ([self.endField.text isEqualToString:@"  结束时间"]){
+        [ToolUtils showMessage:@"请选择结束时间"];
+        return;
+
+    }
     [self waiting:@"正在搜素"];
     [[ApisFactory getApiMRoomSearch]load:self selecter:@selector(disposMessage:) type:self.segmentView.selectedIndex+1 day:[self.day indexOfObject:[self.dayField.text stringByReplacingOccurrencesOfString:@" " withString:@""]]+1
                                    begin:[self.classCount indexOfObject:[self.startField.text stringByReplacingOccurrencesOfString:@" " withString:@""]]+1

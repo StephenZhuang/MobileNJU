@@ -19,7 +19,6 @@
 {
     [super viewDidLoad];
     [self setTitle:@"空闲教室"];
-    [self setSubTitle:@"为您找到地方自习，不受打扰"];
     
     [self loadData];
 }

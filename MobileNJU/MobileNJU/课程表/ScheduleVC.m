@@ -200,16 +200,19 @@
 //    [self.view addSubview:self.alertView];
 //    CGPoint center  = self.alertView.center;
 //    CGPoint newCenter = CGPointMake(center.x, center.y-50);
-    [UIView animateWithDuration:0.3f animations:^{
-//        self.alertView.center = newCenter;
-    }];
-    [UIView animateWithDuration:0.3f animations:^{
-        [self.view bringSubviewToFront:self.alertView];
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, -50);
-    } completion:^(BOOL finished) {
-        [self.view bringSubviewToFront:self.alertView];
-    }];
-//    [textField becomeFirstResponder];
+    if (self.view.window.frame.size.height==480) {
+        [UIView animateWithDuration:0.3f animations:^{
+            //        self.alertView.center = newCenter;
+        }];
+        [UIView animateWithDuration:0.3f animations:^{
+            [self.view bringSubviewToFront:self.alertView];
+            self.alertView.transform = CGAffineTransformMakeTranslation(0, -50);
+        } completion:^(BOOL finished) {
+            [self.view bringSubviewToFront:self.alertView];
+        }];
+
+    }
+  //    [textField becomeFirstResponder];
    
 }
 - (void) initLessonDetail
@@ -264,7 +267,6 @@
 - (void)initNavigationBar
 {
     [self setTitle:@"课程表"];
-    [self setSubTitle:@"一二三四五六七"];
 
         UIButton* button = [[UIButton alloc]init];
     [button setImage:[UIImage imageNamed:@"self_right_barButton"] forState:UIControlStateNormal];

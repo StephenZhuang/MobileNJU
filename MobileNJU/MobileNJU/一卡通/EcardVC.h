@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface EcardVC : UIViewController
+#import "BaseViewController.h"
+@interface EcardVC : BaseViewController
 
 @end
