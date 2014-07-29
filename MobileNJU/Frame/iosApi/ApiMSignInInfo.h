@@ -1,7 +1,7 @@
 //
 //  ApiMSignInInfo
 //
-//  Created by ryan on 2014-06-18 15:39:59
+//  Created by ryan on 2014-07-29 20:12:07
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -11,6 +11,7 @@
 
 #import "ApiUpdate.h"
 
+#import "ZsndTreehole.pb.h"
 
 @interface ApiMSignInInfo : ApiUpdate
 
@@ -22,16 +23,20 @@
 	 * @callback MSignInList_Builder
 	 * @param account * account
 	 * @param password * password
+	 * @param isReInput * 是否是用户重新输入
+	 * @param isV * 该用户是否已验证
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  account:(NSString*)account password:(NSString*)password;
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  account:(NSString*)account password:(NSString*)password isreinput:(double)isReInput isv:(double)isV;
 	/**
 	 *  打卡信息 /mobile?methodno=MSignInInfo&debug=1&deviceid=1&userid=&verify=&account=&password=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @param account * account
 	 * @param password * password
+	 * @param isReInput * 是否是用户重新输入
+	 * @param isV * 该用户是否已验证
 	 * @callback MSignInList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  account:(NSString*)account password:(NSString*)password;
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  account:(NSString*)account password:(NSString*)password isreinput:(double)isReInput isv:(double)isV;
 
 @end

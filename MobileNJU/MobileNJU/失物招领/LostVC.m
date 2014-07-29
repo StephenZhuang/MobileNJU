@@ -54,8 +54,8 @@
 
 - (void)loadData
 {
-    
-    [[[ApisFactory getApiMLostAndFound]setPage:page pageCount:20]load:self selecter:@selector(disposMessage:)  type:self.segmentView.selectedIndex+1];
+#warning api更新
+//    [[[ApisFactory getApiMLostAndFound]setPage:page pageCount:20]load:self selecter:@selector(disposMessage:)  type:self.segmentView.selectedIndex+1];
 }
 
 - (void)disposMessage:(Son *)son

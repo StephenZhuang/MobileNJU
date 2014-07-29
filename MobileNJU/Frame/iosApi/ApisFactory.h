@@ -1,7 +1,7 @@
 //
 //  ApisFactory
 //
-//  Created by ryan on 2014-06-18 15:39:59
+//  Created by ryan on 2014-07-29 20:12:07
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -20,12 +20,16 @@
 #import "ApiMBookDetail.h"
 #import "ApiMMyLibrary.h"
 #import "ApiMLostAndFound.h"
+#import "ApiMMarketType.h"
+#import "ApiMMarketList.h"
+#import "ApiMAddMarket.h"
 #import "ApiMNewsList.h"
 #import "ApiMNews.h"
 #import "ApiMBaiheNewsList.h"
 #import "ApiMAllRss.h"
 #import "ApiMMyRss.h"
 #import "ApiMActivity.h"
+#import "ApiMRssNews.h"
 #import "ApiMPushClear.h"
 #import "ApiMLogout.h"
 #import "ApiMGetWelcomePage.h"
@@ -46,7 +50,7 @@
 #import "ApiMBookRenew.h"
 #import "ApiMRoomSearch.h"
 #import "ApiMAddLostAndFound.h"
-#import "ApiMSchedule.h"
+#import "ApiMScheduleAuto.h"
 #import "ApiMTermList.h"
 #import "ApiMGradeSearch.h"
 #import "ApiMCardInfo.h"
@@ -125,6 +129,21 @@
 	+(ApiMLostAndFound*) getApiMLostAndFound;
 	
 	/**
+	 *  商品分类 mobile?methodno=MMyLibrary&debug=1&userid=&verify=&deviceid=&appid=&account=&password=
+	 */
+	+(ApiMMarketType*) getApiMMarketType;
+	
+	/**
+	 *  获取商品详情 mobile?methodno=MMyLibrary&debug=1&userid=&verify=&deviceid=&appid=&account=&password=
+	 */
+	+(ApiMMarketList*) getApiMMarketList;
+	
+	/**
+	 *  添加商品 mobile?methodno=MMyLibrary&debug=1&userid=&verify=&deviceid=&appid=&account=&password=
+	 */
+	+(ApiMAddMarket*) getApiMAddMarket;
+	
+	/**
 	 * 新闻列表(分页) /mobile?methodno=MNewsList&debug=1&deviceid=1&userid=fe34a40e-eac6-11e3-b696-ac853d9d52b1&verify=cf09a009-d221-466a-b9f0-d7d3b43dce7c&page=2&limit=10&appid=nju
 	 */
 	+(ApiMNewsList*) getApiMNewsList;
@@ -153,6 +172,11 @@
 	 *  活动  /mobile?methodno=MNewsList&debug=1&deviceid=1&userid=fe34a40e-eac6-11e3-b696-ac853d9d52b1&verify=cf09a009-d221-466a-b9f0-d7d3b43dce7c&page=2&limit=10&appid=nju
 	 */
 	+(ApiMActivity*) getApiMActivity;
+	
+	/**
+	 *  订阅新闻  /mobile?methodno=MMyRss&debug=1&deviceid=1&userid=&verify=
+	 */
+	+(ApiMRssNews*) getApiMRssNews;
 	
 	/**
 	 * 清空推送   /mobile?methodno=MPushClear&debug=1&deviceid=&appid=&userid=
@@ -257,7 +281,7 @@
 	/**
 	 *  课程表 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
 	 */
-	+(ApiMSchedule*) getApiMSchedule;
+	+(ApiMScheduleAuto*) getApiMScheduleAuto;
 	
 	/**
 	 *  获取学期列表  /mobile?methodno=MTermList&debug=1&deviceid=1&userid=&verify=&account=&password=

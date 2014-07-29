@@ -52,7 +52,9 @@
 
 - (void)loadData
 {
-    [[[ApisFactory getApiMBusSearch]setPage:page pageCount:20]load:self selecter:@selector(disposMessage:) type:self.segmentView.selectedIndex?1:2];
+    ApiMBusSearch *bussearch = [[ApisFactory getApiMBusSearch]setPage:page pageCount:20];
+    [bussearch load:self selecter:@selector(disposMessage:) type:self.segmentView.selectedIndex?1:2];
+//    [[[ApisFactory getApiMBusSearch]setPage:page pageCount:20] load:self selecter:@selector(disposMessage:) type:self.segmentView.selectedIndex?1:2];
 }
 
 - (void)disposMessage:(Son *)son

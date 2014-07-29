@@ -27,6 +27,12 @@
 		774B92D1195163F4007CB817 /* TreeHoleListHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774B92D0195163F3007CB817 /* TreeHoleListHeader.xib */; };
 		774B92D419516405007CB817 /* TreeHoleListHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 774B92D319516405007CB817 /* TreeHoleListHeader.m */; };
 		774B92D719517B64007CB817 /* ApiMPushClear.m in Sources */ = {isa = PBXBuildFile; fileRef = 774B92D619517B64007CB817 /* ApiMPushClear.m */; };
+		776522651987BAC40061AF4E /* ApiMAddMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765225C1987BAC40061AF4E /* ApiMAddMarket.m */; };
+		776522661987BAC40061AF4E /* ApiMMarketList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765225E1987BAC40061AF4E /* ApiMMarketList.m */; };
+		776522671987BAC40061AF4E /* ApiMMarketType.m in Sources */ = {isa = PBXBuildFile; fileRef = 776522601987BAC40061AF4E /* ApiMMarketType.m */; };
+		776522681987BAC40061AF4E /* ApiMRssNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 776522621987BAC40061AF4E /* ApiMRssNews.m */; };
+		776522691987BAC40061AF4E /* ApiMScheduleAuto.m in Sources */ = {isa = PBXBuildFile; fileRef = 776522641987BAC40061AF4E /* ApiMScheduleAuto.m */; };
+		7765226C1987BACB0061AF4E /* ZsndMarket.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765226B1987BACB0061AF4E /* ZsndMarket.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7765DB4719416C8E00EDDA68 /* NewMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */; };
 		7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4919416CA800EDDA68 /* NewMessageCell.m */; };
 		7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */; };
@@ -202,7 +208,6 @@
 		77E073DD1940435D0098BA09 /* ApiMVerifyMobile.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0738B1940435D0098BA09 /* ApiMVerifyMobile.m */; };
 		77E073DE1940435D0098BA09 /* ApiMVerifyUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0738D1940435D0098BA09 /* ApiMVerifyUser.m */; };
 		77E073DF1940435D0098BA09 /* ApisFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E0738F1940435D0098BA09 /* ApisFactory.m */; };
-		77E073E01940435D0098BA09 /* ApiUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E073911940435D0098BA09 /* ApiUpdate.m */; };
 		77E073E11940435D0098BA09 /* ZsndChat.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E073941940435D0098BA09 /* ZsndChat.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		77E073E21940435D0098BA09 /* ZsndIndex.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E073961940435D0098BA09 /* ZsndIndex.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		77E073E31940435D0098BA09 /* ZsndLibrary.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E073981940435D0098BA09 /* ZsndLibrary.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -572,6 +577,20 @@
 		774B92D319516405007CB817 /* TreeHoleListHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeHoleListHeader.m; sourceTree = "<group>"; };
 		774B92D519517B64007CB817 /* ApiMPushClear.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMPushClear.h; sourceTree = "<group>"; };
 		774B92D619517B64007CB817 /* ApiMPushClear.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMPushClear.m; sourceTree = "<group>"; };
+		7765225B1987BAC40061AF4E /* ApiMAddMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMAddMarket.h; sourceTree = "<group>"; };
+		7765225C1987BAC40061AF4E /* ApiMAddMarket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMAddMarket.m; sourceTree = "<group>"; };
+		7765225D1987BAC40061AF4E /* ApiMMarketList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMMarketList.h; sourceTree = "<group>"; };
+		7765225E1987BAC40061AF4E /* ApiMMarketList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMMarketList.m; sourceTree = "<group>"; };
+		7765225F1987BAC40061AF4E /* ApiMMarketType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMMarketType.h; sourceTree = "<group>"; };
+		776522601987BAC40061AF4E /* ApiMMarketType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMMarketType.m; sourceTree = "<group>"; };
+		776522611987BAC40061AF4E /* ApiMRssNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMRssNews.h; sourceTree = "<group>"; };
+		776522621987BAC40061AF4E /* ApiMRssNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMRssNews.m; sourceTree = "<group>"; };
+		776522631987BAC40061AF4E /* ApiMScheduleAuto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMScheduleAuto.h; sourceTree = "<group>"; };
+		776522641987BAC40061AF4E /* ApiMScheduleAuto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMScheduleAuto.m; sourceTree = "<group>"; };
+		7765226A1987BACB0061AF4E /* ZsndMarket.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZsndMarket.pb.h; sourceTree = "<group>"; };
+		7765226B1987BACB0061AF4E /* ZsndMarket.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZsndMarket.pb.m; sourceTree = "<group>"; };
+		7765226D1987C9E20061AF4E /* ApiUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiUpdate.h; sourceTree = "<group>"; };
+		7765226E1987C9E20061AF4E /* RegExCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExCategories.h; sourceTree = "<group>"; };
 		7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageListViewController.h; sourceTree = "<group>"; };
 		7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageListViewController.m; sourceTree = "<group>"; };
 		7765DB4819416CA800EDDA68 /* NewMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageCell.h; sourceTree = "<group>"; };
@@ -944,8 +963,6 @@
 		77E0738D1940435D0098BA09 /* ApiMVerifyUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMVerifyUser.m; sourceTree = "<group>"; };
 		77E0738E1940435D0098BA09 /* ApisFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApisFactory.h; sourceTree = "<group>"; };
 		77E0738F1940435D0098BA09 /* ApisFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApisFactory.m; sourceTree = "<group>"; };
-		77E073901940435D0098BA09 /* ApiUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiUpdate.h; sourceTree = "<group>"; };
-		77E073911940435D0098BA09 /* ApiUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiUpdate.m; sourceTree = "<group>"; };
 		77E073931940435D0098BA09 /* ZsndChat.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZsndChat.pb.h; sourceTree = "<group>"; };
 		77E073941940435D0098BA09 /* ZsndChat.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZsndChat.pb.m; sourceTree = "<group>"; };
 		77E073951940435D0098BA09 /* ZsndIndex.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZsndIndex.pb.h; sourceTree = "<group>"; };
@@ -2299,6 +2316,8 @@
 		77E072CE1940435D0098BA09 /* head */ = {
 			isa = PBXGroup;
 			children = (
+				7765226D1987C9E20061AF4E /* ApiUpdate.h */,
+				7765226E1987C9E20061AF4E /* RegExCategories.h */,
 				77E072CF1940435D0098BA09 /* AppUpdate.pb.h */,
 				77E072D01940435D0098BA09 /* DataManager.h */,
 				77E072D11940435D0098BA09 /* ErrMsg.h */,
@@ -2404,6 +2423,16 @@
 		77E0731D1940435D0098BA09 /* iosApi */ = {
 			isa = PBXGroup;
 			children = (
+				7765225B1987BAC40061AF4E /* ApiMAddMarket.h */,
+				7765225C1987BAC40061AF4E /* ApiMAddMarket.m */,
+				7765225D1987BAC40061AF4E /* ApiMMarketList.h */,
+				7765225E1987BAC40061AF4E /* ApiMMarketList.m */,
+				7765225F1987BAC40061AF4E /* ApiMMarketType.h */,
+				776522601987BAC40061AF4E /* ApiMMarketType.m */,
+				776522611987BAC40061AF4E /* ApiMRssNews.h */,
+				776522621987BAC40061AF4E /* ApiMRssNews.m */,
+				776522631987BAC40061AF4E /* ApiMScheduleAuto.h */,
+				776522641987BAC40061AF4E /* ApiMScheduleAuto.m */,
 				774B92D519517B64007CB817 /* ApiMPushClear.h */,
 				774B92D619517B64007CB817 /* ApiMPushClear.m */,
 				778EA76A19455467007B6C7E /* ApiMLogout.h */,
@@ -2530,8 +2559,6 @@
 				77E0738D1940435D0098BA09 /* ApiMVerifyUser.m */,
 				77E0738E1940435D0098BA09 /* ApisFactory.h */,
 				77E0738F1940435D0098BA09 /* ApisFactory.m */,
-				77E073901940435D0098BA09 /* ApiUpdate.h */,
-				77E073911940435D0098BA09 /* ApiUpdate.m */,
 			);
 			path = iosApi;
 			sourceTree = "<group>";
@@ -2539,6 +2566,8 @@
 		77E073921940435D0098BA09 /* iosProto */ = {
 			isa = PBXGroup;
 			children = (
+				7765226A1987BACB0061AF4E /* ZsndMarket.pb.h */,
+				7765226B1987BACB0061AF4E /* ZsndMarket.pb.m */,
 				77E073931940435D0098BA09 /* ZsndChat.pb.h */,
 				77E073941940435D0098BA09 /* ZsndChat.pb.m */,
 				77E073951940435D0098BA09 /* ZsndIndex.pb.h */,
@@ -3103,6 +3132,7 @@
 				771EDF4E193F37A200A3DCBB /* SubscribeCell.m in Sources */,
 				77E073A81940435D0098BA09 /* ApiMAddChat.m in Sources */,
 				77E073C81940435D0098BA09 /* ApiMLoginScheduleCode.m in Sources */,
+				776522661987BAC40061AF4E /* ApiMMarketList.m in Sources */,
 				778EA76919454C25007B6C7E /* ApiMBookDetail.m in Sources */,
 				771EDF38193F373000A3DCBB /* UtilMethods.m in Sources */,
 				77E076381940443F0098BA09 /* BusVC.m in Sources */,
@@ -3134,7 +3164,6 @@
 				77E075D2194043DA0098BA09 /* BBSDetail.m in Sources */,
 				77932CA1194AF2F300FBDFEF /* DetailView.m in Sources */,
 				778EA77419455467007B6C7E /* ApiMSignInInDetail.m in Sources */,
-				77E073E01940435D0098BA09 /* ApiUpdate.m in Sources */,
 				778EA77519455467007B6C7E /* ApiMTermList.m in Sources */,
 				77E07601194044110098BA09 /* ScheduleVC.m in Sources */,
 				77B90464192C44A20062237D /* BaseViewController.m in Sources */,
@@ -3154,6 +3183,7 @@
 				77B904BF192C4B3B0062237D /* MBProgressHUD+Add.m in Sources */,
 				7796F1E519496FD000015307 /* HBTalkTableViewTextLeftCell.m in Sources */,
 				7796F1E119496FD000015307 /* HBTalkTableViewImageLeftCell.m in Sources */,
+				776522681987BAC40061AF4E /* ApiMRssNews.m in Sources */,
 				77B904D1192C4B3B0062237D /* SDWebImageManager.m in Sources */,
 				7796F1D119492EB500015307 /* ConnectViewController.m in Sources */,
 				7DD86997192DB68A00D4ADAA /* PhoneNumCell.m in Sources */,
@@ -3207,6 +3237,7 @@
 				77E075E8194043F10098BA09 /* GradeDetailVC.m in Sources */,
 				7D7A4872198691450019E9B3 /* RSSVC.m in Sources */,
 				77E0762E194044340098BA09 /* BookView.m in Sources */,
+				776522691987BAC40061AF4E /* ApiMScheduleAuto.m in Sources */,
 				7796F1E619496FD000015307 /* HBTalkTableViewTextRightCell.m in Sources */,
 				77E075E7194043F10098BA09 /* GradeCell.m in Sources */,
 				7796F1E019496FD000015307 /* HBTalkTableViewCell.m in Sources */,
@@ -3233,10 +3264,13 @@
 				7765DB4719416C8E00EDDA68 /* NewMessageListViewController.m in Sources */,
 				7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */,
 				77E0762A194044340098BA09 /* Book.m in Sources */,
+				7765226C1987BACB0061AF4E /* ZsndMarket.pb.m in Sources */,
 				77E073D11940435D0098BA09 /* ApiMRoomSearch.m in Sources */,
 				7D7A486F198690640019E9B3 /* subscribeCell_n.m in Sources */,
+				776522651987BAC40061AF4E /* ApiMAddMarket.m in Sources */,
 				77E073D81940435D0098BA09 /* ApiMTreeHoleList.m in Sources */,
 				77E0762C194044340098BA09 /* BookDetailView.m in Sources */,
+				776522671987BAC40061AF4E /* ApiMMarketType.m in Sources */,
 				77B904CF192C4B3B0062237D /* SDWebImageDownloaderOperation.m in Sources */,
 				77E7D9F319308BE400BFA983 /* RefreshTableViewController.m in Sources */,
 				77E073B91940435D0098BA09 /* ApiMChatMatch.m in Sources */,

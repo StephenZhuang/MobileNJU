@@ -139,7 +139,8 @@
         [ToolUtils showMessage:@"密码不能为空"];
     } else {
         [self waiting:@"加载中"];
-        [[ApisFactory getApiMMyLibrary]load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
+#warning api更新
+//        [[ApisFactory getApiMMyLibrary]load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
     }
     
 }

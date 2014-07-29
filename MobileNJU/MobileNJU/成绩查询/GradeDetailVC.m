@@ -63,7 +63,8 @@
     [self.passwordTextField resignFirstResponder];
     [self.codeField resignFirstResponder];
     [self waiting:@"正在加载"];
-    [[ApisFactory getApiMTermList]load:self selecter:@selector(disposMessage:) code:nil account:self.schIdTextField.text password:self.passwordTextField.text];
+#warning api更新
+//    [[ApisFactory getApiMTermList]load:self selecter:@selector(disposMessage:) code:nil account:self.schIdTextField.text password:self.passwordTextField.text];
     
 }
 - (void)disposMessage:(Son *)son
