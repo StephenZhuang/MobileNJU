@@ -14,6 +14,7 @@
 #import "NanguaViewController.h"
 #import "ChatViewController.h"
 #import "ZsndIndex.pb.h"
+#import "MyNavigationController.h"
 @interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 @property (weak, nonatomic) IBOutlet UIScrollView *pageScroller;
@@ -51,6 +52,11 @@ static NSArray* descriptions;
     [self loadIndex];
     [self loadTableData];
     
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    MyNavigationController *nav = (MyNavigationController*)self.navigationController;
+    [nav hideTabBar:NO];
 }
 - (void)loadIndex
 {
@@ -275,6 +281,8 @@ static NSArray* descriptions;
 
 #pragma mark 各个按钮监听
 -(void)goToDetail:(id)sender{
+    MyNavigationController* nav = (MyNavigationController*)self.navigationController;
+    [nav hideTabBar:YES];
     MenuButton* menuButton = (MenuButton*)sender;
     if ([menuButton.desitination isEqualToString:@"树洞"]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];

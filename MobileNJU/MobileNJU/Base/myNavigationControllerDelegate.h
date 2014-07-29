@@ -10,4 +10,5 @@
 
 @protocol myNavigationControllerDelegate <NSObject>
 -(void)logOut;
+-(void)hideTabBar:(BOOL)hide;
 @end

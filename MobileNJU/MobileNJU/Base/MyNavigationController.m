@@ -38,6 +38,11 @@
 {
     [self.myDelegate logOut];
 }
+- (void)hideTabBar:(BOOL)hide
+{
+    [self.myDelegate hideTabBar:hide];
+}
+
 /*
 #pragma mark - Navigation
 

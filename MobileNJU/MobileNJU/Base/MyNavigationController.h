@@ -11,4 +11,5 @@
 @interface MyNavigationController : UINavigationController
 @property (nonatomic) id<myNavigationControllerDelegate> myDelegate;
 - (void)logOut;
+- (void)hideTabBar:(BOOL)hide;
 @end

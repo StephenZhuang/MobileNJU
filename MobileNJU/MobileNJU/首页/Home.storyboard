@@ -2591,7 +2591,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--Detail-->
         <scene sceneID="fTf-hT-Jhc">
             <objects>
-                <viewController id="1sx-bY-2El" customClass="BBSDetail" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="bbsdetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1sx-bY-2El" customClass="BBSDetail" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pvo-8X-eKj"/>
                         <viewControllerLayoutGuide type="bottom" id="8IW-vU-3S6"/>

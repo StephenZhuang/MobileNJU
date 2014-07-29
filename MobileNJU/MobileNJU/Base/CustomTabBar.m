@@ -43,8 +43,8 @@
     
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     MainMenuViewController* mainMenuVC = (MainMenuViewController*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"home"]; //test2为viewcontroller的StoryboardId
-    UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:mainMenuVC];
-
+    MyNavigationController *nav1 = [[MyNavigationController alloc] initWithRootViewController:mainMenuVC];
+    [nav1 setMyDelegate:self];
     
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
     SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"self"]; //test2为viewcontroller的StoryboardId
@@ -115,8 +115,11 @@ int preTag = 100;
 }
 - (void)logOut
 {
-    NSLog(@"退出来了");
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)hideTabBar:(BOOL)hide
+{
+    [_cbTarBar setHidden:hide];
 }
 
 @end

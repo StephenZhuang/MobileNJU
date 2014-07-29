@@ -12,5 +12,4 @@
 @interface MainMenuViewController : BaseViewController
 @property(nonatomic,strong)NSMutableArray* photoList;
 @property (nonatomic , strong) CallView *callView;
-@property (nonatomic , strong) UIView *maskView;
 @end

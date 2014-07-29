@@ -33,6 +33,14 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.webView setDelegate:self];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.webView setDelegate:nil];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
