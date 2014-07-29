@@ -44,6 +44,8 @@
 
 -(id)init:(NSString*)nid params:(NSObject*)postdata postparams:(NSObject*)postData type:(int)type build:(PBGeneratedMessage_Builder*)build selecter:(SEL) selecter;
 
+-(id)init:(NSString*)nid params:(NSObject*)postdata postparams:(NSObject*)postData  delegate:(id)ndelegate selecter:(SEL) selecter;
+
 -(id)init:(NSString*)nid params:(NSObject*)postdata postparams:(NSObject*)postData type:(int)type build:(PBGeneratedMessage_Builder*)build;
 
 -(id)init:(NSString*)nid params:(NSObject*)postdata postparams:(NSObject*)postData type:(int)type build:(PBGeneratedMessage_Builder*)build delegate:(id)ndelegate selecter:(SEL) selecter;

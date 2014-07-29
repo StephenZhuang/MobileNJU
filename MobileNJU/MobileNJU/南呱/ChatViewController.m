@@ -430,8 +430,8 @@
         [self.dataArray addObject:chat.build];
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        
-        [[ApisFactory getApiMAddChat] load:self selecter:@selector(disposMessage:) id:_targetid content:string];
+#warning api更新
+//        [[ApisFactory getApiMAddChat] load:self selecter:@selector(disposMessage:) id:_targetid content:string];
     }
     [_messageField resignFirstResponder];
     [_messageField setText:@""];

@@ -95,7 +95,7 @@
 			<key>classname</key>
 			<string>MMatch_Builder</string>
 			<key>errortype</key>
-			<string>1</string>
+			<string>0</string>
 			<key>value</key>
 			<string>MChatMatch</string>
 		</dict>
@@ -173,6 +173,42 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>MMarketType</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MMarketTypeList_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MMarketType</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MMarketList</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MMarketTypeList_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MMarketList</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MAddMarket</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MAddMarket</string>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>MNewsList</string>
 			<key>type</key>
 			<string>1</string>
@@ -242,6 +278,18 @@
 			<string>0</string>
 			<key>value</key>
 			<string>MActivity</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MRssNews</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MMyRss_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MRssNews</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -485,7 +533,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>MSchedule</string>
+			<string>MScheduleAuto</string>
 			<key>type</key>
 			<string>1</string>
 			<key>classname</key>
@@ -493,7 +541,7 @@
 			<key>errortype</key>
 			<string>0</string>
 			<key>value</key>
-			<string>MSchedule</string>
+			<string>MScheduleAuto</string>
 		</dict>
 		<dict>
 			<key>name</key>

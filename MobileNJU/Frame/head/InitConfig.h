@@ -15,10 +15,12 @@
 -(InitUrl*)getUrl:(NSString*)uid;
 
 -(NSString*)getUri;
+- (NSString *)getUriWithString:(NSString *)string;
 
 -(NSString*)getUrl;
 
 -(NSString*)getDUrl;
+- (NSString *)getDUrlWithString:(NSString *)string;
 
 -(BOOL)getLog;
 
