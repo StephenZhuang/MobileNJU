@@ -46,7 +46,7 @@
                                     <constraint firstAttribute="bottom" secondItem="g7M-a0-VNf" secondAttribute="bottom" id="kVR-lp-B67"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5C-2v-7x7">
+                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m5C-2v-7x7">
                                 <rect key="frame" x="30" y="112" width="261" height="190"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -760,7 +760,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mXo-8g-V07">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -814,7 +814,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3kM-Ed-grL" firstAttribute="top" secondItem="mXo-8g-V07" secondAttribute="bottom" constant="49" id="Gvv-BM-402"/>
+                            <constraint firstItem="3kM-Ed-grL" firstAttribute="top" secondItem="mXo-8g-V07" secondAttribute="bottom" id="Gvv-BM-402"/>
                             <constraint firstAttribute="trailing" secondItem="mXo-8g-V07" secondAttribute="trailing" id="bUs-Ib-0tJ"/>
                             <constraint firstItem="mXo-8g-V07" firstAttribute="top" secondItem="6bd-e0-bWE" secondAttribute="top" id="cws-qC-goz"/>
                             <constraint firstItem="mXo-8g-V07" firstAttribute="leading" secondItem="6bd-e0-bWE" secondAttribute="leading" id="hYg-ob-ADw"/>
@@ -843,7 +843,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cG3-P5-p8F">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -922,7 +922,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cG3-P5-p8F" firstAttribute="top" secondItem="EbO-a5-56F" secondAttribute="top" id="774-S7-ep3"/>
-                            <constraint firstItem="2of-xl-U9n" firstAttribute="top" secondItem="cG3-P5-p8F" secondAttribute="bottom" constant="49" id="IWM-H8-Q2O"/>
+                            <constraint firstItem="2of-xl-U9n" firstAttribute="top" secondItem="cG3-P5-p8F" secondAttribute="bottom" id="IWM-H8-Q2O"/>
                             <constraint firstItem="cG3-P5-p8F" firstAttribute="leading" secondItem="EbO-a5-56F" secondAttribute="leading" id="dAj-2Q-c9q"/>
                             <constraint firstAttribute="trailing" secondItem="cG3-P5-p8F" secondAttribute="trailing" id="opZ-yT-jzc"/>
                         </constraints>
@@ -950,7 +950,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CgK-D5-3n1">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1015,7 +1015,7 @@
                             <constraint firstAttribute="trailing" secondItem="CgK-D5-3n1" secondAttribute="trailing" id="87X-VN-VCe"/>
                             <constraint firstItem="CgK-D5-3n1" firstAttribute="leading" secondItem="5Zg-2O-g2y" secondAttribute="leading" id="M3s-Jl-Xq5"/>
                             <constraint firstItem="CgK-D5-3n1" firstAttribute="top" secondItem="5Zg-2O-g2y" secondAttribute="top" id="SQd-Mv-tro"/>
-                            <constraint firstItem="xpE-Qc-0YX" firstAttribute="top" secondItem="CgK-D5-3n1" secondAttribute="bottom" constant="49" id="aqT-nA-Sub"/>
+                            <constraint firstItem="xpE-Qc-0YX" firstAttribute="top" secondItem="CgK-D5-3n1" secondAttribute="bottom" id="aqT-nA-Sub"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="33l-ML-dr5"/>

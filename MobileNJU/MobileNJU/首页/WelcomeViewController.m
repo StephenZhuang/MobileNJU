@@ -12,6 +12,13 @@
 #import "ZsndUser.pb.h"
 #import "ZsndSystem.pb.h"
 #import "CustomTabBar.h"
+#import "MainMenuViewController.h"
+#import "SelfInfoVC.h"
+#import "SubscribeVC.h"
+#import "ActivityCell.h"
+#import "ActivityVC.h"
+#import "RDVTabBarController.h"
+#import "RDVTabBarItem.h"
 @interface WelcomeViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
@@ -92,10 +99,11 @@
             MRet_Builder *ret = (MRet_Builder *)[son getBuild];
             NSLog(@"=======%@",ret.msg);
             if ([ToolUtils isLogin]) {
-                CustomTabBar *root = [[CustomTabBar alloc] init];
-                [self presentViewController:root animated:YES completion:^{
-                    
-                }];
+//                CustomTabBar *root = [[CustomTabBar alloc] init];
+//                [self presentViewController:root animated:YES completion:^{
+//                    
+//                }];
+                [self loadMain];
 
             } else {
                 [self showLoginView];
@@ -115,16 +123,63 @@
             [ToolUtils setPassword:self.passwordTextField.text];
 //            [self performSegueWithIdentifier:@"main" sender:nil];
             
-            CustomTabBar *root = [[CustomTabBar alloc] init];
-            [self presentViewController:root animated:YES completion:^{
-            
-            }];
+//            CustomTabBar *root = [[CustomTabBar alloc] init];
+//            [self presentViewController:root animated:YES completion:^{
+//            
+//            }];
+            [self loadMain];
         }
     } else {
         [self showLoginView];
     }
 }
+- (void)loadMain
 
+{
+    UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    MainMenuViewController* mainMenuVC = (MainMenuViewController*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"home"]; //test2为viewcontroller的StoryboardId
+    UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:mainMenuVC];
+    
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
+    SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"self"]; //test2为viewcontroller的StoryboardId
+    UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:selfVC];
+    
+    UIStoryboard *thirdStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+    SubscribeVC* subVC = (SubscribeVC*)[thirdStoryBoard instantiateViewControllerWithIdentifier:@"subscribe"]; //test2为viewcontroller的StoryboardId
+    UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:subVC];
+    
+    
+    
+    ActivityVC* activityVC = (ActivityVC*)[thirdStoryBoard instantiateViewControllerWithIdentifier:@"activity"]; //test2为viewcontroller的StoryboardId
+    UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:activityVC];
+    RDVTabBarController *tabBarController = [[RDVTabBarController alloc] init];
+    [tabBarController setViewControllers:@[nav1, nav2,
+                                           nav3,nav4]];
+    [self customizeTabBarForController:tabBarController];
+    [self presentViewController:tabBarController animated:YES completion:nil];
+    
+}
+
+
+- (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
+//    NSArray *tabBarItemImages = @[@"first", @"second", @"third"];
+    
+    NSArray* buttonImages = @[@"首页",@"订阅",@"活动",@"个人"];
+    NSArray* buttonImagesSelected=@[@"首页选中",@"订阅选中",@"活动选中",@"个人选中"];
+    
+
+    NSInteger index = 0;
+    for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
+        
+        UIImage *selectedimage = [UIImage imageNamed:[buttonImagesSelected objectAtIndex:index]];
+        UIImage *unselectedimage = [UIImage imageNamed:[buttonImages objectAtIndex:index]];
+        [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
+        [item setBackgroundColor:[UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1]];
+       
+        index++;
+        
+    }
+}
 
 
 

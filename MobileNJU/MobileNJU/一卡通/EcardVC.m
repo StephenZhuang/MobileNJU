@@ -9,8 +9,8 @@
 #import "EcardVC.h"
 #import "EcardCell.h"
 #import "ZsndSystem.pb.h"
-
-@interface EcardVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+#import "IQActionSheetPickerView.h"
+@interface EcardVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,IQActionSheetPickerViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UITextField *schIDText;
 @property (weak, nonatomic) IBOutlet UITextField *passwordText;
@@ -43,14 +43,13 @@
     [super viewDidLoad];
     [self.maskView setHidden:YES];
     
-    [self.alertView setHidden:YES];
+    [self.alertView setHidden:!([ToolUtils getEcardId]==nil)];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backToMain:)];
     [self.ecardDesc addGestureRecognizer:singleTap];
     [self.ecardTitle addGestureRecognizer:singleTap];
     [self.schIDText setText:[ToolUtils getEcardId]==nil?@"":[ToolUtils getEcardId]];
     [self.passwordText setText:[ToolUtils getEcardPassword]==nil?@"":[ToolUtils getPassword]];
     [self getCode];
-    
     // Do any additional setup after loading the view.
 }
 
@@ -73,35 +72,26 @@
     return updateone;
 }
 
+#warning  waiting for new Api
 - (void)disposMessage:(Son *)son
 {
     [self.loginIndicator removeFromSuperview];
     if ([son getError]==0) {
-        NSLog(@"...");
         if ([[son getMethod]isEqualToString:@"MCardInfo"]) {
        }
     }
-}
-
-- (IBAction)chooseDate:(id)sender {
-    [self.pickerView setHidden:YES];
-    [self.maskView setHidden:YES];
-    NSDate *selected = [self.dataPicker date];
-    // 创建一个日期格式器
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    // 为日期格式器设置格式字符串
-    [dateFormatter setDateFormat:@"MM月dd日"];
-    // 使用日期格式器格式化日期、时间
-    NSString *destDateString = [dateFormatter stringFromDate:selected];
-    [self.selectedButton setTitle:destDateString forState:UIControlStateNormal];
 }
 
 
 
 - (IBAction)showDataPicker:(UIButton *)sender {
     self.selectedButton = sender;
-    [self.pickerView setHidden:NO];
-    [self.maskView setHidden:NO];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择生日" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    [picker setTag:6];
+    [picker setActionSheetPickerStyle:IQActionSheetPickerStyleDatePicker];
+    [picker showInView:self.view];
+    [picker setDate:[NSDate date]];
+    
 }
 
 
@@ -183,6 +173,18 @@
 }
 
 
+
+#pragma mark IQActionSheetDelegate
+- (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray *)titles
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    // 为日期格式器设置格式字符串
+    [dateFormatter setDateFormat:@"MM月dd日"];
+    // 使用日期格式器格式化日期、时间
+    NSString *destDateString = [dateFormatter stringFromDate:pickerView.date];
+    [self.selectedButton setTitle:destDateString forState:UIControlStateNormal];
+
+}
 #pragma mark - Table view delegate
 
 /*

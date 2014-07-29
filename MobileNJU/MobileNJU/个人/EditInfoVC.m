@@ -12,16 +12,16 @@
 #import "TagView.h"
 #import "ToolUtils.h"
 #import "ZsndUser.pb.h"
-@interface EditInfoVC ()<UITextFieldDelegate>
+#import "IQActionSheetPickerView.h"
+@interface EditInfoVC ()<UITextFieldDelegate,IQActionSheetPickerViewDelegate>
 @property(nonatomic,strong)AYHCustomComboBox* instituteBox;
 @property (weak, nonatomic) IBOutlet UITextField *instituteField;
 @property (weak, nonatomic) IBOutlet UITextField *nickNameField;
-@property (weak, nonatomic) IBOutlet TagView *tagView;
+
 @property (weak, nonatomic) IBOutlet UITextField *birthField;
 @property (weak, nonatomic) IBOutlet CheckBox *maleCheckBox;
 @property (weak, nonatomic) IBOutlet CheckBox *femaleCheckBox;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
-@property (weak, nonatomic) IBOutlet UIView *dateView;
+
 @end
 
 @implementation EditInfoVC
@@ -33,14 +33,12 @@
     [self setTitle:@"完善资料"];
     [self addComboBox];
     [self.nickNameField setDelegate:self];
-    [self.tagView initialTags];
     [self initField];
     // Do any additional setup after loading the view.
 }
 
 - (void)initField
 {
-
     [self.nickNameField setText:[ToolUtils getNickName]==nil?@"":[ToolUtils getNickName]];
     [self.instituteField setText:[ToolUtils getBelong]==nil?@"":[ToolUtils getBelong]
 ];
@@ -57,22 +55,20 @@
         [self.femaleCheckBox setChoose:NO];
     }
     [self.birthField setText:[ToolUtils getBirthday]==nil?@"":[ToolUtils getBirthday]];
-    
-    NSString* hobbies =[ToolUtils getTags]==nil?@"":[ToolUtils getTags];
-    NSArray* hobbiesArray = [hobbies componentsSeparatedByString:@";"];
-    [self.tagView setHobbies:hobbiesArray];
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
+#warning 这里重新写
 - (IBAction)save:(id)sender {
     [self waiting:@"正在保存"];
-    [[ApisFactory getApiMUpdateUserInfo]load:self selecter:@selector(disposMessage:) nickname:self.nickNameField.text belong:self.instituteField.text sex:(self.maleCheckBox.choose)?1:0 birthday:self.birthField.text tags:[[self.tagView getHobbies]stringByReplacingOccurrencesOfString:@";" withString:@","]];
 }
+
+
 
 - (void)disposMessage:(Son *)son
 {
@@ -123,6 +119,9 @@
     return YES;
 
 }
+
+
+#pragma -mark 选择院系
 - (void)addComboBox
 {
     [self.nickNameField resignFirstResponder];
@@ -152,36 +151,20 @@
         [self.femaleCheckBox setChoose:YES];
     }
 }
+
+
 - (IBAction)showDataPicker:(id)sender {
-    
-    [UIView animateWithDuration:0.2
-            animations:^{
-                CGFloat height = self.view.window.bounds.size.height;
-                [self.dateView setCenter:CGPointMake(self.dateView.center.x, height-self.dateView.bounds.size.height/2-60)];
-        
-    } completion:^(BOOL finished) {
-    }];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择生日" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    [picker setTag:6];
+    [picker setActionSheetPickerStyle:IQActionSheetPickerStyleDatePicker];
+    [picker showInView:self.view];
 
 }
-- (IBAction)selectData:(id)sender {
-    [UIView animateWithDuration:0.2
-                     animations:^{
-                         CGFloat height = self.view.window.bounds.size.height;
-                         [self.dateView setCenter:CGPointMake(self.dateView.center.x, height+self.dateView.bounds.size.height/2+60)];
-                         
-                     } completion:^(BOOL finished) {
-                     }];
-    
-    NSDate *selected = [self.datePicker date];
-    // 创建一个日期格式器
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    // 为日期格式器设置格式字符串
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    // 使用日期格式器格式化日期、时间
-    NSString *destDateString = [dateFormatter stringFromDate:selected];
-    [self.birthField setText:destDateString];
-}
 
+
+
+
+#pragma -mark 院系选择操作
 - (void) CustomComboBoxChanged:(id) sender SelectedItem:(NSString *)selectedItem
 {
     AYHCustomComboBox* ccb = (AYHCustomComboBox*) sender;
@@ -190,11 +173,25 @@
         [self.instituteField setText:selectedItem];
         [self.instituteBox removeFromSuperview];
     }
-  
+    
 }
+
+
 - (IBAction)closeIns:(id)sender {
     [self.nickNameField resignFirstResponder];
     [self.instituteBox removeFromSuperview ];
+}
+
+
+#pragma -mark IQActionSheetPickerViewDelegate
+- (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray *)titles
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    // 为日期格式器设置格式字符串
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    // 使用日期格式器格式化日期、时间
+    NSString *destDateString = [dateFormatter stringFromDate:pickerView.date];
+    [self.birthField setText:destDateString];
 }
 /*
 #pragma mark - Navigation

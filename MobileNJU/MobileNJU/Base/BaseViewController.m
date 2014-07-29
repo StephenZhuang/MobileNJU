@@ -14,6 +14,7 @@
 #import "MyLibraryVC.h"
 #import "ExerciseVC.h"
 #import "WelcomeViewController.h"
+#import "RDVTabBarController.h"
 @interface BaseViewController ()<UINavigationBarDelegate,UINavigationControllerDelegate>
 
 @end
@@ -49,7 +50,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.delegate = self;
     // Do any additional setup after loading the view.
     if([self.navigationController.navigationBar
         respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){

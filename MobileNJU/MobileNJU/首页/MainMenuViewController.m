@@ -42,6 +42,7 @@ static NSArray* descriptions;
 {
     
     [super viewDidLoad];
+    self.navigationController.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCall:) name:@"getCall" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToChat:) name:@"getPushInfo" object:nil];
     [self initNewScroller];
@@ -53,11 +54,7 @@ static NSArray* descriptions;
     [self loadTableData];
     
 }
-- (void)viewWillAppear:(BOOL)animated
-{
-    MyNavigationController *nav = (MyNavigationController*)self.navigationController;
-    [nav hideTabBar:NO];
-}
+
 - (void)loadIndex
 {
     [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
@@ -281,8 +278,6 @@ static NSArray* descriptions;
 
 #pragma mark 各个按钮监听
 -(void)goToDetail:(id)sender{
-    MyNavigationController* nav = (MyNavigationController*)self.navigationController;
-    [nav hideTabBar:YES];
     MenuButton* menuButton = (MenuButton*)sender;
     if ([menuButton.desitination isEqualToString:@"树洞"]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];

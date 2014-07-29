@@ -13,10 +13,10 @@
 #import "ZsndSystem.pb.h"
 #import "UIImageView+LBBlurredImage.h"
 #import "MyNavigationController.h"
-@interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
+#import "RDVTabBarController.h"
+@interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImg;
-
 @property (weak, nonatomic) IBOutlet UITableView *infoTable;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *headImage;
@@ -30,6 +30,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
+
+    self.navigationController.delegate = self;
     [self loadData];
     self.headImage.layer.cornerRadius=55;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
@@ -38,13 +41,11 @@
     [self.headImage setClipsToBounds:YES];
     // Do any additional setup after loading the view.
 }
--(void)onClickImage
-{
-    NSLog(@"show");
-    [self showActionSheet];
-}
+
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
+
     [self loadData];
     [self.infoTable reloadData];
     [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
@@ -58,8 +59,7 @@
 
 - (IBAction)logout:(id)sender {
     [ToolUtils setIsLogin:NO];
-    MyNavigationController *controller = (MyNavigationController*)self.navigationController;
-    [controller logOut];
+    [self.rdv_tabBarController dismissViewControllerAnimated:YES completion:nil];
 //    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -93,13 +93,6 @@
             self.flowerCount = user.flower;
             //用这个方法把array 里的string 组合起来
             NSString *tagsString = [user.tagsList componentsJoinedByString:@";"];
-//            NSMutableString* tagsString = [[NSMutableString alloc]init];
-//            for (int i = 0 ; i < user.tagsList.count-1; i++)
-//            {
-//                [tagsString appendString:[user.tagsList objectAtIndex:i]];
-//                [tagsString appendString:@";"];
-//            }
-//            [tagsString appendString:[user.tagsList lastObject]];
             [ToolUtils setTags:tagsString];
             [self loadData];
             [self.infoTable reloadData];
@@ -120,7 +113,8 @@
 }
 
 - (IBAction)backToMain:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.rdv_tabBarController setSelectedIndex:0];
+    [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
 }
 
 # pragma ViewController
@@ -150,9 +144,6 @@
     if ([ToolUtils getHeadImg]!=nil) {
         NSLog(@"%@ headImage",[ToolUtils getHeadImg]);
         [self.headImage setImageWithURL:[ToolUtils getImageUrlWtihString:[ToolUtils getHeadImg] width:111 height:111] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-//            CGRect frame = CGRectMake(0, 0, 320, 240);
-//            self.backgroundImg = [[UIImageView alloc]initWithFrame:frame];
-//            [self.backgroundImg setImage:image];
             [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
             [self.backgroundImg setImageToBlur:image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:nil];
             [self.backgroundImg setClipsToBounds:YES];
@@ -161,8 +152,6 @@
         } else {
         
         [self.headImage setImage:[UIImage imageNamed:@"05个人－个人头像"]];
-//        CGRect frame = CGRectMake(0, 0, 320, 240);
-//        self.backgroundImg = [[UIImageView alloc]initWithFrame:frame];
         [self.backgroundImg setImage:[UIImage imageNamed:@"05个人－个人头像"]];
         [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
         [self.backgroundImg setImageToBlur:self.headImage.image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:nil];
@@ -216,6 +205,12 @@
 }
 
 
+#pragma -mark 头像更改
+-(void)onClickImage
+{
+    [self showActionSheet];
+}
+
 
 - (void) showActionSheet
 {
@@ -268,6 +263,7 @@
     //    [pool release];
     return newImage;
 }
+
 
 - (void)upLoadImage:(UIImage*)image
 {
@@ -353,6 +349,7 @@
         }
     }
 }
+
 
 
 @end

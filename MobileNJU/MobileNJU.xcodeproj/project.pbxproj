@@ -505,6 +505,10 @@
 		7D7A487E1986AD460019E9B3 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A487B1986AD460019E9B3 /* UIImage+ImageEffects.m */; };
 		7D7A487F1986AD460019E9B3 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A487D1986AD460019E9B3 /* UIImageView+LBBlurredImage.m */; };
 		7D7A48821986B2A80019E9B3 /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A48811986B2A80019E9B3 /* MyNavigationController.m */; };
+		7DB045E11987486600A7612B /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045DC1987486600A7612B /* RDVTabBar.m */; };
+		7DB045E21987486600A7612B /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045DE1987486600A7612B /* RDVTabBarController.m */; };
+		7DB045E31987486600A7612B /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045E01987486600A7612B /* RDVTabBarItem.m */; };
+		7DB045E71987A86E00A7612B /* IQActionSheetPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045E61987A86E00A7612B /* IQActionSheetPickerView.m */; };
 		7DBC8D6519435C6C0086E28B /* BookCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */; };
 		7DC4C58D19443D97007C6888 /* loading@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7DC4C58C19443D97007C6888 /* loading@2x.gif */; };
 		7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B30192D9C230066494D /* WelcomeViewController.m */; };
@@ -1331,6 +1335,14 @@
 		7D7A48811986B2A80019E9B3 /* MyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNavigationController.m; sourceTree = "<group>"; };
 		7D7A48831986B2C30019E9B3 /* myNavigationControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myNavigationControllerDelegate.h; sourceTree = "<group>"; };
 		7DA05111197275E400039D15 /* GradeCellChooseDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradeCellChooseDelegate.h; sourceTree = "<group>"; };
+		7DB045DB1987486600A7612B /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
+		7DB045DC1987486600A7612B /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
+		7DB045DD1987486600A7612B /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
+		7DB045DE1987486600A7612B /* RDVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarController.m; sourceTree = "<group>"; };
+		7DB045DF1987486600A7612B /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarItem.h; sourceTree = "<group>"; };
+		7DB045E01987486600A7612B /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarItem.m; sourceTree = "<group>"; };
+		7DB045E51987A86E00A7612B /* IQActionSheetPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetPickerView.h; sourceTree = "<group>"; };
+		7DB045E61987A86E00A7612B /* IQActionSheetPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetPickerView.m; sourceTree = "<group>"; };
 		7DBC8D6319435C6C0086E28B /* BookCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCollectionCell.h; sourceTree = "<group>"; };
 		7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCollectionCell.m; sourceTree = "<group>"; };
 		7DC4C58C19443D97007C6888 /* loading@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "loading@2x.gif"; sourceTree = "<group>"; };
@@ -2005,6 +2017,8 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7DB045E41987A86E00A7612B /* IQActionSheetPickerView */,
+				7DB045DA1987486600A7612B /* RDVTabBarController */,
 				7D7A48791986AD460019E9B3 /* ImageEffects */,
 				7747D0F41952C2230008C36C /* NotificationStatusBar */,
 				77B904B6192C4B3B0062237D /* ToolUtils */,
@@ -2624,6 +2638,28 @@
 			path = ImageEffects;
 			sourceTree = "<group>";
 		};
+		7DB045DA1987486600A7612B /* RDVTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				7DB045DB1987486600A7612B /* RDVTabBar.h */,
+				7DB045DC1987486600A7612B /* RDVTabBar.m */,
+				7DB045DD1987486600A7612B /* RDVTabBarController.h */,
+				7DB045DE1987486600A7612B /* RDVTabBarController.m */,
+				7DB045DF1987486600A7612B /* RDVTabBarItem.h */,
+				7DB045E01987486600A7612B /* RDVTabBarItem.m */,
+			);
+			path = RDVTabBarController;
+			sourceTree = "<group>";
+		};
+		7DB045E41987A86E00A7612B /* IQActionSheetPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				7DB045E51987A86E00A7612B /* IQActionSheetPickerView.h */,
+				7DB045E61987A86E00A7612B /* IQActionSheetPickerView.m */,
+			);
+			path = IQActionSheetPickerView;
+			sourceTree = "<group>";
+		};
 		7DD25B3D192D9DF30066494D /* 电话 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3046,6 +3082,7 @@
 				77B904C6192C4B3B0062237D /* MJPhotoProgressView.m in Sources */,
 				77B904D6192C4B3B0062237D /* UIImage+WebP.m in Sources */,
 				77E0762B194044340098BA09 /* BookCell.m in Sources */,
+				7DB045E11987486600A7612B /* RDVTabBar.m in Sources */,
 				77E0760F1940441F0098BA09 /* ClassroomVC.m in Sources */,
 				7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */,
 				778EA7851945D415007B6C7E /* NanguaBaseViewController.m in Sources */,
@@ -3072,6 +3109,7 @@
 				77E07600194044110098BA09 /* ScheduleLesson.m in Sources */,
 				77E07632194044340098BA09 /* MyLibraryVC.m in Sources */,
 				77B90439192C3F040062237D /* AppDelegate.m in Sources */,
+				7DB045E21987486600A7612B /* RDVTabBarController.m in Sources */,
 				77E073C61940435D0098BA09 /* ApiMLoginLibrary.m in Sources */,
 				77E072C9194043140098BA09 /* TreeHoleCell.m in Sources */,
 				77E075F0194044020098BA09 /* ExerciseVC.m in Sources */,
@@ -3133,6 +3171,7 @@
 				7D7A487819869C610019E9B3 /* RSSListVC.m in Sources */,
 				77E073C21940435D0098BA09 /* ApiMIndex.m in Sources */,
 				77B9046D192C4ABF0062237D /* TitleView.m in Sources */,
+				7DB045E31987486600A7612B /* RDVTabBarItem.m in Sources */,
 				77E073DF1940435D0098BA09 /* ApisFactory.m in Sources */,
 				77E0764C194044670098BA09 /* ActivityDetailVC.m in Sources */,
 				77E073CA1940435D0098BA09 /* ApiMLostAndFound.m in Sources */,
@@ -3146,6 +3185,7 @@
 				7796F1E419496FD000015307 /* HBTalkTableViewRightCell.m in Sources */,
 				77E0740C194043A20098BA09 /* HBCoreLabel.m in Sources */,
 				77883D4B1947F09C00197F59 /* ChatViewController.m in Sources */,
+				7DB045E71987A86E00A7612B /* IQActionSheetPickerView.m in Sources */,
 				77E075D1194043DA0098BA09 /* BBSCell.m in Sources */,
 				77E073CB1940435D0098BA09 /* ApiMMyLibrary.m in Sources */,
 				77B904D7192C4B3B0062237D /* UIImageView+MJWebCache.m in Sources */,
