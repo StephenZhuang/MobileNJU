@@ -2272,10 +2272,11 @@
                                         <rect key="frame" x="13" y="215" width="228" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="查询">
+                                        <state key="normal" title="查询" backgroundImage="purpleButton">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="highlighted" backgroundImage="purpleButtonhighlighted"/>
                                         <connections>
                                             <action selector="searchResult:" destination="eWv-Bq-41c" eventType="touchUpInside" id="kB9-s0-3y5"/>
                                         </connections>

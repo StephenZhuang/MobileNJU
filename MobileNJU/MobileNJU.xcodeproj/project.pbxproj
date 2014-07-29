@@ -514,6 +514,17 @@
 		7DB045E21987486600A7612B /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045DE1987486600A7612B /* RDVTabBarController.m */; };
 		7DB045E31987486600A7612B /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045E01987486600A7612B /* RDVTabBarItem.m */; };
 		7DB045E71987A86E00A7612B /* IQActionSheetPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045E61987A86E00A7612B /* IQActionSheetPickerView.m */; };
+		7DB046011987C17500A7612B /* GuGuLandscapeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045FC1987C17500A7612B /* GuGuLandscapeTableView.m */; };
+		7DB046021987C17500A7612B /* GuGuSegmentBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045FE1987C17500A7612B /* GuGuSegmentBarView.m */; };
+		7DB046031987C17500A7612B /* GuGuSegmentNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB046001987C17500A7612B /* GuGuSegmentNaviViewController.m */; };
+		7DB046061987C1B400A7612B /* shop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DB046051987C1B400A7612B /* shop.storyboard */; };
+		7DB0460B1987C1D500A7612B /* ShoppingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB046081987C1D500A7612B /* ShoppingCell.m */; };
+		7DB0460C1987C1D500A7612B /* ShoppingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB0460A1987C1D500A7612B /* ShoppingVC.m */; };
+		7DB046131987D1DB00A7612B /* QCSlideSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB0460F1987D1DB00A7612B /* QCSlideSwitchView.m */; };
+		7DB046141987D1DB00A7612B /* QCSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB046111987D1DB00A7612B /* QCSlideViewController.m */; };
+		7DB046151987D1DB00A7612B /* QCSlideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB046121987D1DB00A7612B /* QCSlideViewController.xib */; };
+		7DB046181987DAB600A7612B /* ShoppingDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB046171987DAB600A7612B /* ShoppingDetailVC.m */; };
+		7DB0461C1987E0FF00A7612B /* MyBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB0461B1987E0FF00A7612B /* MyBaseTableViewController.m */; };
 		7DBC8D6519435C6C0086E28B /* BookCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */; };
 		7DC4C58D19443D97007C6888 /* loading@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7DC4C58C19443D97007C6888 /* loading@2x.gif */; };
 		7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B30192D9C230066494D /* WelcomeViewController.m */; };
@@ -1360,6 +1371,27 @@
 		7DB045E01987486600A7612B /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarItem.m; sourceTree = "<group>"; };
 		7DB045E51987A86E00A7612B /* IQActionSheetPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetPickerView.h; sourceTree = "<group>"; };
 		7DB045E61987A86E00A7612B /* IQActionSheetPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetPickerView.m; sourceTree = "<group>"; };
+		7DB045FB1987C17500A7612B /* GuGuLandscapeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuGuLandscapeTableView.h; sourceTree = "<group>"; };
+		7DB045FC1987C17500A7612B /* GuGuLandscapeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuGuLandscapeTableView.m; sourceTree = "<group>"; };
+		7DB045FD1987C17500A7612B /* GuGuSegmentBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuGuSegmentBarView.h; sourceTree = "<group>"; };
+		7DB045FE1987C17500A7612B /* GuGuSegmentBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuGuSegmentBarView.m; sourceTree = "<group>"; };
+		7DB045FF1987C17500A7612B /* GuGuSegmentNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuGuSegmentNaviViewController.h; sourceTree = "<group>"; };
+		7DB046001987C17500A7612B /* GuGuSegmentNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuGuSegmentNaviViewController.m; sourceTree = "<group>"; };
+		7DB046051987C1B400A7612B /* shop.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = shop.storyboard; sourceTree = "<group>"; };
+		7DB046071987C1D500A7612B /* ShoppingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCell.h; sourceTree = "<group>"; };
+		7DB046081987C1D500A7612B /* ShoppingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCell.m; sourceTree = "<group>"; };
+		7DB046091987C1D500A7612B /* ShoppingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingVC.h; sourceTree = "<group>"; };
+		7DB0460A1987C1D500A7612B /* ShoppingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingVC.m; sourceTree = "<group>"; };
+		7DB0460E1987D1DB00A7612B /* QCSlideSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QCSlideSwitchView.h; path = ../ThirdParty/QCSlideSwitchView.h; sourceTree = "<group>"; };
+		7DB0460F1987D1DB00A7612B /* QCSlideSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QCSlideSwitchView.m; path = ../ThirdParty/QCSlideSwitchView.m; sourceTree = "<group>"; };
+		7DB046101987D1DB00A7612B /* QCSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QCSlideViewController.h; path = ../ThirdParty/QCSlideViewController.h; sourceTree = "<group>"; };
+		7DB046111987D1DB00A7612B /* QCSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QCSlideViewController.m; path = ../ThirdParty/QCSlideViewController.m; sourceTree = "<group>"; };
+		7DB046121987D1DB00A7612B /* QCSlideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QCSlideViewController.xib; path = ../ThirdParty/QCSlideViewController.xib; sourceTree = "<group>"; };
+		7DB046161987DAB600A7612B /* ShoppingDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoppingDetailVC.h; path = "跳蚤市场/ShoppingDetailVC.h"; sourceTree = "<group>"; };
+		7DB046171987DAB600A7612B /* ShoppingDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShoppingDetailVC.m; path = "跳蚤市场/ShoppingDetailVC.m"; sourceTree = "<group>"; };
+		7DB046191987DE6C00A7612B /* ShoppingVCDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShoppingVCDelegate.h; path = "跳蚤市场/ShoppingVCDelegate.h"; sourceTree = "<group>"; };
+		7DB0461A1987E0FF00A7612B /* MyBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBaseTableViewController.h; sourceTree = "<group>"; };
+		7DB0461B1987E0FF00A7612B /* MyBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBaseTableViewController.m; sourceTree = "<group>"; };
 		7DBC8D6319435C6C0086E28B /* BookCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCollectionCell.h; sourceTree = "<group>"; };
 		7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCollectionCell.m; sourceTree = "<group>"; };
 		7DC4C58C19443D97007C6888 /* loading@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "loading@2x.gif"; sourceTree = "<group>"; };
@@ -1926,6 +1958,7 @@
 		77B9042E192C3F040062237D /* MobileNJU */ = {
 			isa = PBXGroup;
 			children = (
+				7DB046041987C19900A7612B /* 跳蚤市场 */,
 				7D7A486C19868B1E0019E9B3 /* 订阅新 */,
 				778EA7801945D3F8007B6C7E /* 南呱 */,
 				771EDE97193F363D00A3DCBB /* 百合十大 */,
@@ -2034,6 +2067,8 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7DB0460D1987D1C600A7612B /* QCSlideTableView */,
+				7DB045FA1987C17500A7612B /* GuGuSegmentNavigationController */,
 				7DB045E41987A86E00A7612B /* IQActionSheetPickerView */,
 				7DB045DA1987486600A7612B /* RDVTabBarController */,
 				7D7A48791986AD460019E9B3 /* ImageEffects */,
@@ -2187,6 +2222,8 @@
 				7D7A48801986B2A80019E9B3 /* MyNavigationController.h */,
 				7D7A48811986B2A80019E9B3 /* MyNavigationController.m */,
 				7D7A48831986B2C30019E9B3 /* myNavigationControllerDelegate.h */,
+				7DB0461A1987E0FF00A7612B /* MyBaseTableViewController.h */,
+				7DB0461B1987E0FF00A7612B /* MyBaseTableViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2689,6 +2726,46 @@
 			path = IQActionSheetPickerView;
 			sourceTree = "<group>";
 		};
+		7DB045FA1987C17500A7612B /* GuGuSegmentNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				7DB045FB1987C17500A7612B /* GuGuLandscapeTableView.h */,
+				7DB045FC1987C17500A7612B /* GuGuLandscapeTableView.m */,
+				7DB045FD1987C17500A7612B /* GuGuSegmentBarView.h */,
+				7DB045FE1987C17500A7612B /* GuGuSegmentBarView.m */,
+				7DB045FF1987C17500A7612B /* GuGuSegmentNaviViewController.h */,
+				7DB046001987C17500A7612B /* GuGuSegmentNaviViewController.m */,
+			);
+			path = GuGuSegmentNavigationController;
+			sourceTree = "<group>";
+		};
+		7DB046041987C19900A7612B /* 跳蚤市场 */ = {
+			isa = PBXGroup;
+			children = (
+				7DB0460A1987C1D500A7612B /* ShoppingVC.m */,
+				7DB0460E1987D1DB00A7612B /* QCSlideSwitchView.h */,
+				7DB0460F1987D1DB00A7612B /* QCSlideSwitchView.m */,
+				7DB046101987D1DB00A7612B /* QCSlideViewController.h */,
+				7DB046111987D1DB00A7612B /* QCSlideViewController.m */,
+				7DB046121987D1DB00A7612B /* QCSlideViewController.xib */,
+				7DB046071987C1D500A7612B /* ShoppingCell.h */,
+				7DB046081987C1D500A7612B /* ShoppingCell.m */,
+				7DB046051987C1B400A7612B /* shop.storyboard */,
+				7DB046161987DAB600A7612B /* ShoppingDetailVC.h */,
+				7DB046171987DAB600A7612B /* ShoppingDetailVC.m */,
+				7DB046091987C1D500A7612B /* ShoppingVC.h */,
+				7DB046191987DE6C00A7612B /* ShoppingVCDelegate.h */,
+			);
+			name = "跳蚤市场";
+			sourceTree = "<group>";
+		};
+		7DB0460D1987D1C600A7612B /* QCSlideTableView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = QCSlideTableView;
+			sourceTree = "<group>";
+		};
 		7DD25B3D192D9DF30066494D /* 电话 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2887,6 +2964,7 @@
 				77E074DC194043A90098BA09 /* f001.png in Resources */,
 				77E074FA194043A90098BA09 /* f016.png in Resources */,
 				77E0762D194044340098BA09 /* BookDetailView.xib in Resources */,
+				7DB046061987C1B400A7612B /* shop.storyboard in Resources */,
 				771EDF4B193F37A200A3DCBB /* News.storyboard in Resources */,
 				77E074DF194043A90098BA09 /* f002@2x.png in Resources */,
 				77E07507194043A90098BA09 /* f022@2x.png in Resources */,
@@ -3000,6 +3078,7 @@
 				77E07547194043A90098BA09 /* f054@2x.png in Resources */,
 				77E073A51940435D0098BA09 /* ProgressHUD.bundle in Resources */,
 				77E074E4194043A90098BA09 /* f005.png in Resources */,
+				7DB046151987D1DB00A7612B /* QCSlideViewController.xib in Resources */,
 				77E074EB194043A90098BA09 /* f008@2x.png in Resources */,
 				778F9B101946B30100F89E66 /* fruit_0@2x.png in Resources */,
 				77E07549194043A90098BA09 /* f055@2x.png in Resources */,
@@ -3101,6 +3180,7 @@
 				77E073BA1940435D0098BA09 /* ApiMChatMsg.m in Sources */,
 				778EA77319455467007B6C7E /* ApiMRss.m in Sources */,
 				7796F1E219496FD000015307 /* HBTalkTableViewImageRightCell.m in Sources */,
+				7DB0460B1987C1D500A7612B /* ShoppingCell.m in Sources */,
 				77E073B21940435D0098BA09 /* ApiMChat.m in Sources */,
 				77E073D01940435D0098BA09 /* ApiMRegist.m in Sources */,
 				7DD8699E192DB6D700D4ADAA /* NewsDetailVC.m in Sources */,
@@ -3120,7 +3200,9 @@
 				774B92D719517B64007CB817 /* ApiMPushClear.m in Sources */,
 				7DD25B39192D9C230066494D /* HomeCell.m in Sources */,
 				7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */,
+				7DB046141987D1DB00A7612B /* QCSlideViewController.m in Sources */,
 				77E072CC194043140098BA09 /* TreeHoleListViewController.m in Sources */,
+				7DB0461C1987E0FF00A7612B /* MyBaseTableViewController.m in Sources */,
 				77E073B41940435D0098BA09 /* ApiMChatCall.m in Sources */,
 				7D7A487F1986AD460019E9B3 /* UIImageView+LBBlurredImage.m in Sources */,
 				77B904BC192C4B3B0062237D /* MJRefreshFooterView.m in Sources */,
@@ -3139,6 +3221,7 @@
 				77E07600194044110098BA09 /* ScheduleLesson.m in Sources */,
 				77E07632194044340098BA09 /* MyLibraryVC.m in Sources */,
 				77B90439192C3F040062237D /* AppDelegate.m in Sources */,
+				7DB046011987C17500A7612B /* GuGuLandscapeTableView.m in Sources */,
 				7DB045E21987486600A7612B /* RDVTabBarController.m in Sources */,
 				77E073C61940435D0098BA09 /* ApiMLoginLibrary.m in Sources */,
 				77E072C9194043140098BA09 /* TreeHoleCell.m in Sources */,
@@ -3155,6 +3238,7 @@
 				77E073E11940435D0098BA09 /* ZsndChat.pb.m in Sources */,
 				7D6AA9061984068600E11C31 /* CustomTabBar.m in Sources */,
 				77E075EA194043F10098BA09 /* Lesson.m in Sources */,
+				7DB046181987DAB600A7612B /* ShoppingDetailVC.m in Sources */,
 				77E073BD1940435D0098BA09 /* ApiMGetUserInfo.m in Sources */,
 				778EA7881945D5D6007B6C7E /* NanguaViewController.m in Sources */,
 				77E073B01940435D0098BA09 /* ApiMCardInfo.m in Sources */,
@@ -3211,6 +3295,7 @@
 				77E073CE1940435D0098BA09 /* ApiMNewsList.m in Sources */,
 				77B904D4192C4B3B0062237D /* UIImage+GIF.m in Sources */,
 				77E073BB1940435D0098BA09 /* ApiMContacts.m in Sources */,
+				7DB046131987D1DB00A7612B /* QCSlideSwitchView.m in Sources */,
 				7747D0FC1952C2230008C36C /* JDStatusBarStyle.m in Sources */,
 				7796F1E419496FD000015307 /* HBTalkTableViewRightCell.m in Sources */,
 				77E0740C194043A20098BA09 /* HBCoreLabel.m in Sources */,
@@ -3224,6 +3309,7 @@
 				77B904CB192C4B3B0062237D /* SDImageCache.m in Sources */,
 				77E07631194044340098BA09 /* MyBookCell.m in Sources */,
 				77B904CE192C4B3B0062237D /* SDWebImageDownloader.m in Sources */,
+				7DB046021987C17500A7612B /* GuGuSegmentBarView.m in Sources */,
 				77B90435192C3F040062237D /* main.m in Sources */,
 				77E073D21940435D0098BA09 /* ApiMSchedule.m in Sources */,
 				77E073DB1940435D0098BA09 /* ApiMUpdateHeadImg.m in Sources */,
@@ -3279,6 +3365,7 @@
 				77B904D9192C4B3B0062237D /* ToolUtils.m in Sources */,
 				77E073A71940435D0098BA09 /* ApiMActivity.m in Sources */,
 				77E07617194044290098BA09 /* LostReleaseVC.m in Sources */,
+				7DB0460C1987C1D500A7612B /* ShoppingVC.m in Sources */,
 				77E073B51940435D0098BA09 /* ApiMChatCallBack.m in Sources */,
 				77E073B71940435D0098BA09 /* ApiMChatDel.m in Sources */,
 				77E073AE1940435D0098BA09 /* ApiMBusSearch.m in Sources */,
@@ -3297,6 +3384,7 @@
 				77E073E81940435D0098BA09 /* ZsndUser.pb.m in Sources */,
 				7747D0FB1952C2230008C36C /* JDStatusBarNotification.m in Sources */,
 				774B92CD1951194C007CB817 /* CallView.m in Sources */,
+				7DB046031987C17500A7612B /* GuGuSegmentNaviViewController.m in Sources */,
 				77E073E41940435D0098BA09 /* ZsndLost.pb.m in Sources */,
 				77B904D3192C4B3B0062237D /* UIButton+WebCache.m in Sources */,
 				77B904C2192C4B3B0062237D /* MJPhoto.m in Sources */,

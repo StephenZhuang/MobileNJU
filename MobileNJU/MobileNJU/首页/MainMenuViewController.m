@@ -14,7 +14,9 @@
 #import "NanguaViewController.h"
 #import "ChatViewController.h"
 #import "ZsndIndex.pb.h"
-#import "MyNavigationController.h"
+#import "RDVTabBarController.h"
+#import "QCSlideViewController.h"
+#import "ShoppingVC.h"
 @interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 @property (weak, nonatomic) IBOutlet UIScrollView *pageScroller;
@@ -55,6 +57,10 @@ static NSArray* descriptions;
     
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
+}
 - (void)loadIndex
 {
     [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
@@ -278,6 +284,7 @@ static NSArray* descriptions;
 
 #pragma mark 各个按钮监听
 -(void)goToDetail:(id)sender{
+    [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
     MenuButton* menuButton = (MenuButton*)sender;
     if ([menuButton.desitination isEqualToString:@"树洞"]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
@@ -287,12 +294,37 @@ static NSArray* descriptions;
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
         NanguaViewController *vc = [storyboard instantiateInitialViewController];
         [self.navigationController pushViewController:vc animated:YES];
-    } else {
+    } else if ([menuButton.desitination isEqualToString:@"失物招领"])
+    {
+        [self goToShop];
+    }
+        else {
         [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
     }
 }
 
 
+- (void)goToShop
+{
+//    NSArray *titleArray = [NSArray arrayWithObjects:@"轻松一刻",@"头条",@"北京",@"房产",@"移动互联",@"财经",@"科技",@"游戏",@"历史",@"军事",@"大满贯", nil];
+//    
+//    NSMutableArray *controllerArray = [[NSMutableArray alloc]init];
+//    
+//    for (NSString* title in titleArray)
+//    {
+//        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
+//        ShoppingVC* vc = (ShoppingVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"shop"]; //test2为viewcontroller的StoryboardId
+//        [controllerArray addObject:vc];
+//    }
+//    
+//    GuGuSegmentNaviViewController *controller = [[ GuGuSegmentNaviViewController alloc]initWithItems:titleArray andControllers:controllerArray];
+    
+    QCSlideViewController *slideSwitchVC = [[QCSlideViewController alloc] init];
+    
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:slideSwitchVC];
+    [self.navigationController pushViewController:slideSwitchVC animated:YES];
+    
+}
 #pragma mark 新闻区
 
 /*
