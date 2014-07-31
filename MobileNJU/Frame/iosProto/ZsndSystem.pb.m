@@ -894,7 +894,6 @@ static MRoom* defaultMRoomInstance = nil;
 @interface MClassList ()
 @property int32_t week;
 @property (retain) NSMutableArray* mutableClassList;
-@property (retain) NSString* nowTime;
 @property (retain) NSData* img;
 @end
 
@@ -908,13 +907,6 @@ static MRoom* defaultMRoomInstance = nil;
 }
 @synthesize week;
 @synthesize mutableClassList;
-- (BOOL) hasNowTime {
-  return !!hasNowTime_;
-}
-- (void) setHasNowTime:(BOOL) value {
-  hasNowTime_ = !!value;
-}
-@synthesize nowTime;
 - (BOOL) hasImg {
   return !!hasImg_;
 }
@@ -924,14 +916,12 @@ static MRoom* defaultMRoomInstance = nil;
 @synthesize img;
 - (void) dealloc {
   self.mutableClassList = nil;
-  self.nowTime = nil;
   self.img = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
     self.week = 0;
-    self.nowTime = @"";
     self.img = [NSData data];
   }
   return self;
@@ -968,9 +958,6 @@ static MClassList* defaultMClassListInstance = nil;
   if (self.hasImg) {
     [output writeData:3 value:self.img];
   }
-  if (self.hasNowTime) {
-    [output writeString:4 value:self.nowTime];
-  }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -988,9 +975,6 @@ static MClassList* defaultMClassListInstance = nil;
   }
   if (self.hasImg) {
     size += computeDataSize(3, self.img);
-  }
-  if (self.hasNowTime) {
-    size += computeStringSize(4, self.nowTime);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -1076,9 +1060,6 @@ static MClassList* defaultMClassListInstance = nil;
     }
     [result.mutableClassList addObjectsFromArray:other.mutableClassList];
   }
-  if (other.hasNowTime) {
-    [self setNowTime:other.nowTime];
-  }
   if (other.hasImg) {
     [self setImg:other.img];
   }
@@ -1115,10 +1096,6 @@ static MClassList* defaultMClassListInstance = nil;
       }
       case 26: {
         [self setImg:[input readData]];
-        break;
-      }
-      case 34: {
-        [self setNowTime:[input readString]];
         break;
       }
     }
@@ -1169,22 +1146,6 @@ static MClassList* defaultMClassListInstance = nil;
   [result.mutableClassList addObject:value];
   return self;
 }
-- (BOOL) hasNowTime {
-  return result.hasNowTime;
-}
-- (NSString*) nowTime {
-  return result.nowTime;
-}
-- (MClassList_Builder*) setNowTime:(NSString*) value {
-  result.hasNowTime = YES;
-  result.nowTime = value;
-  return self;
-}
-- (MClassList_Builder*) clearNowTime {
-  result.hasNowTime = NO;
-  result.nowTime = @"";
-  return self;
-}
 - (BOOL) hasImg {
   return result.hasImg;
 }
@@ -1204,6 +1165,7 @@ static MClassList* defaultMClassListInstance = nil;
 @end
 
 @interface MClass ()
+@property (retain) NSString* id;
 @property (retain) NSString* name;
 @property (retain) NSString* teacher;
 @property (retain) NSString* address;
@@ -1216,6 +1178,13 @@ static MClassList* defaultMClassListInstance = nil;
 
 @implementation MClass
 
+- (BOOL) hasId {
+  return !!hasId_;
+}
+- (void) setHasId:(BOOL) value {
+  hasId_ = !!value;
+}
+@synthesize id;
 - (BOOL) hasName {
   return !!hasName_;
 }
@@ -1273,6 +1242,7 @@ static MClassList* defaultMClassListInstance = nil;
 }
 @synthesize time;
 - (void) dealloc {
+  self.id = nil;
   self.name = nil;
   self.teacher = nil;
   self.address = nil;
@@ -1282,6 +1252,7 @@ static MClassList* defaultMClassListInstance = nil;
 }
 - (id) init {
   if ((self = [super init])) {
+    self.id = @"";
     self.name = @"";
     self.teacher = @"";
     self.address = @"";
@@ -1309,29 +1280,32 @@ static MClass* defaultMClassInstance = nil;
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  if (self.hasId) {
+    [output writeString:1 value:self.id];
+  }
   if (self.hasName) {
-    [output writeString:1 value:self.name];
+    [output writeString:2 value:self.name];
   }
   if (self.hasTeacher) {
-    [output writeString:2 value:self.teacher];
+    [output writeString:3 value:self.teacher];
   }
   if (self.hasAddress) {
-    [output writeString:3 value:self.address];
+    [output writeString:4 value:self.address];
   }
   if (self.hasWeek) {
-    [output writeString:4 value:self.week];
+    [output writeString:5 value:self.week];
   }
   if (self.hasDay) {
-    [output writeInt32:5 value:self.day];
+    [output writeInt32:6 value:self.day];
   }
   if (self.hasBegin) {
-    [output writeInt32:6 value:self.begin];
+    [output writeInt32:7 value:self.begin];
   }
   if (self.hasEnd) {
-    [output writeInt32:7 value:self.end];
+    [output writeInt32:8 value:self.end];
   }
   if (self.hasTime) {
-    [output writeString:8 value:self.time];
+    [output writeString:9 value:self.time];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -1342,29 +1316,32 @@ static MClass* defaultMClassInstance = nil;
   }
 
   size = 0;
+  if (self.hasId) {
+    size += computeStringSize(1, self.id);
+  }
   if (self.hasName) {
-    size += computeStringSize(1, self.name);
+    size += computeStringSize(2, self.name);
   }
   if (self.hasTeacher) {
-    size += computeStringSize(2, self.teacher);
+    size += computeStringSize(3, self.teacher);
   }
   if (self.hasAddress) {
-    size += computeStringSize(3, self.address);
+    size += computeStringSize(4, self.address);
   }
   if (self.hasWeek) {
-    size += computeStringSize(4, self.week);
+    size += computeStringSize(5, self.week);
   }
   if (self.hasDay) {
-    size += computeInt32Size(5, self.day);
+    size += computeInt32Size(6, self.day);
   }
   if (self.hasBegin) {
-    size += computeInt32Size(6, self.begin);
+    size += computeInt32Size(7, self.begin);
   }
   if (self.hasEnd) {
-    size += computeInt32Size(7, self.end);
+    size += computeInt32Size(8, self.end);
   }
   if (self.hasTime) {
-    size += computeStringSize(8, self.time);
+    size += computeStringSize(9, self.time);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -1441,6 +1418,9 @@ static MClass* defaultMClassInstance = nil;
   if (other == [MClass defaultInstance]) {
     return self;
   }
+  if (other.hasId) {
+    [self setId:other.id];
+  }
   if (other.hasName) {
     [self setName:other.name];
   }
@@ -1487,39 +1467,59 @@ static MClass* defaultMClassInstance = nil;
         break;
       }
       case 10: {
-        [self setName:[input readString]];
+        [self setId:[input readString]];
         break;
       }
       case 18: {
-        [self setTeacher:[input readString]];
+        [self setName:[input readString]];
         break;
       }
       case 26: {
-        [self setAddress:[input readString]];
+        [self setTeacher:[input readString]];
         break;
       }
       case 34: {
+        [self setAddress:[input readString]];
+        break;
+      }
+      case 42: {
         [self setWeek:[input readString]];
         break;
       }
-      case 40: {
+      case 48: {
         [self setDay:[input readInt32]];
         break;
       }
-      case 48: {
+      case 56: {
         [self setBegin:[input readInt32]];
         break;
       }
-      case 56: {
+      case 64: {
         [self setEnd:[input readInt32]];
         break;
       }
-      case 66: {
+      case 74: {
         [self setTime:[input readString]];
         break;
       }
     }
   }
+}
+- (BOOL) hasId {
+  return result.hasId;
+}
+- (NSString*) id {
+  return result.id;
+}
+- (MClass_Builder*) setId:(NSString*) value {
+  result.hasId = YES;
+  result.id = value;
+  return self;
+}
+- (MClass_Builder*) clearId {
+  result.hasId = NO;
+  result.id = @"";
+  return self;
 }
 - (BOOL) hasName {
   return result.hasName;
@@ -1645,6 +1645,493 @@ static MClass* defaultMClassInstance = nil;
   return self;
 }
 - (MClass_Builder*) clearTime {
+  result.hasTime = NO;
+  result.time = @"";
+  return self;
+}
+@end
+
+@interface MAddClass ()
+@property (retain) NSString* account;
+@property (retain) NSString* name;
+@property (retain) NSString* teacher;
+@property (retain) NSString* address;
+@property (retain) NSString* week;
+@property int32_t day;
+@property int32_t begin;
+@property int32_t end;
+@property (retain) NSString* time;
+@end
+
+@implementation MAddClass
+
+- (BOOL) hasAccount {
+  return !!hasAccount_;
+}
+- (void) setHasAccount:(BOOL) value {
+  hasAccount_ = !!value;
+}
+@synthesize account;
+- (BOOL) hasName {
+  return !!hasName_;
+}
+- (void) setHasName:(BOOL) value {
+  hasName_ = !!value;
+}
+@synthesize name;
+- (BOOL) hasTeacher {
+  return !!hasTeacher_;
+}
+- (void) setHasTeacher:(BOOL) value {
+  hasTeacher_ = !!value;
+}
+@synthesize teacher;
+- (BOOL) hasAddress {
+  return !!hasAddress_;
+}
+- (void) setHasAddress:(BOOL) value {
+  hasAddress_ = !!value;
+}
+@synthesize address;
+- (BOOL) hasWeek {
+  return !!hasWeek_;
+}
+- (void) setHasWeek:(BOOL) value {
+  hasWeek_ = !!value;
+}
+@synthesize week;
+- (BOOL) hasDay {
+  return !!hasDay_;
+}
+- (void) setHasDay:(BOOL) value {
+  hasDay_ = !!value;
+}
+@synthesize day;
+- (BOOL) hasBegin {
+  return !!hasBegin_;
+}
+- (void) setHasBegin:(BOOL) value {
+  hasBegin_ = !!value;
+}
+@synthesize begin;
+- (BOOL) hasEnd {
+  return !!hasEnd_;
+}
+- (void) setHasEnd:(BOOL) value {
+  hasEnd_ = !!value;
+}
+@synthesize end;
+- (BOOL) hasTime {
+  return !!hasTime_;
+}
+- (void) setHasTime:(BOOL) value {
+  hasTime_ = !!value;
+}
+@synthesize time;
+- (void) dealloc {
+  self.account = nil;
+  self.name = nil;
+  self.teacher = nil;
+  self.address = nil;
+  self.week = nil;
+  self.time = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.account = @"";
+    self.name = @"";
+    self.teacher = @"";
+    self.address = @"";
+    self.week = @"";
+    self.day = 0;
+    self.begin = 0;
+    self.end = 0;
+    self.time = @"";
+  }
+  return self;
+}
+static MAddClass* defaultMAddClassInstance = nil;
++ (void) initialize {
+  if (self == [MAddClass class]) {
+    defaultMAddClassInstance = [[MAddClass alloc] init];
+  }
+}
++ (MAddClass*) defaultInstance {
+  return defaultMAddClassInstance;
+}
+- (MAddClass*) defaultInstance {
+  return defaultMAddClassInstance;
+}
+- (BOOL) isInitialized {
+  return YES;
+}
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  if (self.hasAccount) {
+    [output writeString:1 value:self.account];
+  }
+  if (self.hasName) {
+    [output writeString:2 value:self.name];
+  }
+  if (self.hasTeacher) {
+    [output writeString:3 value:self.teacher];
+  }
+  if (self.hasAddress) {
+    [output writeString:4 value:self.address];
+  }
+  if (self.hasWeek) {
+    [output writeString:5 value:self.week];
+  }
+  if (self.hasDay) {
+    [output writeInt32:6 value:self.day];
+  }
+  if (self.hasBegin) {
+    [output writeInt32:7 value:self.begin];
+  }
+  if (self.hasEnd) {
+    [output writeInt32:8 value:self.end];
+  }
+  if (self.hasTime) {
+    [output writeString:9 value:self.time];
+  }
+  [self.unknownFields writeToCodedOutputStream:output];
+}
+- (int32_t) serializedSize {
+  int32_t size = memoizedSerializedSize;
+  if (size != -1) {
+    return size;
+  }
+
+  size = 0;
+  if (self.hasAccount) {
+    size += computeStringSize(1, self.account);
+  }
+  if (self.hasName) {
+    size += computeStringSize(2, self.name);
+  }
+  if (self.hasTeacher) {
+    size += computeStringSize(3, self.teacher);
+  }
+  if (self.hasAddress) {
+    size += computeStringSize(4, self.address);
+  }
+  if (self.hasWeek) {
+    size += computeStringSize(5, self.week);
+  }
+  if (self.hasDay) {
+    size += computeInt32Size(6, self.day);
+  }
+  if (self.hasBegin) {
+    size += computeInt32Size(7, self.begin);
+  }
+  if (self.hasEnd) {
+    size += computeInt32Size(8, self.end);
+  }
+  if (self.hasTime) {
+    size += computeStringSize(9, self.time);
+  }
+  size += self.unknownFields.serializedSize;
+  memoizedSerializedSize = size;
+  return size;
+}
++ (MAddClass*) parseFromData:(NSData*) data {
+  return (MAddClass*)[[[MAddClass builder] mergeFromData:data] build];
+}
++ (MAddClass*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MAddClass*)[[[MAddClass builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
+}
++ (MAddClass*) parseFromInputStream:(NSInputStream*) input {
+  return (MAddClass*)[[[MAddClass builder] mergeFromInputStream:input] build];
+}
++ (MAddClass*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MAddClass*)[[[MAddClass builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MAddClass*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MAddClass*)[[[MAddClass builder] mergeFromCodedInputStream:input] build];
+}
++ (MAddClass*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MAddClass*)[[[MAddClass builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MAddClass_Builder*) builder {
+  return [[[MAddClass_Builder alloc] init] autorelease];
+}
++ (MAddClass_Builder*) builderWithPrototype:(MAddClass*) prototype {
+  return [[MAddClass builder] mergeFrom:prototype];
+}
+- (MAddClass_Builder*) builder {
+  return [MAddClass builder];
+}
+@end
+
+@interface MAddClass_Builder()
+@property (retain) MAddClass* result;
+@end
+
+@implementation MAddClass_Builder
+@synthesize result;
+- (void) dealloc {
+  self.result = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.result = [[[MAddClass alloc] init] autorelease];
+  }
+  return self;
+}
+- (PBGeneratedMessage*) internalGetResult {
+  return result;
+}
+- (MAddClass_Builder*) clear {
+  self.result = [[[MAddClass alloc] init] autorelease];
+  return self;
+}
+- (MAddClass_Builder*) clone {
+  return [MAddClass builderWithPrototype:result];
+}
+- (MAddClass*) defaultInstance {
+  return [MAddClass defaultInstance];
+}
+- (MAddClass*) build {
+  [self checkInitialized];
+  return [self buildPartial];
+}
+- (MAddClass*) buildPartial {
+  MAddClass* returnMe = [[result retain] autorelease];
+  self.result = nil;
+  return returnMe;
+}
+- (MAddClass_Builder*) mergeFrom:(MAddClass*) other {
+  if (other == [MAddClass defaultInstance]) {
+    return self;
+  }
+  if (other.hasAccount) {
+    [self setAccount:other.account];
+  }
+  if (other.hasName) {
+    [self setName:other.name];
+  }
+  if (other.hasTeacher) {
+    [self setTeacher:other.teacher];
+  }
+  if (other.hasAddress) {
+    [self setAddress:other.address];
+  }
+  if (other.hasWeek) {
+    [self setWeek:other.week];
+  }
+  if (other.hasDay) {
+    [self setDay:other.day];
+  }
+  if (other.hasBegin) {
+    [self setBegin:other.begin];
+  }
+  if (other.hasEnd) {
+    [self setEnd:other.end];
+  }
+  if (other.hasTime) {
+    [self setTime:other.time];
+  }
+  [self mergeUnknownFields:other.unknownFields];
+  return self;
+}
+- (MAddClass_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
+}
+- (MAddClass_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+  while (YES) {
+    int32_t tag = [input readTag];
+    switch (tag) {
+      case 0:
+        [self setUnknownFields:[unknownFields build]];
+        return self;
+      default: {
+        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
+          [self setUnknownFields:[unknownFields build]];
+          return self;
+        }
+        break;
+      }
+      case 10: {
+        [self setAccount:[input readString]];
+        break;
+      }
+      case 18: {
+        [self setName:[input readString]];
+        break;
+      }
+      case 26: {
+        [self setTeacher:[input readString]];
+        break;
+      }
+      case 34: {
+        [self setAddress:[input readString]];
+        break;
+      }
+      case 42: {
+        [self setWeek:[input readString]];
+        break;
+      }
+      case 48: {
+        [self setDay:[input readInt32]];
+        break;
+      }
+      case 56: {
+        [self setBegin:[input readInt32]];
+        break;
+      }
+      case 64: {
+        [self setEnd:[input readInt32]];
+        break;
+      }
+      case 74: {
+        [self setTime:[input readString]];
+        break;
+      }
+    }
+  }
+}
+- (BOOL) hasAccount {
+  return result.hasAccount;
+}
+- (NSString*) account {
+  return result.account;
+}
+- (MAddClass_Builder*) setAccount:(NSString*) value {
+  result.hasAccount = YES;
+  result.account = value;
+  return self;
+}
+- (MAddClass_Builder*) clearAccount {
+  result.hasAccount = NO;
+  result.account = @"";
+  return self;
+}
+- (BOOL) hasName {
+  return result.hasName;
+}
+- (NSString*) name {
+  return result.name;
+}
+- (MAddClass_Builder*) setName:(NSString*) value {
+  result.hasName = YES;
+  result.name = value;
+  return self;
+}
+- (MAddClass_Builder*) clearName {
+  result.hasName = NO;
+  result.name = @"";
+  return self;
+}
+- (BOOL) hasTeacher {
+  return result.hasTeacher;
+}
+- (NSString*) teacher {
+  return result.teacher;
+}
+- (MAddClass_Builder*) setTeacher:(NSString*) value {
+  result.hasTeacher = YES;
+  result.teacher = value;
+  return self;
+}
+- (MAddClass_Builder*) clearTeacher {
+  result.hasTeacher = NO;
+  result.teacher = @"";
+  return self;
+}
+- (BOOL) hasAddress {
+  return result.hasAddress;
+}
+- (NSString*) address {
+  return result.address;
+}
+- (MAddClass_Builder*) setAddress:(NSString*) value {
+  result.hasAddress = YES;
+  result.address = value;
+  return self;
+}
+- (MAddClass_Builder*) clearAddress {
+  result.hasAddress = NO;
+  result.address = @"";
+  return self;
+}
+- (BOOL) hasWeek {
+  return result.hasWeek;
+}
+- (NSString*) week {
+  return result.week;
+}
+- (MAddClass_Builder*) setWeek:(NSString*) value {
+  result.hasWeek = YES;
+  result.week = value;
+  return self;
+}
+- (MAddClass_Builder*) clearWeek {
+  result.hasWeek = NO;
+  result.week = @"";
+  return self;
+}
+- (BOOL) hasDay {
+  return result.hasDay;
+}
+- (int32_t) day {
+  return result.day;
+}
+- (MAddClass_Builder*) setDay:(int32_t) value {
+  result.hasDay = YES;
+  result.day = value;
+  return self;
+}
+- (MAddClass_Builder*) clearDay {
+  result.hasDay = NO;
+  result.day = 0;
+  return self;
+}
+- (BOOL) hasBegin {
+  return result.hasBegin;
+}
+- (int32_t) begin {
+  return result.begin;
+}
+- (MAddClass_Builder*) setBegin:(int32_t) value {
+  result.hasBegin = YES;
+  result.begin = value;
+  return self;
+}
+- (MAddClass_Builder*) clearBegin {
+  result.hasBegin = NO;
+  result.begin = 0;
+  return self;
+}
+- (BOOL) hasEnd {
+  return result.hasEnd;
+}
+- (int32_t) end {
+  return result.end;
+}
+- (MAddClass_Builder*) setEnd:(int32_t) value {
+  result.hasEnd = YES;
+  result.end = value;
+  return self;
+}
+- (MAddClass_Builder*) clearEnd {
+  result.hasEnd = NO;
+  result.end = 0;
+  return self;
+}
+- (BOOL) hasTime {
+  return result.hasTime;
+}
+- (NSString*) time {
+  return result.time;
+}
+- (MAddClass_Builder*) setTime:(NSString*) value {
+  result.hasTime = YES;
+  result.time = value;
+  return self;
+}
+- (MAddClass_Builder*) clearTime {
   result.hasTime = NO;
   result.time = @"";
   return self;

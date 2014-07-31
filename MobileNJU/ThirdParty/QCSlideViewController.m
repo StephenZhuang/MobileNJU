@@ -8,6 +8,7 @@
 
 #import "QCSlideViewController.h"
 #import "AddShopVC.h"
+
 #import "ZsndMarket.pb.h"
 
 @interface QCSlideViewController ()
@@ -52,7 +53,7 @@
     
     
     
-    [[ApisFactory getApiMMarketType]load:self selecter:@selector(disposMessage:)];
+//    [[ApisFactory getApiMMarketType]load:self selecter:@selector(disposMessage:)];
     
     
     NSArray *titleArray = [NSArray arrayWithObjects:@"热门",@"电子产品",@"生活用品",@"书籍",@"衣服",nil];
@@ -81,6 +82,7 @@
             MMarketTypeList_Builder* typeList = (MMarketTypeList_Builder*)[son getBuild];
             for (MMarketType* type in typeList.marketList) {
                 NSLog(@"%@",type.id);
+                NSLog(@"%@",type.description);
             }
         }
     }

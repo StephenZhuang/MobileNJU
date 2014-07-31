@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 @interface BBSDetail : BaseViewController
-@property NSURL* url;
+@property (nonatomic,strong)NSURL* url;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @end

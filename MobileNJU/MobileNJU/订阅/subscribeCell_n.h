@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *rssImg;
 @property (weak, nonatomic) IBOutlet UILabel *rssTitle;
 @property (weak, nonatomic) IBOutlet UILabel *rssDetail;
+@property (weak, nonatomic) IBOutlet UIButton *unReadButton;
 
 @end

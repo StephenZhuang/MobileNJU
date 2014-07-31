@@ -1,7 +1,7 @@
 //
 //  ApiMAddMarket
 //
-//  Created by ryan on 2014-07-31 09:18:59
+//  Created by ryan on 2014-07-31 17:37:06
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -15,27 +15,27 @@
 
 
 	/**
-	 *  添加商品 mobile?methodno=MMyLibrary&debug=1&userid=&verify=&deviceid=&appid=&account=&password=
+	 * 
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @param product * url
-	 * @callback MRet_Builder
+	 * @param market * null
+	 * @callback MMarketList_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  product:(MAddMarket_Builder*) product {
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  market:(MAddMarket_Builder*) market {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddMarket" params:array  postparams:product delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddMarket" params:array  postparams:market delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 
 	/**
-	 *  添加商品 mobile?methodno=MMyLibrary&debug=1&userid=&verify=&deviceid=&appid=&account=&password=
+	 * 
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @param product * url
-	 * @callback MRet_Builder
+	 * @param market * null
+	 * @callback MMarketList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  product:(MAddMarket_Builder*) product {
-		UpdateOne *update=[self get:delegate selecter:select product:product];
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  market:(MAddMarket_Builder*) market {
+		UpdateOne *update=[self get:delegate selecter:select market:market];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
 		return update;
 	}

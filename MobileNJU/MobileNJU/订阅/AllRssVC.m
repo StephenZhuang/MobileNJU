@@ -8,8 +8,10 @@
 
 #import "AllRssVC.h"
 #import "MySubscribeCell.h"
-@interface AllRssVC ()<UITableViewDelegate,UITableViewDataSource>
+#import "ZsndNews.pb.h"
 
+@interface AllRssVC ()<UITableViewDelegate,UITableViewDataSource,RssDelegate>
+@property (nonatomic,strong)NSArray* allRss;
 @end
 
 @implementation AllRssVC
@@ -39,22 +41,53 @@
 #warning  todo
 - (void)loadData
 {
-    [self disposMessage:nil];
+    [[ApisFactory getApiMAllRss]load:self selecter:@selector(disposMessage:)];
 }
 - (void)disposMessage:(Son *)son
 {
+    if ([son getError]==0) {
+        if ([[son getMethod]isEqualToString:@"MAllRss"]) {
+            MRssList_Builder* builder = (MRssList_Builder*)[son getBuild];
+            self.allRss = builder.listList;
+            
+        }
+    }
     [self doneWithView:_header];
 }
 
 #pragma -mark tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return self.allRss.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MySubscribeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"allRss" forIndexPath:indexPath];
+    MRss* rss = [self.allRss objectAtIndex:indexPath.row];
+    [cell.typeTitle setText:rss.title ];
+    [cell.typeDetail setText:rss.content];
+    [cell.myImageView setImageWithURL:[ToolUtils getImageUrlWtihString:rss.img width:45 height:45] placeholderImage:[UIImage imageNamed:@"news_loading"]];
+    [cell.subscribeSwitch setOn:rss.state==1];
+    cell.id = rss.id;
+    cell.delegate = self;
     return cell;
+}
+
+- (void)changeState:(NSString *)id
+{
+    for (MRss* rss in self.allRss)
+    {
+        if ([rss.id isEqualToString:id])
+        {
+            if (rss.state==1)
+            {
+               [[ApisFactory getApiMRss]load:self selecter:@selector(disposMessage:) rssid:id];
+            } else {
+                
+            }
+            
+        }
+    }
 }
 /*
 #pragma mark - Navigation

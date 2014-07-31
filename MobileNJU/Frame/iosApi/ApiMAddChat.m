@@ -1,7 +1,7 @@
 //
 //  ApiMAddChat
 //
-//  Created by ryan on 2014-07-31 09:18:59
+//  Created by ryan on 2014-07-31 17:37:06
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -20,14 +20,14 @@
 	 * @param select  回调函数
 	 * @param id * 聊天对象id
 	 * @param content  文字
-	 * @param img  null
+	 * @param image  null
 	 * @callback MChat_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  id:(NSString*)id content:(NSString*)content img:(MImg_Builder*) img {
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  id:(NSString*)id content:(NSString*)content image:(MImg_Builder*) image {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
 		[array addObject:[NSString stringWithFormat:@"id=%@",id==nil?@"":id]];
 		[array addObject:[NSString stringWithFormat:@"content=%@",content==nil?@"":content]];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddChat" params:array  postparams:img delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddChat" params:array  postparams:image delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 
@@ -37,11 +37,11 @@
 	 * @param select  回调函数
 	 * @param id * 聊天对象id
 	 * @param content  文字
-	 * @param img  null
+	 * @param image  null
 	 * @callback MChat_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  id:(NSString*)id content:(NSString*)content img:(MImg_Builder*) img {
-		UpdateOne *update=[self get:delegate selecter:select id:id content:content img:img];
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  id:(NSString*)id content:(NSString*)content image:(MImg_Builder*) image {
+		UpdateOne *update=[self get:delegate selecter:select id:id content:content image:image];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
 		return update;
 	}

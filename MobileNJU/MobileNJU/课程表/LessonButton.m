@@ -7,10 +7,7 @@
 //
 
 #import "LessonButton.h"
-#define STARTX 15   
-#define STARTY -1
-#define WIDTH 61
-#define HEIGHT 49.5
+
 @implementation LessonButton
 
 - (id)initWithFrame:(CGRect)frame
@@ -22,19 +19,7 @@
     return self;
 }
 
-- (void)setMyLesson:(ScheduleLesson *)myLesson
-{
-    _myLesson = myLesson;
-    CGRect frame = CGRectMake(STARTX+(myLesson.day-1)*WIDTH, STARTY+(myLesson.start-1)*HEIGHT, WIDTH, HEIGHT*myLesson.length);
-    self.frame = frame;
-    self.backgroundColor = [self getColor];
-    [self setTitle:myLesson.name forState:UIControlStateNormal];
-    self.titleLabel.font = [UIFont systemFontOfSize: 14.0];
-    self.titleLabel.textColor = [UIColor whiteColor];
-    self.titleLabel.numberOfLines = 0;
-    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
-    [self addTarget:self action:@selector(showDetail) forControlEvents:UIControlEventTouchUpInside];
-}
+
 
 - (void) showDetail
 {
@@ -43,19 +28,29 @@
 
 - (UIColor*)getColor
 {
-    switch (self.lessonId%9) {
-        case 0:return [UIColor colorWithRed:250/255.0 green:120/255.0 blue:134/255.0 alpha:1];
-        case 1:return [UIColor colorWithRed:252/255.0 green:220/255.0 blue:54/255.0 alpha:1];
-        case 2:return [UIColor colorWithRed:255/255.0 green:169/255.0 blue:65/255.0 alpha:1];
-        case 3:return [UIColor colorWithRed:215/255.0 green:231/255.0 blue:243/255.0 alpha:1];
-        case 4:return [UIColor colorWithRed:250/255.0 green:120/255.0 blue:134/255.0 alpha:1 ];
-        case 5:return [UIColor colorWithRed:175/255.0 green:146/255.0 blue:215/255.0 alpha:1];
-        case 6:return [UIColor colorWithRed:203/255.0 green:202/255.0 blue:199/255.0 alpha:1];
-        case 7:return [UIColor colorWithRed:52/255.0 green:206/255.0 blue:217/255.0 alpha:1];
-        case 8:return [UIColor colorWithRed:168/255.0 green:210/255.0 blue:65/255.0 alpha:1];
+    switch (self.lessonId%10) {
+        case 0:return [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+        case 1:return [UIColor colorWithRed:255/255.0 green:169/255.0 blue:165/255.0 alpha:1];
+        case 2:return [UIColor colorWithRed:118/255.0 green:233/255.0 blue:188/255.0 alpha:1];
+        case 3:return [UIColor colorWithRed:0/255.0 green:196/255.0 blue:231/255.0 alpha:1];
+        case 4:return [UIColor colorWithRed:255/255.0 green:219/255.0 blue:255/255.0 alpha:1 ];
+        case 5:return [UIColor colorWithRed:255/255.0 green:202/255.0 blue:133/255.0 alpha:1];
+        case 6:return [UIColor colorWithRed:156/255.0 green:216/255.0 blue:123/255.0 alpha:1];
+        case 7:return [UIColor colorWithRed:75/255.0 green:168/255.0 blue:255/255.0 alpha:1];
+        case 8:return [UIColor colorWithRed:143/255.0 green:128/255.0 blue:255/255.0 alpha:1];
+        case 9:return [UIColor colorWithRed:255/255.0 green:98/255.0 blue:150/255.0 alpha:1];
+
     }
     return [UIColor blackColor];
 }
+
+- (void)setMyButton:(UIButton *)myButton
+{
+    [myButton addTarget:self action:@selector(showDetail) forControlEvents:UIControlEventTouchUpInside];
+
+}
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

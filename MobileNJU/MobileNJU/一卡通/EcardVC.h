@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
-@interface EcardVC : BaseViewController
+#import "RefreshTableViewController.h"
+@interface EcardVC : RefreshTableViewController
 
 @end

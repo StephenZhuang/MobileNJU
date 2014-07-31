@@ -19,12 +19,14 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *alertView;
 @property (weak, nonatomic) IBOutlet UIImageView *confirmCode;
-@property (weak, nonatomic) IBOutlet UIView *pickerView;
-@property (weak, nonatomic) IBOutlet UIDatePicker *dataPicker;
 @property (weak, nonatomic) IBOutlet UILabel *ecardTitle;
-@property (weak, nonatomic) IBOutlet UILabel *ecardDesc;
+@property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (weak, nonatomic) IBOutlet UIButton *endButton;
+
 @property(strong,nonatomic)UIButton* selectedButton;
 @property(strong,nonatomic)NSArray* detaiList;
+@property(nonatomic)int isV;
+@property(nonatomic)int isRe;
 @end
 
 @implementation EcardVC
@@ -38,18 +40,23 @@
     return self;
 }
 
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.isRe=0;
+    self.isV=0;
     [self.maskView setHidden:YES];
     
     [self.alertView setHidden:!([ToolUtils getEcardId]==nil)];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backToMain:)];
-    [self.ecardDesc addGestureRecognizer:singleTap];
     [self.ecardTitle addGestureRecognizer:singleTap];
     [self.schIDText setText:[ToolUtils getEcardId]==nil?@"":[ToolUtils getEcardId]];
     [self.passwordText setText:[ToolUtils getEcardPassword]==nil?@"":[ToolUtils getPassword]];
     [self getCode];
+
     // Do any additional setup after loading the view.
 }
 
@@ -66,6 +73,9 @@
     }
     [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
+    [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
+    
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MCardInfo" params:array  delegate:delegate selecter:select];
     [updateone setShowLoading:NO];
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
@@ -78,10 +88,78 @@
     [self.loginIndicator removeFromSuperview];
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MCardInfo"]) {
+            MCardList_Builder* cardList = (MCardList_Builder*)[son getBuild];
+            if (cardList.cardList.count>0) {
+                self.isRe=1;
+                self.detaiList = cardList.cardList;
+                [self.tableView reloadData];
+            } else {
+                [self.confirmCode setImage:[UIImage imageWithData:cardList.img]];
+                self.isV=1;
+            }
+
+       } else if ([[son getMethod]isEqualToString:@"MCardHistory"])
+       {
+           
+           MCardList_Builder* ret = (MCardList_Builder*)[son getBuild];
+           NSMutableArray* tmp = [[NSMutableArray alloc]initWithArray:self.detaiList];
+           for (MCard* newCard in ret.cardList) {
+               int flag=0;
+               for (MCard* card in tmp) {
+                   if ([card.time isEqualToString:newCard.time]) {
+                       flag=1;
+                       break;
+                   }
+               }
+               if (!flag) {
+                   [tmp addObjectsFromArray:ret.cardList];
+                   break;
+               }
+           }
+           self.detaiList  = tmp;
+           
+           [self doneWithView:_footer];
        }
     }
 }
 
+
+- (void)loadData
+{
+    [self searchDetail:nil];
+}
+
+- (void)addHeader
+{
+    
+}
+- (IBAction)searchDetail:(id)sender {
+    if (sender!=nil) {
+        page=0;
+    }
+    NSString* startDate = self.startButton.titleLabel.text;
+    NSString* endDate = self.endButton.titleLabel.text;
+    [self load:self selecter:@selector(disposMessage:) begin:startDate end:endDate];
+}
+     
+     /**
+      *  一卡通消费记录  /mobile?methodno=MCardHistory&debug=1&deviceid=1&userid=&verify=&begin=&end=&account=&password=
+      * @param delegate 回调类
+      * @param select  回调函数
+      * @param begin * 起始
+      * @param end * 结束
+      * @callback MCardList_Builder
+      */
+     -(UpdateOne*)load:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end {
+         NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+         [array addObject:[NSString stringWithFormat:@"begin=%@",begin==nil?@"":begin]];
+         [array addObject:[NSString stringWithFormat:@"end=%@",end==nil?@"":end]];
+         [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
+         [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
+
+         UpdateOne *updateone=[[UpdateOne alloc] init:@"MCardHistory" params:array  delegate:delegate selecter:select];         [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+         return updateone;
+     }
 
 
 - (IBAction)showDataPicker:(UIButton *)sender {
@@ -121,11 +199,14 @@
     [self.passwordText resignFirstResponder];
     [self.schIDText resignFirstResponder];
     [self.confirmCode resignFirstResponder];
-    [self.pickerView setHidden:YES];
     [self.alertView setHidden:YES];
     [self.maskView setHidden:YES];
     self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
 }
+
+
+
+
 - (IBAction)searchResult:(id)sender {
     if ([self.schIDText.text isEqualToString:@""]) {
         [ToolUtils showMessage:@"请输入您的学号"];
@@ -134,6 +215,7 @@
         [ToolUtils showMessage:@"密码不得为空"];
     } else
     {
+        [self load:self selecter:@selector(disposMessage:) code:self.confirmCodeText.text account:self.schIDText.text password:self.passwordText.text];
     }
 }
 
@@ -157,7 +239,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return self.detaiList.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -169,6 +251,11 @@
 {
     static NSString *CellIdentifier = @"ecard";
     EcardCell *cell = (EcardCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    MCard* card = [self.detaiList objectAtIndex:indexPath.row];
+    [cell.locationLabel setText:card.name];
+    [cell.timeLabel setText:card.time];
+    [cell.remainLabel setText:card.total];
+    [cell.spendLabel setText:card.cost];
     return cell;
 }
 

@@ -301,6 +301,7 @@ static MBookList* defaultMBookListInstance = nil;
 @property int32_t canBorrow;
 @property (retain) NSString* borrowTime;
 @property (retain) NSString* backTime;
+@property int32_t canRenew;
 @property (retain) NSMutableArray* mutableDetailsList;
 @end
 
@@ -362,6 +363,13 @@ static MBookList* defaultMBookListInstance = nil;
   hasBackTime_ = !!value;
 }
 @synthesize backTime;
+- (BOOL) hasCanRenew {
+  return !!hasCanRenew_;
+}
+- (void) setHasCanRenew:(BOOL) value {
+  hasCanRenew_ = !!value;
+}
+@synthesize canRenew;
 @synthesize mutableDetailsList;
 - (void) dealloc {
   self.id = nil;
@@ -383,6 +391,7 @@ static MBookList* defaultMBookListInstance = nil;
     self.canBorrow = 0;
     self.borrowTime = @"";
     self.backTime = @"";
+    self.canRenew = 0;
   }
   return self;
 }
@@ -433,8 +442,11 @@ static MBook* defaultMBookInstance = nil;
   if (self.hasBackTime) {
     [output writeString:8 value:self.backTime];
   }
+  if (self.hasCanRenew) {
+    [output writeInt32:9 value:self.canRenew];
+  }
   for (MBookDetail* element in self.detailsList) {
-    [output writeMessage:9 value:element];
+    [output writeMessage:10 value:element];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -469,8 +481,11 @@ static MBook* defaultMBookInstance = nil;
   if (self.hasBackTime) {
     size += computeStringSize(8, self.backTime);
   }
+  if (self.hasCanRenew) {
+    size += computeInt32Size(9, self.canRenew);
+  }
   for (MBookDetail* element in self.detailsList) {
-    size += computeMessageSize(9, element);
+    size += computeMessageSize(10, element);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -571,6 +586,9 @@ static MBook* defaultMBookInstance = nil;
   if (other.hasBackTime) {
     [self setBackTime:other.backTime];
   }
+  if (other.hasCanRenew) {
+    [self setCanRenew:other.canRenew];
+  }
   if (other.mutableDetailsList.count > 0) {
     if (result.mutableDetailsList == nil) {
       result.mutableDetailsList = [NSMutableArray array];
@@ -630,7 +648,11 @@ static MBook* defaultMBookInstance = nil;
         [self setBackTime:[input readString]];
         break;
       }
-      case 74: {
+      case 72: {
+        [self setCanRenew:[input readInt32]];
+        break;
+      }
+      case 82: {
         MBookDetail_Builder* subBuilder = [MBookDetail builder];
         [input readMessage:subBuilder extensionRegistry:extensionRegistry];
         [self addDetails:[subBuilder buildPartial]];
@@ -765,6 +787,22 @@ static MBook* defaultMBookInstance = nil;
 - (MBook_Builder*) clearBackTime {
   result.hasBackTime = NO;
   result.backTime = @"";
+  return self;
+}
+- (BOOL) hasCanRenew {
+  return result.hasCanRenew;
+}
+- (int32_t) canRenew {
+  return result.canRenew;
+}
+- (MBook_Builder*) setCanRenew:(int32_t) value {
+  result.hasCanRenew = YES;
+  result.canRenew = value;
+  return self;
+}
+- (MBook_Builder*) clearCanRenew {
+  result.hasCanRenew = NO;
+  result.canRenew = 0;
   return self;
 }
 - (NSArray*) detailsList {

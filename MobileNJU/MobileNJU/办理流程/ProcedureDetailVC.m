@@ -18,7 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"办理流程"];
+    [self setTitle:self.title];
     // Do any additional setup after loading the view.
 }
 

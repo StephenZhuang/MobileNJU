@@ -86,6 +86,7 @@
 @private
   BOOL hasTotal_:1;
   BOOL hasCanBorrow_:1;
+  BOOL hasCanRenew_:1;
   BOOL hasId_:1;
   BOOL hasTitle_:1;
   BOOL hasAuthor_:1;
@@ -94,6 +95,7 @@
   BOOL hasBackTime_:1;
   int32_t total;
   int32_t canBorrow;
+  int32_t canRenew;
   NSString* id;
   NSString* title;
   NSString* author;
@@ -110,6 +112,7 @@
 - (BOOL) hasCanBorrow;
 - (BOOL) hasBorrowTime;
 - (BOOL) hasBackTime;
+- (BOOL) hasCanRenew;
 @property (readonly, retain) NSString* id;
 @property (readonly, retain) NSString* title;
 @property (readonly, retain) NSString* author;
@@ -118,6 +121,7 @@
 @property (readonly) int32_t canBorrow;
 @property (readonly, retain) NSString* borrowTime;
 @property (readonly, retain) NSString* backTime;
+@property (readonly) int32_t canRenew;
 - (NSArray*) detailsList;
 - (MBookDetail*) detailsAtIndex:(int32_t) index;
 
@@ -194,6 +198,11 @@
 - (NSString*) backTime;
 - (MBook_Builder*) setBackTime:(NSString*) value;
 - (MBook_Builder*) clearBackTime;
+
+- (BOOL) hasCanRenew;
+- (int32_t) canRenew;
+- (MBook_Builder*) setCanRenew:(int32_t) value;
+- (MBook_Builder*) clearCanRenew;
 
 - (NSArray*) detailsList;
 - (MBookDetail*) detailsAtIndex:(int32_t) index;

@@ -242,11 +242,13 @@
 @interface MRss : PBGeneratedMessage {
 @private
   BOOL hasState_:1;
+  BOOL hasCount_:1;
   BOOL hasId_:1;
   BOOL hasImg_:1;
   BOOL hasTitle_:1;
   BOOL hasContent_:1;
   int32_t state;
+  int32_t count;
   NSString* id;
   NSString* img;
   NSString* title;
@@ -257,11 +259,13 @@
 - (BOOL) hasTitle;
 - (BOOL) hasContent;
 - (BOOL) hasState;
+- (BOOL) hasCount;
 @property (readonly, retain) NSString* id;
 @property (readonly, retain) NSString* img;
 @property (readonly, retain) NSString* title;
 @property (readonly, retain) NSString* content;
 @property (readonly) int32_t state;
+@property (readonly) int32_t count;
 
 + (MRss*) defaultInstance;
 - (MRss*) defaultInstance;
@@ -321,6 +325,11 @@
 - (int32_t) state;
 - (MRss_Builder*) setState:(int32_t) value;
 - (MRss_Builder*) clearState;
+
+- (BOOL) hasCount;
+- (int32_t) count;
+- (MRss_Builder*) setCount:(int32_t) value;
+- (MRss_Builder*) clearCount;
 @end
 
 @interface MMyRssList : PBGeneratedMessage {
@@ -374,16 +383,20 @@
 
 @interface MMyRss : PBGeneratedMessage {
 @private
+  BOOL hasCount_:1;
   BOOL hasId_:1;
   BOOL hasTitle_:1;
+  int32_t count;
   NSString* id;
   NSString* title;
   NSMutableArray* mutableNewsList;
 }
 - (BOOL) hasId;
 - (BOOL) hasTitle;
+- (BOOL) hasCount;
 @property (readonly, retain) NSString* id;
 @property (readonly, retain) NSString* title;
+@property (readonly) int32_t count;
 - (NSArray*) newsList;
 - (MNews*) newsAtIndex:(int32_t) index;
 
@@ -437,5 +450,10 @@
 - (MMyRss_Builder*) addNews:(MNews*) value;
 - (MMyRss_Builder*) addAllNews:(NSArray*) values;
 - (MMyRss_Builder*) clearNewsList;
+
+- (BOOL) hasCount;
+- (int32_t) count;
+- (MMyRss_Builder*) setCount:(int32_t) value;
+- (MMyRss_Builder*) clearCount;
 @end
 

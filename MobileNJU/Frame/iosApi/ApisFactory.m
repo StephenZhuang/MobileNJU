@@ -1,7 +1,7 @@
 //
 //  ApisFactory
 //
-//  Created by ryan on 2014-07-31 09:18:59
+//  Created by ryan on 2014-07-31 17:37:07
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -93,24 +93,24 @@
 	}
 	
 	/**
-	 *  商品分类 mobile?methodno=MMyLibrary&debug=1&userid=&verify=&deviceid=&appid=&account=&password=
-	 */
-	+(ApiMMarketType*) getApiMMarketType{
-		return [[ApiMMarketType alloc ] init];
-	}
-	
-	/**
-	 *  获取商品详情 mobile?methodno=MMyLibrary&debug=1&userid=&verify=&deviceid=&appid=&account=&password=
+	 * 
 	 */
 	+(ApiMMarketList*) getApiMMarketList{
 		return [[ApiMMarketList alloc ] init];
 	}
 	
 	/**
-	 *  添加商品 mobile?methodno=MMyLibrary&debug=1&userid=&verify=&deviceid=&appid=&account=&password=
+	 * 
 	 */
 	+(ApiMAddMarket*) getApiMAddMarket{
 		return [[ApiMAddMarket alloc ] init];
+	}
+	
+	/**
+	 * 
+	 */
+	+(ApiMSoldMarket*) getApiMSoldMarket{
+		return [[ApiMSoldMarket alloc ] init];
 	}
 	
 	/**
@@ -153,13 +153,6 @@
 	 */
 	+(ApiMActivity*) getApiMActivity{
 		return [[ApiMActivity alloc ] init];
-	}
-	
-	/**
-	 *  订阅新闻  /mobile?methodno=MMyRss&debug=1&deviceid=1&userid=&verify=
-	 */
-	+(ApiMRssNews*) getApiMRssNews{
-		return [[ApiMRssNews alloc ] init];
 	}
 	
 	/**
@@ -305,29 +298,8 @@
 	/**
 	 *  课程表 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
 	 */
-	+(ApiMScheduleAuto*) getApiMScheduleAuto{
-		return [[ApiMScheduleAuto alloc ] init];
-	}
-	
-	/**
-	 *   课程表-教务处全新抓取 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
-	 */
 	+(ApiMSchedule*) getApiMSchedule{
 		return [[ApiMSchedule alloc ] init];
-	}
-	
-	/**
-	 *   课程表-添加课程 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
-	 */
-	+(ApiMAddClass*) getApiMAddClass{
-		return [[ApiMAddClass alloc ] init];
-	}
-	
-	/**
-	 *   课程表-删除课程 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
-	 */
-	+(ApiMDelClass*) getApiMDelClass{
-		return [[ApiMDelClass alloc ] init];
 	}
 	
 	/**

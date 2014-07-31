@@ -157,6 +157,7 @@
 
 -(void)setSelectedTitles:(NSArray *)selectedTitles animated:(BOOL)animated
 {
+
     if (_actionSheetPickerStyle == IQActionSheetPickerStyleTextPicker)
     {
         NSUInteger totalComponent = MIN(selectedTitles.count, _pickerView.numberOfComponents);
@@ -184,6 +185,7 @@
 
 -(void)selectIndexes:(NSArray *)indexes animated:(BOOL)animated
 {
+    
     if (_actionSheetPickerStyle == IQActionSheetPickerStyleTextPicker)
     {
         NSUInteger totalComponent = MIN(indexes.count, _pickerView.numberOfComponents);
@@ -267,6 +269,22 @@
         else if (component == 2)
         {
             [pickerView selectRow:MIN([pickerView selectedRowInComponent:0], row) inComponent:0 animated:YES];
+        }
+    }
+    if (self.tag==233 ) {
+        NSArray* originTitles = [self titlesForComponenets];
+        NSArray* courseArr = [originTitles objectAtIndex:1];
+        NSArray* dayArr = [originTitles firstObject];
+        NSString* selectedDay = [dayArr objectAtIndex:[_pickerView selectedRowInComponent:0]];
+        if (component==1) {
+            if ([_pickerView selectedRowInComponent:2]<=[_pickerView selectedRowInComponent:1]) {
+                [self setSelectedTitles:[NSArray arrayWithObjects:selectedDay,[courseArr objectAtIndex:row],[courseArr objectAtIndex:row], nil] animated:YES];
+            }
+
+        } else if (component==2){
+            if ([_pickerView selectedRowInComponent:2]<=[_pickerView selectedRowInComponent:1]) {
+                [self setSelectedTitles:[NSArray arrayWithObjects:selectedDay,[courseArr objectAtIndex:row],[courseArr objectAtIndex:row], nil] animated:YES];
+            }
         }
     }
 }

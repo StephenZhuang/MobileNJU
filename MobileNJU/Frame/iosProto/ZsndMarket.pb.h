@@ -4,14 +4,14 @@
 
 @class MAddMarket;
 @class MAddMarket_Builder;
+@class MMarket;
 @class MMarketList;
 @class MMarketList_Builder;
 @class MMarketType;
 @class MMarketTypeList;
 @class MMarketTypeList_Builder;
 @class MMarketType_Builder;
-@class MProduct;
-@class MProduct_Builder;
+@class MMarket_Builder;
 
 @interface ZsndMarketRoot : NSObject {
 }
@@ -19,52 +19,330 @@
 + (void) registerAllExtensions:(PBMutableExtensionRegistry*) registry;
 @end
 
-@interface MMarketType : PBGeneratedMessage {
+@interface MMarketList : PBGeneratedMessage {
 @private
-  BOOL hasId_:1;
-  NSString* id;
+  NSMutableArray* mutableMarketList;
 }
-- (BOOL) hasId;
-@property (readonly, retain) NSString* id;
+- (NSArray*) marketList;
+- (MMarket*) marketAtIndex:(int32_t) index;
 
-+ (MMarketType*) defaultInstance;
-- (MMarketType*) defaultInstance;
++ (MMarketList*) defaultInstance;
+- (MMarketList*) defaultInstance;
 
 - (BOOL) isInitialized;
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
-- (MMarketType_Builder*) builder;
-+ (MMarketType_Builder*) builder;
-+ (MMarketType_Builder*) builderWithPrototype:(MMarketType*) prototype;
+- (MMarketList_Builder*) builder;
++ (MMarketList_Builder*) builder;
++ (MMarketList_Builder*) builderWithPrototype:(MMarketList*) prototype;
 
-+ (MMarketType*) parseFromData:(NSData*) data;
-+ (MMarketType*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (MMarketType*) parseFromInputStream:(NSInputStream*) input;
-+ (MMarketType*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (MMarketType*) parseFromCodedInputStream:(PBCodedInputStream*) input;
-+ (MMarketType*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MMarketList*) parseFromData:(NSData*) data;
++ (MMarketList*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MMarketList*) parseFromInputStream:(NSInputStream*) input;
++ (MMarketList*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MMarketList*) parseFromCodedInputStream:(PBCodedInputStream*) input;
++ (MMarketList*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 @end
 
-@interface MMarketType_Builder : PBGeneratedMessage_Builder {
+@interface MMarketList_Builder : PBGeneratedMessage_Builder {
 @private
-  MMarketType* result;
+  MMarketList* result;
 }
 
-- (MMarketType*) defaultInstance;
+- (MMarketList*) defaultInstance;
 
-- (MMarketType_Builder*) clear;
-- (MMarketType_Builder*) clone;
+- (MMarketList_Builder*) clear;
+- (MMarketList_Builder*) clone;
 
-- (MMarketType*) build;
-- (MMarketType*) buildPartial;
+- (MMarketList*) build;
+- (MMarketList*) buildPartial;
 
-- (MMarketType_Builder*) mergeFrom:(MMarketType*) other;
-- (MMarketType_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
-- (MMarketType_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+- (MMarketList_Builder*) mergeFrom:(MMarketList*) other;
+- (MMarketList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
+- (MMarketList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+
+- (NSArray*) marketList;
+- (MMarket*) marketAtIndex:(int32_t) index;
+- (MMarketList_Builder*) replaceMarketAtIndex:(int32_t) index with:(MMarket*) value;
+- (MMarketList_Builder*) addMarket:(MMarket*) value;
+- (MMarketList_Builder*) addAllMarket:(NSArray*) values;
+- (MMarketList_Builder*) clearMarketList;
+@end
+
+@interface MMarket : PBGeneratedMessage {
+@private
+  BOOL hasIsSold_:1;
+  BOOL hasId_:1;
+  BOOL hasUserid_:1;
+  BOOL hasName_:1;
+  BOOL hasPriceOriginal_:1;
+  BOOL hasPrice_:1;
+  BOOL hasDescription_:1;
+  BOOL hasPhone_:1;
+  BOOL hasQq_:1;
+  BOOL hasAddress_:1;
+  BOOL hasTime_:1;
+  BOOL hasType_:1;
+  BOOL hasImgs_:1;
+  int32_t isSold;
+  NSString* id;
+  NSString* userid;
+  NSString* name;
+  NSString* priceOriginal;
+  NSString* price;
+  NSString* description;
+  NSString* phone;
+  NSString* qq;
+  NSString* address;
+  NSString* time;
+  NSString* type;
+  NSString* imgs;
+}
+- (BOOL) hasId;
+- (BOOL) hasUserid;
+- (BOOL) hasName;
+- (BOOL) hasPriceOriginal;
+- (BOOL) hasPrice;
+- (BOOL) hasDescription;
+- (BOOL) hasPhone;
+- (BOOL) hasQq;
+- (BOOL) hasAddress;
+- (BOOL) hasTime;
+- (BOOL) hasIsSold;
+- (BOOL) hasType;
+- (BOOL) hasImgs;
+@property (readonly, retain) NSString* id;
+@property (readonly, retain) NSString* userid;
+@property (readonly, retain) NSString* name;
+@property (readonly, retain) NSString* priceOriginal;
+@property (readonly, retain) NSString* price;
+@property (readonly, retain) NSString* description;
+@property (readonly, retain) NSString* phone;
+@property (readonly, retain) NSString* qq;
+@property (readonly, retain) NSString* address;
+@property (readonly, retain) NSString* time;
+@property (readonly) int32_t isSold;
+@property (readonly, retain) NSString* type;
+@property (readonly, retain) NSString* imgs;
+
++ (MMarket*) defaultInstance;
+- (MMarket*) defaultInstance;
+
+- (BOOL) isInitialized;
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
+- (MMarket_Builder*) builder;
++ (MMarket_Builder*) builder;
++ (MMarket_Builder*) builderWithPrototype:(MMarket*) prototype;
+
++ (MMarket*) parseFromData:(NSData*) data;
++ (MMarket*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MMarket*) parseFromInputStream:(NSInputStream*) input;
++ (MMarket*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input;
++ (MMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+@end
+
+@interface MMarket_Builder : PBGeneratedMessage_Builder {
+@private
+  MMarket* result;
+}
+
+- (MMarket*) defaultInstance;
+
+- (MMarket_Builder*) clear;
+- (MMarket_Builder*) clone;
+
+- (MMarket*) build;
+- (MMarket*) buildPartial;
+
+- (MMarket_Builder*) mergeFrom:(MMarket*) other;
+- (MMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
+- (MMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 
 - (BOOL) hasId;
 - (NSString*) id;
-- (MMarketType_Builder*) setId:(NSString*) value;
-- (MMarketType_Builder*) clearId;
+- (MMarket_Builder*) setId:(NSString*) value;
+- (MMarket_Builder*) clearId;
+
+- (BOOL) hasUserid;
+- (NSString*) userid;
+- (MMarket_Builder*) setUserid:(NSString*) value;
+- (MMarket_Builder*) clearUserid;
+
+- (BOOL) hasName;
+- (NSString*) name;
+- (MMarket_Builder*) setName:(NSString*) value;
+- (MMarket_Builder*) clearName;
+
+- (BOOL) hasPriceOriginal;
+- (NSString*) priceOriginal;
+- (MMarket_Builder*) setPriceOriginal:(NSString*) value;
+- (MMarket_Builder*) clearPriceOriginal;
+
+- (BOOL) hasPrice;
+- (NSString*) price;
+- (MMarket_Builder*) setPrice:(NSString*) value;
+- (MMarket_Builder*) clearPrice;
+
+- (BOOL) hasDescription;
+- (NSString*) description;
+- (MMarket_Builder*) setDescription:(NSString*) value;
+- (MMarket_Builder*) clearDescription;
+
+- (BOOL) hasPhone;
+- (NSString*) phone;
+- (MMarket_Builder*) setPhone:(NSString*) value;
+- (MMarket_Builder*) clearPhone;
+
+- (BOOL) hasQq;
+- (NSString*) qq;
+- (MMarket_Builder*) setQq:(NSString*) value;
+- (MMarket_Builder*) clearQq;
+
+- (BOOL) hasAddress;
+- (NSString*) address;
+- (MMarket_Builder*) setAddress:(NSString*) value;
+- (MMarket_Builder*) clearAddress;
+
+- (BOOL) hasTime;
+- (NSString*) time;
+- (MMarket_Builder*) setTime:(NSString*) value;
+- (MMarket_Builder*) clearTime;
+
+- (BOOL) hasIsSold;
+- (int32_t) isSold;
+- (MMarket_Builder*) setIsSold:(int32_t) value;
+- (MMarket_Builder*) clearIsSold;
+
+- (BOOL) hasType;
+- (NSString*) type;
+- (MMarket_Builder*) setType:(NSString*) value;
+- (MMarket_Builder*) clearType;
+
+- (BOOL) hasImgs;
+- (NSString*) imgs;
+- (MMarket_Builder*) setImgs:(NSString*) value;
+- (MMarket_Builder*) clearImgs;
+@end
+
+@interface MAddMarket : PBGeneratedMessage {
+@private
+  BOOL hasName_:1;
+  BOOL hasPriceOriginal_:1;
+  BOOL hasPrice_:1;
+  BOOL hasDescription_:1;
+  BOOL hasPhone_:1;
+  BOOL hasQq_:1;
+  BOOL hasAddress_:1;
+  BOOL hasType_:1;
+  NSString* name;
+  NSString* priceOriginal;
+  NSString* price;
+  NSString* description;
+  NSString* phone;
+  NSString* qq;
+  NSString* address;
+  NSString* type;
+  NSMutableArray* mutableImgsList;
+}
+- (BOOL) hasName;
+- (BOOL) hasPriceOriginal;
+- (BOOL) hasPrice;
+- (BOOL) hasDescription;
+- (BOOL) hasPhone;
+- (BOOL) hasQq;
+- (BOOL) hasAddress;
+- (BOOL) hasType;
+@property (readonly, retain) NSString* name;
+@property (readonly, retain) NSString* priceOriginal;
+@property (readonly, retain) NSString* price;
+@property (readonly, retain) NSString* description;
+@property (readonly, retain) NSString* phone;
+@property (readonly, retain) NSString* qq;
+@property (readonly, retain) NSString* address;
+@property (readonly, retain) NSString* type;
+- (NSArray*) imgsList;
+- (NSData*) imgsAtIndex:(int32_t) index;
+
++ (MAddMarket*) defaultInstance;
+- (MAddMarket*) defaultInstance;
+
+- (BOOL) isInitialized;
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
+- (MAddMarket_Builder*) builder;
++ (MAddMarket_Builder*) builder;
++ (MAddMarket_Builder*) builderWithPrototype:(MAddMarket*) prototype;
+
++ (MAddMarket*) parseFromData:(NSData*) data;
++ (MAddMarket*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MAddMarket*) parseFromInputStream:(NSInputStream*) input;
++ (MAddMarket*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MAddMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input;
++ (MAddMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+@end
+
+@interface MAddMarket_Builder : PBGeneratedMessage_Builder {
+@private
+  MAddMarket* result;
+}
+
+- (MAddMarket*) defaultInstance;
+
+- (MAddMarket_Builder*) clear;
+- (MAddMarket_Builder*) clone;
+
+- (MAddMarket*) build;
+- (MAddMarket*) buildPartial;
+
+- (MAddMarket_Builder*) mergeFrom:(MAddMarket*) other;
+- (MAddMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
+- (MAddMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+
+- (BOOL) hasName;
+- (NSString*) name;
+- (MAddMarket_Builder*) setName:(NSString*) value;
+- (MAddMarket_Builder*) clearName;
+
+- (BOOL) hasPriceOriginal;
+- (NSString*) priceOriginal;
+- (MAddMarket_Builder*) setPriceOriginal:(NSString*) value;
+- (MAddMarket_Builder*) clearPriceOriginal;
+
+- (BOOL) hasPrice;
+- (NSString*) price;
+- (MAddMarket_Builder*) setPrice:(NSString*) value;
+- (MAddMarket_Builder*) clearPrice;
+
+- (BOOL) hasDescription;
+- (NSString*) description;
+- (MAddMarket_Builder*) setDescription:(NSString*) value;
+- (MAddMarket_Builder*) clearDescription;
+
+- (BOOL) hasPhone;
+- (NSString*) phone;
+- (MAddMarket_Builder*) setPhone:(NSString*) value;
+- (MAddMarket_Builder*) clearPhone;
+
+- (BOOL) hasQq;
+- (NSString*) qq;
+- (MAddMarket_Builder*) setQq:(NSString*) value;
+- (MAddMarket_Builder*) clearQq;
+
+- (BOOL) hasAddress;
+- (NSString*) address;
+- (MAddMarket_Builder*) setAddress:(NSString*) value;
+- (MAddMarket_Builder*) clearAddress;
+
+- (BOOL) hasType;
+- (NSString*) type;
+- (MAddMarket_Builder*) setType:(NSString*) value;
+- (MAddMarket_Builder*) clearType;
+
+- (NSArray*) imgsList;
+- (NSData*) imgsAtIndex:(int32_t) index;
+- (MAddMarket_Builder*) replaceImgsAtIndex:(int32_t) index with:(NSData*) value;
+- (MAddMarket_Builder*) addImgs:(NSData*) value;
+- (MAddMarket_Builder*) addAllImgs:(NSArray*) values;
+- (MAddMarket_Builder*) clearImgsList;
 @end
 
 @interface MMarketTypeList : PBGeneratedMessage {
@@ -116,148 +394,60 @@
 - (MMarketTypeList_Builder*) clearMarketList;
 @end
 
-@interface MProduct : PBGeneratedMessage {
+@interface MMarketType : PBGeneratedMessage {
 @private
   BOOL hasId_:1;
+  BOOL hasTitle_:1;
   NSString* id;
+  NSString* title;
 }
 - (BOOL) hasId;
+- (BOOL) hasTitle;
 @property (readonly, retain) NSString* id;
+@property (readonly, retain) NSString* title;
 
-+ (MProduct*) defaultInstance;
-- (MProduct*) defaultInstance;
++ (MMarketType*) defaultInstance;
+- (MMarketType*) defaultInstance;
 
 - (BOOL) isInitialized;
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
-- (MProduct_Builder*) builder;
-+ (MProduct_Builder*) builder;
-+ (MProduct_Builder*) builderWithPrototype:(MProduct*) prototype;
+- (MMarketType_Builder*) builder;
++ (MMarketType_Builder*) builder;
++ (MMarketType_Builder*) builderWithPrototype:(MMarketType*) prototype;
 
-+ (MProduct*) parseFromData:(NSData*) data;
-+ (MProduct*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (MProduct*) parseFromInputStream:(NSInputStream*) input;
-+ (MProduct*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (MProduct*) parseFromCodedInputStream:(PBCodedInputStream*) input;
-+ (MProduct*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MMarketType*) parseFromData:(NSData*) data;
++ (MMarketType*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MMarketType*) parseFromInputStream:(NSInputStream*) input;
++ (MMarketType*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MMarketType*) parseFromCodedInputStream:(PBCodedInputStream*) input;
++ (MMarketType*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 @end
 
-@interface MProduct_Builder : PBGeneratedMessage_Builder {
+@interface MMarketType_Builder : PBGeneratedMessage_Builder {
 @private
-  MProduct* result;
+  MMarketType* result;
 }
 
-- (MProduct*) defaultInstance;
+- (MMarketType*) defaultInstance;
 
-- (MProduct_Builder*) clear;
-- (MProduct_Builder*) clone;
+- (MMarketType_Builder*) clear;
+- (MMarketType_Builder*) clone;
 
-- (MProduct*) build;
-- (MProduct*) buildPartial;
+- (MMarketType*) build;
+- (MMarketType*) buildPartial;
 
-- (MProduct_Builder*) mergeFrom:(MProduct*) other;
-- (MProduct_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
-- (MProduct_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+- (MMarketType_Builder*) mergeFrom:(MMarketType*) other;
+- (MMarketType_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
+- (MMarketType_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 
 - (BOOL) hasId;
 - (NSString*) id;
-- (MProduct_Builder*) setId:(NSString*) value;
-- (MProduct_Builder*) clearId;
-@end
+- (MMarketType_Builder*) setId:(NSString*) value;
+- (MMarketType_Builder*) clearId;
 
-@interface MMarketList : PBGeneratedMessage {
-@private
-  NSMutableArray* mutableMarketList;
-}
-- (NSArray*) marketList;
-- (MProduct*) marketAtIndex:(int32_t) index;
-
-+ (MMarketList*) defaultInstance;
-- (MMarketList*) defaultInstance;
-
-- (BOOL) isInitialized;
-- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
-- (MMarketList_Builder*) builder;
-+ (MMarketList_Builder*) builder;
-+ (MMarketList_Builder*) builderWithPrototype:(MMarketList*) prototype;
-
-+ (MMarketList*) parseFromData:(NSData*) data;
-+ (MMarketList*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (MMarketList*) parseFromInputStream:(NSInputStream*) input;
-+ (MMarketList*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (MMarketList*) parseFromCodedInputStream:(PBCodedInputStream*) input;
-+ (MMarketList*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-@end
-
-@interface MMarketList_Builder : PBGeneratedMessage_Builder {
-@private
-  MMarketList* result;
-}
-
-- (MMarketList*) defaultInstance;
-
-- (MMarketList_Builder*) clear;
-- (MMarketList_Builder*) clone;
-
-- (MMarketList*) build;
-- (MMarketList*) buildPartial;
-
-- (MMarketList_Builder*) mergeFrom:(MMarketList*) other;
-- (MMarketList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
-- (MMarketList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-
-- (NSArray*) marketList;
-- (MProduct*) marketAtIndex:(int32_t) index;
-- (MMarketList_Builder*) replaceMarketAtIndex:(int32_t) index with:(MProduct*) value;
-- (MMarketList_Builder*) addMarket:(MProduct*) value;
-- (MMarketList_Builder*) addAllMarket:(NSArray*) values;
-- (MMarketList_Builder*) clearMarketList;
-@end
-
-@interface MAddMarket : PBGeneratedMessage {
-@private
-  BOOL hasName_:1;
-  NSString* name;
-}
-- (BOOL) hasName;
-@property (readonly, retain) NSString* name;
-
-+ (MAddMarket*) defaultInstance;
-- (MAddMarket*) defaultInstance;
-
-- (BOOL) isInitialized;
-- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
-- (MAddMarket_Builder*) builder;
-+ (MAddMarket_Builder*) builder;
-+ (MAddMarket_Builder*) builderWithPrototype:(MAddMarket*) prototype;
-
-+ (MAddMarket*) parseFromData:(NSData*) data;
-+ (MAddMarket*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (MAddMarket*) parseFromInputStream:(NSInputStream*) input;
-+ (MAddMarket*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (MAddMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input;
-+ (MAddMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-@end
-
-@interface MAddMarket_Builder : PBGeneratedMessage_Builder {
-@private
-  MAddMarket* result;
-}
-
-- (MAddMarket*) defaultInstance;
-
-- (MAddMarket_Builder*) clear;
-- (MAddMarket_Builder*) clone;
-
-- (MAddMarket*) build;
-- (MAddMarket*) buildPartial;
-
-- (MAddMarket_Builder*) mergeFrom:(MAddMarket*) other;
-- (MAddMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
-- (MAddMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-
-- (BOOL) hasName;
-- (NSString*) name;
-- (MAddMarket_Builder*) setName:(NSString*) value;
-- (MAddMarket_Builder*) clearName;
+- (BOOL) hasTitle;
+- (NSString*) title;
+- (MMarketType_Builder*) setTitle:(NSString*) value;
+- (MMarketType_Builder*) clearTitle;
 @end
 
