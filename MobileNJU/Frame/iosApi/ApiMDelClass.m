@@ -1,5 +1,5 @@
 //
-//  ApiMChatChange
+//  ApiMDelClass
 //
 //  Created by ryan on 2014-07-31 09:18:59
 //  Copyright (c) ryan All rights reserved.
@@ -9,30 +9,30 @@
    
 */
 
-#import "ApiMChatChange.h"
+#import "ApiMDelClass.h"
 
-@implementation ApiMChatChange
+@implementation ApiMDelClass
 
 
 	/**
-	 *  南呱换人 /mobile?methodno=MChatChange&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=
+	 *   课程表-删除课程 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @param id * 聊天对象id
+	 * @param id * 课程id
 	 * @callback MRet_Builder
 	*/
 	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  id:(NSString*)id {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
 		[array addObject:[NSString stringWithFormat:@"id=%@",id==nil?@"":id]];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MChatChange" params:array  delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MDelClass" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 
 	/**
-	 *  南呱换人 /mobile?methodno=MChatChange&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=
+	 *   课程表-删除课程 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @param id * 聊天对象id
+	 * @param id * 课程id
 	 * @callback MRet_Builder
 	*/
 	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  id:(NSString*)id {

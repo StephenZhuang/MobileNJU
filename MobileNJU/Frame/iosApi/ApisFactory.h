@@ -1,7 +1,7 @@
 //
 //  ApisFactory
 //
-//  Created by ryan on 2014-07-29 20:12:07
+//  Created by ryan on 2014-07-31 09:18:59
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -51,6 +51,9 @@
 #import "ApiMRoomSearch.h"
 #import "ApiMAddLostAndFound.h"
 #import "ApiMScheduleAuto.h"
+#import "ApiMSchedule.h"
+#import "ApiMAddClass.h"
+#import "ApiMDelClass.h"
 #import "ApiMTermList.h"
 #import "ApiMGradeSearch.h"
 #import "ApiMCardInfo.h"
@@ -282,6 +285,21 @@
 	 *  课程表 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
 	 */
 	+(ApiMScheduleAuto*) getApiMScheduleAuto;
+	
+	/**
+	 *   课程表-教务处全新抓取 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+	 */
+	+(ApiMSchedule*) getApiMSchedule;
+	
+	/**
+	 *   课程表-添加课程 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+	 */
+	+(ApiMAddClass*) getApiMAddClass;
+	
+	/**
+	 *   课程表-删除课程 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+	 */
+	+(ApiMDelClass*) getApiMDelClass;
 	
 	/**
 	 *  获取学期列表  /mobile?methodno=MTermList&debug=1&deviceid=1&userid=&verify=&account=&password=

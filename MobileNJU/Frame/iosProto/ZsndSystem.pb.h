@@ -271,14 +271,18 @@
 @interface MClassList : PBGeneratedMessage {
 @private
   BOOL hasWeek_:1;
+  BOOL hasNowTime_:1;
   BOOL hasImg_:1;
   int32_t week;
+  NSString* nowTime;
   NSData* img;
   NSMutableArray* mutableClassList;
 }
 - (BOOL) hasWeek;
+- (BOOL) hasNowTime;
 - (BOOL) hasImg;
 @property (readonly) int32_t week;
+@property (readonly, retain) NSString* nowTime;
 @property (readonly, retain) NSData* img;
 - (NSArray*) classList;
 - (MClass*) classAtIndex:(int32_t) index;
@@ -328,6 +332,11 @@
 - (MClassList_Builder*) addClass:(MClass*) value;
 - (MClassList_Builder*) addAllClass:(NSArray*) values;
 - (MClassList_Builder*) clearClassList;
+
+- (BOOL) hasNowTime;
+- (NSString*) nowTime;
+- (MClassList_Builder*) setNowTime:(NSString*) value;
+- (MClassList_Builder*) clearNowTime;
 
 - (BOOL) hasImg;
 - (NSData*) img;

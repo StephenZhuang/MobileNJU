@@ -172,8 +172,7 @@ static MNewsList* defaultMNewsListInstance = nil;
         if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
           [self setUnknownFields:[unknownFields build]];
           return self;
-        }
-        break;
+        }         break;
       }
       case 10: {
         MNews_Builder* subBuilder = [MNews builder];

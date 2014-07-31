@@ -894,6 +894,7 @@ static MRoom* defaultMRoomInstance = nil;
 @interface MClassList ()
 @property int32_t week;
 @property (retain) NSMutableArray* mutableClassList;
+@property (retain) NSString* nowTime;
 @property (retain) NSData* img;
 @end
 
@@ -907,6 +908,13 @@ static MRoom* defaultMRoomInstance = nil;
 }
 @synthesize week;
 @synthesize mutableClassList;
+- (BOOL) hasNowTime {
+  return !!hasNowTime_;
+}
+- (void) setHasNowTime:(BOOL) value {
+  hasNowTime_ = !!value;
+}
+@synthesize nowTime;
 - (BOOL) hasImg {
   return !!hasImg_;
 }
@@ -916,12 +924,14 @@ static MRoom* defaultMRoomInstance = nil;
 @synthesize img;
 - (void) dealloc {
   self.mutableClassList = nil;
+  self.nowTime = nil;
   self.img = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
     self.week = 0;
+    self.nowTime = @"";
     self.img = [NSData data];
   }
   return self;
@@ -958,6 +968,9 @@ static MClassList* defaultMClassListInstance = nil;
   if (self.hasImg) {
     [output writeData:3 value:self.img];
   }
+  if (self.hasNowTime) {
+    [output writeString:4 value:self.nowTime];
+  }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -975,6 +988,9 @@ static MClassList* defaultMClassListInstance = nil;
   }
   if (self.hasImg) {
     size += computeDataSize(3, self.img);
+  }
+  if (self.hasNowTime) {
+    size += computeStringSize(4, self.nowTime);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -1060,6 +1076,9 @@ static MClassList* defaultMClassListInstance = nil;
     }
     [result.mutableClassList addObjectsFromArray:other.mutableClassList];
   }
+  if (other.hasNowTime) {
+    [self setNowTime:other.nowTime];
+  }
   if (other.hasImg) {
     [self setImg:other.img];
   }
@@ -1096,6 +1115,10 @@ static MClassList* defaultMClassListInstance = nil;
       }
       case 26: {
         [self setImg:[input readData]];
+        break;
+      }
+      case 34: {
+        [self setNowTime:[input readString]];
         break;
       }
     }
@@ -1144,6 +1167,22 @@ static MClassList* defaultMClassListInstance = nil;
     result.mutableClassList = [NSMutableArray array];
   }
   [result.mutableClassList addObject:value];
+  return self;
+}
+- (BOOL) hasNowTime {
+  return result.hasNowTime;
+}
+- (NSString*) nowTime {
+  return result.nowTime;
+}
+- (MClassList_Builder*) setNowTime:(NSString*) value {
+  result.hasNowTime = YES;
+  result.nowTime = value;
+  return self;
+}
+- (MClassList_Builder*) clearNowTime {
+  result.hasNowTime = NO;
+  result.nowTime = @"";
   return self;
 }
 - (BOOL) hasImg {

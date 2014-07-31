@@ -1,7 +1,7 @@
 //
 //  ApisFactory
 //
-//  Created by ryan on 2014-07-29 20:12:07
+//  Created by ryan on 2014-07-31 09:18:59
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -307,6 +307,27 @@
 	 */
 	+(ApiMScheduleAuto*) getApiMScheduleAuto{
 		return [[ApiMScheduleAuto alloc ] init];
+	}
+	
+	/**
+	 *   课程表-教务处全新抓取 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+	 */
+	+(ApiMSchedule*) getApiMSchedule{
+		return [[ApiMSchedule alloc ] init];
+	}
+	
+	/**
+	 *   课程表-添加课程 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+	 */
+	+(ApiMAddClass*) getApiMAddClass{
+		return [[ApiMAddClass alloc ] init];
+	}
+	
+	/**
+	 *   课程表-删除课程 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+	 */
+	+(ApiMDelClass*) getApiMDelClass{
+		return [[ApiMDelClass alloc ] init];
 	}
 	
 	/**
