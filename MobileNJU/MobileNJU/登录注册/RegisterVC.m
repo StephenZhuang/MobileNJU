@@ -41,11 +41,11 @@
     }
 }
 - (IBAction)complete:(id)sender {
-    
-#warning just for test
-    [self login];
-    return;
-    
+//    
+//#warning just for test
+//    [self login];
+//    return;
+//    
     if (self.passwordField.text.length==0) {
         [self showAlert:@"密码不得为空"];
         return;

@@ -265,7 +265,7 @@ static NSArray* descriptions;
 {
     HomeCell *cell = nil;
     
-    if (indexPath.row % 2 == 1) {
+    if (indexPath.row % 2 == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"LeftCell"];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"RightCell"];
@@ -304,7 +304,7 @@ static NSArray* descriptions;
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
         NanguaViewController *vc = [storyboard instantiateInitialViewController];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ([menuButton.desitination isEqualToString:@"失物招领"])
+    } else if ([menuButton.desitination isEqualToString:@"跳蚤市场"])
     {
         [self goToShop];
     }
