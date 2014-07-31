@@ -3,6 +3,82 @@
 
 <plist version="1.0">
   <dict>
+
+<key>init</key>
+  <dict>
+    <key>upencode</key>
+    <string>utf8</string>
+    <key>encode</key>
+    <string>utf8</string>
+    <key>appid</key>
+    <string>nju</string>
+    <key>url</key>
+    <string>/mobile?methodno=</string>
+    <key>durl</key>
+    <string>/download.do?id=</string>
+    <key>uurl</key>
+    <string>http://app.udows.com:82/mobile?methodno=MUpdate</string>
+    <key>uri</key>
+    <string>http://114.215.196.179:8080/zsnd</string>
+    <key>temppath</key>
+    <string>temppath</string>
+    <key>loading</key>
+    <string></string>
+    <key>channel</key>
+    <string>渠道</string>
+    <key>statkey</key>
+    <string>512d54645270154086000080</string>
+    <key>mapkey</key>
+    <string>makkey</string>
+    <key>menu</key>
+    <string>menu</string>
+    <key>error</key>
+    <string></string>
+    <key>log</key>
+    <true/>
+    <key>iconurl</key>
+    <string>iconurl</string>
+  </dict>
+
+  
+  <key>errors</key>
+  <array>
+    <dict>
+      <key>name</key>
+      <string>97</string>
+      <key>type</key>
+      <string>1</string>
+      <key>value</key>
+      <string>程序错误</string>
+    </dict>
+    <dict>
+      <key>name</key>
+      <string>96</string>
+      <key>type</key>
+      <string>1</string>
+      <key>value</key>
+      <string>数据解析错误</string>
+    </dict>
+    <dict>
+      <key>name</key>
+      <string>98</string>
+      <key>type</key>
+      <string>0</string>
+      <key>value</key>
+      <string>连接错误，请检查网络</string>
+    </dict>
+    <dict>
+      <key>name</key>
+      <string>90</string>
+      <key>type</key>
+      <string>1</string>
+      <key>value</key>
+      <string>授权错误</string>
+    </dict>
+  </array>
+
+
+
     <key>urls</key>
     <array>
       <!-- 南呱首页 /mobile?methodno=MChatIndex&debug=1&appid=nju&deviceid=1&userid=1&verify=1-->
