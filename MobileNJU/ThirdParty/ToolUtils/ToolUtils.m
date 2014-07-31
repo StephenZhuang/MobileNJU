@@ -529,4 +529,45 @@
     }
     return YES;
 }
+
++ (void)setImgList:(NSArray*)imgList;
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: imgList  forKey:@"newsImg"];
+    [userDefaults synchronize];
+
+    
+}
++ (NSArray*)getImgList
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"newsImg"];
+
+}
+
++ (NSString *)getLibraryId
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"libId"];
+}
+
++(NSString*)getLibraryPassword
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"libPassword"];
+
+}
+
++ (void)setLibraryId:(NSString *)libId
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: libId  forKey:@"libId"];
+    [userDefaults synchronize];
+}
++ (void)setLibraryPassword:(NSString *)password
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: password  forKey:@"libPassword"];
+    [userDefaults synchronize];
+
+}
+
+
 @end

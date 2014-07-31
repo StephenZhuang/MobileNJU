@@ -35,9 +35,9 @@
     [super viewDidLoad];
     [self setTitle:@"订阅"];
     UIButton *button  = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 30)];
-    NSString *iconname=DEFAULTBACKICON;
-    [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_n",iconname]] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_p",iconname]] forState:UIControlStateHighlighted];
+    NSString *iconname=@"10-1跳蚤市场-添加";
+    [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",iconname]] forState:UIControlStateNormal];
+//    [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_p",iconname]] forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(gotoAll) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *myAddButton = [[UIBarButtonItem alloc] initWithCustomView:button];
 //    NSArray *myButtonArray = [[NSArray alloc] initWithObjects: myAddButton, nil];

@@ -18,9 +18,6 @@
     }
     return self;
 }
-- (IBAction)continueBorrow:(id)sender {
-    
-}
 
 - (void)setBook:(Book *)book{
     _book = book;

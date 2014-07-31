@@ -9,8 +9,6 @@
 #import "NewsDetailVC.h"
 
 @interface NewsDetailVC ()
-@property (weak, nonatomic) IBOutlet UIView *shareView;
-@property (weak, nonatomic) IBOutlet UIView *maskView;
 
 @end
 
@@ -27,17 +25,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-- (IBAction)showShare:(id)sender {
-    [self.shareView setHidden:NO];
-    [self.maskView setHidden:NO];
-    [self addMask];
-}
-
-- (IBAction)cancelShare:(id)sender {
-    [self.shareView setHidden:YES];
-    [self.maskView setHidden:YES];
-    [self removeMask];
 }
 
 @end

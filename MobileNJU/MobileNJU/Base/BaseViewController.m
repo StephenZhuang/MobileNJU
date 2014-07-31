@@ -15,6 +15,7 @@
 #import "ExerciseVC.h"
 #import "WelcomeViewController.h"
 #import "RDVTabBarController.h"
+#import "BookViewController.h"
 @interface BaseViewController ()<UINavigationBarDelegate,UINavigationControllerDelegate>
 
 @end
@@ -176,8 +177,8 @@ UIView* view;
         || [viewController class]==[SelfInfoVC class]
         || [viewController class]== [ExerciseVC class]
         || [viewController class]==[EcardVC class]
-        || [viewController class]==[MyLibraryVC class]
         || [viewController class]==[ExerciseVC class]
+        || [viewController class]==[BookViewController class]
         ) {
         [navigationController setNavigationBarHidden:YES animated:animated];
     } else if ( [navigationController isNavigationBarHidden] ) {

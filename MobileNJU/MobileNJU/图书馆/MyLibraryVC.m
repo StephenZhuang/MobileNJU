@@ -19,6 +19,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setTitle:@"我的借阅"];
     // Do any additional setup after loading the view.
 }
 - (IBAction)back:(id)sender {
@@ -46,6 +47,8 @@
     myBook.borrowDate = book.borrowTime;
     myBook.returnDate = book.backTime;
     [cell setBook:myBook];
+    cell.continueBt.tag = 200+indexPath.row;
+
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,5 +66,22 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)continueBorrow:(id)sender {
+    [self waiting:@"正在帮您续借"];
+    UIButton* button = (UIButton*)sender;
+    MBook* book = [self.myBookList objectAtIndex:button.tag-200];
+    [[ApisFactory getApiMBookRenew]load:self selecter:@selector(disposMessage:) id:book.id account: self.account password:self.password];
+}
+
+- (void)disposMessage:(Son *)son
+{
+    [self.loginIndicator removeFromSuperview];
+    if ([son getError]==0) {
+        if ([[son getMethod]isEqualToString:@"MBookRenew"]) {
+            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+            [ToolUtils showMessage:ret.msg];
+        }
+    }
+}
 
 @end

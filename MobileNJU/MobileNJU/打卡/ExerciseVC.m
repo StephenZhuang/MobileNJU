@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *alertView;
 @property (strong,nonatomic) NSArray* infoList;
+@property (nonatomic)int isRe;
 @end
 
 @implementation ExerciseVC
@@ -37,6 +38,7 @@
     [self.schIdLabel setText:[ToolUtils getSchId]==nil?@"":[ToolUtils getSchId]];
     [self.nameLabel setText:[ToolUtils getUserName]==nil?@"":[ToolUtils getUserName]];
     [self.timeLabel setText:@"0"];
+    self.isRe = 0;
    
     // Do any additional setup after loading the view.
 }
@@ -71,8 +73,8 @@
 //        [self waiting:@"正在查询"];
         [self closeAlertView:nil];
 #warning api更新
-//        [[ApisFactory getApiMSignInInfo] load:self selecter:@selector(disposMessage:) account:self.schIDText.text password:self.schIDText.text];
-
+        [[ApisFactory getApiMSignInInfo]load:self selecter:@selector(disposMessage:) account:self.schIDText.text password:self.schIDText.text isreinput:self.isRe isv:[ToolUtils getIsVeryfy]];
+       
         [[ApisFactory getApiMSignInInDetail]load:self selecter:@selector(disposMessage:
                                                                          ) account:self.schIDText.text password:self.schIDText.text];
     }
@@ -82,6 +84,7 @@
 {
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MSignInInfo"]) {
+            self.isRe=1;
             self.OK=YES;
             [self.loginIndicator removeFromSuperview];
             MSignInList_Builder* list = (MSignInList_Builder*)[son getBuild];

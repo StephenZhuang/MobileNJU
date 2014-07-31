@@ -1,7 +1,7 @@
 //
 //  ApiMSchedule
 //
-//  Created by ryan on 2014-06-18 15:39:59
+//  Created by ryan on 2014-07-31 09:18:59
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -11,29 +11,34 @@
 
 #import "ApiUpdate.h"
 
+#import "ZsndTreehole.pb.h"
 
 @interface ApiMSchedule : ApiUpdate
 
 
 	/**
-	 *  课程表 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+	 *   课程表-教务处全新抓取 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
 	 * @param delegate 回调类
 	 * @param select  回调函数
 	 * @callback MClassList_Builder
-	 * @param code * 第一次登录时不需要，如果有验证码，则第二次请求时必须
-	 * @param account * account
-	 * @param password * password
+	 * @param account * account 
+	 * @param password * password 
+	 * @param code * code 
+	 * @param isReInput * isReInput 
+	 * @param isV * isV 
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password;
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  account:(NSString*)account password:(NSString*)password code:(NSString*)code isreinput:(NSString*)isReInput isv:(NSString*)isV;
 	/**
-	 *  课程表 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+	 *   课程表-教务处全新抓取 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @param code * 第一次登录时不需要，如果有验证码，则第二次请求时必须
-	 * @param account * account
-	 * @param password * password
+	 * @param account * account 
+	 * @param password * password 
+	 * @param code * code 
+	 * @param isReInput * isReInput 
+	 * @param isV * isV 
 	 * @callback MClassList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password;
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  account:(NSString*)account password:(NSString*)password code:(NSString*)code isreinput:(NSString*)isReInput isv:(NSString*)isV;
 
 @end

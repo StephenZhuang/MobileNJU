@@ -31,6 +31,7 @@
 @property (strong,nonatomic)NSArray* focusList;
 @property (strong,nonatomic)NSMutableArray* imageArrays;
 @property (strong,nonatomic)NSMutableArray* imageArraysSelected;
+@property (strong,nonatomic)NSArray* newsImgList;
 
 @end
 
@@ -54,6 +55,10 @@ static NSArray* descriptions;
     [self.tableView setAllowsSelection:NO];
     [self loadIndex];
     [self loadTableData];
+    self.newsImgList = [ToolUtils getImgList];
+    if (self.newsImgList!=nil) {
+        [self prepareForNews];
+    }
     
 }
 
@@ -96,6 +101,11 @@ static NSArray* descriptions;
             [ToolUtils setFunctionNames:functionNames];
             [ToolUtils setButtonImage:buttonImages];
             self.focusList = index.focusList;
+            NSMutableArray* imgList = [[NSMutableArray alloc] init];
+            for (MFocus *focus in index.focusList) {
+                [imgList addObject:focus.img];
+            }
+            [ToolUtils setImgList:imgList];
             [self addUnreadMsg];
             [self prepareForNews];
         } else if ([[son getMethod]isEqualToString:@"MUnreadModule"])
@@ -299,6 +309,7 @@ static NSArray* descriptions;
         [self goToShop];
     }
         else {
+            NSLog(@"%@ destination",menuButton.desitination);
         [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
     }
 }
@@ -352,8 +363,12 @@ static NSArray* descriptions;
 - (void)reloadNews:(NSInteger)site
 {
     UIImageView *imageView = [[self.pageScroller subviews] objectAtIndex:site+1];
-    MFocus* focus = [self.focusList objectAtIndex:site-1];
-    [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:320 height:217]];
+    if (self.focusList.count>site) {
+        MFocus* focus = [self.focusList objectAtIndex:site-1];
+        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:320 height:217]];
+    } else {
+        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site]width:320 height:217]];
+    }
 }
 
 
@@ -396,7 +411,13 @@ static NSArray* descriptions;
         frame.size = self.pageScroller.frame.size;
         frame.origin.y = self.headerView.frame.size.height-frame.size.height-40;
         _newImage = [[UIImageView alloc]initWithFrame:frame];
-        [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:320 height:217]];
+        if (focus==nil) {
+            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:page]   width:320 height:217]];
+
+        } else {
+            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:320 height:217]];
+
+        }
 
     }
     return _newImage;

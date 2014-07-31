@@ -42,6 +42,7 @@
     // Do any additional setup after loading the view.
 }
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
@@ -59,7 +60,9 @@
 
 - (IBAction)logout:(id)sender {
     [ToolUtils setIsLogin:NO];
-    [self.rdv_tabBarController dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self.rdv_tabBarController dismissViewControllerAnimated:NO completion:nil];
+    }];
 //    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -70,6 +73,7 @@
     if ([son getError] == 0) {
         //判断接口名
         if ([[son getMethod] isEqualToString:@"MGetUserInfo"]) {
+            NSLog(@"ok");
             //获得返回类
             MUser_Builder *user = (MUser_Builder *)[son getBuild];
             [ToolUtils setBelong:user.belong==nil?@"":user.belong];
@@ -113,7 +117,7 @@
 }
 
 - (IBAction)backToMain:(id)sender {
-    [self.rdv_tabBarController setSelectedIndex:0];
+    [self dismissViewControllerAnimated:YES completion:nil];
     [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
 }
 
@@ -141,13 +145,15 @@
                         [ToolUtils getBelong]==nil?@"":[ToolUtils getBelong],
                         [ToolUtils getSex]==nil?@"":[ToolUtils getSex],
                         [ToolUtils getBirthday]==nil?@"":[ToolUtils getBirthday], [ToolUtils getVersion]==nil?@"":[ToolUtils getVersion],nil];
-    if ([ToolUtils getHeadImg]!=nil) {
+    if ([ToolUtils getHeadImg]!=nil&&[ToolUtils getHeadImg].length>0) {
         NSLog(@"%@ headImage",[ToolUtils getHeadImg]);
         [self.headImage setImageWithURL:[ToolUtils getImageUrlWtihString:[ToolUtils getHeadImg] width:111 height:111] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
             [self.backgroundImg setImageToBlur:image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:nil];
             [self.backgroundImg setClipsToBounds:YES];
-          
+            
+            [self.headImage removeFromSuperview];
+            [self.headView addSubview:self.headImage];
         }];
         } else {
         
@@ -155,7 +161,7 @@
         [self.backgroundImg setImage:[UIImage imageNamed:@"05个人－个人头像"]];
         [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
         [self.backgroundImg setImageToBlur:self.headImage.image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:nil];
-            [self.backgroundImg setClipsToBounds:YES];
+        [self.backgroundImg setClipsToBounds:YES];
            
     }
     

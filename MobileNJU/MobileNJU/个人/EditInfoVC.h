@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "AYHCustomComboBoxDelegate.h"
-@interface EditInfoVC : BaseViewController<AYHCustomComboBoxDelegate>
+@interface EditInfoVC : BaseViewController
 
 @end

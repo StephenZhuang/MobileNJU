@@ -510,6 +510,8 @@
 		7D7A487E1986AD460019E9B3 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A487B1986AD460019E9B3 /* UIImage+ImageEffects.m */; };
 		7D7A487F1986AD460019E9B3 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A487D1986AD460019E9B3 /* UIImageView+LBBlurredImage.m */; };
 		7D7A48821986B2A80019E9B3 /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A48811986B2A80019E9B3 /* MyNavigationController.m */; };
+		7D9479991989E1030000EB4E /* ApiMSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9479981989E1030000EB4E /* ApiMSchedule.m */; };
+		7D9A6BD61988CDC100185A16 /* SecondPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9A6BD51988CDC100185A16 /* SecondPage.m */; };
 		7DB045E11987486600A7612B /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045DC1987486600A7612B /* RDVTabBar.m */; };
 		7DB045E21987486600A7612B /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045DE1987486600A7612B /* RDVTabBarController.m */; };
 		7DB045E31987486600A7612B /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045E01987486600A7612B /* RDVTabBarItem.m */; };
@@ -525,6 +527,10 @@
 		7DB046151987D1DB00A7612B /* QCSlideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB046121987D1DB00A7612B /* QCSlideViewController.xib */; };
 		7DB046181987DAB600A7612B /* ShoppingDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB046171987DAB600A7612B /* ShoppingDetailVC.m */; };
 		7DB0461C1987E0FF00A7612B /* MyBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB0461B1987E0FF00A7612B /* MyBaseTableViewController.m */; };
+		7DB0461E1987EBD300A7612B /* AddFirstPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB0461D1987EBD300A7612B /* AddFirstPage.xib */; };
+		7DB046201987EE7800A7612B /* AddSecondPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DB0461F1987EE7800A7612B /* AddSecondPage.xib */; };
+		7DB046231987F88100A7612B /* AddShopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB046221987F88100A7612B /* AddShopVC.m */; };
+		7DB046261988049F00A7612B /* FirstPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB046251988049F00A7612B /* FirstPage.m */; };
 		7DBC8D6519435C6C0086E28B /* BookCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */; };
 		7DC4C58D19443D97007C6888 /* loading@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7DC4C58C19443D97007C6888 /* loading@2x.gif */; };
 		7DD25B37192D9C230066494D /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD25B30192D9C230066494D /* WelcomeViewController.m */; };
@@ -1362,6 +1368,12 @@
 		7D7A48801986B2A80019E9B3 /* MyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNavigationController.h; sourceTree = "<group>"; };
 		7D7A48811986B2A80019E9B3 /* MyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNavigationController.m; sourceTree = "<group>"; };
 		7D7A48831986B2C30019E9B3 /* myNavigationControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myNavigationControllerDelegate.h; sourceTree = "<group>"; };
+		7D9479971989E1030000EB4E /* ApiMSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMSchedule.h; sourceTree = "<group>"; };
+		7D9479981989E1030000EB4E /* ApiMSchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMSchedule.m; sourceTree = "<group>"; };
+		7D9A6BD31988BEEB00185A16 /* PageDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PageDelegate.h; path = "跳蚤市场/PageDelegate.h"; sourceTree = "<group>"; };
+		7D9A6BD41988CDC100185A16 /* SecondPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondPage.h; path = "跳蚤市场/SecondPage.h"; sourceTree = "<group>"; };
+		7D9A6BD51988CDC100185A16 /* SecondPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondPage.m; path = "跳蚤市场/SecondPage.m"; sourceTree = "<group>"; };
+		7D9A6BD91989124F00185A16 /* loginDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loginDelegate.h; sourceTree = "<group>"; };
 		7DA05111197275E400039D15 /* GradeCellChooseDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradeCellChooseDelegate.h; sourceTree = "<group>"; };
 		7DB045DB1987486600A7612B /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
 		7DB045DC1987486600A7612B /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
@@ -1392,6 +1404,12 @@
 		7DB046191987DE6C00A7612B /* ShoppingVCDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShoppingVCDelegate.h; path = "跳蚤市场/ShoppingVCDelegate.h"; sourceTree = "<group>"; };
 		7DB0461A1987E0FF00A7612B /* MyBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBaseTableViewController.h; sourceTree = "<group>"; };
 		7DB0461B1987E0FF00A7612B /* MyBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBaseTableViewController.m; sourceTree = "<group>"; };
+		7DB0461D1987EBD300A7612B /* AddFirstPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddFirstPage.xib; path = "跳蚤市场/AddFirstPage.xib"; sourceTree = "<group>"; };
+		7DB0461F1987EE7800A7612B /* AddSecondPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddSecondPage.xib; path = "跳蚤市场/AddSecondPage.xib"; sourceTree = "<group>"; };
+		7DB046211987F88100A7612B /* AddShopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddShopVC.h; path = "跳蚤市场/AddShopVC.h"; sourceTree = "<group>"; };
+		7DB046221987F88100A7612B /* AddShopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddShopVC.m; path = "跳蚤市场/AddShopVC.m"; sourceTree = "<group>"; };
+		7DB046241988049F00A7612B /* FirstPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FirstPage.h; path = "跳蚤市场/FirstPage.h"; sourceTree = "<group>"; };
+		7DB046251988049F00A7612B /* FirstPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FirstPage.m; path = "跳蚤市场/FirstPage.m"; sourceTree = "<group>"; };
 		7DBC8D6319435C6C0086E28B /* BookCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCollectionCell.h; sourceTree = "<group>"; };
 		7DBC8D6419435C6C0086E28B /* BookCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCollectionCell.m; sourceTree = "<group>"; };
 		7DC4C58C19443D97007C6888 /* loading@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "loading@2x.gif"; sourceTree = "<group>"; };
@@ -1974,14 +1992,14 @@
 				7DD86999192DB6B400D4ADAA /* 新闻 */,
 				7DD25B3D192D9DF30066494D /* 电话 */,
 				77B90461192C444A0062237D /* Base */,
-				77B9045A192C434B0062237D /* 登录注册 */,
 				77B9045B192C434B0062237D /* 订阅 */,
 				77B9045C192C434B0062237D /* 个人 */,
 				77B9045D192C434B0062237D /* 活动 */,
 				77B9045F192C434B0062237D /* 首页 */,
 				77B90460192C434B0062237D /* 树洞 */,
-				77B90437192C3F040062237D /* AppDelegate.h */,
+				77B9045A192C434B0062237D /* 登录注册 */,
 				77B90438192C3F040062237D /* AppDelegate.m */,
+				77B90437192C3F040062237D /* AppDelegate.h */,
 				77B9043A192C3F040062237D /* Images.xcassets */,
 				77B9042F192C3F040062237D /* Supporting Files */,
 			);
@@ -2072,7 +2090,6 @@
 				7DB045E41987A86E00A7612B /* IQActionSheetPickerView */,
 				7DB045DA1987486600A7612B /* RDVTabBarController */,
 				7D7A48791986AD460019E9B3 /* ImageEffects */,
-				7747D0F41952C2230008C36C /* NotificationStatusBar */,
 				77B904B6192C4B3B0062237D /* ToolUtils */,
 				77E075A9194043CD0098BA09 /* Frontia */,
 				771EDF15193F367600A3DCBB /* 图文混排 */,
@@ -2080,6 +2097,7 @@
 				771EDF1B193F367600A3DCBB /* CustomIOSAlertView */,
 				771EDF1E193F367600A3DCBB /* SegmentView.h */,
 				771EDF1F193F367600A3DCBB /* SegmentView.m */,
+				7747D0F41952C2230008C36C /* NotificationStatusBar */,
 				77B9046F192C4B3A0062237D /* MJRefresh */,
 				77B9047C192C4B3A0062237D /* PhotoBrowser */,
 				77B90491192C4B3A0062237D /* SDWebImage */,
@@ -2115,10 +2133,10 @@
 		77B9045C192C434B0062237D /* 个人 */ = {
 			isa = PBXGroup;
 			children = (
+				771EDF3C193F377100A3DCBB /* EditInfoVC.m */,
 				771EDF39193F377100A3DCBB /* CheckBox.h */,
 				771EDF3A193F377100A3DCBB /* CheckBox.m */,
 				771EDF3B193F377100A3DCBB /* EditInfoVC.h */,
-				771EDF3C193F377100A3DCBB /* EditInfoVC.m */,
 				771EDF3D193F377100A3DCBB /* TagButton.h */,
 				771EDF3E193F377100A3DCBB /* TagButton.m */,
 				771EDF3F193F377100A3DCBB /* TagView.h */,
@@ -2162,6 +2180,7 @@
 				7DD25B36192D9C230066494D /* MenuButton.m */,
 				77B90465192C48980062237D /* HomeViewController.h */,
 				77B90466192C48980062237D /* HomeViewController.m */,
+				7D9A6BD91989124F00185A16 /* loginDelegate.h */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -2205,9 +2224,9 @@
 		77B90461192C444A0062237D /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				771EDF32193F373000A3DCBB /* AlertCloseDelegate.h */,
 				7D6AA9041984068600E11C31 /* CustomTabBar.h */,
 				7D6AA9051984068600E11C31 /* CustomTabBar.m */,
-				771EDF32193F373000A3DCBB /* AlertCloseDelegate.h */,
 				771EDF33193F373000A3DCBB /* HasLoginController.h */,
 				771EDF34193F373000A3DCBB /* HasLoginController.m */,
 				771EDF35193F373000A3DCBB /* UtilMethods.h */,
@@ -2472,6 +2491,8 @@
 				776522641987BAC40061AF4E /* ApiMScheduleAuto.m */,
 				774B92D519517B64007CB817 /* ApiMPushClear.h */,
 				774B92D619517B64007CB817 /* ApiMPushClear.m */,
+				7D9479971989E1030000EB4E /* ApiMSchedule.h */,
+				7D9479981989E1030000EB4E /* ApiMSchedule.m */,
 				778EA76A19455467007B6C7E /* ApiMLogout.h */,
 				778EA76B19455467007B6C7E /* ApiMLogout.m */,
 				778EA76C19455467007B6C7E /* ApiMRss.h */,
@@ -2751,10 +2772,19 @@
 				7DB046071987C1D500A7612B /* ShoppingCell.h */,
 				7DB046081987C1D500A7612B /* ShoppingCell.m */,
 				7DB046051987C1B400A7612B /* shop.storyboard */,
+				7DB046211987F88100A7612B /* AddShopVC.h */,
+				7DB046221987F88100A7612B /* AddShopVC.m */,
+				7D9A6BD41988CDC100185A16 /* SecondPage.h */,
+				7D9A6BD51988CDC100185A16 /* SecondPage.m */,
+				7DB046241988049F00A7612B /* FirstPage.h */,
+				7DB046251988049F00A7612B /* FirstPage.m */,
 				7DB046161987DAB600A7612B /* ShoppingDetailVC.h */,
 				7DB046171987DAB600A7612B /* ShoppingDetailVC.m */,
 				7DB046091987C1D500A7612B /* ShoppingVC.h */,
 				7DB046191987DE6C00A7612B /* ShoppingVCDelegate.h */,
+				7DB0461D1987EBD300A7612B /* AddFirstPage.xib */,
+				7DB0461F1987EE7800A7612B /* AddSecondPage.xib */,
+				7D9A6BD31988BEEB00185A16 /* PageDelegate.h */,
 			);
 			name = "跳蚤市场";
 			sourceTree = "<group>";
@@ -3002,6 +3032,7 @@
 				77E07522194043A90098BA09 /* f036.png in Resources */,
 				77E0754E194043A90098BA09 /* f058.png in Resources */,
 				77E0753A194043A90098BA09 /* f048.png in Resources */,
+				7DB046201987EE7800A7612B /* AddSecondPage.xib in Resources */,
 				77E0759B194043A90098BA09 /* f096@2x.png in Resources */,
 				77E074FD194043A90098BA09 /* f017@2x.png in Resources */,
 				77E0750A194043A90098BA09 /* f024.png in Resources */,
@@ -3037,6 +3068,7 @@
 				77E0759E194043A90098BA09 /* f098.png in Resources */,
 				77E07599194043A90098BA09 /* f095@2x.png in Resources */,
 				77E07595194043A90098BA09 /* f093@2x.png in Resources */,
+				7DB0461E1987EBD300A7612B /* AddFirstPage.xib in Resources */,
 				77E07532194043A90098BA09 /* f044.png in Resources */,
 				77E07555194043A90098BA09 /* f061@2x.png in Resources */,
 				77E073FB1940436E0098BA09 /* treehole_mine@2x.png in Resources */,
@@ -3236,6 +3268,7 @@
 				77E075FD194044110098BA09 /* LessonButton.m in Sources */,
 				77E073E31940435D0098BA09 /* ZsndLibrary.pb.m in Sources */,
 				77E073E11940435D0098BA09 /* ZsndChat.pb.m in Sources */,
+				7DB046231987F88100A7612B /* AddShopVC.m in Sources */,
 				7D6AA9061984068600E11C31 /* CustomTabBar.m in Sources */,
 				77E075EA194043F10098BA09 /* Lesson.m in Sources */,
 				7DB046181987DAB600A7612B /* ShoppingDetailVC.m in Sources */,
@@ -3273,6 +3306,7 @@
 				7DD86997192DB68A00D4ADAA /* PhoneNumCell.m in Sources */,
 				77B904C1192C4B3B0062237D /* MBProgressHUD.m in Sources */,
 				771EDF43193F377100A3DCBB /* TagButton.m in Sources */,
+				7DB046261988049F00A7612B /* FirstPage.m in Sources */,
 				774972041942EFF3006767A7 /* CheckViewController.m in Sources */,
 				7D6AA9031983F24E00E11C31 /* RegisterVC.m in Sources */,
 				77E0764B194044670098BA09 /* ActivityCell.m in Sources */,
@@ -3330,6 +3364,7 @@
 				77E073D71940435D0098BA09 /* ApiMTreeHoleDel.m in Sources */,
 				77E072CB194043140098BA09 /* TreeHoleImageCell.m in Sources */,
 				771EDF42193F377100A3DCBB /* EditInfoVC.m in Sources */,
+				7D9A6BD61988CDC100185A16 /* SecondPage.m in Sources */,
 				77E073BF1940435D0098BA09 /* ApiMGetWelcomePage.m in Sources */,
 				77B904D5192C4B3B0062237D /* UIImage+MultiFormat.m in Sources */,
 				77E075C6194043CD0098BA09 /* JSONKit.m in Sources */,
@@ -3361,6 +3396,7 @@
 				77E7D9F319308BE400BFA983 /* RefreshTableViewController.m in Sources */,
 				77E073B91940435D0098BA09 /* ApiMChatMatch.m in Sources */,
 				77B904C7192C4B3B0062237D /* MJPhotoToolbar.m in Sources */,
+				7D9479991989E1030000EB4E /* ApiMSchedule.m in Sources */,
 				77B904C8192C4B3B0062237D /* MJPhotoView.m in Sources */,
 				77B904D9192C4B3B0062237D /* ToolUtils.m in Sources */,
 				77E073A71940435D0098BA09 /* ApiMActivity.m in Sources */,
@@ -3473,6 +3509,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "6404FFFA-B73A-4D3F-BD2B-5A8357C36EA3";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3505,6 +3542,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PROVISIONING_PROFILE = "6404FFFA-B73A-4D3F-BD2B-5A8357C36EA3";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3533,7 +3571,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FC7FCF38-53C3-4A11-83BE-C53B9FFF6986";
+				PROVISIONING_PROFILE = "6404FFFA-B73A-4D3F-BD2B-5A8357C36EA3";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -3562,7 +3600,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FC7FCF38-53C3-4A11-83BE-C53B9FFF6986";
+				PROVISIONING_PROFILE = "6404FFFA-B73A-4D3F-BD2B-5A8357C36EA3";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

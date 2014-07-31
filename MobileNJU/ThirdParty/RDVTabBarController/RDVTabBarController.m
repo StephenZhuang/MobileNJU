@@ -253,6 +253,8 @@
     if ([[self delegate] respondsToSelector:@selector(tabBarController:didSelectViewController:)]) {
         [[self delegate] tabBarController:self didSelectViewController:[self viewControllers][index]];
     }
+    
+
 }
 
 @end

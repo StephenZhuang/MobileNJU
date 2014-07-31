@@ -276,16 +276,23 @@
 {
     [_pickerView reloadAllComponents];
     
+    
     [super showInView:view];
     
     [UIView animateWithDuration:0.3 animations:^{
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
         {
-            
-            CGRect bounds = view.bounds;
+            CGRect bounds ;
+            if (view==nil) {
+                bounds = self.window.bounds;
+
+            } else {
+                bounds = view.bounds;
+
+            }
             CGRect newbounds = CGRectMake(0, 0, bounds.size.width, bounds.size.height);
             [self setBounds:newbounds];
-            [self setFrame:CGRectMake(self.frame.origin.x, view.bounds.size.height-_actionToolbar.bounds.size.height-_pickerView.bounds.size.height, self.frame.size.width, self.frame.size.height)];
+            [self setFrame:CGRectMake(self.frame.origin.x, bounds.size.height-_actionToolbar.bounds.size.height-_pickerView.bounds.size.height, self.frame.size.width, self.frame.size.height)];
         }
     }];
     

@@ -90,4 +90,10 @@
 + (void)setFunctionDetails:(NSArray*)details;
 + (NSArray*)getFunctionDetails;
 + (BOOL)compareArray:(NSArray*)oldArray newArray:(NSArray*)newArray;
++ (void)setImgList:(NSArray*)imgList;
++ (NSArray*)getImgList;
++(void)setLibraryId:(NSString*)libId;
++(NSString*)getLibraryId;
++(void)setLibraryPassword:(NSString*)password;
++(NSString*)getLibraryPassword;
 @end

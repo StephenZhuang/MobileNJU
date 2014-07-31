@@ -14,4 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *returnDate;
 @property(strong,nonatomic)Book* book;
+@property(strong,nonatomic)NSString* bookId;
+@property (weak, nonatomic) IBOutlet UIButton *continueBt;
+
 @end

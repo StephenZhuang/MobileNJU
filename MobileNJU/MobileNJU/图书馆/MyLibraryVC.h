@@ -10,4 +10,6 @@
 
 @interface MyLibraryVC : BaseViewController
 @property (nonatomic,strong)NSArray* myBookList;
+@property (nonatomic,strong)NSString* account;
+@property (nonatomic,strong)NSString* password;
 @end

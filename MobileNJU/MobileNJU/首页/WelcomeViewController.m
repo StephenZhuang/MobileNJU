@@ -19,7 +19,9 @@
 #import "ActivityVC.h"
 #import "RDVTabBarController.h"
 #import "RDVTabBarItem.h"
-@interface WelcomeViewController ()<UITextFieldDelegate>
+#import "RegisterVC.h"
+#import "loginDelegate.h"
+@interface WelcomeViewController ()<UITextFieldDelegate,RDVTabBarControllerDelegate,loginDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 
@@ -29,6 +31,7 @@
 @property (nonatomic)NSInteger page;
 @property(nonatomic)BOOL firstOpen;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (nonatomic)NSInteger time;
 @end
 
 @implementation WelcomeViewController
@@ -45,13 +48,13 @@
     self.page = 1;
     //加载动画
     [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timeChangeIndicate) userInfo:nil repeats:YES];
+    self.time = 1;
 
-    
-    
     //api调用方式 可以点进去查看，也可按option + 左键查看 ， 回调函数统一写作disposMessage ， 如下
     [[ApisFactory getApiMGetWelcomePage] load:self selecter:@selector(disposMessage:)];
     [self.usernameTextField setText:[ToolUtils getAccount]==nil?@"":[ToolUtils getAccount]];
     [self.passwordTextField setText:[ToolUtils getPassword]==nil?@"":[ToolUtils getPassword]];
+    [self.view setUserInteractionEnabled:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,8 +75,9 @@
     }
     [self resignAllResponders:nil];
     [self waiting:@"登陆中"];
-    #warning 注意加密
-    [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:self.passwordTextField.text pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"] device:@"ios"];
+    [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:
+     [mMD5 md5s:self.passwordTextField.text]
+     pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"] device:@"ios"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -95,7 +99,9 @@
     if ([son getError] == 0) {
         //判断接口名
         if ([[son getMethod] isEqualToString:@"MGetWelcomePage"]) {
+            [self.view setUserInteractionEnabled:YES];
             //获得返回类
+            self.time=0;
             MRet_Builder *ret = (MRet_Builder *)[son getBuild];
             NSLog(@"=======%@",ret.msg);
             if ([ToolUtils isLogin]) {
@@ -114,8 +120,11 @@
             NSLog(@"account%@  nickname%@ verify  %@ ",user.account,user.nickname,user.verify);
             [ToolUtils setVerify:user.verify];
             [ToolUtils setLoginId:user.id];
-            [ToolUtils setHeadImg:user.headImg];
-            NSArray *array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],nil];
+            if (user.headImg.length>0) {
+                [ToolUtils setHeadImg:user.headImg];
+            }
+            NSArray *array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],@"device=IOS",nil];
+            
             [Frame setAutoAddParams:array];
     
             [ToolUtils setIsLogin:YES];
@@ -130,12 +139,17 @@
             [self loadMain];
         }
     } else {
+        
         [self showLoginView];
+        if ([ToolUtils isLogin]) {
+            [self loadMain];
+        }
     }
 }
 - (void)loadMain
 
 {
+    [self hideLoad];
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     MainMenuViewController* mainMenuVC = (MainMenuViewController*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"home"]; //test2为viewcontroller的StoryboardId
     UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:mainMenuVC];
@@ -143,7 +157,7 @@
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
     SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"self"]; //test2为viewcontroller的StoryboardId
     UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:selfVC];
-    
+
     UIStoryboard *thirdStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
     SubscribeVC* subVC = (SubscribeVC*)[thirdStoryBoard instantiateViewControllerWithIdentifier:@"subscribe"]; //test2为viewcontroller的StoryboardId
     UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:subVC];
@@ -155,6 +169,7 @@
     RDVTabBarController *tabBarController = [[RDVTabBarController alloc] init];
     [tabBarController setViewControllers:@[nav1, nav2,
                                            nav3,nav4]];
+    [tabBarController setDelegate:self];
     [self customizeTabBarForController:tabBarController];
     [self presentViewController:tabBarController animated:YES completion:nil];
     
@@ -251,9 +266,13 @@
 
 - (void)timeChangeIndicate{
     self.page = (self.page)%6+1;
-    
     NSString* imageUrl = [NSString stringWithFormat:@"加载点%d",self.page];
     [self.indicateView setImage:[UIImage imageNamed:imageUrl]];
+    self.time++;
+    if (self.time==20&&!self.indicateView.isHidden) {
+        [ToolUtils showMessage:@"网络连接超时,进入脱机浏览"];
+        [self loadMain];
+    }
 }
 
 
@@ -261,7 +280,7 @@
 //加载完毕，显示登录界面。
 - (void)showLoginView
 {
-    
+    [self.view setUserInteractionEnabled:YES];
     [self hideLoad];
     [self.loginView removeFromSuperview];
     [self.logoImage removeFromSuperview];
@@ -282,6 +301,38 @@
     } completion:^(BOOL finished) {
         [self.loginButton setHidden:NO];
     }];
+}
+
+#pragma mark -RDVTabbarcontrollerdelegate
+- (BOOL)tabBarController:(RDVTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    if ([tabBarController.viewControllers indexOfObject:viewController]==3) {
+//        [viewController.rdv_tabBarController setTabBarHidden:YES];
+        [tabBarController presentViewController:viewController animated:YES completion:^{
+            
+        }];
+        return NO;
+    };
+    return YES;
+
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"next"]) {
+        RegisterVC* next = (RegisterVC*)segue.destinationViewController;
+        next.myDelegate = self;
+    }
+}
+
+- (void)login
+{
+    [self.usernameTextField setText:[ToolUtils getAccount]==nil?@"":[ToolUtils getAccount]];
+    [self.passwordTextField setText:[ToolUtils getPassword]==nil?@"":[ToolUtils getPassword]];
+    
+    [self loadMain];
+}
+- (IBAction)goToRegist:(id)sender {
+    [self performSegueWithIdentifier:@"next" sender:nil];
 }
 
 

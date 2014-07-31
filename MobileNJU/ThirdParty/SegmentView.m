@@ -9,8 +9,11 @@
 #import "SegmentView.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define BackColor ([UIColor colorWithRed:34 / 255.0 green:131 / 255.0 blue:219 / 255.0 alpha:1.0])
+#define GrayColor ([UIColor colorWithRed:76 / 255.0 green:76 / 255.0 blue:76 / 255.0 alpha:1.0])
 
+#define blackColor ([UIColor colorWithRed:24 / 255.0 green:24 / 255.0 blue:24 / 255.0 alpha:1.0])
+
+#define DarkGrayColor ([UIColor colorWithRed:238 / 255.0 green:238 / 255.0 blue:238 / 255.0 alpha:1.0])
 @implementation SegmentView
 
 - (id)initWithFrame:(CGRect)frame
@@ -27,14 +30,13 @@
     // Drawing code
     _selectedIndex = [_dataSource defaultSelectedSegment];
     
-    self.layer.cornerRadius = 5;
-    self.layer.borderWidth = 1;
-    self.layer.borderColor = [UIColor colorWithRed:110/255.0 green:15/255.0 blue:109/255.0 alpha:1.0].CGColor;
+//    self.layer.cornerRadius = 5;
+//    self.layer.borderWidth = 1;
+//    self.layer.borderColor = [UIColor colorWithRed:110/255.0 green:15/255.0 blue:109/255.0 alpha:1.0].CGColor;
     [self setBackgroundColor:[_dataSource colorForLine]];
     
     int itemCount = [_dataSource numOfSegments];
     CGFloat buttonWidth = self.frame.size.width / itemCount;
-    
     buttonArray = [[NSMutableArray alloc] init];
     for (int i = 0; i< itemCount; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -43,20 +45,20 @@
         
         NSString *title = [_dataSource segmentView:self nameForSegment:i];
         [button setTitle:title forState:UIControlStateNormal];
-        [button setTitle:title forState:UIControlStateSelected];
-        [button setTitle:title forState:UIControlStateHighlighted];
+       
         
         [button.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
-        [button setTitleColor:[_dataSource colorForLine] forState:UIControlStateNormal];
-        [button setTitleColor:[_dataSource colorForTint] forState:UIControlStateHighlighted];
-        [button setTitleColor:[_dataSource colorForTint] forState:UIControlStateSelected];
-        [button setBackgroundColor:[UIColor whiteColor]];
+        [button setTitleColor:GrayColor forState:UIControlStateNormal];
+        [button setTitleColor:blackColor forState:UIControlStateHighlighted];
+        [button setTitleColor:blackColor forState:UIControlStateSelected];
+        [button setBackgroundColor:DarkGrayColor];
         
         [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         if (i == [_dataSource defaultSelectedSegment]) {
             [button setSelected:YES];
-            [button setBackgroundColor:[_dataSource colorForLine]];
+            [button setBackgroundColor:[UIColor whiteColor]];
+           
         }
         
         
@@ -83,12 +85,13 @@
         
         for (UIButton *btn in buttonArray) {
             [btn setSelected:NO];
-            [btn setBackgroundColor:[UIColor whiteColor]];
+            [btn setBackgroundColor:DarkGrayColor];
+            
 //            [btn setHidden:YES];
         }
         
         [button setSelected:YES];
-        [button setBackgroundColor:[_dataSource colorForLine]];
+        [button setBackgroundColor:[UIColor whiteColor]];
         _selectedIndex = button.tag;
         [_delegate selectSegmentAtIndex:button.tag];
     }
@@ -114,9 +117,9 @@
 //    CGContextMoveToPoint(ctx, x, 0);  //起点坐标
 //    CGContextAddLineToPoint(ctx, x, y);   //终点坐标
 //    CGContextStrokePath(ctx);
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, 0, 1, y)];
-    [view setBackgroundColor:[_dataSource colorForLine]];
-    [self addSubview:view];
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, 0, 1, y)];
+//    [view setBackgroundColor:[_dataSource colorForLine]];
+//    [self addSubview:view];
 //    [view release];
 }
 

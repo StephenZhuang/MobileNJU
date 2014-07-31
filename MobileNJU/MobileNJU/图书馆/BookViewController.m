@@ -30,6 +30,7 @@
 @property (nonatomic,strong)NSString* selectedBookName;
 @property(nonatomic)BOOL loading;
 @property (weak, nonatomic) IBOutlet UISwitch *rememberSwitch;
+@property (nonatomic)int isRe;
 @end
 
 @implementation BookViewController
@@ -39,30 +40,43 @@
     [super viewDidLoad];
     [self initNavigationBar];
     [self initBookDetail];
+    [self.passwordField setText:[ToolUtils getLibraryPassword]==nil?@"":[ToolUtils getLibraryPassword]];
+    [self.schIdField setText:[ToolUtils getLibraryId]==nil?@"":[ToolUtils getLibraryId]];
     self.page = 1;
     self.loading=NO;
+    self.isRe=0;
     // Do any additional setup after loading the view.
 }
 
+
 - (void) initBookDetail
 {
-     self.bookDetail = [[[NSBundle mainBundle] loadNibNamed:@"BookDetailView" owner:self options:nil] objectAtIndex:1];
+    self.bookDetail = [[[NSBundle mainBundle] loadNibNamed:@"BookDetailView" owner:self options:nil] objectAtIndex:1];
     [self.bookDetail setFrame:CGRectMake(30, 100,260,180)];
     [self.bookDetail setHidden:YES];
     [self.bookDetail setDelegate:self];
     [self.view addSubview:self.bookDetail];
     
 }
-- (IBAction)searchBook:(id)sender {
-    if ([self.searchField.text isEqualToString:@""]) {
-        [UtilMethods showMessage:@"关键字不能为空"];
-    } else {
-        [self.searchField resignFirstResponder];
-        [self waiting:@"正在搜索"];
-        [[[[ApisFactory getApiMSearchBook]setPage:self.page pageCount:100] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
-    }
+
+
+- (void)initNavigationBar
+{
+    [self setTitle:@"图书馆"];
+    UIButton* button = [[UIButton alloc]init];
+    [button setImage:[UIImage imageNamed:@"self_right_barButton"] forState:UIControlStateNormal];
+    CGRect frame = CGRectMake(0, 0, 40, 36);
+    button.frame = frame;
+    [button addTarget:self action:@selector(showAlert) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* selfItem =  [[UIBarButtonItem alloc]initWithCustomView:button];
+    //    [selfItem setTintColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = selfItem;
 }
 
+
+
+
+#pragma mark 网络回调
 - (void)disposMessage:(Son *)son
 {
     self.OK=YES;
@@ -95,7 +109,7 @@
         } else if ([[son getMethod] isEqualToString:@"MMyLibrary"]){
             
             [self.loginIndicator removeFromSuperview];
-            
+            [self setOK:YES];
             MBookList_Builder* myBookList = (MBookList_Builder*)[son getBuild];
             [self cancelAlert:nil];
             [self performSegueWithIdentifier:@"myLibrary" sender:myBookList.newsList];
@@ -104,24 +118,35 @@
     }
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"myLibrary"]) {
-        MyLibraryVC* nextVC = (MyLibraryVC*)segue.destinationViewController;
-        nextVC.myBookList = sender;
+
+#pragma mark -按钮监听
+- (IBAction)searchBook:(id)sender {
+    if ([self.searchField.text isEqualToString:@""]) {
+        [UtilMethods showMessage:@"关键字不能为空"];
+    } else {
+        [self.searchField resignFirstResponder];
+        [self waiting:@"正在搜索"];
+        [[[[ApisFactory getApiMSearchBook]setPage:self.page pageCount:100] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
     }
 }
-- (void)initNavigationBar
-{
-    [self setTitle:@"图书馆"];
-    UIButton* button = [[UIButton alloc]init];
-    [button setImage:[UIImage imageNamed:@"self_right_barButton"] forState:UIControlStateNormal];
-    CGRect frame = CGRectMake(0, 0, 40, 36);
-    button.frame = frame;
-    [button addTarget:self action:@selector(showAlert) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem* selfItem =  [[UIBarButtonItem alloc]initWithCustomView:button];
-//    [selfItem setTintColor:[UIColor whiteColor]];
-    self.navigationItem.rightBarButtonItem = selfItem;
+- (IBAction)showSelf:(id)sender {
+    [self showAlert];
+}
+
+- (IBAction)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)cancelAlert:(id)sender {
+    self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
+    [self.passwordField resignFirstResponder];
+    [self.schIdField resignFirstResponder];
+    [self.searchField resignFirstResponder];
+    [self.maskView setHidden:YES];
+    [self.alertView setHidden:YES];
+    [self.bookDetail setHidden:YES];
+    [super removeMask];
+    
 }
 
 - (void)showAlert
@@ -139,11 +164,30 @@
         [ToolUtils showMessage:@"密码不能为空"];
     } else {
         [self waiting:@"加载中"];
-#warning api更新
+        
+        if (self.rememberSwitch.isOn) {
+            [ToolUtils setLibraryId:self.schIdField.text];
+            [ToolUtils setLibraryPassword:self.passwordField.text];
+        }
+        [[ApisFactory getApiMMyLibrary]load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text isreinput:self.isRe isv:[ToolUtils getIsVeryfy]];
 //        [[ApisFactory getApiMMyLibrary]load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
     }
     
 }
+
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"myLibrary"]) {
+        MyLibraryVC* nextVC = (MyLibraryVC*)segue.destinationViewController;
+        nextVC.myBookList = sender;
+        nextVC.password = self.passwordField.text;
+        nextVC.account = self.schIdField.text;
+    }
+}
+
+
 #pragma mark delegateTextField
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -185,17 +229,7 @@
     [[[ApisFactory getApiMBookDetail]load:self selecter:@selector(disposMessage:) id:book.id] setShowLoading:YES];
 }
 
-- (IBAction)cancelAlert:(id)sender {
-    self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
-    [self.passwordField resignFirstResponder];
-    [self.schIdField resignFirstResponder];
-    [self.searchField resignFirstResponder];
-    [self.maskView setHidden:YES];
-    [self.alertView setHidden:YES];
-    [self.bookDetail setHidden:YES];
-    [super removeMask];
-    
-}
+
 
 - (void)didReceiveMemoryWarning
 {

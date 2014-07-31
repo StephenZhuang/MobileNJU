@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "loginDelegate.h"
 @interface RegisterVC : BaseViewController
-
+@property (nonatomic,strong) id<loginDelegate> myDelegate;
 @end

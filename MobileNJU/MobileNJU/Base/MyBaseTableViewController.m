@@ -169,7 +169,6 @@ UIView* view;
         || [viewController class]==[SelfInfoVC class]
         || [viewController class]== [ExerciseVC class]
         || [viewController class]==[EcardVC class]
-        || [viewController class]==[MyLibraryVC class]
         || [viewController class]==[ExerciseVC class]
         ) {
         [navigationController setNavigationBarHidden:YES animated:animated];

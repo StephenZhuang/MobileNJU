@@ -24,7 +24,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong,nonatomic)NSString* account;
 @property(strong,nonatomic)NSString* password;
-
+@property(nonatomic)int isV;
+@property(nonatomic)int isRe;
 @end
 
 @implementation GradeVC
@@ -44,6 +45,18 @@
     [self initNavigationBar];
     [self loadColor];
     [self loadSavedState];
+    self.isV = 0;
+    self.isRe=0;
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
+
+    
+}
+- (void)textFieldDidChange:(NSNotification *)note
+{
+    NSLog(@"%@",self.schIdTextField.text);
+    if ([self.schIdTextField.text hasPrefix:@"Mg"]&&self.isV==0) {
+        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+    }
 }
 - (void)loadSavedState
 {
@@ -56,12 +69,11 @@
   
 }
 - (IBAction)search:(id)sender {
+    
     [self.schIdTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     [self.codeField resignFirstResponder];
-    if (sender!=nil) {
-        [self waiting:@"正在加载"];
-    }
+    [self waiting:@"正在加载"];
     [self load:self selecter:@selector(disposMessage:) code:self.codeField==nil?nil:self.codeField.text account:self.schIdTextField.text password:self.passwordTextField.text];
 }
 
@@ -72,6 +84,10 @@
     }
     [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
+    
+    [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
+    
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MTermList" params:array  delegate:delegate selecter:select];
     [updateone setShowLoading:NO];
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
@@ -86,6 +102,9 @@
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
             if (termList.termList.count==0) {
+                if (self.alertView.isHidden) {
+                    [self.alertView setHidden:NO];
+                }
                 [self addCode:termList.img];
             } else {
                 self.password  = self.passwordTextField.text;
@@ -135,6 +154,7 @@
 }
 
 - (IBAction)cancelAlert:(id)sender {
+    [self.tableView setUserInteractionEnabled:YES];
     [self.codeField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     [self.schIdTextField resignFirstResponder];;
@@ -145,10 +165,12 @@
 
 
 
+
 - (void)showAlert
 {
+    [self.tableView setUserInteractionEnabled:NO];
     [self.alertView setHidden:NO];
-    [self.maskView setHidden:NO];
+//    [self.maskView setHidden:NO];
     [self addMask];
 }
 
@@ -166,7 +188,7 @@
 
 - (void)addCode:(NSData*)img
 {
-    
+    self.isV = 1;
     self.searchButton.transform = CGAffineTransformMakeTranslation(0, 60);
     
     self.codeField = [[UITextField alloc]init];
@@ -204,9 +226,21 @@
     //    [textField becomeFirstResponder];
     
 }
+
+
+
+
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+
+    [UIView animateWithDuration:0.3f animations:^{
+        [self.view bringSubviewToFront:self.alertView];
+        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
+    } completion:^(BOOL finished) {
+        [self.view bringSubviewToFront:self.alertView];
+    }];
+
     return YES;
 }
 
@@ -274,6 +308,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    [self cancelAlert:nil];
     if ([[segue identifier] isEqualToString:@"gradeDetail"]) {
         GradeDetailVC* nextVC = (GradeDetailVC*)segue.destinationViewController;
         [nextVC setTerm:sender];

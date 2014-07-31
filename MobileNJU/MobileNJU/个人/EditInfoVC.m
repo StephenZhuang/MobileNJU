@@ -7,14 +7,12 @@
 //
 
 #import "EditInfoVC.h"
-#import "AYHCustomComboBox.h"
 #import "CheckBox.h"
 #import "TagView.h"
 #import "ToolUtils.h"
 #import "ZsndUser.pb.h"
 #import "IQActionSheetPickerView.h"
 @interface EditInfoVC ()<UITextFieldDelegate,IQActionSheetPickerViewDelegate>
-@property(nonatomic,strong)AYHCustomComboBox* instituteBox;
 @property (weak, nonatomic) IBOutlet UITextField *instituteField;
 @property (weak, nonatomic) IBOutlet UITextField *nickNameField;
 
@@ -31,7 +29,6 @@
 {
     [super viewDidLoad];
     [self setTitle:@"完善资料"];
-    [self addComboBox];
     [self.nickNameField setDelegate:self];
     [self initField];
     // Do any additional setup after loading the view.
@@ -63,9 +60,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-#warning 这里重新写
 - (IBAction)save:(id)sender {
     [self waiting:@"正在保存"];
+    int gender = self.maleCheckBox.choose?1:0;
+    [[ApisFactory getApiMUpdateUserInfo]load:self selecter:@selector(disposMessage:) nickname:self.nickNameField.text belong:self.instituteField.text sex:gender birthday:self.birthField.text tags:@""];
 }
 
 
@@ -93,16 +91,7 @@
             default:
                 break;
         }
-        NSMutableString* tagsString = [[NSMutableString alloc]init];
-        for (int i = 0 ; i < user.tagsList.count-1; i++)
-        {
-            [tagsString appendString:[user.tagsList objectAtIndex:i]];
-            [tagsString appendString:@";"];
-        }
-        [tagsString appendString:[user.tagsList lastObject]];
-        [ToolUtils setTags:tagsString];
         [self.navigationController popViewControllerAnimated:YES];
-
     }
 }
 
@@ -115,28 +104,23 @@
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    [self.instituteBox removeFromSuperview];
     return YES;
-
 }
 
 
 #pragma -mark 选择院系
-- (void)addComboBox
-{
+- (IBAction)showComboBox:(id)sender {
     [self.nickNameField resignFirstResponder];
-    self.instituteBox = [[AYHCustomComboBox alloc] initWithFrame:CGRectMake(81, 100, 219, 200) DataCount:3 NotificationName:@"AYHComboBoxInstituteChanged"];
-    [self.instituteBox setTag:200];
-    [self.instituteBox setDelegate:self];
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"selfInfo" ofType:@"plist"];
     NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     NSArray* items = [data objectForKey:@"NJU"];
-    [self.instituteBox addItemsData:items];
-    [self.instituteBox flushData];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择院系" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    [picker setTag:1];
+    [picker setTitlesForComponenets:[NSArray arrayWithObjects:
+                                     items,
+                                     nil]];
 
-}
-- (IBAction)showComboBox:(id)sender {
-    [self.view addSubview:self.instituteBox];
+    [picker showInView:self.view];
 }
 
 /*
@@ -162,36 +146,26 @@
 }
 
 
-
-
-#pragma -mark 院系选择操作
-- (void) CustomComboBoxChanged:(id) sender SelectedItem:(NSString *)selectedItem
-{
-    AYHCustomComboBox* ccb = (AYHCustomComboBox*) sender;
-    if ([ccb tag]==200)
-    {
-        [self.instituteField setText:selectedItem];
-        [self.instituteBox removeFromSuperview];
-    }
-    
-}
-
-
 - (IBAction)closeIns:(id)sender {
     [self.nickNameField resignFirstResponder];
-    [self.instituteBox removeFromSuperview ];
 }
 
 
 #pragma -mark IQActionSheetPickerViewDelegate
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray *)titles
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    // 为日期格式器设置格式字符串
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    // 使用日期格式器格式化日期、时间
-    NSString *destDateString = [dateFormatter stringFromDate:pickerView.date];
-    [self.birthField setText:destDateString];
+    if (pickerView.tag==1) {
+        [self.instituteField setText:[titles firstObject]];
+    } else
+    {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        // 为日期格式器设置格式字符串
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        // 使用日期格式器格式化日期、时间
+        NSString *destDateString = [dateFormatter stringFromDate:pickerView.date];
+        [self.birthField setText:destDateString];
+     
+    }
 }
 /*
 #pragma mark - Navigation

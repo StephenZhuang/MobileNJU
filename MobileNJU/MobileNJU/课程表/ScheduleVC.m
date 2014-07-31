@@ -26,6 +26,7 @@
 @property (strong,nonatomic)UITextField* codeView;
 @property (strong,nonatomic)NSArray* lessonList;
 @property (strong,nonatomic)NSString* code;
+@property (nonatomic)int isRe;
 @end
 @implementation ScheduleVC
 
@@ -59,6 +60,7 @@
     if (![self.schIdField.text isEqualToString:@""]&&![self.passwordField.text isEqualToString:@""]) {
         [self search:nil];
     }
+    self.isRe=0;
     
     
   //    if (self.lessonList!=nil) {
@@ -103,6 +105,7 @@
     if (sender!=nil) {
         [self waiting:@"正在查询"];
     }
+    self.isRe=1;
     [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
     
 }
@@ -123,8 +126,10 @@
     }
     [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
+    [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
+    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MSchedule" params:array  delegate:delegate selecter:select];
-    [updateone setShowLoading:NO];
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
     return updateone;
 }
@@ -146,9 +151,7 @@
                     [ToolUtils setJWId:@""];
                 }
                 [ToolUtils setCurrentWeek:classList.week];
-//                [ToolUtils setMySchedule:classList.classList];
                 [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",classList.week]];
-                
                 self.lessonList = classList.classList;
                 [self loadSchedule];
             } else {
@@ -161,15 +164,7 @@
 
 - (void)addCode:(NSData*)img
 {
-    
-//    CGRect frame =  self.alertView.frame;
-//    frame.size.height = frame.size.height+80;
-    
-//    [self.alertView removeFromSuperview];
-//    self.alertView.frame = frame;
-//    [self.view addSubview:self.alertView];
     self.searchButton.transform = CGAffineTransformMakeTranslation(0, 60);
-
     self.codeView = [[UITextField alloc]init];
     self.codeView.delegate = self;
     self.codeView.borderStyle = self.schIdField.borderStyle;
