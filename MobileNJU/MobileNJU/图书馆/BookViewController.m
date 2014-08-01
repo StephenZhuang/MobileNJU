@@ -31,6 +31,7 @@
 @property(nonatomic)BOOL loading;
 @property (weak, nonatomic) IBOutlet UISwitch *rememberSwitch;
 @property (nonatomic)int isRe;
+@property(nonatomic)int isV;
 @end
 
 @implementation BookViewController
@@ -45,6 +46,7 @@
     self.page = 1;
     self.loading=NO;
     self.isRe=0;
+    self.isV=0;
     // Do any additional setup after loading the view.
 }
 
@@ -74,7 +76,15 @@
 }
 
 
+-(void)addFooter
+{
+    
+}
 
+-(void)addHeader
+{
+    
+}
 
 #pragma mark 网络回调
 - (void)disposMessage:(Son *)son
@@ -169,12 +179,32 @@
             [ToolUtils setLibraryId:self.schIdField.text];
             [ToolUtils setLibraryPassword:self.passwordField.text];
         }
-        [[ApisFactory getApiMMyLibrary]load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text isreinput:self.isRe isv:[ToolUtils getIsVeryfy]];
-//        [[ApisFactory getApiMMyLibrary]load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
+        
+         
+         [self load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
     }
     
 }
 
+         /**
+          *  个人图书馆(分页) mobile?methodno=MMyLibrary&debug=1&userid=&verify=&deviceid=&appid=&account=&password=
+          * @param delegate 回调类
+          * @param select  回调函数
+          * @param account * account
+          * @param password * password
+          * @callback MBookList_Builder
+          */
+         -(UpdateOne*)load:(id)delegate selecter:(SEL)select  account:(NSString*)account password:(NSString*)password {
+             NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+             [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
+             [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+             [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
+             [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
+             
+             UpdateOne *updateone=[[UpdateOne alloc] init:@"MMyLibrary" params:array  delegate:delegate selecter:select];
+             [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+             return updateone;
+         }
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -135,11 +135,13 @@
 
 @interface MMdoule : PBGeneratedMessage {
 @private
+  BOOL hasIsRecommend_:1;
   BOOL hasId_:1;
   BOOL hasImg_:1;
   BOOL hasName_:1;
   BOOL hasDesc_:1;
   BOOL hasCode_:1;
+  int32_t isRecommend;
   NSString* id;
   NSString* img;
   NSString* name;
@@ -151,11 +153,13 @@
 - (BOOL) hasName;
 - (BOOL) hasDesc;
 - (BOOL) hasCode;
+- (BOOL) hasIsRecommend;
 @property (readonly, retain) NSString* id;
 @property (readonly, retain) NSString* img;
 @property (readonly, retain) NSString* name;
 @property (readonly, retain) NSString* desc;
 @property (readonly, retain) NSString* code;
+@property (readonly) int32_t isRecommend;
 
 + (MMdoule*) defaultInstance;
 - (MMdoule*) defaultInstance;
@@ -215,6 +219,11 @@
 - (NSString*) code;
 - (MMdoule_Builder*) setCode:(NSString*) value;
 - (MMdoule_Builder*) clearCode;
+
+- (BOOL) hasIsRecommend;
+- (int32_t) isRecommend;
+- (MMdoule_Builder*) setIsRecommend:(int32_t) value;
+- (MMdoule_Builder*) clearIsRecommend;
 @end
 
 @interface MUnread : PBGeneratedMessage {

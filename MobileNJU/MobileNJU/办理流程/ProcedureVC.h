@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 Stephen Zhuang. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "RefreshTableViewController.h"
 
-@interface ProcedureVC : BaseViewController
+@interface ProcedureVC :RefreshTableViewController
 @property NSArray* procedureContents;
 @property NSArray* urls;
 @end

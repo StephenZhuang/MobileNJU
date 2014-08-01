@@ -9,7 +9,6 @@
 #import "BBSDetail.h"
 
 @interface BBSDetail ()<UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 

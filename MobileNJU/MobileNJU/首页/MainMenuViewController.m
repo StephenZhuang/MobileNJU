@@ -17,6 +17,7 @@
 #import "RDVTabBarController.h"
 #import "QCSlideViewController.h"
 #import "ShoppingVC.h"
+#import "ProcedureDetailVC.h"
 @interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 @property (weak, nonatomic) IBOutlet UIScrollView *pageScroller;
@@ -32,6 +33,7 @@
 @property (strong,nonatomic)NSMutableArray* imageArrays;
 @property (strong,nonatomic)NSMutableArray* imageArraysSelected;
 @property (strong,nonatomic)NSArray* newsImgList;
+@property (strong,nonatomic)NSString* tempUrl;
 
 @end
 
@@ -83,6 +85,9 @@ static NSArray* descriptions;
                 [names addObject:model.name];
                 [image addObject:model.img];
                 [details addObject:model.desc];
+                if ([model.name isEqualToString:@"办理流程"]) {
+                    self.tempUrl = model.desc;
+                }
             }
             if (functionNames==nil) {
                 functionNames=names;
@@ -90,12 +95,12 @@ static NSArray* descriptions;
                 descriptions=details;
                 [self loadImages];
             } else {
-                if (![ToolUtils compareArray:functionNames newArray:names]) {
-                    functionNames=names;
-                    buttonImages=image;
-                    descriptions=details;
-                    [self loadImages];
-                }
+    
+                functionNames=names;
+                buttonImages=image;
+                descriptions=details;
+                [self loadImages];
+                
             }
             [ToolUtils setFunctionDetails:descriptions];
             [ToolUtils setFunctionNames:functionNames];
@@ -104,8 +109,11 @@ static NSArray* descriptions;
             NSMutableArray* imgList = [[NSMutableArray alloc] init];
             for (MFocus *focus in index.focusList) {
                 [imgList addObject:focus.img];
+                NSLog(@"website %@",focus.id);
             }
             [ToolUtils setImgList:imgList];
+            [self loadTableData];
+            [self.tableView reloadData];
             [self addUnreadMsg];
             [self prepareForNews];
         } else if ([[son getMethod]isEqualToString:@"MUnreadModule"])
@@ -220,7 +228,13 @@ static NSArray* descriptions;
     if ([[segue identifier] isEqualToString:@"news"]) {
         UINavigationController* destinationVC = (UINavigationController*)segue.destinationViewController
         ;
+        
         [destinationVC setTitle:@"啦啦啦啊啦"];
+    } else if ([[segue identifier]isEqualToString:@"临时功能"])
+    {
+        ProcedureDetailVC* nextVC = (ProcedureDetailVC*)[segue destinationViewController];
+        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.tempUrl]];
+
     }
 }
 
@@ -276,7 +290,7 @@ static NSArray* descriptions;
         [cell.menuButton setImage:image.image forState:UIControlStateNormal];
         [cell.menuButton setImage:imageSelected.image forState:UIControlStateHighlighted];
          [cell.menuButton setImage:imageSelected.image forState:UIControlStateSelected];
-        [cell.menuButton setDesitination:[functionNames objectAtIndex:indexPath.row]];
+        [cell.menuButton setDesitination:[descriptions objectAtIndex:indexPath.row]];
         [cell.menuTitle setText:[functionNames objectAtIndex:indexPath.row]];
 //        [cell.menuSubTitle setText:[descriptions objectAtIndex:indexPath.row]];
         [cell.menuButton addTarget:self action:@selector(
@@ -307,6 +321,9 @@ static NSArray* descriptions;
     } else if ([menuButton.desitination isEqualToString:@"跳蚤市场"])
     {
         [self goToShop];
+    } else if ([menuButton.desitination hasSuffix:@"html"]){
+        [self performSegueWithIdentifier:@"临时功能"  sender:menuButton.desitination];
+
     }
         else {
             NSLog(@"%@ destination",menuButton.desitination);
@@ -317,18 +334,6 @@ static NSArray* descriptions;
 
 - (void)goToShop
 {
-//    NSArray *titleArray = [NSArray arrayWithObjects:@"轻松一刻",@"头条",@"北京",@"房产",@"移动互联",@"财经",@"科技",@"游戏",@"历史",@"军事",@"大满贯", nil];
-//    
-//    NSMutableArray *controllerArray = [[NSMutableArray alloc]init];
-//    
-//    for (NSString* title in titleArray)
-//    {
-//        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
-//        ShoppingVC* vc = (ShoppingVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"shop"]; //test2为viewcontroller的StoryboardId
-//        [controllerArray addObject:vc];
-//    }
-//    
-//    GuGuSegmentNaviViewController *controller = [[ GuGuSegmentNaviViewController alloc]initWithItems:titleArray andControllers:controllerArray];
     
     QCSlideViewController *slideSwitchVC = [[QCSlideViewController alloc] init];
     
@@ -505,6 +510,10 @@ static NSArray* descriptions;
     UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
     NewsListTVC* newsList = (NewsListTVC*)[unc.childViewControllers firstObject];
     newsList.jump = YES;
+    MFocus* focus = [self.focusList objectAtIndex:self.pageController.currentPage];
+    
+    [newsList setCurrentUrl:focus.id];
+    NSLog(@"%@新闻网址",focus.id);
     [self presentViewController:unc animated:YES completion:^{
         
     }];

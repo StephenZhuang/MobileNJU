@@ -19,11 +19,219 @@ static PBExtensionRegistry* extensionRegistry = nil;
 }
 @end
 
-@interface MMarketType ()
-@property (retain) NSString* id;
+@interface MMarketList ()
+@property (retain) NSMutableArray* mutableMarketList;
 @end
 
-@implementation MMarketType
+@implementation MMarketList
+
+@synthesize mutableMarketList;
+- (void) dealloc {
+  self.mutableMarketList = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+  }
+  return self;
+}
+static MMarketList* defaultMMarketListInstance = nil;
++ (void) initialize {
+  if (self == [MMarketList class]) {
+    defaultMMarketListInstance = [[MMarketList alloc] init];
+  }
+}
++ (MMarketList*) defaultInstance {
+  return defaultMMarketListInstance;
+}
+- (MMarketList*) defaultInstance {
+  return defaultMMarketListInstance;
+}
+- (NSArray*) marketList {
+  return mutableMarketList;
+}
+- (MMarket*) marketAtIndex:(int32_t) index {
+  id value = [mutableMarketList objectAtIndex:index];
+  return value;
+}
+- (BOOL) isInitialized {
+  return YES;
+}
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  for (MMarket* element in self.marketList) {
+    [output writeMessage:1 value:element];
+  }
+  [self.unknownFields writeToCodedOutputStream:output];
+}
+- (int32_t) serializedSize {
+  int32_t size = memoizedSerializedSize;
+  if (size != -1) {
+    return size;
+  }
+
+  size = 0;
+  for (MMarket* element in self.marketList) {
+    size += computeMessageSize(1, element);
+  }
+  size += self.unknownFields.serializedSize;
+  memoizedSerializedSize = size;
+  return size;
+}
++ (MMarketList*) parseFromData:(NSData*) data {
+  return (MMarketList*)[[[MMarketList builder] mergeFromData:data] build];
+}
++ (MMarketList*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMarketList*)[[[MMarketList builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
+}
++ (MMarketList*) parseFromInputStream:(NSInputStream*) input {
+  return (MMarketList*)[[[MMarketList builder] mergeFromInputStream:input] build];
+}
++ (MMarketList*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMarketList*)[[[MMarketList builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MMarketList*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MMarketList*)[[[MMarketList builder] mergeFromCodedInputStream:input] build];
+}
++ (MMarketList*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMarketList*)[[[MMarketList builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MMarketList_Builder*) builder {
+  return [[[MMarketList_Builder alloc] init] autorelease];
+}
++ (MMarketList_Builder*) builderWithPrototype:(MMarketList*) prototype {
+  return [[MMarketList builder] mergeFrom:prototype];
+}
+- (MMarketList_Builder*) builder {
+  return [MMarketList builder];
+}
+@end
+
+@interface MMarketList_Builder()
+@property (retain) MMarketList* result;
+@end
+
+@implementation MMarketList_Builder
+@synthesize result;
+- (void) dealloc {
+  self.result = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.result = [[[MMarketList alloc] init] autorelease];
+  }
+  return self;
+}
+- (PBGeneratedMessage*) internalGetResult {
+  return result;
+}
+- (MMarketList_Builder*) clear {
+  self.result = [[[MMarketList alloc] init] autorelease];
+  return self;
+}
+- (MMarketList_Builder*) clone {
+  return [MMarketList builderWithPrototype:result];
+}
+- (MMarketList*) defaultInstance {
+  return [MMarketList defaultInstance];
+}
+- (MMarketList*) build {
+  [self checkInitialized];
+  return [self buildPartial];
+}
+- (MMarketList*) buildPartial {
+  MMarketList* returnMe = [[result retain] autorelease];
+  self.result = nil;
+  return returnMe;
+}
+- (MMarketList_Builder*) mergeFrom:(MMarketList*) other {
+  if (other == [MMarketList defaultInstance]) {
+    return self;
+  }
+  if (other.mutableMarketList.count > 0) {
+    if (result.mutableMarketList == nil) {
+      result.mutableMarketList = [NSMutableArray array];
+    }
+    [result.mutableMarketList addObjectsFromArray:other.mutableMarketList];
+  }
+  [self mergeUnknownFields:other.unknownFields];
+  return self;
+}
+- (MMarketList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
+}
+- (MMarketList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+  while (YES) {
+    int32_t tag = [input readTag];
+    switch (tag) {
+      case 0:
+        [self setUnknownFields:[unknownFields build]];
+        return self;
+      default: {
+        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
+          [self setUnknownFields:[unknownFields build]];
+          return self;
+        }
+        break;
+      }
+      case 10: {
+        MMarket_Builder* subBuilder = [MMarket builder];
+        [input readMessage:subBuilder extensionRegistry:extensionRegistry];
+        [self addMarket:[subBuilder buildPartial]];
+        break;
+      }
+    }
+  }
+}
+- (NSArray*) marketList {
+  if (result.mutableMarketList == nil) { return [NSArray array]; }
+  return result.mutableMarketList;
+}
+- (MMarket*) marketAtIndex:(int32_t) index {
+  return [result marketAtIndex:index];
+}
+- (MMarketList_Builder*) replaceMarketAtIndex:(int32_t) index with:(MMarket*) value {
+  [result.mutableMarketList replaceObjectAtIndex:index withObject:value];
+  return self;
+}
+- (MMarketList_Builder*) addAllMarket:(NSArray*) values {
+  if (result.mutableMarketList == nil) {
+    result.mutableMarketList = [NSMutableArray array];
+  }
+  [result.mutableMarketList addObjectsFromArray:values];
+  return self;
+}
+- (MMarketList_Builder*) clearMarketList {
+  result.mutableMarketList = nil;
+  return self;
+}
+- (MMarketList_Builder*) addMarket:(MMarket*) value {
+  if (result.mutableMarketList == nil) {
+    result.mutableMarketList = [NSMutableArray array];
+  }
+  [result.mutableMarketList addObject:value];
+  return self;
+}
+@end
+
+@interface MMarket ()
+@property (retain) NSString* id;
+@property (retain) NSString* userid;
+@property (retain) NSString* name;
+@property (retain) NSString* priceOriginal;
+@property (retain) NSString* price;
+@property (retain) NSString* description;
+@property (retain) NSString* phone;
+@property (retain) NSString* qq;
+@property (retain) NSString* address;
+@property (retain) NSString* time;
+@property int32_t isSold;
+@property (retain) NSString* type;
+@property (retain) NSString* imgs;
+@end
+
+@implementation MMarket
 
 - (BOOL) hasId {
   return !!hasId_;
@@ -32,27 +240,134 @@ static PBExtensionRegistry* extensionRegistry = nil;
   hasId_ = !!value;
 }
 @synthesize id;
+- (BOOL) hasUserid {
+  return !!hasUserid_;
+}
+- (void) setHasUserid:(BOOL) value {
+  hasUserid_ = !!value;
+}
+@synthesize userid;
+- (BOOL) hasName {
+  return !!hasName_;
+}
+- (void) setHasName:(BOOL) value {
+  hasName_ = !!value;
+}
+@synthesize name;
+- (BOOL) hasPriceOriginal {
+  return !!hasPriceOriginal_;
+}
+- (void) setHasPriceOriginal:(BOOL) value {
+  hasPriceOriginal_ = !!value;
+}
+@synthesize priceOriginal;
+- (BOOL) hasPrice {
+  return !!hasPrice_;
+}
+- (void) setHasPrice:(BOOL) value {
+  hasPrice_ = !!value;
+}
+@synthesize price;
+- (BOOL) hasDescription {
+  return !!hasDescription_;
+}
+- (void) setHasDescription:(BOOL) value {
+  hasDescription_ = !!value;
+}
+@synthesize description;
+- (BOOL) hasPhone {
+  return !!hasPhone_;
+}
+- (void) setHasPhone:(BOOL) value {
+  hasPhone_ = !!value;
+}
+@synthesize phone;
+- (BOOL) hasQq {
+  return !!hasQq_;
+}
+- (void) setHasQq:(BOOL) value {
+  hasQq_ = !!value;
+}
+@synthesize qq;
+- (BOOL) hasAddress {
+  return !!hasAddress_;
+}
+- (void) setHasAddress:(BOOL) value {
+  hasAddress_ = !!value;
+}
+@synthesize address;
+- (BOOL) hasTime {
+  return !!hasTime_;
+}
+- (void) setHasTime:(BOOL) value {
+  hasTime_ = !!value;
+}
+@synthesize time;
+- (BOOL) hasIsSold {
+  return !!hasIsSold_;
+}
+- (void) setHasIsSold:(BOOL) value {
+  hasIsSold_ = !!value;
+}
+@synthesize isSold;
+- (BOOL) hasType {
+  return !!hasType_;
+}
+- (void) setHasType:(BOOL) value {
+  hasType_ = !!value;
+}
+@synthesize type;
+- (BOOL) hasImgs {
+  return !!hasImgs_;
+}
+- (void) setHasImgs:(BOOL) value {
+  hasImgs_ = !!value;
+}
+@synthesize imgs;
 - (void) dealloc {
   self.id = nil;
+  self.userid = nil;
+  self.name = nil;
+  self.priceOriginal = nil;
+  self.price = nil;
+  self.description = nil;
+  self.phone = nil;
+  self.qq = nil;
+  self.address = nil;
+  self.time = nil;
+  self.type = nil;
+  self.imgs = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
     self.id = @"";
+    self.userid = @"";
+    self.name = @"";
+    self.priceOriginal = @"";
+    self.price = @"";
+    self.description = @"";
+    self.phone = @"";
+    self.qq = @"";
+    self.address = @"";
+    self.time = @"";
+    self.isSold = 0;
+    self.type = @"";
+    self.imgs = @"";
   }
   return self;
 }
-static MMarketType* defaultMMarketTypeInstance = nil;
+static MMarket* defaultMMarketInstance = nil;
 + (void) initialize {
-  if (self == [MMarketType class]) {
-    defaultMMarketTypeInstance = [[MMarketType alloc] init];
+  if (self == [MMarket class]) {
+    defaultMMarketInstance = [[MMarket alloc] init];
   }
 }
-+ (MMarketType*) defaultInstance {
-  return defaultMMarketTypeInstance;
++ (MMarket*) defaultInstance {
+  return defaultMMarketInstance;
 }
-- (MMarketType*) defaultInstance {
-  return defaultMMarketTypeInstance;
+- (MMarket*) defaultInstance {
+  return defaultMMarketInstance;
 }
 - (BOOL) isInitialized {
   return YES;
@@ -60,6 +375,42 @@ static MMarketType* defaultMMarketTypeInstance = nil;
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
   if (self.hasId) {
     [output writeString:1 value:self.id];
+  }
+  if (self.hasUserid) {
+    [output writeString:2 value:self.userid];
+  }
+  if (self.hasName) {
+    [output writeString:3 value:self.name];
+  }
+  if (self.hasPriceOriginal) {
+    [output writeString:4 value:self.priceOriginal];
+  }
+  if (self.hasPrice) {
+    [output writeString:5 value:self.price];
+  }
+  if (self.hasDescription) {
+    [output writeString:6 value:self.description];
+  }
+  if (self.hasPhone) {
+    [output writeString:7 value:self.phone];
+  }
+  if (self.hasQq) {
+    [output writeString:8 value:self.qq];
+  }
+  if (self.hasAddress) {
+    [output writeString:9 value:self.address];
+  }
+  if (self.hasTime) {
+    [output writeString:10 value:self.time];
+  }
+  if (self.hasIsSold) {
+    [output writeInt32:11 value:self.isSold];
+  }
+  if (self.hasType) {
+    [output writeString:12 value:self.type];
+  }
+  if (self.hasImgs) {
+    [output writeString:13 value:self.imgs];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -73,44 +424,80 @@ static MMarketType* defaultMMarketTypeInstance = nil;
   if (self.hasId) {
     size += computeStringSize(1, self.id);
   }
+  if (self.hasUserid) {
+    size += computeStringSize(2, self.userid);
+  }
+  if (self.hasName) {
+    size += computeStringSize(3, self.name);
+  }
+  if (self.hasPriceOriginal) {
+    size += computeStringSize(4, self.priceOriginal);
+  }
+  if (self.hasPrice) {
+    size += computeStringSize(5, self.price);
+  }
+  if (self.hasDescription) {
+    size += computeStringSize(6, self.description);
+  }
+  if (self.hasPhone) {
+    size += computeStringSize(7, self.phone);
+  }
+  if (self.hasQq) {
+    size += computeStringSize(8, self.qq);
+  }
+  if (self.hasAddress) {
+    size += computeStringSize(9, self.address);
+  }
+  if (self.hasTime) {
+    size += computeStringSize(10, self.time);
+  }
+  if (self.hasIsSold) {
+    size += computeInt32Size(11, self.isSold);
+  }
+  if (self.hasType) {
+    size += computeStringSize(12, self.type);
+  }
+  if (self.hasImgs) {
+    size += computeStringSize(13, self.imgs);
+  }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
   return size;
 }
-+ (MMarketType*) parseFromData:(NSData*) data {
-  return (MMarketType*)[[[MMarketType builder] mergeFromData:data] build];
++ (MMarket*) parseFromData:(NSData*) data {
+  return (MMarket*)[[[MMarket builder] mergeFromData:data] build];
 }
-+ (MMarketType*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MMarketType*)[[[MMarketType builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
++ (MMarket*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMarket*)[[[MMarket builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
 }
-+ (MMarketType*) parseFromInputStream:(NSInputStream*) input {
-  return (MMarketType*)[[[MMarketType builder] mergeFromInputStream:input] build];
++ (MMarket*) parseFromInputStream:(NSInputStream*) input {
+  return (MMarket*)[[[MMarket builder] mergeFromInputStream:input] build];
 }
-+ (MMarketType*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MMarketType*)[[[MMarketType builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
++ (MMarket*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMarket*)[[[MMarket builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (MMarketType*) parseFromCodedInputStream:(PBCodedInputStream*) input {
-  return (MMarketType*)[[[MMarketType builder] mergeFromCodedInputStream:input] build];
++ (MMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MMarket*)[[[MMarket builder] mergeFromCodedInputStream:input] build];
 }
-+ (MMarketType*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MMarketType*)[[[MMarketType builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
++ (MMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMarket*)[[[MMarket builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (MMarketType_Builder*) builder {
-  return [[[MMarketType_Builder alloc] init] autorelease];
++ (MMarket_Builder*) builder {
+  return [[[MMarket_Builder alloc] init] autorelease];
 }
-+ (MMarketType_Builder*) builderWithPrototype:(MMarketType*) prototype {
-  return [[MMarketType builder] mergeFrom:prototype];
++ (MMarket_Builder*) builderWithPrototype:(MMarket*) prototype {
+  return [[MMarket builder] mergeFrom:prototype];
 }
-- (MMarketType_Builder*) builder {
-  return [MMarketType builder];
+- (MMarket_Builder*) builder {
+  return [MMarket builder];
 }
 @end
 
-@interface MMarketType_Builder()
-@property (retain) MMarketType* result;
+@interface MMarket_Builder()
+@property (retain) MMarket* result;
 @end
 
-@implementation MMarketType_Builder
+@implementation MMarket_Builder
 @synthesize result;
 - (void) dealloc {
   self.result = nil;
@@ -118,46 +505,82 @@ static MMarketType* defaultMMarketTypeInstance = nil;
 }
 - (id) init {
   if ((self = [super init])) {
-    self.result = [[[MMarketType alloc] init] autorelease];
+    self.result = [[[MMarket alloc] init] autorelease];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
   return result;
 }
-- (MMarketType_Builder*) clear {
-  self.result = [[[MMarketType alloc] init] autorelease];
+- (MMarket_Builder*) clear {
+  self.result = [[[MMarket alloc] init] autorelease];
   return self;
 }
-- (MMarketType_Builder*) clone {
-  return [MMarketType builderWithPrototype:result];
+- (MMarket_Builder*) clone {
+  return [MMarket builderWithPrototype:result];
 }
-- (MMarketType*) defaultInstance {
-  return [MMarketType defaultInstance];
+- (MMarket*) defaultInstance {
+  return [MMarket defaultInstance];
 }
-- (MMarketType*) build {
+- (MMarket*) build {
   [self checkInitialized];
   return [self buildPartial];
 }
-- (MMarketType*) buildPartial {
-  MMarketType* returnMe = [[result retain] autorelease];
+- (MMarket*) buildPartial {
+  MMarket* returnMe = [[result retain] autorelease];
   self.result = nil;
   return returnMe;
 }
-- (MMarketType_Builder*) mergeFrom:(MMarketType*) other {
-  if (other == [MMarketType defaultInstance]) {
+- (MMarket_Builder*) mergeFrom:(MMarket*) other {
+  if (other == [MMarket defaultInstance]) {
     return self;
   }
   if (other.hasId) {
     [self setId:other.id];
   }
+  if (other.hasUserid) {
+    [self setUserid:other.userid];
+  }
+  if (other.hasName) {
+    [self setName:other.name];
+  }
+  if (other.hasPriceOriginal) {
+    [self setPriceOriginal:other.priceOriginal];
+  }
+  if (other.hasPrice) {
+    [self setPrice:other.price];
+  }
+  if (other.hasDescription) {
+    [self setDescription:other.description];
+  }
+  if (other.hasPhone) {
+    [self setPhone:other.phone];
+  }
+  if (other.hasQq) {
+    [self setQq:other.qq];
+  }
+  if (other.hasAddress) {
+    [self setAddress:other.address];
+  }
+  if (other.hasTime) {
+    [self setTime:other.time];
+  }
+  if (other.hasIsSold) {
+    [self setIsSold:other.isSold];
+  }
+  if (other.hasType) {
+    [self setType:other.type];
+  }
+  if (other.hasImgs) {
+    [self setImgs:other.imgs];
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
-- (MMarketType_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+- (MMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
   return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
 }
-- (MMarketType_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+- (MMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
   PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
   while (YES) {
     int32_t tag = [input readTag];
@@ -176,6 +599,54 @@ static MMarketType* defaultMMarketTypeInstance = nil;
         [self setId:[input readString]];
         break;
       }
+      case 18: {
+        [self setUserid:[input readString]];
+        break;
+      }
+      case 26: {
+        [self setName:[input readString]];
+        break;
+      }
+      case 34: {
+        [self setPriceOriginal:[input readString]];
+        break;
+      }
+      case 42: {
+        [self setPrice:[input readString]];
+        break;
+      }
+      case 50: {
+        [self setDescription:[input readString]];
+        break;
+      }
+      case 58: {
+        [self setPhone:[input readString]];
+        break;
+      }
+      case 66: {
+        [self setQq:[input readString]];
+        break;
+      }
+      case 74: {
+        [self setAddress:[input readString]];
+        break;
+      }
+      case 82: {
+        [self setTime:[input readString]];
+        break;
+      }
+      case 88: {
+        [self setIsSold:[input readInt32]];
+        break;
+      }
+      case 98: {
+        [self setType:[input readString]];
+        break;
+      }
+      case 106: {
+        [self setImgs:[input readString]];
+        break;
+      }
     }
   }
 }
@@ -185,14 +656,719 @@ static MMarketType* defaultMMarketTypeInstance = nil;
 - (NSString*) id {
   return result.id;
 }
-- (MMarketType_Builder*) setId:(NSString*) value {
+- (MMarket_Builder*) setId:(NSString*) value {
   result.hasId = YES;
   result.id = value;
   return self;
 }
-- (MMarketType_Builder*) clearId {
+- (MMarket_Builder*) clearId {
   result.hasId = NO;
   result.id = @"";
+  return self;
+}
+- (BOOL) hasUserid {
+  return result.hasUserid;
+}
+- (NSString*) userid {
+  return result.userid;
+}
+- (MMarket_Builder*) setUserid:(NSString*) value {
+  result.hasUserid = YES;
+  result.userid = value;
+  return self;
+}
+- (MMarket_Builder*) clearUserid {
+  result.hasUserid = NO;
+  result.userid = @"";
+  return self;
+}
+- (BOOL) hasName {
+  return result.hasName;
+}
+- (NSString*) name {
+  return result.name;
+}
+- (MMarket_Builder*) setName:(NSString*) value {
+  result.hasName = YES;
+  result.name = value;
+  return self;
+}
+- (MMarket_Builder*) clearName {
+  result.hasName = NO;
+  result.name = @"";
+  return self;
+}
+- (BOOL) hasPriceOriginal {
+  return result.hasPriceOriginal;
+}
+- (NSString*) priceOriginal {
+  return result.priceOriginal;
+}
+- (MMarket_Builder*) setPriceOriginal:(NSString*) value {
+  result.hasPriceOriginal = YES;
+  result.priceOriginal = value;
+  return self;
+}
+- (MMarket_Builder*) clearPriceOriginal {
+  result.hasPriceOriginal = NO;
+  result.priceOriginal = @"";
+  return self;
+}
+- (BOOL) hasPrice {
+  return result.hasPrice;
+}
+- (NSString*) price {
+  return result.price;
+}
+- (MMarket_Builder*) setPrice:(NSString*) value {
+  result.hasPrice = YES;
+  result.price = value;
+  return self;
+}
+- (MMarket_Builder*) clearPrice {
+  result.hasPrice = NO;
+  result.price = @"";
+  return self;
+}
+- (BOOL) hasDescription {
+  return result.hasDescription;
+}
+- (NSString*) description {
+  return result.description;
+}
+- (MMarket_Builder*) setDescription:(NSString*) value {
+  result.hasDescription = YES;
+  result.description = value;
+  return self;
+}
+- (MMarket_Builder*) clearDescription {
+  result.hasDescription = NO;
+  result.description = @"";
+  return self;
+}
+- (BOOL) hasPhone {
+  return result.hasPhone;
+}
+- (NSString*) phone {
+  return result.phone;
+}
+- (MMarket_Builder*) setPhone:(NSString*) value {
+  result.hasPhone = YES;
+  result.phone = value;
+  return self;
+}
+- (MMarket_Builder*) clearPhone {
+  result.hasPhone = NO;
+  result.phone = @"";
+  return self;
+}
+- (BOOL) hasQq {
+  return result.hasQq;
+}
+- (NSString*) qq {
+  return result.qq;
+}
+- (MMarket_Builder*) setQq:(NSString*) value {
+  result.hasQq = YES;
+  result.qq = value;
+  return self;
+}
+- (MMarket_Builder*) clearQq {
+  result.hasQq = NO;
+  result.qq = @"";
+  return self;
+}
+- (BOOL) hasAddress {
+  return result.hasAddress;
+}
+- (NSString*) address {
+  return result.address;
+}
+- (MMarket_Builder*) setAddress:(NSString*) value {
+  result.hasAddress = YES;
+  result.address = value;
+  return self;
+}
+- (MMarket_Builder*) clearAddress {
+  result.hasAddress = NO;
+  result.address = @"";
+  return self;
+}
+- (BOOL) hasTime {
+  return result.hasTime;
+}
+- (NSString*) time {
+  return result.time;
+}
+- (MMarket_Builder*) setTime:(NSString*) value {
+  result.hasTime = YES;
+  result.time = value;
+  return self;
+}
+- (MMarket_Builder*) clearTime {
+  result.hasTime = NO;
+  result.time = @"";
+  return self;
+}
+- (BOOL) hasIsSold {
+  return result.hasIsSold;
+}
+- (int32_t) isSold {
+  return result.isSold;
+}
+- (MMarket_Builder*) setIsSold:(int32_t) value {
+  result.hasIsSold = YES;
+  result.isSold = value;
+  return self;
+}
+- (MMarket_Builder*) clearIsSold {
+  result.hasIsSold = NO;
+  result.isSold = 0;
+  return self;
+}
+- (BOOL) hasType {
+  return result.hasType;
+}
+- (NSString*) type {
+  return result.type;
+}
+- (MMarket_Builder*) setType:(NSString*) value {
+  result.hasType = YES;
+  result.type = value;
+  return self;
+}
+- (MMarket_Builder*) clearType {
+  result.hasType = NO;
+  result.type = @"";
+  return self;
+}
+- (BOOL) hasImgs {
+  return result.hasImgs;
+}
+- (NSString*) imgs {
+  return result.imgs;
+}
+- (MMarket_Builder*) setImgs:(NSString*) value {
+  result.hasImgs = YES;
+  result.imgs = value;
+  return self;
+}
+- (MMarket_Builder*) clearImgs {
+  result.hasImgs = NO;
+  result.imgs = @"";
+  return self;
+}
+@end
+
+@interface MAddMarket ()
+@property (retain) NSString* name;
+@property (retain) NSString* priceOriginal;
+@property (retain) NSString* price;
+@property (retain) NSString* description;
+@property (retain) NSString* phone;
+@property (retain) NSString* qq;
+@property (retain) NSString* address;
+@property (retain) NSString* type;
+@property (retain) NSMutableArray* mutableImgsList;
+@end
+
+@implementation MAddMarket
+
+- (BOOL) hasName {
+  return !!hasName_;
+}
+- (void) setHasName:(BOOL) value {
+  hasName_ = !!value;
+}
+@synthesize name;
+- (BOOL) hasPriceOriginal {
+  return !!hasPriceOriginal_;
+}
+- (void) setHasPriceOriginal:(BOOL) value {
+  hasPriceOriginal_ = !!value;
+}
+@synthesize priceOriginal;
+- (BOOL) hasPrice {
+  return !!hasPrice_;
+}
+- (void) setHasPrice:(BOOL) value {
+  hasPrice_ = !!value;
+}
+@synthesize price;
+- (BOOL) hasDescription {
+  return !!hasDescription_;
+}
+- (void) setHasDescription:(BOOL) value {
+  hasDescription_ = !!value;
+}
+@synthesize description;
+- (BOOL) hasPhone {
+  return !!hasPhone_;
+}
+- (void) setHasPhone:(BOOL) value {
+  hasPhone_ = !!value;
+}
+@synthesize phone;
+- (BOOL) hasQq {
+  return !!hasQq_;
+}
+- (void) setHasQq:(BOOL) value {
+  hasQq_ = !!value;
+}
+@synthesize qq;
+- (BOOL) hasAddress {
+  return !!hasAddress_;
+}
+- (void) setHasAddress:(BOOL) value {
+  hasAddress_ = !!value;
+}
+@synthesize address;
+- (BOOL) hasType {
+  return !!hasType_;
+}
+- (void) setHasType:(BOOL) value {
+  hasType_ = !!value;
+}
+@synthesize type;
+@synthesize mutableImgsList;
+- (void) dealloc {
+  self.name = nil;
+  self.priceOriginal = nil;
+  self.price = nil;
+  self.description = nil;
+  self.phone = nil;
+  self.qq = nil;
+  self.address = nil;
+  self.type = nil;
+  self.mutableImgsList = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.name = @"";
+    self.priceOriginal = @"";
+    self.price = @"";
+    self.description = @"";
+    self.phone = @"";
+    self.qq = @"";
+    self.address = @"";
+    self.type = @"";
+  }
+  return self;
+}
+static MAddMarket* defaultMAddMarketInstance = nil;
++ (void) initialize {
+  if (self == [MAddMarket class]) {
+    defaultMAddMarketInstance = [[MAddMarket alloc] init];
+  }
+}
++ (MAddMarket*) defaultInstance {
+  return defaultMAddMarketInstance;
+}
+- (MAddMarket*) defaultInstance {
+  return defaultMAddMarketInstance;
+}
+- (NSArray*) imgsList {
+  return mutableImgsList;
+}
+- (NSData*) imgsAtIndex:(int32_t) index {
+  id value = [mutableImgsList objectAtIndex:index];
+  return value;
+}
+- (BOOL) isInitialized {
+  return YES;
+}
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  if (self.hasName) {
+    [output writeString:1 value:self.name];
+  }
+  if (self.hasPriceOriginal) {
+    [output writeString:2 value:self.priceOriginal];
+  }
+  if (self.hasPrice) {
+    [output writeString:3 value:self.price];
+  }
+  if (self.hasDescription) {
+    [output writeString:4 value:self.description];
+  }
+  if (self.hasPhone) {
+    [output writeString:5 value:self.phone];
+  }
+  if (self.hasQq) {
+    [output writeString:6 value:self.qq];
+  }
+  if (self.hasAddress) {
+    [output writeString:7 value:self.address];
+  }
+  if (self.hasType) {
+    [output writeString:8 value:self.type];
+  }
+  for (NSData* element in self.mutableImgsList) {
+    [output writeData:9 value:element];
+  }
+  [self.unknownFields writeToCodedOutputStream:output];
+}
+- (int32_t) serializedSize {
+  int32_t size = memoizedSerializedSize;
+  if (size != -1) {
+    return size;
+  }
+
+  size = 0;
+  if (self.hasName) {
+    size += computeStringSize(1, self.name);
+  }
+  if (self.hasPriceOriginal) {
+    size += computeStringSize(2, self.priceOriginal);
+  }
+  if (self.hasPrice) {
+    size += computeStringSize(3, self.price);
+  }
+  if (self.hasDescription) {
+    size += computeStringSize(4, self.description);
+  }
+  if (self.hasPhone) {
+    size += computeStringSize(5, self.phone);
+  }
+  if (self.hasQq) {
+    size += computeStringSize(6, self.qq);
+  }
+  if (self.hasAddress) {
+    size += computeStringSize(7, self.address);
+  }
+  if (self.hasType) {
+    size += computeStringSize(8, self.type);
+  }
+  {
+    int32_t dataSize = 0;
+    for (NSData* element in self.mutableImgsList) {
+      dataSize += computeDataSizeNoTag(element);
+    }
+    size += dataSize;
+    size += 1 * self.mutableImgsList.count;
+  }
+  size += self.unknownFields.serializedSize;
+  memoizedSerializedSize = size;
+  return size;
+}
++ (MAddMarket*) parseFromData:(NSData*) data {
+  return (MAddMarket*)[[[MAddMarket builder] mergeFromData:data] build];
+}
++ (MAddMarket*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MAddMarket*)[[[MAddMarket builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
+}
++ (MAddMarket*) parseFromInputStream:(NSInputStream*) input {
+  return (MAddMarket*)[[[MAddMarket builder] mergeFromInputStream:input] build];
+}
++ (MAddMarket*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MAddMarket*)[[[MAddMarket builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MAddMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MAddMarket*)[[[MAddMarket builder] mergeFromCodedInputStream:input] build];
+}
++ (MAddMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MAddMarket*)[[[MAddMarket builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MAddMarket_Builder*) builder {
+  return [[[MAddMarket_Builder alloc] init] autorelease];
+}
++ (MAddMarket_Builder*) builderWithPrototype:(MAddMarket*) prototype {
+  return [[MAddMarket builder] mergeFrom:prototype];
+}
+- (MAddMarket_Builder*) builder {
+  return [MAddMarket builder];
+}
+@end
+
+@interface MAddMarket_Builder()
+@property (retain) MAddMarket* result;
+@end
+
+@implementation MAddMarket_Builder
+@synthesize result;
+- (void) dealloc {
+  self.result = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.result = [[[MAddMarket alloc] init] autorelease];
+  }
+  return self;
+}
+- (PBGeneratedMessage*) internalGetResult {
+  return result;
+}
+- (MAddMarket_Builder*) clear {
+  self.result = [[[MAddMarket alloc] init] autorelease];
+  return self;
+}
+- (MAddMarket_Builder*) clone {
+  return [MAddMarket builderWithPrototype:result];
+}
+- (MAddMarket*) defaultInstance {
+  return [MAddMarket defaultInstance];
+}
+- (MAddMarket*) build {
+  [self checkInitialized];
+  return [self buildPartial];
+}
+- (MAddMarket*) buildPartial {
+  MAddMarket* returnMe = [[result retain] autorelease];
+  self.result = nil;
+  return returnMe;
+}
+- (MAddMarket_Builder*) mergeFrom:(MAddMarket*) other {
+  if (other == [MAddMarket defaultInstance]) {
+    return self;
+  }
+  if (other.hasName) {
+    [self setName:other.name];
+  }
+  if (other.hasPriceOriginal) {
+    [self setPriceOriginal:other.priceOriginal];
+  }
+  if (other.hasPrice) {
+    [self setPrice:other.price];
+  }
+  if (other.hasDescription) {
+    [self setDescription:other.description];
+  }
+  if (other.hasPhone) {
+    [self setPhone:other.phone];
+  }
+  if (other.hasQq) {
+    [self setQq:other.qq];
+  }
+  if (other.hasAddress) {
+    [self setAddress:other.address];
+  }
+  if (other.hasType) {
+    [self setType:other.type];
+  }
+  if (other.mutableImgsList.count > 0) {
+    if (result.mutableImgsList == nil) {
+      result.mutableImgsList = [NSMutableArray array];
+    }
+    [result.mutableImgsList addObjectsFromArray:other.mutableImgsList];
+  }
+  [self mergeUnknownFields:other.unknownFields];
+  return self;
+}
+- (MAddMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
+}
+- (MAddMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+  while (YES) {
+    int32_t tag = [input readTag];
+    switch (tag) {
+      case 0:
+        [self setUnknownFields:[unknownFields build]];
+        return self;
+      default: {
+        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
+          [self setUnknownFields:[unknownFields build]];
+          return self;
+        }
+        break;
+      }
+      case 10: {
+        [self setName:[input readString]];
+        break;
+      }
+      case 18: {
+        [self setPriceOriginal:[input readString]];
+        break;
+      }
+      case 26: {
+        [self setPrice:[input readString]];
+        break;
+      }
+      case 34: {
+        [self setDescription:[input readString]];
+        break;
+      }
+      case 42: {
+        [self setPhone:[input readString]];
+        break;
+      }
+      case 50: {
+        [self setQq:[input readString]];
+        break;
+      }
+      case 58: {
+        [self setAddress:[input readString]];
+        break;
+      }
+      case 66: {
+        [self setType:[input readString]];
+        break;
+      }
+      case 74: {
+        [self addImgs:[input readData]];
+        break;
+      }
+    }
+  }
+}
+- (BOOL) hasName {
+  return result.hasName;
+}
+- (NSString*) name {
+  return result.name;
+}
+- (MAddMarket_Builder*) setName:(NSString*) value {
+  result.hasName = YES;
+  result.name = value;
+  return self;
+}
+- (MAddMarket_Builder*) clearName {
+  result.hasName = NO;
+  result.name = @"";
+  return self;
+}
+- (BOOL) hasPriceOriginal {
+  return result.hasPriceOriginal;
+}
+- (NSString*) priceOriginal {
+  return result.priceOriginal;
+}
+- (MAddMarket_Builder*) setPriceOriginal:(NSString*) value {
+  result.hasPriceOriginal = YES;
+  result.priceOriginal = value;
+  return self;
+}
+- (MAddMarket_Builder*) clearPriceOriginal {
+  result.hasPriceOriginal = NO;
+  result.priceOriginal = @"";
+  return self;
+}
+- (BOOL) hasPrice {
+  return result.hasPrice;
+}
+- (NSString*) price {
+  return result.price;
+}
+- (MAddMarket_Builder*) setPrice:(NSString*) value {
+  result.hasPrice = YES;
+  result.price = value;
+  return self;
+}
+- (MAddMarket_Builder*) clearPrice {
+  result.hasPrice = NO;
+  result.price = @"";
+  return self;
+}
+- (BOOL) hasDescription {
+  return result.hasDescription;
+}
+- (NSString*) description {
+  return result.description;
+}
+- (MAddMarket_Builder*) setDescription:(NSString*) value {
+  result.hasDescription = YES;
+  result.description = value;
+  return self;
+}
+- (MAddMarket_Builder*) clearDescription {
+  result.hasDescription = NO;
+  result.description = @"";
+  return self;
+}
+- (BOOL) hasPhone {
+  return result.hasPhone;
+}
+- (NSString*) phone {
+  return result.phone;
+}
+- (MAddMarket_Builder*) setPhone:(NSString*) value {
+  result.hasPhone = YES;
+  result.phone = value;
+  return self;
+}
+- (MAddMarket_Builder*) clearPhone {
+  result.hasPhone = NO;
+  result.phone = @"";
+  return self;
+}
+- (BOOL) hasQq {
+  return result.hasQq;
+}
+- (NSString*) qq {
+  return result.qq;
+}
+- (MAddMarket_Builder*) setQq:(NSString*) value {
+  result.hasQq = YES;
+  result.qq = value;
+  return self;
+}
+- (MAddMarket_Builder*) clearQq {
+  result.hasQq = NO;
+  result.qq = @"";
+  return self;
+}
+- (BOOL) hasAddress {
+  return result.hasAddress;
+}
+- (NSString*) address {
+  return result.address;
+}
+- (MAddMarket_Builder*) setAddress:(NSString*) value {
+  result.hasAddress = YES;
+  result.address = value;
+  return self;
+}
+- (MAddMarket_Builder*) clearAddress {
+  result.hasAddress = NO;
+  result.address = @"";
+  return self;
+}
+- (BOOL) hasType {
+  return result.hasType;
+}
+- (NSString*) type {
+  return result.type;
+}
+- (MAddMarket_Builder*) setType:(NSString*) value {
+  result.hasType = YES;
+  result.type = value;
+  return self;
+}
+- (MAddMarket_Builder*) clearType {
+  result.hasType = NO;
+  result.type = @"";
+  return self;
+}
+- (NSArray*) imgsList {
+  if (result.mutableImgsList == nil) {
+    return [NSArray array];
+  }
+  return result.mutableImgsList;
+}
+- (NSData*) imgsAtIndex:(int32_t) index {
+  return [result imgsAtIndex:index];
+}
+- (MAddMarket_Builder*) replaceImgsAtIndex:(int32_t) index with:(NSData*) value {
+  [result.mutableImgsList replaceObjectAtIndex:index withObject:value];
+  return self;
+}
+- (MAddMarket_Builder*) addImgs:(NSData*) value {
+  if (result.mutableImgsList == nil) {
+    result.mutableImgsList = [NSMutableArray array];
+  }
+  [result.mutableImgsList addObject:value];
+  return self;
+}
+- (MAddMarket_Builder*) addAllImgs:(NSArray*) values {
+  if (result.mutableImgsList == nil) {
+    result.mutableImgsList = [NSMutableArray array];
+  }
+  [result.mutableImgsList addObjectsFromArray:values];
+  return self;
+}
+- (MAddMarket_Builder*) clearImgsList {
+  result.mutableImgsList = nil;
   return self;
 }
 @end
@@ -393,11 +1569,12 @@ static MMarketTypeList* defaultMMarketTypeListInstance = nil;
 }
 @end
 
-@interface MProduct ()
+@interface MMarketType ()
 @property (retain) NSString* id;
+@property (retain) NSString* title;
 @end
 
-@implementation MProduct
+@implementation MMarketType
 
 - (BOOL) hasId {
   return !!hasId_;
@@ -406,27 +1583,36 @@ static MMarketTypeList* defaultMMarketTypeListInstance = nil;
   hasId_ = !!value;
 }
 @synthesize id;
+- (BOOL) hasTitle {
+  return !!hasTitle_;
+}
+- (void) setHasTitle:(BOOL) value {
+  hasTitle_ = !!value;
+}
+@synthesize title;
 - (void) dealloc {
   self.id = nil;
+  self.title = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
     self.id = @"";
+    self.title = @"";
   }
   return self;
 }
-static MProduct* defaultMProductInstance = nil;
+static MMarketType* defaultMMarketTypeInstance = nil;
 + (void) initialize {
-  if (self == [MProduct class]) {
-    defaultMProductInstance = [[MProduct alloc] init];
+  if (self == [MMarketType class]) {
+    defaultMMarketTypeInstance = [[MMarketType alloc] init];
   }
 }
-+ (MProduct*) defaultInstance {
-  return defaultMProductInstance;
++ (MMarketType*) defaultInstance {
+  return defaultMMarketTypeInstance;
 }
-- (MProduct*) defaultInstance {
-  return defaultMProductInstance;
+- (MMarketType*) defaultInstance {
+  return defaultMMarketTypeInstance;
 }
 - (BOOL) isInitialized {
   return YES;
@@ -434,6 +1620,9 @@ static MProduct* defaultMProductInstance = nil;
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
   if (self.hasId) {
     [output writeString:1 value:self.id];
+  }
+  if (self.hasTitle) {
+    [output writeString:2 value:self.title];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -447,44 +1636,47 @@ static MProduct* defaultMProductInstance = nil;
   if (self.hasId) {
     size += computeStringSize(1, self.id);
   }
+  if (self.hasTitle) {
+    size += computeStringSize(2, self.title);
+  }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
   return size;
 }
-+ (MProduct*) parseFromData:(NSData*) data {
-  return (MProduct*)[[[MProduct builder] mergeFromData:data] build];
++ (MMarketType*) parseFromData:(NSData*) data {
+  return (MMarketType*)[[[MMarketType builder] mergeFromData:data] build];
 }
-+ (MProduct*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MProduct*)[[[MProduct builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
++ (MMarketType*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMarketType*)[[[MMarketType builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
 }
-+ (MProduct*) parseFromInputStream:(NSInputStream*) input {
-  return (MProduct*)[[[MProduct builder] mergeFromInputStream:input] build];
++ (MMarketType*) parseFromInputStream:(NSInputStream*) input {
+  return (MMarketType*)[[[MMarketType builder] mergeFromInputStream:input] build];
 }
-+ (MProduct*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MProduct*)[[[MProduct builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
++ (MMarketType*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMarketType*)[[[MMarketType builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (MProduct*) parseFromCodedInputStream:(PBCodedInputStream*) input {
-  return (MProduct*)[[[MProduct builder] mergeFromCodedInputStream:input] build];
++ (MMarketType*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MMarketType*)[[[MMarketType builder] mergeFromCodedInputStream:input] build];
 }
-+ (MProduct*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MProduct*)[[[MProduct builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
++ (MMarketType*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMarketType*)[[[MMarketType builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (MProduct_Builder*) builder {
-  return [[[MProduct_Builder alloc] init] autorelease];
++ (MMarketType_Builder*) builder {
+  return [[[MMarketType_Builder alloc] init] autorelease];
 }
-+ (MProduct_Builder*) builderWithPrototype:(MProduct*) prototype {
-  return [[MProduct builder] mergeFrom:prototype];
++ (MMarketType_Builder*) builderWithPrototype:(MMarketType*) prototype {
+  return [[MMarketType builder] mergeFrom:prototype];
 }
-- (MProduct_Builder*) builder {
-  return [MProduct builder];
+- (MMarketType_Builder*) builder {
+  return [MMarketType builder];
 }
 @end
 
-@interface MProduct_Builder()
-@property (retain) MProduct* result;
+@interface MMarketType_Builder()
+@property (retain) MMarketType* result;
 @end
 
-@implementation MProduct_Builder
+@implementation MMarketType_Builder
 @synthesize result;
 - (void) dealloc {
   self.result = nil;
@@ -492,46 +1684,49 @@ static MProduct* defaultMProductInstance = nil;
 }
 - (id) init {
   if ((self = [super init])) {
-    self.result = [[[MProduct alloc] init] autorelease];
+    self.result = [[[MMarketType alloc] init] autorelease];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
   return result;
 }
-- (MProduct_Builder*) clear {
-  self.result = [[[MProduct alloc] init] autorelease];
+- (MMarketType_Builder*) clear {
+  self.result = [[[MMarketType alloc] init] autorelease];
   return self;
 }
-- (MProduct_Builder*) clone {
-  return [MProduct builderWithPrototype:result];
+- (MMarketType_Builder*) clone {
+  return [MMarketType builderWithPrototype:result];
 }
-- (MProduct*) defaultInstance {
-  return [MProduct defaultInstance];
+- (MMarketType*) defaultInstance {
+  return [MMarketType defaultInstance];
 }
-- (MProduct*) build {
+- (MMarketType*) build {
   [self checkInitialized];
   return [self buildPartial];
 }
-- (MProduct*) buildPartial {
-  MProduct* returnMe = [[result retain] autorelease];
+- (MMarketType*) buildPartial {
+  MMarketType* returnMe = [[result retain] autorelease];
   self.result = nil;
   return returnMe;
 }
-- (MProduct_Builder*) mergeFrom:(MProduct*) other {
-  if (other == [MProduct defaultInstance]) {
+- (MMarketType_Builder*) mergeFrom:(MMarketType*) other {
+  if (other == [MMarketType defaultInstance]) {
     return self;
   }
   if (other.hasId) {
     [self setId:other.id];
   }
+  if (other.hasTitle) {
+    [self setTitle:other.title];
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
-- (MProduct_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+- (MMarketType_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
   return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
 }
-- (MProduct_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+- (MMarketType_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
   PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
   while (YES) {
     int32_t tag = [input readTag];
@@ -550,6 +1745,10 @@ static MProduct* defaultMProductInstance = nil;
         [self setId:[input readString]];
         break;
       }
+      case 18: {
+        [self setTitle:[input readString]];
+        break;
+      }
     }
   }
 }
@@ -559,388 +1758,30 @@ static MProduct* defaultMProductInstance = nil;
 - (NSString*) id {
   return result.id;
 }
-- (MProduct_Builder*) setId:(NSString*) value {
+- (MMarketType_Builder*) setId:(NSString*) value {
   result.hasId = YES;
   result.id = value;
   return self;
 }
-- (MProduct_Builder*) clearId {
+- (MMarketType_Builder*) clearId {
   result.hasId = NO;
   result.id = @"";
   return self;
 }
-@end
-
-@interface MMarketList ()
-@property (retain) NSMutableArray* mutableMarketList;
-@end
-
-@implementation MMarketList
-
-@synthesize mutableMarketList;
-- (void) dealloc {
-  self.mutableMarketList = nil;
-  [super dealloc];
+- (BOOL) hasTitle {
+  return result.hasTitle;
 }
-- (id) init {
-  if ((self = [super init])) {
-  }
+- (NSString*) title {
+  return result.title;
+}
+- (MMarketType_Builder*) setTitle:(NSString*) value {
+  result.hasTitle = YES;
+  result.title = value;
   return self;
 }
-static MMarketList* defaultMMarketListInstance = nil;
-+ (void) initialize {
-  if (self == [MMarketList class]) {
-    defaultMMarketListInstance = [[MMarketList alloc] init];
-  }
-}
-+ (MMarketList*) defaultInstance {
-  return defaultMMarketListInstance;
-}
-- (MMarketList*) defaultInstance {
-  return defaultMMarketListInstance;
-}
-- (NSArray*) marketList {
-  return mutableMarketList;
-}
-- (MProduct*) marketAtIndex:(int32_t) index {
-  id value = [mutableMarketList objectAtIndex:index];
-  return value;
-}
-- (BOOL) isInitialized {
-  return YES;
-}
-- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
-  for (MProduct* element in self.marketList) {
-    [output writeMessage:1 value:element];
-  }
-  [self.unknownFields writeToCodedOutputStream:output];
-}
-- (int32_t) serializedSize {
-  int32_t size = memoizedSerializedSize;
-  if (size != -1) {
-    return size;
-  }
-
-  size = 0;
-  for (MProduct* element in self.marketList) {
-    size += computeMessageSize(1, element);
-  }
-  size += self.unknownFields.serializedSize;
-  memoizedSerializedSize = size;
-  return size;
-}
-+ (MMarketList*) parseFromData:(NSData*) data {
-  return (MMarketList*)[[[MMarketList builder] mergeFromData:data] build];
-}
-+ (MMarketList*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MMarketList*)[[[MMarketList builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
-}
-+ (MMarketList*) parseFromInputStream:(NSInputStream*) input {
-  return (MMarketList*)[[[MMarketList builder] mergeFromInputStream:input] build];
-}
-+ (MMarketList*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MMarketList*)[[[MMarketList builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
-}
-+ (MMarketList*) parseFromCodedInputStream:(PBCodedInputStream*) input {
-  return (MMarketList*)[[[MMarketList builder] mergeFromCodedInputStream:input] build];
-}
-+ (MMarketList*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MMarketList*)[[[MMarketList builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
-}
-+ (MMarketList_Builder*) builder {
-  return [[[MMarketList_Builder alloc] init] autorelease];
-}
-+ (MMarketList_Builder*) builderWithPrototype:(MMarketList*) prototype {
-  return [[MMarketList builder] mergeFrom:prototype];
-}
-- (MMarketList_Builder*) builder {
-  return [MMarketList builder];
-}
-@end
-
-@interface MMarketList_Builder()
-@property (retain) MMarketList* result;
-@end
-
-@implementation MMarketList_Builder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-  [super dealloc];
-}
-- (id) init {
-  if ((self = [super init])) {
-    self.result = [[[MMarketList alloc] init] autorelease];
-  }
-  return self;
-}
-- (PBGeneratedMessage*) internalGetResult {
-  return result;
-}
-- (MMarketList_Builder*) clear {
-  self.result = [[[MMarketList alloc] init] autorelease];
-  return self;
-}
-- (MMarketList_Builder*) clone {
-  return [MMarketList builderWithPrototype:result];
-}
-- (MMarketList*) defaultInstance {
-  return [MMarketList defaultInstance];
-}
-- (MMarketList*) build {
-  [self checkInitialized];
-  return [self buildPartial];
-}
-- (MMarketList*) buildPartial {
-  MMarketList* returnMe = [[result retain] autorelease];
-  self.result = nil;
-  return returnMe;
-}
-- (MMarketList_Builder*) mergeFrom:(MMarketList*) other {
-  if (other == [MMarketList defaultInstance]) {
-    return self;
-  }
-  if (other.mutableMarketList.count > 0) {
-    if (result.mutableMarketList == nil) {
-      result.mutableMarketList = [NSMutableArray array];
-    }
-    [result.mutableMarketList addObjectsFromArray:other.mutableMarketList];
-  }
-  [self mergeUnknownFields:other.unknownFields];
-  return self;
-}
-- (MMarketList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
-  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
-}
-- (MMarketList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
-  while (YES) {
-    int32_t tag = [input readTag];
-    switch (tag) {
-      case 0:
-        [self setUnknownFields:[unknownFields build]];
-        return self;
-      default: {
-        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
-          [self setUnknownFields:[unknownFields build]];
-          return self;
-        }
-        break;
-      }
-      case 10: {
-        MProduct_Builder* subBuilder = [MProduct builder];
-        [input readMessage:subBuilder extensionRegistry:extensionRegistry];
-        [self addMarket:[subBuilder buildPartial]];
-        break;
-      }
-    }
-  }
-}
-- (NSArray*) marketList {
-  if (result.mutableMarketList == nil) { return [NSArray array]; }
-  return result.mutableMarketList;
-}
-- (MProduct*) marketAtIndex:(int32_t) index {
-  return [result marketAtIndex:index];
-}
-- (MMarketList_Builder*) replaceMarketAtIndex:(int32_t) index with:(MProduct*) value {
-  [result.mutableMarketList replaceObjectAtIndex:index withObject:value];
-  return self;
-}
-- (MMarketList_Builder*) addAllMarket:(NSArray*) values {
-  if (result.mutableMarketList == nil) {
-    result.mutableMarketList = [NSMutableArray array];
-  }
-  [result.mutableMarketList addObjectsFromArray:values];
-  return self;
-}
-- (MMarketList_Builder*) clearMarketList {
-  result.mutableMarketList = nil;
-  return self;
-}
-- (MMarketList_Builder*) addMarket:(MProduct*) value {
-  if (result.mutableMarketList == nil) {
-    result.mutableMarketList = [NSMutableArray array];
-  }
-  [result.mutableMarketList addObject:value];
-  return self;
-}
-@end
-
-@interface MAddMarket ()
-@property (retain) NSString* name;
-@end
-
-@implementation MAddMarket
-
-- (BOOL) hasName {
-  return !!hasName_;
-}
-- (void) setHasName:(BOOL) value {
-  hasName_ = !!value;
-}
-@synthesize name;
-- (void) dealloc {
-  self.name = nil;
-  [super dealloc];
-}
-- (id) init {
-  if ((self = [super init])) {
-    self.name = @"";
-  }
-  return self;
-}
-static MAddMarket* defaultMAddMarketInstance = nil;
-+ (void) initialize {
-  if (self == [MAddMarket class]) {
-    defaultMAddMarketInstance = [[MAddMarket alloc] init];
-  }
-}
-+ (MAddMarket*) defaultInstance {
-  return defaultMAddMarketInstance;
-}
-- (MAddMarket*) defaultInstance {
-  return defaultMAddMarketInstance;
-}
-- (BOOL) isInitialized {
-  return YES;
-}
-- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
-  if (self.hasName) {
-    [output writeString:1 value:self.name];
-  }
-  [self.unknownFields writeToCodedOutputStream:output];
-}
-- (int32_t) serializedSize {
-  int32_t size = memoizedSerializedSize;
-  if (size != -1) {
-    return size;
-  }
-
-  size = 0;
-  if (self.hasName) {
-    size += computeStringSize(1, self.name);
-  }
-  size += self.unknownFields.serializedSize;
-  memoizedSerializedSize = size;
-  return size;
-}
-+ (MAddMarket*) parseFromData:(NSData*) data {
-  return (MAddMarket*)[[[MAddMarket builder] mergeFromData:data] build];
-}
-+ (MAddMarket*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MAddMarket*)[[[MAddMarket builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
-}
-+ (MAddMarket*) parseFromInputStream:(NSInputStream*) input {
-  return (MAddMarket*)[[[MAddMarket builder] mergeFromInputStream:input] build];
-}
-+ (MAddMarket*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MAddMarket*)[[[MAddMarket builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
-}
-+ (MAddMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input {
-  return (MAddMarket*)[[[MAddMarket builder] mergeFromCodedInputStream:input] build];
-}
-+ (MAddMarket*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MAddMarket*)[[[MAddMarket builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
-}
-+ (MAddMarket_Builder*) builder {
-  return [[[MAddMarket_Builder alloc] init] autorelease];
-}
-+ (MAddMarket_Builder*) builderWithPrototype:(MAddMarket*) prototype {
-  return [[MAddMarket builder] mergeFrom:prototype];
-}
-- (MAddMarket_Builder*) builder {
-  return [MAddMarket builder];
-}
-@end
-
-@interface MAddMarket_Builder()
-@property (retain) MAddMarket* result;
-@end
-
-@implementation MAddMarket_Builder
-@synthesize result;
-- (void) dealloc {
-  self.result = nil;
-  [super dealloc];
-}
-- (id) init {
-  if ((self = [super init])) {
-    self.result = [[[MAddMarket alloc] init] autorelease];
-  }
-  return self;
-}
-- (PBGeneratedMessage*) internalGetResult {
-  return result;
-}
-- (MAddMarket_Builder*) clear {
-  self.result = [[[MAddMarket alloc] init] autorelease];
-  return self;
-}
-- (MAddMarket_Builder*) clone {
-  return [MAddMarket builderWithPrototype:result];
-}
-- (MAddMarket*) defaultInstance {
-  return [MAddMarket defaultInstance];
-}
-- (MAddMarket*) build {
-  [self checkInitialized];
-  return [self buildPartial];
-}
-- (MAddMarket*) buildPartial {
-  MAddMarket* returnMe = [[result retain] autorelease];
-  self.result = nil;
-  return returnMe;
-}
-- (MAddMarket_Builder*) mergeFrom:(MAddMarket*) other {
-  if (other == [MAddMarket defaultInstance]) {
-    return self;
-  }
-  if (other.hasName) {
-    [self setName:other.name];
-  }
-  [self mergeUnknownFields:other.unknownFields];
-  return self;
-}
-- (MAddMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
-  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
-}
-- (MAddMarket_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
-  while (YES) {
-    int32_t tag = [input readTag];
-    switch (tag) {
-      case 0:
-        [self setUnknownFields:[unknownFields build]];
-        return self;
-      default: {
-        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
-          [self setUnknownFields:[unknownFields build]];
-          return self;
-        }
-        break;
-      }
-      case 10: {
-        [self setName:[input readString]];
-        break;
-      }
-    }
-  }
-}
-- (BOOL) hasName {
-  return result.hasName;
-}
-- (NSString*) name {
-  return result.name;
-}
-- (MAddMarket_Builder*) setName:(NSString*) value {
-  result.hasName = YES;
-  result.name = value;
-  return self;
-}
-- (MAddMarket_Builder*) clearName {
-  result.hasName = NO;
-  result.name = @"";
+- (MMarketType_Builder*) clearTitle {
+  result.hasTitle = NO;
+  result.title = @"";
   return self;
 }
 @end

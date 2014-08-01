@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
-@interface BookViewController : BaseViewController
+#import "RefreshCollectionViewController.h"
+@interface BookViewController : RefreshCollectionViewController
 
 @end

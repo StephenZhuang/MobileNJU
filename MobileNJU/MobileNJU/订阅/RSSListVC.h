@@ -9,5 +9,5 @@
 #import "RefreshTableViewController.h"
 
 @interface RSSListVC : RefreshTableViewController
-
+@property (nonatomic,strong)NSString* rssId;
 @end

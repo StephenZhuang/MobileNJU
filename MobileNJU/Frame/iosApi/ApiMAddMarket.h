@@ -1,7 +1,7 @@
 //
 //  ApiMAddMarket
 //
-//  Created by ryan on 2014-07-31 09:18:59
+//  Created by ryan on 2014-07-31 17:37:06
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -17,20 +17,20 @@
 
 
 	/**
-	 *  添加商品 mobile?methodno=MMyLibrary&debug=1&userid=&verify=&deviceid=&appid=&account=&password=
+	 * 
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @callback MRet_Builder
-	 * @param product * url
+	 * @callback MMarketList_Builder
+	 * @param market * null
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  product:(MAddMarket_Builder*) product;
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  market:(MAddMarket_Builder*) market;
 	/**
-	 *  添加商品 mobile?methodno=MMyLibrary&debug=1&userid=&verify=&deviceid=&appid=&account=&password=
+	 * 
 	 * @param delegate 回调类
 	 * @param select  回调函数
-	 * @param product * url
-	 * @callback MRet_Builder
+	 * @param market * null
+	 * @callback MMarketList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  product:(MAddMarket_Builder*) product;
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  market:(MAddMarket_Builder*) market;
 
 @end

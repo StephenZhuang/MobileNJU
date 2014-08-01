@@ -14,8 +14,10 @@
 - (void) showSchedule:(ScheduleLesson*)lesson;
 @end
 
-@interface LessonButton : UIButton
+@interface LessonButton : UIView
 @property (nonatomic)int lessonId;
 @property (nonatomic,strong)ScheduleLesson* myLesson;
 @property (nonatomic , assign) IBOutlet id<ScheduleViewDelegate> delegate;
+- (UIColor*)getColor;
+- (void)setMyButton:(UIButton *)myButton;
 @end

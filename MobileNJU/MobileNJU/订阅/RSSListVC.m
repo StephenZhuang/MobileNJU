@@ -8,8 +8,12 @@
 
 #import "RSSListVC.h"
 #import "NewsCell.h"
+#import "ZsndNews.pb.h"
+#import "NewsDetailVC.h"
+#import "ApiMRssNews.h"
 @interface RSSListVC ()<UITableViewDataSource,UITableViewDelegate>
-
+@property (nonatomic,strong)NSArray* rssNews;
+@property(nonatomic,strong)NSString* currentUrl;
 @end
 
 @implementation RSSListVC
@@ -35,16 +39,23 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 - (void)loadData
 {
-    [self disposMessage:nil];
+    ApiMRssNews* api = [[ApiMRssNews alloc]init];
+    [[api setPage:page pageCount:10] load:self selecter:@selector(disposMessage:) rssid:self.rssId];
 }
 
 - (void)disposMessage:(Son *)son
 {
+    if ([son getError]==0) {
+        if ([[son getMethod]isEqualToString:@"MRssNews"]) {
+            MMyRss_Builder* ret = (MMyRss_Builder*)[son getBuild];
+            self.rssNews = ret.newsList;
+        }
+    }
     [self doneWithView:_header];
 }
+
 
 #pragma -mark tableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -53,20 +64,39 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return self.rssNews.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NewsCell* cell = [tableView dequeueReusableCellWithIdentifier:@"list" forIndexPath:indexPath];
+    MNews* new = [self.rssNews objectAtIndex:indexPath.row];
+    cell.title = new.title;
+    cell.type = new.source;
+    cell.detail = new.content;
+    cell.date = new.time;
+    [cell.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:new.img width:89 height:67] placeholderImage:[UIImage imageNamed:@"news_loading"]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"detail" sender:@""];
+    MNews* news = [self.rssNews objectAtIndex:indexPath.row];
+    self.currentUrl = news.url;
+    [self performSegueWithIdentifier:@"detail" sender:indexPath];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if ([[segue identifier] isEqualToString:@"detail"]) {
+        NewsDetailVC* destinationVC = (NewsDetailVC*)segue.destinationViewController;
+        NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.currentUrl]];
+        NSLog(@"设置的网址%@",self.currentUrl);
+        [destinationVC setUrl:url];
+    }
 
+}
 /*
 #pragma mark - Navigation
 

@@ -33,6 +33,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="lh6-b3-3pv" id="YfD-Er-SMP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRi-YY-a7J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -601,6 +604,7 @@
                                             <outlet property="rssDetail" destination="CRh-r5-JyG" id="9Al-oD-U9K"/>
                                             <outlet property="rssImg" destination="BIP-1h-s3s" id="H63-Av-OMm"/>
                                             <outlet property="rssTitle" destination="kNi-Jg-Ly3" id="tRb-wI-IXh"/>
+                                            <outlet property="unReadButton" destination="toO-1d-8nY" id="YBP-3p-Tv5"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -854,6 +858,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qms-gb-U7f"/>
+        <segue reference="py4-9b-1rW"/>
     </inferredMetricsTieBreakers>
 </document>

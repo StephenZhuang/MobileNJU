@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
-@interface ProcedureDetailVC : BaseViewController
-
+#import "BBSDetail.h"
+@interface ProcedureDetailVC : BBSDetail
+@property (nonatomic,strong)NSString* title;
 @end

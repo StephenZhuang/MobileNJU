@@ -172,7 +172,8 @@ static MNewsList* defaultMNewsListInstance = nil;
         if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
           [self setUnknownFields:[unknownFields build]];
           return self;
-        }         break;
+        }
+        break;
       }
       case 10: {
         MNews_Builder* subBuilder = [MNews builder];
@@ -905,6 +906,7 @@ static MRssList* defaultMRssListInstance = nil;
 @property (retain) NSString* title;
 @property (retain) NSString* content;
 @property int32_t state;
+@property int32_t count;
 @end
 
 @implementation MRss
@@ -944,6 +946,13 @@ static MRssList* defaultMRssListInstance = nil;
   hasState_ = !!value;
 }
 @synthesize state;
+- (BOOL) hasCount {
+  return !!hasCount_;
+}
+- (void) setHasCount:(BOOL) value {
+  hasCount_ = !!value;
+}
+@synthesize count;
 - (void) dealloc {
   self.id = nil;
   self.img = nil;
@@ -958,6 +967,7 @@ static MRssList* defaultMRssListInstance = nil;
     self.title = @"";
     self.content = @"";
     self.state = 0;
+    self.count = 0;
   }
   return self;
 }
@@ -992,6 +1002,9 @@ static MRss* defaultMRssInstance = nil;
   if (self.hasState) {
     [output writeInt32:5 value:self.state];
   }
+  if (self.hasCount) {
+    [output writeInt32:6 value:self.count];
+  }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -1015,6 +1028,9 @@ static MRss* defaultMRssInstance = nil;
   }
   if (self.hasState) {
     size += computeInt32Size(5, self.state);
+  }
+  if (self.hasCount) {
+    size += computeInt32Size(6, self.count);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -1106,6 +1122,9 @@ static MRss* defaultMRssInstance = nil;
   if (other.hasState) {
     [self setState:other.state];
   }
+  if (other.hasCount) {
+    [self setCount:other.count];
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -1145,6 +1164,10 @@ static MRss* defaultMRssInstance = nil;
       }
       case 40: {
         [self setState:[input readInt32]];
+        break;
+      }
+      case 48: {
+        [self setCount:[input readInt32]];
         break;
       }
     }
@@ -1228,6 +1251,22 @@ static MRss* defaultMRssInstance = nil;
 - (MRss_Builder*) clearState {
   result.hasState = NO;
   result.state = 0;
+  return self;
+}
+- (BOOL) hasCount {
+  return result.hasCount;
+}
+- (int32_t) count {
+  return result.count;
+}
+- (MRss_Builder*) setCount:(int32_t) value {
+  result.hasCount = YES;
+  result.count = value;
+  return self;
+}
+- (MRss_Builder*) clearCount {
+  result.hasCount = NO;
+  result.count = 0;
   return self;
 }
 @end
@@ -1432,6 +1471,7 @@ static MMyRssList* defaultMMyRssListInstance = nil;
 @property (retain) NSString* id;
 @property (retain) NSString* title;
 @property (retain) NSMutableArray* mutableNewsList;
+@property int32_t count;
 @end
 
 @implementation MMyRss
@@ -1451,6 +1491,13 @@ static MMyRssList* defaultMMyRssListInstance = nil;
 }
 @synthesize title;
 @synthesize mutableNewsList;
+- (BOOL) hasCount {
+  return !!hasCount_;
+}
+- (void) setHasCount:(BOOL) value {
+  hasCount_ = !!value;
+}
+@synthesize count;
 - (void) dealloc {
   self.id = nil;
   self.title = nil;
@@ -1461,6 +1508,7 @@ static MMyRssList* defaultMMyRssListInstance = nil;
   if ((self = [super init])) {
     self.id = @"";
     self.title = @"";
+    self.count = 0;
   }
   return self;
 }
@@ -1496,6 +1544,9 @@ static MMyRss* defaultMMyRssInstance = nil;
   for (MNews* element in self.newsList) {
     [output writeMessage:3 value:element];
   }
+  if (self.hasCount) {
+    [output writeInt32:4 value:self.count];
+  }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -1513,6 +1564,9 @@ static MMyRss* defaultMMyRssInstance = nil;
   }
   for (MNews* element in self.newsList) {
     size += computeMessageSize(3, element);
+  }
+  if (self.hasCount) {
+    size += computeInt32Size(4, self.count);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -1601,6 +1655,9 @@ static MMyRss* defaultMMyRssInstance = nil;
     }
     [result.mutableNewsList addObjectsFromArray:other.mutableNewsList];
   }
+  if (other.hasCount) {
+    [self setCount:other.count];
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -1634,6 +1691,10 @@ static MMyRss* defaultMMyRssInstance = nil;
         MNews_Builder* subBuilder = [MNews builder];
         [input readMessage:subBuilder extensionRegistry:extensionRegistry];
         [self addNews:[subBuilder buildPartial]];
+        break;
+      }
+      case 32: {
+        [self setCount:[input readInt32]];
         break;
       }
     }
@@ -1698,6 +1759,22 @@ static MMyRss* defaultMMyRssInstance = nil;
     result.mutableNewsList = [NSMutableArray array];
   }
   [result.mutableNewsList addObject:value];
+  return self;
+}
+- (BOOL) hasCount {
+  return result.hasCount;
+}
+- (int32_t) count {
+  return result.count;
+}
+- (MMyRss_Builder*) setCount:(int32_t) value {
+  result.hasCount = YES;
+  result.count = value;
+  return self;
+}
+- (MMyRss_Builder*) clearCount {
+  result.hasCount = NO;
+  result.count = 0;
   return self;
 }
 @end

@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIView *alertView;
 @property (strong,nonatomic) NSArray* infoList;
 @property (nonatomic)int isRe;
+@property (nonatomic)int isV;
+
 @end
 
 @implementation ExerciseVC
@@ -39,6 +41,7 @@
     [self.nameLabel setText:[ToolUtils getUserName]==nil?@"":[ToolUtils getUserName]];
     [self.timeLabel setText:@"0"];
     self.isRe = 0;
+    self.isV=0;
    
     // Do any additional setup after loading the view.
 }
@@ -73,12 +76,32 @@
 //        [self waiting:@"正在查询"];
         [self closeAlertView:nil];
 #warning api更新
-        [[ApisFactory getApiMSignInInfo]load:self selecter:@selector(disposMessage:) account:self.schIDText.text password:self.schIDText.text isreinput:self.isRe isv:[ToolUtils getIsVeryfy]];
+        [self load:self selecter:@selector(disposMessage:) account:self.schIDText.text password:self.schIDText.text];
        
         [[ApisFactory getApiMSignInInDetail]load:self selecter:@selector(disposMessage:
                                                                          ) account:self.schIDText.text password:self.schIDText.text];
     }
+         
 }
+
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  account:(NSString*)account password:(NSString*)password
+
+
+
+{
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
+    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
+    [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
+    
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MSignInInfo" params:array  delegate:delegate selecter:select];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
+}
+
 
 - (void)disposMessage:(Son *)son
 {

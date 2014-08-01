@@ -40,9 +40,7 @@
     UIBarButtonItem *myAddButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     NSArray *myButtonArray = [[NSArray alloc] initWithObjects: myAddButton, nil];
     self.navigationItem.leftBarButtonItems = myButtonArray;
-
-    
-    self.currentUrl = self.navigationController.title;
+//    self.currentUrl = self.navigationController.title;
     if (self.jump) {
         [self performSegueWithIdentifier:@"detail" sender:nil];
     }
@@ -70,7 +68,6 @@
                 for (MNews* currentNews in self.newsList) {
                     if ([news.id isEqualToString:currentNews.id]) {
                         has = YES;
-//                        [self.newsList replaceObjectAtIndex:[self.newsList indexOfObject:news] withObject:currentNews];
                         break;
                     }
                 }
@@ -97,7 +94,9 @@
 {
     if ([[segue identifier] isEqualToString:@"detail"]) {
         NewsDetailVC* destinationVC = (NewsDetailVC*)segue.destinationViewController;
-        [destinationVC setUrl:self.currentUrl];
+        NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.currentUrl]];
+        NSLog(@"设置的网址%@",self.currentUrl);
+        [destinationVC setUrl:url];
     }
 }
 - (void)didReceiveMemoryWarning

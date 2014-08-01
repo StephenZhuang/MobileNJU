@@ -8,6 +8,9 @@
 
 #import "RSSVC.h"
 #import "subscribeCell_n.h"
+#import "ZsndNews.pb.h"
+#import "RSSListVC.h"
+#import "ZsndSystem.pb.h"
 @interface RSSVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSArray* myRss;
 @end
@@ -51,17 +54,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-#warning 此处暂时伪造下数据
 - (void)loadData
 {
-    [self disposMessage:nil];
+    [[ApisFactory getApiMMyRss]load:self selecter:@selector(disposMessage:)];
+//    [self disposMessage:nil];
 }
 
 - (void)disposMessage:(Son *)son
 {
     
-    
+    if ([son getError]==0) {
+        if ([[son getMethod]isEqualToString:@"MMyRss"]) {
+            MRssList_Builder* ret = (MRssList_Builder*)[son getBuild];
+            self.myRss = ret.listList;
+        }
+    }
     [self doneWithView:_header];
+
 }
 
 
@@ -69,15 +78,23 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     subscribeCell_n *cell = [tableView dequeueReusableCellWithIdentifier:@"Rss" forIndexPath:indexPath];
-    
+    MRss* rss = [self.myRss objectAtIndex:indexPath.row];
+    [cell.rssTitle setText:rss.title];
+    [cell.rssDetail setText:rss.content];
+    if (rss.count==0) {
+        [cell.unReadButton setHidden:YES];
+    } else {
+        [cell.unReadButton setTitle:[NSString stringWithFormat:@"%d",rss.count] forState:UIControlStateNormal];
+    }
+    [cell.rssImg setImageWithURL:[ToolUtils getImageUrlWtihString:rss.img width:45 height:46] placeholderImage:[UIImage imageNamed:@"news_loading"]];
     return cell;
-
+    
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return self.myRss.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,13 +104,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"list" sender:@"考试宝典"];
+    MRss* rss = [self.myRss objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"list" sender:rss];
+
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"list"]) {
-        UIViewController* controller = (UIViewController*)[segue destinationViewController];
-        [controller setTitle:sender];
+        RSSListVC* controller = (RSSListVC*)[segue destinationViewController];
+        [controller setTitle:((MRss*)sender).title];
+        [controller setRssId :((MRss*)sender).id];
+        
     }
 }
 /*

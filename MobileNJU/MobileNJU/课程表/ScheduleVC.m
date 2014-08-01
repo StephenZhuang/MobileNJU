@@ -11,15 +11,14 @@
 #import "ScheduleView.h"
 #import "LessonDetailView.h"
 #import "AlertCloseDelegate.h"
-#import "ZsndSystem.pb.h"
+#import "ApiMScheduleAuto.h"
 @interface ScheduleVC ()<AlertCloseDelegate,ScheduleViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *alertView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
-@property (weak, nonatomic) IBOutlet UIView *dayView;
 @property (weak, nonatomic) IBOutlet UITextField *schIdField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
-@property (weak, nonatomic) IBOutlet UILabel *weekNumLabel;
+@property (strong, nonatomic)  UILabel *weekNumLabel;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UISwitch *autoSwitch;
 @property (strong,nonatomic)LessonDetailView* lessonDetail;
@@ -27,6 +26,8 @@
 @property (strong,nonatomic)NSArray* lessonList;
 @property (strong,nonatomic)NSString* code;
 @property (nonatomic)int isRe;
+@property (nonatomic)int isV;
+@property (nonatomic,strong)ScheduleView* scheduleView;
 @end
 @implementation ScheduleVC
 
@@ -34,39 +35,30 @@
 {
     [super viewDidLoad];
     [self initNavigationBar];
-//    [self loadSchedule];
     [self initLessonDetail];
     self.code=nil;
-    NSCalendar*calendar = [NSCalendar currentCalendar];
-    NSDate* date = [[NSDate alloc]init];
-    NSDateComponents* compos =[calendar components:(NSWeekCalendarUnit | NSWeekdayCalendarUnit |NSWeekdayOrdinalCalendarUnit)
-                                        fromDate:date];
-//    NSInteger week = [compos week]; // 今年的第几周
-    NSInteger weekday = [compos weekday]; // 星期几（注意，周日是“1”，周一是“2”。。。。）
-    for (UIView* view in self.dayView.subviews) {
-        UILabel* label = (UILabel*)view;
-        [label setBackgroundColor:[UIColor colorWithRed:235/255.0 green:234/255.0 blue:231/255.0 alpha:1]];
-         [label setTextColor:[UIColor colorWithRed:129/255.0 green:129/255.0 blue:129/255.0 alpha:1]];
-    }
-    if (weekday<=6&&weekday>1) {
-        UILabel* currentDay = [self.dayView.subviews objectAtIndex:(weekday-2)];
-        [currentDay setTextColor:[UIColor whiteColor]];
-        [currentDay setBackgroundColor:[UIColor blackColor]];
-    }
-    
     self.schIdField.text=[ToolUtils getJWID];
     self.passwordField.text = [ToolUtils getJWPassword];
     [self loadSavedLesson];
-    if (![self.schIdField.text isEqualToString:@""]&&![self.passwordField.text isEqualToString:@""]) {
-        [self search:nil];
-    }
+
+    [self loadLast];
     self.isRe=0;
+    self.isV=0;
+    [self addTitleView];
+}
+
+- (void)addTitleView
+{
+    self.titleView = [[[NSBundle mainBundle] loadNibNamed:@"TitleView" owner:self options:nil] firstObject];
+    [self.navigationItem setTitleView:self.titleView];
+    self.weekNumLabel = self.titleView.subtitleLabel;
+
+}
+- (void)loadLast
+{
+    ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
+    [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
     
-    
-  //    if (self.lessonList!=nil) {
-//        [self loadSchedule];
-//    }
-        // Do any additional setup after loading the view.
 }
 - (void)loadSavedLesson
 {
@@ -80,11 +72,13 @@
         }
         self.lessons=lessonList;
         ScheduleView* schedule = [[[NSBundle mainBundle] loadNibNamed:@"ScheduleView" owner:self options:nil] firstObject];
+        [schedule initDate];
         CGRect frame = CGRectMake(0, 0, 320, 568);
         schedule.frame = frame;
         self.scrollView.contentSize = CGSizeMake(320, 568);
         [self.scrollView addSubview:schedule];
         [schedule addLessons:self.lessons delegate:self];
+        self.scheduleView = schedule;
     }
     [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",  [ToolUtils getCurrentWeek]]];
 
@@ -127,7 +121,7 @@
     [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
-    [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
+    [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MSchedule" params:array  delegate:delegate selecter:select];
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
@@ -142,6 +136,7 @@
             
             MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
             if (classList.week!=0) {
+                self.isRe=1;
                 [self closeAlert];
                 if (self.autoSwitch.isOn) {
                     [ToolUtils setJWPassword:self.passwordField.text];
@@ -155,9 +150,16 @@
                 self.lessonList = classList.classList;
                 [self loadSchedule];
             } else {
+                self.isV=1;
                 [self addCode:classList.img];
            }
             
+        } else if ([[son getMethod]isEqualToString:@"MScheduleAuto"]){
+            MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
+            [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",classList.week]];
+            self.lessonList = classList.classList;
+            [self loadSchedule];
+
         }
     }
 }
@@ -229,7 +231,11 @@
 
 - (void)loadSchedule
 {
+    if (self.scheduleView!=nil) {
+        [self.scheduleView removeFromSuperview];
+    }
     ScheduleView* schedule = [[[NSBundle mainBundle] loadNibNamed:@"ScheduleView" owner:self options:nil] firstObject];
+    [schedule initDate];
     CGRect frame = CGRectMake(0, 0, 320, 568);
     schedule.frame = frame;
     self.scrollView.contentSize = CGSizeMake(320, 568);
@@ -240,6 +246,7 @@
 
     for (MClass* each_class in self.lessonList) {
         ScheduleLesson* lesson = [[ScheduleLesson alloc]init];
+
         lesson.name = each_class.name;
         lesson.teacher = each_class.teacher;
         lesson.location = each_class.address;
@@ -256,6 +263,7 @@
 
 
     [schedule addLessons:self.lessons delegate:self];
+    self.scheduleView = schedule;
 }
 
 

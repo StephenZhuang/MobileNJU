@@ -495,6 +495,7 @@ static MFocus* defaultMFocusInstance = nil;
 @property (retain) NSString* name;
 @property (retain) NSString* desc;
 @property (retain) NSString* code;
+@property int32_t isRecommend;
 @end
 
 @implementation MMdoule
@@ -534,6 +535,13 @@ static MFocus* defaultMFocusInstance = nil;
   hasCode_ = !!value;
 }
 @synthesize code;
+- (BOOL) hasIsRecommend {
+  return !!hasIsRecommend_;
+}
+- (void) setHasIsRecommend:(BOOL) value {
+  hasIsRecommend_ = !!value;
+}
+@synthesize isRecommend;
 - (void) dealloc {
   self.id = nil;
   self.img = nil;
@@ -549,6 +557,7 @@ static MFocus* defaultMFocusInstance = nil;
     self.name = @"";
     self.desc = @"";
     self.code = @"";
+    self.isRecommend = 0;
   }
   return self;
 }
@@ -583,6 +592,9 @@ static MMdoule* defaultMMdouleInstance = nil;
   if (self.hasCode) {
     [output writeString:5 value:self.code];
   }
+  if (self.hasIsRecommend) {
+    [output writeInt32:6 value:self.isRecommend];
+  }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -606,6 +618,9 @@ static MMdoule* defaultMMdouleInstance = nil;
   }
   if (self.hasCode) {
     size += computeStringSize(5, self.code);
+  }
+  if (self.hasIsRecommend) {
+    size += computeInt32Size(6, self.isRecommend);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -697,6 +712,9 @@ static MMdoule* defaultMMdouleInstance = nil;
   if (other.hasCode) {
     [self setCode:other.code];
   }
+  if (other.hasIsRecommend) {
+    [self setIsRecommend:other.isRecommend];
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -736,6 +754,10 @@ static MMdoule* defaultMMdouleInstance = nil;
       }
       case 42: {
         [self setCode:[input readString]];
+        break;
+      }
+      case 48: {
+        [self setIsRecommend:[input readInt32]];
         break;
       }
     }
@@ -819,6 +841,22 @@ static MMdoule* defaultMMdouleInstance = nil;
 - (MMdoule_Builder*) clearCode {
   result.hasCode = NO;
   result.code = @"";
+  return self;
+}
+- (BOOL) hasIsRecommend {
+  return result.hasIsRecommend;
+}
+- (int32_t) isRecommend {
+  return result.isRecommend;
+}
+- (MMdoule_Builder*) setIsRecommend:(int32_t) value {
+  result.hasIsRecommend = YES;
+  result.isRecommend = value;
+  return self;
+}
+- (MMdoule_Builder*) clearIsRecommend {
+  result.hasIsRecommend = NO;
+  result.isRecommend = 0;
   return self;
 }
 @end

@@ -2,6 +2,8 @@
 
 #import "ProtocolBuffers.h"
 
+@class MAddClass;
+@class MAddClass_Builder;
 @class MBus;
 @class MBusList;
 @class MBusList_Builder;
@@ -271,18 +273,14 @@
 @interface MClassList : PBGeneratedMessage {
 @private
   BOOL hasWeek_:1;
-  BOOL hasNowTime_:1;
   BOOL hasImg_:1;
   int32_t week;
-  NSString* nowTime;
   NSData* img;
   NSMutableArray* mutableClassList;
 }
 - (BOOL) hasWeek;
-- (BOOL) hasNowTime;
 - (BOOL) hasImg;
 @property (readonly) int32_t week;
-@property (readonly, retain) NSString* nowTime;
 @property (readonly, retain) NSData* img;
 - (NSArray*) classList;
 - (MClass*) classAtIndex:(int32_t) index;
@@ -333,11 +331,6 @@
 - (MClassList_Builder*) addAllClass:(NSArray*) values;
 - (MClassList_Builder*) clearClassList;
 
-- (BOOL) hasNowTime;
-- (NSString*) nowTime;
-- (MClassList_Builder*) setNowTime:(NSString*) value;
-- (MClassList_Builder*) clearNowTime;
-
 - (BOOL) hasImg;
 - (NSData*) img;
 - (MClassList_Builder*) setImg:(NSData*) value;
@@ -349,6 +342,7 @@
   BOOL hasDay_:1;
   BOOL hasBegin_:1;
   BOOL hasEnd_:1;
+  BOOL hasId_:1;
   BOOL hasName_:1;
   BOOL hasTeacher_:1;
   BOOL hasAddress_:1;
@@ -357,12 +351,14 @@
   int32_t day;
   int32_t begin;
   int32_t end;
+  NSString* id;
   NSString* name;
   NSString* teacher;
   NSString* address;
   NSString* week;
   NSString* time;
 }
+- (BOOL) hasId;
 - (BOOL) hasName;
 - (BOOL) hasTeacher;
 - (BOOL) hasAddress;
@@ -371,6 +367,7 @@
 - (BOOL) hasBegin;
 - (BOOL) hasEnd;
 - (BOOL) hasTime;
+@property (readonly, retain) NSString* id;
 @property (readonly, retain) NSString* name;
 @property (readonly, retain) NSString* teacher;
 @property (readonly, retain) NSString* address;
@@ -414,6 +411,11 @@
 - (MClass_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
 - (MClass_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 
+- (BOOL) hasId;
+- (NSString*) id;
+- (MClass_Builder*) setId:(NSString*) value;
+- (MClass_Builder*) clearId;
+
 - (BOOL) hasName;
 - (NSString*) name;
 - (MClass_Builder*) setName:(NSString*) value;
@@ -453,6 +455,126 @@
 - (NSString*) time;
 - (MClass_Builder*) setTime:(NSString*) value;
 - (MClass_Builder*) clearTime;
+@end
+
+@interface MAddClass : PBGeneratedMessage {
+@private
+  BOOL hasDay_:1;
+  BOOL hasBegin_:1;
+  BOOL hasEnd_:1;
+  BOOL hasAccount_:1;
+  BOOL hasName_:1;
+  BOOL hasTeacher_:1;
+  BOOL hasAddress_:1;
+  BOOL hasWeek_:1;
+  BOOL hasTime_:1;
+  int32_t day;
+  int32_t begin;
+  int32_t end;
+  NSString* account;
+  NSString* name;
+  NSString* teacher;
+  NSString* address;
+  NSString* week;
+  NSString* time;
+}
+- (BOOL) hasAccount;
+- (BOOL) hasName;
+- (BOOL) hasTeacher;
+- (BOOL) hasAddress;
+- (BOOL) hasWeek;
+- (BOOL) hasDay;
+- (BOOL) hasBegin;
+- (BOOL) hasEnd;
+- (BOOL) hasTime;
+@property (readonly, retain) NSString* account;
+@property (readonly, retain) NSString* name;
+@property (readonly, retain) NSString* teacher;
+@property (readonly, retain) NSString* address;
+@property (readonly, retain) NSString* week;
+@property (readonly) int32_t day;
+@property (readonly) int32_t begin;
+@property (readonly) int32_t end;
+@property (readonly, retain) NSString* time;
+
++ (MAddClass*) defaultInstance;
+- (MAddClass*) defaultInstance;
+
+- (BOOL) isInitialized;
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
+- (MAddClass_Builder*) builder;
++ (MAddClass_Builder*) builder;
++ (MAddClass_Builder*) builderWithPrototype:(MAddClass*) prototype;
+
++ (MAddClass*) parseFromData:(NSData*) data;
++ (MAddClass*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MAddClass*) parseFromInputStream:(NSInputStream*) input;
++ (MAddClass*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MAddClass*) parseFromCodedInputStream:(PBCodedInputStream*) input;
++ (MAddClass*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+@end
+
+@interface MAddClass_Builder : PBGeneratedMessage_Builder {
+@private
+  MAddClass* result;
+}
+
+- (MAddClass*) defaultInstance;
+
+- (MAddClass_Builder*) clear;
+- (MAddClass_Builder*) clone;
+
+- (MAddClass*) build;
+- (MAddClass*) buildPartial;
+
+- (MAddClass_Builder*) mergeFrom:(MAddClass*) other;
+- (MAddClass_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
+- (MAddClass_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+
+- (BOOL) hasAccount;
+- (NSString*) account;
+- (MAddClass_Builder*) setAccount:(NSString*) value;
+- (MAddClass_Builder*) clearAccount;
+
+- (BOOL) hasName;
+- (NSString*) name;
+- (MAddClass_Builder*) setName:(NSString*) value;
+- (MAddClass_Builder*) clearName;
+
+- (BOOL) hasTeacher;
+- (NSString*) teacher;
+- (MAddClass_Builder*) setTeacher:(NSString*) value;
+- (MAddClass_Builder*) clearTeacher;
+
+- (BOOL) hasAddress;
+- (NSString*) address;
+- (MAddClass_Builder*) setAddress:(NSString*) value;
+- (MAddClass_Builder*) clearAddress;
+
+- (BOOL) hasWeek;
+- (NSString*) week;
+- (MAddClass_Builder*) setWeek:(NSString*) value;
+- (MAddClass_Builder*) clearWeek;
+
+- (BOOL) hasDay;
+- (int32_t) day;
+- (MAddClass_Builder*) setDay:(int32_t) value;
+- (MAddClass_Builder*) clearDay;
+
+- (BOOL) hasBegin;
+- (int32_t) begin;
+- (MAddClass_Builder*) setBegin:(int32_t) value;
+- (MAddClass_Builder*) clearBegin;
+
+- (BOOL) hasEnd;
+- (int32_t) end;
+- (MAddClass_Builder*) setEnd:(int32_t) value;
+- (MAddClass_Builder*) clearEnd;
+
+- (BOOL) hasTime;
+- (NSString*) time;
+- (MAddClass_Builder*) setTime:(NSString*) value;
+- (MAddClass_Builder*) clearTime;
 @end
 
 @interface MCourseList : PBGeneratedMessage {

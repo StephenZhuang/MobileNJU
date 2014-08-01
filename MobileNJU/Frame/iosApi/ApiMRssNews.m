@@ -1,7 +1,7 @@
 //
 //  ApiMRssNews
 //
-//  Created by ryan on 2014-07-31 09:18:59
+//  Created by ryan on 2014-07-31 13:42:28
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -20,8 +20,9 @@
 	 * @param select  回调函数
 	 * @callback MMyRss_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  {
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  rssid:(NSString *)rssid{
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+        [array addObject:[NSString stringWithFormat:@"rssid=%@",rssid]];
 		UpdateOne *updateone=[[UpdateOne alloc] init:@"MRssNews" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
@@ -32,8 +33,8 @@
 	 * @param select  回调函数
 	 * @callback MMyRss_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  {
-		UpdateOne *update=[self get:delegate selecter:select];
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select rssid:(NSString *)rssid {
+		UpdateOne *update=[self get:delegate selecter:select rssid:rssid];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
 		return update;
 	}
