@@ -49,10 +49,6 @@
     self.slideSwitchView.shadowImage = [[UIImage imageNamed:@"red_line_and_shadow.png"]
                                         stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
    
-    
-    
-    
-    
 //    [[ApisFactory getApiMMarketType]load:self selecter:@selector(disposMessage:)];
     
     
@@ -69,8 +65,6 @@
         vc.title = title;
     }
     self.viewControllers = controllerArray;
-
-    
     [self.slideSwitchView buildUI];
 }
 

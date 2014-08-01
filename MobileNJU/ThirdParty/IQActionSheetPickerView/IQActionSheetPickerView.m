@@ -275,7 +275,7 @@
         NSArray* originTitles = [self titlesForComponenets];
         NSArray* courseArr = [originTitles objectAtIndex:1];
         NSArray* dayArr = [originTitles firstObject];
-        NSString* selectedDay = [dayArr objectAtIndex:[_pickerView selectedRowInComponent:0]];
+        NSString* selectedDay = [dayArr objectAtIndex:[_pickerView selectedRowInComponent:0]];        
         if (component==1) {
             if ([_pickerView selectedRowInComponent:2]<=[_pickerView selectedRowInComponent:1]) {
                 [self setSelectedTitles:[NSArray arrayWithObjects:selectedDay,[courseArr objectAtIndex:row],[courseArr objectAtIndex:row], nil] animated:YES];

@@ -10,6 +10,7 @@
 #import "NewsCell.h"
 #import "ZsndNews.pb.h"
 #import "NewsDetailVC.h"
+#import "ApiMRssNews.h"
 @interface RSSListVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSArray* rssNews;
 @property(nonatomic,strong)NSString* currentUrl;
@@ -38,11 +39,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#warning 接口突然缺了
 - (void)loadData
 {
-//    [[[ApisFactory getApiMRssNews] setPage:page pageCount:10]
-//     load:self selecter:@selector(disposMessage:) rssid:self.rssId];
+    ApiMRssNews* api = [[ApiMRssNews alloc]init];
+    [[api setPage:page pageCount:10] load:self selecter:@selector(disposMessage:) rssid:self.rssId];
 }
 
 - (void)disposMessage:(Son *)son
@@ -50,9 +50,7 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MRssNews"]) {
             MMyRss_Builder* ret = (MMyRss_Builder*)[son getBuild];
-            
             self.rssNews = ret.newsList;
-        
         }
     }
     [self doneWithView:_header];
@@ -68,6 +66,7 @@
 {
     return self.rssNews.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NewsCell* cell = [tableView dequeueReusableCellWithIdentifier:@"list" forIndexPath:indexPath];

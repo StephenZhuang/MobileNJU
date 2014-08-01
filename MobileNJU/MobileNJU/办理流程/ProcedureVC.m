@@ -27,36 +27,36 @@
 
 - (void)loadData
 {
-    [self load:self selecter:@selector(disposMessage:)];
+    [[[ApisFactory getApiMHelp] setPage:page pageCount:10] load:self selecter:@selector(disposMessage:)];
 }
 
 - (void)disposMessage:(Son *)son
 {
     if ([son getError]==0) {
         NSLog(@"%@",[son getBuild].description);
-        MContactList_Builder* ret = (MContactList_Builder*)[son getBuild];
     
-        self.procedureContents = ret.listList;
-        NSLog(@"%d",ret.listList.count);
+        MContacts_Builder* ret = (MContacts_Builder*)[son getBuild];
+        self.procedureContents = ret.contactList;
+        NSLog(@"%d",ret.contactList.count);
         [self doneWithView:_header];
     }
 }
 
-/**
- *  办理流程(分页) /mobile?methodno=MHelp&debug=1&deviceid=1&userid=&verify=&page=&limit=
- * @param delegate 回调类
- * @param select  回调函数
- * @callback MContacts_Builder
- */
--(UpdateOne*)load:(id)delegate selecter:(SEL)select  {
-    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-    [array addObject:[NSString stringWithFormat:@"page=%d",page]];
-    [array addObject:[NSString stringWithFormat:@"limit=10"]];
-    UpdateOne *updateone=[[UpdateOne alloc] init:@"MHelp" params:array  delegate:delegate selecter:select];
-    
-    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
-    return updateone;
-}
+///**
+// *  办理流程(分页) /mobile?methodno=MHelp&debug=1&deviceid=1&userid=&verify=&page=&limit=
+// * @param delegate 回调类
+// * @param select  回调函数
+// * @callback MContacts_Builder
+// */
+//-(UpdateOne*)load:(id)delegate selecter:(SEL)select  {
+//    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+//    [array addObject:[NSString stringWithFormat:@"page=%d",page]];
+//    [array addObject:[NSString stringWithFormat:@"limit=10"]];
+//    UpdateOne *updateone=[[UpdateOne alloc] init:@"MHelp" params:array  delegate:delegate selecter:select];
+//    
+//    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+//    return updateone;
+//}
 
 
 - (void)addFooter
