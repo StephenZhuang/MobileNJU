@@ -22,10 +22,9 @@
 	 * @param sold * 0:全部列表    1：未售列表   2：已售列表
 	 * @callback MMarketList_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  type:(double)type sold:(double)sold {
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  type:(NSString *)type {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-		[array addObject:[NSString stringWithFormat:@"type=%@",[Frame number2String:type]]];
-		[array addObject:[NSString stringWithFormat:@"sold=%@",[Frame number2String:sold]]];
+		[array addObject:[NSString stringWithFormat:@"type=%@",type]];
 		UpdateOne *updateone=[[UpdateOne alloc] init:@"MMarketList" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
@@ -38,8 +37,8 @@
 	 * @param sold * 0:全部列表    1：未售列表   2：已售列表
 	 * @callback MMarketList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  type:(double)type sold:(double)sold {
-		UpdateOne *update=[self get:delegate selecter:select type:type sold:sold];
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  type:(NSString *)type {
+		UpdateOne *update=[self get:delegate selecter:select type:type];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
 		return update;
 	}

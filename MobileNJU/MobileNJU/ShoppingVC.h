@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import "RefreshCollectionViewController.h"
 #import "ShoppingVCDelegate.h"
-@interface ShoppingVC : BaseViewController
-@property (nonatomic) id<ShoppingVCDelegate> myDelegate;
+@interface ShoppingVC : RefreshCollectionViewController
+@property (nonatomic,strong) id<ShoppingVCDelegate> myDelegate;
+@property(nonatomic,strong)NSString* type;
+-(void)startRefresh;
 @end

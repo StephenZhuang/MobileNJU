@@ -68,7 +68,6 @@
                 for (MNews* currentNews in self.newsList) {
                     if ([news.id isEqualToString:currentNews.id]) {
                         has = YES;
-//                        [self.newsList replaceObjectAtIndex:[self.newsList indexOfObject:news] withObject:currentNews];
                         break;
                     }
                 }

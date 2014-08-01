@@ -442,6 +442,7 @@
 		7D947C3B1989EAFE0000EB4E /* ZsndTreehole.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D947C311989EAFE0000EB4E /* ZsndTreehole.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7D947C3C1989EAFE0000EB4E /* ZsndUser.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D947C331989EAFE0000EB4E /* ZsndUser.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7D9A6BD61988CDC100185A16 /* SecondPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9A6BD51988CDC100185A16 /* SecondPage.m */; };
+		7DA343B5198BF539007DE453 /* RefreshCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA343B4198BF539007DE453 /* RefreshCollectionViewController.m */; };
 		7DB045E11987486600A7612B /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045DC1987486600A7612B /* RDVTabBar.m */; };
 		7DB045E21987486600A7612B /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045DE1987486600A7612B /* RDVTabBarController.m */; };
 		7DB045E31987486600A7612B /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB045E01987486600A7612B /* RDVTabBarItem.m */; };
@@ -1237,6 +1238,8 @@
 		7D9A6BD51988CDC100185A16 /* SecondPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondPage.m; path = "跳蚤市场/SecondPage.m"; sourceTree = "<group>"; };
 		7D9A6BD91989124F00185A16 /* loginDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loginDelegate.h; sourceTree = "<group>"; };
 		7DA05111197275E400039D15 /* GradeCellChooseDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradeCellChooseDelegate.h; sourceTree = "<group>"; };
+		7DA343B3198BF539007DE453 /* RefreshCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshCollectionViewController.h; sourceTree = "<group>"; };
+		7DA343B4198BF539007DE453 /* RefreshCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshCollectionViewController.m; sourceTree = "<group>"; };
 		7DB045DB1987486600A7612B /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
 		7DB045DC1987486600A7612B /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
 		7DB045DD1987486600A7612B /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
@@ -2249,6 +2252,8 @@
 				771EDF35193F373000A3DCBB /* UtilMethods.h */,
 				771EDF36193F373000A3DCBB /* UtilMethods.m */,
 				77E7D9F119308BE400BFA983 /* RefreshTableViewController.h */,
+				7DA343B3198BF539007DE453 /* RefreshCollectionViewController.h */,
+				7DA343B4198BF539007DE453 /* RefreshCollectionViewController.m */,
 				77E7D9F219308BE400BFA983 /* RefreshTableViewController.m */,
 				77B9046A192C4ABF0062237D /* TitleView.h */,
 				7DFC4500198A8FDE0018BCB9 /* TitleView.xib */,
@@ -3260,6 +3265,7 @@
 				7DFC44DA198A4B250018BCB9 /* ApiMMarketType.m in Sources */,
 				77E076381940443F0098BA09 /* BusVC.m in Sources */,
 				77E07600194044110098BA09 /* ScheduleLesson.m in Sources */,
+				7DA343B5198BF539007DE453 /* RefreshCollectionViewController.m in Sources */,
 				77E07632194044340098BA09 /* MyLibraryVC.m in Sources */,
 				77B90439192C3F040062237D /* AppDelegate.m in Sources */,
 				7DB046011987C17500A7612B /* GuGuLandscapeTableView.m in Sources */,

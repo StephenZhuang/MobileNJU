@@ -76,7 +76,15 @@
 }
 
 
+-(void)addFooter
+{
+    
+}
 
+-(void)addHeader
+{
+    
+}
 
 #pragma mark 网络回调
 - (void)disposMessage:(Son *)son

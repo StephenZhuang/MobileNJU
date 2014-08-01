@@ -8,11 +8,12 @@
 
 #import "QCSlideViewController.h"
 #import "AddShopVC.h"
-
+#import "ApiMMarketType.h"
 #import "ZsndMarket.pb.h"
 
 @interface QCSlideViewController ()
 @property (nonatomic,strong)NSArray* titleArray;
+@property (nonatomic,strong)NSArray* typeList;
 @end
 
 @implementation QCSlideViewController
@@ -49,14 +50,17 @@
     self.slideSwitchView.shadowImage = [[UIImage imageNamed:@"red_line_and_shadow.png"]
                                         stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
    
-//    [[ApisFactory getApiMMarketType]load:self selecter:@selector(disposMessage:)];
+    ApiMMarketType* api = [[ApiMMarketType alloc]init];
+    [self waiting:@"正在加载中"];
+    [api load:self selecter:@selector(disposMessage:)];
     
     
-    NSArray *titleArray = [NSArray arrayWithObjects:@"热门",@"电子产品",@"生活用品",@"书籍",@"衣服",nil];
-    
+}
+- (void)loadType
+{
     NSMutableArray *controllerArray = [[NSMutableArray alloc]init];
     
-    for (NSString* title in titleArray)
+    for (NSString* title in self.titleArray)
     {
         UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
         ShoppingVC* vc = (ShoppingVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"shop"]; //test2为viewcontroller的StoryboardId
@@ -66,6 +70,7 @@
     }
     self.viewControllers = controllerArray;
     [self.slideSwitchView buildUI];
+    
 }
 
 - (void)disposMessage:(Son *)son
@@ -74,10 +79,12 @@
         if ([[son getMethod] isEqualToString:@"MMarketType"])  {
             NSMutableArray* types = [[NSMutableArray alloc]init];
             MMarketTypeList_Builder* typeList = (MMarketTypeList_Builder*)[son getBuild];
+            self.typeList = typeList.marketList;
             for (MMarketType* type in typeList.marketList) {
-                NSLog(@"%@",type.id);
-                NSLog(@"%@",type.description);
+                [types addObject:type.title];
             }
+            self.titleArray = types;
+            [self loadType];
         }
     }
 }
@@ -106,6 +113,9 @@
 - (void)slideSwitchView:(QCSlideSwitchView *)view didselectTab:(NSUInteger)number
 {
     ShoppingVC *vc = [self.viewControllers objectAtIndex:number];
+    MMarketType* type = [self.typeList objectAtIndex:number];
+    [vc setType:type.id];
+    [vc startRefresh];
 }
 
 #pragma mark - 内存报警
