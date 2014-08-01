@@ -66,7 +66,7 @@
 }
 - (void)disposMessage:(Son *)son
 {
-    [self waiting:nil];
+    
     if ([son getError]==0) {
         if ([[son getMethod] isEqualToString:@"MGetMobileVerify"]) {
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
