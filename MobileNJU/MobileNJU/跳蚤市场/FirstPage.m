@@ -20,6 +20,7 @@
 #pragma mark -初始化
 - (void)initial
 {
+    self.titleField.delegate = self;
     self.priceFIeld.delegate = self;
     self.originPriceField.delegate = self;
     self.discriptionField.delegate = self;
@@ -81,12 +82,17 @@
     {
         label = self.discLabel;
     }
-    [UIView animateWithDuration:0.2f animations:^{
-        [label setFont:self.font];
-        [label setTextColor:self.discLabel2.textColor];
-        label.transform = CGAffineTransformMakeTranslation(0, 0);
-    }];
-    [self.discLabel2 setHidden:NO];
+   
+    if (((UITextField*)textField).text.length>0) {
+    } else {
+        [self.discLabel2 setHidden:NO];
+        [UIView animateWithDuration:0.2f animations:^{
+            [label setFont:self.font];
+            [label setTextColor:self.discLabel2.textColor];
+            label.transform = CGAffineTransformMakeTranslation(0, 0);
+        }];
+        
+    }
 
 }
 

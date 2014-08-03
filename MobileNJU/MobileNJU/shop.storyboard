@@ -304,7 +304,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="chh-q1-Gk2"/>
                     <connections>
-                        <outlet property="firstPage" destination="ZKC-fI-hMc" id="ugf-F0-2XG"/>
+                        <outlet property="firstPage" destination="ZKC-fI-hMc" id="cH6-VR-R8O"/>
                         <outlet property="pageControl" destination="1b1-XH-65L" id="veE-f9-buI"/>
                         <outlet property="scrollerView" destination="Enl-V5-PuP" id="jvQ-63-Dhf"/>
                         <segue destination="pjI-7M-fAW" kind="push" identifier="next" id="ULO-28-rsH"/>
@@ -485,6 +485,7 @@
                     <connections>
                         <outlet property="pageControl" destination="odX-qq-az7" id="kyV-VN-wlX"/>
                         <outlet property="scrollerView" destination="O8F-AZ-O5l" id="SP7-iD-a1s"/>
+                        <outlet property="secondPage" destination="fzO-y6-bQ1" id="h3V-dG-Bbl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O7S-OK-N7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -499,16 +500,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <scrollView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="f5c-IC-mZ3">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="rcA-HX-lLF">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="oN6-7m-Hdo">
-                                    <rect key="frame" x="141" y="283" width="39" height="37"/>
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OQW-Hw-NLc">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                </scrollView>
+                                <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="o2P-UN-VQa">
+                                    <rect key="frame" x="140" y="280" width="39" height="37"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </pageControl>
                             </subviews>
-                        </scrollView>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="MYa-lF-NEu">
                             <rect key="frame" x="0.0" y="389" width="320" height="264"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -598,9 +604,9 @@
                         <outlet property="footView" destination="MYa-lF-NEu" id="38E-Ub-YE7"/>
                         <outlet property="nameLabel" destination="U3v-t0-C6a" id="mF6-Qt-Nud"/>
                         <outlet property="originPriceLabel" destination="aIk-iw-cvn" id="hp7-ET-2qh"/>
-                        <outlet property="pageControl" destination="oN6-7m-Hdo" id="ju7-Oe-KZC"/>
+                        <outlet property="pageControl" destination="o2P-UN-VQa" id="M0a-xi-obF"/>
                         <outlet property="priceLabel" destination="F1b-rn-GEv" id="ZQO-Ar-cTO"/>
-                        <outlet property="scrollView" destination="f5c-IC-mZ3" id="VA2-JL-y3l"/>
+                        <outlet property="scrollView" destination="OQW-Hw-NLc" id="KDf-0r-EXg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sjh-tQ-Tjx" userLabel="First Responder" sceneMemberID="firstResponder"/>

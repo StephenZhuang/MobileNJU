@@ -12,7 +12,12 @@
 #import "LessonDetailView.h"
 #import "AlertCloseDelegate.h"
 #import "ApiMScheduleAuto.h"
-@interface ScheduleVC ()<AlertCloseDelegate,ScheduleViewDelegate,UITextFieldDelegate>
+#import "ZsndSystem.pb.h"
+#import "ApiMDelClass.h"
+#import "ViewController.h"
+#import "iCarousel.h"
+#import "ViewForIcaursel.h"
+@interface ScheduleVC ()<AlertCloseDelegate,ScheduleViewDelegate,UITextFieldDelegate,iCarouselDataSource,iCarouselDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *alertView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
@@ -21,13 +26,18 @@
 @property (strong, nonatomic)  UILabel *weekNumLabel;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UISwitch *autoSwitch;
+@property (strong, nonatomic)  iCarousel *icarousel;
 @property (strong,nonatomic)LessonDetailView* lessonDetail;
+@property (strong,nonatomic)NSArray* lessonsForIcarousel;
 @property (strong,nonatomic)UITextField* codeView;
 @property (strong,nonatomic)NSArray* lessonList;
 @property (strong,nonatomic)NSString* code;
 @property (nonatomic)int isRe;
 @property (nonatomic)int isV;
 @property (nonatomic,strong)ScheduleView* scheduleView;
+@property (nonatomic,strong)UIColor* currentColor;
+
+@property (nonatomic,strong)UIView* lastView;
 @end
 @implementation ScheduleVC
 
@@ -40,26 +50,47 @@
     self.schIdField.text=[ToolUtils getJWID];
     self.passwordField.text = [ToolUtils getJWPassword];
     [self loadSavedLesson];
-
     [self loadLast];
     self.isRe=0;
     self.isV=0;
     [self addTitleView];
+    self.icarousel = [[iCarousel alloc]initWithFrame:CGRectMake(20, 120, 280, 200)];
+    [self.view addSubview:self.icarousel];
+    [self.icarousel setHidden:YES];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdField];
+    
+}
+- (void)textFieldDidChange:(NSNotification *)note
+{
+    if ([self.schIdField.text hasPrefix:@"Mg"]&&self.isV==0) {
+        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+    }
 }
 
+
+//返回时重新加载
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self loadLast];
+}
+
+//标题栏
 - (void)addTitleView
 {
     self.titleView = [[[NSBundle mainBundle] loadNibNamed:@"TitleView" owner:self options:nil] firstObject];
     [self.navigationItem setTitleView:self.titleView];
     self.weekNumLabel = self.titleView.subtitleLabel;
-
+    [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",[ToolUtils getCurrentWeek]]];
 }
+
+//重新加载
 - (void)loadLast
 {
     ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
     [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
-    
 }
+
+//加载缓存课表
 - (void)loadSavedLesson
 {
     NSArray* lessons = [ToolUtils getMySchedule];
@@ -83,6 +114,8 @@
     [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",  [ToolUtils getCurrentWeek]]];
 
 }
+
+//从教务处读取课表
 - (IBAction)search:(id)sender {
     
     [self.codeView resignFirstResponder];
@@ -127,6 +160,8 @@
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
     return updateone;
 }
+
+//回调函数
 - (void)disposMessage:(Son *)son
 {
     self.OK=YES;
@@ -160,10 +195,16 @@
             self.lessonList = classList.classList;
             [self loadSchedule];
 
+        } else if ([[son getMethod]isEqualToString:@"MDelClass"]){
+            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+            [ToolUtils showMessage:ret.msg];
+            [self closeAlert];
+            [self loadLast];
         }
     }
 }
 
+//添加验证码
 - (void)addCode:(NSData*)img
 {
     self.searchButton.transform = CGAffineTransformMakeTranslation(0, 60);
@@ -185,18 +226,17 @@
     
     
 }
+
+
 #pragma mark textFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
 }
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-//    [self.alertView removeFromSuperview];
-//    [self.view addSubview:self.alertView];
-//    CGPoint center  = self.alertView.center;
-//    CGPoint newCenter = CGPointMake(center.x, center.y-50);
     if (self.view.window.frame.size.height==480) {
         [UIView animateWithDuration:0.3f animations:^{
             //        self.alertView.center = newCenter;
@@ -209,26 +249,44 @@
         }];
 
     }
-  //    [textField becomeFirstResponder];
-   
 }
+
+//课程详细初始化
 - (void) initLessonDetail
 {
     self.lessonDetail = [[[NSBundle mainBundle] loadNibNamed:@"LessonDetailView" owner:self options:nil] firstObject];
-    [self.lessonDetail setFrame:CGRectMake(30, 100,260,200)];
+    [self.lessonDetail setFrame:CGRectMake(30, 100,260,219)];
+    [self.lessonDetail setClipsToBounds:YES];
     [self.lessonDetail setHidden:YES];
     [self.lessonDetail setMydelegate:self];
     [self.view addSubview:self.lessonDetail];
 }
 
+#pragma mark showScheduleDelegate
 - (void)showSchedule:(ScheduleLesson *)lesson
 {
+    [self.icarousel setHidden:YES];
     [self.lessonDetail setLesson:lesson];
+    [self.lessonDetail setId:lesson.id];
     [self.lessonDetail setHidden:NO];
     [self.maskView setHidden:NO];
     [self addMask];
 }
+- (void)showSchedules:(NSArray *)lessons color:(UIColor *)color
+{
+    self.lessonsForIcarousel = lessons;
+    self.currentColor = color;
+    ((iCarousel*)self.icarousel).delegate = self;
+    [self.icarousel setBounces:NO];
+    self.icarousel.perspective=-0.0095;
+    self.icarousel.dataSource = self;
+    self.icarousel.type = iCarouselTypeCoverFlow;
+    
+    [self.icarousel reloadData];
+    [self.icarousel setHidden:NO];
+}
 
+//加载课程表界面
 - (void)loadSchedule
 {
     if (self.scheduleView!=nil) {
@@ -255,6 +313,7 @@
         lesson.start = each_class.begin;
         lesson.length = each_class.end-each_class.begin+1;
         lesson.time = each_class.time;
+        lesson.id = each_class.id;
         [schedules addObject:lesson];
         [canSaveLessons addObject:[lesson getDic]];
     }
@@ -267,6 +326,7 @@
 }
 
 
+//初始化nav
 - (void)initNavigationBar
 {
     [self setTitle:@"课程表"];
@@ -281,6 +341,8 @@
     self.navigationItem.rightBarButtonItem = selfItem;
 }
 
+
+//登录窗口
 - (void)showAlert
 {
     [self.alertView setHidden:NO];
@@ -293,11 +355,10 @@
     
     [self cancelAlert:nil];
 }
-
 - (IBAction)cancelAlert:(id)sender {
     
-    
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
+    [self.icarousel setHidden:YES];
+    self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
     [self.codeView resignFirstResponder];
     [self.schIdField resignFirstResponder];
     [self.passwordField resignFirstResponder];
@@ -308,21 +369,88 @@
     
 }
 
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+//添加课程
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    ViewController* nextVC = (ViewController*)[segue destinationViewController];
+    nextVC.account = self.schIdField.text;
 }
-*/
+- (IBAction)addLesson:(id)sender {
+    [self performSegueWithIdentifier:@"addLesson" sender:nil];
+}
+
+//删除课程
+- (void)deleteLesson:(NSString *)id
+{
+    [self cancelAlert:nil];
+    [self waiting:@"正在删除"];
+    ApiMDelClass* api = [[ApiMDelClass alloc]init];
+    [api load:self selecter:@selector(disposMessage:) id:id];
+}
+
+
+
+#pragma mark -icaursel
+- (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
+{
+    return self.lessonsForIcarousel.count;
+}
+
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index
+{
+    ViewForIcaursel* view = [[[NSBundle mainBundle] loadNibNamed:@"ViewForIcourse" owner:self options:nil] firstObject];
+    
+    if (index==carousel.currentItemIndex) {
+        self.lastView = view;
+        [view setBackgroundColor:self.currentColor];
+        [view setAlpha:0.85];
+    } else {
+        [view setBackgroundColor:[UIColor blackColor]];
+        [view setAlpha:0.5];
+    }
+   
+    ScheduleLesson* lesson = [self.lessonsForIcarousel objectAtIndex:index];
+    [view.LessonNameLabel setText:lesson.name];
+    view.LessonNameLabel.verticalAlignment = VerticalAlignmentTop;
+    [view.locationLabel setText:lesson.location];
+    view.frame = CGRectMake(30, 5, 134, 195);
+    return view;
+}
+
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+{
+    ScheduleLesson* selectedLesson = [self.lessonsForIcarousel objectAtIndex:index];
+    [self showSchedule:selectedLesson];
+}
+- (NSUInteger)numberOfPlaceholdersInCarousel:(iCarousel *)carousel
+{
+	return 0;
+}
+
+- (void)carouselCurrentItemIndexUpdated:(iCarousel *)carousel
+{
+    [self.lastView setBackgroundColor:[UIColor blackColor]];
+    [self.lastView setAlpha:0.5];
+    
+    [carousel.currentItemView setBackgroundColor:self.currentColor];
+    [carousel.currentItemView setAlpha:0.85];
+    self.lastView = carousel.currentItemView;
+    NSLog(@"update");
+}
+
+- (NSUInteger)numberOfVisibleItemsInCarousel:(iCarousel *)carousel
+{
+    return self.lessonsForIcarousel.count;
+}
+
+- (CGFloat)carouselItemWidth:(iCarousel *)carousel
+{
+    return 160;
+}
+
+- (BOOL)carouselShouldWrap:(iCarousel *)carousel
+{
+    return NO;
+}
 
 @end

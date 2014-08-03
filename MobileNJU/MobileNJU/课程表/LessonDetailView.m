@@ -43,4 +43,11 @@
     [myDelegate closeAlert];
 }
 
+- (IBAction)deleteLesson:(id)sender {
+    [myDelegate deleteLesson:self.id];
+}
+
+
+
+
 @end

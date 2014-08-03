@@ -8,7 +8,12 @@
 
 #import "BaseViewController.h"
 #import "FirstPage.h"
+#import "SecondPage.h"
 @interface AddShopVC : BaseViewController
 @property (nonatomic)NSInteger currentPage;
 @property (weak, nonatomic) IBOutlet FirstPage *firstPage;
+@property (nonatomic,strong)MAddMarket_Builder* market;
+@property (weak, nonatomic) IBOutlet SecondPage *secondPage;
+@property (nonatomic) AddShopVC* myLast;
+@property(nonatomic)BOOL shoudReturn;
 @end

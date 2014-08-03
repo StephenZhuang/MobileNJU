@@ -431,6 +431,11 @@
 		7D7A487E1986AD460019E9B3 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A487B1986AD460019E9B3 /* UIImage+ImageEffects.m */; };
 		7D7A487F1986AD460019E9B3 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A487D1986AD460019E9B3 /* UIImageView+LBBlurredImage.m */; };
 		7D7A48821986B2A80019E9B3 /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A48811986B2A80019E9B3 /* MyNavigationController.m */; };
+		7D943E61198D2ABF0060222B /* ViewForIcourse.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D943E60198D2ABF0060222B /* ViewForIcourse.xib */; };
+		7D943E64198D2BD70060222B /* ViewForIcaursel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943E63198D2BD70060222B /* ViewForIcaursel.m */; };
+		7D943E65198D384F0060222B /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943E5E198D293B0060222B /* iCarousel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D943E67198E92FC0060222B /* WaitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D943E66198E92FC0060222B /* WaitingView.xib */; };
+		7D943E6A198E93BF0060222B /* WaitingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D943E69198E93BF0060222B /* WaitingView.m */; };
 		7D947B621989EA660000EB4E /* InitConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D947B611989EA660000EB4E /* InitConfig.plist */; };
 		7D947C341989EAFE0000EB4E /* ZsndChat.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D947C231989EAFE0000EB4E /* ZsndChat.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7D947C351989EAFE0000EB4E /* ZsndIndex.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D947C251989EAFE0000EB4E /* ZsndIndex.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1214,6 +1219,14 @@
 		7D7A48801986B2A80019E9B3 /* MyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNavigationController.h; sourceTree = "<group>"; };
 		7D7A48811986B2A80019E9B3 /* MyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNavigationController.m; sourceTree = "<group>"; };
 		7D7A48831986B2C30019E9B3 /* myNavigationControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myNavigationControllerDelegate.h; sourceTree = "<group>"; };
+		7D943E5D198D293B0060222B /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		7D943E5E198D293B0060222B /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		7D943E60198D2ABF0060222B /* ViewForIcourse.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewForIcourse.xib; path = "../首页/ViewForIcourse.xib"; sourceTree = "<group>"; };
+		7D943E62198D2BD70060222B /* ViewForIcaursel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewForIcaursel.h; sourceTree = "<group>"; };
+		7D943E63198D2BD70060222B /* ViewForIcaursel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewForIcaursel.m; sourceTree = "<group>"; };
+		7D943E66198E92FC0060222B /* WaitingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaitingView.xib; sourceTree = "<group>"; };
+		7D943E68198E93BF0060222B /* WaitingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitingView.h; sourceTree = "<group>"; };
+		7D943E69198E93BF0060222B /* WaitingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitingView.m; sourceTree = "<group>"; };
 		7D947B611989EA660000EB4E /* InitConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InitConfig.plist; sourceTree = "<group>"; };
 		7D947C221989EAFE0000EB4E /* ZsndChat.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZsndChat.pb.h; sourceTree = "<group>"; };
 		7D947C231989EAFE0000EB4E /* ZsndChat.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZsndChat.pb.m; sourceTree = "<group>"; };
@@ -1566,6 +1579,9 @@
 				7DFC44F9198A648C0018BCB9 /* UILabel+VerticalAlign.m */,
 				7DFC44FB198A656E0018BCB9 /* VerticallyAlignedLabel.h */,
 				7DFC44FC198A656E0018BCB9 /* VerticallyAlignedLabel.m */,
+				7D943E62198D2BD70060222B /* ViewForIcaursel.h */,
+				7D943E63198D2BD70060222B /* ViewForIcaursel.m */,
+				7D943E60198D2ABF0060222B /* ViewForIcourse.xib */,
 			);
 			path = "课程表";
 			sourceTree = "<group>";
@@ -2105,6 +2121,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7D943E5C198D29290060222B /* iCarousel */,
 				7DB0460D1987D1C600A7612B /* QCSlideTableView */,
 				7DB045FA1987C17500A7612B /* GuGuSegmentNavigationController */,
 				7DB045E41987A86E00A7612B /* IQActionSheetPickerView */,
@@ -2265,6 +2282,9 @@
 				7D7A48831986B2C30019E9B3 /* myNavigationControllerDelegate.h */,
 				7DB0461A1987E0FF00A7612B /* MyBaseTableViewController.h */,
 				7DB0461B1987E0FF00A7612B /* MyBaseTableViewController.m */,
+				7D943E66198E92FC0060222B /* WaitingView.xib */,
+				7D943E68198E93BF0060222B /* WaitingView.h */,
+				7D943E69198E93BF0060222B /* WaitingView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2575,6 +2595,15 @@
 				7D7A487D1986AD460019E9B3 /* UIImageView+LBBlurredImage.m */,
 			);
 			path = ImageEffects;
+			sourceTree = "<group>";
+		};
+		7D943E5C198D29290060222B /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				7D943E5D198D293B0060222B /* iCarousel.h */,
+				7D943E5E198D293B0060222B /* iCarousel.m */,
+			);
+			name = iCarousel;
 			sourceTree = "<group>";
 		};
 		7D947B631989EAF80000EB4E /* iosApi */ = {
@@ -2942,6 +2971,7 @@
 				77E0752A194043A90098BA09 /* f040.png in Resources */,
 				77E07588194043A90098BA09 /* f087.png in Resources */,
 				7796F1E919498B3600015307 /* ReceiverTextNodeBkg@2x.png in Resources */,
+				7D943E67198E92FC0060222B /* WaitingView.xib in Resources */,
 				77E07531194043A90098BA09 /* f043@2x.png in Resources */,
 				77E074F8194043A90098BA09 /* f015.png in Resources */,
 				77E07562194043A90098BA09 /* f068.png in Resources */,
@@ -3101,6 +3131,7 @@
 				77E0750E194043A90098BA09 /* f026.png in Resources */,
 				77E07521194043A90098BA09 /* f035@2x.png in Resources */,
 				77E07504194043A90098BA09 /* f021.png in Resources */,
+				7D943E61198D2ABF0060222B /* ViewForIcourse.xib in Resources */,
 				77E0751D194043A90098BA09 /* f033@2x.png in Resources */,
 				77E07540194043A90098BA09 /* f051.png in Resources */,
 				7796F1EB19498B3C00015307 /* SenderTextNodeBkg@2x.png in Resources */,
@@ -3208,6 +3239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D943E65198D384F0060222B /* iCarousel.m in Sources */,
 				7DFC44C2198A4B250018BCB9 /* ApiMCardHistory.m in Sources */,
 				7DFC44E8198A4B250018BCB9 /* ApiMSignInInDetail.m in Sources */,
 				77B904C4192C4B3B0062237D /* MJPhotoBrowser.m in Sources */,
@@ -3262,6 +3294,7 @@
 				771EDF4E193F37A200A3DCBB /* SubscribeCell.m in Sources */,
 				771EDF38193F373000A3DCBB /* UtilMethods.m in Sources */,
 				7DFC44C5198A4B250018BCB9 /* ApiMChat.m in Sources */,
+				7D943E64198D2BD70060222B /* ViewForIcaursel.m in Sources */,
 				7DFC44DA198A4B250018BCB9 /* ApiMMarketType.m in Sources */,
 				77E076381940443F0098BA09 /* BusVC.m in Sources */,
 				77E07600194044110098BA09 /* ScheduleLesson.m in Sources */,
@@ -3434,6 +3467,7 @@
 				7DFC44F3198A4B250018BCB9 /* ApiMUpdateUserInfo.m in Sources */,
 				77E075E5194043F10098BA09 /* GPAView.m in Sources */,
 				77E076441940445C0098BA09 /* SubscribeVC.m in Sources */,
+				7D943E6A198E93BF0060222B /* WaitingView.m in Sources */,
 				7747D0FB1952C2230008C36C /* JDStatusBarNotification.m in Sources */,
 				774B92CD1951194C007CB817 /* CallView.m in Sources */,
 				7DB046031987C17500A7612B /* GuGuSegmentNaviViewController.m in Sources */,

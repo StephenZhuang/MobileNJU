@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *ecardTitle;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet UIButton *endButton;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *remainLabel;
 
 @property(strong,nonatomic)UIButton* selectedButton;
 @property(strong,nonatomic)NSArray* detaiList;
@@ -48,20 +50,31 @@
     [super viewDidLoad];
     self.isRe=0;
     self.isV=0;
+    page=0;
     [self.maskView setHidden:YES];
     
     [self.alertView setHidden:!([ToolUtils getEcardId]==nil)];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backToMain:)];
     [self.ecardTitle addGestureRecognizer:singleTap];
     [self.schIDText setText:[ToolUtils getEcardId]==nil?@"":[ToolUtils getEcardId]];
-    [self.passwordText setText:[ToolUtils getEcardPassword]==nil?@"":[ToolUtils getPassword]];
+    [self.passwordText setText:[ToolUtils getEcardPassword]==nil?@"":[ToolUtils getEcardPassword]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    // 为日期格式器设置格式字符串
+    [dateFormatter setDateFormat:@"MM月dd日"];
+    // 使用日期格式器格式化日期、时间
+    NSString *destDateString = [dateFormatter stringFromDate:[NSDate date]];
+    [self.startButton setTitle:destDateString forState:UIControlStateNormal];
+    [self.endButton setTitle:destDateString forState:UIControlStateNormal];
     [self getCode];
-
+    if (self.alertView.isHidden) {
+        [self searchDetail:nil];
+    }
     // Do any additional setup after loading the view.
 }
 
 - (void)getCode
 {
+    [self.confirmCode setImage:[UIImage imageNamed:@"news_loading"]];
     [self load:self selecter:@selector(disposMessage:) code:nil account:@"1" password:@"1"];
 }
 
@@ -90,12 +103,17 @@
         if ([[son getMethod]isEqualToString:@"MCardInfo"]) {
             MCardList_Builder* cardList = (MCardList_Builder*)[son getBuild];
             if (cardList.cardList.count>0) {
+                [self closeAlertView:nil];
                 self.isRe=1;
                 self.detaiList = cardList.cardList;
+                MCard* card = [cardList.cardList firstObject];
+                [self.nameLabel setText:card.name];
+                [self.remainLabel setText:card.total];
                 [self.tableView reloadData];
             } else {
                 [self.confirmCode setImage:[UIImage imageWithData:cardList.img]];
                 self.isV=1;
+                
             }
 
        } else if ([[son getMethod]isEqualToString:@"MCardHistory"])
@@ -120,6 +138,8 @@
            
            [self doneWithView:_footer];
        }
+    } else {
+        [self getCode];
     }
 }
 
@@ -137,9 +157,22 @@
     if (sender!=nil) {
         page=0;
     }
-    NSString* startDate = self.startButton.titleLabel.text;
-    NSString* endDate = self.endButton.titleLabel.text;
-    [self load:self selecter:@selector(disposMessage:) begin:startDate end:endDate];
+    if (self.schIDText.text.length==0) {
+        [ToolUtils showMessage:@"请输入您的学号"];
+        [self showAlertView:nil];
+    } else if (self.passwordText.text.length==0)
+    {
+        [ToolUtils showMessage:@"请输入您的密码"];
+        [self showAlertView:nil];
+
+        
+    } else {
+        NSString* startDate = self.startButton.titleLabel.text;
+        NSString* endDate = self.endButton.titleLabel.text;
+        [self waiting:@"正在查询"];
+        [self load:self selecter:@selector(disposMessage:) begin:startDate end:endDate];
+ 
+    }
 }
      
      /**
@@ -152,10 +185,15 @@
       */
      -(UpdateOne*)load:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end {
          NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+         [array addObject:[NSString stringWithFormat:@"account=%@",self.schIDText.text]];
+         [array addObject:[NSString stringWithFormat:@"password=%@",self.passwordText.text]];
+
          [array addObject:[NSString stringWithFormat:@"begin=%@",begin==nil?@"":begin]];
          [array addObject:[NSString stringWithFormat:@"end=%@",end==nil?@"":end]];
          [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
          [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
+         [array addObject:[NSString stringWithFormat:@"page=%d",page]];
+         [array addObject:[NSString stringWithFormat:@"limit=%d",20]];
 
          UpdateOne *updateone=[[UpdateOne alloc] init:@"MCardHistory" params:array  delegate:delegate selecter:select];         [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
          return updateone;
@@ -191,7 +229,19 @@
         } completion:^(BOOL finished) {
         }];
     }
+}
 
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
+        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
+        //    self.logoImage.center = CGPointMake(self.logoImage.center.x, 100);
+    } completion:^(BOOL finished) {
+    }];
+
+    return YES;
 }
 
 #pragma mark 关于自定义的alertView
@@ -215,6 +265,15 @@
         [ToolUtils showMessage:@"密码不得为空"];
     } else
     {
+        if (self.autoSearch.isOn) {
+            [ToolUtils setEcardId:self.schIDText.text];
+            [ToolUtils setEcardPassword:self.passwordText.text];
+        }
+        [self waiting:@"正在查询"];
+        [self.passwordText resignFirstResponder];
+        [self.confirmCodeText resignFirstResponder];
+        [self.schIDText resignFirstResponder];
+        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
         [self load:self selecter:@selector(disposMessage:) code:self.confirmCodeText.text account:self.schIDText.text password:self.passwordText.text];
     }
 }
@@ -239,7 +298,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.detaiList.count;
+    return self.detaiList.count-1;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -251,7 +310,7 @@
 {
     static NSString *CellIdentifier = @"ecard";
     EcardCell *cell = (EcardCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    MCard* card = [self.detaiList objectAtIndex:indexPath.row];
+    MCard* card = [self.detaiList objectAtIndex:indexPath.row+1];
     [cell.locationLabel setText:card.name];
     [cell.timeLabel setText:card.time];
     [cell.remainLabel setText:card.total];
@@ -270,6 +329,9 @@
     // 使用日期格式器格式化日期、时间
     NSString *destDateString = [dateFormatter stringFromDate:pickerView.date];
     [self.selectedButton setTitle:destDateString forState:UIControlStateNormal];
+    if (self.selectedButton==self.startButton) {
+        [self.endButton setTitle:self.startButton.titleLabel.text forState:UIControlStateNormal];
+    }
 
 }
 #pragma mark - Table view delegate

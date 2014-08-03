@@ -8,7 +8,7 @@
 
 #import "ShoppingDetailVC.h"
 
-@interface ShoppingDetailVC ()
+@interface ShoppingDetailVC ()<UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -30,14 +30,24 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self setTitle:@"详情"];
-    [self addDetail:@"我真的很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长"];
+    self.scrollView.delegate = self;
+    self.scrollView.pagingEnabled=YES;
+    [self.pageControl addTarget:self action:@selector(pageChange:)
+                  forControlEvents:UIControlEventTouchUpInside];
+
+    [self.nameLabel setText:self.market.name];
+    [self.priceLabel setText:[NSString stringWithFormat:@"%@元",self.market.price]];
+    [self.originPriceLabel setText:[NSString stringWithFormat:@"%@元",self.market.priceOriginal]];
     
+    [self addDetail:self.market.description];
     [self addButton:@"联系买家"];
-    [self addLocation:@"仙林校区"];
+    [self addLocation:self.market.address];
+    [self loadNews];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -46,18 +56,17 @@
 }
 -(void)addButton:(NSString*)state
 {
-    CGRect frame = self.detailLabel.frame;
-    frame.origin.y = frame.origin.y + frame.size.height + 15+15+22;
-    frame.size.height = 40;
+    CGRect frame = CGRectMake(10,self.detailLabel.frame.origin.y+self.detailLabel.frame.size.height+15+15+22 , 300, 40);
+//    
+//    self.detailLabel.frame;
+//    frame.origin.y = frame.origin.y + frame.size.height + 15+15+22;
+//    frame.size.height = 40;
     UIButton* button = [[UIButton alloc]initWithFrame:frame];
     [button setBackgroundImage:[UIImage imageNamed:@"purpleButton"] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage imageNamed:@"purpleButtonhighlighted"] forState:UIControlStateHighlighted];
-
     [self.footView addSubview:button];
-    
     [button setTitle:state forState:UIControlStateNormal];
     [button addTarget:self action:@selector(contact) forControlEvents:(UIControlEventTouchUpInside)];
-    
 }
 
 - (void)contact
@@ -75,7 +84,7 @@
 }
 - (void)addDetail:(NSString*)detail
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(9, 30, 280, 21)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, 300, 21)];
     if (label) {
         // 设置文本内容
         label.text = detail;
@@ -97,6 +106,43 @@
     
 }
 
+- (void)loadNews
+{
+    NSArray* photoList = [self.market.imgs componentsSeparatedByString:@","];
+    NSInteger pageCount = [photoList count];
+    [self.scrollView setPagingEnabled:YES];
+    self.pageControl.currentPage = 0;
+    self.pageControl.numberOfPages = pageCount;
+    CGSize pageScrollViewSize = self.scrollView.frame.size;
+    self.scrollView.contentSize = CGSizeMake(pageScrollViewSize.width * photoList.count, pageScrollViewSize.height);
+    for (NSInteger i = 0; i<pageCount; i++)
+    {
+        CGRect frame;
+        frame.origin.x = self.scrollView.frame.size.width * i;
+        frame.origin.y = 0;
+        frame.size = self.scrollView.frame.size;
+        UIImageView *pageView = [[UIImageView alloc]initWithFrame:frame];
+        [pageView setImageWithURL:[ToolUtils getImageUrlWtihString:[photoList objectAtIndex:i] width:320 height:320] placeholderImage:[UIImage imageNamed:@"news_loading"]];
+        pageView.contentMode = UIViewContentModeScaleAspectFit;
+        [pageView setClipsToBounds:YES];
+        [self.scrollView addSubview:pageView];
+    }
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView==self.scrollView) {
+        int index=scrollView.contentOffset.x/scrollView.frame.size.width;
+        self.pageControl.currentPage=index;
+    }
+}
+
+
+
+-(void)pageChange:(UIPageControl *)sender{
+    CGFloat offset= self.pageControl.currentPage*320;
+    [self.scrollView setContentOffset:CGPointMake(offset, 0) animated:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -116,6 +162,7 @@
     // Return the number of rows in the section.
     return 1;
 }
+
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

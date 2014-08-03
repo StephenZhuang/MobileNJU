@@ -10,6 +10,7 @@
 #import "AddShopVC.h"
 #import "ApiMMarketType.h"
 #import "ZsndMarket.pb.h"
+#import "RDVTabBarController.h"
 
 @interface QCSlideViewController ()
 @property (nonatomic,strong)NSArray* titleArray;
@@ -26,11 +27,14 @@
     }
     return self;
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.rdv_tabBarController setTabBarHidden:YES];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
@@ -75,6 +79,7 @@
 
 - (void)disposMessage:(Son *)son
 {
+    [self.loginIndicator removeFromSuperview];
     if ([son getError]==0) {
         if ([[son getMethod] isEqualToString:@"MMarketType"])  {
             NSMutableArray* types = [[NSMutableArray alloc]init];
@@ -93,6 +98,7 @@
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
     AddShopVC* vc = (AddShopVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"add"];
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 #pragma mark - 滑动tab视图代理方法
@@ -129,6 +135,14 @@
 #pragma mark -shoppingVCDelegate
 - (void)moveToDetail:(ShoppingDetailVC *)vc
 {
+    
     [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier]isEqualToString:@"add"]) {
+        AddShopVC* add = (AddShopVC*)[segue destinationViewController];
+
+    }
 }
 @end

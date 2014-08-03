@@ -21,4 +21,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *location;
 @property (weak, nonatomic) IBOutlet UILabel *week;
 @property (strong,nonatomic)ScheduleLesson* lesson;
+@property (nonatomic,strong)NSString* id;
 @end

@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "TitleView.h"
 #import "MBProgressHUD.h"
+#import "WaitingView.h"
 @interface BaseViewController : UIViewController
 @property (strong, nonatomic) NSArray *backIcons;
 @property (nonatomic , strong) TitleView *titleView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
-@property (nonatomic,strong)UIActivityIndicatorView* loginIndicator;
+@property (nonatomic,strong)WaitingView* loginIndicator;
 @property (nonatomic)BOOL OK;
 -(void)closeSelf;
 - (void)addTitleView;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="K0T-h3-6G5" userLabel="BookDetailView" customClass="LessonDetailView">
-            <rect key="frame" x="0.0" y="0.0" width="260" height="195"/>
+            <rect key="frame" x="0.0" y="0.0" width="260" height="219"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8YV-6D-gZV">
@@ -22,76 +22,108 @@
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程名称:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWm-xi-q1g">
-                    <rect key="frame" x="20" y="50" width="85" height="21"/>
+                    <rect key="frame" x="20" y="50" width="85" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="85" id="CZy-4M-jh6"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任课老师:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qq-Qb-RSz">
-                    <rect key="frame" x="20" y="79" width="85" height="21"/>
+                    <rect key="frame" x="20" y="76" width="85" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDn-Km-ixH">
-                    <rect key="frame" x="42" y="108" width="51" height="21"/>
+                    <rect key="frame" x="32" y="102" width="51" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="51" id="shD-qe-AWQ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地点:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="du9-cf-q8y">
-                    <rect key="frame" x="42" y="135" width="51" height="21"/>
+                    <rect key="frame" x="32" y="126" width="51" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="周数:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6S-Th-LzQ">
-                    <rect key="frame" x="42" y="162" width="51" height="21"/>
+                    <rect key="frame" x="32" y="150" width="51" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEM-Pc-c1Q">
-                    <rect key="frame" x="102" y="50" width="138" height="21"/>
+                    <rect key="frame" x="91" y="50" width="138" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMr-Mt-HzG">
-                    <rect key="frame" x="102" y="79" width="138" height="21"/>
+                    <rect key="frame" x="91" y="76" width="138" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hr-Ky-fT0">
-                    <rect key="frame" x="102" y="108" width="138" height="21"/>
+                    <rect key="frame" x="91" y="102" width="138" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DI-wK-L7w">
-                    <rect key="frame" x="102" y="135" width="138" height="21"/>
+                    <rect key="frame" x="91" y="127" width="138" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aC1-BS-IyS">
-                    <rect key="frame" x="101" y="162" width="139" height="21"/>
+                    <rect key="frame" x="91" y="150" width="139" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3hc-K3-0CU">
+                    <rect key="frame" x="0.0" y="174" width="260" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xGX-Xy-hnV">
+                    <rect key="frame" x="130" y="175" width="1" height="85"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0X-9v-DjE">
+                    <rect key="frame" x="15" y="183" width="95" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="删除课程">
+                        <color key="titleColor" red="0.54509803921568623" green="0.24705882352941178" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="deleteLesson:" destination="K0T-h3-6G5" eventType="touchUpInside" id="z0W-4S-fKO"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSv-1Q-Ex1">
+                    <rect key="frame" x="145" y="181" width="95" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="确定">
+                        <color key="titleColor" red="0.5450980392" green="0.2470588235" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="closeSelf:" destination="K0T-h3-6G5" eventType="touchUpInside" id="FWE-JB-4xl"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -105,7 +137,7 @@
                 <constraint firstItem="8Qq-Qb-RSz" firstAttribute="leading" secondItem="rWm-xi-q1g" secondAttribute="leading" id="GSu-hw-4cf"/>
                 <constraint firstItem="3DI-wK-L7w" firstAttribute="trailing" secondItem="8Hr-Ky-fT0" secondAttribute="trailing" id="Gbz-OK-PFV"/>
                 <constraint firstItem="du9-cf-q8y" firstAttribute="trailing" secondItem="i6S-Th-LzQ" secondAttribute="trailing" id="Iik-Fe-90c"/>
-                <constraint firstItem="JDn-Km-ixH" firstAttribute="leading" secondItem="K0T-h3-6G5" secondAttribute="leading" constant="42" id="Iwq-fT-fJj"/>
+                <constraint firstItem="JDn-Km-ixH" firstAttribute="leading" secondItem="K0T-h3-6G5" secondAttribute="leading" constant="32" id="Iwq-fT-fJj"/>
                 <constraint firstItem="8Hr-Ky-fT0" firstAttribute="trailing" secondItem="EMr-Mt-HzG" secondAttribute="trailing" id="NMI-Pw-6ot"/>
                 <constraint firstItem="du9-cf-q8y" firstAttribute="leading" secondItem="i6S-Th-LzQ" secondAttribute="leading" id="NSp-Jj-jNW"/>
                 <constraint firstAttribute="trailing" secondItem="8YV-6D-gZV" secondAttribute="trailing" constant="20" symbolic="YES" id="Pgb-Rd-Vo1"/>
@@ -115,12 +147,12 @@
                 <constraint firstItem="rWm-xi-q1g" firstAttribute="trailing" secondItem="8Qq-Qb-RSz" secondAttribute="trailing" id="aYo-pk-YKO"/>
                 <constraint firstItem="8Qq-Qb-RSz" firstAttribute="top" secondItem="rWm-xi-q1g" secondAttribute="bottom" constant="8" symbolic="YES" id="bLH-wf-KQv"/>
                 <constraint firstItem="aC1-BS-IyS" firstAttribute="leading" secondItem="i6S-Th-LzQ" secondAttribute="trailing" constant="8" symbolic="YES" id="c7G-El-Cfh"/>
-                <constraint firstItem="8Hr-Ky-fT0" firstAttribute="leading" secondItem="JDn-Km-ixH" secondAttribute="trailing" constant="9" id="h2c-RM-eep"/>
+                <constraint firstItem="8Hr-Ky-fT0" firstAttribute="leading" secondItem="JDn-Km-ixH" secondAttribute="trailing" constant="8" id="h2c-RM-eep"/>
                 <constraint firstItem="oEM-Pc-c1Q" firstAttribute="baseline" secondItem="rWm-xi-q1g" secondAttribute="baseline" id="jLG-dV-XeI"/>
-                <constraint firstItem="oEM-Pc-c1Q" firstAttribute="trailing" secondItem="8YV-6D-gZV" secondAttribute="trailing" id="kTB-yi-KZX"/>
-                <constraint firstItem="aC1-BS-IyS" firstAttribute="trailing" secondItem="3DI-wK-L7w" secondAttribute="trailing" id="loT-li-AhC"/>
+                <constraint firstItem="oEM-Pc-c1Q" firstAttribute="trailing" secondItem="8YV-6D-gZV" secondAttribute="trailing" constant="-11" id="kTB-yi-KZX"/>
+                <constraint firstItem="aC1-BS-IyS" firstAttribute="trailing" secondItem="3DI-wK-L7w" secondAttribute="trailing" constant="1" id="loT-li-AhC"/>
                 <constraint firstItem="EMr-Mt-HzG" firstAttribute="baseline" secondItem="8Qq-Qb-RSz" secondAttribute="baseline" id="lyx-7S-Oo1"/>
-                <constraint firstItem="3DI-wK-L7w" firstAttribute="baseline" secondItem="du9-cf-q8y" secondAttribute="baseline" id="pNg-Rb-DVc"/>
+                <constraint firstItem="3DI-wK-L7w" firstAttribute="baseline" secondItem="du9-cf-q8y" secondAttribute="baseline" constant="1" id="pNg-Rb-DVc"/>
                 <constraint firstItem="8Hr-Ky-fT0" firstAttribute="baseline" secondItem="JDn-Km-ixH" secondAttribute="baseline" id="tjn-E9-vzl"/>
                 <constraint firstItem="JDn-Km-ixH" firstAttribute="top" secondItem="8Qq-Qb-RSz" secondAttribute="bottom" constant="8" symbolic="YES" id="wax-fO-igy"/>
                 <constraint firstItem="3DI-wK-L7w" firstAttribute="leading" secondItem="8Hr-Ky-fT0" secondAttribute="leading" id="xdM-gN-dCA"/>

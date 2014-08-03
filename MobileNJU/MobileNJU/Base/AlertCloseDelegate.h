@@ -10,4 +10,6 @@
 
 @protocol AlertCloseDelegate <NSObject>
 - (void)closeAlert;
+@optional
+- (void) deleteLesson:(NSString*) id;
 @end

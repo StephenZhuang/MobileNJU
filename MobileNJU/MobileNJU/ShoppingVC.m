@@ -114,7 +114,7 @@
     NSString* img = [[market.imgs componentsSeparatedByString:@","] firstObject];
     [cell.img setImageWithURL:[ToolUtils getImageUrlWtihString:img width:140 height:140] placeholderImage:loading];
     [cell.name setText:market.name==nil?@"":market.name];
-    [cell.price setText:market.price==nil?@"":market.price];
+    [cell.price setText:[NSString stringWithFormat:@"%@元",market.price==nil?@"":market.price]];
     NSString* state = market.isSold==1?@"（已售）":@"";
     [cell.state setText:state];
     return cell;
@@ -124,6 +124,7 @@
 {
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
     ShoppingDetailVC* vc = (ShoppingDetailVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"detail"]; //test2为viewcontroller的StoryboardId
+    vc.market = [self.marketList objectAtIndex:indexPath.row];
     [self.myDelegate moveToDetail:vc];
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface ViewController : UITableViewController
-
+@property (nonatomic,strong)NSString* account;
 @end

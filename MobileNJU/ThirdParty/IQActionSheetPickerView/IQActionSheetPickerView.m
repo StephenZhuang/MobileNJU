@@ -293,20 +293,16 @@
 -(void)showInView:(UIView *)view
 {
     [_pickerView reloadAllComponents];
-    
-    
+
     [super showInView:view];
-    
     [UIView animateWithDuration:0.3 animations:^{
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
         {
             CGRect bounds ;
-            if (view==nil) {
+            if (self.tag==123456||self.tag==654321) {
                 bounds = self.window.bounds;
-
             } else {
                 bounds = view.bounds;
-
             }
             CGRect newbounds = CGRectMake(0, 0, bounds.size.width, bounds.size.height);
             [self setBounds:newbounds];

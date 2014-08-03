@@ -23,7 +23,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
     //创建顶部可滑动的tab
     _topScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, kHeightOfTopScrollView)];
     _topScrollView.delegate = self;
-    _topScrollView.backgroundColor = [UIColor clearColor];
+    _topScrollView.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:236/255.0 alpha:1];
     _topScrollView.pagingEnabled = NO;
     _topScrollView.showsHorizontalScrollIndicator = NO;
     _topScrollView.showsVerticalScrollIndicator = NO;
@@ -40,6 +40,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
     _rootScrollView.showsHorizontalScrollIndicator = NO;
     _rootScrollView.showsVerticalScrollIndicator = NO;
     _rootScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+    _rootScrollView.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:236/255.0 alpha:1];
     _userContentOffsetX = 0;
     [_rootScrollView.panGestureRecognizer addTarget:self action:@selector(scrollHandlePan:)];
     [self addSubview:_rootScrollView];
@@ -188,8 +189,9 @@ static const NSUInteger kTagOfRightSideButton = 999;
         button.titleLabel.font = [UIFont systemFontOfSize:kFontSizeOfTabButton];
         [button setTitleColor:self.tabItemNormalColor forState:UIControlStateNormal];
         [button setTitleColor:self.tabItemSelectedColor forState:UIControlStateSelected];
-        [button setBackgroundImage:self.tabItemNormalBackgroundImage forState:UIControlStateNormal];
-        [button setBackgroundImage:self.tabItemSelectedBackgroundImage forState:UIControlStateSelected];
+        [button setBackgroundColor:[UIColor clearColor]];
+//        [button setBackgroundImage:self.tabItemNormalBackgroundImage forState:UIControlStateNormal];
+//        [button setBackgroundImage:self.tabItemSelectedBackgroundImage forState:UIControlStateSelected];
         [button addTarget:self action:@selector(selectNameButton:) forControlEvents:UIControlEventTouchUpInside];
         [_topScrollView addSubview:button];
     }

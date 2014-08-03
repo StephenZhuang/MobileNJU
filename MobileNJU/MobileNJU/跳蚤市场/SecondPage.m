@@ -13,7 +13,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
     }
     return self;
 }
@@ -21,32 +20,34 @@
 #pragma mark -初始化
 - (void)drawRect:(CGRect)rect
 {
+    self.typeId = @"-1";
     self.QQField.delegate = self;
     self.phoneField.delegate = self;
     self.font = self.QQLabel.font;
 }
 - (IBAction)chooseType:(id)sender {
+    self.typeArr= [NSArray arrayWithObjects:@"电子产品",@"生活用品",@"书籍",@"衣服", nil];
     [self returnLabel:self.lastField];
     [self.QQField resignFirstResponder];
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择商品类别" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
-    [picker setTag:1];
+    [picker setTag:123456];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
-                                     [NSArray arrayWithObjects:@"电子产品",@"生活用品",@"书籍",@"衣服", nil],
+                                     self.typeArr,
                                      nil]];
     
-    [picker showInView:nil];
+    [picker showInView:self];
 }
 
 - (IBAction)chooseLocation:(id)sender {
     [self returnLabel:self.lastField];
     [self.QQField resignFirstResponder];
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择商品类别" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
-    [picker setTag:2];
+    [picker setTag:654321];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
                                      [NSArray arrayWithObjects:@"仙林校区",@"鼓楼校区", nil],
                                      nil]];
     
-    [picker showInView:nil];
+    [picker showInView:self];
     
 }
 
@@ -63,16 +64,10 @@
     [textField resignFirstResponder];
     if (textField==self.phoneField) {
         [self.QQField becomeFirstResponder];
-    }  else if (textField==self.QQField)
-    {
-        [self complete];
     }
     return YES;
 }
-- (void)complete
-{
-    
-}
+
 -(void) returnLabel:(id)textField
 {
     if (textField==nil) {
@@ -85,12 +80,16 @@
     {
         label = self.phoneLabel;
     }
-    [UIView animateWithDuration:0.2f animations:^{
-        [label setFont:self.font];
-        [label setTextColor:[UIColor lightGrayColor]];
-        label.transform = CGAffineTransformMakeTranslation(0, 0);
-    }];
     
+    if (((UITextField*)textField).text.length>0) {
+    
+    } else {
+        [UIView animateWithDuration:0.2f animations:^{
+            [label setFont:self.font];
+            [label setTextColor:[UIColor lightGrayColor]];
+            label.transform = CGAffineTransformMakeTranslation(0, 0);
+        }];
+    }
 }
 
 -(void) changeLabel:(id)textField
@@ -107,6 +106,7 @@
         [label setFont:[UIFont fontWithName:@"Helvetica" size:10.0]];
         label.transform = CGAffineTransformMakeTranslation(0, -10);
     }];
+    
     self.lastField = textField;
 }
 
@@ -134,9 +134,15 @@
 #pragma mark -IQActionSheetDelegate
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray *)titles
 {
-    if (pickerView.tag==1) {
+    
+    if (pickerView.tag==123456) {
         [self.typeField setText:[titles firstObject]];
-        
+        for (int i = 0 ; i < self.typeArr.count; i++) {
+            if ([[self.typeArr objectAtIndex:i] isEqualToString:[titles firstObject]]) {
+                self.typeId = [NSString stringWithFormat:@"%d",i];
+                break;
+            }
+        }
     } else {
         [self.locationField setText:[titles firstObject]];
     }

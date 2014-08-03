@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MyBaseTableViewController.h"
+#import "ApiMMarketList.h"
 @interface ShoppingDetailVC : MyBaseTableViewController
-
+@property (nonatomic,strong)MMarket* market;
 @end

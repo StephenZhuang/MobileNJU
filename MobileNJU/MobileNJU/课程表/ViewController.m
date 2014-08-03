@@ -18,6 +18,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *timeField;
 @property (nonatomic,strong)WeekPicker *weekPicker;
 @property (weak, nonatomic) IBOutlet UITextField *weekField;
+@property (nonatomic,strong)NSArray* weekTitle;
+@property (nonatomic,strong)NSArray* classTitle;
+@property (nonatomic)int day;
+@property (nonatomic)int start;
+@property (nonatomic)int end;
 @end
 
 @implementation ViewController
@@ -25,6 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.day = 0 ;
+    self.start = 0;
+    self.end = 0;
+    self.weekTitle = [NSArray arrayWithObjects:@"周一" ,@"周二",@"周三",@"周四",@"周五",@"周六",@"周日",nil];
+    self.classTitle =  [NSArray arrayWithObjects:@"第1节",@"第2节",@"第3节",@"第4节",@"第5节",@"第6节",@"第7节",@"第8节",@"第9节",@"第10节",@"第11节",nil];
     [self.tableView setScrollEnabled:NO];
     if([self.navigationController.navigationBar
         respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
@@ -35,11 +45,20 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+- (void)disposeMessage:(Son*)son
+{
+    if ([son getError]==0) {
+        MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+        [ToolUtils showMessage:ret.msg];
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 - (void)enableAll:(BOOL)enable
 {
@@ -51,6 +70,22 @@
 -  (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray *)titles
 {
     [self.timeField setText:[NSString stringWithFormat:@"%@ %@-%@",[titles firstObject],[titles objectAtIndex:1],[titles lastObject]]];
+    for (int i = 0 ; i < self.weekTitle.count; i++)
+    {
+        if ([[titles firstObject] isEqualToString:[self.weekTitle objectAtIndex:i]]) {
+            self.day = i+1;
+            break;
+        }
+    }
+    for (int i = 0 ; i < self.classTitle.count; i++)
+    {
+        if ([[titles objectAtIndex:1] isEqualToString:[self.classTitle objectAtIndex:i]]) {
+            self.start = i+1;
+        }
+        if ([[titles objectAtIndex:2] isEqualToString:[self.classTitle objectAtIndex:i]]) {
+            self.end = i+1;
+        }
+    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -102,10 +137,11 @@
 {
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择节数" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     [picker setTag:233];
+   
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
-                                     [NSArray arrayWithObjects:@"周一" ,@"周二",@"周三",@"周四",@"周五",@"周六",@"周日",nil],
-                                     [NSArray arrayWithObjects:@"第1节",@"第2节",@"第3节",@"第4节",@"第5节",@"第6节",@"第7节",@"第8节",@"第9节",@"第10节",@"第11节",nil],
-                                     [NSArray arrayWithObjects:@"第1节",@"第2节",@"第3节",@"第4节",@"第5节",@"第6节",@"第7节",@"第8节",@"第9节",@"第10节",@"第11节",nil],
+                                    self.weekTitle,
+                                    self.classTitle
+                                     ,self.classTitle,
                                      nil]];
     [picker showInView:self.view];
 
@@ -139,7 +175,41 @@
     [self.weekField setText:string];
     
 }
+- (IBAction)cancel:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
+- (IBAction)submit:(id)sender {
+    
+    if (self.lessonNameField.text.length==0) {
+        [ToolUtils showMessage:@"请输入课程名"];
+        return;
+    }
+   
+    if (self.weekField.text.length==0) {
+        [ToolUtils showMessage:@"请选择上课周数"];
+        return;
+    }
+    if (self.timeField.text.length==0) {
+        [ToolUtils showMessage:@"请选择上课时间"];
+        return;
+    }
+    
+    MAddClass_Builder* builder = [[MAddClass_Builder alloc]init];
+    builder.account = self.account==nil?@"":self.account;
+    builder.name = self.lessonNameField.text;
+    builder.teacher = self.teacherNameField.text;
+    builder.address = self.classroomField.text;
+    builder.week = self.weekField.text;
+    builder.day = self.day;
+    builder.begin = self.start;
+    builder.end = self.end;
+    builder.time = self.timeField.text;
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddClass" params:builder  delegate:self selecter:@selector(disposMessage:)];
+    
+    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
+
+}
 
 #pragma -mark textfieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

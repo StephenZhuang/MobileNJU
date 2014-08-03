@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneField;
 @property (weak, nonatomic) IBOutlet UITextField *QQField;
 @property (weak, nonatomic) IBOutlet UILabel *QQLabel;
+@property(nonatomic,strong)NSArray* typeArr;
+@property (nonatomic,strong)NSString* typeId;
 @property (strong,nonatomic)UIFont *font;
 @property (strong,nonatomic)UITextField* lastField;
 @end

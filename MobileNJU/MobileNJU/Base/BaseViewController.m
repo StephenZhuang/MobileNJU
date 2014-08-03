@@ -145,15 +145,14 @@ UIView* view;
 - (void) waiting:(NSString*)msg
 {
     [self.loginIndicator removeFromSuperview];
-    CGRect frame = CGRectMake(100, 100, self.view.center.x-50, self.view.center.y);
-    self.loginIndicator = [[UIActivityIndicatorView alloc] initWithFrame:frame];
-    
-	[self.loginIndicator setTintColor:[UIColor purpleColor]];
-    [self.loginIndicator setColor:[UIColor purpleColor]];
+    CGRect frame = CGRectMake(110, 200, 100, 100);
+    self.loginIndicator = [[[NSBundle mainBundle] loadNibNamed:@"WaitingView" owner:self options:nil] firstObject];
+    self.loginIndicator.layer.cornerRadius=15;
+    [self.loginIndicator setClipsToBounds:YES];
+    self.loginIndicator.frame = frame;
     [self.navigationController.view addSubview:self.loginIndicator];
+    [self.loginIndicator.msgLbel setText:msg];
     [self.navigationController.view bringSubviewToFront:self.loginIndicator];
-    [self.loginIndicator startAnimating];
-    [self.loginIndicator setHidden:NO];
 }
 
 - (void)disposMessage:(Son *)son

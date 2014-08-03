@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        self.lessonArr = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -23,8 +23,13 @@
 
 - (void) showDetail
 {
-    [self.delegate showSchedule:self.myLesson];
+    if (self.lessonArr.count==1) {
+        [self.delegate showSchedule:self.myLesson];
+    } else {
+        [self.delegate showSchedules:self.lessonArr  color: [self getColor]];
+    }
 }
+
 
 - (UIColor*)getColor
 {

@@ -8,6 +8,7 @@
 
 #import "ScheduleView.h"
 #import "LessonButton.h"
+
 #import "VerticallyAlignedLabel.h"
 #define STARTX 31
 #define STARTY 27
@@ -21,10 +22,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        
-        
-        
     }
    
     return self;
@@ -61,6 +58,8 @@
         NSDate *newDate = [[NSDate alloc] initWithTimeInterval:60*60*24*(i-((weekday-2)%7)) sinceDate:[NSDate date]];
         UILabel* label = [dayLabels objectAtIndex:i];
         [label setText:[dateFormatter stringFromDate:newDate]];
+        
+        
     }
     
     [dateFormatter setDateFormat:@"MM月"];
@@ -82,46 +81,70 @@
 - (void)addLessons:(NSArray *)lessons delegate:(id<ScheduleViewDelegate>) delegate
 {
     int lessonId=0;
+    self.buttonList = [[NSMutableArray alloc]init];
     for (ScheduleLesson* lesson in lessons) {
-         CGRect frame = CGRectMake(STARTX+(lesson.day-1)*WIDTH, STARTY+(lesson.start-1)*HEIGHT, WIDTH, HEIGHT*lesson.length);
-        LessonButton* lessonBt = [[LessonButton alloc]initWithFrame:frame];
-        lessonBt.delegate = delegate;
+        int flag = 1;
+        for (LessonButton* button in self.buttonList) {
+            ScheduleLesson* buttonLesson = button.myLesson;
+            if (buttonLesson.day==lesson.day&&buttonLesson.start<=lesson.start&&(buttonLesson.start+buttonLesson.length)>lesson.start) {
+                if (button.lessonArr.count==1) {
+                    CGRect frame = CGRectMake(button.frame.size.width-8.5, 0, 8.5, 7.5);
+                    UIImageView* img1 = [[UIImageView alloc]initWithFrame:frame];
+                    [img1 setImage:[UIImage imageNamed:@"09课程表-折叠课程表-右上角三角2"]];
+                    [button addSubview:img1];
+                    
+                    UIImageView* img2 = [[UIImageView alloc]initWithFrame:frame];
+                    [img2 setImage:[UIImage imageNamed:@"09课程表-折叠课程表-右上角三角1"]];
+                    [button addSubview:img2];
 
-        lessonBt.lessonId=lessonId;
-        lessonId++;
-        [lessonBt setMyLesson:lesson];
-        
-       
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT*lesson.length)];
-        [button setTitle:@"" forState:UIControlStateNormal];
-        [button setBackgroundColor:[UIColor clearColor]];
-        lessonBt.backgroundColor = [lessonBt getColor];
-        CGRect nameFrame = CGRectMake(3, 7, WIDTH-6, HEIGHT*lesson.length-22);
-        
-        VerticallyAlignedLabel *lessonNameLabel = [[VerticallyAlignedLabel alloc]initWithFrame:nameFrame];
-        [lessonNameLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
-        [lessonNameLabel setText:lesson.name];
-        [lessonNameLabel setTextColor:[UIColor whiteColor]];
-        // 0代表不限制行数
-        [lessonNameLabel setNumberOfLines:0];
-        [lessonNameLabel setVerticalAlignment:VerticalAlignmentTop];
-        // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
-        //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
-        
-        
-        CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-15, WIDTH-6, 15);
-        UILabel *locationLabel = [[UILabel alloc]initWithFrame:loactionFrame];
-        [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
-        [locationLabel setText:lesson.location];
-        [locationLabel setTextColor:[UIColor whiteColor]];
-        
-        
-        [lessonBt addSubview:button];
-        [lessonBt setMyButton:button];
-        [lessonBt addSubview:lessonNameLabel];
-        [lessonBt addSubview:locationLabel];
-    
-        [self addSubview:lessonBt];
+                }
+                [button.lessonArr addObject:lesson];
+                flag=0;
+                
+                break;
+            }
+            
+        }
+        if (flag) {
+            
+            CGRect frame = CGRectMake(STARTX+(lesson.day-1)*WIDTH, STARTY+(lesson.start-1)*HEIGHT, WIDTH, HEIGHT*lesson.length);
+            LessonButton* lessonBt = [[LessonButton alloc]initWithFrame:frame];
+            lessonBt.delegate = delegate;
+            lessonBt.lessonId=lessonId;
+            lessonId++;
+            [lessonBt setMyLesson:lesson];
+            [lessonBt.lessonArr addObject:lesson];
+            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT*lesson.length)];
+            [button setTitle:@"" forState:UIControlStateNormal];
+            [button setBackgroundColor:[UIColor clearColor]];
+            lessonBt.backgroundColor = [lessonBt getColor];
+            CGRect nameFrame = CGRectMake(3, 7, WIDTH-6, HEIGHT*lesson.length-22);
+            VerticallyAlignedLabel *lessonNameLabel = [[VerticallyAlignedLabel alloc]initWithFrame:nameFrame];
+            [lessonNameLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
+            [lessonNameLabel setText:lesson.name];
+            [lessonNameLabel setTextColor:[UIColor whiteColor]];
+            // 0代表不限制行数
+            [lessonNameLabel setNumberOfLines:0];
+            [lessonNameLabel setVerticalAlignment:VerticalAlignmentTop];
+            // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
+            //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
+            
+            
+            CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-15, WIDTH-6, 15);
+            UILabel *locationLabel = [[UILabel alloc]initWithFrame:loactionFrame];
+            [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
+            [locationLabel setText:lesson.location];
+            [locationLabel setTextColor:[UIColor whiteColor]];
+            
+            
+            [lessonBt addSubview:button];
+            [lessonBt setMyButton:button];
+            [lessonBt addSubview:lessonNameLabel];
+            [lessonBt addSubview:locationLabel];
+            [self.buttonList addObject:lessonBt];
+            [self addSubview:lessonBt];
+
+        }
     }
     
     

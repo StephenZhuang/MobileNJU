@@ -21,5 +21,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *daySeven;
 @property (weak, nonatomic) IBOutlet UIView *currentWeek;
 @property (weak, nonatomic) IBOutlet UILabel *monthLabel;
+@property (nonatomic,strong)NSMutableArray* buttonList;
 - (void)initDate;
 @end
