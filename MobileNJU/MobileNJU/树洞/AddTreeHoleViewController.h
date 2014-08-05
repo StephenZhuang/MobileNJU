@@ -7,13 +7,14 @@
 //
 
 #import "BaseViewController.h"
+#import "UIPlaceHolderTextView.h"
 
 typedef void(^AddSuccessBlock)(void);
 
-@interface AddTreeHoleViewController : BaseViewController<UICollectionViewDataSource , UICollectionViewDelegate ,UIImagePickerControllerDelegate , UIActionSheetDelegate>
-@property (nonatomic , weak) IBOutlet UITextField *titleTextField;
-@property (nonatomic , weak) IBOutlet UITextView *contentTextView;
-@property (nonatomic , weak) IBOutlet UICollectionView *photoCollectionView;
-@property (nonatomic , strong) NSMutableArray *photoArray;
+@interface AddTreeHoleViewController : BaseViewController<UIImagePickerControllerDelegate , UIActionSheetDelegate ,UITableViewDelegate ,UITableViewDataSource>
+@property (nonatomic , weak) IBOutlet UITableView *tableView;
+@property (nonatomic , weak) IBOutlet UIPlaceHolderTextView *textView;
+@property (nonatomic , strong) UIImage *image;
+@property (nonatomic , weak) IBOutlet UIView *bottomView;
 @property (nonatomic , copy) AddSuccessBlock addSuccessBlock;
 @end

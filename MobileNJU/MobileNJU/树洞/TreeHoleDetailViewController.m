@@ -14,7 +14,6 @@
 #import "ProgressHUD.h"
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
-#import "TreeHoleImageCell.h"
 
 @interface TreeHoleDetailViewController ()
 
@@ -289,42 +288,42 @@
     return 0;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    TreeHoleImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TreeHoleImageCell" forIndexPath:indexPath];
-    
-    NSString *imageUrl = [_imageArray objectAtIndex:indexPath.row];
-    [cell.contentImage setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@""]];
-    cell.contentImage.layer.contentsGravity = kCAGravityResizeAspectFill;
-    
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSInteger count = _imageArray.count;
-    // 1.封装图片数据
-    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
-    for (int i = 0; i<count; i++) {
-        // 替换为中等尺寸图片
-        NSString *imageUrl = [_imageArray objectAtIndex:i];
-        NSString *url = [imageUrl stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
-        NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)url, NULL, NULL,  kCFStringEncodingUTF8 ));
-        MJPhoto *photo = [[MJPhoto alloc] init];
-        photo.url = [NSURL URLWithString:encodedString]; // 图片路径
-        
-        TreeHoleImageCell *cell = (TreeHoleImageCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        photo.srcImageView = cell.contentImage; // 来源于哪个UIImageView
-        //        photo.description = [NSString stringWithFormat:@"========%i" , i];
-        [photos addObject:photo];
-    }
-    
-    // 2.显示相册
-    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
-    browser.currentPhotoIndex = indexPath.row; // 弹出相册时显示的第一张图片是？
-    browser.photos = photos; // 设置所有的图片
-    [browser show];
-}
+//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    TreeHoleImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TreeHoleImageCell" forIndexPath:indexPath];
+//    
+//    NSString *imageUrl = [_imageArray objectAtIndex:indexPath.row];
+//    [cell.contentImage setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@""]];
+//    cell.contentImage.layer.contentsGravity = kCAGravityResizeAspectFill;
+//    
+//    return cell;
+//}
+//
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSInteger count = _imageArray.count;
+//    // 1.封装图片数据
+//    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
+//    for (int i = 0; i<count; i++) {
+//        // 替换为中等尺寸图片
+//        NSString *imageUrl = [_imageArray objectAtIndex:i];
+//        NSString *url = [imageUrl stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
+//        NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)url, NULL, NULL,  kCFStringEncodingUTF8 ));
+//        MJPhoto *photo = [[MJPhoto alloc] init];
+//        photo.url = [NSURL URLWithString:encodedString]; // 图片路径
+//        
+//        TreeHoleImageCell *cell = (TreeHoleImageCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//        photo.srcImageView = cell.contentImage; // 来源于哪个UIImageView
+//        //        photo.description = [NSString stringWithFormat:@"========%i" , i];
+//        [photos addObject:photo];
+//    }
+//    
+//    // 2.显示相册
+//    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+//    browser.currentPhotoIndex = indexPath.row; // 弹出相册时显示的第一张图片是？
+//    browser.photos = photos; // 设置所有的图片
+//    [browser show];
+//}
 
 
 /*

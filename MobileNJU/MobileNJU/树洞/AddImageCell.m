@@ -1,14 +1,14 @@
 //
-//  TreeHoleCell.m
+//  AddImageCell.m
 //  MobileNJU
 //
-//  Created by Stephen Zhuang on 14-5-27.
+//  Created by Stephen Zhuang on 14-8-5.
 //  Copyright (c) 2014年 Stephen Zhuang. All rights reserved.
 //
 
-#import "TreeHoleCell.h"
+#import "AddImageCell.h"
 
-@implementation TreeHoleCell
+@implementation AddImageCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -29,12 +29,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
-
-+ (CGFloat)getHeightBy
-{
-    CGFloat height = 0;
-    return height;
 }
 
 @end

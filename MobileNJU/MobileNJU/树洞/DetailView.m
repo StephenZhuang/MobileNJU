@@ -7,7 +7,6 @@
 //
 
 #import "DetailView.h"
-#import "TreeHoleImageCell.h"
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
 

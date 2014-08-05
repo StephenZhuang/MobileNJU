@@ -7,11 +7,11 @@
 //
 
 #import "AddTreeHoleViewController.h"
-#import "TreeHoleImageCell.h"
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
 #import "ZsndTreehole.pb.h"
-#import "NSString+unicode.h"
+#import "TopicCell.h"
+#import "AddImageCell.h"
 
 @interface AddTreeHoleViewController ()
 
@@ -32,52 +32,44 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setTitle:@"发布树洞"];
+    [self setTitle:@"树洞"];
     
-    UIButton* button = [[UIButton alloc]init];
-    [button setImage:[UIImage imageNamed:@"提交"] forState:UIControlStateNormal];
-    CGRect frame = CGRectMake(0, 0, 53, 28);
-    button.frame = frame;
-    [button addTarget:self action:@selector(commitTreeHole) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem* releaseItem =  [[UIBarButtonItem alloc]initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = releaseItem;
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"发表" style:UIBarButtonItemStyleBordered target:self action:@selector(commitTreeHole)];
+    [item setTintColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = item;
     
-    _photoArray = [[NSMutableArray alloc] init];
-    self.titleTextField.layer.borderWidth=1;
-    self.titleTextField.layer.borderColor=[UIColor lightGrayColor].CGColor;
-    self.contentTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.contentTextView.layer.borderWidth=1;
+    _textView.placeholder = @"匿名发表树洞，不超过120字";
 }
 
 - (void)commitTreeHole
 {
-    [self.view endEditing:YES];
-    NSString *title = [_titleTextField text];
-    NSString *content = [_contentTextView text];
-    if (title.length == 0) {
-        [ProgressHUD showError:@"标题不能为空"];
-        return;
-    } else if (title.length > 20) {
-        [ProgressHUD showError:@"标题不能超过20字"];
-        return;
-    }
-    
-    if (content.length == 0) {
-        [ProgressHUD showError:@"内容不能为空"];
-        return;
-    } else if (content.length > 500) {
-        [ProgressHUD showError:@"内容不能超过500字"];
-        return;
-    }
-    MAddTopic_Builder *addTopic = [MAddTopic_Builder new];
-    [addTopic setTitle:title];
-    [addTopic setContent:content];
-    for (UIImage *image in _photoArray) {
-        [addTopic addImgs:UIImagePNGRepresentation(image)];
-    }
-    
-    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddTreeHole" params:addTopic  delegate:self selecter:@selector(disposMessage:)];
-    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
+//    [self.view endEditing:YES];
+//    NSString *title = [_titleTextField text];
+//    NSString *content = [_contentTextView text];
+//    if (title.length == 0) {
+//        [ProgressHUD showError:@"标题不能为空"];
+//        return;
+//    } else if (title.length > 20) {
+//        [ProgressHUD showError:@"标题不能超过20字"];
+//        return;
+//    }
+//    
+//    if (content.length == 0) {
+//        [ProgressHUD showError:@"内容不能为空"];
+//        return;
+//    } else if (content.length > 500) {
+//        [ProgressHUD showError:@"内容不能超过500字"];
+//        return;
+//    }
+//    MAddTopic_Builder *addTopic = [MAddTopic_Builder new];
+//    [addTopic setTitle:title];
+//    [addTopic setContent:content];
+//    for (UIImage *image in _photoArray) {
+//        [addTopic addImgs:UIImagePNGRepresentation(image)];
+//    }
+//    
+//    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddTreeHole" params:addTopic  delegate:self selecter:@selector(disposMessage:)];
+//    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
 }
 
 - (void)disposMessage:(Son *)son
@@ -93,101 +85,91 @@
     }
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (_photoArray.count < 4) {
-        return _photoArray.count + 1;
+    if (_image) {
+        return 2;
     }
-    return _photoArray.count;
+    return 1;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TreeHoleImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TreeHoleImageCell" forIndexPath:indexPath];
-    cell.contentImage.layer.contentsGravity = kCAGravityResizeAspectFill;
-    if (indexPath.row == _photoArray.count) {
-        [cell.contentImage setImage:[UIImage imageNamed:@"添加图片"]];
-        [cell.contentImage setUserInteractionEnabled:NO];
+    if (indexPath.row == 0) {
+        return 44;
+    }
+    return 220;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        TopicCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TopicCell"];
+        return cell;
     } else {
-        [cell.contentImage setImage:[_photoArray objectAtIndex:indexPath.row]];
-        [cell.contentImage setUserInteractionEnabled:YES];
-        cell.contentImage.tag = indexPath.row;
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showDelete:)];
-        [cell.contentImage addGestureRecognizer:longPress];
-    }
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == _photoArray.count) {
-        UIActionSheet *sheet;
-        // 判断是否支持相机
-        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-        {
-            sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册选择", nil];
-        }
-        else {
-            
-            sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
-        }
-        
-        sheet.tag = 255;
-        
-        [sheet showInView:[UIApplication sharedApplication].keyWindow];
-    } else {
-        int count = _photoArray.count;
-        // 1.封装图片数据
-        NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
-        for (int i = 0; i<count; i++) {
-            // 替换为中等尺寸图片
-            UIImage *image = [_photoArray objectAtIndex:i];
-//            NSString *url = [imageUrl stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
-//            NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)url, NULL, NULL,  kCFStringEncodingUTF8 ));
-            MJPhoto *photo = [[MJPhoto alloc] init];
-//            photo.url = [NSURL URLWithString:encodedString]; // 图片路径
-            photo.image = image;
-            
-            TreeHoleImageCell *cell = (TreeHoleImageCell *)[collectionView cellForItemAtIndexPath:indexPath];
-            photo.srcImageView = cell.contentImage; // 来源于哪个UIImageView
-            //        photo.description = [NSString stringWithFormat:@"========%i" , i];
-            [photos addObject:photo];
-        }
-        
-        // 2.显示相册
-        MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
-        browser.currentPhotoIndex = indexPath.row; // 弹出相册时显示的第一张图片是？
-        browser.photos = photos; // 设置所有的图片
-        [browser show];
-    }
-}
-
-- (void)showDelete:(UILongPressGestureRecognizer *)longPress
-{
-    if (longPress.state == UIGestureRecognizerStateBegan) {        
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:nil, nil];
-        actionSheet.tag = longPress.view.tag;
-        [actionSheet showInView:self.view];
+        AddImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddImageCell"];
+        return cell;
     }
 }
 
 #pragma - mark photo select delegate
-//- (IBAction)photoBtnAct:(id)sender {
-//    UIActionSheet *sheet;
-//    // 判断是否支持相机
-//    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-//    {
-//        sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册选择", nil];
-//    }
-//    else {
-//        
-//        sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
-//    }
-//    
-//    sheet.tag = 255;
-//    
-//    [sheet showInView:[UIApplication sharedApplication].keyWindow];
-//}
+- (IBAction)photoBtnAct:(id)sender {
+    UIActionSheet *sheet;
+    // 判断是否支持相机
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册选择", nil];
+    }
+    else {
+        
+        sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册选择", nil];
+    }
+    
+    sheet.tag = 255;
+    
+    [sheet showInView:[UIApplication sharedApplication].keyWindow];
+}
+
+- (IBAction)camaraAction:(id)sender
+{
+    [self.view endEditing:YES];
+    UIButton *button = (UIButton *)sender;
+    
+    NSUInteger sourceType = 0;
+    
+        
+    switch (button.tag) {
+        case 0:
+        {
+            // 判断是否支持相机
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            // 相机
+                sourceType = UIImagePickerControllerSourceTypeCamera;
+            } else {
+                return;
+            }
+        }
+            break;
+        case 1:
+            // 相册
+            sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            break;
+            
+        default:
+            return;
+            break;
+    }
+    // 跳转到相机或相册页面
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    
+    imagePickerController.delegate = self;
+    
+    imagePickerController.allowsEditing = YES;
+    
+    imagePickerController.sourceType = sourceType;
+    
+    [self presentViewController:imagePickerController animated:YES completion:^{}];
+}
 
 #pragma mark - 保存图片至沙盒
 - (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
@@ -206,22 +188,12 @@
 #pragma mark - image picker delegte
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    //    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowPhotoTabbar" object:nil];
 	[picker dismissViewControllerAnimated:YES completion:^{}];
     
     //    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     image = [self useImage:image];
     
-    [_photoArray addObject:image];
-    if (_photoArray.count < 4) {
-        [_photoCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:_photoArray.count - 1 inSection:0]]];
-    } else {
-        [_photoCollectionView reloadData];
-//        [_photoCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:_photoArray.count - 1 inSection:0]]];
-    }
-//    [_userInfoView.logoButton setBackgroundImage:image forState:UIControlStateNormal];
-//    [self updateHeadImg];
 }
 
 - (UIImage *)useImage:(UIImage *)image {
@@ -299,26 +271,10 @@
         //        [imagePickerController release];
         
         //        [[NSNotificationCenter defaultCenter] postNotificationName:@"HidePhotoTabbar" object:nil];
-    } else {
-        switch (buttonIndex) {
-            case 0:
-                // 删除
-            {
-                [_photoArray removeObjectAtIndex:actionSheet.tag];
-//                if (_photoArray.count == 3) {
-                    [_photoCollectionView reloadData];
-//                } else {
-//                    [_photoCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:actionSheet.tag inSection:0]]];
-//                }
-                [actionSheet dismissWithClickedButtonIndex:buttonIndex animated:YES];
-            }
-                
-                break;
-            default:
-                break;
-        }
     }
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {

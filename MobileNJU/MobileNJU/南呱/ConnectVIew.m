@@ -7,7 +7,6 @@
 //
 
 #import "ConnectVIew.h"
-#import "TreeHoleImageCell.h"
 
 @implementation CardView
 
@@ -67,13 +66,13 @@
     return 30;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    TreeHoleImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TreeHoleImageCell" forIndexPath:indexPath];
-    int i =  indexPath.row % 8 + 100;
-    [cell.contentImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"f%i" , i]]];
-    return cell;
-}
+//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    TreeHoleImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TreeHoleImageCell" forIndexPath:indexPath];
+//    int i =  indexPath.row % 8 + 100;
+//    [cell.contentImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"f%i" , i]]];
+//    return cell;
+//}
 
 - (void)startConnecting
 {

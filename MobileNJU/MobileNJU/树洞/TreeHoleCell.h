@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TreeHoleCell : UITableViewCell<UICollectionViewDataSource , UICollectionViewDelegate>
+@interface TreeHoleCell : UITableViewCell
 @property (nonatomic , strong) IBOutlet UIImageView *logoImage;
-@property (nonatomic , strong) IBOutlet UILabel *titleLabel;
-@property (nonatomic , strong) IBOutlet UILabel *timeLabel;
+@property (nonatomic , strong) IBOutlet UIButton *topicButton;
 @property (nonatomic , strong) IBOutlet UILabel *contentLabel;
-@property (nonatomic , strong) IBOutlet UICollectionView *collectionView;
 @property (nonatomic , strong) IBOutlet UIButton *zanButton;
 @property (nonatomic , strong) IBOutlet UIButton *commentButton;
-@property (nonatomic , strong) IBOutlet UIButton *deleteButton;
-@property (nonatomic , strong) NSMutableArray *imageArray;
+@property (nonatomic , strong) IBOutlet UIButton *messageButton;
+@property (nonatomic , strong) IBOutlet UIButton *moreButton;
 @end
