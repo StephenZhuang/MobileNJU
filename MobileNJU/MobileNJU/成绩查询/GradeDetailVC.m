@@ -12,17 +12,18 @@
 #import "AlertCloseDelegate.h"
 #import "GradeCellChooseDelegate.h"
 #import "ZsndSystem.pb.h"
+#import "AlertViewWithPassword.h"
 @interface GradeDetailVC ()<UITableViewDelegate,UITableViewDataSource,AlertCloseDelegate,UITextFieldDelegate,GradeCellChooseDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *schIdTextField;
+@property (strong, nonatomic) UITextField *schIdTextField;
 @property (nonatomic,strong)GPAView* gpaView;
-@property (weak, nonatomic) IBOutlet UIView *alertView;
+@property (strong, nonatomic)  AlertViewWithPassword *alertView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
-@property (weak, nonatomic) IBOutlet UISwitch *autoSwitch;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (strong, nonatomic)  UISwitch *autoSwitch;
+@property (strong, nonatomic)  UITextField *passwordTextField;
 @property (strong,nonatomic)UITextField* codeField;
 @property (strong,nonatomic)NSArray* gradeList;
-@property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (strong, nonatomic)UIButton *searchButton;
 @property (strong,nonatomic)NSMutableDictionary* LessonChooseDic;
 @end
 
@@ -31,6 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initAlert];
     [self initNavigationBar];
     [self.schIdTextField setDelegate:self];
     [self.passwordTextField setDelegate:self];
@@ -43,6 +45,24 @@
     [self loadSavedState];
     self.LessonChooseDic = [[NSMutableDictionary alloc]init];
     // Do any additional setup after loading the view.
+}
+
+- (void)initAlert
+{
+    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
+    CGRect frame = CGRectMake((self.view.bounds.size.width-261)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 257);
+    self.alertView.frame = frame;
+    [self.view addSubview:self.alertView];
+    [self.alertView setHidden:YES];
+    self.schIdTextField =self.alertView.schIdField;
+    self.schIdTextField.delegate = self;
+    self.autoSwitch = self.alertView.autoSwitch;
+    self.passwordTextField = self.alertView.passwordField;
+    self.schIdTextField.delegate = self;
+    self.passwordTextField.delegate = self;
+    self.searchButton = self.alertView.searchBt;
+    [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
+    [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
 }
 - (void)initNavigationBar
 {
@@ -156,7 +176,7 @@
 }
 
 - (IBAction)cancelAlert:(id)sender {
-    
+    self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
     [self.gpaView setHidden:YES];
     [self.alertView setHidden:YES  ];
     [self.maskView setHidden:YES];
@@ -189,18 +209,10 @@
     [imgView setImage:[UIImage imageWithData:img]];
     [self.alertView addSubview:imgView];
     
-    
 }
 #pragma mark textFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    //    [self.alertView removeFromSuperview];
-    //    [self.view addSubview:self.alertView];
-    //    CGPoint center  = self.alertView.center;
-    //    CGPoint newCenter = CGPointMake(center.x, center.y-50);
-    [UIView animateWithDuration:0.3f animations:^{
-        //        self.alertView.center = newCenter;
-    }];
     [UIView animateWithDuration:0.3f animations:^{
         [self.view bringSubviewToFront:self.alertView];
         self.alertView.transform = CGAffineTransformMakeTranslation(0, -50);
@@ -213,6 +225,7 @@
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
     return YES;
 }
 

@@ -254,6 +254,21 @@
         [[self delegate] tabBarController:self didSelectViewController:[self viewControllers][index]];
     }
     
+    if (index==1) {
+        RDVTabBarItem* item = [self.tabBar.items objectAtIndex:1];
+        UIImage *selectedimage = [UIImage imageNamed:@"订阅选中"];
+        UIImage *unselectedimage = [UIImage imageNamed:@"订阅"];
+        [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
+
+    }
+    
+    if (index==2) {
+        RDVTabBarItem* item = [self.tabBar.items objectAtIndex:2];
+        UIImage *selectedimage = [UIImage imageNamed:@"活动选中"];
+        UIImage *unselectedimage = [UIImage imageNamed:@"活动"];
+        [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
+        
+    }
 
 }
 

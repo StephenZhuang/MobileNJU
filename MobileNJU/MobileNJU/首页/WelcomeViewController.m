@@ -20,6 +20,7 @@
 #import "RDVTabBarController.h"
 #import "RDVTabBarItem.h"
 #import "RegisterVC.h"
+#import "ZsndIndex.pb.h"
 #import "loginDelegate.h"
 @interface WelcomeViewController ()<UITextFieldDelegate,RDVTabBarControllerDelegate,loginDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
@@ -32,6 +33,7 @@
 @property(nonatomic)BOOL firstOpen;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (nonatomic)NSInteger time;
+@property(nonatomic,strong)MUnread_Builder* unread;
 @end
 
 @implementation WelcomeViewController
@@ -49,7 +51,7 @@
     //加载动画
     [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timeChangeIndicate) userInfo:nil repeats:YES];
     self.time = 1;
-
+    self.offline = NO;
     //api调用方式 可以点进去查看，也可按option + 左键查看 ， 回调函数统一写作disposMessage ， 如下
     [[ApisFactory getApiMGetWelcomePage] load:self selecter:@selector(disposMessage:)];
     [self.usernameTextField setText:[ToolUtils getAccount]==nil?@"":[ToolUtils getAccount]];
@@ -73,8 +75,8 @@
         [ProgressHUD showError:@"密码不能为空"];
         return;
     }
-    [self resignAllResponders:nil];
-    [self waiting:@"登陆中"];
+    [self resignAllResponders:sender];
+    [self waiting:@"登录中"];
     [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:
      [mMD5 md5s:self.passwordTextField.text]
      pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"] device:@"ios"];
@@ -96,26 +98,30 @@
     [self.loginIndicator removeFromSuperview];
     self.OK=YES;
     //error = 0 表示接口调用成功
-    if ([son getError] == 0) {
-        //判断接口名
-        if ([[son getMethod] isEqualToString:@"MGetWelcomePage"]) {
+    if ([son getMethod] ==nil) {
+        [self showLoginView];
+        if ([ToolUtils isLogin]) {
+            //                [self login:nil];
+            self.offline=YES;
+            [self loadMain];
+        }
+    } else if ([[son getMethod] isEqualToString:@"MGetWelcomePage"]) {
+        if ([son getError] == 0) {
             [self.view setUserInteractionEnabled:YES];
             //获得返回类
             self.time=0;
             MRet_Builder *ret = (MRet_Builder *)[son getBuild];
             NSLog(@"=======%@",ret.msg);
             if ([ToolUtils isLogin]) {
-//                CustomTabBar *root = [[CustomTabBar alloc] init];
-//                [self presentViewController:root animated:YES completion:^{
-//                    
-//                }];
-                [self loadMain];
-
+                [self login:nil ];
             } else {
                 [self showLoginView];
             }
-        } else if ([[son getMethod] isEqualToString:@"MLogin"])
-        {
+        }
+    } else if ([[son getMethod] isEqualToString:@"MLogin"])
+    {
+        if ([son getError] == 0) {
+            self.offline=NO;
             MUser_Builder *user = (MUser_Builder *)[son getBuild];
             NSLog(@"account%@  nickname%@ verify  %@ ",user.account,user.nickname,user.verify);
             [ToolUtils setVerify:user.verify];
@@ -124,27 +130,24 @@
                 [ToolUtils setHeadImg:user.headImg];
             }
             NSArray *array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],@"device=IOS",nil];
-            
             [Frame setAutoAddParams:array];
-    
             [ToolUtils setIsLogin:YES];
             [ToolUtils setAccount:self.usernameTextField.text];
             [ToolUtils setPassword:self.passwordTextField.text];
-//            [self performSegueWithIdentifier:@"main" sender:nil];
-            
-//            CustomTabBar *root = [[CustomTabBar alloc] init];
-//            [self presentViewController:root animated:YES completion:^{
-//            
-//            }];
-            [self loadMain];
+            [self getUnread];
         }
-    } else {
-        
-        [self showLoginView];
-        if ([ToolUtils isLogin]) {
+    } else if ([[son getMethod]isEqualToString:@"MUnreadModule"])
+    {
+        if ([son getError] == 0) {
+            MUnread_Builder* unread = (MUnread_Builder*)[son getBuild];
+            self.unread = unread;
             [self loadMain];
         }
     }
+}
+- (void)getUnread
+{
+    [[ApisFactory getApiMUnreadModule]load:self selecter:@selector(disposMessage:)];
 }
 - (void)loadMain
 
@@ -152,10 +155,14 @@
     [self hideLoad];
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     MainMenuViewController* mainMenuVC = (MainMenuViewController*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"home"]; //test2为viewcontroller的StoryboardId
+    mainMenuVC.unread = self.unread;
+    mainMenuVC.offline = self.offline;
     UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:mainMenuVC];
+    
     
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
     SelfInfoVC* selfVC = (SelfInfoVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"self"]; //test2为viewcontroller的StoryboardId
+    selfVC.offline = self.offline;
     UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:selfVC];
 
     UIStoryboard *thirdStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
@@ -177,12 +184,16 @@
 
 
 - (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
-//    NSArray *tabBarItemImages = @[@"first", @"second", @"third"];
-    
-    NSArray* buttonImages = @[@"首页",@"订阅",@"活动",@"个人"];
+    NSString* rssName = @"订阅";
+    NSString* activityName = @"活动";
+    if (self.unread.module3>0) {
+        rssName = @"订阅消息";
+    }
+    if (self.unread.module4>0) {
+        activityName = @"活动消息";
+    }
+    NSArray* buttonImages = @[@"首页",rssName,activityName,@"个人"];
     NSArray* buttonImagesSelected=@[@"首页选中",@"订阅选中",@"活动选中",@"个人选中"];
-    
-
     NSInteger index = 0;
     for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
         
@@ -197,29 +208,19 @@
 }
 
 
-
 - (IBAction)resignAllResponders:(id)sender {
-    [self.usernameTextField resignFirstResponder];
-    [self.passwordTextField resignFirstResponder];
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-        CGRect loginViewFrame = CGRectMake(self.loginView.frame.origin.x, 146,self.loginView.frame.size.width, self.loginView.frame.size.height);
-        self.loginView.frame = loginViewFrame;
-        
-        
-        CGRect loginLogoFrame = CGRectMake(self.logoImage.frame.origin.x, -74,self.logoImage.frame.size.width, self.logoImage.frame.size.height);
-        self.logoImage.frame = loginLogoFrame;
-        
-        
-    } completion:^(BOOL finished) {
-    }];
+    if (sender==self.loginButton) {
+        [self.usernameTextField resignFirstResponder];
+        [self.passwordTextField resignFirstResponder];
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
+            CGRect loginViewFrame = CGRectMake(self.loginView.frame.origin.x, 146,self.loginView.frame.size.width, self.loginView.frame.size.height);
+            self.loginView.frame = loginViewFrame;
+            CGRect loginLogoFrame = CGRectMake(self.logoImage.frame.origin.x, -74,self.logoImage.frame.size.width, self.logoImage.frame.size.height);
+            self.logoImage.frame = loginLogoFrame;
+        } completion:^(BOOL finished) {
+        }];
+    }
 }
-
-/*
- 设置NavigationBar风格
--(void) setNavigationBarStyle
-{
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigationBar_background.png"] forBarMetrics:UIBarMetricsDefault];
- } */
 
 
 
@@ -228,7 +229,7 @@
 /*Return返回*/
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self resignAllResponders:nil];
+    [self resignAllResponders:self.loginButton];
     return YES;
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -268,11 +269,11 @@
     self.page = (self.page)%6+1;
     NSString* imageUrl = [NSString stringWithFormat:@"加载点%d",self.page];
     [self.indicateView setImage:[UIImage imageNamed:imageUrl]];
-    self.time++;
-    if (self.time==20&&!self.indicateView.isHidden) {
-        [ToolUtils showMessage:@"网络连接超时,进入脱机浏览"];
-        [self loadMain];
-    }
+//    self.time++;
+//    if (self.time==20&&!self.indicateView.isHidden) {
+//        [ToolUtils showMessage:@"网络连接超时,进入脱机浏览"];
+//        [self loadMain];
+//    }
 }
 
 
@@ -328,7 +329,6 @@
 {
     [self.usernameTextField setText:[ToolUtils getAccount]==nil?@"":[ToolUtils getAccount]];
     [self.passwordTextField setText:[ToolUtils getPassword]==nil?@"":[ToolUtils getPassword]];
-    
     [self loadMain];
 }
 - (IBAction)goToRegist:(id)sender {

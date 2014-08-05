@@ -23,7 +23,7 @@
 	 * @param begin * 起始
 	 * @param end * 结束
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end;
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end account:(NSString*)account password:(NSString*)password;
 	/**
 	 *  一卡通消费记录  /mobile?methodno=MCardHistory&debug=1&deviceid=1&userid=&verify=&begin=&end=&account=&password=
 	 * @param delegate 回调类
@@ -32,6 +32,6 @@
 	 * @param end * 结束
 	 * @callback MCardList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end;
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end account:(NSString*)account password:(NSString*)password;
 
 @end

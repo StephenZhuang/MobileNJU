@@ -30,6 +30,10 @@
     [super viewDidLoad];
     [self setTitle:@"完善资料"];
     [self.nickNameField setDelegate:self];
+    [self.instituteField setDelegate:self];
+    [self.birthField setDelegate:self];
+    [self.instituteField addTarget:self action:@selector(showComboBox:) forControlEvents:UIControlEventAllTouchEvents];
+    [self.birthField addTarget:self action:@selector(showDataPicker:) forControlEvents:UIControlEventAllTouchEvents];
     [self initField];
     // Do any additional setup after loading the view.
 }
@@ -37,8 +41,8 @@
 - (void)initField
 {
     [self.nickNameField setText:[ToolUtils getNickName]==nil?@"":[ToolUtils getNickName]];
-    [self.instituteField setText:[ToolUtils getBelong]==nil?@"":[ToolUtils getBelong]
-];
+    [self.instituteField setText:[ToolUtils getBelong]==nil?@"":[ToolUtils getBelong]];
+    
     NSString* sex =     [ToolUtils getSex]==nil?@"":[ToolUtils getSex];
     if ([sex isEqualToString:@"男"]) {
         [self.maleCheckBox setChoose:YES];
@@ -104,6 +108,9 @@
 }
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if (textField==self.instituteField||textField==self.birthField) {
+        return NO;
+    }
     return YES;
 }
 

@@ -10,22 +10,24 @@
 #import "GradeDetailVC.h"
 #import "ZsndSystem.pb.h"
 #import "TermCell.h"
+#import "AlertViewWithPassword.h"
 @interface GradeVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property (strong,nonatomic)NSArray* greenList;
 @property (strong,nonatomic)NSArray* redList;
 @property (strong,nonatomic)NSArray* blueList;
-@property (weak, nonatomic) IBOutlet UIView *alertView;
-@property (weak, nonatomic) IBOutlet UITextField *schIdTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (strong, nonatomic)  AlertViewWithPassword *alertView;
+@property (strong, nonatomic)  UITextField *schIdTextField;
+@property (strong, nonatomic)  UITextField *passwordTextField;
 @property (strong,nonatomic)UITextField* codeField;
-@property (weak, nonatomic) IBOutlet UIButton *searchButton;
-@property (weak, nonatomic) IBOutlet UISwitch *autoSwitch;
+@property (strong, nonatomic)  UIButton *searchButton;
+@property (strong, nonatomic)  UISwitch *autoSwitch;
 @property(nonatomic,strong)NSArray* termList;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong,nonatomic)NSString* account;
 @property(strong,nonatomic)NSString* password;
 @property(nonatomic)int isV;
 @property(nonatomic)int isRe;
+@property (nonatomic)CGRect frame;
 @end
 
 @implementation GradeVC
@@ -42,6 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initAlert];
     [self initNavigationBar];
     [self loadColor];
     [self loadSavedState];
@@ -49,8 +52,27 @@
     self.isRe=0;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
 
-    
 }
+- (void)initAlert
+{
+    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
+    CGRect frame = CGRectMake((self.view.bounds.size.width-261)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 257);
+    self.alertView.frame = frame;
+    self.frame = frame;
+    [self.view addSubview:self.alertView];
+    [self.alertView setHidden:YES];
+    self.schIdTextField =self.alertView.schIdField;
+    self.schIdTextField.delegate = self;
+    self.autoSwitch = self.alertView.autoSwitch;
+    self.passwordTextField = self.alertView.passwordField;
+    self.schIdTextField.delegate = self;
+    self.passwordTextField.delegate = self;
+    
+    [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
+    [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+
 - (void)textFieldDidChange:(NSNotification *)note
 {
     NSLog(@"%@",self.schIdTextField.text);
@@ -85,9 +107,7 @@
     [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
-    
     [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
-    
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MTermList" params:array  delegate:delegate selecter:select];
     [updateone setShowLoading:NO];
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
@@ -138,6 +158,7 @@
     self.redList = [data objectForKey:@"redList"];
     self.greenList = [data objectForKey:@"greenList"];
     self.blueList = [data objectForKey:@"blueList"];
+    
 }
 
 - (void)initNavigationBar
@@ -154,10 +175,11 @@
 }
 
 - (IBAction)cancelAlert:(id)sender {
+    self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
     [self.tableView setUserInteractionEnabled:YES];
     [self.codeField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
-    [self.schIdTextField resignFirstResponder];;
+    [self.schIdTextField resignFirstResponder];
     [self.alertView setHidden:YES  ];
     [self.maskView setHidden:YES];
     [self removeMask];
@@ -177,7 +199,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 
@@ -188,9 +210,10 @@
 
 - (void)addCode:(NSData*)img
 {
-    self.isV = 1;
-    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 60);
     
+    self.isV = 1;
+    
+    self.alertView.searchBt.transform = CGAffineTransformMakeTranslation(0, 60);
     self.codeField = [[UITextField alloc]init];
     self.codeField.delegate = self;
     self.codeField.borderStyle = self.schIdTextField.borderStyle;
@@ -205,25 +228,15 @@
     [imgView setImage:[UIImage imageWithData:img]];
     [self.alertView addSubview:imgView];
     
-    
 }
 #pragma mark textFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    //    [self.alertView removeFromSuperview];
-    //    [self.view addSubview:self.alertView];
-    //    CGPoint center  = self.alertView.center;
-    //    CGPoint newCenter = CGPointMake(center.x, center.y-50);
     [UIView animateWithDuration:0.3f animations:^{
-        //        self.alertView.center = newCenter;
+        CGFloat offset= self.frame.origin.y+self.frame.size.height-(self.view.bounds.size.height-216);
+        self.alertView.transform = CGAffineTransformMakeTranslation(0, -offset);
+
     }];
-    [UIView animateWithDuration:0.3f animations:^{
-        [self.view bringSubviewToFront:self.alertView];
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, -50);
-    } completion:^(BOOL finished) {
-        [self.view bringSubviewToFront:self.alertView];
-    }];
-    //    [textField becomeFirstResponder];
     
 }
 
@@ -233,13 +246,9 @@
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-
     [UIView animateWithDuration:0.3f animations:^{
-        [self.view bringSubviewToFront:self.alertView];
         self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
-    } completion:^(BOOL finished) {
-        [self.view bringSubviewToFront:self.alertView];
-    }];
+    } ];
 
     return YES;
 }
@@ -249,7 +258,11 @@
 #pragma mark tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.termList.count;
+    if (self.termList.count>0) {
+        return self.greenList.count;
+    } else {
+        return 0;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -257,34 +270,48 @@
     return windowHeight==480?50:60;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray* term = [self.termList objectAtIndex:indexPath.row];
-    [self performSegueWithIdentifier:@"gradeDetail" sender:[term objectAtIndex:1]];
+    
+    if (indexPath.row<self.termList.count) {
+        NSArray* term = [self.termList objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"gradeDetail" sender:[term objectAtIndex:1]];
+    }
 }
-/*
- 进入屏幕后开启动画
- */
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-
-        [self performBounceUpAnimationOnView:cell duration:0.3f delay:indexPath.row*0.2f];
-}
-
-
+///*
+// 进入屏幕后开启动画
+// */
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [self performBounceUpAnimationOnView:cell duration:0.3f delay:indexPath.row*0.2f];
+//
+//}
+//
+//
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TermCell *cell = nil;
     cell = [tableView dequeueReusableCellWithIdentifier:@"term"];
+    cell.isShow = 0;
     [cell.contentView setBackgroundColor:[UIColor colorWithRed:[[self.redList objectAtIndex:indexPath.row] intValue]/255.0
                                             green:[[self.greenList objectAtIndex:indexPath.row] intValue]/255.0
                                              blue:[[self.blueList objectAtIndex:indexPath.row] intValue]/255.0
                                             alpha:1]];
     
-    [cell.termLabel setText:[[self.termList objectAtIndex:indexPath.row
-                             ] firstObject]];
+    if (indexPath.row<self.termList.count) {
+        [cell.termLabel setText:[[self.termList objectAtIndex:indexPath.row
+                                  ] firstObject]];
+    } else {
+        [cell.termLabel setText:@""];
+    }
+    UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
+    cell.selectedBackgroundView = backView;
+    cell.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:[[self.redList objectAtIndex:indexPath.row] intValue]/255.0
+                                                                  green:[[self.greenList objectAtIndex:indexPath.row] intValue]/255.0
+                                                                   blue:[[self.blueList objectAtIndex:indexPath.row] intValue]/255.0
+                                                                  alpha:1];
+    
     return cell;
 }
-
 
 #pragma mark 动画
 - (void)performBounceUpAnimationOnView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay {

@@ -97,6 +97,8 @@
         NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.currentUrl]];
         NSLog(@"设置的网址%@",self.currentUrl);
         [destinationVC setUrl:url];
+        [destinationVC setImg:self.currentImg];
+        [destinationVC setCurrentNew:self.currentNew];
     }
 }
 - (void)didReceiveMemoryWarning
@@ -128,6 +130,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MNews* new = [self.newsList objectAtIndex:indexPath.row];
     self.currentUrl = new.url;
+    self.currentNew = new;
+    NewsCell* cell  =(NewsCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+    self.currentImg=cell.newsImage.image;
     [self performSegueWithIdentifier:@"detail" sender:nil];
 }
 

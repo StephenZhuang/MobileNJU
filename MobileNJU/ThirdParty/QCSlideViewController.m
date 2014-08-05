@@ -133,7 +133,7 @@
 }
 
 #pragma mark -shoppingVCDelegate
-- (void)moveToDetail:(ShoppingDetailVC *)vc
+- (void)moveToDetail:(UIViewController *)vc
 {
     
     [self.navigationController pushViewController:vc animated:YES];
@@ -144,5 +144,9 @@
         AddShopVC* add = (AddShopVC*)[segue destinationViewController];
 
     }
+}
+- (void)showView:(UIViewController *)vc
+{
+    [self presentViewController:vc animated:YES completion:nil];
 }
 @end

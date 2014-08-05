@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 #import "CallView.h"
+#import "ZsndIndex.pb.h"
+
 @interface MainMenuViewController : BaseViewController
 @property(nonatomic,strong)NSMutableArray* photoList;
 @property (nonatomic , strong) CallView *callView;
+@property (nonatomic,strong)MUnread_Builder* unread;
 @end

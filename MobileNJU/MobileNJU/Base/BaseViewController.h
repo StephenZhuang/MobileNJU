@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (nonatomic,strong)WaitingView* loginIndicator;
 @property (nonatomic)BOOL OK;
+@property (nonatomic)BOOL offline;
 -(void)closeSelf;
 - (void)addTitleView;
 - (void)addMask;

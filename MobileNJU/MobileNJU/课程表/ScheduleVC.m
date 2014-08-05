@@ -17,9 +17,10 @@
 #import "ViewController.h"
 #import "iCarousel.h"
 #import "ViewForIcaursel.h"
+#import "AlertViewWithPassword.h"
 @interface ScheduleVC ()<AlertCloseDelegate,ScheduleViewDelegate,UITextFieldDelegate,iCarouselDataSource,iCarouselDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIView *alertView;
+@property (weak, nonatomic) IBOutlet AlertViewWithPassword *alertView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UITextField *schIdField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -36,20 +37,22 @@
 @property (nonatomic)int isV;
 @property (nonatomic,strong)ScheduleView* scheduleView;
 @property (nonatomic,strong)UIColor* currentColor;
-
 @property (nonatomic,strong)UIView* lastView;
+@property (nonatomic)CGRect frame;
 @end
+
+
 @implementation ScheduleVC
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initAlert];
     [self initNavigationBar];
     [self initLessonDetail];
     self.code=nil;
     self.schIdField.text=[ToolUtils getJWID];
     self.passwordField.text = [ToolUtils getJWPassword];
-    [self loadSavedLesson];
     [self loadLast];
     self.isRe=0;
     self.isV=0;
@@ -60,6 +63,29 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdField];
     
 }
+
+
+
+- (void)initAlert
+{
+    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
+    CGRect frame = CGRectMake((self.view.bounds.size.width-261)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 257);
+    self.alertView.frame = frame;
+    self.frame = frame;
+    [self.view addSubview:self.alertView];
+    [self.alertView setHidden:YES];
+    self.schIdField =self.alertView.schIdField;
+    self.schIdField.delegate = self;
+    self.autoSwitch = self.alertView.autoSwitch;
+    self.passwordField = self.alertView.passwordField;
+    self.schIdField.delegate = self;
+    self.passwordField.delegate = self;
+
+    [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
+    [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+
 - (void)textFieldDidChange:(NSNotification *)note
 {
     if ([self.schIdField.text hasPrefix:@"Mg"]&&self.isV==0) {
@@ -86,6 +112,10 @@
 //重新加载
 - (void)loadLast
 {
+    if ([ToolUtils getJWID]==nil) {
+        return;
+    }
+    [self loadSavedLesson];
     ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
     [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
 }
@@ -104,9 +134,9 @@
         self.lessons=lessonList;
         ScheduleView* schedule = [[[NSBundle mainBundle] loadNibNamed:@"ScheduleView" owner:self options:nil] firstObject];
         [schedule initDate];
-        CGRect frame = CGRectMake(0, 0, 320, 568);
+        CGRect frame = CGRectMake(0, 0, 320, 620);
         schedule.frame = frame;
-        self.scrollView.contentSize = CGSizeMake(320, 568);
+        self.scrollView.contentSize = CGSizeMake(320, 620);
         [self.scrollView addSubview:schedule];
         [schedule addLessons:self.lessons delegate:self];
         self.scheduleView = schedule;
@@ -135,6 +165,7 @@
     self.isRe=1;
     [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
     
+    
 }
 
 /**
@@ -157,6 +188,7 @@
     [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MSchedule" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
     return updateone;
 }
@@ -223,8 +255,7 @@
     UIImageView* imgView = [[UIImageView alloc]initWithFrame:codeFrame];
     [imgView setImage:[UIImage imageWithData:img]];
     [self.alertView addSubview:imgView];
-    
-    
+
 }
 
 
@@ -237,18 +268,15 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (self.view.window.frame.size.height==480) {
         [UIView animateWithDuration:0.3f animations:^{
-            //        self.alertView.center = newCenter;
-        }];
-        [UIView animateWithDuration:0.3f animations:^{
-            [self.view bringSubviewToFront:self.alertView];
-            self.alertView.transform = CGAffineTransformMakeTranslation(0, -50);
-        } completion:^(BOOL finished) {
-            [self.view bringSubviewToFront:self.alertView];
-        }];
+            
+            CGFloat offset= self.frame.origin.y+self.frame.size.height-(self.view.bounds.size.height-216);
+            self.alertView.transform = CGAffineTransformMakeTranslation(0, -offset);
 
-    }
+        
+        }         ];
+
+
 }
 
 //课程详细初始化
@@ -265,6 +293,7 @@
 #pragma mark showScheduleDelegate
 - (void)showSchedule:(ScheduleLesson *)lesson
 {
+    
     [self.icarousel setHidden:YES];
     [self.lessonDetail setLesson:lesson];
     [self.lessonDetail setId:lesson.id];
@@ -284,6 +313,8 @@
     
     [self.icarousel reloadData];
     [self.icarousel setHidden:NO];
+    [self.maskView setHidden:NO];
+    [self addMask];
 }
 
 //加载课程表界面
@@ -294,9 +325,9 @@
     }
     ScheduleView* schedule = [[[NSBundle mainBundle] loadNibNamed:@"ScheduleView" owner:self options:nil] firstObject];
     [schedule initDate];
-    CGRect frame = CGRectMake(0, 0, 320, 568);
+    CGRect frame = CGRectMake(0, 0, 320, 620);
     schedule.frame = frame;
-    self.scrollView.contentSize = CGSizeMake(320, 568);
+    self.scrollView.contentSize = CGSizeMake(320, 620);
     [self.scrollView addSubview:schedule];
     
     NSMutableArray* schedules = [[NSMutableArray alloc]init];
@@ -411,7 +442,7 @@
    
     ScheduleLesson* lesson = [self.lessonsForIcarousel objectAtIndex:index];
     [view.LessonNameLabel setText:lesson.name];
-    view.LessonNameLabel.verticalAlignment = VerticalAlignmentTop;
+    view.LessonNameLabel.verticalAlignment = VerticalAlignmentMiddle;
     [view.locationLabel setText:lesson.location];
     view.frame = CGRectMake(30, 5, 134, 195);
     return view;
@@ -419,6 +450,7 @@
 
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
 {
+    [self removeMask];
     ScheduleLesson* selectedLesson = [self.lessonsForIcarousel objectAtIndex:index];
     [self showSchedule:selectedLesson];
 }

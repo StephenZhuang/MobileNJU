@@ -106,8 +106,7 @@
     CGPoint center = cell.imageView.center;
     center.x = cell.center.x;
     cell.imageView.center = center;
-    cell.url = [NSURL URLWithString:news.url];
-    
+    cell.url =     [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",news.url]];
     return cell;
 }
 /*

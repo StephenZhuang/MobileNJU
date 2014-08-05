@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0HC-43-OVy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0HC-43-OVy">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -17,19 +17,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lh6-b3-3pv">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lh6-b3-3pv">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dpj-vO-0fw" firstAttribute="top" secondItem="lh6-b3-3pv" secondAttribute="bottom" id="3Wx-XI-qrk"/>
+                            <constraint firstItem="lh6-b3-3pv" firstAttribute="leading" secondItem="q3G-JJ-GeI" secondAttribute="leading" id="Q87-WV-atL"/>
+                            <constraint firstItem="lh6-b3-3pv" firstAttribute="top" secondItem="q3G-JJ-GeI" secondAttribute="top" id="UYD-vu-E9t"/>
+                            <constraint firstAttribute="trailing" secondItem="lh6-b3-3pv" secondAttribute="trailing" id="XvA-Nk-TNb"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7Qj-oe-z9O">
                         <barButtonItem key="rightBarButtonItem" image="分享" id="2b2-9T-od7">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="showShare:" destination="OTm-be-dhq" id="Aaw-4G-aoI"/>
+                                <action selector="share:" destination="OTm-be-dhq" id="UXm-YU-fI4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -325,15 +331,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="N5Q-Qy-YOn" firstAttribute="top" secondItem="bnO-pR-0NE" secondAttribute="top" id="0w4-Jp-aM5"/>
+                            <constraint firstItem="N5Q-Qy-YOn" firstAttribute="leading" secondItem="bnO-pR-0NE" secondAttribute="leading" id="6JU-6o-WA1"/>
+                            <constraint firstItem="HTS-Pj-1fp" firstAttribute="top" secondItem="N5Q-Qy-YOn" secondAttribute="bottom" id="9MQ-md-5zC"/>
                             <constraint firstAttribute="trailing" secondItem="N5Q-Qy-YOn" secondAttribute="trailing" id="Dlf-Ld-UhH"/>
                             <constraint firstItem="N5Q-Qy-YOn" firstAttribute="top" secondItem="bnO-pR-0NE" secondAttribute="top" id="ENg-UX-Wcp"/>
+                            <constraint firstAttribute="trailing" secondItem="N5Q-Qy-YOn" secondAttribute="trailing" id="Jsl-zU-5O6"/>
                             <constraint firstAttribute="bottom" secondItem="N5Q-Qy-YOn" secondAttribute="bottom" id="ZYs-dT-Cnr"/>
                             <constraint firstItem="N5Q-Qy-YOn" firstAttribute="leading" secondItem="bnO-pR-0NE" secondAttribute="leading" id="yX9-xh-04e"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0aV-09-hnw"/>
                     <connections>
-                        <outlet property="webView" destination="N5Q-Qy-YOn" id="Mcw-BZ-mBg"/>
+                        <outlet property="webView" destination="N5Q-Qy-YOn" id="feS-fY-dQp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCa-Si-dcV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -723,10 +733,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="cG3-P5-p8F" firstAttribute="leading" secondItem="EbO-a5-56F" secondAttribute="leading" id="6MG-Aa-zGh"/>
                             <constraint firstItem="cG3-P5-p8F" firstAttribute="top" secondItem="EbO-a5-56F" secondAttribute="top" id="774-S7-ep3"/>
+                            <constraint firstItem="cG3-P5-p8F" firstAttribute="top" secondItem="EbO-a5-56F" secondAttribute="top" id="BLh-5X-FgE"/>
                             <constraint firstItem="2of-xl-U9n" firstAttribute="top" secondItem="cG3-P5-p8F" secondAttribute="bottom" id="IWM-H8-Q2O"/>
                             <constraint firstItem="cG3-P5-p8F" firstAttribute="leading" secondItem="EbO-a5-56F" secondAttribute="leading" id="dAj-2Q-c9q"/>
                             <constraint firstAttribute="trailing" secondItem="cG3-P5-p8F" secondAttribute="trailing" id="opZ-yT-jzc"/>
+                            <constraint firstItem="2of-xl-U9n" firstAttribute="top" secondItem="cG3-P5-p8F" secondAttribute="bottom" id="p9c-fK-R2o"/>
+                            <constraint firstAttribute="trailing" secondItem="cG3-P5-p8F" secondAttribute="trailing" id="qss-oj-dmw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xf4-Hl-eWp"/>
@@ -751,18 +765,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CgK-D5-3n1">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CgK-D5-3n1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.95294117647058818" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="allRss" rowHeight="60" id="Hkh-0b-OSF" customClass="MySubscribeCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hkh-0b-OSF" id="TJg-7J-VRO">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rqm-eO-lC3">
@@ -770,9 +784,12 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="onTintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="changeState:" destination="Hkh-0b-OSF" eventType="valueChanged" id="M86-o0-SYR"/>
+                                                    </connections>
                                                 </switch>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="twf-AC-l73">
-                                                    <rect key="frame" x="7" y="6" width="45" height="46"/>
+                                                    <rect key="frame" x="7" y="6" width="45" height="45"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="考试宝典" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HwL-f7-Fcx">
@@ -796,7 +813,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="rqm-eO-lC3" secondAttribute="trailing" constant="19" id="tsa-jN-ZmW"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="delegate" destination="Asu-PT-jhq" id="Btu-fn-eTj"/>
                                             <outlet property="myImageView" destination="twf-AC-l73" id="2KQ-ZT-lkH"/>
@@ -812,7 +829,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.95294117647058818" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="CgK-D5-3n1" secondAttribute="trailing" id="87X-VN-VCe"/>
                             <constraint firstItem="CgK-D5-3n1" firstAttribute="leading" secondItem="5Zg-2O-g2y" secondAttribute="leading" id="M3s-Jl-Xq5"/>

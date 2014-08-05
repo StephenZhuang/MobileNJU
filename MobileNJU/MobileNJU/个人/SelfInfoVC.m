@@ -14,6 +14,7 @@
 #import "UIImageView+LBBlurredImage.h"
 #import "MyNavigationController.h"
 #import "RDVTabBarController.h"
+#import "RegisterVC.h"
 @interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImg;
@@ -33,23 +34,22 @@
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
 
     self.navigationController.delegate = self;
-    [self loadData];
+//    [self loadData];
     self.headImage.layer.cornerRadius=55;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.headImage addGestureRecognizer:singleTap];
-//    [self.headImage setImage:[UIImage imageNamed:@"head"]];
     [self.headImage setClipsToBounds:YES];
-    // Do any additional setup after loading the view.
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
-
     [self loadData];
     [self.infoTable reloadData];
-    [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
+    if (!self.offline) {
+        [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -357,5 +357,10 @@
 }
 
 
+- (IBAction)modifyPassword:(id)sender {
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    RegisterVC* reg = (RegisterVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"register"]; //test2为viewcontroller的StoryboardId
+    [self.navigationController pushViewController:reg animated:YES];
+}
 
 @end

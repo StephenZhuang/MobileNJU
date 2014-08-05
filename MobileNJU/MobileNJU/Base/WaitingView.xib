@@ -18,7 +18,7 @@
                     <color key="color" red="0.5450980392" green="0.2470588235" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                 </activityIndicatorView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZp-9n-ULw">
-                    <rect key="frame" x="29" y="65" width="42" height="21"/>
+                    <rect key="frame" x="7" y="65" width="87" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -29,7 +29,7 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="YZp-9n-ULw" secondAttribute="bottom" constant="14" id="2ik-GS-gaM"/>
                 <constraint firstItem="YZp-9n-ULw" firstAttribute="centerX" secondItem="Z1r-h5-GOF" secondAttribute="centerX" id="Ew9-EP-LrM"/>
-                <constraint firstItem="YZp-9n-ULw" firstAttribute="leading" secondItem="Z1r-h5-GOF" secondAttribute="leading" constant="29" id="NJU-D4-byq"/>
+                <constraint firstItem="YZp-9n-ULw" firstAttribute="leading" secondItem="Z1r-h5-GOF" secondAttribute="leading" constant="7" id="NJU-D4-byq"/>
                 <constraint firstItem="YZp-9n-ULw" firstAttribute="top" secondItem="gWk-y9-uf9" secondAttribute="bottom" constant="8" symbolic="YES" id="Ys3-v0-4mN"/>
                 <constraint firstItem="gWk-y9-uf9" firstAttribute="top" secondItem="Z1r-h5-GOF" secondAttribute="top" constant="20" symbolic="YES" id="crm-oh-Sj7"/>
                 <constraint firstItem="gWk-y9-uf9" firstAttribute="centerX" secondItem="YZp-9n-ULw" secondAttribute="centerX" id="tsd-Xe-Y1T"/>

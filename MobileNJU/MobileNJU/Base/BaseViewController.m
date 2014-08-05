@@ -86,7 +86,7 @@
             self.navigationItem.leftBarButtonItems = myButtonArray;
         }
     }
-//    [self addTitleView];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 }
 
 - (void)addTitleView
@@ -185,7 +185,10 @@ UIView* view;
     }
 }
 
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.loginIndicator removeFromSuperview];
+}
 /*
 #pragma mark - Navigation
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="3MI-o9-Bax">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="3MI-o9-Bax">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -139,6 +139,9 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="modifyPassword:" destination="3MI-o9-Bax" eventType="touchUpInside" id="ggt-Cc-TGA"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9D-Ct-5MM">
                                         <rect key="frame" x="160" y="0.0" width="160" height="60"/>
@@ -148,7 +151,6 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <state key="highlighted" backgroundImage="greenButtonhighlited"/>
                                         <connections>
                                             <action selector="logout:" destination="3MI-o9-Bax" eventType="touchUpInside" id="fPM-9h-E96"/>
                                         </connections>
@@ -332,7 +334,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q8t-aG-h2W">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q8t-aG-h2W">
                                 <rect key="frame" x="81" y="85" width="189" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -379,7 +381,7 @@
                                     <action selector="checkSex:" destination="D68-ft-VPq" eventType="touchUpInside" id="hvW-JH-v6Q"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-kY-cqi">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-kY-cqi">
                                 <rect key="frame" x="81" y="215" width="189" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -462,21 +464,95 @@
             </objects>
             <point key="canvasLocation" x="522" y="-186"/>
         </scene>
+        <!--VerifyVC-->
+        <scene sceneID="sM3-ee-Wrt">
+            <objects>
+                <viewController storyboardIdentifier="verify" useStoryboardIdentifierAsRestorationIdentifier="YES" id="w8b-jt-DFo" customClass="VerifyVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kaO-db-HiL"/>
+                        <viewControllerLayoutGuide type="bottom" id="E0j-Fl-6hG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PUt-Lx-Lgc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="24身份认证-提示点" translatesAutoresizingMaskIntoConstraints="NO" id="fJd-E4-Ncf">
+                                <rect key="frame" x="26" y="42" width="7" height="7"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="此处都学号和密码仅为验证是否为南大学生" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8W-A1-jsW">
+                                <rect key="frame" x="39" y="35" width="209" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" 请输入bras账号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PA8-Ad-Xso">
+                                <rect key="frame" x="35" y="58" width="254" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="w8b-jt-DFo" id="bkR-Pt-lLz"/>
+                                </connections>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="填写线" translatesAutoresizingMaskIntoConstraints="NO" id="8yi-98-xTT">
+                                <rect key="frame" x="30" y="81" width="254" height="12"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" 请输入bras密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UTK-FW-TWy">
+                                <rect key="frame" x="33" y="116" width="254" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="w8b-jt-DFo" id="taz-8h-ktY"/>
+                                </connections>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="填写线" translatesAutoresizingMaskIntoConstraints="NO" id="2lI-6P-bDJ">
+                                <rect key="frame" x="28" y="139" width="254" height="12"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8j-iE-wNJ">
+                                <rect key="frame" x="30" y="190" width="252" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="验证" backgroundImage="purpleButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="purpleButtonhighlighted"/>
+                                <connections>
+                                    <action selector="verify:" destination="w8b-jt-DFo" eventType="touchUpInside" id="pJT-bb-SfI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="brasNameField" destination="PA8-Ad-Xso" id="2ba-WP-IPV"/>
+                        <outlet property="brasPasswordField" destination="UTK-FW-TWy" id="PiF-pf-YUC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="epz-5Y-Eoz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="971" y="-182"/>
+        </scene>
     </scenes>
     <resources>
         <image name="05个人-编辑资料" width="23" height="23"/>
         <image name="05个人－修改密码" width="36" height="32"/>
         <image name="05个人－修改密码和注销退出的bg" width="640" height="120"/>
         <image name="05个人－注销退出" width="28" height="28"/>
+        <image name="24身份认证-提示点" width="14" height="14"/>
         <image name="check_box_selected" width="27" height="27"/>
         <image name="check_box_unselected" width="27" height="27"/>
         <image name="flower" width="15" height="19"/>
-        <image name="greenButtonhighlited" width="320" height="54"/>
         <image name="navigation_back_n.png" width="15" height="30"/>
         <image name="plus" width="30" height="30"/>
         <image name="purpleButton" width="245" height="40"/>
         <image name="purpleButtonhighlighted" width="245" height="40"/>
         <image name="tabBar_self" width="80" height="50"/>
+        <image name="填写线" width="250" height="12"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

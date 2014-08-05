@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "RefreshTableViewController.h"
+#import "ZsndNews.pb.h"
 @interface NewsListTVC : RefreshTableViewController
+@property (nonatomic,strong)MNews* currentNew;
 @property (nonatomic,strong)NSString* currentUrl;
 @property (nonatomic)BOOL jump;
+@property (nonatomic,strong)UIImage*  currentImg;
 @end

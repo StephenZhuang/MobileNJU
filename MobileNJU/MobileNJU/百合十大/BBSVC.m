@@ -97,6 +97,10 @@
     [cell.commentCountLabel setText:[NSString stringWithFormat:@"%d",new.comment]];
     [cell.authorLabel setText:new.author];
     cell.url = new.url;
+    
+    UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
+    cell.selectedBackgroundView = backView;
+    cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
     return cell;
 }
 

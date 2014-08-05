@@ -120,7 +120,7 @@
             lessonBt.backgroundColor = [lessonBt getColor];
             CGRect nameFrame = CGRectMake(3, 7, WIDTH-6, HEIGHT*lesson.length-22);
             VerticallyAlignedLabel *lessonNameLabel = [[VerticallyAlignedLabel alloc]initWithFrame:nameFrame];
-            [lessonNameLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
+            [lessonNameLabel setFont:[UIFont fontWithName:@"Helvetica" size:11]];
             [lessonNameLabel setText:lesson.name];
             [lessonNameLabel setTextColor:[UIColor whiteColor]];
             // 0代表不限制行数
@@ -130,9 +130,11 @@
             //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
             
             
-            CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-15, WIDTH-6, 15);
-            UILabel *locationLabel = [[UILabel alloc]initWithFrame:loactionFrame];
+            CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-30, WIDTH-6, 30);
+            VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
             [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
+            [locationLabel setNumberOfLines:0];
+            [locationLabel setVerticalAlignment:VerticalAlignmentBottom];
             [locationLabel setText:lesson.location];
             [locationLabel setTextColor:[UIColor whiteColor]];
             

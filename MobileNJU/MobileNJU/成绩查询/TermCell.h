@@ -10,5 +10,5 @@
 
 @interface TermCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *termLabel;
-
+@property (nonatomic)int isShow;
 @end

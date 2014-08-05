@@ -34,14 +34,13 @@
     self.start = 0;
     self.end = 0;
     self.weekTitle = [NSArray arrayWithObjects:@"周一" ,@"周二",@"周三",@"周四",@"周五",@"周六",@"周日",nil];
-    self.classTitle =  [NSArray arrayWithObjects:@"第1节",@"第2节",@"第3节",@"第4节",@"第5节",@"第6节",@"第7节",@"第8节",@"第9节",@"第10节",@"第11节",nil];
+    self.classTitle =  [NSArray arrayWithObjects:@"第1节",@"第2节",@"第3节",@"第4节",@"第5节",@"第6节",@"第7节",@"第8节",@"第9节",@"第10节",@"第11节",@"第12节",nil];
     [self.tableView setScrollEnabled:NO];
     if([self.navigationController.navigationBar
         respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
         
         [self.navigationController.navigationBar  setBackgroundImage:[[UIImage imageNamed:@"navigationBack"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)]   forBarMetrics:UIBarMetricsDefault];
     }
-
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -50,6 +49,7 @@
     if ([son getError]==0) {
         MRet_Builder* ret = (MRet_Builder*)[son getBuild];
         [ToolUtils showMessage:ret.msg];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 - (void)didReceiveMemoryWarning
@@ -144,7 +144,7 @@
                                      ,self.classTitle,
                                      nil]];
     [picker showInView:self.view];
-
+    
     
 }
 
@@ -173,6 +173,7 @@
         [string appendFormat:@"%@ ",chooseNum];
     }
     [self.weekField setText:string];
+    
     
 }
 - (IBAction)cancel:(id)sender {
@@ -205,8 +206,7 @@
     builder.begin = self.start;
     builder.end = self.end;
     builder.time = self.timeField.text;
-    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddClass" params:builder  delegate:self selecter:@selector(disposMessage:)];
-    
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddClass" params:builder  delegate:self selecter:@selector(disposeMessage:)];
     [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
 
 }

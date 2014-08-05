@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "ShoppingDetailVC.h"
 @protocol ShoppingVCDelegate <NSObject>
-- (void) moveToDetail:(ShoppingDetailVC*) vc;
+- (void) moveToDetail:(UIViewController*) vc;
+- (void) showView:(UIViewController*)vc;
 @end
