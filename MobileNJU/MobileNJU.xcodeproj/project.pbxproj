@@ -44,6 +44,7 @@
 		774D4BC019920A9200D675D7 /* ApiMTreeHoleNewComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4BB619920A9200D675D7 /* ApiMTreeHoleNewComment.m */; };
 		774D4BC119920A9200D675D7 /* ApiMTreeHoleQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4BB819920A9200D675D7 /* ApiMTreeHoleQuery.m */; };
 		774D4BC219920A9200D675D7 /* ApiMTreeHoleReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4BBA19920A9200D675D7 /* ApiMTreeHoleReport.m */; };
+		774D4BC91992615900D675D7 /* bt_treehole_detailreply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 774D4BC81992615900D675D7 /* bt_treehole_detailreply@2x.png */; };
 		7765DB4719416C8E00EDDA68 /* NewMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */; };
 		7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4919416CA800EDDA68 /* NewMessageCell.m */; };
 		7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */; };
@@ -671,6 +672,7 @@
 		774D4BB819920A9200D675D7 /* ApiMTreeHoleQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMTreeHoleQuery.m; sourceTree = "<group>"; };
 		774D4BB919920A9200D675D7 /* ApiMTreeHoleReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMTreeHoleReport.h; sourceTree = "<group>"; };
 		774D4BBA19920A9200D675D7 /* ApiMTreeHoleReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMTreeHoleReport.m; sourceTree = "<group>"; };
+		774D4BC81992615900D675D7 /* bt_treehole_detailreply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_detailreply@2x.png"; sourceTree = "<group>"; };
 		7765226D1987C9E20061AF4E /* ApiUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiUpdate.h; sourceTree = "<group>"; };
 		7765226E1987C9E20061AF4E /* RegExCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExCategories.h; sourceTree = "<group>"; };
 		7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageListViewController.h; sourceTree = "<group>"; };
@@ -2228,6 +2230,7 @@
 		77B90458192C433F0062237D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				774D4BC81992615900D675D7 /* bt_treehole_detailreply@2x.png */,
 				774D4BA91991DBE100D675D7 /* ic_treehole_right@2x.png */,
 				774D4BA71991D33C00D675D7 /* bg_treehole_listbar@2x.png */,
 				774D4BA51991D2D600D675D7 /* bg_treehole_bottombar@2x.png */,
@@ -3442,6 +3445,7 @@
 				7D947B621989EA660000EB4E /* InitConfig.plist in Resources */,
 				77E07567194043A90098BA09 /* f070@2x.png in Resources */,
 				7D6AA9001983F0E100E11C31 /* Home.storyboard in Resources */,
+				774D4BC91992615900D675D7 /* bt_treehole_detailreply@2x.png in Resources */,
 				77B904C0192C4B3B0062237D /* MBProgressHUD.bundle in Resources */,
 				77E074ED194043A90098BA09 /* f009@2x.png in Resources */,
 				77E07518194043A90098BA09 /* f031.png in Resources */,

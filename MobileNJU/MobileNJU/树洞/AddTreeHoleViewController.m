@@ -13,6 +13,7 @@
 #import "TopicCell.h"
 #import "AddImageCell.h"
 #import "RDVTabBarController.h"
+#import "TopicListViewController.h"
 
 @interface AddTreeHoleViewController ()
 
@@ -54,33 +55,28 @@
 
 - (void)commitTreeHole
 {
-//    [self.view endEditing:YES];
-//    NSString *title = [_titleTextField text];
-//    NSString *content = [_contentTextView text];
-//    if (title.length == 0) {
-//        [ProgressHUD showError:@"标题不能为空"];
-//        return;
-//    } else if (title.length > 20) {
-//        [ProgressHUD showError:@"标题不能超过20字"];
-//        return;
-//    }
-//    
-//    if (content.length == 0) {
-//        [ProgressHUD showError:@"内容不能为空"];
-//        return;
-//    } else if (content.length > 500) {
-//        [ProgressHUD showError:@"内容不能超过500字"];
-//        return;
-//    }
-//    MAddTopic_Builder *addTopic = [MAddTopic_Builder new];
-//    [addTopic setTitle:title];
-//    [addTopic setContent:content];
-//    for (UIImage *image in _photoArray) {
-//        [addTopic addImgs:UIImagePNGRepresentation(image)];
-//    }
-//    
-//    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddTreeHole" params:addTopic  delegate:self selecter:@selector(disposMessage:)];
-//    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
+    [self.view endEditing:YES];
+    [_tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+    
+    NSString *content = _textView.text;
+    
+    if (content.length == 0) {
+        [ProgressHUD showError:@"内容不能为空"];
+        return;
+    } else if (content.length > 120) {
+        [ProgressHUD showError:@"内容不能超过120字"];
+        return;
+    }
+    MAddTopic_Builder *addTopic = [MAddTopic_Builder new];
+    [addTopic setContent:content];
+    if (_mtag) {
+        [addTopic setTagId:_mtag.id];
+    }
+    if (_image) {
+        [addTopic setImg:UIImagePNGRepresentation(_image)];
+    }
+    [[[ApisFactory getApiMAddTreeHole] isShowLoad:YES] load:self selecter:@selector(disposMessage:) topic:addTopic];
+    
 }
 
 - (void)disposMessage:(Son *)son
@@ -116,6 +112,14 @@
 {
     if (indexPath.row == 0) {
         TopicCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TopicCell"];
+        if (_mtag) {
+            [cell.tipLabel setHidden:YES];
+            [cell.topicLabel setHidden:NO];
+            [cell.topicLabel setText:[NSString stringWithFormat:@"#%@",_mtag.title]];
+        } else {
+            [cell.tipLabel setHidden:NO];
+            [cell.topicLabel setHidden:YES];
+        }
         return cell;
     } else {
         AddImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddImageCell"];
@@ -322,7 +326,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -330,7 +334,12 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    TopicListViewController *vc = segue.destinationViewController;
+    vc.selectTagBlock = ^(MTag *tag) {
+        self.mtag = tag;
+        [self.tableView reloadData];
+    };
 }
-*/
+
 
 @end

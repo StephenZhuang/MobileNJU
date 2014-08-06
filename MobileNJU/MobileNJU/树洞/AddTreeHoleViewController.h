@@ -19,4 +19,5 @@ typedef void(^AddSuccessBlock)(void);
 @property (nonatomic , weak) IBOutlet UIView *bottomView;
 @property (nonatomic , copy) AddSuccessBlock addSuccessBlock;
 @property (nonatomic , strong) GKImagePicker *imagePicker;
+@property (nonatomic , strong) MTag *mtag;
 @end

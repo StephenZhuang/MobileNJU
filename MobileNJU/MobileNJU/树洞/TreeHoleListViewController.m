@@ -50,6 +50,14 @@
     [item setTintColor:[UIColor whiteColor]];
     
     self.navigationItem.rightBarButtonItems = @[releaseItem ,item , mesageitem];
+    
+    [[ApisFactory getApiMGetTags] load:self selecter:@selector(disposMessage:)];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[ApisFactory getApiMGetMsgCount] load:self selecter:@selector(disposMessage:)];
 }
 
 - (void)goToAdd
@@ -57,20 +65,23 @@
     [self performSegueWithIdentifier:@"add" sender:nil];
 }
 
-//- (void)loadData
-//{
-//    NSString *beginStr = @"";
-//    if (page == 1) {
-//        beginStr = @"";
-//    } else {
-//        if (self.dataArray.count > 0) {
-//            MTopic *topic = [self.dataArray lastObject];
-//            beginStr = topic.createTime;
-//        }
-//        
-//    }
-//    [[ApisFactory getApiMTreeHoleList] load:self selecter:@selector(disposMessage:) type:_isMyTreeHole?1:0 begin:beginStr];
-//}
+- (void)loadData
+{
+    NSString *beginStr = @"";
+    double type = 1;
+    if (page == 1) {
+        beginStr = @"";
+        type = 1;
+    } else {
+        if (self.dataArray.count > 0) {
+            MTopic *topic = [self.dataArray lastObject];
+            beginStr = topic.createTime;
+        }
+        type = 2;
+        
+    }
+    [[ApisFactory getApiMTreeHoleList] load:self selecter:@selector(disposMessage:) type:type begin:beginStr];
+}
 
 - (void)disposMessage:(Son *)son
 {
@@ -81,6 +92,22 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:treeHole.topicsList];
+        } else if ([[son getMethod] isEqualToString:@"MGetMsgCount"]) {
+            MMsgCount_Builder *msgCountBuilder = (MMsgCount_Builder *)[son getBuild];
+            [_messageButton setTitle:[NSString stringWithFormat:@"%d",msgCountBuilder.comment + msgCountBuilder.chat] forState:UIControlStateNormal];
+        } else if ([[son getMethod] isEqualToString:@"MGetTags"]) {
+            NSMutableArray *tagArray = [[NSMutableArray alloc] init];
+            MTagList_Builder *tagsList = (MTagList_Builder *)[son getBuild];
+            [tagArray addObjectsFromArray:tagsList.tagsList];
+            [ToolUtils sharedToolUtils].tagArray = tagArray;
+            
+            
+            for (int i = 0; i < 3; i++) {
+                UIButton *button = (UIButton *)[self.tableView viewWithTag:i+100];
+                MTag *tag = tagArray[i];
+                [button setTitle:[NSString stringWithFormat:@"#%@",tag.title] forState:UIControlStateNormal];
+                
+            }
         }
     }
     if ([[son getMethod] isEqualToString:@"MTreeHoleList"]) {
@@ -107,8 +134,8 @@
     return _sectionHeader;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
 //    TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
 //    MTopic *topic = [self.dataArray objectAtIndex:indexPath.row];
 //    [cell.contentLabel setText:topic.content];
@@ -124,37 +151,39 @@
 //    [cell setImageArray:array];
 //    return CGRectGetMaxY(cell.commentButton.frame) + 10;
 //    return [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1.0f;
-//}
+    MTopic *topic = [self.dataArray objectAtIndex:indexPath.section];
+    return [TreeHoleCell getHeightByTopic:topic];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
+    MTopic *topic = [self.dataArray objectAtIndex:indexPath.section];
+    TreeHoleCell *cell = nil;
+    if (topic.tag.length > 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCellTopic"];
+        [cell.topicButton setTitle:[NSString stringWithFormat:@"#%@",topic.tag] forState:UIControlStateNormal];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
+    }
     
-//    MTopic *topic = [self.dataArray objectAtIndex:indexPath.row];
-//    [cell.titleLabel setText:topic.title];
-//    [cell.contentLabel setText:topic.content];
-//    [cell.timeLabel setText:topic.time];
-//    [cell.zanButton setTag:indexPath.row];
-//    [cell.commentButton setTag:indexPath.row];
-//    [cell.deleteButton setTag:indexPath.row];
-//    [cell.zanButton setTitle:[NSString stringWithFormat:@"%i" , topic.praiseCnt] forState:UIControlStateNormal];
-//    [cell.commentButton setTitle:[NSString stringWithFormat:@"%i" , topic.commentCnt] forState:UIControlStateNormal];
-//    
-//    NSMutableArray *array = [[NSMutableArray alloc] init];
-//    if (topic.imgs.length > 0) {
-//        NSArray *imgStrArr = [topic.imgs componentsSeparatedByString:@","];
-//        
-//        for (NSString *str in imgStrArr) {
-//            [array addObject:[ToolUtils getImageUrlWtihString:str].absoluteString];
-//        }
-//    }
-//    [cell setImageArray:array];
-//    if (_isMyTreeHole) {
-//        [cell.deleteButton setHidden:NO];
-//    } else {
-//        [cell.deleteButton setHidden:YES];
-//    }
+    [cell.contentLabel setText:topic.content];
+    [cell.logoImage setImageWithURL:[ToolUtils getImageUrlWtihString:topic.img] placeholderImage:[UIImage imageNamed:@""]];
+    [cell.zanButton setTag:indexPath.section];
+    [cell.commentButton setTag:indexPath.section];
+    [cell.moreButton setTag:indexPath.section];
+    [cell.messageButton setTag:indexPath.section];
+    [cell.zanButton setTitle:[NSString stringWithFormat:@"%i" , topic.praiseCnt] forState:UIControlStateNormal];
+    [cell.commentButton setTitle:[NSString stringWithFormat:@"%i" , topic.commentCnt] forState:UIControlStateNormal];
+
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MTopic *topic = [self.dataArray objectAtIndex:indexPath.section];
+    TreeHoleDetailViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"TreeHoleDetailViewController"];
+    vc.treeHoleid = topic.id;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)zanAction:(id)sender

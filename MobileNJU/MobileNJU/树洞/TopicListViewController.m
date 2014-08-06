@@ -28,12 +28,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"话题";
+    self.dataArray = [ToolUtils sharedToolUtils].tagArray;
 }
+
+- (void)addHeader{}
+- (void)addFooter{}
+- (void)loadData{}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == 1) {
         return 2;
+    }
+    if (_selectTagBlock) {
+        return self.dataArray.count + 1;
     }
     return self.dataArray.count;
 }
@@ -65,12 +73,28 @@
         return cell;
     } else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+        if (indexPath.row == 0) {
+            [cell.textLabel setText:@"无话题"];
+            [cell.textLabel setTextColor:RGB(168, 16, 166)];
+        } else {
+            MTag *tag = [self.dataArray objectAtIndex:indexPath.row - 1];
+            [cell.textLabel setText:[NSString stringWithFormat:@"#%@",tag.title]];
+            [cell.textLabel setTextColor:RGB(87, 87, 87)];
+        }
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (_selectTagBlock) {
+        if (indexPath.row == 0) {
+            _selectTagBlock(nil);
+        } else {
+            _selectTagBlock(self.dataArray[indexPath.row - 1]);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

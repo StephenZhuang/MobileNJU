@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZsndTreehole.pb.h"
 
 @interface TreeHoleCell : UITableViewCell
 @property (nonatomic , strong) IBOutlet UIImageView *logoImage;
@@ -16,4 +17,7 @@
 @property (nonatomic , strong) IBOutlet UIButton *commentButton;
 @property (nonatomic , strong) IBOutlet UIButton *messageButton;
 @property (nonatomic , strong) IBOutlet UIButton *moreButton;
+
++ (CGFloat)getHeightByTopic:(MTopic *)topic;
++ (CGFloat)getDetailHeightByTopic:(MTopic_Builder *)topic;
 @end

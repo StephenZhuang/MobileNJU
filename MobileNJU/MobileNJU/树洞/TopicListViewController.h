@@ -8,6 +8,9 @@
 
 #import "RefreshTableViewController.h"
 
+typedef void(^SelectTagBlock)(MTag *tag);
+
 @interface TopicListViewController : RefreshTableViewController<UITableViewDataSource , UITableViewDelegate>
 @property (nonatomic , weak) IBOutlet UITableView *overtableView;
+@property (nonatomic , copy) SelectTagBlock selectTagBlock;
 @end

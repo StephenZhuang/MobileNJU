@@ -111,4 +111,22 @@
 //    }title:fromString];
 //    return match.height;
 //}
+
++ (CGFloat)getHeightByComment:(MComment *)comment
+{
+    CGFloat height = 13;
+    
+    UIFont *font = [UIFont systemFontOfSize:14];
+    CGSize size = CGSizeMake(227,2000);
+    CGSize labelsize = [comment.content sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+    height += labelsize.height;
+    
+    if (comment.replyid.length > 0 || comment.isLz == 1) {
+        height += 53;
+    } else {
+        height += 36;
+    }
+    
+    return height;
+}
 @end
