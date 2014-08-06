@@ -48,7 +48,6 @@
                 BOOL has = NO;
                 for (MNews* currentNews in self.activityList) {
                     if ([news.id isEqualToString:currentNews.id]) {
-//                        [self.activityList replaceObjectAtIndex:[self.activityList indexOfObject:news] withObject:currentNews];
                         has=YES;
                         break;
                     }

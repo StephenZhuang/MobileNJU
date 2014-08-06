@@ -22,8 +22,11 @@
 {
     self.typeId = @"-1";
     self.QQField.delegate = self;
+    self.typeField.delegate = self;
+    self.locationField.delegate = self;
     self.phoneField.delegate = self;
     self.font = self.QQLabel.font;
+
 }
 - (IBAction)chooseType:(id)sender {
     self.typeArr= [NSArray arrayWithObjects:@"电子产品",@"生活用品",@"书籍",@"衣服", nil];
@@ -34,7 +37,7 @@
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
                                      self.typeArr,
                                      nil]];
-    
+
     [picker showInView:self];
 }
 
@@ -112,6 +115,9 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if (textField==self.typeField||textField==self.locationField) {
+        return NO;
+    }
     [self returnLabel:self.lastField];
     [self changeLabel:textField];
     CGRect frame = textField.frame;

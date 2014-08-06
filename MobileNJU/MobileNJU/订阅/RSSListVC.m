@@ -75,7 +75,7 @@
     cell.type = new.source;
     cell.detail = new.content;
     cell.date = new.time;
-    [cell.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:new.img width:89 height:67] placeholderImage:[UIImage imageNamed:@"news_loading"]];
+    [cell.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:new.img width:178 height:134] placeholderImage:[UIImage imageNamed:@"news_loading"]];
     return cell;
 }
 

@@ -37,7 +37,7 @@
     
     _imageName = imageName;
     UIImage* loading = [UIImage imageNamed:@"news_loading"];
-    [self.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:imageName width:89 height:67] placeholderImage:loading];
+    [self.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:imageName width:178 height:134] placeholderImage:loading];
     [self.newsImage setClipsToBounds:YES];
 }
 - (void)setType:(NSString *)type

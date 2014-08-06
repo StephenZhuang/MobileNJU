@@ -20,4 +20,5 @@
 @property (nonatomic,strong)NSString* typeId;
 @property (strong,nonatomic)UIFont *font;
 @property (strong,nonatomic)UITextField* lastField;
+@property(weak,nonatomic)UIViewController* myController;
 @end
