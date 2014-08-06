@@ -46,6 +46,9 @@
     myBook.bookName = book.title;
     myBook.borrowDate = book.borrowTime;
     myBook.returnDate = book.backTime;
+    if (!book.canRenew) {
+        [cell.continueBt setEnabled:NO];
+    }
     [cell setBook:myBook];
     cell.continueBt.tag = 200+indexPath.row;
 
@@ -67,7 +70,7 @@
 }
 */
 - (IBAction)continueBorrow:(id)sender {
-    [self waiting:@"正在帮您续借"];
+    [self waiting:@"正在续借"];
     UIButton* button = (UIButton*)sender;
     MBook* book = [self.myBookList objectAtIndex:button.tag-200];
     [[ApisFactory getApiMBookRenew]load:self selecter:@selector(disposMessage:) id:book.id account: self.account password:self.password];

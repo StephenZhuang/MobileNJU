@@ -13,6 +13,7 @@
 #import "VerifyVC.h"
 @interface ShoppingVC ()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate>
 @property(nonatomic,strong)NSMutableArray* marketList;
+@property(nonatomic,strong)MMarket* selectedMarket;
 @end
 
 @implementation ShoppingVC
@@ -26,6 +27,7 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -35,6 +37,7 @@
 
 -(void)startRefresh
 {
+    page=1;
     [self waiting:@"正在加载"];
     [self loadData];
 //    [_header beginRefreshing];
@@ -56,19 +59,19 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MMarketList"]) {
             MMarketList_Builder* list = (MMarketList_Builder*)[son getBuild];
-            
+            NSMutableArray *removeArray  = [[NSMutableArray alloc]init];
+            if (self.selectedMarket!=nil) {
+                [removeArray addObject:self.selectedMarket];
+            }
             for (MMarket* market in list.marketList) {
-                BOOL has = NO;
                 for (MMarket* currentMarket in self.marketList) {
                     if ([currentMarket.id isEqualToString:market.id]) {
-                        has = YES;
-                        break;
+                        [removeArray addObject:currentMarket];
                     }
                 }
-                if (!has) {
-                    [self.marketList addObject:market];
-                }
             }
+            [self.marketList removeObjectsInArray:removeArray];
+            [self.marketList addObjectsFromArray:list.marketList];
             if (page==1) {
                 [self doneWithView:_header];
             } else {
@@ -123,19 +126,21 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%d",[ToolUtils getIsVeryfy]);
-    if ([ToolUtils getIsVeryfy]==0) {
-        [ToolUtils showMessage:@"请先验证身份"];
-        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
-        VerifyVC* vc = (VerifyVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"verify"]; //test2为viewcontroller的StoryboardId
-        [self.myDelegate showView:vc];
-        
-    }
+    
+//    if ([ToolUtils getIsVeryfy]==0) {
+//        [ToolUtils showMessage:@"请先验证身份"];
+//        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
+//        VerifyVC* vc = (VerifyVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"verify"]; //test2为viewcontroller的StoryboardId
+//        [self.myDelegate showView:vc];
+//        
+//    }
     
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
     ShoppingDetailVC* vc = (ShoppingDetailVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"detail"]; //test2为viewcontroller的StoryboardId
     vc.market = [self.marketList objectAtIndex:indexPath.row];
+    self.selectedMarket = [self.marketList objectAtIndex:indexPath.row];
     [self.myDelegate moveToDetail:vc];
+    
 }
 
 @end

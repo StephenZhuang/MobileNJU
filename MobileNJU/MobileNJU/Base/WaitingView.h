@@ -11,5 +11,6 @@
 @interface WaitingView : UIView
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loading;
 @property (weak, nonatomic) IBOutlet UILabel *msgLbel;
+@property (weak, nonatomic) IBOutlet UIImageView *loadingImg;
 
 @end

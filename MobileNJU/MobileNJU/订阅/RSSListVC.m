@@ -33,6 +33,11 @@
     // Do any additional setup after loading the view.
 }
 
+- (void) viewWillAppear: (BOOL)inAnimated {
+    NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+    if(selected)
+        [self.tableView deselectRowAtIndexPath:selected animated:NO];
+}
 
 - (void)didReceiveMemoryWarning
 {

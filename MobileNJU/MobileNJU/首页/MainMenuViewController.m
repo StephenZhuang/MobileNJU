@@ -38,6 +38,9 @@
 @property (strong,nonatomic)NSMutableArray* newsList;
 @property (strong,nonatomic)NSArray* allNews;
 @property (strong,nonatomic)NSMutableArray* UIImageViewList;
+@property (nonatomic)int complete;
+@property (nonatomic,strong)NSMutableDictionary* stateDic;
+@property (nonatomic)int prepare;
 @end
 
 @implementation MainMenuViewController
@@ -58,15 +61,24 @@ static NSArray* descriptions;
     [self.pageScroller addGestureRecognizer:singleTap];
     self.changeHeader = NO;
     [self.tableView setAllowsSelection:NO];
-    [self loadIndex];
-    [self loadTableData];
+//    [self loadTableData];
     self.newsImgList = [ToolUtils getImgList];
+    self.complete=0;
+    self.prepare = 0;
     if (self.newsImgList!=nil) {
         [self prepareForNews];
     }
     
 }
+- (void)viewDidAppear:(BOOL)animated
+{
 
+    
+    [self loadTableData];
+//    [self.tableView reloadData];
+    [self loadIndex];
+
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -91,6 +103,7 @@ static NSArray* descriptions;
             self.allNews = newsList.newsList;
             
         } else if ([[son getMethod] isEqualToString:@"MIndex"]) {
+            BOOL isLoad = functionNames==nil;
             MIndex_Builder* index = (MIndex_Builder*)[son getBuild];
             NSMutableArray* image = [[NSMutableArray alloc]init];
             NSMutableArray* names = [[NSMutableArray alloc]init];
@@ -114,7 +127,6 @@ static NSArray* descriptions;
                 buttonImages=image;
                 descriptions=details;
                 [self loadImages];
-                
             }
             [ToolUtils setFunctionDetails:descriptions];
             [ToolUtils setFunctionNames:functionNames];
@@ -125,15 +137,19 @@ static NSArray* descriptions;
                 [imgList addObject:focus.img];
             }
             [ToolUtils setImgList:imgList];
-            [self loadTableData];
-            [self.tableView reloadData];
+            if (isLoad) {
+                [self loadTableData];
+                [self.tableView reloadData];
+            }
+//            [self loadTableData];
+//            [self.tableView reloadData];
             
             
             
             if (self.newsImgList.count==0) {
                 self.newsImgList = imgList;
                 [self prepareForNews];
-            } else {
+            } else if (self.complete==4){
                 self.newsImgList = imgList;
                 [self.photoList removeAllObjects];
                 for (int i = 1; i<=NEWSCOUNT; i++) {
@@ -154,6 +170,9 @@ static NSArray* descriptions;
     buttonImages= [ToolUtils getButtonImage];
     descriptions = [ToolUtils getFunctionDetails];
     if (functionNames!=nil) {
+        if (self.stateDic==nil) {
+            self.stateDic = [[NSMutableDictionary alloc]init];
+        }
         [self loadImages];
     }
 }
@@ -167,7 +186,9 @@ static NSArray* descriptions;
         UIImageView* image = [[UIImageView alloc]init];
         image.frame = frame;
         [image setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls firstObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            if (self.imageArrays.count==buttonImages.count) {
+            self.prepare++;
+            if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count) {
+                
                 [self.tableView reloadData];
 
             }
@@ -175,14 +196,14 @@ static NSArray* descriptions;
         UIImageView* imageSelected = [[UIImageView alloc]init];
         imageSelected.frame = frame;
         [imageSelected setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls lastObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            if (self.imageArrays.count==buttonImages.count) {
+            if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count) {
                 [self.tableView reloadData];
             }
         }];
         [self.imageArrays addObject:image];
         [self.imageArraysSelected addObject:imageSelected];
     }
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -224,7 +245,7 @@ static NSArray* descriptions;
     self.cloudBack = [[UIImageView alloc]initWithFrame:CGRectMake(0,40, self.tableView.bounds.size.width, 30)];
     [self.cloudBack setImage:background];
     [self.headerView addSubview:self.cloudBack];
-
+    
     UIImage* touch = [UIImage imageNamed:@"触控区"];
     self.touchButton = [[UIImageView alloc]initWithFrame:CGRectMake(132.5, 15, 55, 75)];
     [self.touchButton setImage:touch];
@@ -278,6 +299,8 @@ static NSArray* descriptions;
         [cell.redCircle setHidden:YES];
     }
     
+   
+
    return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -291,6 +314,29 @@ static NSArray* descriptions;
             [((HomeCell*)cell).redCircle setHidden:YES];
         }
     }
+    
+    NSString* str = [NSString stringWithFormat:@"%d",indexPath.row];
+    if ([self.stateDic objectForKey:str]==nil) {
+        HomeCell* homecell = (HomeCell*)cell;
+        [self.stateDic setObject:@"ok" forKey:str];
+        if (indexPath.row%2==0) {
+            homecell.menuView.transform = CGAffineTransformMakeTranslation(-300, 0);
+            [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                homecell.menuView.transform = CGAffineTransformMakeTranslation(0, 0);
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+        } else {
+            homecell.menuView.transform = CGAffineTransformMakeTranslation(300, 0);
+            [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                homecell.menuView.transform = CGAffineTransformMakeTranslation(0, 0);
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    }
+    
     
    
 
@@ -352,11 +398,17 @@ static NSArray* descriptions;
     if (self.focusList.count>site) {
         MFocus* focus = [self.focusList objectAtIndex:site-1];
         [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [self.photoList addObject:image];
+            self.complete++;
+            if (image!=nil) {
+                [self.photoList addObject:image];
+            }
         }];
     } else {
         [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site-1]width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [self.photoList addObject:image];
+            self.complete++;
+            if (image!=nil) {
+                [self.photoList addObject:image];
+            }
         }];
     }
 }

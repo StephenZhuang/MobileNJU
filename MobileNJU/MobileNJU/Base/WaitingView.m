@@ -7,7 +7,7 @@
 //
 
 #import "WaitingView.h"
-
+#import "UIImage+GIF.h"
 @implementation WaitingView
 
 - (id)initWithFrame:(CGRect)frame
@@ -24,9 +24,11 @@
     [self start];
 }
 
+
 - (void)start
 {
     [self.loading startAnimating];
+    
 }
 /*
 // Only override drawRect: if you perform custom drawing.

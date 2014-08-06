@@ -428,6 +428,8 @@
 		7D6AA9001983F0E100E11C31 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D6AA8FF1983F0E100E11C31 /* Home.storyboard */; };
 		7D6AA9031983F24E00E11C31 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6AA9021983F24E00E11C31 /* RegisterVC.m */; };
 		7D6AA9061984068600E11C31 /* CustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6AA9051984068600E11C31 /* CustomTabBar.m */; };
+		7D784D231991DE5C00E7CE64 /* Nipic_2897814_20110209144722712129.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7D784D221991DE5C00E7CE64 /* Nipic_2897814_20110209144722712129.gif */; };
+		7D784D251991DF7800E7CE64 /* loading16.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7D784D241991DF7800E7CE64 /* loading16.gif */; };
 		7D7A486F198690640019E9B3 /* subscribeCell_n.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A486E198690640019E9B3 /* subscribeCell_n.m */; };
 		7D7A4872198691450019E9B3 /* RSSVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A4871198691450019E9B3 /* RSSVC.m */; };
 		7D7A4875198698CE0019E9B3 /* AllRssVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A4874198698CE0019E9B3 /* AllRssVC.m */; };
@@ -1218,6 +1220,8 @@
 		7D6AA9021983F24E00E11C31 /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
 		7D6AA9041984068600E11C31 /* CustomTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBar.h; sourceTree = "<group>"; };
 		7D6AA9051984068600E11C31 /* CustomTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBar.m; sourceTree = "<group>"; };
+		7D784D221991DE5C00E7CE64 /* Nipic_2897814_20110209144722712129.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Nipic_2897814_20110209144722712129.gif; sourceTree = "<group>"; };
+		7D784D241991DF7800E7CE64 /* loading16.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading16.gif; sourceTree = "<group>"; };
 		7D7A486D198690640019E9B3 /* subscribeCell_n.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = subscribeCell_n.h; path = "订阅/subscribeCell_n.h"; sourceTree = "<group>"; };
 		7D7A486E198690640019E9B3 /* subscribeCell_n.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = subscribeCell_n.m; path = "订阅/subscribeCell_n.m"; sourceTree = "<group>"; };
 		7D7A4870198691450019E9B3 /* RSSVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSSVC.h; path = "订阅/RSSVC.h"; sourceTree = "<group>"; };
@@ -2121,8 +2125,10 @@
 			isa = PBXGroup;
 			children = (
 				7796F1EC1949B84B00015307 /* nangua_add@2x.png */,
+				7D784D221991DE5C00E7CE64 /* Nipic_2897814_20110209144722712129.gif */,
 				7796F1EA19498B3C00015307 /* SenderTextNodeBkg@2x.png */,
 				7796F1E819498B3600015307 /* ReceiverTextNodeBkg@2x.png */,
+				7D784D241991DF7800E7CE64 /* loading16.gif */,
 				77883D4F1947F7AF00197F59 /* nangua_connect_line1@2x.png */,
 				77883D501947F7AF00197F59 /* nangua_connect_line2@2x.png */,
 				77883D511947F7AF00197F59 /* nangua_connect_timedout@2x.png */,
@@ -3303,6 +3309,7 @@
 				77E073F41940436E0098BA09 /* btn_emoji@2x.png in Resources */,
 				77E07575194043A90098BA09 /* f077@2x.png in Resources */,
 				77E07546194043A90098BA09 /* f054.png in Resources */,
+				7D784D231991DE5C00E7CE64 /* Nipic_2897814_20110209144722712129.gif in Resources */,
 				77E074F3194043A90098BA09 /* f012@2x.png in Resources */,
 				7796F1ED1949B84B00015307 /* nangua_add@2x.png in Resources */,
 				778EA78E1945DCF7007B6C7E /* nangua_back@2x.png in Resources */,
@@ -3321,6 +3328,7 @@
 				77E07500194043A90098BA09 /* f019.png in Resources */,
 				77E075A1194043A90098BA09 /* f099@2x.png in Resources */,
 				77883D661948075A00197F59 /* f107@2x.png in Resources */,
+				7D784D251991DF7800E7CE64 /* loading16.gif in Resources */,
 				77E0750F194043A90098BA09 /* f026@2x.png in Resources */,
 				77B904C3192C4B3B0062237D /* MJPhotoBrowser.bundle in Resources */,
 				77E0754D194043A90098BA09 /* f057@2x.png in Resources */,

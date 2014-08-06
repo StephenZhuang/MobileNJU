@@ -22,4 +22,7 @@
 @property (nonatomic , assign) IBOutlet id<ScheduleViewDelegate> delegate;
 - (UIColor*)getColor;
 - (void)setMyButton:(UIButton *)myButton;
+@property (nonatomic,strong)UILabel* lessonNameLabel;
+@property (nonatomic,strong)UILabel* locationLabel;
+@property (nonatomic,strong)UIButton* touchButton;
 @end

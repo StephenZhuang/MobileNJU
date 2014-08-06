@@ -32,7 +32,6 @@
 @property(nonatomic)BOOL loading;
 @property (strong, nonatomic)  UISwitch *rememberSwitch;
 @property (nonatomic)int isRe;
-@property(nonatomic)int isV;
 @property (nonatomic)CGRect frame;
 @end
 
@@ -48,7 +47,6 @@
     [self.schIdField setText:[ToolUtils getLibraryId]==nil?@"":[ToolUtils getLibraryId]];
     self.loading=NO;
     self.isRe=0;
-    self.isV=0;
     // Do any additional setup after loading the view.
 }
 
@@ -141,7 +139,7 @@
             [self.maskView setHidden:NO];
             [self addMask];
         } else if ([[son getMethod] isEqualToString:@"MMyLibrary"]){
-            
+            [ToolUtils setIsVeryfy:1];
             [self.loginIndicator removeFromSuperview];
             [self setOK:YES];
             MBookList_Builder* myBookList = (MBookList_Builder*)[son getBuild];
@@ -231,7 +229,7 @@
              [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
              [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
              [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
-             [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
+             [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
              
              UpdateOne *updateone=[[UpdateOne alloc] init:@"MMyLibrary" params:array  delegate:delegate selecter:select];
              [updateone setShowLoading:NO];

@@ -29,11 +29,20 @@
     [self.teacher setText:lesson.teacher];
     [self.time setText:lesson.time];
     [self.week setText:lesson.week];
+    if (lesson.location.length==0) {
+        lesson.location = @"   ";
+    }
     [self.location setText:lesson.location];
-    
-    
+    [self adjust];
 }
 
+- (void)adjust
+{
+    CGRect myFrame = CGRectMake(30, 100, 260, 219+20*(self.lessonName.text.length/9+self.teacher.text.length/9+self.time.text.length/9+self.location.text.length/9+self.week.text.length/9));
+    self.frame = myFrame;
+    self.adjustFrame = myFrame;
+    [self setNeedsDisplay];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

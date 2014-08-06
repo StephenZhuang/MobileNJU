@@ -34,11 +34,15 @@
 @property (strong,nonatomic)NSArray* lessonList;
 @property (strong,nonatomic)NSString* code;
 @property (nonatomic)int isRe;
-@property (nonatomic)int isV;
 @property (nonatomic,strong)ScheduleView* scheduleView;
 @property (nonatomic,strong)UIColor* currentColor;
 @property (nonatomic,strong)UIView* lastView;
 @property (nonatomic)CGRect frame;
+@property (nonatomic)BOOL hasCode;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UIButton *addBack;
+@property (strong,nonatomic)UIImageView* imgView;
+
 @end
 
 
@@ -49,19 +53,24 @@
     [super viewDidLoad];
     [self initAlert];
     [self initNavigationBar];
-    [self initLessonDetail];
     self.code=nil;
+    self.hasCode=NO;
     self.schIdField.text=[ToolUtils getJWID];
     self.passwordField.text = [ToolUtils getJWPassword];
-    [self loadLast];
+//    [self loadLast];
     self.isRe=0;
-    self.isV=0;
     [self addTitleView];
     self.icarousel = [[iCarousel alloc]initWithFrame:CGRectMake(20, 120, 280, 200)];
     [self.view addSubview:self.icarousel];
     [self.icarousel setHidden:YES];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdField];
-    
+    if (self.schIdField.text.length==0) {
+        [self.alertView setHidden:NO];
+        [self.addBack setHidden:YES];
+        [self.addButton setHidden:YES];
+    } else {
+        [self loadLast];
+    }
 }
 
 
@@ -80,7 +89,7 @@
     self.passwordField = self.alertView.passwordField;
     self.schIdField.delegate = self;
     self.passwordField.delegate = self;
-
+    self.searchButton = self.alertView.searchBt;
     [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -88,8 +97,12 @@
 
 - (void)textFieldDidChange:(NSNotification *)note
 {
-    if ([self.schIdField.text hasPrefix:@"Mg"]&&self.isV==0) {
+    if ([self.schIdField.text hasPrefix:@"Mg"]) {
         [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+    } else {
+        if (self.hasCode) {
+            [self removeCode];
+        }
     }
 }
 
@@ -97,7 +110,10 @@
 //返回时重新加载
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self loadLast];
+    if ([ToolUtils getJWID].length>0) {
+        [self loadLast];
+
+    }
 }
 
 //标题栏
@@ -185,7 +201,7 @@
     [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
-    [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
+    [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MSchedule" params:array  delegate:delegate selecter:select];
     [updateone setShowLoading:NO];
@@ -200,9 +216,11 @@
     [self.loginIndicator removeFromSuperview];
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MSchedule"]) {
-            
-            MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
+                       MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
             if (classList.week!=0) {
+                [self.addButton setHidden:NO];
+                [self.addBack setHidden:NO];
+
                 self.isRe=1;
                 [self closeAlert];
                 if (self.autoSwitch.isOn) {
@@ -216,8 +234,8 @@
                 [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",classList.week]];
                 self.lessonList = classList.classList;
                 [self loadSchedule];
+                [ToolUtils setIsVeryfy:1];
             } else {
-                self.isV=1;
                 [self addCode:classList.img];
            }
             
@@ -235,10 +253,22 @@
         }
     }
 }
+- (void)removeCode
+{
+    [self.codeView setHidden:YES];
+    
+    [self.codeView removeFromSuperview];
+    self.codeView = nil;
+    [self.imgView removeFromSuperview];
+    [self.imgView setHidden:YES];
+    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 0);
+    
 
+}
 //添加验证码
 - (void)addCode:(NSData*)img
 {
+    self.hasCode = YES;
     self.searchButton.transform = CGAffineTransformMakeTranslation(0, 60);
     self.codeView = [[UITextField alloc]init];
     self.codeView.delegate = self;
@@ -248,6 +278,7 @@
     codeFrame.size.width = codeFrame.size.width/2;
     codeFrame.origin.y = codeFrame.origin.y+codeFrame.origin.y-self.schIdField.frame.origin.y+self.autoSwitch.frame.size.height;
     self.codeView.frame = codeFrame;
+    
     [self.alertView addSubview:self.codeView];
     
     
@@ -255,6 +286,7 @@
     UIImageView* imgView = [[UIImageView alloc]initWithFrame:codeFrame];
     [imgView setImage:[UIImage imageWithData:img]];
     [self.alertView addSubview:imgView];
+    self.imgView = imgView;
 
 }
 
@@ -283,27 +315,34 @@
 - (void) initLessonDetail
 {
     self.lessonDetail = [[[NSBundle mainBundle] loadNibNamed:@"LessonDetailView" owner:self options:nil] firstObject];
-    [self.lessonDetail setFrame:CGRectMake(30, 100,260,219)];
+//    [self.lessonDetail setFrame:frame];
     [self.lessonDetail setClipsToBounds:YES];
     [self.lessonDetail setHidden:YES];
     [self.lessonDetail setMydelegate:self];
-    [self.view addSubview:self.lessonDetail];
 }
 
 #pragma mark showScheduleDelegate
 - (void)showSchedule:(ScheduleLesson *)lesson
 {
-    
+    [self.lessonDetail removeFromSuperview];
+    CGRect frame = CGRectMake(30, 100, 260, 219);
     [self.icarousel setHidden:YES];
+    [self initLessonDetail];
+    self.lessonDetail.frame = frame;
     [self.lessonDetail setLesson:lesson];
+    [self.lessonDetail removeFromSuperview];
+    self.lessonDetail.frame = self.lessonDetail.adjustFrame;
+//    [self.view addSubview:self.lessonDetail];
     [self.lessonDetail setId:lesson.id];
+    [self.view addSubview:self.lessonDetail];
     [self.lessonDetail setHidden:NO];
     [self.maskView setHidden:NO];
     [self addMask];
 }
 - (void)showSchedules:(NSArray *)lessons color:(UIColor *)color
 {
-    self.lessonsForIcarousel = lessons;
+     NSSet *set = [NSSet setWithArray:lessons];
+    self.lessonsForIcarousel = [set allObjects];;
     self.currentColor = color;
     ((iCarousel*)self.icarousel).delegate = self;
     [self.icarousel setBounces:NO];

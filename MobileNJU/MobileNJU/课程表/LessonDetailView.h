@@ -22,4 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *week;
 @property (strong,nonatomic)ScheduleLesson* lesson;
 @property (nonatomic,strong)NSString* id;
+@property (nonatomic)CGRect adjustFrame;
+- (void) adjust;
 @end

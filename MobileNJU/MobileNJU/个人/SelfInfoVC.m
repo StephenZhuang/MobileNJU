@@ -32,13 +32,13 @@
 {
     [super viewDidLoad];
     [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
-
     self.navigationController.delegate = self;
 //    [self loadData];
     self.headImage.layer.cornerRadius=55;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.headImage addGestureRecognizer:singleTap];
     [self.headImage setClipsToBounds:YES];
+    
 }
 
 
@@ -73,7 +73,6 @@
     if ([son getError] == 0) {
         //判断接口名
         if ([[son getMethod] isEqualToString:@"MGetUserInfo"]) {
-            NSLog(@"ok");
             //获得返回类
             MUser_Builder *user = (MUser_Builder *)[son getBuild];
             [ToolUtils setBelong:user.belong==nil?@"":user.belong];
@@ -247,6 +246,7 @@
     
     //    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    
     image = [self useImage:image];
     [self upLoadImage:image];
 //    [self.headImage setImage:image];
@@ -256,7 +256,7 @@
     //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     // Create a graphics image context
-    CGSize newSize = CGSizeMake(80, 80);
+    CGSize newSize = CGSizeMake(222, 222);
     UIGraphicsBeginImageContext(newSize);
     // Tell the old image to draw in this new context, with the desired
     // new size

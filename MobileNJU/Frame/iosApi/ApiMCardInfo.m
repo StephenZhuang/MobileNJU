@@ -23,11 +23,15 @@
 	 * @param password * password
 	 * @callback MCard_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password isV:(int)isV isReInput:(int)isReInput{
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-		[array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
+        if (code!=nil) {
+            [array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
+        }
 		[array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
 		[array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+        [array addObject:[NSString stringWithFormat:@"isReInput=%d",isReInput]];
+        [array addObject:[NSString stringWithFormat:@"isV=%d",isV]];
 		UpdateOne *updateone=[[UpdateOne alloc] init:@"MCardInfo" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
@@ -41,8 +45,8 @@
 	 * @param password * password
 	 * @callback MCard_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
-		UpdateOne *update=[self get:delegate selecter:select code:code account:account password:password];
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password isV:(int)isV isReInput:(int)isReInput{
+		UpdateOne *update=[self get:delegate selecter:select code:code account:account password:password isV:isV isReInput:isReInput ];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
 		return update;
 	}

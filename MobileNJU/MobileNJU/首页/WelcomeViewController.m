@@ -209,7 +209,7 @@
 
 
 - (IBAction)resignAllResponders:(id)sender {
-    if (sender==self.loginButton) {
+    if (sender==self.loginButton||sender==self.view||sender==self.loginView) {
         [self.usernameTextField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
@@ -236,12 +236,23 @@
 {
    
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-        CGRect loginViewFrame = CGRectMake(self.loginView.frame.origin.x, 0,self.loginView.frame.size.width, self.loginView.frame.size.height);
-        self.loginView.frame = loginViewFrame;
-        
-        
-        CGRect loginLogoFrame = CGRectMake(self.logoImage.frame.origin.x, -228,self.logoImage.frame.size.width, self.logoImage.frame.size.height);
-        self.logoImage.frame = loginLogoFrame;
+        if (self.view.bounds.size.height==480) {
+            CGRect loginViewFrame = CGRectMake(self.loginView.frame.origin.x, 0,self.loginView.frame.size.width, self.loginView.frame.size.height);
+            self.loginView.frame = loginViewFrame;
+            
+            
+            CGRect loginLogoFrame = CGRectMake(self.logoImage.frame.origin.x, -228,self.logoImage.frame.size.width, self.logoImage.frame.size.height);
+            self.logoImage.frame = loginLogoFrame;
+
+        } else {
+            CGRect loginViewFrame = CGRectMake(self.loginView.frame.origin.x, 50,self.loginView.frame.size.width, self.loginView.frame.size.height);
+            self.loginView.frame = loginViewFrame;
+            
+            
+            CGRect loginLogoFrame = CGRectMake(self.logoImage.frame.origin.x, -178,self.logoImage.frame.size.width, self.logoImage.frame.size.height);
+            self.logoImage.frame = loginLogoFrame;
+
+        }
         
         
     } completion:^(BOOL finished) {

@@ -10,6 +10,7 @@
 #import "AddShopVC.h"
 #import "ApiMMarketType.h"
 #import "ZsndMarket.pb.h"
+#import "ShoppingVC.h"
 #import "RDVTabBarController.h"
 
 @interface QCSlideViewController ()
@@ -30,7 +31,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.rdv_tabBarController setTabBarHidden:YES];
+    int location = self.slideSwitchView.rootScrollView.contentOffset.x/320;
+    ShoppingVC* vc = [self.viewControllers objectAtIndex:location];
+    [vc startRefresh];
 }
+
 
 - (void)viewDidLoad
 {
@@ -41,7 +46,7 @@
     
     self.title = @"跳蚤";
     
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
     
     [button setImage:[UIImage imageNamed:@"10-1跳蚤市场-添加"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(addNew) forControlEvents:UIControlEventTouchUpInside];
@@ -142,7 +147,7 @@
 {
     if ([[segue identifier]isEqualToString:@"add"]) {
         AddShopVC* add = (AddShopVC*)[segue destinationViewController];
-
+        
     }
 }
 - (void)showView:(UIViewController *)vc

@@ -10,4 +10,5 @@
 
 @interface ScheduleVC : BaseViewController
 @property (nonatomic,strong)NSArray* lessons;
+@property (nonatomic)CGRect adjustFrame;
 @end

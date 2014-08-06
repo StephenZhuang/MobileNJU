@@ -126,20 +126,20 @@ UIView* view;
 - (void)addMask
 {
 //    if (!_view) {
+    if (view!=nil) {
+        [view removeFromSuperview];
+    }
     [self.maskView setHidden:NO];
         CGRect frame = CGRectMake(0, -20, 0, 0);
     frame.size = self.navigationController.navigationBar.frame.size;
-
     if ([[[UIDevice currentDevice]systemVersion]floatValue]<7.0) {
         frame.size.height = frame.size.height+21;
     }
-        frame.size.height = frame.size.height+20;
-        view = [[UIView alloc]initWithFrame:frame];
-        [view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];
+    frame.size.height = frame.size.height+20;
+    view = [[UIView alloc]initWithFrame:frame];
+    [view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];
         [self.navigationController.navigationBar addSubview:view];
-//    } else{
-//        [view setHidden:NO];
-//    }
+
 
 }
 
@@ -190,6 +190,8 @@ UIView* view;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.loginIndicator removeFromSuperview];
+    [view removeFromSuperview];
+    [self removeMask];
 }
 /*
 #pragma mark - Navigation

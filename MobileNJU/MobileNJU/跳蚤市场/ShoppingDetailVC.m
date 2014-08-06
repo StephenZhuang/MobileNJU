@@ -62,23 +62,36 @@
     [self.footView addSubview:emptyView];
     
 }
-- (void)setIsSold
-{
-    
-}
-- (void)downShelf
-{
-    
-}
 
+- (void)disposeMessage:(Son *)son
+{
+    [self.loginIndicator removeFromSuperview];
+    if ([son getError]==0 ) {
+        if ([[son getMethod]isEqualToString:@"MSoldMarket"]) {
+            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+            if (ret.code==1) {
+                [ToolUtils showMessage:ret.msg];
+                [self.isSoldBt setEnabled:NO];
+            }
+        } else if ([[son getMethod]isEqualToString:@"MDelMarket"])
+        {
+            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+            if (ret.code==1) {
+                [ToolUtils showMessage:ret.msg];
+                [self.downShelfBt setEnabled:NO];
+            }
+        }
+    }
+}
+    
+    
 - (void)contact
 {
     
     UIActionSheet *sheet;
     // 判断是否支持相机
     sheet  = [[UIActionSheet alloc] initWithTitle:@"联系买家" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:self.market.phone
-              ,    self.market.qq
-, nil];
+              , [NSString stringWithFormat:@"QQ:%@",self.market.qq], nil];
     sheet.tag = 255;
     [sheet setDelegate:self];
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
@@ -89,7 +102,7 @@
         NSString* str = [NSString stringWithFormat:@"tel://%@",self.market.phone];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 
-    } else {
+    } else if (buttonIndex==1){
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = self.market.qq;
         [ToolUtils showMessage:@"已复制到您到剪切板"];
@@ -203,7 +216,32 @@
     return cell;
 }
 
+- (IBAction)downShelf:(id)sender {
+    [self loadShelf:self selecter:@selector(disposeMessage:) rssid:self.market.id];
+}
+- (IBAction)setIsSold:(id)sender {
+    [self loadSold:self selecter:@selector(disposeMessage:) rssid:self.market.id];
+}
 
+-(UpdateOne*)loadShelf:(id)delegate selecter:(SEL)select  rssid:(NSString*)rssid {
+    [self waiting:@"正在处理"];
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    [array addObject:[NSString stringWithFormat:@"id=%@",rssid==nil?@"":rssid]];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MDelMarket" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
+}
+
+-(UpdateOne*)loadSold:(id)delegate selecter:(SEL)select  rssid:(NSString*)rssid {
+    [self waiting:@"正在处理"];
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    [array addObject:[NSString stringWithFormat:@"id=%@",rssid==nil?@"":rssid]];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MSoldMarket" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

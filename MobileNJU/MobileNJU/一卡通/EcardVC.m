@@ -25,11 +25,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *endButton;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *remainLabel;
+@property (weak, nonatomic) IBOutlet UILabel *remainNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *unitLabel;
 @property (strong,nonatomic) NSString* startDate;
 @property (strong,nonatomic) NSString* endDate;
 @property(strong,nonatomic)UIButton* selectedButton;
 @property(strong,nonatomic)NSArray* detaiList;
-@property(nonatomic)int isV;
 @property(nonatomic)int isRe;
 @property (nonatomic)CGRect frame;
 @end
@@ -52,7 +53,6 @@
     [super viewDidLoad];
     [self initAlert];
     self.isRe=0;
-    self.isV=0;
     page=0;
     [self.maskView setHidden:YES];
     [self.alertView setHidden:!([ToolUtils getEcardId]==nil)];
@@ -77,7 +77,8 @@
     self.startDate = searchStartDate;
     if (self.alertView.isHidden) {
         [self waiting:@"正在读取"];
-        [self load:self selecter:@selector(disposeMessage:) code:@"" account:self.schIDText.text password:self.passwordText.text];
+        [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
+//        [self load:self selecter:@selector(disposeMessage:) code:@"" account:self.schIDText.text password:self.passwordText.text];
     } else {
         [self getCode];
     }
@@ -113,26 +114,26 @@
 - (void)getCode
 {
     [self.confirmCode setImage:[UIImage imageNamed:@"news_loading"]];
-    [self load:self selecter:@selector(disposeMessage:) code:nil account:@"1" password:@"1"];
+    [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:@"111" password:@"111" isV:0 isReInput:self.isRe];
+//    [self load:self selecter:@selector(disposeMessage:) code:nil account:@"1" password:@"1"];
 }
 
 
 
--(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
-    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-    if (code!=nil) {
-        [array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
-    }
-    [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
-    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
-    [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
-    [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
-    
-    UpdateOne *updateone=[[UpdateOne alloc] init:@"MCardInfo" params:array  delegate:delegate selecter:select];
-    [updateone setShowLoading:NO];
-    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
-    return updateone;
-}
+//-(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
+//    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+//    if (code!=nil) {
+//        [array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
+//    }
+//    [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
+//    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+//    [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
+//    [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
+//    UpdateOne *updateone=[[UpdateOne alloc] init:@"MCardInfo" params:array  delegate:delegate selecter:select];
+//    [updateone setShowLoading:NO];
+//    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+//    return updateone;
+//}
 
 
 - (void)disposeMessage:(Son *)son
@@ -142,22 +143,26 @@
         if ([[son getMethod]isEqualToString:@"MCardInfo"]) {
             MCardList_Builder* cardList = (MCardList_Builder*)[son getBuild];
             if (cardList.cardList.count>0) {
+                [self.dataArray removeAllObjects];
                 [self closeAlertView:nil];
                 self.isRe=1;
                 MCard* card = [cardList.cardList firstObject];
                 [self.nameLabel setText:card.name];
                 [self.remainLabel setText:card.total];
+                [self.unitLabel setHidden:NO];
+                [self.remainNameLabel setHidden:NO];
                 [self.tableView reloadData];
                 if (self.autoSearch.isOn)
                 {
                     [ToolUtils setEcardId:self.schIDText.text];
                     [ToolUtils setEcardPassword:self.passwordText.text];
                 }
+                [ToolUtils setIsVeryfy:1];
                 [self searchDetail:nil];
+                
             } else {
                 [self.confirmCode setImage:[UIImage imageWithData:cardList.img]];
-                self.isV=1;
-                
+            
             }
 
        } else if ([[son getMethod]isEqualToString:@"MCardHistory"])
@@ -179,11 +184,15 @@
                }
            }
            self.detaiList  = tmp;
+           if (page>1) {
+               [self doneWithView:_footer];
+           } else {
+               [self.tableView reloadData];
+           }
            
-            [self doneWithView:_footer];
            
        }
-    } else {
+    } else if ([son getError]==10021){
         [self getCode];
     }
 }
@@ -199,9 +208,7 @@
     
 }
 - (IBAction)searchDetail:(id)sender {
-    if (sender!=nil) {
-        page=0;
-    }
+
     if (self.schIDText.text.length==0) {
         [ToolUtils showMessage:@"请输入您的学号"];
         [self showAlertView:nil];
@@ -210,6 +217,10 @@
         [ToolUtils showMessage:@"请输入您的密码"];
         [self showAlertView:nil];
     } else {
+        if (sender!=nil) {
+            page=0;
+            self.detaiList = [[NSArray alloc]init];
+        }
         [self waiting:@"正在查询"];
         [[[[ApisFactory getApiMCardHistory]setPage:page pageCount:10]load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate account:self.schIDText.text password:self.passwordText.text] setShowLoading:NO];
 //        [self load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate];
@@ -232,7 +243,7 @@
          [array addObject:[NSString stringWithFormat:@"begin=%@",self.startDate]];
          [array addObject:[NSString stringWithFormat:@"end=%@",self.endDate]];
          [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
-         [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
+         [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
          [array addObject:[NSString stringWithFormat:@"page=%d",page]];
          [array addObject:[NSString stringWithFormat:@"limit=%d",20]];
          UpdateOne *updateone=[[UpdateOne alloc] init:@"MCardHistory" params:array  delegate:delegate selecter:select];         [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
@@ -244,7 +255,7 @@
 
 - (IBAction)showDataPicker:(UIButton *)sender {
     self.selectedButton = sender;
-    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择生日" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择日期" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     [picker setTag:6];
     [picker setActionSheetPickerStyle:IQActionSheetPickerStyleDatePicker];
     [picker showInView:self.view];
@@ -314,7 +325,9 @@
         [self.confirmCodeText resignFirstResponder];
         [self.schIDText resignFirstResponder];
         self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
-        [self load:self selecter:@selector(disposMessage:) code:self.confirmCodeText.text account:self.schIDText.text password:self.passwordText.text];
+//        [self load:self selecter:@selector(disposMessage:) code:self.confirmCodeText.text account:self.schIDText.text password:self.passwordText.text];
+        [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:self.confirmCodeText.text account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
+
     }
 }
 
@@ -324,6 +337,7 @@
     }
     [self.alertView setHidden:NO];
     [self.maskView setHidden:NO];
+    [self addMask];
 }
 
 - (IBAction)backToMain:(id)sender {
@@ -373,15 +387,27 @@
     // 使用日期格式器格式化日期、时间
     NSString *destDateString = [dateFormatter stringFromDate:pickerView.date];
     [self.selectedButton setTitle:destDateString forState:UIControlStateNormal];
-    if (self.selectedButton==self.startButton) {
-        [self.endButton setTitle:self.startButton.titleLabel.text forState:UIControlStateNormal];
-    }
-    [dateFormatter setDateFormat:@"yyyy/mm/dd"];
+ 
+    [dateFormatter setDateFormat:@"YYYY/MM/dd"];
     if (self.selectedButton==self.startButton) {
         self.startDate = [dateFormatter stringFromDate:pickerView.date];
-        
+        NSDate *end = [dateFormatter dateFromString:self.endDate];
+        NSDate *start = [dateFormatter dateFromString:self.startDate];
+        NSTimeInterval timeBetween = [end timeIntervalSinceDate:start];
+        if (timeBetween<0) {
+            self.endDate  = self.startDate;
+            [self.endButton setTitle:self.startButton.titleLabel.text forState:UIControlStateNormal];
+        }
     } else {
         self.endDate = [dateFormatter stringFromDate:pickerView.date];
+        NSDate *end = [dateFormatter dateFromString:self.endDate];
+        NSDate *start = [dateFormatter dateFromString:self.startDate];
+        NSTimeInterval timeBetween = [end timeIntervalSinceDate:start];
+        if (timeBetween<0) {
+            self.startDate  = self.endDate;
+            [self.startButton setTitle:self.endButton.titleLabel.text forState:UIControlStateNormal];
+
+        }
     }
 }
 #pragma mark - Table view delegate

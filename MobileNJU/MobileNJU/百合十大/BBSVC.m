@@ -13,19 +13,29 @@
 @interface BBSVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSArray* colorArray;
 @property (nonatomic,strong)NSArray* newsList;
+@property (nonatomic)int refreshCount;
 @end
+
 
 @implementation BBSVC
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.refreshCount = 0;
     [self setTitle:@"百合十大"];
     self.colorArray = [[NSArray alloc]initWithObjects:@"一",@"二",@"三",@"四",@"五",@"六",@"七",@"八",@"九",@"十", nil];
+    
     // Do any additional setup after loading the view.
 //    [self waiting];
 //    [[ApisFactory getApiMBaiheNewsList] load:self selecter:@selector(disposMessage:)];
     
+}
+
+- (void) viewWillAppear: (BOOL)inAnimated {
+    NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+    if(selected)
+        [self.tableView deselectRowAtIndexPath:selected animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +59,7 @@
     if ([son getError] == 0) {
         //判断接口名
         if ([[son getMethod] isEqualToString:@"MBaiheNewsList"]) {
+            self.refreshCount ++;
             MNewsList_Builder* list = (MNewsList_Builder*)[son getBuild];
             self.newsList = list.newsList;
             [self doneWithView:_header];
@@ -105,14 +116,19 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    BBSCell* bbsCell = (BBSCell*)cell;
-    bbsCell.Content.transform = CGAffineTransformMakeTranslation(300, 0);
-    [UIView animateWithDuration:0.3 delay:indexPath.row*0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        bbsCell.Content.transform = CGAffineTransformMakeTranslation(0, 0);
-    } completion:^(BOOL finished) {
-        
-    }];
+    if (self.refreshCount>1) {
+        return;
+    } else {
+        BBSCell* bbsCell = (BBSCell*)cell;
+        bbsCell.Content.transform = CGAffineTransformMakeTranslation(300, 0);
+        [UIView animateWithDuration:0.3 delay:indexPath.row*0.1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            bbsCell.Content.transform = CGAffineTransformMakeTranslation(0, 0);
+        } completion:^(BOOL finished) {
+            
+        }];
 
+    }
+  
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

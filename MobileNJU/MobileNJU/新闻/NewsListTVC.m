@@ -24,7 +24,11 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-
+- (void) viewWillAppear: (BOOL)inAnimated {
+    NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+    if(selected)
+        [self.tableView deselectRowAtIndexPath:selected animated:NO];
+}
 
 - (void)viewDidLoad
 {
@@ -81,7 +85,7 @@
                 [self doneWithView:_footer];
             }
         }
-    }
+    } 
 }
 
 //       // Uncomment the following line to preserve selection between presentations.

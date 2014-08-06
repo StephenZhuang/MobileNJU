@@ -26,6 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    [self setUrl:[NSURL URLWithString:@"http://114.215.196.179/nju/vote/1407220561836.html?userid=1c947179-eb40-11e3-b696-ac853d9d52b1&verify=1"]];
     [self setTitle:@"详情"];
     [self.webView setDelegate:self];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];

@@ -25,11 +25,12 @@
 }
 - (void)loadDic:(NSDictionary *)dic
 {
+    
     self.start = [[dic objectForKey:@"start"]integerValue];
     self.length = [[dic objectForKey:@"length"]integerValue];
     self.day = [[dic objectForKey:@"day"]integerValue];
     self.name = [dic objectForKey:@"name"];
-    
+     
     self.location = [dic objectForKey:@"location"];
     self.teacher = [dic objectForKey:@"teacher"];
     self.week = [dic objectForKey:@"week"];

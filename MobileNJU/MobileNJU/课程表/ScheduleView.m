@@ -37,7 +37,6 @@
 - (void)initDate
 {
     NSArray* dayLabels = [NSArray arrayWithObjects:self.dayOne,self.dayTwo,self.dayThree,self.dayFour,self.dayFive,self.daySex,self.daySeven, nil];
-
     
     NSCalendar*calendar = [NSCalendar currentCalendar];
     NSDate* date = [NSDate date];
@@ -75,6 +74,26 @@
 
 
 
+- (BOOL) judge:(ScheduleLesson*) exitLesson newLesson:(ScheduleLesson*)newLesson
+{
+    if (exitLesson.day!=newLesson.day) {
+        return NO;
+    } else if (exitLesson.start<=newLesson.start&& (newLesson.start-exitLesson.start)<exitLesson.length)
+    {
+        return YES;
+    } else if (newLesson.start<=exitLesson.start&&(exitLesson.start-newLesson.start)<newLesson.length)
+    {
+        return YES;
+    } else if (exitLesson.start<=newLesson.start&&(exitLesson.start+exitLesson.length-1)>=(newLesson.start+newLesson.length-1))
+    {
+        return YES;
+        
+    } else if (exitLesson.start>=newLesson.start&&(exitLesson.start+exitLesson.length-1)<=(newLesson.start+newLesson.length-1))
+    {
+        return YES;
+    }
+    return NO;
+}
 
 
 
@@ -83,30 +102,109 @@
     int lessonId=0;
     self.buttonList = [[NSMutableArray alloc]init];
     for (ScheduleLesson* lesson in lessons) {
+        NSMutableArray* removeButtonList = [[NSMutableArray alloc]init];
         int flag = 1;
         for (LessonButton* button in self.buttonList) {
             ScheduleLesson* buttonLesson = button.myLesson;
-            if (buttonLesson.day==lesson.day&&buttonLesson.start<=lesson.start&&(buttonLesson.start+buttonLesson.length)>lesson.start) {
-                if (button.lessonArr.count==1) {
+            if ([self judge:buttonLesson newLesson:lesson]  ) {
+                [button.lessonArr addObject:lesson];
+                if (buttonLesson.length<lesson.length) {
+                    button.myLesson = lesson;
+                }
+                int currentStart = buttonLesson.start;
+                int currentEnd = buttonLesson.start+buttonLesson.length-1;
+                int currentLength = buttonLesson.length;
+                if (buttonLesson.start > lesson.start) {
+                    currentStart = lesson.start;
+                }
+                if (currentEnd < lesson.start+lesson.length-1) {
+                    currentEnd = lesson.start+lesson.length-1;
+                }
+                ScheduleLesson* virtualLesson =  [[ScheduleLesson alloc]init];
+                virtualLesson.day = lesson.day;
+                virtualLesson.start = currentStart;
+                virtualLesson.length = currentLength;
+                currentLength = currentEnd-currentStart+1;
+                for (LessonButton* checkButton in self.buttonList) {
+                    if (checkButton!=button) {
+                        ScheduleLesson* checkLesson = checkButton.myLesson;
+                        if ([self judge:virtualLesson newLesson:checkLesson]) {
+                            if (button.myLesson.length<checkLesson.length) {
+                                button.myLesson = checkLesson;
+                            }
+                            [removeButtonList addObject:checkButton];
+                            [checkButton removeFromSuperview];
+                            for (ScheduleLesson* lesson in button.lessonArr) {
+                                if ([checkButton.lessonArr indexOfObject:lesson]==NSNotFound) {
+                                    [checkButton.lessonArr addObject:lesson];
+                                }
+                            }
+                            [button.lessonArr addObjectsFromArray:checkButton.lessonArr];
+                            if (currentStart > checkLesson.start) {
+                                currentStart = lesson.start;
+                            }
+                            if (currentEnd < checkLesson.start+checkLesson.length-1) {
+                                currentEnd = lesson.start+lesson.length-1;
+                            }
+                            currentLength = currentEnd-currentStart+1;                    }
+                    } else {
+                        NSLog(@"重复");
+                    }
+             
+                }
+                [button.lessonNameLabel removeFromSuperview];
+                [button.locationLabel removeFromSuperview];
+                [button removeFromSuperview];
+                CGRect frame = CGRectMake(STARTX+(lesson.day-1)*WIDTH, STARTY+(currentStart
+                                                                            -1)*HEIGHT, WIDTH, HEIGHT*currentLength);
+                button.frame  = frame;
+                UIButton *touchButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT*currentLength)];
+                [touchButton setTitle:@"" forState:UIControlStateNormal];
+                [touchButton setBackgroundColor:[UIColor clearColor]];
+                touchButton.backgroundColor = [button getColor];
+                CGRect nameFrame = CGRectMake(3, 7, WIDTH-6, HEIGHT*lesson.length-22);
+                VerticallyAlignedLabel *lessonNameLabel = [[VerticallyAlignedLabel alloc]initWithFrame:nameFrame];
+                [lessonNameLabel setFont:[UIFont fontWithName:@"Helvetica" size:11]];
+                [lessonNameLabel setText:button.myLesson.name];
+                [lessonNameLabel setTextColor:[UIColor whiteColor]];
+                // 0代表不限制行数
+                [lessonNameLabel setNumberOfLines:0];
+                [lessonNameLabel setVerticalAlignment:VerticalAlignmentTop];
+                // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
+                //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
+                
+                CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-30, WIDTH-6, 30);
+                VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
+                [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
+                [locationLabel setNumberOfLines:0];
+                [locationLabel setVerticalAlignment:VerticalAlignmentBottom];
+                [locationLabel setText:button.myLesson.location];
+                [locationLabel setTextColor:[UIColor whiteColor]];
+                [button addSubview:touchButton];
+                [button setMyButton:touchButton];
+                [button addSubview:lessonNameLabel];
+                [button addSubview:locationLabel];
+                button.locationLabel = locationLabel;
+                button.lessonNameLabel = lessonNameLabel;
+                button.touchButton = touchButton;
+                [button setNeedsDisplay];
+                [self addSubview:button];
+                
+                if (button.lessonArr.count>=2) {
                     CGRect frame = CGRectMake(button.frame.size.width-8.5, 0, 8.5, 7.5);
                     UIImageView* img1 = [[UIImageView alloc]initWithFrame:frame];
                     [img1 setImage:[UIImage imageNamed:@"09课程表-折叠课程表-右上角三角2"]];
                     [button addSubview:img1];
-                    
                     UIImageView* img2 = [[UIImageView alloc]initWithFrame:frame];
                     [img2 setImage:[UIImage imageNamed:@"09课程表-折叠课程表-右上角三角1"]];
                     [button addSubview:img2];
-
                 }
-                [button.lessonArr addObject:lesson];
                 flag=0;
-                
-                break;
             }
-            
         }
-        if (flag) {
-            
+        [self.buttonList removeObjectsInArray:removeButtonList];
+
+        if (flag==1) {
             CGRect frame = CGRectMake(STARTX+(lesson.day-1)*WIDTH, STARTY+(lesson.start-1)*HEIGHT, WIDTH, HEIGHT*lesson.length);
             LessonButton* lessonBt = [[LessonButton alloc]initWithFrame:frame];
             lessonBt.delegate = delegate;
@@ -129,7 +227,6 @@
             // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
             //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
             
-            
             CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-30, WIDTH-6, 30);
             VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
             [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
@@ -143,6 +240,9 @@
             [lessonBt setMyButton:button];
             [lessonBt addSubview:lessonNameLabel];
             [lessonBt addSubview:locationLabel];
+            lessonBt.locationLabel = locationLabel;
+            lessonBt.lessonNameLabel = lessonNameLabel;
+            lessonBt.touchButton = button;
             [self.buttonList addObject:lessonBt];
             [self addSubview:lessonBt];
 

@@ -635,7 +635,7 @@
                                 <sections/>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Skv-Bp-C4F">
-                                <rect key="frame" x="0.0" y="520" width="320" height="40"/>
+                                <rect key="frame" x="0.0" y="520" width="320" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GeP-AT-0gY">
@@ -648,6 +648,9 @@
                                             <color key="titleColor" red="0.43529411759999997" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="highlighted" backgroundImage="purpleButtonhighlighted"/>
+                                        <connections>
+                                            <action selector="downShelf:" destination="iNC-oM-Snk" eventType="touchUpInside" id="WAx-ch-cAQ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqg-ga-j4f">
                                         <rect key="frame" x="165" y="0.0" width="145" height="40"/>
@@ -659,12 +662,15 @@
                                             <color key="titleColor" red="0.43529411764705883" green="0.43529411764705883" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="highlighted" backgroundImage="purpleButtonhighlighted"/>
+                                        <connections>
+                                            <action selector="setIsSold:" destination="iNC-oM-Snk" eventType="touchUpInside" id="EaA-FJ-TdB"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="SlK-G6-it3"/>
-                                    <constraint firstAttribute="height" constant="40" id="Yk5-az-3kO"/>
+                                    <constraint firstAttribute="height" constant="48" id="Yk5-az-3kO"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -674,7 +680,7 @@
                             <constraint firstItem="Dm8-CQ-l9g" firstAttribute="top" secondItem="QnM-w5-UHD" secondAttribute="top" id="A0g-9a-WcD"/>
                             <constraint firstItem="Skv-Bp-C4F" firstAttribute="leading" secondItem="QnM-w5-UHD" secondAttribute="leading" id="LSZ-d3-xnv"/>
                             <constraint firstAttribute="trailing" secondItem="Dm8-CQ-l9g" secondAttribute="trailing" id="Q3g-gj-nQj"/>
-                            <constraint firstItem="I6A-MB-gFG" firstAttribute="top" secondItem="Skv-Bp-C4F" secondAttribute="bottom" constant="8" id="YhN-jG-m5Z"/>
+                            <constraint firstItem="I6A-MB-gFG" firstAttribute="top" secondItem="Skv-Bp-C4F" secondAttribute="bottom" id="YhN-jG-m5Z"/>
                             <constraint firstAttribute="trailing" secondItem="Skv-Bp-C4F" secondAttribute="trailing" id="e0Z-ai-O0p"/>
                             <constraint firstItem="Dm8-CQ-l9g" firstAttribute="leading" secondItem="QnM-w5-UHD" secondAttribute="leading" id="vQM-0b-Oa2"/>
                         </constraints>

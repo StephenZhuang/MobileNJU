@@ -25,8 +25,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong,nonatomic)NSString* account;
 @property(strong,nonatomic)NSString* password;
-@property(nonatomic)int isV;
 @property(nonatomic)int isRe;
+@property (nonatomic,strong) UIImageView* imgView;
 @property (nonatomic)CGRect frame;
 @end
 
@@ -48,7 +48,6 @@
     [self initNavigationBar];
     [self loadColor];
     [self loadSavedState];
-    self.isV = 0;
     self.isRe=0;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
 
@@ -76,9 +75,23 @@
 - (void)textFieldDidChange:(NSNotification *)note
 {
     NSLog(@"%@",self.schIdTextField.text);
-    if ([self.schIdTextField.text hasPrefix:@"Mg"]&&self.isV==0) {
+    if ([self.schIdTextField.text hasPrefix:@"Mg"]) {
         [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+    } else {
+        [self removeCode];
     }
+}
+- (void)removeCode
+{
+    [self.codeField setHidden:YES];
+    
+    [self.codeField removeFromSuperview];
+    self.codeField = nil;
+    [self.imgView removeFromSuperview];
+    [self.imgView setHidden:YES];
+    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 0);
+    
+    
 }
 - (void)loadSavedState
 {
@@ -107,7 +120,7 @@
     [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
-    [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
+    [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MTermList" params:array  delegate:delegate selecter:select];
     [updateone setShowLoading:NO];
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
@@ -120,6 +133,7 @@
     [self.loginIndicator removeFromSuperview];
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
+            [ToolUtils setIsVeryfy:1];
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
             if (termList.termList.count==0) {
                 if (self.alertView.isHidden) {
@@ -211,7 +225,6 @@
 - (void)addCode:(NSData*)img
 {
     
-    self.isV = 1;
     
     self.alertView.searchBt.transform = CGAffineTransformMakeTranslation(0, 60);
     self.codeField = [[UITextField alloc]init];
@@ -227,6 +240,7 @@
     UIImageView* imgView = [[UIImageView alloc]initWithFrame:codeFrame];
     [imgView setImage:[UIImage imageWithData:img]];
     [self.alertView addSubview:imgView];
+    self.imgView = imgView;
     
 }
 #pragma mark textFieldDelegate

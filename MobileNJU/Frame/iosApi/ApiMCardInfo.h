@@ -24,7 +24,7 @@
 	 * @param account * account
 	 * @param password * password
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password;
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password isV:(int)isV isReInput:(int)isReInput;
 	/**
 	 *  一卡通余额 /mobile?methodno=MCardInfo&debug=1&deviceid=1&userid=&verify=&account=&password=
 	 * @param delegate 回调类
@@ -34,6 +34,6 @@
 	 * @param password * password
 	 * @callback MCard_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password;
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password isV:(int)isV isReInput:(int)isReInput;
 
 @end

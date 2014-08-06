@@ -49,8 +49,8 @@
     NSArray *sharePlatforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_SINAWEIBO,FRONTIA_SOCIAL_SHARE_PLATFORM_QQWEIBO,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN,FRONTIA_SOCIAL_SHARE_PLATFORM_KAIXIN,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_EMAIL,FRONTIA_SOCIAL_SHARE_PLATFORM_SMS,FRONTIA_SOCIAL_SHARE_PLATFORM_COPY,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE];
     FrontiaShare *share = [Frontia getShare];
     [share registerQQAppId:@"100358052" enableSSO:YES];
-    [share registerWeixinAppId:@"wx712df8473f2a1dbe"];
-
+    [share registerWeixinAppId:@"wx277782943f4c36be"];
+    [share registerSinaweiboAppId:@"306527345"];
     [share showShareMenuWithShareContent:content displayPlatforms:sharePlatforms supportedInterfaceOrientations:UIInterfaceOrientationMaskAll isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
 }
 
