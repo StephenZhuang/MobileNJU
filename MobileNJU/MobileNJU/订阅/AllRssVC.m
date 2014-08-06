@@ -49,10 +49,15 @@
         if ([[son getMethod]isEqualToString:@"MAllRss"]) {
             MRssList_Builder* builder = (MRssList_Builder*)[son getBuild];
             self.allRss = builder.listList;
-            
+            [self doneWithView:_header];
+
+        } else if ([[son getMethod]isEqualToString:@"MRss"]||[[son getMethod]isEqualToString:@"MRssCancel"])
+        {
+            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+//            [ToolUtils showMessage:ret.msg];
+//            [_header beginRefreshing];
         }
     }
-    [self doneWithView:_header];
 }
 
 #pragma -mark tableViewDelegate
@@ -79,15 +84,25 @@
     {
         if ([rss.id isEqualToString:id])
         {
-            if (rss.state==1)
+            if (rss.state==0)
             {
-               [[ApisFactory getApiMRss]load:self selecter:@selector(disposMessage:) rssid:id];
+               [[[ApisFactory getApiMRss]load:self selecter:@selector(disposMessage:) rssid:id] setShowLoading:NO];
             } else {
-                
+                [self load:self selecter:@selector(disposMessage:) rssid:id];
             }
             
         }
     }
+}
+
+
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  rssid:(NSString*)rssid {
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    [array addObject:[NSString stringWithFormat:@"rssid=%@",rssid==nil?@"":rssid]];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MRssCancel" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
 }
 /*
 #pragma mark - Navigation

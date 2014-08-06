@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *creditLabel;
 @property(nonatomic,assign) id<GradeCellChooseDelegate> delegate;
 @property (nonatomic)BOOL isTicked;
-
 - (void) addLineForLabel;
 - (void)addBorder;
 - (void)setTick:(BOOL)tick;

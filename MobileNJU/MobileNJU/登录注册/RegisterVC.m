@@ -27,6 +27,9 @@
 {
     [super viewDidLoad];
     [self setTitle:@"注册"];
+    if (self.myDelegate==nil) {
+        [self.phoneNumField setText:[ToolUtils getAccount]];
+    }
     // Do any additional setup after loading the view.
 }
 
@@ -36,6 +39,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)getCode:(id)sender {
+    [self waiting:@"正在发送.."];
     if ([ToolUtils checkTel:self.phoneNumField.text]) {
         [[ApisFactory getApiMGetMobileVerify]load:self selecter:@selector(disposMessage:) phone:self.phoneNumField.text];
     }
@@ -45,7 +49,8 @@
 //#warning just for test
 //    [self login];
 //    return;
-//    
+//
+    
     if (self.passwordField.text.length==0) {
         [self showAlert:@"密码不得为空"];
         return;
@@ -58,6 +63,7 @@
         [self showAlert:@"请先验证"];
         return;
     }
+    [self waiting:@"注册中..."];
     NSString* password = [mMD5 md5s:self.passwordField.text];
 
     
@@ -66,7 +72,7 @@
 }
 - (void)disposMessage:(Son *)son
 {
-    
+    [self.loginIndicator removeFromSuperview];
     if ([son getError]==0) {
         if ([[son getMethod] isEqualToString:@"MGetMobileVerify"]) {
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
@@ -85,8 +91,31 @@
             [ToolUtils setNickname:user.nickname];
             [ToolUtils setVerify:user.verify];
             [self login];
+        } else
+        if ([[son getMethod] isEqualToString:@"MLogin"])
+        {
+            MUser_Builder *user = (MUser_Builder *)[son getBuild];
+            NSLog(@"account%@  nickname%@ verify  %@ ",user.account,user.nickname,user.verify);
+            [ToolUtils setVerify:user.verify];
+            [ToolUtils setLoginId:user.id];
+            if (user.headImg.length>0) {
+                [ToolUtils setHeadImg:user.headImg];
+            }
+            NSArray *array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],@"device=IOS",nil];
+            [Frame setAutoAddParams:array];
+            [ToolUtils setIsLogin:YES];
+            [ToolUtils setAccount:self.phoneNum];
+            [ToolUtils setPassword:self.passwordField.text];
+            [self.myDelegate login];
+            [self.navigationController popViewControllerAnimated:NO];
+            
         }
     }
+}
+- (IBAction)resignAll:(id)sender {
+    [self.phoneNumField resignFirstResponder];
+    [self.passwordField resignFirstResponder];
+    [self.codeField resignFirstResponder];
 }
 
 - (void) timer
@@ -108,10 +137,12 @@
 
 - (void)login
 {
-    [ToolUtils setIsLogin:YES];
-    [self.myDelegate login];
-    [self.navigationController popViewControllerAnimated:NO];
+    [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.phoneNum password:
+     [mMD5 md5s:self.passwordField.text]
+                             pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"] device:@"ios"];
+
 }
+
 /*
 #pragma mark - Navigation
 

@@ -14,5 +14,6 @@
 @property (weak,nonatomic) NSString* menuName;
 @property (weak, nonatomic) IBOutlet UILabel *menuTitle;
 @property (weak, nonatomic) IBOutlet UILabel *menuSubTitle;
-
+@property (weak, nonatomic) IBOutlet UIView *redCircle;
+-(void)addUnread;
 @end

@@ -8,5 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BBSDetail.h"
+#import "ZsndNews.pb.h"
 @interface NewsDetailVC : BBSDetail
+@property (nonatomic,strong)MNews* currentNew;
+@property (nonatomic,strong)UIImage* img;
 @end

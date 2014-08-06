@@ -17,5 +17,4 @@
 
 @property (nonatomic,strong)NSArray* lessonList;
 @property (weak, nonatomic) IBOutlet UILabel *gpaLabel;
-@property (weak, nonatomic) IBOutlet UILabel *commentLabel;
 @end

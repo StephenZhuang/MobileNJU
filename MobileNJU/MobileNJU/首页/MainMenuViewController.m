@@ -18,6 +18,8 @@
 #import "QCSlideViewController.h"
 #import "ShoppingVC.h"
 #import "ProcedureDetailVC.h"
+#import "ZsndNews.pb.h"
+#define NEWSCOUNT 4
 @interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
 @property (weak, nonatomic) IBOutlet UIScrollView *pageScroller;
@@ -28,13 +30,14 @@
 @property (strong,nonatomic)UIImageView* newImage;
 @property (strong,nonatomic)UIImageView* touchButton;
 @property (strong,nonatomic)UIImageView* cloudBack;
-@property (strong,nonatomic)MUnread_Builder* unread;
 @property (strong,nonatomic)NSArray* focusList;
 @property (strong,nonatomic)NSMutableArray* imageArrays;
 @property (strong,nonatomic)NSMutableArray* imageArraysSelected;
 @property (strong,nonatomic)NSArray* newsImgList;
 @property (strong,nonatomic)NSString* tempUrl;
-
+@property (strong,nonatomic)NSMutableArray* newsList;
+@property (strong,nonatomic)NSArray* allNews;
+@property (strong,nonatomic)NSMutableArray* UIImageViewList;
 @end
 
 @implementation MainMenuViewController
@@ -64,19 +67,30 @@ static NSArray* descriptions;
     
 }
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
+//    [self.tableView reloadData];
 }
 - (void)loadIndex
 {
-    [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
+    if (!self.offline) {
+        [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
+        [[[ApisFactory getApiMNewsList]setPage:1 pageCount:10]load:self selecter:@selector(disposeMessage:)];
+    }
 }
 
 - (void)disposeMessage:(Son*)son
 {
     if ([son getError]==0) {
-        if ([[son getMethod] isEqualToString:@"MIndex"]) {
+        if ([[son getMethod] isEqualToString:@"MNewsList"]) {
+            self.newsList = [[NSMutableArray alloc]init];
+            //获得返回类
+            MNewsList_Builder *newsList = (MNewsList_Builder *)[son getBuild];
+            self.allNews = newsList.newsList;
+            
+        } else if ([[son getMethod] isEqualToString:@"MIndex"]) {
             MIndex_Builder* index = (MIndex_Builder*)[son getBuild];
             NSMutableArray* image = [[NSMutableArray alloc]init];
             NSMutableArray* names = [[NSMutableArray alloc]init];
@@ -85,7 +99,7 @@ static NSArray* descriptions;
                 [names addObject:model.name];
                 [image addObject:model.img];
                 [details addObject:model.desc];
-                if ([model.name isEqualToString:@"办理流程"]) {
+                if ([model.desc hasSuffix:@"html"]) {
                     self.tempUrl = model.desc;
                 }
             }
@@ -109,19 +123,28 @@ static NSArray* descriptions;
             NSMutableArray* imgList = [[NSMutableArray alloc] init];
             for (MFocus *focus in index.focusList) {
                 [imgList addObject:focus.img];
-                NSLog(@"website %@",focus.id);
             }
             [ToolUtils setImgList:imgList];
             [self loadTableData];
             [self.tableView reloadData];
-            [self addUnreadMsg];
-            [self prepareForNews];
-        } else if ([[son getMethod]isEqualToString:@"MUnreadModule"])
-        {
-            self.unread = (MUnread_Builder*)[son getBuild];
-            [self addUnreadMsg];
+            
+            
+            
+            if (self.newsImgList.count==0) {
+                self.newsImgList = imgList;
+                [self prepareForNews];
+            } else {
+                self.newsImgList = imgList;
+                [self.photoList removeAllObjects];
+                for (int i = 1; i<=NEWSCOUNT; i++) {
+                    [self loadNewsCache:i];
+                }
+
+            }
         }
     }
+
+    
 }
 #warning 这里需要加上从服务器载下来的临时功能
 - (void)loadTableData
@@ -161,60 +184,6 @@ static NSArray* descriptions;
     }
     [self.tableView reloadData];
 }
-- (void)addUnreadMsg
-{
-    if (self.unread!=nil&&buttonImages.count>0) {
-        NSLog(@"不为nil");
-        if (self.unread.module1>0) {
-            NSIndexPath* index = [NSIndexPath indexPathForRow:[buttonImages indexOfObject:@"南呱"] inSection:0];
-            HomeCell* cell = (HomeCell*)[self.tableView cellForRowAtIndexPath:index];
-            [cell.menuButton setImage: [UIImage imageNamed:@"南呱消息"] forState:UIControlStateNormal];
-            [cell.menuButton setImage:[UIImage imageNamed:@"南呱消息选中"]  forState:UIControlStateHighlighted];
-            [cell.menuButton setImage:[UIImage imageNamed:@"南呱消息选中"] forState:UIControlStateSelected];
-        } else {
-            NSIndexPath* index = [NSIndexPath indexPathForRow:[buttonImages indexOfObject:@"南呱"] inSection:0];
-            HomeCell* cell = (HomeCell*)[self.tableView cellForRowAtIndexPath:index];
-            [cell.menuButton setImage: [UIImage imageNamed:@"南呱"] forState:UIControlStateNormal];
-            [cell.menuButton setImage:[UIImage imageNamed:@"南呱选中"]  forState:UIControlStateHighlighted];
-            [cell.menuButton setImage:[UIImage imageNamed:@"南呱选中"] forState:UIControlStateSelected];
-        }
-        if (self.unread.module2>0) {
-
-            NSIndexPath* index = [NSIndexPath indexPathForRow:[buttonImages indexOfObject:@"树洞"] inSection:0];
-            HomeCell* cell = (HomeCell*)[self.tableView cellForRowAtIndexPath:index];
-            [cell.menuButton setImage: [UIImage imageNamed:@"树洞消息"] forState:UIControlStateNormal];
-            [cell.menuButton setImage:[UIImage imageNamed:@"树洞消息选中"]  forState:UIControlStateHighlighted];
-            [cell.menuButton setImage:[UIImage imageNamed:@"树洞消息选中"] forState:UIControlStateSelected];
-        } else {
-            NSIndexPath* index = [NSIndexPath indexPathForRow:[buttonImages indexOfObject:@"树洞"] inSection:0];
-            HomeCell* cell = (HomeCell*)[self.tableView cellForRowAtIndexPath:index];
-            [cell.menuButton setImage: [UIImage imageNamed:@"树洞"] forState:UIControlStateNormal];
-            [cell.menuButton setImage:[UIImage imageNamed:@"树洞选中"]  forState:UIControlStateHighlighted];
-            [cell.menuButton setImage:[UIImage imageNamed:@"树洞选中"] forState:UIControlStateSelected];
-        }
-        if (self.unread.module3>0) {
-//            [self.subscribeButton setImage: [UIImage imageNamed:@"订阅消息"] forState:UIControlStateNormal];
-//            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅消息选中"]  forState:UIControlStateHighlighted];
-//            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅消息选中"] forState:UIControlStateSelected];
-        } else {
-//            [self.subscribeButton setImage: [UIImage imageNamed:@"订阅"] forState:UIControlStateNormal];
-//            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅选中"]  forState:UIControlStateHighlighted];
-//            [self.subscribeButton setImage:[UIImage imageNamed:@"订阅选中"] forState:UIControlStateSelected];
-        }
-        if (self.unread.module4>0) {
-
-//            [self.activityButton setImage: [UIImage imageNamed:@"活动消息"] forState:UIControlStateNormal];
-//            [self.activityButton setImage:[UIImage imageNamed:@"活动消息选中"]  forState:UIControlStateHighlighted];
-//            [self.activityButton setImage:[UIImage imageNamed:@"活动消息选中"] forState:UIControlStateSelected];
-        } else {
-//            [self.activityButton setImage: [UIImage imageNamed:@"活动"] forState:UIControlStateNormal];
-//            [self.activityButton setImage:[UIImage imageNamed:@"活动选中"]  forState:UIControlStateHighlighted];
-//            [self.activityButton setImage:[UIImage imageNamed:@"活动选中"] forState:UIControlStateSelected];
-        }
-        
-
-    }
-   }
 
 - (void)didReceiveMemoryWarning
 {
@@ -296,13 +265,35 @@ static NSArray* descriptions;
         [cell.menuButton addTarget:self action:@selector(
                                                          goToDetail
                                                 :) forControlEvents:UIControlEventTouchUpInside];
+        if (self.unread.module2>0&&[[functionNames objectAtIndex:indexPath.row]isEqualToString:@"树洞"]) {
+            [cell addUnread];
+        } else {
+            [cell.redCircle setHidden:YES];
+        }
 
     } else {
         [cell.menuButton setImage:nil forState:UIControlStateNormal];
         [cell.menuTitle setText:@""];
         [cell.menuSubTitle setText:@""];
+        [cell.redCircle setHidden:YES];
     }
+    
    return cell;
+}
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [((HomeCell*)cell).redCircle setHidden:YES];
+    if (indexPath.row<=[buttonImages count]-1)
+    {
+        if (self.unread.module2>0&&[[functionNames objectAtIndex:indexPath.row]isEqualToString:@"树洞"]) {
+            [(HomeCell*)cell addUnread];
+        } else {
+            [((HomeCell*)cell).redCircle setHidden:YES];
+        }
+    }
+    
+   
+
 }
 
 
@@ -311,6 +302,7 @@ static NSArray* descriptions;
     [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
     MenuButton* menuButton = (MenuButton*)sender;
     if ([menuButton.desitination isEqualToString:@"树洞"]) {
+        self.unread=nil;
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
         TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
         [self.navigationController pushViewController:vc animated:YES];
@@ -343,17 +335,6 @@ static NSArray* descriptions;
 }
 #pragma mark 新闻区
 
-/*
- 加载图片 */
--(void)loadPhotos
-{
-    for (int i = 1; i < 3 ; i ++){
-        [self loadNewsCache:i];
-    }
-}
-
-
-
 -(UIImage *)getEmptyUIImage
 {
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.pageScroller.frame.size.width,
@@ -367,12 +348,16 @@ static NSArray* descriptions;
 //重新加载图片
 - (void)reloadNews:(NSInteger)site
 {
-    UIImageView *imageView = [[self.pageScroller subviews] objectAtIndex:site+1];
+    UIImageView *imageView = [self.UIImageViewList objectAtIndex:site-1];;
     if (self.focusList.count>site) {
         MFocus* focus = [self.focusList objectAtIndex:site-1];
-        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:320 height:217]];
+        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:320 height:217] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self.photoList addObject:image];
+        }];
     } else {
-        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site]width:320 height:217]];
+        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site]width:320 height:217] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self.photoList addObject:image];
+        }];
     }
 }
 
@@ -387,11 +372,12 @@ static NSArray* descriptions;
 //加载图片至scrollerView
 - (void)loadNews
 {
-    NSInteger pageCount = [self.photoList count];
+    NSInteger pageCount = NEWSCOUNT;
     self.pageController.currentPage = 0;
     self.pageController.numberOfPages = pageCount;
     CGSize pageScrollViewSize = self.pageScroller.frame.size;
     self.pageScroller.contentSize = CGSizeMake(pageScrollViewSize.width * self.photoList.count, pageScrollViewSize.height);
+    self.UIImageViewList = [[NSMutableArray alloc]init];
     for (NSInteger i = 0; i<pageCount; i++)
     {
         CGRect frame;
@@ -403,12 +389,11 @@ static NSArray* descriptions;
         pageView.contentMode = UIViewContentModeScaleAspectFit;
         [pageView setClipsToBounds:YES];
         [self.pageScroller addSubview:pageView];
+        [self.UIImageViewList addObject:pageView];
     }
 }
 - (UIImageView *)newImage{
     if (!_newImage) {
-        
-        
         NSInteger page = self.pageController.currentPage;
         MFocus* focus = [self.focusList objectAtIndex:page];
         CGRect frame;
@@ -418,12 +403,9 @@ static NSArray* descriptions;
         _newImage = [[UIImageView alloc]initWithFrame:frame];
         if (focus==nil) {
             [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:page]   width:320 height:217]];
-
         } else {
             [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:320 height:217]];
-
         }
-
     }
     return _newImage;
 }
@@ -493,11 +475,11 @@ static NSArray* descriptions;
 - (void)prepareForNews
 {
     self.photoList = [[NSMutableArray alloc]init];
-    for (int i = 0; i<3; i++) {
+    for (int i = 0; i<NEWSCOUNT; i++) {
         [self.photoList addObject:[self getEmptyUIImage]];
     }
     [self loadNews];
-    for (int i = 1; i<=3; i++) {
+    for (int i = 1; i<=NEWSCOUNT; i++) {
         [self loadNewsCache:i];
     }
     [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(timerChangePic) userInfo:nil repeats:YES];
@@ -505,15 +487,28 @@ static NSArray* descriptions;
 }
 
 -(void) onClickImage:(id) sender{
-  
+    if (self.allNews==nil) {
+        [ToolUtils showMessage:@"脱机状态下无法浏览新闻"];
+        return;
+    }
+    for (MFocus *focus in self.focusList) {
+        for (MNews* news in self.allNews) {
+            if ([news.url isEqualToString:focus.id]) {
+                [self.newsList addObject:news];
+                break;
+            }
+        }
+    }
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
     UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
     NewsListTVC* newsList = (NewsListTVC*)[unc.childViewControllers firstObject];
     newsList.jump = YES;
-    MFocus* focus = [self.focusList objectAtIndex:self.pageController.currentPage];
-    
-    [newsList setCurrentUrl:focus.id];
-    NSLog(@"%@新闻网址",focus.id);
+    if (self.newsList!=nil) {
+        MNews* focus = [self.newsList objectAtIndex:self.pageController.currentPage];
+        [newsList setCurrentNew:focus];
+        [newsList setCurrentUrl:focus.url];
+        [newsList setCurrentImg:[self.photoList objectAtIndex:self.pageController.currentPage]];
+    }
     [self presentViewController:unc animated:YES completion:^{
         
     }];

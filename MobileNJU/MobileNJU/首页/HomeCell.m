@@ -30,5 +30,10 @@
 
     // Configure the view for the selected state
 }
+- (void)addUnread
+{
+    self.redCircle.layer.cornerRadius=4;
+    [self.redCircle setHidden:NO];
+}
 
 @end

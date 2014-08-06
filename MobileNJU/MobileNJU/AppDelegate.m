@@ -32,7 +32,6 @@
     [self initDeviceid];
     [self initApiFrame];
     [self initShare:application options:launchOptions];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     WelcomeViewController *vc = [storyboard instantiateInitialViewController];

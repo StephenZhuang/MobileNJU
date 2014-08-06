@@ -10,16 +10,17 @@
 #import "ExerciseCell.h"
 #import "ToolUtils.h"
 #import "ZsndSystem.pb.h"
+#import "AlertView.h"
 @interface ExerciseVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *schIdLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *maskView;
-@property (weak, nonatomic) IBOutlet UITextField *schIDText;
-@property (weak, nonatomic) IBOutlet UISwitch *autoSearch;
+@property (strong, nonatomic)  UITextField *schIDText;
+@property (strong, nonatomic) UISwitch *autoSearch;
 
-@property (weak, nonatomic) IBOutlet UIView *alertView;
+@property (strong, nonatomic) AlertView *alertView;
 @property (strong,nonatomic) NSArray* infoList;
 @property (nonatomic)int isRe;
 @property (nonatomic)int isV;
@@ -33,17 +34,34 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.alertView setHidden:YES];
-    [self.maskView setHidden:YES];
+    [self initAlert];
+
     [self.schIDText setDelegate:self];
-    [self.schIDText setText:[ToolUtils getSchId]==nil?@"":[ToolUtils getSchId]];
+    [self.maskView setHidden:YES];
     [self.schIdLabel setText:[ToolUtils getSchId]==nil?@"":[ToolUtils getSchId]];
     [self.nameLabel setText:[ToolUtils getUserName]==nil?@"":[ToolUtils getUserName]];
     [self.timeLabel setText:@"0"];
     self.isRe = 0;
     self.isV=0;
-   
-    // Do any additional setup after loading the view.
+    
+
+}
+- (void)initAlert
+{
+    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertView" owner:self options:nil] firstObject];
+    CGRect frame = CGRectMake((self.view.frame.size.width-261)/2.0, (self.view.frame.size.height-220)/2.0, 261, 220);
+    self.alertView.frame = frame;
+    [self.view addSubview:self.alertView];
+    [self.alertView setHidden:YES];
+    self.schIDText =self.alertView.schIdField;
+    self.schIDText.delegate = self;
+    self.autoSearch = self.alertView.autoSwitch;
+    [self.schIDText setText:[ToolUtils getSchId]==nil?@"":[ToolUtils getSchId]];
+    if (self.schIDText.text.length==0) {
+        [self.alertView setHidden:NO];
+    }
+    [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
+    [self.alertView.closeBt addTarget:self action:@selector(closeAlertView:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,11 +74,8 @@
         [self showAlert:@"请输入正确的9位学号"];
         return;
     }
-    
-   
+    [self.schIDText resignFirstResponder];
     [_header beginRefreshing];
-    
-    
 }
 - (void)addFooter
 {
@@ -73,13 +88,11 @@
     if ([self.schIDText.text isEqualToString:@""]) {
         [self doneWithView:_header];
     } else {
-//        [self waiting:@"正在查询"];
         [self closeAlertView:nil];
-#warning api更新
         [self load:self selecter:@selector(disposMessage:) account:self.schIDText.text password:self.schIDText.text];
-       
-        [[ApisFactory getApiMSignInInDetail]load:self selecter:@selector(disposMessage:
-                                                                         ) account:self.schIDText.text password:self.schIDText.text];
+        [[[ApisFactory getApiMSignInInDetail]
+         load:self selecter:@selector(disposMessage:
+                                                                         ) account:self.schIDText.text password:self.schIDText.text] setShowLoading:NO];
     }
          
 }
@@ -98,10 +111,27 @@
     [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
     
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MSignInInfo" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
     return updateone;
 }
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.alertView.transform = CGAffineTransformMakeTranslation(0, -80);
+    }];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self search:nil];
+    [textField resignFirstResponder];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
+    }];
+
+    return YES;
+}
 
 - (void)disposMessage:(Son *)son
 {
@@ -138,6 +168,7 @@
 
 #pragma mark 关于自定义的alertView
 - (IBAction)closeAlertView:(id)sender {
+    self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
     [self.alertView setHidden:YES];
     [self.maskView setHidden:YES];
     [self.schIDText resignFirstResponder];

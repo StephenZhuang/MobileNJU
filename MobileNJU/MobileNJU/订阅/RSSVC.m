@@ -33,6 +33,11 @@
 {
     [self performSegueWithIdentifier:@"all" sender:nil];
 }
+- (void)addFooter
+{
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -48,6 +53,12 @@
     // Do any additional setup after loading the view.
 }
 
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [_header beginRefreshing];
+
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

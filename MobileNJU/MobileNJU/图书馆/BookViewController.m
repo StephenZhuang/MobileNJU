@@ -16,22 +16,24 @@
 #import "ZsndLibrary.pb.h"
 #import "UtilMethods.h"
 #import "MyLibraryVC.h"
+#import "AlertViewWithPassword.h"
 @interface BookViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,AlertCloseDelegate,UITextFieldDelegate>
 @property(nonatomic,strong)NSArray* books;
-@property (weak, nonatomic) IBOutlet UIView *alertView;
+@property (strong, nonatomic)  AlertViewWithPassword *alertView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UITextField *searchField;
-@property (weak, nonatomic) IBOutlet UITextField *schIdField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (strong, nonatomic)  UITextField *schIdField;
+@property (strong, nonatomic)  UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UICollectionView *myCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (strong,nonatomic)BookDetailScrollerView* bookDetail;
-@property (nonatomic)int page;
+//@property (nonatomic)int page;
 @property (nonatomic,strong)NSString* selectedBookName;
 @property(nonatomic)BOOL loading;
-@property (weak, nonatomic) IBOutlet UISwitch *rememberSwitch;
+@property (strong, nonatomic)  UISwitch *rememberSwitch;
 @property (nonatomic)int isRe;
 @property(nonatomic)int isV;
+@property (nonatomic)CGRect frame;
 @end
 
 @implementation BookViewController
@@ -39,15 +41,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initAlert];
     [self initNavigationBar];
     [self initBookDetail];
     [self.passwordField setText:[ToolUtils getLibraryPassword]==nil?@"":[ToolUtils getLibraryPassword]];
     [self.schIdField setText:[ToolUtils getLibraryId]==nil?@"":[ToolUtils getLibraryId]];
-    self.page = 1;
     self.loading=NO;
     self.isRe=0;
     self.isV=0;
     // Do any additional setup after loading the view.
+}
+
+
+- (void)initAlert
+{
+    
+    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
+    CGRect frame = CGRectMake((self.view.bounds.size.width-261)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 257);
+    self.alertView.frame = frame;
+    self.frame = frame;
+    [self.view addSubview:self.alertView];
+    [self.alertView setHidden:YES];
+    self.schIdField =self.alertView.schIdField;
+    self.schIdField.delegate = self;
+    self.rememberSwitch = self.alertView.autoSwitch;
+    self.passwordField = self.alertView.passwordField;
+    self.schIdField.delegate = self;
+    self.passwordField.delegate = self;
+    self.schIdField.placeholder = @"请输入图书馆账号";
+    self.passwordField.placeholder =@"请输入图书馆密码";
+    [self.alertView.searchBt addTarget:self action:@selector(gotoMyLibrary:) forControlEvents:UIControlEventTouchUpInside];
+    [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
@@ -58,6 +82,7 @@
     [self.bookDetail setHidden:YES];
     [self.bookDetail setDelegate:self];
     [self.view addSubview:self.bookDetail];
+
     
 }
 
@@ -71,7 +96,6 @@
     button.frame = frame;
     [button addTarget:self action:@selector(showAlert) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem* selfItem =  [[UIBarButtonItem alloc]initWithCustomView:button];
-    //    [selfItem setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = selfItem;
 }
 
@@ -131,12 +155,15 @@
 
 #pragma mark -按钮监听
 - (IBAction)searchBook:(id)sender {
+    
     if ([self.searchField.text isEqualToString:@""]) {
         [UtilMethods showMessage:@"关键字不能为空"];
     } else {
         [self.searchField resignFirstResponder];
+        [self.passwordField resignFirstResponder];
+        
         [self waiting:@"正在搜索"];
-        [[[[ApisFactory getApiMSearchBook]setPage:self.page pageCount:100] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
+        [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:100] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
     }
 }
 - (IBAction)showSelf:(id)sender {
@@ -166,6 +193,11 @@
     [self addMask];
 }
 - (IBAction)gotoMyLibrary:(id)sender {
+    [self.passwordField resignFirstResponder];
+    [self.schIdField resignFirstResponder];
+    [UIView animateWithDuration:0.3f animations:^{
+        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
+    }];
     
     if (self.schIdField.text.length==0) {
         [ToolUtils showMessage:@"学工号不能为空"];
@@ -202,6 +234,7 @@
              [array addObject:[NSString stringWithFormat:@"isV=%d",self.isV]];
              
              UpdateOne *updateone=[[UpdateOne alloc] init:@"MMyLibrary" params:array  delegate:delegate selecter:select];
+             [updateone setShowLoading:NO];
              [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
              return updateone;
          }
@@ -221,6 +254,7 @@
 #pragma mark delegateTextField
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+   
     [textField resignFirstResponder];
     if (textField==self.searchField) {
         [self searchBook:nil];
@@ -228,7 +262,6 @@
     {
         [self.passwordField becomeFirstResponder];
     } else if (textField==self.passwordField){
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
         [self gotoMyLibrary:nil];
     }
     return YES;
@@ -236,16 +269,11 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (self.view.window.frame.size.height==480) {
-        [UIView animateWithDuration:0.3f animations:^{
-            //        self.alertView.center = newCenter;
-        }];
-        [UIView animateWithDuration:0.3f animations:^{
-            self.alertView.transform = CGAffineTransformMakeTranslation(0, -40);
+    [UIView animateWithDuration:0.3f animations:^{
+            CGFloat offset= self.frame.origin.y+self.frame.size.height-(self.view.bounds.size.height-216);
+            self.alertView.transform = CGAffineTransformMakeTranslation(0, -offset);
         } completion:^(BOOL finished) {
         }];
-        
-    }
 }
 #pragma mark delegate_AlertChoose
 - (void)closeAlert{
@@ -255,6 +283,7 @@
 #pragma mark - chooseBookDelegate
 - (void)chooseBook:(Book *)book
 {
+    
     [self waiting:@"加载中"];
     [[[ApisFactory getApiMBookDetail]load:self selecter:@selector(disposMessage:) id:book.id] setShowLoading:YES];
 }

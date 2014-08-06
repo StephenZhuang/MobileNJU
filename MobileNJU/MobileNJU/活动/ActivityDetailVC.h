@@ -6,8 +6,7 @@
 //  Copyright (c) 2014年 Stephen Zhuang. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BBSDetail.h"
 
-@interface ActivityDetailVC : BaseViewController
-@property (nonatomic,strong)NSURL* url;
+@interface ActivityDetailVC : BBSDetail
 @end

@@ -22,10 +22,12 @@
 	 * @param end * 结束
 	 * @callback MCardList_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end {
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end account:(NSString*)account password:(NSString*)password{
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
 		[array addObject:[NSString stringWithFormat:@"begin=%@",begin==nil?@"":begin]];
 		[array addObject:[NSString stringWithFormat:@"end=%@",end==nil?@"":end]];
+        [array addObject:[NSString stringWithFormat:@"account=%@",account]];
+        [array addObject:[NSString stringWithFormat:@"password=%@",password]];
 		UpdateOne *updateone=[[UpdateOne alloc] init:@"MCardHistory" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
@@ -38,8 +40,8 @@
 	 * @param end * 结束
 	 * @callback MCardList_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end {
-		UpdateOne *update=[self get:delegate selecter:select begin:begin end:end];
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end account:(NSString*)account password:(NSString*)password{
+		UpdateOne *update=[self get:delegate selecter:select begin:begin end:end account:account password:password];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
 		return update;
 	}

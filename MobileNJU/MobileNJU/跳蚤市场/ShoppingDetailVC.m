@@ -7,28 +7,19 @@
 //
 
 #import "ShoppingDetailVC.h"
-
-@interface ShoppingDetailVC ()<UIScrollViewDelegate>
+#import "MarketDetailCell.h"
+@interface ShoppingDetailVC ()<UIScrollViewDelegate,UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *originPriceLabel;
 @property (weak, nonatomic) IBOutlet UIView *footView;
 @property (strong,nonatomic)UILabel* detailLabel;
+@property (weak, nonatomic) IBOutlet UIButton *downShelfBt;
+@property (weak, nonatomic) IBOutlet UIButton *isSoldBt;
 @property (strong,nonatomic)UIImageView* locationImg;
+@property (weak, nonatomic) IBOutlet UIView *btView;
 @end
 
 @implementation ShoppingDetailVC
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 
 - (void)viewDidLoad
@@ -39,39 +30,70 @@
     self.scrollView.pagingEnabled=YES;
     [self.pageControl addTarget:self action:@selector(pageChange:)
                   forControlEvents:UIControlEventTouchUpInside];
-
-    [self.nameLabel setText:self.market.name];
-    [self.priceLabel setText:[NSString stringWithFormat:@"%@元",self.market.price]];
-    [self.originPriceLabel setText:[NSString stringWithFormat:@"%@元",self.market.priceOriginal]];
-    
     [self addDetail:self.market.description];
-    [self addButton:@"联系买家"];
+    if (![self.market.userid isEqualToString:[ToolUtils getLoginId]]) {
+        [self addButton:@"联系买家"];
+    } else {
+        [self addButton:nil];
+    }
+    
     [self addLocation:self.market.address];
     [self loadNews];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 }
 -(void)addButton:(NSString*)state
 {
-    CGRect frame = CGRectMake(10,self.detailLabel.frame.origin.y+self.detailLabel.frame.size.height+15+15+22 , 300, 40);
-//    
-//    self.detailLabel.frame;
-//    frame.origin.y = frame.origin.y + frame.size.height + 15+15+22;
-//    frame.size.height = 40;
-    UIButton* button = [[UIButton alloc]initWithFrame:frame];
-    [button setBackgroundImage:[UIImage imageNamed:@"purpleButton"] forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage imageNamed:@"purpleButtonhighlighted"] forState:UIControlStateHighlighted];
-    [self.footView addSubview:button];
-    [button setTitle:state forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(contact) forControlEvents:(UIControlEventTouchUpInside)];
+    if (state==nil) {
+        [self.btView setHidden:NO];
+        if (self.market.isSold==1) {
+            [self.isSoldBt setEnabled:NO];
+        } 
+    } else {
+        CGRect frame = CGRectMake(10,self.detailLabel.frame.origin.y+self.detailLabel.frame.size.height+15+15+22 , 300, 40);
+        UIButton* button = [[UIButton alloc]initWithFrame:frame];
+        [button setBackgroundImage:[UIImage imageNamed:@"purpleButton"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"purpleButtonhighlighted"] forState:UIControlStateHighlighted];
+        [self.footView addSubview:button];
+        [button setTitle:state forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(contact) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    
+    UIView* emptyView = [[UIView alloc]initWithFrame:CGRectMake(10,self.detailLabel.frame.origin.y+self.detailLabel.frame.size.height+15+15+22+40, 300, 40)];
+    [self.footView addSubview:emptyView];
+    
+}
+- (void)setIsSold
+{
+    
+}
+- (void)downShelf
+{
+    
 }
 
 - (void)contact
 {
-    NSLog(@"contact");
+    
+    UIActionSheet *sheet;
+    // 判断是否支持相机
+    sheet  = [[UIActionSheet alloc] initWithTitle:@"联系买家" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:self.market.phone
+              ,    self.market.qq
+, nil];
+    sheet.tag = 255;
+    [sheet setDelegate:self];
+    [sheet showInView:[UIApplication sharedApplication].keyWindow];
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        NSString* str = [NSString stringWithFormat:@"tel://%@",self.market.phone];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+
+    } else {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.market.qq;
+        [ToolUtils showMessage:@"已复制到您到剪切板"];
+    }
 }
 
 - (void)addLocation:(NSString*)location
@@ -138,6 +160,7 @@
 
 
 
+
 -(void)pageChange:(UIPageControl *)sender{
     CGFloat offset= self.pageControl.currentPage*320;
     [self.scrollView setContentOffset:CGPointMake(offset, 0) animated:YES];
@@ -164,16 +187,22 @@
 }
 
 
-/*
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    MarketDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"market" forIndexPath:indexPath];
+    
+    [cell.nameLabel setText:self.market.name];
+    [cell.priceLabel setText:[NSString stringWithFormat:@"%@元",self.market.price]];
+    [cell.originPriceLabel setText:[NSString stringWithFormat:@"%@元",self.market.priceOriginal]];
+    
     
     // Configure the cell...
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

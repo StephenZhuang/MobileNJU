@@ -8,9 +8,9 @@
 
 #import "ActivityDetailVC.h"
 
-@interface ActivityDetailVC ()<UIWebViewDelegate>
+@interface ActivityDetailVC ()
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @end
 
 @implementation ActivityDetailVC
@@ -29,11 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"活动"];
-    self.webView.delegate = self;
-    NSLog(@"%@网址。。",self.url.absoluteString
-          );
-    [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    [self setTitle:@"活动详情"];
     // Do any additional setup after loading the view.
 }
 
@@ -41,27 +37,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    self.OK = YES;
-    [self.loginIndicator removeFromSuperview];
-}
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    [self waiting:@"加载中"];
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "ShoppingCell.h"
 #import "ShoppingDetailVC.h"
 #import "ZsndMarket.pb.h"
+#import "VerifyVC.h"
 @interface ShoppingVC ()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate>
 @property(nonatomic,strong)NSMutableArray* marketList;
 @end
@@ -122,6 +123,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"%d",[ToolUtils getIsVeryfy]);
+    if ([ToolUtils getIsVeryfy]==0) {
+        [ToolUtils showMessage:@"请先验证身份"];
+        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
+        VerifyVC* vc = (VerifyVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"verify"]; //test2为viewcontroller的StoryboardId
+        [self.myDelegate showView:vc];
+        
+    }
+    
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
     ShoppingDetailVC* vc = (ShoppingDetailVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"detail"]; //test2为viewcontroller的StoryboardId
     vc.market = [self.marketList objectAtIndex:indexPath.row];
