@@ -112,6 +112,11 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma - mark photo select delegate
 - (IBAction)photoBtnAct:(id)sender {
     UIActionSheet *sheet;
@@ -160,29 +165,11 @@
             break;
     }
     // 跳转到相机或相册页面
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     
-    imagePickerController.delegate = self;
-    
-    imagePickerController.allowsEditing = YES;
-    
-    imagePickerController.sourceType = sourceType;
-    
-    [self presentViewController:imagePickerController animated:YES completion:^{}];
-}
-
-#pragma mark - 保存图片至沙盒
-- (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
-{
-    //    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
-    NSData *imageData = UIImagePNGRepresentation(currentImage);
-    // 获取沙盒目录
-    
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
-    
-    // 将图片写入文件
-    
-    [imageData writeToFile:fullPath atomically:NO];
+    _imagePicker = [[GKImagePicker alloc] initWithSourceType:sourceType];
+    self.imagePicker.cropSize = CGSizeMake(320, 220);
+    self.imagePicker.delegate = self;
+    [self presentViewController:_imagePicker.imagePickerController animated:YES completion:nil];
 }
 
 #pragma mark - image picker delegte
@@ -212,12 +199,6 @@
     
     //    [pool release];
     return newImage;
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    //    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowPhotoTabbar" object:nil];
-	[self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 #pragma mark - actionsheet delegate
@@ -258,23 +239,24 @@
             }
         }
         // 跳转到相机或相册页面
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        
-        imagePickerController.delegate = self;
-        
-        imagePickerController.allowsEditing = YES;
-        
-        imagePickerController.sourceType = sourceType;
-        
-        [self presentViewController:imagePickerController animated:YES completion:^{}];
-        
-        //        [imagePickerController release];
-        
-        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"HidePhotoTabbar" object:nil];
+        _imagePicker = [[GKImagePicker alloc] initWithSourceType:sourceType];
+        self.imagePicker.cropSize = CGSizeMake(320, 220);
+        self.imagePicker.delegate = self;
+        [self presentViewController:_imagePicker.imagePickerController animated:YES completion:nil];
     }
 }
 
+# pragma mark -
+# pragma mark GKImagePicker Delegate Methods
 
+- (void)imagePicker:(GKImagePicker *)imagePicker pickedImage:(UIImage *)image{
+//    self.imgView.image = image;
+    [self hideImagePicker];
+}
+
+- (void)hideImagePicker{
+    [self.imagePicker.imagePickerController dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)didReceiveMemoryWarning
 {

@@ -22,6 +22,8 @@
 #import "RegisterVC.h"
 #import "ZsndIndex.pb.h"
 #import "loginDelegate.h"
+#import <Frontia/Frontia.h>
+
 @interface WelcomeViewController ()<UITextFieldDelegate,RDVTabBarControllerDelegate,loginDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
@@ -134,6 +136,27 @@
             [ToolUtils setIsLogin:YES];
             [ToolUtils setAccount:self.usernameTextField.text];
             [ToolUtils setPassword:self.passwordTextField.text];
+            
+            FrontiaPush *push = [Frontia getPush];
+            if(push) {
+                
+                NSString *tags = user.verify;
+                if (![@"" isEqualToString:tags]) {
+                    NSArray *tagArr = [tags componentsSeparatedByString:@";"];
+                    
+                    [push setTags:tagArr tagOpResult:^(int count, NSArray *failureTag) {
+//                        NSString *message = [[NSString alloc] initWithFormat:@"set tag success result: %d with failure tags %@", count, failureTag];
+//                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
+                        
+                    } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
+                        NSString *message = [[NSString alloc] initWithFormat:@"set tag failed with %@ error code : %d error message %@", action, errorCode, errorMessage];
+//                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
+                        [ToolUtils showMessage:message];
+                        
+                    }];
+                }
+                
+            }
             [self getUnread];
         }
     } else if ([[son getMethod]isEqualToString:@"MUnreadModule"])
@@ -149,6 +172,7 @@
 {
     [[ApisFactory getApiMUnreadModule]load:self selecter:@selector(disposMessage:)];
 }
+
 - (void)loadMain
 
 {

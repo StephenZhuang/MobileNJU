@@ -8,13 +8,15 @@
 
 #import "BaseViewController.h"
 #import "UIPlaceHolderTextView.h"
+#import "GKImagePicker.h"
 
 typedef void(^AddSuccessBlock)(void);
 
-@interface AddTreeHoleViewController : BaseViewController<UIImagePickerControllerDelegate , UIActionSheetDelegate ,UITableViewDelegate ,UITableViewDataSource>
+@interface AddTreeHoleViewController : BaseViewController<UIImagePickerControllerDelegate , UIActionSheetDelegate ,UITableViewDelegate ,UITableViewDataSource ,GKImagePickerDelegate>
 @property (nonatomic , weak) IBOutlet UITableView *tableView;
 @property (nonatomic , weak) IBOutlet UIPlaceHolderTextView *textView;
 @property (nonatomic , strong) UIImage *image;
 @property (nonatomic , weak) IBOutlet UIView *bottomView;
 @property (nonatomic , copy) AddSuccessBlock addSuccessBlock;
+@property (nonatomic , strong) IBOutlet GKImagePicker *imagePicker;
 @end
