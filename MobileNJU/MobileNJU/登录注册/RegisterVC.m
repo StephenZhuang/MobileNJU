@@ -67,7 +67,7 @@
     NSString* password = [mMD5 md5s:self.passwordField.text];
 
     
-   [[ApisFactory getApiMRegist]load:self selecter:@selector(disposMessage:) phone:self.phoneNum password:password nickname:@"" code:self.codeField.text pushid:[ToolUtils getPushid] device:@"IOS"];
+   [[ApisFactory getApiMRegist]load:self selecter:@selector(disposMessage:) phone:self.phoneNum password:password nickname:@"" code:self.codeField.text device:@"IOS"];
   
 }
 - (void)disposMessage:(Son *)son
@@ -138,8 +138,7 @@
 - (void)login
 {
     [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.phoneNum password:
-     [mMD5 md5s:self.passwordField.text]
-                             pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"] device:@"ios"];
+     [mMD5 md5s:self.passwordField.text] device:@"ios"];
 
 }
 

@@ -1,7 +1,7 @@
 //
 //  ApiMScheduleAuto
 //
-//  Created by ryan on 2014-07-31 13:42:28
+//  Created by ryan on 2014-08-06 14:28:21
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -11,7 +11,6 @@
 
 #import "ApiUpdate.h"
 
-#import "ZsndTreehole.pb.h"
 
 @interface ApiMScheduleAuto : ApiUpdate
 

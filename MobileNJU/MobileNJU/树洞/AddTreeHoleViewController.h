@@ -12,11 +12,11 @@
 
 typedef void(^AddSuccessBlock)(void);
 
-@interface AddTreeHoleViewController : BaseViewController<UIImagePickerControllerDelegate , UIActionSheetDelegate ,UITableViewDelegate ,UITableViewDataSource ,GKImagePickerDelegate>
+@interface AddTreeHoleViewController : BaseViewController<UIImagePickerControllerDelegate , UIActionSheetDelegate ,UITableViewDelegate ,UITableViewDataSource ,GKImagePickerDelegate , UITextViewDelegate>
 @property (nonatomic , weak) IBOutlet UITableView *tableView;
 @property (nonatomic , weak) IBOutlet UIPlaceHolderTextView *textView;
 @property (nonatomic , strong) UIImage *image;
 @property (nonatomic , weak) IBOutlet UIView *bottomView;
 @property (nonatomic , copy) AddSuccessBlock addSuccessBlock;
-@property (nonatomic , strong) IBOutlet GKImagePicker *imagePicker;
+@property (nonatomic , strong) GKImagePicker *imagePicker;
 @end

@@ -12,6 +12,7 @@
 #import "ZsndTreehole.pb.h"
 #import "TopicCell.h"
 #import "AddImageCell.h"
+#import "RDVTabBarController.h"
 
 @interface AddTreeHoleViewController ()
 
@@ -32,6 +33,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
     [self setTitle:@"树洞"];
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"发表" style:UIBarButtonItemStyleBordered target:self action:@selector(commitTreeHole)];
@@ -39,6 +44,12 @@
     self.navigationItem.rightBarButtonItem = item;
     
     _textView.placeholder = @"匿名发表树洞，不超过120字";
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.rdv_tabBarController setTabBarHidden:YES];
 }
 
 - (void)commitTreeHole
@@ -108,6 +119,7 @@
         return cell;
     } else {
         AddImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddImageCell"];
+        [cell.backImage setImage:_image];
         return cell;
     }
 }
@@ -115,6 +127,31 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - 键盘处理
+#pragma mark 键盘即将显示
+- (void)keyBoardWillShow:(NSNotification *)note{
+    
+    CGRect rect = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat ty = - rect.size.height;
+    [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
+        self.bottomView.transform = CGAffineTransformMakeTranslation(0, ty);
+    }];
+    
+}
+#pragma mark 键盘即将退出
+- (void)keyBoardWillHide:(NSNotification *)note{
+    [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
+        self.bottomView.transform = CGAffineTransformIdentity;
+    }];
+}
+
+- (IBAction)deletePhoto:(id)sender
+{
+    _image = nil;
+    [_bottomView setHidden:NO];
+    [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma - mark photo select delegate
@@ -250,12 +287,33 @@
 # pragma mark GKImagePicker Delegate Methods
 
 - (void)imagePicker:(GKImagePicker *)imagePicker pickedImage:(UIImage *)image{
-//    self.imgView.image = image;
+    _image = [self useImage:image];
+    [self.tableView reloadData];
+    [self.bottomView setHidden:YES];
     [self hideImagePicker];
 }
 
 - (void)hideImagePicker{
-    [self.imagePicker.imagePickerController dismissViewControllerAnimated:YES completion:nil];
+    [self.imagePicker.imagePickerController dismissViewControllerAnimated:YES completion:^(void){
+        [self.rdv_tabBarController setTabBarHidden:YES];
+    }];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if (_image) {
+        [_tableView setContentOffset:CGPointMake(0, 264) animated:YES];
+    }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        [_tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+        return NO;
+    }
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning

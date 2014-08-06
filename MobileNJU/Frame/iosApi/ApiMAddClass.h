@@ -1,7 +1,7 @@
 //
 //  ApiMAddClass
 //
-//  Created by ryan on 2014-07-31 13:42:28
+//  Created by ryan on 2014-08-06 14:28:21
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -11,7 +11,7 @@
 
 #import "ApiUpdate.h"
 
-#import "ZsndTreehole.pb.h"
+#import "ZsndSystem.pb.h"
 
 @interface ApiMAddClass : ApiUpdate
 
@@ -23,7 +23,7 @@
 	 * @callback MRet_Builder
 	 * @param clas * 添加的课程表 
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  ;
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  clas:(MAddClass_Builder*) clas;
 	/**
 	 *   课程表-添加课程 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
 	 * @param delegate 回调类
@@ -31,6 +31,6 @@
 	 * @param clas * 添加的课程表 
 	 * @callback MRet_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  ;
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  clas:(MAddClass_Builder*) clas;
 
 @end

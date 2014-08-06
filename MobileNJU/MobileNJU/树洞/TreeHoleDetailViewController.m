@@ -65,7 +65,7 @@
             [self.detailView setTopic:_topic];
             self.tableView.tableHeaderView = _detailView;
             [self.dataArray removeAllObjects];
-            [self.dataArray addObjectsFromArray:_topic.commentList];
+//            [self.dataArray addObjectsFromArray:_topic.commentList];
         } else if ([[son getMethod] isEqualToString:@"MTreeHoleComment"]) {
 //            [self loadData];
         }
@@ -162,17 +162,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
-    if (![comment.userid1 isEqualToString:[ToolUtils getLoginId]]) {
-        if (![comment.userid1 isEqualToString:_topic.author]) {                
-            _targetid = comment.userid1;
-            _commentid = comment.id;
-            _cometName = comment.nickname1;
-            
-            [_messageField setPlaceholder:[NSString stringWithFormat:@"回复 %@：" , comment.nickname1]];
-        }
-        [_messageField becomeFirstResponder];
-    }
+//    MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
+//    if (![comment.userid1 isEqualToString:[ToolUtils getLoginId]]) {
+//        if (![comment.userid1 isEqualToString:_topic.author]) {                
+//            _targetid = comment.userid1;
+//            _commentid = comment.id;
+//            _cometName = comment.nickname1;
+//            
+//            [_messageField setPlaceholder:[NSString stringWithFormat:@"回复 %@：" , comment.nickname1]];
+//        }
+//        [_messageField becomeFirstResponder];
+//    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -230,23 +230,23 @@
         [ProgressHUD showError:@"回复不能超过100字"];
         return;
     }
-    if (string.length > 0) {
-        MComment_Builder *comment = [MComment_Builder new];
-        [comment setUserid1:[ToolUtils getLoginId]];
-        [comment setNickname1:[ToolUtils getNickName]];
-        [comment setUserid2:_commentid];
-        [comment setNickname2:_cometName];
-        [comment setContent:string];
-        [comment setAuthor:_topic.author];
-        
-        [self.dataArray addObject:comment.build];
-        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        
-        [_topic setCommentCnt:_topic.commentCnt + 1];
-        [_detailView.commentButton setTitle:[NSString stringWithFormat:@"%i",_topic.commentCnt] forState:UIControlStateNormal];
-        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_topic.id content:string reply:_targetid commentid:_commentid];
-    }
+//    if (string.length > 0) {
+//        MComment_Builder *comment = [MComment_Builder new];
+//        [comment setUserid1:[ToolUtils getLoginId]];
+//        [comment setNickname1:[ToolUtils getNickName]];
+//        [comment setUserid2:_commentid];
+//        [comment setNickname2:_cometName];
+//        [comment setContent:string];
+//        [comment setAuthor:_topic.author];
+//        
+//        [self.dataArray addObject:comment.build];
+//        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//        
+//        [_topic setCommentCnt:_topic.commentCnt + 1];
+//        [_detailView.commentButton setTitle:[NSString stringWithFormat:@"%i",_topic.commentCnt] forState:UIControlStateNormal];
+//        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_topic.id content:string reply:_targetid commentid:_commentid];
+//    }
     [_messageField resignFirstResponder];
     [_messageField setText:@""];
     _targetid = @"";

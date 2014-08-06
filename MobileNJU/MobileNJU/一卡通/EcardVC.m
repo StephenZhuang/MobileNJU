@@ -211,7 +211,8 @@
         [self showAlertView:nil];
     } else {
         [self waiting:@"正在查询"];
-        [[[[ApisFactory getApiMCardHistory]setPage:page pageCount:10]load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate account:self.schIDText.text password:self.passwordText.text] setShowLoading:NO];
+#warning api 更改
+//        [[[[ApisFactory getApiMCardHistory]setPage:page pageCount:10] load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate account:self.schIDText.text password:self.passwordText.text] setShowLoading:NO];
 //        [self load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate];
  
     }

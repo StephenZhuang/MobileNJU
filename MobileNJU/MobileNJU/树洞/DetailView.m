@@ -136,23 +136,23 @@
 
 - (void)setTopic:(MTopic_Builder *)topic
 {
-    [_titleLabel setText:topic.title];
-    [_timeLabel setText:topic.time];
-    [_contentLabel setText:topic.content];
-    [_contentLabel sizeToFit];
-    
-    [_zanButton setTitle:[NSString stringWithFormat:@"%i" , topic.praiseCnt] forState:UIControlStateNormal];
-    [_commentButton setTitle:[NSString stringWithFormat:@"%i" , topic.commentCnt] forState:UIControlStateNormal];
-    
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    if (topic.imgs.length > 0) {
-        NSArray *imgStrArr = [topic.imgs componentsSeparatedByString:@","];
-        
-        for (NSString *str in imgStrArr) {
-            [array addObject:[ToolUtils getImageUrlWtihString:str].absoluteString];
-        }
-    }
-    [self setImageArray:array];
+//    [_titleLabel setText:topic.title];
+//    [_timeLabel setText:topic.time];
+//    [_contentLabel setText:topic.content];
+//    [_contentLabel sizeToFit];
+//    
+//    [_zanButton setTitle:[NSString stringWithFormat:@"%i" , topic.praiseCnt] forState:UIControlStateNormal];
+//    [_commentButton setTitle:[NSString stringWithFormat:@"%i" , topic.commentCnt] forState:UIControlStateNormal];
+//    
+//    NSMutableArray *array = [[NSMutableArray alloc] init];
+//    if (topic.imgs.length > 0) {
+//        NSArray *imgStrArr = [topic.imgs componentsSeparatedByString:@","];
+//        
+//        for (NSString *str in imgStrArr) {
+//            [array addObject:[ToolUtils getImageUrlWtihString:str].absoluteString];
+//        }
+//    }
+//    [self setImageArray:array];
 }
 
 - (void)lookImage:(UITapGestureRecognizer *)tap

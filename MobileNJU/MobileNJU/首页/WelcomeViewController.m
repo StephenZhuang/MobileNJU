@@ -79,9 +79,7 @@
     }
     [self resignAllResponders:sender];
     [self waiting:@"登录中"];
-    [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:
-     [mMD5 md5s:self.passwordTextField.text]
-     pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"] device:@"ios"];
+    [[ApisFactory getApiMLogin] load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:[mMD5 md5s:self.passwordTextField.text] device:@"ios"];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -21,26 +21,17 @@ static PBExtensionRegistry* extensionRegistry = nil;
 
 @interface MTreeHole ()
 @property (retain) NSMutableArray* mutableTopicsList;
-@property int32_t newsCnt;
 @end
 
 @implementation MTreeHole
 
 @synthesize mutableTopicsList;
-- (BOOL) hasNewsCnt {
-  return !!hasNewsCnt_;
-}
-- (void) setHasNewsCnt:(BOOL) value {
-  hasNewsCnt_ = !!value;
-}
-@synthesize newsCnt;
 - (void) dealloc {
   self.mutableTopicsList = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
-    self.newsCnt = 0;
   }
   return self;
 }
@@ -70,9 +61,6 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
   for (MTopic* element in self.topicsList) {
     [output writeMessage:1 value:element];
   }
-  if (self.hasNewsCnt) {
-    [output writeInt32:2 value:self.newsCnt];
-  }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -84,9 +72,6 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
   size = 0;
   for (MTopic* element in self.topicsList) {
     size += computeMessageSize(1, element);
-  }
-  if (self.hasNewsCnt) {
-    size += computeInt32Size(2, self.newsCnt);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -169,9 +154,6 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
     }
     [result.mutableTopicsList addObjectsFromArray:other.mutableTopicsList];
   }
-  if (other.hasNewsCnt) {
-    [self setNewsCnt:other.newsCnt];
-  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -197,10 +179,6 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
         MTopic_Builder* subBuilder = [MTopic builder];
         [input readMessage:subBuilder extensionRegistry:extensionRegistry];
         [self addTopics:[subBuilder buildPartial]];
-        break;
-      }
-      case 16: {
-        [self setNewsCnt:[input readInt32]];
         break;
       }
     }
@@ -235,36 +213,22 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
   [result.mutableTopicsList addObject:value];
   return self;
 }
-- (BOOL) hasNewsCnt {
-  return result.hasNewsCnt;
-}
-- (int32_t) newsCnt {
-  return result.newsCnt;
-}
-- (MTreeHole_Builder*) setNewsCnt:(int32_t) value {
-  result.hasNewsCnt = YES;
-  result.newsCnt = value;
-  return self;
-}
-- (MTreeHole_Builder*) clearNewsCnt {
-  result.hasNewsCnt = NO;
-  result.newsCnt = 0;
-  return self;
-}
 @end
 
 @interface MTopic ()
 @property (retain) NSString* id;
-@property (retain) NSString* title;
+@property (retain) NSString* tagid;
+@property (retain) NSString* tag;
 @property (retain) NSString* content;
 @property (retain) NSString* time;
-@property (retain) NSString* imgs;
+@property (retain) NSString* img;
 @property int32_t praiseCnt;
 @property int32_t commentCnt;
 @property int32_t hasPraise;
-@property (retain) NSMutableArray* mutableCommentList;
-@property (retain) NSString* createTime;
+@property int32_t isHot;
+@property int32_t isTop;
 @property (retain) NSString* author;
+@property (retain) NSString* createTime;
 @end
 
 @implementation MTopic
@@ -276,13 +240,20 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
   hasId_ = !!value;
 }
 @synthesize id;
-- (BOOL) hasTitle {
-  return !!hasTitle_;
+- (BOOL) hasTagid {
+  return !!hasTagid_;
 }
-- (void) setHasTitle:(BOOL) value {
-  hasTitle_ = !!value;
+- (void) setHasTagid:(BOOL) value {
+  hasTagid_ = !!value;
 }
-@synthesize title;
+@synthesize tagid;
+- (BOOL) hasTag {
+  return !!hasTag_;
+}
+- (void) setHasTag:(BOOL) value {
+  hasTag_ = !!value;
+}
+@synthesize tag;
 - (BOOL) hasContent {
   return !!hasContent_;
 }
@@ -297,13 +268,13 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
   hasTime_ = !!value;
 }
 @synthesize time;
-- (BOOL) hasImgs {
-  return !!hasImgs_;
+- (BOOL) hasImg {
+  return !!hasImg_;
 }
-- (void) setHasImgs:(BOOL) value {
-  hasImgs_ = !!value;
+- (void) setHasImg:(BOOL) value {
+  hasImg_ = !!value;
 }
-@synthesize imgs;
+@synthesize img;
 - (BOOL) hasPraiseCnt {
   return !!hasPraiseCnt_;
 }
@@ -325,14 +296,20 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
   hasHasPraise_ = !!value;
 }
 @synthesize hasPraise;
-@synthesize mutableCommentList;
-- (BOOL) hasCreateTime {
-  return !!hasCreateTime_;
+- (BOOL) hasIsHot {
+  return !!hasIsHot_;
 }
-- (void) setHasCreateTime:(BOOL) value {
-  hasCreateTime_ = !!value;
+- (void) setHasIsHot:(BOOL) value {
+  hasIsHot_ = !!value;
 }
-@synthesize createTime;
+@synthesize isHot;
+- (BOOL) hasIsTop {
+  return !!hasIsTop_;
+}
+- (void) setHasIsTop:(BOOL) value {
+  hasIsTop_ = !!value;
+}
+@synthesize isTop;
 - (BOOL) hasAuthor {
   return !!hasAuthor_;
 }
@@ -340,29 +317,39 @@ static MTreeHole* defaultMTreeHoleInstance = nil;
   hasAuthor_ = !!value;
 }
 @synthesize author;
+- (BOOL) hasCreateTime {
+  return !!hasCreateTime_;
+}
+- (void) setHasCreateTime:(BOOL) value {
+  hasCreateTime_ = !!value;
+}
+@synthesize createTime;
 - (void) dealloc {
   self.id = nil;
-  self.title = nil;
+  self.tagid = nil;
+  self.tag = nil;
   self.content = nil;
   self.time = nil;
-  self.imgs = nil;
-  self.mutableCommentList = nil;
-  self.createTime = nil;
+  self.img = nil;
   self.author = nil;
+  self.createTime = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
     self.id = @"";
-    self.title = @"";
+    self.tagid = @"";
+    self.tag = @"";
     self.content = @"";
     self.time = @"";
-    self.imgs = @"";
+    self.img = @"";
     self.praiseCnt = 0;
     self.commentCnt = 0;
     self.hasPraise = 0;
-    self.createTime = @"";
+    self.isHot = 0;
+    self.isTop = 0;
     self.author = @"";
+    self.createTime = @"";
   }
   return self;
 }
@@ -378,13 +365,6 @@ static MTopic* defaultMTopicInstance = nil;
 - (MTopic*) defaultInstance {
   return defaultMTopicInstance;
 }
-- (NSArray*) commentList {
-  return mutableCommentList;
-}
-- (MComment*) commentAtIndex:(int32_t) index {
-  id value = [mutableCommentList objectAtIndex:index];
-  return value;
-}
 - (BOOL) isInitialized {
   return YES;
 }
@@ -392,35 +372,41 @@ static MTopic* defaultMTopicInstance = nil;
   if (self.hasId) {
     [output writeString:1 value:self.id];
   }
-  if (self.hasTitle) {
-    [output writeString:2 value:self.title];
+  if (self.hasTagid) {
+    [output writeString:2 value:self.tagid];
+  }
+  if (self.hasTag) {
+    [output writeString:3 value:self.tag];
   }
   if (self.hasContent) {
-    [output writeString:3 value:self.content];
+    [output writeString:4 value:self.content];
   }
   if (self.hasTime) {
-    [output writeString:4 value:self.time];
+    [output writeString:5 value:self.time];
   }
-  if (self.hasImgs) {
-    [output writeString:5 value:self.imgs];
+  if (self.hasImg) {
+    [output writeString:6 value:self.img];
   }
   if (self.hasPraiseCnt) {
-    [output writeInt32:6 value:self.praiseCnt];
+    [output writeInt32:7 value:self.praiseCnt];
   }
   if (self.hasCommentCnt) {
-    [output writeInt32:7 value:self.commentCnt];
+    [output writeInt32:8 value:self.commentCnt];
   }
   if (self.hasHasPraise) {
-    [output writeInt32:8 value:self.hasPraise];
+    [output writeInt32:9 value:self.hasPraise];
   }
-  for (MComment* element in self.commentList) {
-    [output writeMessage:9 value:element];
+  if (self.hasIsHot) {
+    [output writeInt32:10 value:self.isHot];
   }
-  if (self.hasCreateTime) {
-    [output writeString:10 value:self.createTime];
+  if (self.hasIsTop) {
+    [output writeInt32:11 value:self.isTop];
   }
   if (self.hasAuthor) {
-    [output writeString:11 value:self.author];
+    [output writeString:12 value:self.author];
+  }
+  if (self.hasCreateTime) {
+    [output writeString:13 value:self.createTime];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -434,35 +420,41 @@ static MTopic* defaultMTopicInstance = nil;
   if (self.hasId) {
     size += computeStringSize(1, self.id);
   }
-  if (self.hasTitle) {
-    size += computeStringSize(2, self.title);
+  if (self.hasTagid) {
+    size += computeStringSize(2, self.tagid);
+  }
+  if (self.hasTag) {
+    size += computeStringSize(3, self.tag);
   }
   if (self.hasContent) {
-    size += computeStringSize(3, self.content);
+    size += computeStringSize(4, self.content);
   }
   if (self.hasTime) {
-    size += computeStringSize(4, self.time);
+    size += computeStringSize(5, self.time);
   }
-  if (self.hasImgs) {
-    size += computeStringSize(5, self.imgs);
+  if (self.hasImg) {
+    size += computeStringSize(6, self.img);
   }
   if (self.hasPraiseCnt) {
-    size += computeInt32Size(6, self.praiseCnt);
+    size += computeInt32Size(7, self.praiseCnt);
   }
   if (self.hasCommentCnt) {
-    size += computeInt32Size(7, self.commentCnt);
+    size += computeInt32Size(8, self.commentCnt);
   }
   if (self.hasHasPraise) {
-    size += computeInt32Size(8, self.hasPraise);
+    size += computeInt32Size(9, self.hasPraise);
   }
-  for (MComment* element in self.commentList) {
-    size += computeMessageSize(9, element);
+  if (self.hasIsHot) {
+    size += computeInt32Size(10, self.isHot);
   }
-  if (self.hasCreateTime) {
-    size += computeStringSize(10, self.createTime);
+  if (self.hasIsTop) {
+    size += computeInt32Size(11, self.isTop);
   }
   if (self.hasAuthor) {
-    size += computeStringSize(11, self.author);
+    size += computeStringSize(12, self.author);
+  }
+  if (self.hasCreateTime) {
+    size += computeStringSize(13, self.createTime);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -542,8 +534,11 @@ static MTopic* defaultMTopicInstance = nil;
   if (other.hasId) {
     [self setId:other.id];
   }
-  if (other.hasTitle) {
-    [self setTitle:other.title];
+  if (other.hasTagid) {
+    [self setTagid:other.tagid];
+  }
+  if (other.hasTag) {
+    [self setTag:other.tag];
   }
   if (other.hasContent) {
     [self setContent:other.content];
@@ -551,8 +546,8 @@ static MTopic* defaultMTopicInstance = nil;
   if (other.hasTime) {
     [self setTime:other.time];
   }
-  if (other.hasImgs) {
-    [self setImgs:other.imgs];
+  if (other.hasImg) {
+    [self setImg:other.img];
   }
   if (other.hasPraiseCnt) {
     [self setPraiseCnt:other.praiseCnt];
@@ -563,17 +558,17 @@ static MTopic* defaultMTopicInstance = nil;
   if (other.hasHasPraise) {
     [self setHasPraise:other.hasPraise];
   }
-  if (other.mutableCommentList.count > 0) {
-    if (result.mutableCommentList == nil) {
-      result.mutableCommentList = [NSMutableArray array];
-    }
-    [result.mutableCommentList addObjectsFromArray:other.mutableCommentList];
+  if (other.hasIsHot) {
+    [self setIsHot:other.isHot];
   }
-  if (other.hasCreateTime) {
-    [self setCreateTime:other.createTime];
+  if (other.hasIsTop) {
+    [self setIsTop:other.isTop];
   }
   if (other.hasAuthor) {
     [self setAuthor:other.author];
+  }
+  if (other.hasCreateTime) {
+    [self setCreateTime:other.createTime];
   }
   [self mergeUnknownFields:other.unknownFields];
   return self;
@@ -601,45 +596,51 @@ static MTopic* defaultMTopicInstance = nil;
         break;
       }
       case 18: {
-        [self setTitle:[input readString]];
+        [self setTagid:[input readString]];
         break;
       }
       case 26: {
-        [self setContent:[input readString]];
+        [self setTag:[input readString]];
         break;
       }
       case 34: {
-        [self setTime:[input readString]];
+        [self setContent:[input readString]];
         break;
       }
       case 42: {
-        [self setImgs:[input readString]];
+        [self setTime:[input readString]];
         break;
       }
-      case 48: {
-        [self setPraiseCnt:[input readInt32]];
+      case 50: {
+        [self setImg:[input readString]];
         break;
       }
       case 56: {
-        [self setCommentCnt:[input readInt32]];
+        [self setPraiseCnt:[input readInt32]];
         break;
       }
       case 64: {
+        [self setCommentCnt:[input readInt32]];
+        break;
+      }
+      case 72: {
         [self setHasPraise:[input readInt32]];
         break;
       }
-      case 74: {
-        MComment_Builder* subBuilder = [MComment builder];
-        [input readMessage:subBuilder extensionRegistry:extensionRegistry];
-        [self addComment:[subBuilder buildPartial]];
+      case 80: {
+        [self setIsHot:[input readInt32]];
         break;
       }
-      case 82: {
-        [self setCreateTime:[input readString]];
+      case 88: {
+        [self setIsTop:[input readInt32]];
         break;
       }
-      case 90: {
+      case 98: {
         [self setAuthor:[input readString]];
+        break;
+      }
+      case 106: {
+        [self setCreateTime:[input readString]];
         break;
       }
     }
@@ -661,20 +662,36 @@ static MTopic* defaultMTopicInstance = nil;
   result.id = @"";
   return self;
 }
-- (BOOL) hasTitle {
-  return result.hasTitle;
+- (BOOL) hasTagid {
+  return result.hasTagid;
 }
-- (NSString*) title {
-  return result.title;
+- (NSString*) tagid {
+  return result.tagid;
 }
-- (MTopic_Builder*) setTitle:(NSString*) value {
-  result.hasTitle = YES;
-  result.title = value;
+- (MTopic_Builder*) setTagid:(NSString*) value {
+  result.hasTagid = YES;
+  result.tagid = value;
   return self;
 }
-- (MTopic_Builder*) clearTitle {
-  result.hasTitle = NO;
-  result.title = @"";
+- (MTopic_Builder*) clearTagid {
+  result.hasTagid = NO;
+  result.tagid = @"";
+  return self;
+}
+- (BOOL) hasTag {
+  return result.hasTag;
+}
+- (NSString*) tag {
+  return result.tag;
+}
+- (MTopic_Builder*) setTag:(NSString*) value {
+  result.hasTag = YES;
+  result.tag = value;
+  return self;
+}
+- (MTopic_Builder*) clearTag {
+  result.hasTag = NO;
+  result.tag = @"";
   return self;
 }
 - (BOOL) hasContent {
@@ -709,20 +726,20 @@ static MTopic* defaultMTopicInstance = nil;
   result.time = @"";
   return self;
 }
-- (BOOL) hasImgs {
-  return result.hasImgs;
+- (BOOL) hasImg {
+  return result.hasImg;
 }
-- (NSString*) imgs {
-  return result.imgs;
+- (NSString*) img {
+  return result.img;
 }
-- (MTopic_Builder*) setImgs:(NSString*) value {
-  result.hasImgs = YES;
-  result.imgs = value;
+- (MTopic_Builder*) setImg:(NSString*) value {
+  result.hasImg = YES;
+  result.img = value;
   return self;
 }
-- (MTopic_Builder*) clearImgs {
-  result.hasImgs = NO;
-  result.imgs = @"";
+- (MTopic_Builder*) clearImg {
+  result.hasImg = NO;
+  result.img = @"";
   return self;
 }
 - (BOOL) hasPraiseCnt {
@@ -773,49 +790,36 @@ static MTopic* defaultMTopicInstance = nil;
   result.hasPraise = 0;
   return self;
 }
-- (NSArray*) commentList {
-  if (result.mutableCommentList == nil) { return [NSArray array]; }
-  return result.mutableCommentList;
+- (BOOL) hasIsHot {
+  return result.hasIsHot;
 }
-- (MComment*) commentAtIndex:(int32_t) index {
-  return [result commentAtIndex:index];
+- (int32_t) isHot {
+  return result.isHot;
 }
-- (MTopic_Builder*) replaceCommentAtIndex:(int32_t) index with:(MComment*) value {
-  [result.mutableCommentList replaceObjectAtIndex:index withObject:value];
+- (MTopic_Builder*) setIsHot:(int32_t) value {
+  result.hasIsHot = YES;
+  result.isHot = value;
   return self;
 }
-- (MTopic_Builder*) addAllComment:(NSArray*) values {
-  if (result.mutableCommentList == nil) {
-    result.mutableCommentList = [NSMutableArray array];
-  }
-  [result.mutableCommentList addObjectsFromArray:values];
+- (MTopic_Builder*) clearIsHot {
+  result.hasIsHot = NO;
+  result.isHot = 0;
   return self;
 }
-- (MTopic_Builder*) clearCommentList {
-  result.mutableCommentList = nil;
+- (BOOL) hasIsTop {
+  return result.hasIsTop;
+}
+- (int32_t) isTop {
+  return result.isTop;
+}
+- (MTopic_Builder*) setIsTop:(int32_t) value {
+  result.hasIsTop = YES;
+  result.isTop = value;
   return self;
 }
-- (MTopic_Builder*) addComment:(MComment*) value {
-  if (result.mutableCommentList == nil) {
-    result.mutableCommentList = [NSMutableArray array];
-  }
-  [result.mutableCommentList addObject:value];
-  return self;
-}
-- (BOOL) hasCreateTime {
-  return result.hasCreateTime;
-}
-- (NSString*) createTime {
-  return result.createTime;
-}
-- (MTopic_Builder*) setCreateTime:(NSString*) value {
-  result.hasCreateTime = YES;
-  result.createTime = value;
-  return self;
-}
-- (MTopic_Builder*) clearCreateTime {
-  result.hasCreateTime = NO;
-  result.createTime = @"";
+- (MTopic_Builder*) clearIsTop {
+  result.hasIsTop = NO;
+  result.isTop = 0;
   return self;
 }
 - (BOOL) hasAuthor {
@@ -834,19 +838,447 @@ static MTopic* defaultMTopicInstance = nil;
   result.author = @"";
   return self;
 }
+- (BOOL) hasCreateTime {
+  return result.hasCreateTime;
+}
+- (NSString*) createTime {
+  return result.createTime;
+}
+- (MTopic_Builder*) setCreateTime:(NSString*) value {
+  result.hasCreateTime = YES;
+  result.createTime = value;
+  return self;
+}
+- (MTopic_Builder*) clearCreateTime {
+  result.hasCreateTime = NO;
+  result.createTime = @"";
+  return self;
+}
+@end
+
+@interface MTag ()
+@property (retain) NSString* id;
+@property (retain) NSString* title;
+@end
+
+@implementation MTag
+
+- (BOOL) hasId {
+  return !!hasId_;
+}
+- (void) setHasId:(BOOL) value {
+  hasId_ = !!value;
+}
+@synthesize id;
+- (BOOL) hasTitle {
+  return !!hasTitle_;
+}
+- (void) setHasTitle:(BOOL) value {
+  hasTitle_ = !!value;
+}
+@synthesize title;
+- (void) dealloc {
+  self.id = nil;
+  self.title = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.id = @"";
+    self.title = @"";
+  }
+  return self;
+}
+static MTag* defaultMTagInstance = nil;
++ (void) initialize {
+  if (self == [MTag class]) {
+    defaultMTagInstance = [[MTag alloc] init];
+  }
+}
++ (MTag*) defaultInstance {
+  return defaultMTagInstance;
+}
+- (MTag*) defaultInstance {
+  return defaultMTagInstance;
+}
+- (BOOL) isInitialized {
+  return YES;
+}
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  if (self.hasId) {
+    [output writeString:1 value:self.id];
+  }
+  if (self.hasTitle) {
+    [output writeString:2 value:self.title];
+  }
+  [self.unknownFields writeToCodedOutputStream:output];
+}
+- (int32_t) serializedSize {
+  int32_t size = memoizedSerializedSize;
+  if (size != -1) {
+    return size;
+  }
+
+  size = 0;
+  if (self.hasId) {
+    size += computeStringSize(1, self.id);
+  }
+  if (self.hasTitle) {
+    size += computeStringSize(2, self.title);
+  }
+  size += self.unknownFields.serializedSize;
+  memoizedSerializedSize = size;
+  return size;
+}
++ (MTag*) parseFromData:(NSData*) data {
+  return (MTag*)[[[MTag builder] mergeFromData:data] build];
+}
++ (MTag*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTag*)[[[MTag builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
+}
++ (MTag*) parseFromInputStream:(NSInputStream*) input {
+  return (MTag*)[[[MTag builder] mergeFromInputStream:input] build];
+}
++ (MTag*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTag*)[[[MTag builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MTag*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MTag*)[[[MTag builder] mergeFromCodedInputStream:input] build];
+}
++ (MTag*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTag*)[[[MTag builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MTag_Builder*) builder {
+  return [[[MTag_Builder alloc] init] autorelease];
+}
++ (MTag_Builder*) builderWithPrototype:(MTag*) prototype {
+  return [[MTag builder] mergeFrom:prototype];
+}
+- (MTag_Builder*) builder {
+  return [MTag builder];
+}
+@end
+
+@interface MTag_Builder()
+@property (retain) MTag* result;
+@end
+
+@implementation MTag_Builder
+@synthesize result;
+- (void) dealloc {
+  self.result = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.result = [[[MTag alloc] init] autorelease];
+  }
+  return self;
+}
+- (PBGeneratedMessage*) internalGetResult {
+  return result;
+}
+- (MTag_Builder*) clear {
+  self.result = [[[MTag alloc] init] autorelease];
+  return self;
+}
+- (MTag_Builder*) clone {
+  return [MTag builderWithPrototype:result];
+}
+- (MTag*) defaultInstance {
+  return [MTag defaultInstance];
+}
+- (MTag*) build {
+  [self checkInitialized];
+  return [self buildPartial];
+}
+- (MTag*) buildPartial {
+  MTag* returnMe = [[result retain] autorelease];
+  self.result = nil;
+  return returnMe;
+}
+- (MTag_Builder*) mergeFrom:(MTag*) other {
+  if (other == [MTag defaultInstance]) {
+    return self;
+  }
+  if (other.hasId) {
+    [self setId:other.id];
+  }
+  if (other.hasTitle) {
+    [self setTitle:other.title];
+  }
+  [self mergeUnknownFields:other.unknownFields];
+  return self;
+}
+- (MTag_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
+}
+- (MTag_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+  while (YES) {
+    int32_t tag = [input readTag];
+    switch (tag) {
+      case 0:
+        [self setUnknownFields:[unknownFields build]];
+        return self;
+      default: {
+        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
+          [self setUnknownFields:[unknownFields build]];
+          return self;
+        }
+        break;
+      }
+      case 10: {
+        [self setId:[input readString]];
+        break;
+      }
+      case 18: {
+        [self setTitle:[input readString]];
+        break;
+      }
+    }
+  }
+}
+- (BOOL) hasId {
+  return result.hasId;
+}
+- (NSString*) id {
+  return result.id;
+}
+- (MTag_Builder*) setId:(NSString*) value {
+  result.hasId = YES;
+  result.id = value;
+  return self;
+}
+- (MTag_Builder*) clearId {
+  result.hasId = NO;
+  result.id = @"";
+  return self;
+}
+- (BOOL) hasTitle {
+  return result.hasTitle;
+}
+- (NSString*) title {
+  return result.title;
+}
+- (MTag_Builder*) setTitle:(NSString*) value {
+  result.hasTitle = YES;
+  result.title = value;
+  return self;
+}
+- (MTag_Builder*) clearTitle {
+  result.hasTitle = NO;
+  result.title = @"";
+  return self;
+}
+@end
+
+@interface MTagList ()
+@property (retain) NSMutableArray* mutableTagsList;
+@end
+
+@implementation MTagList
+
+@synthesize mutableTagsList;
+- (void) dealloc {
+  self.mutableTagsList = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+  }
+  return self;
+}
+static MTagList* defaultMTagListInstance = nil;
++ (void) initialize {
+  if (self == [MTagList class]) {
+    defaultMTagListInstance = [[MTagList alloc] init];
+  }
+}
++ (MTagList*) defaultInstance {
+  return defaultMTagListInstance;
+}
+- (MTagList*) defaultInstance {
+  return defaultMTagListInstance;
+}
+- (NSArray*) tagsList {
+  return mutableTagsList;
+}
+- (MTag*) tagsAtIndex:(int32_t) index {
+  id value = [mutableTagsList objectAtIndex:index];
+  return value;
+}
+- (BOOL) isInitialized {
+  return YES;
+}
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  for (MTag* element in self.tagsList) {
+    [output writeMessage:1 value:element];
+  }
+  [self.unknownFields writeToCodedOutputStream:output];
+}
+- (int32_t) serializedSize {
+  int32_t size = memoizedSerializedSize;
+  if (size != -1) {
+    return size;
+  }
+
+  size = 0;
+  for (MTag* element in self.tagsList) {
+    size += computeMessageSize(1, element);
+  }
+  size += self.unknownFields.serializedSize;
+  memoizedSerializedSize = size;
+  return size;
+}
++ (MTagList*) parseFromData:(NSData*) data {
+  return (MTagList*)[[[MTagList builder] mergeFromData:data] build];
+}
++ (MTagList*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTagList*)[[[MTagList builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
+}
++ (MTagList*) parseFromInputStream:(NSInputStream*) input {
+  return (MTagList*)[[[MTagList builder] mergeFromInputStream:input] build];
+}
++ (MTagList*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTagList*)[[[MTagList builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MTagList*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MTagList*)[[[MTagList builder] mergeFromCodedInputStream:input] build];
+}
++ (MTagList*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTagList*)[[[MTagList builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MTagList_Builder*) builder {
+  return [[[MTagList_Builder alloc] init] autorelease];
+}
++ (MTagList_Builder*) builderWithPrototype:(MTagList*) prototype {
+  return [[MTagList builder] mergeFrom:prototype];
+}
+- (MTagList_Builder*) builder {
+  return [MTagList builder];
+}
+@end
+
+@interface MTagList_Builder()
+@property (retain) MTagList* result;
+@end
+
+@implementation MTagList_Builder
+@synthesize result;
+- (void) dealloc {
+  self.result = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.result = [[[MTagList alloc] init] autorelease];
+  }
+  return self;
+}
+- (PBGeneratedMessage*) internalGetResult {
+  return result;
+}
+- (MTagList_Builder*) clear {
+  self.result = [[[MTagList alloc] init] autorelease];
+  return self;
+}
+- (MTagList_Builder*) clone {
+  return [MTagList builderWithPrototype:result];
+}
+- (MTagList*) defaultInstance {
+  return [MTagList defaultInstance];
+}
+- (MTagList*) build {
+  [self checkInitialized];
+  return [self buildPartial];
+}
+- (MTagList*) buildPartial {
+  MTagList* returnMe = [[result retain] autorelease];
+  self.result = nil;
+  return returnMe;
+}
+- (MTagList_Builder*) mergeFrom:(MTagList*) other {
+  if (other == [MTagList defaultInstance]) {
+    return self;
+  }
+  if (other.mutableTagsList.count > 0) {
+    if (result.mutableTagsList == nil) {
+      result.mutableTagsList = [NSMutableArray array];
+    }
+    [result.mutableTagsList addObjectsFromArray:other.mutableTagsList];
+  }
+  [self mergeUnknownFields:other.unknownFields];
+  return self;
+}
+- (MTagList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
+}
+- (MTagList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+  while (YES) {
+    int32_t tag = [input readTag];
+    switch (tag) {
+      case 0:
+        [self setUnknownFields:[unknownFields build]];
+        return self;
+      default: {
+        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
+          [self setUnknownFields:[unknownFields build]];
+          return self;
+        }
+        break;
+      }
+      case 10: {
+        MTag_Builder* subBuilder = [MTag builder];
+        [input readMessage:subBuilder extensionRegistry:extensionRegistry];
+        [self addTags:[subBuilder buildPartial]];
+        break;
+      }
+    }
+  }
+}
+- (NSArray*) tagsList {
+  if (result.mutableTagsList == nil) { return [NSArray array]; }
+  return result.mutableTagsList;
+}
+- (MTag*) tagsAtIndex:(int32_t) index {
+  return [result tagsAtIndex:index];
+}
+- (MTagList_Builder*) replaceTagsAtIndex:(int32_t) index with:(MTag*) value {
+  [result.mutableTagsList replaceObjectAtIndex:index withObject:value];
+  return self;
+}
+- (MTagList_Builder*) addAllTags:(NSArray*) values {
+  if (result.mutableTagsList == nil) {
+    result.mutableTagsList = [NSMutableArray array];
+  }
+  [result.mutableTagsList addObjectsFromArray:values];
+  return self;
+}
+- (MTagList_Builder*) clearTagsList {
+  result.mutableTagsList = nil;
+  return self;
+}
+- (MTagList_Builder*) addTags:(MTag*) value {
+  if (result.mutableTagsList == nil) {
+    result.mutableTagsList = [NSMutableArray array];
+  }
+  [result.mutableTagsList addObject:value];
+  return self;
+}
 @end
 
 @interface MComment ()
 @property (retain) NSString* id;
-@property (retain) NSString* userid1;
-@property (retain) NSString* nickname1;
-@property (retain) NSString* userid2;
-@property (retain) NSString* nickname2;
+@property int32_t floor;
+@property (retain) NSString* userid;
+@property int32_t replyFloor;
+@property (retain) NSString* replyid;
 @property (retain) NSString* content;
 @property (retain) NSString* time;
-@property (retain) NSString* pid;
-@property (retain) NSString* title;
-@property (retain) NSString* author;
+@property int32_t isLz;
+@property (retain) NSString* createTime;
 @end
 
 @implementation MComment
@@ -858,34 +1290,34 @@ static MTopic* defaultMTopicInstance = nil;
   hasId_ = !!value;
 }
 @synthesize id;
-- (BOOL) hasUserid1 {
-  return !!hasUserid1_;
+- (BOOL) hasFloor {
+  return !!hasFloor_;
 }
-- (void) setHasUserid1:(BOOL) value {
-  hasUserid1_ = !!value;
+- (void) setHasFloor:(BOOL) value {
+  hasFloor_ = !!value;
 }
-@synthesize userid1;
-- (BOOL) hasNickname1 {
-  return !!hasNickname1_;
+@synthesize floor;
+- (BOOL) hasUserid {
+  return !!hasUserid_;
 }
-- (void) setHasNickname1:(BOOL) value {
-  hasNickname1_ = !!value;
+- (void) setHasUserid:(BOOL) value {
+  hasUserid_ = !!value;
 }
-@synthesize nickname1;
-- (BOOL) hasUserid2 {
-  return !!hasUserid2_;
+@synthesize userid;
+- (BOOL) hasReplyFloor {
+  return !!hasReplyFloor_;
 }
-- (void) setHasUserid2:(BOOL) value {
-  hasUserid2_ = !!value;
+- (void) setHasReplyFloor:(BOOL) value {
+  hasReplyFloor_ = !!value;
 }
-@synthesize userid2;
-- (BOOL) hasNickname2 {
-  return !!hasNickname2_;
+@synthesize replyFloor;
+- (BOOL) hasReplyid {
+  return !!hasReplyid_;
 }
-- (void) setHasNickname2:(BOOL) value {
-  hasNickname2_ = !!value;
+- (void) setHasReplyid:(BOOL) value {
+  hasReplyid_ = !!value;
 }
-@synthesize nickname2;
+@synthesize replyid;
 - (BOOL) hasContent {
   return !!hasContent_;
 }
@@ -900,52 +1332,40 @@ static MTopic* defaultMTopicInstance = nil;
   hasTime_ = !!value;
 }
 @synthesize time;
-- (BOOL) hasPid {
-  return !!hasPid_;
+- (BOOL) hasIsLz {
+  return !!hasIsLz_;
 }
-- (void) setHasPid:(BOOL) value {
-  hasPid_ = !!value;
+- (void) setHasIsLz:(BOOL) value {
+  hasIsLz_ = !!value;
 }
-@synthesize pid;
-- (BOOL) hasTitle {
-  return !!hasTitle_;
+@synthesize isLz;
+- (BOOL) hasCreateTime {
+  return !!hasCreateTime_;
 }
-- (void) setHasTitle:(BOOL) value {
-  hasTitle_ = !!value;
+- (void) setHasCreateTime:(BOOL) value {
+  hasCreateTime_ = !!value;
 }
-@synthesize title;
-- (BOOL) hasAuthor {
-  return !!hasAuthor_;
-}
-- (void) setHasAuthor:(BOOL) value {
-  hasAuthor_ = !!value;
-}
-@synthesize author;
+@synthesize createTime;
 - (void) dealloc {
   self.id = nil;
-  self.userid1 = nil;
-  self.nickname1 = nil;
-  self.userid2 = nil;
-  self.nickname2 = nil;
+  self.userid = nil;
+  self.replyid = nil;
   self.content = nil;
   self.time = nil;
-  self.pid = nil;
-  self.title = nil;
-  self.author = nil;
+  self.createTime = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
     self.id = @"";
-    self.userid1 = @"";
-    self.nickname1 = @"";
-    self.userid2 = @"";
-    self.nickname2 = @"";
+    self.floor = 0;
+    self.userid = @"";
+    self.replyFloor = 0;
+    self.replyid = @"";
     self.content = @"";
     self.time = @"";
-    self.pid = @"";
-    self.title = @"";
-    self.author = @"";
+    self.isLz = 0;
+    self.createTime = @"";
   }
   return self;
 }
@@ -968,17 +1388,17 @@ static MComment* defaultMCommentInstance = nil;
   if (self.hasId) {
     [output writeString:1 value:self.id];
   }
-  if (self.hasUserid1) {
-    [output writeString:2 value:self.userid1];
+  if (self.hasFloor) {
+    [output writeInt32:2 value:self.floor];
   }
-  if (self.hasNickname1) {
-    [output writeString:3 value:self.nickname1];
+  if (self.hasUserid) {
+    [output writeString:3 value:self.userid];
   }
-  if (self.hasUserid2) {
-    [output writeString:4 value:self.userid2];
+  if (self.hasReplyFloor) {
+    [output writeInt32:4 value:self.replyFloor];
   }
-  if (self.hasNickname2) {
-    [output writeString:5 value:self.nickname2];
+  if (self.hasReplyid) {
+    [output writeString:5 value:self.replyid];
   }
   if (self.hasContent) {
     [output writeString:6 value:self.content];
@@ -986,14 +1406,11 @@ static MComment* defaultMCommentInstance = nil;
   if (self.hasTime) {
     [output writeString:7 value:self.time];
   }
-  if (self.hasPid) {
-    [output writeString:8 value:self.pid];
+  if (self.hasIsLz) {
+    [output writeInt32:8 value:self.isLz];
   }
-  if (self.hasTitle) {
-    [output writeString:9 value:self.title];
-  }
-  if (self.hasAuthor) {
-    [output writeString:10 value:self.author];
+  if (self.hasCreateTime) {
+    [output writeString:9 value:self.createTime];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -1007,17 +1424,17 @@ static MComment* defaultMCommentInstance = nil;
   if (self.hasId) {
     size += computeStringSize(1, self.id);
   }
-  if (self.hasUserid1) {
-    size += computeStringSize(2, self.userid1);
+  if (self.hasFloor) {
+    size += computeInt32Size(2, self.floor);
   }
-  if (self.hasNickname1) {
-    size += computeStringSize(3, self.nickname1);
+  if (self.hasUserid) {
+    size += computeStringSize(3, self.userid);
   }
-  if (self.hasUserid2) {
-    size += computeStringSize(4, self.userid2);
+  if (self.hasReplyFloor) {
+    size += computeInt32Size(4, self.replyFloor);
   }
-  if (self.hasNickname2) {
-    size += computeStringSize(5, self.nickname2);
+  if (self.hasReplyid) {
+    size += computeStringSize(5, self.replyid);
   }
   if (self.hasContent) {
     size += computeStringSize(6, self.content);
@@ -1025,14 +1442,11 @@ static MComment* defaultMCommentInstance = nil;
   if (self.hasTime) {
     size += computeStringSize(7, self.time);
   }
-  if (self.hasPid) {
-    size += computeStringSize(8, self.pid);
+  if (self.hasIsLz) {
+    size += computeInt32Size(8, self.isLz);
   }
-  if (self.hasTitle) {
-    size += computeStringSize(9, self.title);
-  }
-  if (self.hasAuthor) {
-    size += computeStringSize(10, self.author);
+  if (self.hasCreateTime) {
+    size += computeStringSize(9, self.createTime);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -1112,17 +1526,17 @@ static MComment* defaultMCommentInstance = nil;
   if (other.hasId) {
     [self setId:other.id];
   }
-  if (other.hasUserid1) {
-    [self setUserid1:other.userid1];
+  if (other.hasFloor) {
+    [self setFloor:other.floor];
   }
-  if (other.hasNickname1) {
-    [self setNickname1:other.nickname1];
+  if (other.hasUserid) {
+    [self setUserid:other.userid];
   }
-  if (other.hasUserid2) {
-    [self setUserid2:other.userid2];
+  if (other.hasReplyFloor) {
+    [self setReplyFloor:other.replyFloor];
   }
-  if (other.hasNickname2) {
-    [self setNickname2:other.nickname2];
+  if (other.hasReplyid) {
+    [self setReplyid:other.replyid];
   }
   if (other.hasContent) {
     [self setContent:other.content];
@@ -1130,14 +1544,11 @@ static MComment* defaultMCommentInstance = nil;
   if (other.hasTime) {
     [self setTime:other.time];
   }
-  if (other.hasPid) {
-    [self setPid:other.pid];
+  if (other.hasIsLz) {
+    [self setIsLz:other.isLz];
   }
-  if (other.hasTitle) {
-    [self setTitle:other.title];
-  }
-  if (other.hasAuthor) {
-    [self setAuthor:other.author];
+  if (other.hasCreateTime) {
+    [self setCreateTime:other.createTime];
   }
   [self mergeUnknownFields:other.unknownFields];
   return self;
@@ -1164,20 +1575,20 @@ static MComment* defaultMCommentInstance = nil;
         [self setId:[input readString]];
         break;
       }
-      case 18: {
-        [self setUserid1:[input readString]];
+      case 16: {
+        [self setFloor:[input readInt32]];
         break;
       }
       case 26: {
-        [self setNickname1:[input readString]];
+        [self setUserid:[input readString]];
         break;
       }
-      case 34: {
-        [self setUserid2:[input readString]];
+      case 32: {
+        [self setReplyFloor:[input readInt32]];
         break;
       }
       case 42: {
-        [self setNickname2:[input readString]];
+        [self setReplyid:[input readString]];
         break;
       }
       case 50: {
@@ -1188,16 +1599,12 @@ static MComment* defaultMCommentInstance = nil;
         [self setTime:[input readString]];
         break;
       }
-      case 66: {
-        [self setPid:[input readString]];
+      case 64: {
+        [self setIsLz:[input readInt32]];
         break;
       }
       case 74: {
-        [self setTitle:[input readString]];
-        break;
-      }
-      case 82: {
-        [self setAuthor:[input readString]];
+        [self setCreateTime:[input readString]];
         break;
       }
     }
@@ -1219,68 +1626,68 @@ static MComment* defaultMCommentInstance = nil;
   result.id = @"";
   return self;
 }
-- (BOOL) hasUserid1 {
-  return result.hasUserid1;
+- (BOOL) hasFloor {
+  return result.hasFloor;
 }
-- (NSString*) userid1 {
-  return result.userid1;
+- (int32_t) floor {
+  return result.floor;
 }
-- (MComment_Builder*) setUserid1:(NSString*) value {
-  result.hasUserid1 = YES;
-  result.userid1 = value;
+- (MComment_Builder*) setFloor:(int32_t) value {
+  result.hasFloor = YES;
+  result.floor = value;
   return self;
 }
-- (MComment_Builder*) clearUserid1 {
-  result.hasUserid1 = NO;
-  result.userid1 = @"";
+- (MComment_Builder*) clearFloor {
+  result.hasFloor = NO;
+  result.floor = 0;
   return self;
 }
-- (BOOL) hasNickname1 {
-  return result.hasNickname1;
+- (BOOL) hasUserid {
+  return result.hasUserid;
 }
-- (NSString*) nickname1 {
-  return result.nickname1;
+- (NSString*) userid {
+  return result.userid;
 }
-- (MComment_Builder*) setNickname1:(NSString*) value {
-  result.hasNickname1 = YES;
-  result.nickname1 = value;
+- (MComment_Builder*) setUserid:(NSString*) value {
+  result.hasUserid = YES;
+  result.userid = value;
   return self;
 }
-- (MComment_Builder*) clearNickname1 {
-  result.hasNickname1 = NO;
-  result.nickname1 = @"";
+- (MComment_Builder*) clearUserid {
+  result.hasUserid = NO;
+  result.userid = @"";
   return self;
 }
-- (BOOL) hasUserid2 {
-  return result.hasUserid2;
+- (BOOL) hasReplyFloor {
+  return result.hasReplyFloor;
 }
-- (NSString*) userid2 {
-  return result.userid2;
+- (int32_t) replyFloor {
+  return result.replyFloor;
 }
-- (MComment_Builder*) setUserid2:(NSString*) value {
-  result.hasUserid2 = YES;
-  result.userid2 = value;
+- (MComment_Builder*) setReplyFloor:(int32_t) value {
+  result.hasReplyFloor = YES;
+  result.replyFloor = value;
   return self;
 }
-- (MComment_Builder*) clearUserid2 {
-  result.hasUserid2 = NO;
-  result.userid2 = @"";
+- (MComment_Builder*) clearReplyFloor {
+  result.hasReplyFloor = NO;
+  result.replyFloor = 0;
   return self;
 }
-- (BOOL) hasNickname2 {
-  return result.hasNickname2;
+- (BOOL) hasReplyid {
+  return result.hasReplyid;
 }
-- (NSString*) nickname2 {
-  return result.nickname2;
+- (NSString*) replyid {
+  return result.replyid;
 }
-- (MComment_Builder*) setNickname2:(NSString*) value {
-  result.hasNickname2 = YES;
-  result.nickname2 = value;
+- (MComment_Builder*) setReplyid:(NSString*) value {
+  result.hasReplyid = YES;
+  result.replyid = value;
   return self;
 }
-- (MComment_Builder*) clearNickname2 {
-  result.hasNickname2 = NO;
-  result.nickname2 = @"";
+- (MComment_Builder*) clearReplyid {
+  result.hasReplyid = NO;
+  result.replyid = @"";
   return self;
 }
 - (BOOL) hasContent {
@@ -1315,109 +1722,81 @@ static MComment* defaultMCommentInstance = nil;
   result.time = @"";
   return self;
 }
-- (BOOL) hasPid {
-  return result.hasPid;
+- (BOOL) hasIsLz {
+  return result.hasIsLz;
 }
-- (NSString*) pid {
-  return result.pid;
+- (int32_t) isLz {
+  return result.isLz;
 }
-- (MComment_Builder*) setPid:(NSString*) value {
-  result.hasPid = YES;
-  result.pid = value;
+- (MComment_Builder*) setIsLz:(int32_t) value {
+  result.hasIsLz = YES;
+  result.isLz = value;
   return self;
 }
-- (MComment_Builder*) clearPid {
-  result.hasPid = NO;
-  result.pid = @"";
+- (MComment_Builder*) clearIsLz {
+  result.hasIsLz = NO;
+  result.isLz = 0;
   return self;
 }
-- (BOOL) hasTitle {
-  return result.hasTitle;
+- (BOOL) hasCreateTime {
+  return result.hasCreateTime;
 }
-- (NSString*) title {
-  return result.title;
+- (NSString*) createTime {
+  return result.createTime;
 }
-- (MComment_Builder*) setTitle:(NSString*) value {
-  result.hasTitle = YES;
-  result.title = value;
+- (MComment_Builder*) setCreateTime:(NSString*) value {
+  result.hasCreateTime = YES;
+  result.createTime = value;
   return self;
 }
-- (MComment_Builder*) clearTitle {
-  result.hasTitle = NO;
-  result.title = @"";
-  return self;
-}
-- (BOOL) hasAuthor {
-  return result.hasAuthor;
-}
-- (NSString*) author {
-  return result.author;
-}
-- (MComment_Builder*) setAuthor:(NSString*) value {
-  result.hasAuthor = YES;
-  result.author = value;
-  return self;
-}
-- (MComment_Builder*) clearAuthor {
-  result.hasAuthor = NO;
-  result.author = @"";
+- (MComment_Builder*) clearCreateTime {
+  result.hasCreateTime = NO;
+  result.createTime = @"";
   return self;
 }
 @end
 
-@interface MNewComments ()
-@property (retain) NSMutableArray* mutableNewsList;
-@property int32_t cnt;
+@interface MCommentList ()
+@property (retain) NSMutableArray* mutableCommentsList;
 @end
 
-@implementation MNewComments
+@implementation MCommentList
 
-@synthesize mutableNewsList;
-- (BOOL) hasCnt {
-  return !!hasCnt_;
-}
-- (void) setHasCnt:(BOOL) value {
-  hasCnt_ = !!value;
-}
-@synthesize cnt;
+@synthesize mutableCommentsList;
 - (void) dealloc {
-  self.mutableNewsList = nil;
+  self.mutableCommentsList = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
-    self.cnt = 0;
   }
   return self;
 }
-static MNewComments* defaultMNewCommentsInstance = nil;
+static MCommentList* defaultMCommentListInstance = nil;
 + (void) initialize {
-  if (self == [MNewComments class]) {
-    defaultMNewCommentsInstance = [[MNewComments alloc] init];
+  if (self == [MCommentList class]) {
+    defaultMCommentListInstance = [[MCommentList alloc] init];
   }
 }
-+ (MNewComments*) defaultInstance {
-  return defaultMNewCommentsInstance;
++ (MCommentList*) defaultInstance {
+  return defaultMCommentListInstance;
 }
-- (MNewComments*) defaultInstance {
-  return defaultMNewCommentsInstance;
+- (MCommentList*) defaultInstance {
+  return defaultMCommentListInstance;
 }
-- (NSArray*) newsList {
-  return mutableNewsList;
+- (NSArray*) commentsList {
+  return mutableCommentsList;
 }
-- (MComment*) newsAtIndex:(int32_t) index {
-  id value = [mutableNewsList objectAtIndex:index];
+- (MComment*) commentsAtIndex:(int32_t) index {
+  id value = [mutableCommentsList objectAtIndex:index];
   return value;
 }
 - (BOOL) isInitialized {
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
-  for (MComment* element in self.newsList) {
+  for (MComment* element in self.commentsList) {
     [output writeMessage:1 value:element];
-  }
-  if (self.hasCnt) {
-    [output writeInt32:2 value:self.cnt];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -1428,50 +1807,47 @@ static MNewComments* defaultMNewCommentsInstance = nil;
   }
 
   size = 0;
-  for (MComment* element in self.newsList) {
+  for (MComment* element in self.commentsList) {
     size += computeMessageSize(1, element);
-  }
-  if (self.hasCnt) {
-    size += computeInt32Size(2, self.cnt);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
   return size;
 }
-+ (MNewComments*) parseFromData:(NSData*) data {
-  return (MNewComments*)[[[MNewComments builder] mergeFromData:data] build];
++ (MCommentList*) parseFromData:(NSData*) data {
+  return (MCommentList*)[[[MCommentList builder] mergeFromData:data] build];
 }
-+ (MNewComments*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MNewComments*)[[[MNewComments builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
++ (MCommentList*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MCommentList*)[[[MCommentList builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
 }
-+ (MNewComments*) parseFromInputStream:(NSInputStream*) input {
-  return (MNewComments*)[[[MNewComments builder] mergeFromInputStream:input] build];
++ (MCommentList*) parseFromInputStream:(NSInputStream*) input {
+  return (MCommentList*)[[[MCommentList builder] mergeFromInputStream:input] build];
 }
-+ (MNewComments*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MNewComments*)[[[MNewComments builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
++ (MCommentList*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MCommentList*)[[[MCommentList builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (MNewComments*) parseFromCodedInputStream:(PBCodedInputStream*) input {
-  return (MNewComments*)[[[MNewComments builder] mergeFromCodedInputStream:input] build];
++ (MCommentList*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MCommentList*)[[[MCommentList builder] mergeFromCodedInputStream:input] build];
 }
-+ (MNewComments*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MNewComments*)[[[MNewComments builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
++ (MCommentList*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MCommentList*)[[[MCommentList builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (MNewComments_Builder*) builder {
-  return [[[MNewComments_Builder alloc] init] autorelease];
++ (MCommentList_Builder*) builder {
+  return [[[MCommentList_Builder alloc] init] autorelease];
 }
-+ (MNewComments_Builder*) builderWithPrototype:(MNewComments*) prototype {
-  return [[MNewComments builder] mergeFrom:prototype];
++ (MCommentList_Builder*) builderWithPrototype:(MCommentList*) prototype {
+  return [[MCommentList builder] mergeFrom:prototype];
 }
-- (MNewComments_Builder*) builder {
-  return [MNewComments builder];
+- (MCommentList_Builder*) builder {
+  return [MCommentList builder];
 }
 @end
 
-@interface MNewComments_Builder()
-@property (retain) MNewComments* result;
+@interface MCommentList_Builder()
+@property (retain) MCommentList* result;
 @end
 
-@implementation MNewComments_Builder
+@implementation MCommentList_Builder
 @synthesize result;
 - (void) dealloc {
   self.result = nil;
@@ -1479,52 +1855,49 @@ static MNewComments* defaultMNewCommentsInstance = nil;
 }
 - (id) init {
   if ((self = [super init])) {
-    self.result = [[[MNewComments alloc] init] autorelease];
+    self.result = [[[MCommentList alloc] init] autorelease];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
   return result;
 }
-- (MNewComments_Builder*) clear {
-  self.result = [[[MNewComments alloc] init] autorelease];
+- (MCommentList_Builder*) clear {
+  self.result = [[[MCommentList alloc] init] autorelease];
   return self;
 }
-- (MNewComments_Builder*) clone {
-  return [MNewComments builderWithPrototype:result];
+- (MCommentList_Builder*) clone {
+  return [MCommentList builderWithPrototype:result];
 }
-- (MNewComments*) defaultInstance {
-  return [MNewComments defaultInstance];
+- (MCommentList*) defaultInstance {
+  return [MCommentList defaultInstance];
 }
-- (MNewComments*) build {
+- (MCommentList*) build {
   [self checkInitialized];
   return [self buildPartial];
 }
-- (MNewComments*) buildPartial {
-  MNewComments* returnMe = [[result retain] autorelease];
+- (MCommentList*) buildPartial {
+  MCommentList* returnMe = [[result retain] autorelease];
   self.result = nil;
   return returnMe;
 }
-- (MNewComments_Builder*) mergeFrom:(MNewComments*) other {
-  if (other == [MNewComments defaultInstance]) {
+- (MCommentList_Builder*) mergeFrom:(MCommentList*) other {
+  if (other == [MCommentList defaultInstance]) {
     return self;
   }
-  if (other.mutableNewsList.count > 0) {
-    if (result.mutableNewsList == nil) {
-      result.mutableNewsList = [NSMutableArray array];
+  if (other.mutableCommentsList.count > 0) {
+    if (result.mutableCommentsList == nil) {
+      result.mutableCommentsList = [NSMutableArray array];
     }
-    [result.mutableNewsList addObjectsFromArray:other.mutableNewsList];
-  }
-  if (other.hasCnt) {
-    [self setCnt:other.cnt];
+    [result.mutableCommentsList addObjectsFromArray:other.mutableCommentsList];
   }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
-- (MNewComments_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+- (MCommentList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
   return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
 }
-- (MNewComments_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+- (MCommentList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
   PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
   while (YES) {
     int32_t tag = [input readTag];
@@ -1542,78 +1915,58 @@ static MNewComments* defaultMNewCommentsInstance = nil;
       case 10: {
         MComment_Builder* subBuilder = [MComment builder];
         [input readMessage:subBuilder extensionRegistry:extensionRegistry];
-        [self addNews:[subBuilder buildPartial]];
-        break;
-      }
-      case 16: {
-        [self setCnt:[input readInt32]];
+        [self addComments:[subBuilder buildPartial]];
         break;
       }
     }
   }
 }
-- (NSArray*) newsList {
-  if (result.mutableNewsList == nil) { return [NSArray array]; }
-  return result.mutableNewsList;
+- (NSArray*) commentsList {
+  if (result.mutableCommentsList == nil) { return [NSArray array]; }
+  return result.mutableCommentsList;
 }
-- (MComment*) newsAtIndex:(int32_t) index {
-  return [result newsAtIndex:index];
+- (MComment*) commentsAtIndex:(int32_t) index {
+  return [result commentsAtIndex:index];
 }
-- (MNewComments_Builder*) replaceNewsAtIndex:(int32_t) index with:(MComment*) value {
-  [result.mutableNewsList replaceObjectAtIndex:index withObject:value];
+- (MCommentList_Builder*) replaceCommentsAtIndex:(int32_t) index with:(MComment*) value {
+  [result.mutableCommentsList replaceObjectAtIndex:index withObject:value];
   return self;
 }
-- (MNewComments_Builder*) addAllNews:(NSArray*) values {
-  if (result.mutableNewsList == nil) {
-    result.mutableNewsList = [NSMutableArray array];
+- (MCommentList_Builder*) addAllComments:(NSArray*) values {
+  if (result.mutableCommentsList == nil) {
+    result.mutableCommentsList = [NSMutableArray array];
   }
-  [result.mutableNewsList addObjectsFromArray:values];
+  [result.mutableCommentsList addObjectsFromArray:values];
   return self;
 }
-- (MNewComments_Builder*) clearNewsList {
-  result.mutableNewsList = nil;
+- (MCommentList_Builder*) clearCommentsList {
+  result.mutableCommentsList = nil;
   return self;
 }
-- (MNewComments_Builder*) addNews:(MComment*) value {
-  if (result.mutableNewsList == nil) {
-    result.mutableNewsList = [NSMutableArray array];
+- (MCommentList_Builder*) addComments:(MComment*) value {
+  if (result.mutableCommentsList == nil) {
+    result.mutableCommentsList = [NSMutableArray array];
   }
-  [result.mutableNewsList addObject:value];
-  return self;
-}
-- (BOOL) hasCnt {
-  return result.hasCnt;
-}
-- (int32_t) cnt {
-  return result.cnt;
-}
-- (MNewComments_Builder*) setCnt:(int32_t) value {
-  result.hasCnt = YES;
-  result.cnt = value;
-  return self;
-}
-- (MNewComments_Builder*) clearCnt {
-  result.hasCnt = NO;
-  result.cnt = 0;
+  [result.mutableCommentsList addObject:value];
   return self;
 }
 @end
 
 @interface MAddTopic ()
-@property (retain) NSString* title;
+@property (retain) NSString* tagId;
 @property (retain) NSString* content;
-@property (retain) NSMutableArray* mutableImgsList;
+@property (retain) NSData* img;
 @end
 
 @implementation MAddTopic
 
-- (BOOL) hasTitle {
-  return !!hasTitle_;
+- (BOOL) hasTagId {
+  return !!hasTagId_;
 }
-- (void) setHasTitle:(BOOL) value {
-  hasTitle_ = !!value;
+- (void) setHasTagId:(BOOL) value {
+  hasTagId_ = !!value;
 }
-@synthesize title;
+@synthesize tagId;
 - (BOOL) hasContent {
   return !!hasContent_;
 }
@@ -1621,17 +1974,24 @@ static MNewComments* defaultMNewCommentsInstance = nil;
   hasContent_ = !!value;
 }
 @synthesize content;
-@synthesize mutableImgsList;
+- (BOOL) hasImg {
+  return !!hasImg_;
+}
+- (void) setHasImg:(BOOL) value {
+  hasImg_ = !!value;
+}
+@synthesize img;
 - (void) dealloc {
-  self.title = nil;
+  self.tagId = nil;
   self.content = nil;
-  self.mutableImgsList = nil;
+  self.img = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
-    self.title = @"";
+    self.tagId = @"";
     self.content = @"";
+    self.img = [NSData data];
   }
   return self;
 }
@@ -1647,25 +2007,18 @@ static MAddTopic* defaultMAddTopicInstance = nil;
 - (MAddTopic*) defaultInstance {
   return defaultMAddTopicInstance;
 }
-- (NSArray*) imgsList {
-  return mutableImgsList;
-}
-- (NSData*) imgsAtIndex:(int32_t) index {
-  id value = [mutableImgsList objectAtIndex:index];
-  return value;
-}
 - (BOOL) isInitialized {
   return YES;
 }
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
-  if (self.hasTitle) {
-    [output writeString:1 value:self.title];
+  if (self.hasTagId) {
+    [output writeString:1 value:self.tagId];
   }
   if (self.hasContent) {
     [output writeString:2 value:self.content];
   }
-  for (NSData* element in self.mutableImgsList) {
-    [output writeData:3 value:element];
+  if (self.hasImg) {
+    [output writeData:3 value:self.img];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -1676,19 +2029,14 @@ static MAddTopic* defaultMAddTopicInstance = nil;
   }
 
   size = 0;
-  if (self.hasTitle) {
-    size += computeStringSize(1, self.title);
+  if (self.hasTagId) {
+    size += computeStringSize(1, self.tagId);
   }
   if (self.hasContent) {
     size += computeStringSize(2, self.content);
   }
-  {
-    int32_t dataSize = 0;
-    for (NSData* element in self.mutableImgsList) {
-      dataSize += computeDataSizeNoTag(element);
-    }
-    size += dataSize;
-    size += 1 * self.mutableImgsList.count;
+  if (self.hasImg) {
+    size += computeDataSize(3, self.img);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -1765,17 +2113,14 @@ static MAddTopic* defaultMAddTopicInstance = nil;
   if (other == [MAddTopic defaultInstance]) {
     return self;
   }
-  if (other.hasTitle) {
-    [self setTitle:other.title];
+  if (other.hasTagId) {
+    [self setTagId:other.tagId];
   }
   if (other.hasContent) {
     [self setContent:other.content];
   }
-  if (other.mutableImgsList.count > 0) {
-    if (result.mutableImgsList == nil) {
-      result.mutableImgsList = [NSMutableArray array];
-    }
-    [result.mutableImgsList addObjectsFromArray:other.mutableImgsList];
+  if (other.hasImg) {
+    [self setImg:other.img];
   }
   [self mergeUnknownFields:other.unknownFields];
   return self;
@@ -1799,7 +2144,7 @@ static MAddTopic* defaultMAddTopicInstance = nil;
         break;
       }
       case 10: {
-        [self setTitle:[input readString]];
+        [self setTagId:[input readString]];
         break;
       }
       case 18: {
@@ -1807,26 +2152,26 @@ static MAddTopic* defaultMAddTopicInstance = nil;
         break;
       }
       case 26: {
-        [self addImgs:[input readData]];
+        [self setImg:[input readData]];
         break;
       }
     }
   }
 }
-- (BOOL) hasTitle {
-  return result.hasTitle;
+- (BOOL) hasTagId {
+  return result.hasTagId;
 }
-- (NSString*) title {
-  return result.title;
+- (NSString*) tagId {
+  return result.tagId;
 }
-- (MAddTopic_Builder*) setTitle:(NSString*) value {
-  result.hasTitle = YES;
-  result.title = value;
+- (MAddTopic_Builder*) setTagId:(NSString*) value {
+  result.hasTagId = YES;
+  result.tagId = value;
   return self;
 }
-- (MAddTopic_Builder*) clearTitle {
-  result.hasTitle = NO;
-  result.title = @"";
+- (MAddTopic_Builder*) clearTagId {
+  result.hasTagId = NO;
+  result.tagId = @"";
   return self;
 }
 - (BOOL) hasContent {
@@ -1845,35 +2190,764 @@ static MAddTopic* defaultMAddTopicInstance = nil;
   result.content = @"";
   return self;
 }
-- (NSArray*) imgsList {
-  if (result.mutableImgsList == nil) {
-    return [NSArray array];
-  }
-  return result.mutableImgsList;
+- (BOOL) hasImg {
+  return result.hasImg;
 }
-- (NSData*) imgsAtIndex:(int32_t) index {
-  return [result imgsAtIndex:index];
+- (NSData*) img {
+  return result.img;
 }
-- (MAddTopic_Builder*) replaceImgsAtIndex:(int32_t) index with:(NSData*) value {
-  [result.mutableImgsList replaceObjectAtIndex:index withObject:value];
+- (MAddTopic_Builder*) setImg:(NSData*) value {
+  result.hasImg = YES;
+  result.img = value;
   return self;
 }
-- (MAddTopic_Builder*) addImgs:(NSData*) value {
-  if (result.mutableImgsList == nil) {
-    result.mutableImgsList = [NSMutableArray array];
-  }
-  [result.mutableImgsList addObject:value];
+- (MAddTopic_Builder*) clearImg {
+  result.hasImg = NO;
+  result.img = [NSData data];
   return self;
 }
-- (MAddTopic_Builder*) addAllImgs:(NSArray*) values {
-  if (result.mutableImgsList == nil) {
-    result.mutableImgsList = [NSMutableArray array];
+@end
+
+@interface MMsgCount ()
+@property int32_t comment;
+@property int32_t chat;
+@end
+
+@implementation MMsgCount
+
+- (BOOL) hasComment {
+  return !!hasComment_;
+}
+- (void) setHasComment:(BOOL) value {
+  hasComment_ = !!value;
+}
+@synthesize comment;
+- (BOOL) hasChat {
+  return !!hasChat_;
+}
+- (void) setHasChat:(BOOL) value {
+  hasChat_ = !!value;
+}
+@synthesize chat;
+- (void) dealloc {
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.comment = 0;
+    self.chat = 0;
   }
-  [result.mutableImgsList addObjectsFromArray:values];
   return self;
 }
-- (MAddTopic_Builder*) clearImgsList {
-  result.mutableImgsList = nil;
+static MMsgCount* defaultMMsgCountInstance = nil;
++ (void) initialize {
+  if (self == [MMsgCount class]) {
+    defaultMMsgCountInstance = [[MMsgCount alloc] init];
+  }
+}
++ (MMsgCount*) defaultInstance {
+  return defaultMMsgCountInstance;
+}
+- (MMsgCount*) defaultInstance {
+  return defaultMMsgCountInstance;
+}
+- (BOOL) isInitialized {
+  return YES;
+}
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  if (self.hasComment) {
+    [output writeInt32:1 value:self.comment];
+  }
+  if (self.hasChat) {
+    [output writeInt32:2 value:self.chat];
+  }
+  [self.unknownFields writeToCodedOutputStream:output];
+}
+- (int32_t) serializedSize {
+  int32_t size = memoizedSerializedSize;
+  if (size != -1) {
+    return size;
+  }
+
+  size = 0;
+  if (self.hasComment) {
+    size += computeInt32Size(1, self.comment);
+  }
+  if (self.hasChat) {
+    size += computeInt32Size(2, self.chat);
+  }
+  size += self.unknownFields.serializedSize;
+  memoizedSerializedSize = size;
+  return size;
+}
++ (MMsgCount*) parseFromData:(NSData*) data {
+  return (MMsgCount*)[[[MMsgCount builder] mergeFromData:data] build];
+}
++ (MMsgCount*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMsgCount*)[[[MMsgCount builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
+}
++ (MMsgCount*) parseFromInputStream:(NSInputStream*) input {
+  return (MMsgCount*)[[[MMsgCount builder] mergeFromInputStream:input] build];
+}
++ (MMsgCount*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMsgCount*)[[[MMsgCount builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MMsgCount*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MMsgCount*)[[[MMsgCount builder] mergeFromCodedInputStream:input] build];
+}
++ (MMsgCount*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MMsgCount*)[[[MMsgCount builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MMsgCount_Builder*) builder {
+  return [[[MMsgCount_Builder alloc] init] autorelease];
+}
++ (MMsgCount_Builder*) builderWithPrototype:(MMsgCount*) prototype {
+  return [[MMsgCount builder] mergeFrom:prototype];
+}
+- (MMsgCount_Builder*) builder {
+  return [MMsgCount builder];
+}
+@end
+
+@interface MMsgCount_Builder()
+@property (retain) MMsgCount* result;
+@end
+
+@implementation MMsgCount_Builder
+@synthesize result;
+- (void) dealloc {
+  self.result = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.result = [[[MMsgCount alloc] init] autorelease];
+  }
+  return self;
+}
+- (PBGeneratedMessage*) internalGetResult {
+  return result;
+}
+- (MMsgCount_Builder*) clear {
+  self.result = [[[MMsgCount alloc] init] autorelease];
+  return self;
+}
+- (MMsgCount_Builder*) clone {
+  return [MMsgCount builderWithPrototype:result];
+}
+- (MMsgCount*) defaultInstance {
+  return [MMsgCount defaultInstance];
+}
+- (MMsgCount*) build {
+  [self checkInitialized];
+  return [self buildPartial];
+}
+- (MMsgCount*) buildPartial {
+  MMsgCount* returnMe = [[result retain] autorelease];
+  self.result = nil;
+  return returnMe;
+}
+- (MMsgCount_Builder*) mergeFrom:(MMsgCount*) other {
+  if (other == [MMsgCount defaultInstance]) {
+    return self;
+  }
+  if (other.hasComment) {
+    [self setComment:other.comment];
+  }
+  if (other.hasChat) {
+    [self setChat:other.chat];
+  }
+  [self mergeUnknownFields:other.unknownFields];
+  return self;
+}
+- (MMsgCount_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
+}
+- (MMsgCount_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+  while (YES) {
+    int32_t tag = [input readTag];
+    switch (tag) {
+      case 0:
+        [self setUnknownFields:[unknownFields build]];
+        return self;
+      default: {
+        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
+          [self setUnknownFields:[unknownFields build]];
+          return self;
+        }
+        break;
+      }
+      case 8: {
+        [self setComment:[input readInt32]];
+        break;
+      }
+      case 16: {
+        [self setChat:[input readInt32]];
+        break;
+      }
+    }
+  }
+}
+- (BOOL) hasComment {
+  return result.hasComment;
+}
+- (int32_t) comment {
+  return result.comment;
+}
+- (MMsgCount_Builder*) setComment:(int32_t) value {
+  result.hasComment = YES;
+  result.comment = value;
+  return self;
+}
+- (MMsgCount_Builder*) clearComment {
+  result.hasComment = NO;
+  result.comment = 0;
+  return self;
+}
+- (BOOL) hasChat {
+  return result.hasChat;
+}
+- (int32_t) chat {
+  return result.chat;
+}
+- (MMsgCount_Builder*) setChat:(int32_t) value {
+  result.hasChat = YES;
+  result.chat = value;
+  return self;
+}
+- (MMsgCount_Builder*) clearChat {
+  result.hasChat = NO;
+  result.chat = 0;
+  return self;
+}
+@end
+
+@interface MTopicMini ()
+@property (retain) NSString* id;
+@property (retain) NSString* tag;
+@property (retain) NSString* content;
+@property int32_t unreadCnt;
+@property (retain) NSString* createTime;
+@end
+
+@implementation MTopicMini
+
+- (BOOL) hasId {
+  return !!hasId_;
+}
+- (void) setHasId:(BOOL) value {
+  hasId_ = !!value;
+}
+@synthesize id;
+- (BOOL) hasTag {
+  return !!hasTag_;
+}
+- (void) setHasTag:(BOOL) value {
+  hasTag_ = !!value;
+}
+@synthesize tag;
+- (BOOL) hasContent {
+  return !!hasContent_;
+}
+- (void) setHasContent:(BOOL) value {
+  hasContent_ = !!value;
+}
+@synthesize content;
+- (BOOL) hasUnreadCnt {
+  return !!hasUnreadCnt_;
+}
+- (void) setHasUnreadCnt:(BOOL) value {
+  hasUnreadCnt_ = !!value;
+}
+@synthesize unreadCnt;
+- (BOOL) hasCreateTime {
+  return !!hasCreateTime_;
+}
+- (void) setHasCreateTime:(BOOL) value {
+  hasCreateTime_ = !!value;
+}
+@synthesize createTime;
+- (void) dealloc {
+  self.id = nil;
+  self.tag = nil;
+  self.content = nil;
+  self.createTime = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.id = @"";
+    self.tag = @"";
+    self.content = @"";
+    self.unreadCnt = 0;
+    self.createTime = @"";
+  }
+  return self;
+}
+static MTopicMini* defaultMTopicMiniInstance = nil;
++ (void) initialize {
+  if (self == [MTopicMini class]) {
+    defaultMTopicMiniInstance = [[MTopicMini alloc] init];
+  }
+}
++ (MTopicMini*) defaultInstance {
+  return defaultMTopicMiniInstance;
+}
+- (MTopicMini*) defaultInstance {
+  return defaultMTopicMiniInstance;
+}
+- (BOOL) isInitialized {
+  return YES;
+}
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  if (self.hasId) {
+    [output writeString:1 value:self.id];
+  }
+  if (self.hasTag) {
+    [output writeString:2 value:self.tag];
+  }
+  if (self.hasContent) {
+    [output writeString:3 value:self.content];
+  }
+  if (self.hasUnreadCnt) {
+    [output writeInt32:4 value:self.unreadCnt];
+  }
+  if (self.hasCreateTime) {
+    [output writeString:5 value:self.createTime];
+  }
+  [self.unknownFields writeToCodedOutputStream:output];
+}
+- (int32_t) serializedSize {
+  int32_t size = memoizedSerializedSize;
+  if (size != -1) {
+    return size;
+  }
+
+  size = 0;
+  if (self.hasId) {
+    size += computeStringSize(1, self.id);
+  }
+  if (self.hasTag) {
+    size += computeStringSize(2, self.tag);
+  }
+  if (self.hasContent) {
+    size += computeStringSize(3, self.content);
+  }
+  if (self.hasUnreadCnt) {
+    size += computeInt32Size(4, self.unreadCnt);
+  }
+  if (self.hasCreateTime) {
+    size += computeStringSize(5, self.createTime);
+  }
+  size += self.unknownFields.serializedSize;
+  memoizedSerializedSize = size;
+  return size;
+}
++ (MTopicMini*) parseFromData:(NSData*) data {
+  return (MTopicMini*)[[[MTopicMini builder] mergeFromData:data] build];
+}
++ (MTopicMini*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTopicMini*)[[[MTopicMini builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
+}
++ (MTopicMini*) parseFromInputStream:(NSInputStream*) input {
+  return (MTopicMini*)[[[MTopicMini builder] mergeFromInputStream:input] build];
+}
++ (MTopicMini*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTopicMini*)[[[MTopicMini builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MTopicMini*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MTopicMini*)[[[MTopicMini builder] mergeFromCodedInputStream:input] build];
+}
++ (MTopicMini*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTopicMini*)[[[MTopicMini builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MTopicMini_Builder*) builder {
+  return [[[MTopicMini_Builder alloc] init] autorelease];
+}
++ (MTopicMini_Builder*) builderWithPrototype:(MTopicMini*) prototype {
+  return [[MTopicMini builder] mergeFrom:prototype];
+}
+- (MTopicMini_Builder*) builder {
+  return [MTopicMini builder];
+}
+@end
+
+@interface MTopicMini_Builder()
+@property (retain) MTopicMini* result;
+@end
+
+@implementation MTopicMini_Builder
+@synthesize result;
+- (void) dealloc {
+  self.result = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.result = [[[MTopicMini alloc] init] autorelease];
+  }
+  return self;
+}
+- (PBGeneratedMessage*) internalGetResult {
+  return result;
+}
+- (MTopicMini_Builder*) clear {
+  self.result = [[[MTopicMini alloc] init] autorelease];
+  return self;
+}
+- (MTopicMini_Builder*) clone {
+  return [MTopicMini builderWithPrototype:result];
+}
+- (MTopicMini*) defaultInstance {
+  return [MTopicMini defaultInstance];
+}
+- (MTopicMini*) build {
+  [self checkInitialized];
+  return [self buildPartial];
+}
+- (MTopicMini*) buildPartial {
+  MTopicMini* returnMe = [[result retain] autorelease];
+  self.result = nil;
+  return returnMe;
+}
+- (MTopicMini_Builder*) mergeFrom:(MTopicMini*) other {
+  if (other == [MTopicMini defaultInstance]) {
+    return self;
+  }
+  if (other.hasId) {
+    [self setId:other.id];
+  }
+  if (other.hasTag) {
+    [self setTag:other.tag];
+  }
+  if (other.hasContent) {
+    [self setContent:other.content];
+  }
+  if (other.hasUnreadCnt) {
+    [self setUnreadCnt:other.unreadCnt];
+  }
+  if (other.hasCreateTime) {
+    [self setCreateTime:other.createTime];
+  }
+  [self mergeUnknownFields:other.unknownFields];
+  return self;
+}
+- (MTopicMini_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
+}
+- (MTopicMini_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+  while (YES) {
+    int32_t tag = [input readTag];
+    switch (tag) {
+      case 0:
+        [self setUnknownFields:[unknownFields build]];
+        return self;
+      default: {
+        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
+          [self setUnknownFields:[unknownFields build]];
+          return self;
+        }
+        break;
+      }
+      case 10: {
+        [self setId:[input readString]];
+        break;
+      }
+      case 18: {
+        [self setTag:[input readString]];
+        break;
+      }
+      case 26: {
+        [self setContent:[input readString]];
+        break;
+      }
+      case 32: {
+        [self setUnreadCnt:[input readInt32]];
+        break;
+      }
+      case 42: {
+        [self setCreateTime:[input readString]];
+        break;
+      }
+    }
+  }
+}
+- (BOOL) hasId {
+  return result.hasId;
+}
+- (NSString*) id {
+  return result.id;
+}
+- (MTopicMini_Builder*) setId:(NSString*) value {
+  result.hasId = YES;
+  result.id = value;
+  return self;
+}
+- (MTopicMini_Builder*) clearId {
+  result.hasId = NO;
+  result.id = @"";
+  return self;
+}
+- (BOOL) hasTag {
+  return result.hasTag;
+}
+- (NSString*) tag {
+  return result.tag;
+}
+- (MTopicMini_Builder*) setTag:(NSString*) value {
+  result.hasTag = YES;
+  result.tag = value;
+  return self;
+}
+- (MTopicMini_Builder*) clearTag {
+  result.hasTag = NO;
+  result.tag = @"";
+  return self;
+}
+- (BOOL) hasContent {
+  return result.hasContent;
+}
+- (NSString*) content {
+  return result.content;
+}
+- (MTopicMini_Builder*) setContent:(NSString*) value {
+  result.hasContent = YES;
+  result.content = value;
+  return self;
+}
+- (MTopicMini_Builder*) clearContent {
+  result.hasContent = NO;
+  result.content = @"";
+  return self;
+}
+- (BOOL) hasUnreadCnt {
+  return result.hasUnreadCnt;
+}
+- (int32_t) unreadCnt {
+  return result.unreadCnt;
+}
+- (MTopicMini_Builder*) setUnreadCnt:(int32_t) value {
+  result.hasUnreadCnt = YES;
+  result.unreadCnt = value;
+  return self;
+}
+- (MTopicMini_Builder*) clearUnreadCnt {
+  result.hasUnreadCnt = NO;
+  result.unreadCnt = 0;
+  return self;
+}
+- (BOOL) hasCreateTime {
+  return result.hasCreateTime;
+}
+- (NSString*) createTime {
+  return result.createTime;
+}
+- (MTopicMini_Builder*) setCreateTime:(NSString*) value {
+  result.hasCreateTime = YES;
+  result.createTime = value;
+  return self;
+}
+- (MTopicMini_Builder*) clearCreateTime {
+  result.hasCreateTime = NO;
+  result.createTime = @"";
+  return self;
+}
+@end
+
+@interface MTopicMiniList ()
+@property (retain) NSMutableArray* mutableTopicsList;
+@end
+
+@implementation MTopicMiniList
+
+@synthesize mutableTopicsList;
+- (void) dealloc {
+  self.mutableTopicsList = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+  }
+  return self;
+}
+static MTopicMiniList* defaultMTopicMiniListInstance = nil;
++ (void) initialize {
+  if (self == [MTopicMiniList class]) {
+    defaultMTopicMiniListInstance = [[MTopicMiniList alloc] init];
+  }
+}
++ (MTopicMiniList*) defaultInstance {
+  return defaultMTopicMiniListInstance;
+}
+- (MTopicMiniList*) defaultInstance {
+  return defaultMTopicMiniListInstance;
+}
+- (NSArray*) topicsList {
+  return mutableTopicsList;
+}
+- (MTopicMini*) topicsAtIndex:(int32_t) index {
+  id value = [mutableTopicsList objectAtIndex:index];
+  return value;
+}
+- (BOOL) isInitialized {
+  return YES;
+}
+- (void) writeToCodedOutputStream:(PBCodedOutputStream*) output {
+  for (MTopicMini* element in self.topicsList) {
+    [output writeMessage:1 value:element];
+  }
+  [self.unknownFields writeToCodedOutputStream:output];
+}
+- (int32_t) serializedSize {
+  int32_t size = memoizedSerializedSize;
+  if (size != -1) {
+    return size;
+  }
+
+  size = 0;
+  for (MTopicMini* element in self.topicsList) {
+    size += computeMessageSize(1, element);
+  }
+  size += self.unknownFields.serializedSize;
+  memoizedSerializedSize = size;
+  return size;
+}
++ (MTopicMiniList*) parseFromData:(NSData*) data {
+  return (MTopicMiniList*)[[[MTopicMiniList builder] mergeFromData:data] build];
+}
++ (MTopicMiniList*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTopicMiniList*)[[[MTopicMiniList builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
+}
++ (MTopicMiniList*) parseFromInputStream:(NSInputStream*) input {
+  return (MTopicMiniList*)[[[MTopicMiniList builder] mergeFromInputStream:input] build];
+}
++ (MTopicMiniList*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTopicMiniList*)[[[MTopicMiniList builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MTopicMiniList*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MTopicMiniList*)[[[MTopicMiniList builder] mergeFromCodedInputStream:input] build];
+}
++ (MTopicMiniList*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MTopicMiniList*)[[[MTopicMiniList builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
+}
++ (MTopicMiniList_Builder*) builder {
+  return [[[MTopicMiniList_Builder alloc] init] autorelease];
+}
++ (MTopicMiniList_Builder*) builderWithPrototype:(MTopicMiniList*) prototype {
+  return [[MTopicMiniList builder] mergeFrom:prototype];
+}
+- (MTopicMiniList_Builder*) builder {
+  return [MTopicMiniList builder];
+}
+@end
+
+@interface MTopicMiniList_Builder()
+@property (retain) MTopicMiniList* result;
+@end
+
+@implementation MTopicMiniList_Builder
+@synthesize result;
+- (void) dealloc {
+  self.result = nil;
+  [super dealloc];
+}
+- (id) init {
+  if ((self = [super init])) {
+    self.result = [[[MTopicMiniList alloc] init] autorelease];
+  }
+  return self;
+}
+- (PBGeneratedMessage*) internalGetResult {
+  return result;
+}
+- (MTopicMiniList_Builder*) clear {
+  self.result = [[[MTopicMiniList alloc] init] autorelease];
+  return self;
+}
+- (MTopicMiniList_Builder*) clone {
+  return [MTopicMiniList builderWithPrototype:result];
+}
+- (MTopicMiniList*) defaultInstance {
+  return [MTopicMiniList defaultInstance];
+}
+- (MTopicMiniList*) build {
+  [self checkInitialized];
+  return [self buildPartial];
+}
+- (MTopicMiniList*) buildPartial {
+  MTopicMiniList* returnMe = [[result retain] autorelease];
+  self.result = nil;
+  return returnMe;
+}
+- (MTopicMiniList_Builder*) mergeFrom:(MTopicMiniList*) other {
+  if (other == [MTopicMiniList defaultInstance]) {
+    return self;
+  }
+  if (other.mutableTopicsList.count > 0) {
+    if (result.mutableTopicsList == nil) {
+      result.mutableTopicsList = [NSMutableArray array];
+    }
+    [result.mutableTopicsList addObjectsFromArray:other.mutableTopicsList];
+  }
+  [self mergeUnknownFields:other.unknownFields];
+  return self;
+}
+- (MTopicMiniList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+  return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
+}
+- (MTopicMiniList_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
+  while (YES) {
+    int32_t tag = [input readTag];
+    switch (tag) {
+      case 0:
+        [self setUnknownFields:[unknownFields build]];
+        return self;
+      default: {
+        if (![self parseUnknownField:input unknownFields:unknownFields extensionRegistry:extensionRegistry tag:tag]) {
+          [self setUnknownFields:[unknownFields build]];
+          return self;
+        }
+        break;
+      }
+      case 10: {
+        MTopicMini_Builder* subBuilder = [MTopicMini builder];
+        [input readMessage:subBuilder extensionRegistry:extensionRegistry];
+        [self addTopics:[subBuilder buildPartial]];
+        break;
+      }
+    }
+  }
+}
+- (NSArray*) topicsList {
+  if (result.mutableTopicsList == nil) { return [NSArray array]; }
+  return result.mutableTopicsList;
+}
+- (MTopicMini*) topicsAtIndex:(int32_t) index {
+  return [result topicsAtIndex:index];
+}
+- (MTopicMiniList_Builder*) replaceTopicsAtIndex:(int32_t) index with:(MTopicMini*) value {
+  [result.mutableTopicsList replaceObjectAtIndex:index withObject:value];
+  return self;
+}
+- (MTopicMiniList_Builder*) addAllTopics:(NSArray*) values {
+  if (result.mutableTopicsList == nil) {
+    result.mutableTopicsList = [NSMutableArray array];
+  }
+  [result.mutableTopicsList addObjectsFromArray:values];
+  return self;
+}
+- (MTopicMiniList_Builder*) clearTopicsList {
+  result.mutableTopicsList = nil;
+  return self;
+}
+- (MTopicMiniList_Builder*) addTopics:(MTopicMini*) value {
+  if (result.mutableTopicsList == nil) {
+    result.mutableTopicsList = [NSMutableArray array];
+  }
+  [result.mutableTopicsList addObject:value];
   return self;
 }
 @end

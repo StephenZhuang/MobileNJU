@@ -175,10 +175,10 @@
     }
     [newTopic setCommentCnt:topic.commentCnt];
     [newTopic setId:topic.id];
-    [newTopic setTitle:topic.title];
+//    [newTopic setTitle:topic.title];
     [newTopic setContent:topic.content];
     [newTopic setTime:topic.time];
-    [newTopic setImgs:topic.imgs];
+//    [newTopic setImgs:topic.imgs];
     [newTopic setCreateTime:topic.createTime];
     [newTopic setAuthor:topic.author];
     

@@ -13,7 +13,7 @@
 @property (nonatomic , weak) IBOutlet UILabel *gradeLabel;
 @property (nonatomic , weak) IBOutlet UILabel *collegeLabel;
 @property (nonatomic , weak) IBOutlet UILabel *flowerLabel;
-- (void)setMatch:(MMatch_Builder *)match;
+//- (void)setMatch:(MMatch_Builder *)match;
 @end
 
 @interface ConnectVIew : UIView<UICollectionViewDataSource , UICollectionViewDelegate>

@@ -10,8 +10,8 @@
 @class MChat_Builder;
 @class MChats;
 @class MChats_Builder;
-@class MMatch;
-@class MMatch_Builder;
+@class MView;
+@class MView_Builder;
 
 @interface ZsndChatRoot : NSObject {
 }
@@ -21,8 +21,12 @@
 
 @interface MChatList : PBGeneratedMessage {
 @private
+  BOOL hasUnreadCnt_:1;
+  int32_t unreadCnt;
   NSMutableArray* mutableChatList;
 }
+- (BOOL) hasUnreadCnt;
+@property (readonly) int32_t unreadCnt;
 - (NSArray*) chatList;
 - (MChatIndex*) chatAtIndex:(int32_t) index;
 
@@ -66,39 +70,60 @@
 - (MChatList_Builder*) addChat:(MChatIndex*) value;
 - (MChatList_Builder*) addAllChat:(NSArray*) values;
 - (MChatList_Builder*) clearChatList;
+
+- (BOOL) hasUnreadCnt;
+- (int32_t) unreadCnt;
+- (MChatList_Builder*) setUnreadCnt:(int32_t) value;
+- (MChatList_Builder*) clearUnreadCnt;
 @end
 
 @interface MChatIndex : PBGeneratedMessage {
 @private
+  BOOL hasTargetHeadImg_:1;
   BOOL hasHeadImg_:1;
-  BOOL hasTotal_:1;
+  BOOL hasHasNew_:1;
   BOOL hasId_:1;
   BOOL hasTargetid_:1;
-  BOOL hasContent_:1;
+  BOOL hasUserid_:1;
+  BOOL hasMsg_:1;
   BOOL hasTime_:1;
-  BOOL hasSpeaker_:1;
+  BOOL hasTopicid_:1;
+  BOOL hasTopicImg_:1;
+  BOOL hasTopicContent_:1;
+  int32_t targetHeadImg;
   int32_t headImg;
-  int32_t total;
+  int32_t hasNew;
   NSString* id;
   NSString* targetid;
-  NSString* content;
+  NSString* userid;
+  NSString* msg;
   NSString* time;
-  NSString* speaker;
+  NSString* topicid;
+  NSString* topicImg;
+  NSString* topicContent;
 }
 - (BOOL) hasId;
 - (BOOL) hasTargetid;
+- (BOOL) hasTargetHeadImg;
+- (BOOL) hasUserid;
 - (BOOL) hasHeadImg;
-- (BOOL) hasTotal;
-- (BOOL) hasContent;
+- (BOOL) hasHasNew;
+- (BOOL) hasMsg;
 - (BOOL) hasTime;
-- (BOOL) hasSpeaker;
+- (BOOL) hasTopicid;
+- (BOOL) hasTopicImg;
+- (BOOL) hasTopicContent;
 @property (readonly, retain) NSString* id;
 @property (readonly, retain) NSString* targetid;
+@property (readonly) int32_t targetHeadImg;
+@property (readonly, retain) NSString* userid;
 @property (readonly) int32_t headImg;
-@property (readonly) int32_t total;
-@property (readonly, retain) NSString* content;
+@property (readonly) int32_t hasNew;
+@property (readonly, retain) NSString* msg;
 @property (readonly, retain) NSString* time;
-@property (readonly, retain) NSString* speaker;
+@property (readonly, retain) NSString* topicid;
+@property (readonly, retain) NSString* topicImg;
+@property (readonly, retain) NSString* topicContent;
 
 + (MChatIndex*) defaultInstance;
 - (MChatIndex*) defaultInstance;
@@ -144,30 +169,50 @@
 - (MChatIndex_Builder*) setTargetid:(NSString*) value;
 - (MChatIndex_Builder*) clearTargetid;
 
+- (BOOL) hasTargetHeadImg;
+- (int32_t) targetHeadImg;
+- (MChatIndex_Builder*) setTargetHeadImg:(int32_t) value;
+- (MChatIndex_Builder*) clearTargetHeadImg;
+
+- (BOOL) hasUserid;
+- (NSString*) userid;
+- (MChatIndex_Builder*) setUserid:(NSString*) value;
+- (MChatIndex_Builder*) clearUserid;
+
 - (BOOL) hasHeadImg;
 - (int32_t) headImg;
 - (MChatIndex_Builder*) setHeadImg:(int32_t) value;
 - (MChatIndex_Builder*) clearHeadImg;
 
-- (BOOL) hasTotal;
-- (int32_t) total;
-- (MChatIndex_Builder*) setTotal:(int32_t) value;
-- (MChatIndex_Builder*) clearTotal;
+- (BOOL) hasHasNew;
+- (int32_t) hasNew;
+- (MChatIndex_Builder*) setHasNew:(int32_t) value;
+- (MChatIndex_Builder*) clearHasNew;
 
-- (BOOL) hasContent;
-- (NSString*) content;
-- (MChatIndex_Builder*) setContent:(NSString*) value;
-- (MChatIndex_Builder*) clearContent;
+- (BOOL) hasMsg;
+- (NSString*) msg;
+- (MChatIndex_Builder*) setMsg:(NSString*) value;
+- (MChatIndex_Builder*) clearMsg;
 
 - (BOOL) hasTime;
 - (NSString*) time;
 - (MChatIndex_Builder*) setTime:(NSString*) value;
 - (MChatIndex_Builder*) clearTime;
 
-- (BOOL) hasSpeaker;
-- (NSString*) speaker;
-- (MChatIndex_Builder*) setSpeaker:(NSString*) value;
-- (MChatIndex_Builder*) clearSpeaker;
+- (BOOL) hasTopicid;
+- (NSString*) topicid;
+- (MChatIndex_Builder*) setTopicid:(NSString*) value;
+- (MChatIndex_Builder*) clearTopicid;
+
+- (BOOL) hasTopicImg;
+- (NSString*) topicImg;
+- (MChatIndex_Builder*) setTopicImg:(NSString*) value;
+- (MChatIndex_Builder*) clearTopicImg;
+
+- (BOOL) hasTopicContent;
+- (NSString*) topicContent;
+- (MChatIndex_Builder*) setTopicContent:(NSString*) value;
+- (MChatIndex_Builder*) clearTopicContent;
 @end
 
 @interface MChats : PBGeneratedMessage {
@@ -348,87 +393,87 @@
 - (MChat_Builder*) clearSize;
 @end
 
-@interface MMatch : PBGeneratedMessage {
+@interface MView : PBGeneratedMessage {
 @private
   BOOL hasHeadImg_:1;
-  BOOL hasFlower_:1;
+  BOOL hasTargetHeadImg_:1;
   BOOL hasUserid_:1;
-  BOOL hasSchool_:1;
-  BOOL hasBelong_:1;
+  BOOL hasTargetid_:1;
+  BOOL hasTopicid_:1;
   int32_t headImg;
-  int32_t flower;
+  int32_t targetHeadImg;
   NSString* userid;
-  NSString* school;
-  NSString* belong;
+  NSString* targetid;
+  NSString* topicid;
 }
 - (BOOL) hasUserid;
 - (BOOL) hasHeadImg;
-- (BOOL) hasFlower;
-- (BOOL) hasSchool;
-- (BOOL) hasBelong;
+- (BOOL) hasTargetid;
+- (BOOL) hasTargetHeadImg;
+- (BOOL) hasTopicid;
 @property (readonly, retain) NSString* userid;
 @property (readonly) int32_t headImg;
-@property (readonly) int32_t flower;
-@property (readonly, retain) NSString* school;
-@property (readonly, retain) NSString* belong;
+@property (readonly, retain) NSString* targetid;
+@property (readonly) int32_t targetHeadImg;
+@property (readonly, retain) NSString* topicid;
 
-+ (MMatch*) defaultInstance;
-- (MMatch*) defaultInstance;
++ (MView*) defaultInstance;
+- (MView*) defaultInstance;
 
 - (BOOL) isInitialized;
 - (void) writeToCodedOutputStream:(PBCodedOutputStream*) output;
-- (MMatch_Builder*) builder;
-+ (MMatch_Builder*) builder;
-+ (MMatch_Builder*) builderWithPrototype:(MMatch*) prototype;
+- (MView_Builder*) builder;
++ (MView_Builder*) builder;
++ (MView_Builder*) builderWithPrototype:(MView*) prototype;
 
-+ (MMatch*) parseFromData:(NSData*) data;
-+ (MMatch*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (MMatch*) parseFromInputStream:(NSInputStream*) input;
-+ (MMatch*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
-+ (MMatch*) parseFromCodedInputStream:(PBCodedInputStream*) input;
-+ (MMatch*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MView*) parseFromData:(NSData*) data;
++ (MView*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MView*) parseFromInputStream:(NSInputStream*) input;
++ (MView*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
++ (MView*) parseFromCodedInputStream:(PBCodedInputStream*) input;
++ (MView*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 @end
 
-@interface MMatch_Builder : PBGeneratedMessage_Builder {
+@interface MView_Builder : PBGeneratedMessage_Builder {
 @private
-  MMatch* result;
+  MView* result;
 }
 
-- (MMatch*) defaultInstance;
+- (MView*) defaultInstance;
 
-- (MMatch_Builder*) clear;
-- (MMatch_Builder*) clone;
+- (MView_Builder*) clear;
+- (MView_Builder*) clone;
 
-- (MMatch*) build;
-- (MMatch*) buildPartial;
+- (MView*) build;
+- (MView*) buildPartial;
 
-- (MMatch_Builder*) mergeFrom:(MMatch*) other;
-- (MMatch_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
-- (MMatch_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
+- (MView_Builder*) mergeFrom:(MView*) other;
+- (MView_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input;
+- (MView_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry;
 
 - (BOOL) hasUserid;
 - (NSString*) userid;
-- (MMatch_Builder*) setUserid:(NSString*) value;
-- (MMatch_Builder*) clearUserid;
+- (MView_Builder*) setUserid:(NSString*) value;
+- (MView_Builder*) clearUserid;
 
 - (BOOL) hasHeadImg;
 - (int32_t) headImg;
-- (MMatch_Builder*) setHeadImg:(int32_t) value;
-- (MMatch_Builder*) clearHeadImg;
+- (MView_Builder*) setHeadImg:(int32_t) value;
+- (MView_Builder*) clearHeadImg;
 
-- (BOOL) hasFlower;
-- (int32_t) flower;
-- (MMatch_Builder*) setFlower:(int32_t) value;
-- (MMatch_Builder*) clearFlower;
+- (BOOL) hasTargetid;
+- (NSString*) targetid;
+- (MView_Builder*) setTargetid:(NSString*) value;
+- (MView_Builder*) clearTargetid;
 
-- (BOOL) hasSchool;
-- (NSString*) school;
-- (MMatch_Builder*) setSchool:(NSString*) value;
-- (MMatch_Builder*) clearSchool;
+- (BOOL) hasTargetHeadImg;
+- (int32_t) targetHeadImg;
+- (MView_Builder*) setTargetHeadImg:(int32_t) value;
+- (MView_Builder*) clearTargetHeadImg;
 
-- (BOOL) hasBelong;
-- (NSString*) belong;
-- (MMatch_Builder*) setBelong:(NSString*) value;
-- (MMatch_Builder*) clearBelong;
+- (BOOL) hasTopicid;
+- (NSString*) topicid;
+- (MView_Builder*) setTopicid:(NSString*) value;
+- (MView_Builder*) clearTopicid;
 @end
 

@@ -1,7 +1,7 @@
 //
 //  ApiMAddClass
 //
-//  Created by ryan on 2014-07-31 13:42:28
+//  Created by ryan on 2014-08-06 14:28:21
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -21,9 +21,9 @@
 	 * @param clas * 添加的课程表 
 	 * @callback MRet_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select   {
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  clas:(MAddClass_Builder*) clas {
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddClass" params:array  delegate:delegate selecter:select];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddClass" params:array  postparams:clas delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 
@@ -34,8 +34,8 @@
 	 * @param clas * 添加的课程表 
 	 * @callback MRet_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select   {
-		UpdateOne *update=[self get:delegate selecter:select];
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  clas:(MAddClass_Builder*) clas {
+		UpdateOne *update=[self get:delegate selecter:select clas:clas];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
 		return update;
 	}

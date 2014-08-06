@@ -16,18 +16,18 @@
 //    self.layer.borderWidth = 1;
 }
 
-- (void)setMatch:(MMatch_Builder *)match
-{
-    [self setHidden:NO];
-    [_collegeLabel setText:match.school];
-    [_gradeLabel setText:match.belong];
-    [_flowerLabel setText:[NSString stringWithFormat:@"鲜花数：%i",match.flower]];
-    [UIView animateWithDuration:1 animations:^(void) {
-        [_collegeLabel setAlpha:1];
-        [_gradeLabel setAlpha:1];
-        [_flowerLabel setAlpha:1];
-    }];
-}
+//- (void)setMatch:(MMatch_Builder *)match
+//{
+//    [self setHidden:NO];
+//    [_collegeLabel setText:match.school];
+//    [_gradeLabel setText:match.belong];
+//    [_flowerLabel setText:[NSString stringWithFormat:@"鲜花数：%i",match.flower]];
+//    [UIView animateWithDuration:1 animations:^(void) {
+//        [_collegeLabel setAlpha:1];
+//        [_gradeLabel setAlpha:1];
+//        [_flowerLabel setAlpha:1];
+//    }];
+//}
 @end
 
 @implementation ConnectVIew
