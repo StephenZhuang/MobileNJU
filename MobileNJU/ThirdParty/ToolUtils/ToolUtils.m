@@ -569,5 +569,16 @@
 
 }
 
++(void)setHasLogOut:(NSString*) hasLogout
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: hasLogout  forKey:@"haslogout"];
+    [userDefaults synchronize];
 
+}
++(NSString*)getHasLogOut
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"haslogout"];
+
+}
 @end

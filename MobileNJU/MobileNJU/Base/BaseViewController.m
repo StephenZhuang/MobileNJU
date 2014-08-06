@@ -130,7 +130,7 @@ UIView* view;
         [view removeFromSuperview];
     }
     [self.maskView setHidden:NO];
-        CGRect frame = CGRectMake(0, -20, 0, 0);
+    CGRect frame = CGRectMake(0, -20, 0, 0);
     frame.size = self.navigationController.navigationBar.frame.size;
     if ([[[UIDevice currentDevice]systemVersion]floatValue]<7.0) {
         frame.size.height = frame.size.height+21;
@@ -138,7 +138,7 @@ UIView* view;
     frame.size.height = frame.size.height+20;
     view = [[UIView alloc]initWithFrame:frame];
     [view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6]];
-        [self.navigationController.navigationBar addSubview:view];
+    [self.navigationController.navigationBar addSubview:view];
 
 
 }

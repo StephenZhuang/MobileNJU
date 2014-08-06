@@ -59,6 +59,7 @@
     [self.schIDText setText:[ToolUtils getSchId]==nil?@"":[ToolUtils getSchId]];
     if (self.schIDText.text.length==0) {
         [self.alertView setHidden:NO];
+        [self.maskView setHidden:NO];
     }
     [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(closeAlertView:) forControlEvents:UIControlEventTouchUpInside];

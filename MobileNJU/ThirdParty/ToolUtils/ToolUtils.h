@@ -96,4 +96,7 @@
 +(NSString*)getLibraryId;
 +(void)setLibraryPassword:(NSString*)password;
 +(NSString*)getLibraryPassword;
++(void)setHasLogOut:(NSString*) hasLogout;
++(NSString*)getHasLogOut;
+
 @end

@@ -59,6 +59,7 @@
 }
 
 - (IBAction)logout:(id)sender {
+    [ToolUtils setHasLogOut:@"yes"];
     [ToolUtils setIsLogin:NO];
     [self dismissViewControllerAnimated:NO completion:^{
         [self.rdv_tabBarController dismissViewControllerAnimated:NO completion:nil];

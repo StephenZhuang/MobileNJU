@@ -25,6 +25,9 @@
 @property (strong,nonatomic)NSArray* gradeList;
 @property (strong, nonatomic)UIButton *searchButton;
 @property (strong,nonatomic)NSMutableDictionary* LessonChooseDic;
+@property (nonatomic)CGRect frame;
+@property (nonatomic)int isRe;
+@property (nonatomic,strong)UIImageView* imgView;
 @end
 
 @implementation GradeDetailVC
@@ -41,18 +44,19 @@
     [self.view addSubview:self.gpaView];
     [self.gpaView setDelegate:self];
     [self.tableView setAllowsSelection:NO];
-
     [self loadSavedState];
     self.LessonChooseDic = [[NSMutableDictionary alloc]init];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
+
     // Do any additional setup after loading the view.
 }
 
 - (void)initAlert
 {
-    
     self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
     CGRect frame = CGRectMake((self.view.bounds.size.width-261)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 257);
     self.alertView.frame = frame;
+    self.frame = frame;
     [self.view addSubview:self.alertView];
     [self.alertView setHidden:YES];
     self.schIdTextField =self.alertView.schIdField;
@@ -61,10 +65,76 @@
     self.passwordTextField = self.alertView.passwordField;
     self.schIdTextField.delegate = self;
     self.passwordTextField.delegate = self;
-    self.searchButton = self.alertView.searchBt;
     [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
+    self.isRe = 0 ;
+    self.searchButton = self.alertView.searchBt;
 }
+
+
+- (void)textFieldDidChange:(NSNotification *)note
+{
+    NSLog(@"%@",self.schIdTextField.text);
+    if ([self.schIdTextField.text hasPrefix:@"Mg"]&&self.codeField==nil) {
+        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+    } else if (![self.schIdTextField.text hasPrefix:@"Mg"]){
+        [self removeCode];
+    }
+
+}
+
+- (IBAction)search:(id)sender {
+    
+    
+    [self.schIdTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    [self.codeField resignFirstResponder];
+    
+    if (self.schIdTextField.text.length==0) {
+        [ToolUtils showMessage:@"学号不得为空"];
+        return;
+    } else if (self.schIdTextField.text.length==0){
+        [ToolUtils showMessage:@"密码不得为空"];
+        return;
+    } else if (self.codeField!=nil&&self.codeField.text.length==0)
+    {
+        [ToolUtils showMessage:@"验证码不得为空"];
+        return;
+    }
+    [self waiting:@"正在加载"];
+    [self load:self selecter:@selector(disposMessage:) code:self.codeField==nil?nil:self.codeField.text account:self.schIdTextField.text password:self.passwordTextField.text];
+}
+
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    if (code!=nil) {
+        [array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
+    }
+    [array addObject:[NSString stringWithFormat:@"account=%@",account==nil?@"":account]];
+    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
+    [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MTermList" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
+}
+
+- (void)removeCode
+{
+    [self.codeField setHidden:YES];
+    [self.codeField removeFromSuperview];
+    [self.codeField setText:@""];
+    self.codeField = nil;
+    [self.imgView removeFromSuperview];
+    [self.imgView setHidden:YES];
+    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 0);
+    
+    
+}
+
+
+
 - (void)initNavigationBar
 {
     [self setTitle:@"成绩查询"];
@@ -79,15 +149,6 @@
     
 }
 
-- (IBAction)search:(id)sender {
-    [self.schIdTextField resignFirstResponder];
-    [self.passwordTextField resignFirstResponder];
-    [self.codeField resignFirstResponder];
-    [self waiting:@"正在加载"];
-#warning api更新
-//    [[ApisFactory getApiMTermList]load:self selecter:@selector(disposMessage:) code:nil account:self.schIdTextField.text password:self.passwordTextField.text];
-    
-}
 - (void)disposMessage:(Son *)son
 {
     self.OK=YES;
@@ -126,6 +187,8 @@
     }
 }
 
+
+
 - (void)loadSavedState
 {
     [self waiting:@"正在加载"];
@@ -150,6 +213,9 @@
 
 - (void)showAlert
 {
+    if ([self.schIdTextField.text hasPrefix:@"Mg"]) {
+        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+    }
     [self.alertView setHidden:NO];
     [self.maskView setHidden:NO];
     [self addMask];

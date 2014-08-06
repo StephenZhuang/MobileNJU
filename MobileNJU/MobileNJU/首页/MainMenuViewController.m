@@ -41,6 +41,7 @@
 @property (nonatomic)int complete;
 @property (nonatomic,strong)NSMutableDictionary* stateDic;
 @property (nonatomic)int prepare;
+
 @end
 
 @implementation MainMenuViewController
@@ -69,15 +70,24 @@ static NSArray* descriptions;
         [self prepareForNews];
     }
     
+
+    [self loadTableData];
+    [self loadIndex];
+    
+   
 }
+
+//- (void)viewDidDisappear:(BOOL)animated
+//{
+//    self.prepare=0;
+//    self.stateDic = nil;
+//}
 - (void)viewDidAppear:(BOOL)animated
 {
-
-    
-    [self loadTableData];
-//    [self.tableView reloadData];
-    [self loadIndex];
-
+//    if ([ToolUtils getHasLogOut]==nil||[ToolUtils getHasLogOut].length==0) {
+//        [self loadTableData];
+//        [self loadIndex];
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -139,7 +149,7 @@ static NSArray* descriptions;
             [ToolUtils setImgList:imgList];
             if (isLoad) {
                 [self loadTableData];
-                [self.tableView reloadData];
+//                [self.tableView reloadData];
             }
 //            [self loadTableData];
 //            [self.tableView reloadData];
@@ -188,16 +198,16 @@ static NSArray* descriptions;
         [image setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls firstObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             self.prepare++;
             if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count) {
-                
                 [self.tableView reloadData];
-
             }
         }];
         UIImageView* imageSelected = [[UIImageView alloc]init];
         imageSelected.frame = frame;
         [imageSelected setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls lastObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            self.prepare++;
             if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count) {
                 [self.tableView reloadData];
+                
             }
         }];
         [self.imageArrays addObject:image];
@@ -238,6 +248,7 @@ static NSArray* descriptions;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
     // set header view colour
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 100)];
     [self.headerView setBackgroundColor:[UIColor clearColor]];
@@ -268,7 +279,6 @@ static NSArray* descriptions;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeCell *cell = nil;
-    
     if (indexPath.row % 2 == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"LeftCell"];
     } else {
@@ -297,6 +307,7 @@ static NSArray* descriptions;
         [cell.menuTitle setText:@""];
         [cell.menuSubTitle setText:@""];
         [cell.redCircle setHidden:YES];
+        
     }
     
    
@@ -321,15 +332,14 @@ static NSArray* descriptions;
         [self.stateDic setObject:@"ok" forKey:str];
         if (indexPath.row%2==0) {
             homecell.menuView.transform = CGAffineTransformMakeTranslation(-300, 0);
-            [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
                 homecell.menuView.transform = CGAffineTransformMakeTranslation(0, 0);
             } completion:^(BOOL finished) {
                 
             }];
-            
         } else {
             homecell.menuView.transform = CGAffineTransformMakeTranslation(300, 0);
-            [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
                 homecell.menuView.transform = CGAffineTransformMakeTranslation(0, 0);
             } completion:^(BOOL finished) {
                 
@@ -400,14 +410,14 @@ static NSArray* descriptions;
         [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             self.complete++;
             if (image!=nil) {
-                [self.photoList addObject:image];
+                [self.photoList setObject:image atIndexedSubscript:site-1];
             }
         }];
     } else {
         [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site-1]width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             self.complete++;
             if (image!=nil) {
-                [self.photoList addObject:image];
+                [self.photoList setObject:image atIndexedSubscript:site-1];
             }
         }];
     }

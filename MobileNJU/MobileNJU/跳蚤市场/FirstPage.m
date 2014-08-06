@@ -82,7 +82,6 @@
     {
         label = self.discLabel;
     }
-   
     if (((UITextField*)textField).text.length>0) {
     } else {
         [self.discLabel2 setHidden:NO];
@@ -126,7 +125,7 @@
     [self returnLabel:self.lastField];
     [self changeLabel:textView];
     CGRect frame = textView.frame;
-    int offset = frame.origin.y +422 - (self.frame.size.height - 240);//键盘高度216
+    int offset = frame.origin.y +600 - (self.frame.size.height - 240);//键盘高度216
     NSLog(@"offset is %d",offset);
     NSTimeInterval animationDuration = 0.30f;
     [UIView beginAnimations:@"ResizeForKeyBoard" context:nil];
@@ -141,29 +140,29 @@
     [UIView commitAnimations];
     return YES;
 }
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    
-    if ([text isEqualToString:@"\n"]) {
-        [self returnLabel:textView];
-        NSTimeInterval animationDuration = 0.30f;
-        [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-        [UIView setAnimationDuration:animationDuration];
-        CGRect rect = CGRectMake(0.0f, 0.0f, self.frame.size.width, self.frame.size.height);
-        self.frame = rect;
-        [UIView commitAnimations];
-        [textView resignFirstResponder];
-        return NO;
-    }
-    
-    return YES;
-}
+//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+//{
+//    
+//    if ([text isEqualToString:@"\n"]) {
+//        [self returnLabel:textView];
+//        NSTimeInterval animationDuration = 0.30f;
+//        [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+//        [UIView setAnimationDuration:animationDuration];
+//        CGRect rect = CGRectMake(0.0f, 0.0f, self.frame.size.width, self.frame.size.height);
+//        self.frame = rect;
+//        [UIView commitAnimations];
+//        [textView resignFirstResponder];
+//        return NO;
+//    }
+//    
+//    return YES;
+//}
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     [self returnLabel:self.lastField];
     [self changeLabel:textField];
     CGRect frame = textField.frame;
-    int offset = frame.origin.y +422 - (self.frame.size.height - 240);//键盘高度216
+    int offset = frame.origin.y +440 - (self.frame.size.height - 240);//键盘高度216
     NSLog(@"offset is %d",offset);
     NSTimeInterval animationDuration = 0.30f;
     [UIView beginAnimations:@"ResizeForKeyBoard" context:nil];
@@ -320,6 +319,29 @@
     }
     
 }
+- (void)resignAll
+{
+    float width = self.frame.size.width;
+    float height = self.frame.size.height;
+    CGRect rect = CGRectMake(0.0f,0,width,height);
+    self.frame = rect;
+    [self.lastField resignFirstResponder];
+    [self returnLabel:self.lastField];
+
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField==self.priceFIeld||textField==self.originPriceField) {
+        if (range.location >=4)
+            return NO; // return NO to not change text
+        return YES;
+    }
+    return YES;
+}
+
+- (IBAction)resignAll:(id)sender {
+    }
 
 
 /*

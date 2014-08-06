@@ -44,7 +44,7 @@
 - (IBAction)chooseLocation:(id)sender {
     [self returnLabel:self.lastField];
     [self.QQField resignFirstResponder];
-    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择商品类别" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择交易地点" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     [picker setTag:654321];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
                                      [NSArray arrayWithObjects:@"仙林校区",@"鼓楼校区", nil],
@@ -52,6 +52,17 @@
     
     [picker showInView:self];
     
+}
+
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField==self.phoneField) {
+        if (range.location >=11)
+            return NO; // return NO to not change text
+        return YES;
+    }
+    return YES;
 }
 
 #pragma textFieldDelegate
@@ -152,6 +163,16 @@
     } else {
         [self.locationField setText:[titles firstObject]];
     }
+}
+- (void)resignAll
+{
+    float width = self.frame.size.width;
+    float height = self.frame.size.height;
+    CGRect rect = CGRectMake(0.0f,0,width,height);
+    self.frame = rect;
+    [self.lastField resignFirstResponder];
+    [self returnLabel:self.lastField];
+    
 }
 /*
 // Only override drawRect: if you perform custom drawing.

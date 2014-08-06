@@ -56,6 +56,7 @@
     page=0;
     [self.maskView setHidden:YES];
     [self.alertView setHidden:!([ToolUtils getEcardId]==nil)];
+    [self.maskView setHidden:!([ToolUtils getEcardId]==nil)];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backToMain:)];
     [self.ecardTitle addGestureRecognizer:singleTap];
     [self.schIDText setText:[ToolUtils getEcardId]==nil?@"":[ToolUtils getEcardId]];
@@ -78,6 +79,7 @@
     if (self.alertView.isHidden) {
         [self waiting:@"正在读取"];
         [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
+        
 //        [self load:self selecter:@selector(disposeMessage:) code:@"" account:self.schIDText.text password:self.passwordText.text];
     } else {
         [self getCode];
@@ -145,6 +147,7 @@
             if (cardList.cardList.count>0) {
                 [self.dataArray removeAllObjects];
                 [self closeAlertView:nil];
+                [self.tableView reloadData];
                 self.isRe=1;
                 MCard* card = [cardList.cardList firstObject];
                 [self.nameLabel setText:card.name];
@@ -184,7 +187,7 @@
                }
            }
            self.detaiList  = tmp;
-           if (page>1) {
+           if (page>=1) {
                [self doneWithView:_footer];
            } else {
                [self.tableView reloadData];
