@@ -41,6 +41,7 @@
     }
 //    [self addViews];
     if (self.currentPage==1) {
+        self.secondPage.myController = self;
         self.pageControl.currentPage=1;
     }
     UISwipeGestureRecognizer *recognizer;
@@ -72,7 +73,7 @@
         self.navigationItem.rightBarButtonItem = rightButton;
         
     } else {
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
         [button setTitle:@"完成" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(complete) forControlEvents:UIControlEventTouchUpInside];
         UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:button];
@@ -163,7 +164,6 @@
 -(void)pageChange
 {
     if (self.pageControl.currentPage==0) {
-        
         FirstPage *page = self.firstPage;
         if (page.titleField.text.length==0) {
             [ToolUtils showMessage:@"标题不能为空"];

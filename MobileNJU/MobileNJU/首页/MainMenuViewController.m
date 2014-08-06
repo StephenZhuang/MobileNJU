@@ -351,11 +351,11 @@ static NSArray* descriptions;
     UIImageView *imageView = [self.UIImageViewList objectAtIndex:site-1];;
     if (self.focusList.count>site) {
         MFocus* focus = [self.focusList objectAtIndex:site-1];
-        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:320 height:217] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             [self.photoList addObject:image];
         }];
     } else {
-        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site]width:320 height:217] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site-1]width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             [self.photoList addObject:image];
         }];
     }
@@ -402,9 +402,9 @@ static NSArray* descriptions;
         frame.origin.y = self.headerView.frame.size.height-frame.size.height-40;
         _newImage = [[UIImageView alloc]initWithFrame:frame];
         if (focus==nil) {
-            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:page]   width:320 height:217]];
+            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:page]   width:640 height:434]];
         } else {
-            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:320 height:217]];
+            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434]];
         }
     }
     return _newImage;

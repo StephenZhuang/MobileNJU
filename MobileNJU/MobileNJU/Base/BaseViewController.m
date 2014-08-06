@@ -86,6 +86,8 @@
             self.navigationItem.leftBarButtonItems = myButtonArray;
         }
     }
+    [self.navigationController.navigationBar setAlpha:1];
+    [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 }
 
