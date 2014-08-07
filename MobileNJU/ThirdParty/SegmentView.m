@@ -57,7 +57,7 @@
         
         if (i == [_dataSource defaultSelectedSegment]) {
             [button setSelected:YES];
-            [button setBackgroundColor:[UIColor whiteColor]];
+            [button setBackgroundColor:DarkGrayColor];
            
         }
         

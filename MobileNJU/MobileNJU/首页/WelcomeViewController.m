@@ -85,11 +85,11 @@ static NSArray* buttonImages;
 - (IBAction)login:(UIButton *)sender {
     
     if ([self.usernameTextField.text isEqualToString:@""]) {
-        [ProgressHUD showError:@"请输入您的手机号"];
+        [ToolUtils showMessage:@"请输入您的手机号"];
         return;
     }
     if ([self.passwordTextField.text isEqualToString:@""]) {
-        [ProgressHUD showError:@"密码不能为空"];
+        [ToolUtils showMessage:@"密码不能为空"];
         return;
     }
     [self resignAllResponders:sender];

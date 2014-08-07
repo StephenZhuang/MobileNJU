@@ -12,7 +12,7 @@
 #import "NewsDetailVC.h"
 #import "ApiMRssNews.h"
 @interface RSSListVC ()<UITableViewDataSource,UITableViewDelegate>
-@property (nonatomic,strong)NSArray* rssNews;
+@property (nonatomic,strong)NSMutableArray* rssNews;
 @property(nonatomic,strong)MNews* currentNew;
 @property(nonatomic,strong)UIImage* currentImg;
 @property(nonatomic,strong)NSString* currentUrl;
@@ -32,13 +32,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.rssNews = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
 }
 
 - (void) viewWillAppear: (BOOL)inAnimated {
     NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
     if(selected)
+    {
         [self.tableView deselectRowAtIndexPath:selected animated:NO];
+    }
+    
+//    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,7 +62,15 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MRssNews"]) {
             MMyRss_Builder* ret = (MMyRss_Builder*)[son getBuild];
-            self.rssNews = ret.newsList;
+            if (page==1) {
+                [self.rssNews removeAllObjects];
+                [self.rssNews addObjectsFromArray:ret.newsList];
+                
+            } else {
+                [self.rssNews addObjectsFromArray:ret.newsList];
+                [self doneWithView:_footer];
+                
+            }
         }
     } else {
         [super disposMessage:son];
@@ -86,6 +99,10 @@
     cell.detail = new.content;
     cell.date = new.time;
     [cell.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:new.img width:178 height:134] placeholderImage:[UIImage imageNamed:@"news_loading"]];
+    
+//    UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
+//    cell.selectedBackgroundView = backView;
+//    cell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 
@@ -97,6 +114,7 @@
     NewsCell* cell  = (NewsCell*)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
     self.currentImg = cell.newsImage.image;
     [self performSegueWithIdentifier:@"detail" sender:indexPath];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
