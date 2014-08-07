@@ -256,6 +256,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.68627450980392157" green="0.68627450980392157" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dde-Qi-WbF">
+                                <rect key="frame" x="251" y="46" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGt-iq-Zt1">
                                 <rect key="frame" x="249" y="42" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -285,6 +292,7 @@
                         <outlet property="codeField" destination="aXW-e7-rcu" id="Egx-HI-3Cv"/>
                         <outlet property="passwordField" destination="CvL-L7-VkM" id="oZC-PI-J5k"/>
                         <outlet property="phoneNumField" destination="AE2-pt-lCC" id="dSr-B8-j0X"/>
+                        <outlet property="timerLabel" destination="dde-Qi-WbF" id="N5W-ws-a1p"/>
                         <outlet property="veryfyBt" destination="cGt-iq-Zt1" id="n39-EH-nIZ"/>
                     </connections>
                 </viewController>

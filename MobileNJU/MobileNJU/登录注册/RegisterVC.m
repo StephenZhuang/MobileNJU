@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *veryfyBt;
 @property (strong,nonatomic)NSString* phoneNum;
 @property (nonatomic)NSInteger remainTime;
+@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property(nonatomic)BOOL canGetCode;
 @end
 
 @implementation RegisterVC
@@ -30,6 +32,7 @@
     if (self.myDelegate==nil) {
         [self.phoneNumField setText:[ToolUtils getAccount]];
     }
+    self.canGetCode = YES;
     // Do any additional setup after loading the view.
 }
 
@@ -77,10 +80,11 @@
         if ([[son getMethod] isEqualToString:@"MGetMobileVerify"]) {
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
             [ToolUtils showMessage:ret.msg];
-            [self.veryfyBt setEnabled:NO];
              [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timer) userInfo:nil repeats:YES];
             self.remainTime = 60;
+            self.canGetCode = NO;
             self.phoneNum = self.phoneNumField.text;
+            [self.veryfyBt setTitle:@"" forState:UIControlStateNormal];
         } else if ([[son getMethod]isEqualToString:@"MRegist"])
         {
             MUser_Builder* user = (MUser_Builder*)[son getBuild];
@@ -125,8 +129,12 @@
 {
     self.remainTime--;
     if (self.remainTime==0) {
+        [self.timerLabel setText:@""];
         [self.veryfyBt setTitle:@"验证" forState:UIControlStateNormal];
-        [self.veryfyBt setEnabled:YES];
+        self.canGetCode = YES;
+    } else {
+        
+        [self.timerLabel setText:[NSString stringWithFormat:@"%d",self.remainTime]];
     }
 }
 
