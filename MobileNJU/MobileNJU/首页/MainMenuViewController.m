@@ -74,10 +74,8 @@ static NSArray* descriptions;
 - (void)viewDidAppear:(BOOL)animated
 {
     
-        [self loadTableData];
-        [self loadIndex];
-    
-   
+    [self loadTableData];
+    [self loadIndex];
 }
 
 - (void)viewWillAppear:(BOOL)animated

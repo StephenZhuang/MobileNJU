@@ -124,8 +124,16 @@
 {
     [self returnLabel:self.lastField];
     [self changeLabel:textView];
+    CGFloat height_off = 420 ;
     CGRect frame = textView.frame;
-    int offset = frame.origin.y +600 - (self.frame.size.height - 240);//键盘高度216
+    if (
+    [[UIScreen mainScreen] bounds].size.height >= 568.0f && [[UIScreen mainScreen] bounds].size.height < 1024.0f
+        ){
+        height_off = 600;
+    }
+    
+        
+    int offset = frame.origin.y + height_off - (self.frame.size.height - 240);//键盘高度216
     NSLog(@"offset is %d",offset);
     NSTimeInterval animationDuration = 0.30f;
     [UIView beginAnimations:@"ResizeForKeyBoard" context:nil];

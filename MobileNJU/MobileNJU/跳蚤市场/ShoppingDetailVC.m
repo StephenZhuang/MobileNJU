@@ -108,7 +108,7 @@
     } else if (buttonIndex==1){
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = self.market.qq;
-        [ToolUtils showMessage:@"已复制到您到剪切板"];
+        [ToolUtils showMessage:@"已复制到您到剪切板，请登录qq与卖家联系"];
     }
 }
 
