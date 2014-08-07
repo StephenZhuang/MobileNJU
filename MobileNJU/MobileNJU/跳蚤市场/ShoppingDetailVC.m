@@ -8,7 +8,7 @@
 
 #import "ShoppingDetailVC.h"
 #import "MarketDetailCell.h"
-@interface ShoppingDetailVC ()<UIScrollViewDelegate,UIActionSheetDelegate>
+@interface ShoppingDetailVC ()<UIScrollViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UIView *footView;
@@ -81,7 +81,10 @@
                 [self.downShelfBt setEnabled:NO];
             }
         }
+    } else {
+        [super disposMessage:son];
     }
+
 }
     
     
@@ -105,7 +108,7 @@
     } else if (buttonIndex==1){
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = self.market.qq;
-        [ToolUtils showMessage:@"已复制到您到剪切板"];
+        [ToolUtils showMessage:@"已复制到您到剪切板，请登录qq与卖家联系"];
     }
 }
 
@@ -209,10 +212,7 @@
     [cell.nameLabel setText:self.market.name];
     [cell.priceLabel setText:[NSString stringWithFormat:@"%@元",self.market.price]];
     [cell.originPriceLabel setText:[NSString stringWithFormat:@"%@元",self.market.priceOriginal]];
-    
-    
     // Configure the cell...
-    
     return cell;
 }
 

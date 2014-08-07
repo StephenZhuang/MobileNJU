@@ -26,14 +26,12 @@
     }
     return _weekButtons;
 }
+
 -(void)addWeek
 {
     [self.cancelButton setTintColor:[UIColor blackColor]];
     [self.doneButton setTintColor:[UIColor blackColor]];
     [self.chooseAllBt setSelected:YES];
-    
-    
-    
     NSMutableArray* weekButtons = [[NSMutableArray alloc]init];
     for (int i = 0 ; i<5; i++) {
         for (int j=0; j<5; j++) {
@@ -46,12 +44,9 @@
             weekCell.layer.borderWidth=0.5;
             weekCell.myDelegate = self;
             [weekButtons addObject:weekCell];
-            
             [self.chooseArea addSubview:weekCell];
-            
         }
     }
-    
     self.weekButtons = weekButtons;
 }
 
@@ -165,7 +160,7 @@
     [self.chooseAllBt setSelected:allFlag==1];
     [self.chooseSingleBt setSelected:singleFlag==1];
     [self.chooseDoubleBt setSelected:doubleFlag==1];
-    
+
 }
 /*
 // Only override drawRect: if you perform custom drawing.

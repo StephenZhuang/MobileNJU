@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *veryfyBt;
 @property (strong,nonatomic)NSString* phoneNum;
 @property (nonatomic)NSInteger remainTime;
+@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property(nonatomic)BOOL canGetCode;
 @end
 
 @implementation RegisterVC
@@ -26,10 +28,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"注册"];
+    [self setTitle:self.myTitle];
     if (self.myDelegate==nil) {
         [self.phoneNumField setText:[ToolUtils getAccount]];
     }
+    self.canGetCode = YES;
     // Do any additional setup after loading the view.
 }
 
@@ -39,9 +42,10 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)getCode:(id)sender {
-    [self waiting:@"正在发送.."];
     if ([ToolUtils checkTel:self.phoneNumField.text]) {
+        [self waiting:@"正在发送.."];
         [[ApisFactory getApiMGetMobileVerify]load:self selecter:@selector(disposMessage:) phone:self.phoneNumField.text];
+        
     }
 }
 - (IBAction)complete:(id)sender {
@@ -65,9 +69,8 @@
     }
     [self waiting:@"注册中..."];
     NSString* password = [mMD5 md5s:self.passwordField.text];
-
     
-   [[ApisFactory getApiMRegist]load:self selecter:@selector(disposMessage:) phone:self.phoneNum password:password nickname:@"" code:self.codeField.text pushid:[ToolUtils getPushid] device:@"IOS"];
+   [[ApisFactory getApiMRegist]load:self selecter:@selector(disposMessage:) phone:self.phoneNum password:password nickname:@"" code:self.codeField.text device:@"IOS"];
   
 }
 - (void)disposMessage:(Son *)son
@@ -77,10 +80,11 @@
         if ([[son getMethod] isEqualToString:@"MGetMobileVerify"]) {
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
             [ToolUtils showMessage:ret.msg];
-            [self.veryfyBt setEnabled:NO];
              [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timer) userInfo:nil repeats:YES];
             self.remainTime = 60;
+            self.canGetCode = NO;
             self.phoneNum = self.phoneNumField.text;
+            [self.veryfyBt setTitle:@"" forState:UIControlStateNormal];
         } else if ([[son getMethod]isEqualToString:@"MRegist"])
         {
             MUser_Builder* user = (MUser_Builder*)[son getBuild];
@@ -110,7 +114,10 @@
             [self.navigationController popViewControllerAnimated:NO];
             
         }
+    } else {
+        [super disposMessage:son];
     }
+
 }
 - (IBAction)resignAll:(id)sender {
     [self.phoneNumField resignFirstResponder];
@@ -122,8 +129,12 @@
 {
     self.remainTime--;
     if (self.remainTime==0) {
+        [self.timerLabel setText:@""];
         [self.veryfyBt setTitle:@"验证" forState:UIControlStateNormal];
-        [self.veryfyBt setEnabled:YES];
+        self.canGetCode = YES;
+    } else {
+        
+        [self.timerLabel setText:[NSString stringWithFormat:@"%d",self.remainTime]];
     }
 }
 
@@ -138,10 +149,10 @@
 - (void)login
 {
     [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.phoneNum password:
-     [mMD5 md5s:self.passwordField.text]
-                             pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"] device:@"ios"];
+     [mMD5 md5s:self.passwordField.text] device:@"ios"];
 
 }
+
 
 /*
 #pragma mark - Navigation

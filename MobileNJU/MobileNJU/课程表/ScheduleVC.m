@@ -64,16 +64,23 @@
     [self.view addSubview:self.icarousel];
     [self.icarousel setHidden:YES];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdField];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
     if (self.schIdField.text.length==0) {
+        [self.maskView setHidden:NO];
+        [self addMask];
         [self.alertView setHidden:NO];
         [self.addBack setHidden:YES];
         [self.addButton setHidden:YES];
     } else {
+        if ([self.schIdField.text hasPrefix:@"Mg"]) {
+            [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdField.text    password:self.passwordField.text];
+        }
         [self loadLast];
     }
 }
-
-
 
 - (void)initAlert
 {
@@ -97,9 +104,9 @@
 
 - (void)textFieldDidChange:(NSNotification *)note
 {
-    if ([self.schIdField.text hasPrefix:@"Mg"]) {
+    if ([self.schIdField.text hasPrefix:@"Mg"]&&self.codeView==nil) {
         [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
-    } else {
+    } else if (![self.schIdField.text hasPrefix:@"Mg"]){
         if (self.hasCode) {
             [self removeCode];
         }
@@ -178,7 +185,6 @@
     if (sender!=nil) {
         [self waiting:@"正在查询"];
     }
-    self.isRe=1;
     [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
     
     
@@ -220,7 +226,6 @@
             if (classList.week!=0) {
                 [self.addButton setHidden:NO];
                 [self.addBack setHidden:NO];
-
                 self.isRe=1;
                 [self closeAlert];
                 if (self.autoSwitch.isOn) {
@@ -251,12 +256,14 @@
             [self closeAlert];
             [self loadLast];
         }
+    } else {
+        [super disposMessage:son];
     }
+
 }
 - (void)removeCode
 {
     [self.codeView setHidden:YES];
-    
     [self.codeView removeFromSuperview];
     self.codeView = nil;
     [self.imgView removeFromSuperview];
@@ -280,7 +287,6 @@
     self.codeView.frame = codeFrame;
     
     [self.alertView addSubview:self.codeView];
-    
     
     codeFrame.origin.x = codeFrame.size.width+20;
     UIImageView* imgView = [[UIImageView alloc]initWithFrame:codeFrame];
@@ -325,7 +331,8 @@
 - (void)showSchedule:(ScheduleLesson *)lesson
 {
     [self.lessonDetail removeFromSuperview];
-    CGRect frame = CGRectMake(30, 100, 260, 219);
+    CGFloat initY = self.view.bounds.size.height==480?70:100;
+    CGRect frame = CGRectMake(30, initY, 260, 219);
     [self.icarousel setHidden:YES];
     [self initLessonDetail];
     self.lessonDetail.frame = frame;

@@ -84,6 +84,8 @@
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
             [ToolUtils showMessage:ret.msg];
         }
+    } else {
+        [super disposMessage:son];
     }
 }
 

@@ -48,6 +48,7 @@
 }
 - (void)loadData
 {
+#warning API 更改
     [(ApiMMarketList*)[[ApisFactory getApiMMarketList] setPage:page pageCount:10]
      load:self selecter:@selector(disposMessage:) type:self.type];
 //    [self load:self selecter:@selector(disposMessage:) type:self.type];
@@ -78,7 +79,10 @@
                 [self doneWithView:_footer];
             }
         }
+    } else {
+        [super disposMessage:son];
     }
+
 }
 /**
 // *

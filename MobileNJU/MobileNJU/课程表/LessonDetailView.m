@@ -29,6 +29,9 @@
     [self.teacher setText:lesson.teacher];
     [self.time setText:lesson.time];
     [self.week setText:lesson.week];
+    if (lesson.week.length>10) {
+        [self.week setFont:[UIFont fontWithName:@"Helvetica" size:9]];
+    }
     if (lesson.location.length==0) {
         lesson.location = @"   ";
     }
@@ -38,7 +41,7 @@
 
 - (void)adjust
 {
-    CGRect myFrame = CGRectMake(30, 100, 260, 219+20*(self.lessonName.text.length/9+self.teacher.text.length/9*0.6+self.time.text.length/9*0.6+self.location.text.length/9*0.6+self.week.text.length/9*0.6));
+    CGRect myFrame = CGRectMake(30, 80, 260, 219+16*(self.lessonName.text.length/9+self.teacher.text.length/9+self.time.text.length/9+self.location.text.length/9+self.week.text.length/28));
     self.frame = myFrame;
     self.adjustFrame = myFrame;
     [self setNeedsDisplay];

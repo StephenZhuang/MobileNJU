@@ -57,6 +57,8 @@
 //            [ToolUtils showMessage:ret.msg];
 //            [_header beginRefreshing];
         }
+    } else {
+        [super disposMessage:son];
     }
 }
 

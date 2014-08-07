@@ -27,5 +27,5 @@
 @property (strong,nonatomic)NSMutableArray* buttonArray;
 @property (nonatomic,assign)IBOutlet id<PageDelegate> myDelegate;
 -(void) initial;
-
+-(void)resignAll;
 @end

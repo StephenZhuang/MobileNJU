@@ -77,7 +77,10 @@
                 dataArray = array;
                 [self doneWithView:_header];
             }
-        }
+    } else {
+        [super disposMessage:son];
+    }
+
 }
 - (void)didReceiveMemoryWarning
 {

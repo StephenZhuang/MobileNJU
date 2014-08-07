@@ -31,7 +31,7 @@
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="不区分大小写" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R4g-DM-2y0">
-                    <rect key="frame" x="20" y="177" width="125" height="30"/>
+                    <rect key="frame" x="20" y="177" width="113" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -52,11 +52,11 @@
                     <rect key="frame" x="13" y="215" width="228" height="46"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="查询" backgroundImage="9DFA84EF-A807-4871-AED3-8D784AF07140">
+                    <state key="normal" title="查询" backgroundImage="C94E33E4-BFAE-4A43-B13C-550D66991F64">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="76E55001-6DA5-4DC5-BF4C-0FFD30E1258C"/>
+                    <state key="highlighted" backgroundImage="57D7896E-BC54-4BA1-B8D3-1DF2B91EF881"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVL-sC-xJw">
                     <rect key="frame" x="205" y="0.0" width="49" height="52"/>
@@ -66,9 +66,16 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7vL-kd-f7K">
-                    <rect key="frame" x="153" y="177" width="88" height="30"/>
+                    <rect key="frame" x="140" y="175" width="98" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="（第一次登录较慢，请耐心等待）" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="157" translatesAutoresizingMaskIntoConstraints="NO" id="kRV-b9-IdL">
+                    <rect key="frame" x="58" y="17" width="157" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="0.74901960779999999" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -87,7 +94,7 @@
         </view>
     </objects>
     <resources>
-        <image name="76E55001-6DA5-4DC5-BF4C-0FFD30E1258C" width="245" height="40">
+        <image name="57D7896E-BC54-4BA1-B8D3-1DF2B91EF881" width="245" height="40">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -791,7 +798,7 @@ onCidaKAoominKKgorOivqLHosyi1KLXotyi66Lvovai/qMLoxCjEqMUoxmjIaMkoymjMaM0o0ajSaNO
 AAAAAAAAAgEAAAAAAAAAQgAAAAAAAAAAAAAAAAAAo1A
 </mutableData>
         </image>
-        <image name="9DFA84EF-A807-4871-AED3-8D784AF07140" width="245" height="40">
+        <image name="C94E33E4-BFAE-4A43-B13C-550D66991F64" width="245" height="40">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

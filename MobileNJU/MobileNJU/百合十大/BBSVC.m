@@ -64,6 +64,8 @@
             self.newsList = list.newsList;
             [self doneWithView:_header];
         }
+    } else {
+        [super disposMessage:son];
     }
 }
 

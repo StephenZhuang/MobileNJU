@@ -129,15 +129,15 @@
     builder.time = self.timeField.text;
     builder.address = self.locationField.text;
     NSLog(@"%@ time",time);
-    if (self.photoArray.count>0) {
-        builder.img1 =  UIImageJPEGRepresentation([self.photoArray firstObject], 1.0);
-    }
-    if (self.photoArray.count>1) {
-        builder.img2 =  UIImageJPEGRepresentation([self.photoArray objectAtIndex:1], 1.0);
-    }
-    if (self.photoArray.count>2) {
-        builder.img3 =  UIImageJPEGRepresentation([self.photoArray objectAtIndex:2], 1.0);
-    }
+//    if (self.photoArray.count>0) {
+//        builder.img1 =  UIImageJPEGRepresentation([self.photoArray firstObject], 1.0);
+//    }
+//    if (self.photoArray.count>1) {
+//        builder.img2 =  UIImageJPEGRepresentation([self.photoArray objectAtIndex:1], 1.0);
+//    }
+//    if (self.photoArray.count>2) {
+//        builder.img3 =  UIImageJPEGRepresentation([self.photoArray objectAtIndex:2], 1.0);
+//    }
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddLostAndFound" params:builder  delegate:self selecter:@selector(disposMessage:)];
     [updateone setShowLoading:NO];
     
@@ -154,6 +154,8 @@
             NSLog(@"return %@",ret.msg);
             [self.navigationController popViewControllerAnimated:YES];
         }
+    } else {
+        [super disposMessage:son];
     }
 }
 @end

@@ -9,7 +9,7 @@
 #import "NanguaBaseViewController.h"
 #import "MJRefresh.h"
 
-@interface ChatViewController : NanguaBaseViewController<UITableViewDataSource , UITableViewDelegate , UIActionSheetDelegate , UIImagePickerControllerDelegate>
+@interface ChatViewController : BaseViewController<UITableViewDataSource , UITableViewDelegate , UIActionSheetDelegate , UIImagePickerControllerDelegate>
 {
     MJRefreshHeaderView *_header;
 }
@@ -19,7 +19,8 @@
 @property (nonatomic , weak) IBOutlet UIView *bottomView;
 @property (nonatomic , weak) IBOutlet UITextField *messageField;
 @property (nonatomic , copy) NSString *targetid;
+@property (nonatomic , copy) NSString *topicid;
 @property (nonatomic , assign) int targetHead;
-@property (nonatomic , copy) NSString *headImg;
+@property (nonatomic , assign) int headImg;
 @property (nonatomic , strong) UIImage *image;
 @end

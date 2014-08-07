@@ -136,6 +136,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="currentWeek" destination="vFw-x4-3oe" id="UHf-rR-V9p"/>
                 <outlet property="dayFive" destination="owY-Sx-r1A" id="uK0-pB-p7Q"/>
                 <outlet property="dayFour" destination="Ljh-j2-a7X" id="ox8-1M-fHZ"/>
                 <outlet property="dayOne" destination="Cam-9e-hPB" id="fBs-0p-FjW"/>

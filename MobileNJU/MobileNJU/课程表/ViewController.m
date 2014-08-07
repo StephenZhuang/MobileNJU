@@ -11,7 +11,8 @@
 #import "WeekPicker.h"
 #import "weekPickerDelegate.h"
 #import "WeekCell.h"
-@interface ViewController ()<IQActionSheetPickerViewDelegate,weekPickerDelegate,UITextFieldDelegate>
+#import "RDVTabBarController.h"
+@interface ViewController ()<IQActionSheetPickerViewDelegate,weekPickerDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *lessonNameField;
 @property (weak, nonatomic) IBOutlet UITextField *teacherNameField;
 @property (weak, nonatomic) IBOutlet UITextField *classroomField;
@@ -35,14 +36,46 @@
     self.end = 0;
     self.weekTitle = [NSArray arrayWithObjects:@"周一" ,@"周二",@"周三",@"周四",@"周五",@"周六",@"周日",nil];
     self.classTitle =  [NSArray arrayWithObjects:@"第1节",@"第2节",@"第3节",@"第4节",@"第5节",@"第6节",@"第7节",@"第8节",@"第9节",@"第10节",@"第11节",@"第12节",nil];
-    [self.tableView setScrollEnabled:NO];
+//    [self.tableView setScrollEnabled:NO];
     if([self.navigationController.navigationBar
         respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
         
         [self.navigationController.navigationBar  setBackgroundImage:[[UIImage imageNamed:@"navigationBack"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)]   forBarMetrics:UIBarMetricsDefault];
     }
-	// Do any additional setup after loading the view, typically from a nib.
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.lessonNameField];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.teacherNameField];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.classroomField];
+
+
 }
+//- (void)textFieldDidChange:(NSNotification *)note
+//{
+//    if (self.lessonNameField.text.length>20) {
+//        [self.lessonNameField setText:[self.lessonNameField.text substringToIndex:20]];
+//    }
+//    if (self.teacherNameField.text.length>10)
+//    {
+//        [self.teacherNameField setText:[self.teacherNameField.text substringToIndex:10]];
+//
+//    }
+//    if (self.classroomField.text.length>10)
+//    {
+//        [self.classroomField setText:[self.classroomField.text substringToIndex:10]];
+//        
+//    }
+//}
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+    {
+        if (textField==self.lessonNameField) {
+            if (range.location >=20)
+                return NO; // return NO to not change text
+        } else if (textField==self.classroomField||textField==self.teacherNameField)
+        {
+            if (range.location >=10)
+                return NO; // retu
+        }
+        return YES;
+    }
 
 - (void)disposeMessage:(Son*)son
 {
@@ -50,7 +83,23 @@
         MRet_Builder* ret = (MRet_Builder*)[son getBuild];
         [ToolUtils showMessage:ret.msg];
         [self.navigationController popViewControllerAnimated:YES];
+    }  else {
+        if ([[son getMsg] isEqualToString:@"登录验证失败"]) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您的账户在别处登录" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                alert.delegate = self;
+                [alert show];
+            
+            
+        }
     }
+}
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self returnToWelcome];
+}
+- (void)returnToWelcome
+{
+    [self.rdv_tabBarController dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -106,6 +155,9 @@
             [self.weekPicker removeFromSuperview];
         }
         [self enableAll:NO];
+        if (self.weekPicker!=nil) {
+            [self.weekPicker removeFromSuperview];
+        }
         WeekPicker* weekPicker = [[[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil] objectAtIndex:0];
         [weekPicker setFrame:CGRectMake(0, self.view.bounds.size.height, 320, 280)];
         [weekPicker addWeek];
@@ -135,6 +187,7 @@
 
 -(void)showDateChoose
 {
+    
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择节数" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     [picker setTag:233];
    
@@ -225,11 +278,19 @@
     }
     return YES;
 }
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     if (self.weekPicker) {
         [self cancel];
     }
     return YES;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.lessonNameField resignFirstResponder];
+    [self.teacherNameField resignFirstResponder];
+    [self.classroomField resignFirstResponder];
 }
 @end

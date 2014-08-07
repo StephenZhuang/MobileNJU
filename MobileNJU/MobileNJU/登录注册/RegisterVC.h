@@ -11,4 +11,5 @@
 #import "loginDelegate.h"
 @interface RegisterVC : BaseViewController
 @property (nonatomic,strong) id<loginDelegate> myDelegate;
+@property (nonatomic,strong)NSString* myTitle;
 @end

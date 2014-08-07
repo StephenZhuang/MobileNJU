@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZsndNews.pb.h"
 @protocol ActivityCellDelegate<NSObject>
 
 @required
--(void)showAll:(NSURL*)url;
+-(void)showAll:(MNews*)news img:(UIImage*)img;
 @end
 
 @interface ActivityCell : UITableViewCell
@@ -22,4 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIControl *activityView;
 @property (nonatomic,strong)NSString* imageName;
 - (void)setActivity:(NSDictionary*)activity;
+@property(nonatomic,strong)UIImageView* imgView;
+
+@property (nonatomic,strong)MNews* currentNew;
 @end

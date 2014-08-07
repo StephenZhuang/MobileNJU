@@ -7,9 +7,6 @@
 //
 
 #import "TreeHoleCell.h"
-#import "TreeHoleImageCell.h"
-#import "MJPhoto.h"
-#import "MJPhotoBrowser.h"
 
 @implementation TreeHoleCell
 
@@ -25,7 +22,6 @@
 - (void)awakeFromNib
 {
     // Initialization code
-    _imageArray = [[NSMutableArray alloc] init];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -35,77 +31,44 @@
     // Configure the view for the selected state
 }
 
-#pragma - mark collectionview delegate
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
++ (CGFloat)getHeightByTopic:(MTopic *)topic
 {
-    return _imageArray.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    TreeHoleImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TreeHoleImageCell" forIndexPath:indexPath];
-    
-    NSString *imageUrl = [_imageArray objectAtIndex:indexPath.row];
-    [cell.contentImage setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@""]];
-    cell.contentImage.layer.contentsGravity = kCAGravityResizeAspectFill;
-    
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    int count = _imageArray.count;
-    // 1.封装图片数据
-    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
-    for (int i = 0; i<count; i++) {
-        // 替换为中等尺寸图片
-        NSString *imageUrl = [_imageArray objectAtIndex:i];
-        NSString *url = [imageUrl stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
-        NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)url, NULL, NULL,  kCFStringEncodingUTF8 ));
-        MJPhoto *photo = [[MJPhoto alloc] init];
-        photo.url = [NSURL URLWithString:encodedString]; // 图片路径
-        
-        TreeHoleImageCell *cell = (TreeHoleImageCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        photo.srcImageView = cell.contentImage; // 来源于哪个UIImageView
-//        photo.description = [NSString stringWithFormat:@"========%i" , i];
-        [photos addObject:photo];
+    CGFloat height = 18;
+    if (topic.tag.length > 0) {
+        height += 29;
     }
     
-    // 2.显示相册
-    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
-    browser.currentPhotoIndex = indexPath.row; // 弹出相册时显示的第一张图片是？
-    browser.photos = photos; // 设置所有的图片
-    [browser show];
+    UIFont *font = [UIFont systemFontOfSize:17];
+    CGSize size = CGSizeMake(286,2000);
+    CGSize labelsize = [topic.content sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+    height += labelsize.height;
+    
+    if (topic.img.length > 0) {
+        height += 110;
+    }
+    height += 17;
+    height += 38;
+    return height;
 }
 
-- (void)setImageArray:(NSMutableArray *)imageArray
++ (CGFloat)getDetailHeightByTopic:(MTopic_Builder *)topic
 {
-    _imageArray = imageArray;
-    [_collectionView reloadData];
-    
-    CGRect rect = _collectionView.frame;
-    rect.origin.y = CGRectGetMaxY(_contentLabel.frame) + 8;
-    if (_imageArray.count == 0) {
-        rect.size.height = 0.1;
-    } else if (_imageArray.count < 3) {
-        rect.size.height = 110;
-    } else {
-        rect.size.height = 230;
+    CGFloat height = 0;
+    if (!topic) {
+        return height;
     }
-//    rect.size = _collectionView.contentSize;
-    [_collectionView setFrame:rect];
+    if (topic.img.length > 0) {
+        height += 220;
+    }
+    UIFont *font = [UIFont systemFontOfSize:17];
+    CGSize size = CGSizeMake(280,2000);
+    CGSize labelsize = [topic.content sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+    height += labelsize.height;
     
-    CGRect zanFrame = _zanButton.frame;
-    zanFrame.origin.y = CGRectGetMaxY(rect) + 8;
-    [_zanButton setFrame:zanFrame];
     
-    CGRect commentFrame = _commentButton.frame;
-    commentFrame.origin.y = CGRectGetMaxY(rect) + 8;
-    [_commentButton setFrame:commentFrame];
-    
-    CGRect deleteFrame = _deleteButton.frame;
-    deleteFrame.origin.y = CGRectGetMaxY(rect) + 8;
-    [_deleteButton setFrame:deleteFrame];
+    height += 16;
+    height += 38;
+    return height;
 }
 
 @end

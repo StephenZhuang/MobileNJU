@@ -20,16 +20,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"新闻详情"];
+    [self setTitle:self.myTitle];
     
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)share:(id)sender {
     FrontiaShareContent *content = [[FrontiaShareContent alloc] init];
-    content.url = self.url.absoluteString;
+    content.url = [[self.url.absoluteString componentsSeparatedByString:@"?"]firstObject];
     content.description = self.currentNew.content;
     content.title =    self.currentNew.title;
-    content.imageObj = self.img;
+    content.imageObj = [self useImage:self.img];
     //分享取消回调函数
     FrontiaShareCancelCallback onCancel = ^(){
         NSLog(@"OnCancel: share is cancelled");
@@ -56,6 +56,23 @@
 
 
 
+- (UIImage *)useImage:(UIImage *)image {
+    //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // Create a graphics image context
+    CGSize newSize = CGSizeMake(100, 100);
+    UIGraphicsBeginImageContext(newSize);
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    //    [pool release];
+    return newImage;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

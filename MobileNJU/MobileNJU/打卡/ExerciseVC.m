@@ -59,6 +59,7 @@
     [self.schIDText setText:[ToolUtils getSchId]==nil?@"":[ToolUtils getSchId]];
     if (self.schIDText.text.length==0) {
         [self.alertView setHidden:NO];
+        [self.maskView setHidden:NO];
     }
     [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(closeAlertView:) forControlEvents:UIControlEventTouchUpInside];
@@ -135,11 +136,12 @@
 
 - (void)disposMessage:(Son *)son
 {
+    [self.loginIndicator removeFromSuperview];
+
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MSignInInfo"]) {
             self.isRe=1;
             self.OK=YES;
-            [self.loginIndicator removeFromSuperview];
             MSignInList_Builder* list = (MSignInList_Builder*)[son getBuild];
             [self.timeLabel setText:[NSString stringWithFormat:@"%d",list.count]];
             [self.nameLabel setText:list.name];
@@ -161,7 +163,7 @@
     } else {
         [self doneWithView:_header];
         self.OK=YES;
-        [self.loginIndicator removeFromSuperview];
+        [super disposMessage:son];
     }
 }
 #pragma mark UITextViewDelegate

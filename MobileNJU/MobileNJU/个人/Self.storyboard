@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="XbY-GJ-SbM">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="XbY-GJ-SbM">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="508"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -34,7 +34,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EEq-CU-Zi8">
-                                            <rect key="frame" x="107" y="84" width="111" height="111"/>
+                                            <rect key="frame" x="105" y="74" width="111" height="111"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="111" id="Q32-4F-HwP"/>
@@ -68,12 +68,12 @@
                                         <constraint firstAttribute="bottom" secondItem="mbx-B5-eds" secondAttribute="bottom" constant="20" symbolic="YES" id="Icl-1o-exT"/>
                                         <constraint firstItem="h1f-QI-J7o" firstAttribute="centerY" secondItem="mbx-B5-eds" secondAttribute="centerY" id="Nk1-en-i7i"/>
                                         <constraint firstItem="mbx-B5-eds" firstAttribute="leading" secondItem="h1f-QI-J7o" secondAttribute="trailing" constant="8" symbolic="YES" id="OV4-3L-9zX"/>
-                                        <constraint firstItem="fod-K7-fSI" firstAttribute="top" secondItem="EEq-CU-Zi8" secondAttribute="bottom" constant="5" id="Ong-A4-0Nq"/>
+                                        <constraint firstItem="fod-K7-fSI" firstAttribute="top" secondItem="EEq-CU-Zi8" secondAttribute="bottom" constant="15" id="Ong-A4-0Nq"/>
                                         <constraint firstAttribute="centerX" secondItem="fod-K7-fSI" secondAttribute="centerX" constant="-2.5" id="W6L-N4-gZY"/>
-                                        <constraint firstItem="EEq-CU-Zi8" firstAttribute="top" secondItem="byL-3y-TJJ" secondAttribute="top" constant="84" id="WOs-7x-hVC"/>
+                                        <constraint firstItem="EEq-CU-Zi8" firstAttribute="top" secondItem="byL-3y-TJJ" secondAttribute="top" constant="74" id="WOs-7x-hVC"/>
                                         <constraint firstItem="gCd-Jx-o4q" firstAttribute="leading" secondItem="byL-3y-TJJ" secondAttribute="leading" id="XBI-i2-s2x"/>
                                         <constraint firstAttribute="bottom" secondItem="gCd-Jx-o4q" secondAttribute="bottom" id="Y9q-wh-TOq"/>
-                                        <constraint firstItem="EEq-CU-Zi8" firstAttribute="leading" secondItem="byL-3y-TJJ" secondAttribute="leading" constant="107" id="Yvb-lP-APK"/>
+                                        <constraint firstItem="EEq-CU-Zi8" firstAttribute="leading" secondItem="byL-3y-TJJ" secondAttribute="leading" constant="105" id="Yvb-lP-APK"/>
                                         <constraint firstItem="h1f-QI-J7o" firstAttribute="leading" secondItem="byL-3y-TJJ" secondAttribute="leading" constant="20" symbolic="YES" id="ga0-Mn-4vG"/>
                                         <constraint firstItem="gCd-Jx-o4q" firstAttribute="top" secondItem="byL-3y-TJJ" secondAttribute="top" constant="-20" id="jWR-ta-7Cn"/>
                                         <constraint firstAttribute="trailing" secondItem="gCd-Jx-o4q" secondAttribute="trailing" id="vwq-wL-3Jd"/>

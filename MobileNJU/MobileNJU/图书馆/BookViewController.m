@@ -18,7 +18,7 @@
 #import "MyLibraryVC.h"
 #import "AlertViewWithPassword.h"
 @interface BookViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,AlertCloseDelegate,UITextFieldDelegate>
-@property(nonatomic,strong)NSArray* books;
+@property(nonatomic,strong)NSMutableArray* books;
 @property (strong, nonatomic)  AlertViewWithPassword *alertView;
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (weak, nonatomic) IBOutlet UITextField *searchField;
@@ -47,6 +47,7 @@
     [self.schIdField setText:[ToolUtils getLibraryId]==nil?@"":[ToolUtils getLibraryId]];
     self.loading=NO;
     self.isRe=0;
+    self.books = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
 }
 
@@ -98,11 +99,9 @@
 }
 
 
--(void)addFooter
-{
-    
+- (void)loadData{
+    [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:20] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
 }
-
 -(void)addHeader
 {
     
@@ -116,7 +115,14 @@
     if ([son getError]==0) {
         if ([[son getMethod] isEqualToString:@"MSearchBook"]) {
             MBookList_Builder* bookList = (MBookList_Builder*)[son getBuild];
-            self.books = bookList.newsList;
+            if (page>1) {
+                [self.books addObjectsFromArray:bookList.newsList];
+                [self doneWithView:_footer];
+            } else if (page==1)
+            {
+                [self.books removeAllObjects];
+                [self.books addObjectsFromArray:bookList.newsList];
+            }
             [self.resultLabel setText:[NSString stringWithFormat:@"共找到%d个结果",bookList.cnt]];
             [self.myCollectionView reloadData];
             
@@ -134,6 +140,10 @@
                 book.bookName = self.selectedBookName;
                 [myBooks addObject:book];
             }
+            if (myBooks.count==0) {
+                [ToolUtils showMessage:@"此书刊为电子书或正在订购中或者处理中"];
+                return;
+            }
             [self.bookDetail addBooks:myBooks];
             [self.bookDetail setHidden:NO];
             [self.maskView setHidden:NO];
@@ -147,6 +157,8 @@
             [self performSegueWithIdentifier:@"myLibrary" sender:myBookList.newsList];
             
         }
+    } else {
+        [super disposMessage:son];
     }
 }
 
@@ -157,11 +169,15 @@
     if ([self.searchField.text isEqualToString:@""]) {
         [UtilMethods showMessage:@"关键字不能为空"];
     } else {
+        
         [self.searchField resignFirstResponder];
         [self.passwordField resignFirstResponder];
         
+        if (sender!=nil) {
+            page=1;
+        }
         [self waiting:@"正在搜索"];
-        [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:100] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
+        [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:20] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
     }
 }
 - (IBAction)showSelf:(id)sender {
@@ -204,12 +220,10 @@
         [ToolUtils showMessage:@"密码不能为空"];
     } else {
         [self waiting:@"加载中"];
-        
         if (self.rememberSwitch.isOn) {
             [ToolUtils setLibraryId:self.schIdField.text];
             [ToolUtils setLibraryPassword:self.passwordField.text];
         }
-        
          
          [self load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
     }

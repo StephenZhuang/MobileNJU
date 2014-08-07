@@ -24,14 +24,15 @@
     UIImageView* img = [[UIImageView alloc]initWithFrame:CGRectMake(7, 70, 267, 140)];
     [img setImageWithURL:[UtilMethods getImageUrlWtihString:imageName width:534 height:280]];
     [self.activityView addSubview:img];
+    self.imgView = img;
     
 }
 - (void)awakeFromNib
 {
     // Initialization code
 }
-- (IBAction)showMore:(id)sender {
-    [self.delegate showAll:self.url];
+- (IBAction)showMore:(id)sender  {
+    [self.delegate showAll:self.currentNew img:self.imgView.image] ;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

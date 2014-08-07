@@ -96,7 +96,10 @@
             self.titleArray = types;
             [self loadType];
         }
+    }else {
+        [super disposMessage:son];
     }
+
 }
 - (void)addNew
 {

@@ -74,10 +74,10 @@
             }
         }
     } else {
-        [self doneWithView:page==1?_header:_footer];
+        [super disposMessage:son];
+//        [self doneWithView:page==1?_header:_footer];
     }
 }
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;

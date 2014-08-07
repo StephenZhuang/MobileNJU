@@ -10,7 +10,7 @@
 #import "PageDelegate.h"
 #import "FirstPage.h"
 #import "RDVTabBarController.h"
-@interface AddShopVC ()<PageDelegate>
+@interface AddShopVC ()<PageDelegate,UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UIView *scrollerView;
 @end
@@ -39,7 +39,7 @@
     if (self.market==nil) {
         self.market = [[MAddMarket_Builder alloc]init];
     }
-//    [self addViews];
+    //    [self addViews];
     if (self.currentPage==1) {
         self.secondPage.myController = self;
         self.pageControl.currentPage=1;
@@ -136,6 +136,9 @@
         return;
     
     }
+    if (![ToolUtils checkTel:page.phoneField.text]) {
+        return;
+    }
     [page.QQField resignFirstResponder];
     [page.phoneField resignFirstResponder];
     self.market.type = page.typeId;
@@ -158,6 +161,8 @@
         [ToolUtils showMessage:ret.msg];
         self.myLast.shoudReturn=YES;
         [self.navigationController popViewControllerAnimated:NO];
+    } else {
+        [super disposMessage:son];
     }
 }
 
@@ -233,7 +238,15 @@
     }
 }
 
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.firstPage!=nil) {
+        [self.firstPage resignAll];
+    } else if (self.secondPage!=nil)
+    {
+        [self.secondPage resignAll];
+    }
+}
 
 /*
 #pragma mark - Navigation
@@ -245,5 +258,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (IBAction)resignAll:(id)sender {
+    if (self.firstPage!=nil) {
+        [self.firstPage resignAll];
+    }
+}
 
 @end

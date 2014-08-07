@@ -12,7 +12,7 @@
 #import "VerticallyAlignedLabel.h"
 #define STARTX 31
 #define STARTY 27
-#define WIDTH 41.4
+#define WIDTH 41
 #define HEIGHT 47.5
 #define HEADBACKCOLOR  [UIColor colorWithRed:235/255.0 green:234/255.0 blue:231/255.0 alpha:1]
 #define HEADTEXTCOLOR  [UIColor colorWithRed:129/255.0 green:129/255.0 blue:129/255.0 alpha:1]
@@ -45,10 +45,7 @@
     //    NSInteger week = [compos week]; // 今年的第几周
     NSInteger weekday = [compos weekday]; // 星期几（注意，周日是“1”，周一是“2”。。。。）
     self.currentWeek.transform = CGAffineTransformMakeTranslation(((weekday-2)%7)*WIDTH*2, 0);
-    
     NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
-    
-
     // 设置日期格式
     
     [dateFormatter setDateFormat:@"dd"];
@@ -57,8 +54,7 @@
         NSDate *newDate = [[NSDate alloc] initWithTimeInterval:60*60*24*(i-((weekday-2)%7)) sinceDate:[NSDate date]];
         UILabel* label = [dayLabels objectAtIndex:i];
         [label setText:[dateFormatter stringFromDate:newDate]];
-        
-        
+
     }
     
     [dateFormatter setDateFormat:@"MM月"];
@@ -216,7 +212,7 @@
             [button setTitle:@"" forState:UIControlStateNormal];
             [button setBackgroundColor:[UIColor clearColor]];
             lessonBt.backgroundColor = [lessonBt getColor];
-            CGRect nameFrame = CGRectMake(3, 7, WIDTH-6, HEIGHT*lesson.length-22);
+            CGRect nameFrame = CGRectMake(3, 0, WIDTH-6, HEIGHT*lesson.length-22);
             VerticallyAlignedLabel *lessonNameLabel = [[VerticallyAlignedLabel alloc]initWithFrame:nameFrame];
             [lessonNameLabel setFont:[UIFont fontWithName:@"Helvetica" size:11]];
             [lessonNameLabel setText:lesson.name];
@@ -229,6 +225,7 @@
             
             CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-30, WIDTH-6, 30);
             VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
+            
             [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
             [locationLabel setNumberOfLines:0];
             [locationLabel setVerticalAlignment:VerticalAlignmentBottom];
@@ -243,6 +240,10 @@
             lessonBt.locationLabel = locationLabel;
             lessonBt.lessonNameLabel = lessonNameLabel;
             lessonBt.touchButton = button;
+            
+            if (lesson.length==1) {
+                [locationLabel setHidden:YES];
+            }
             [self.buttonList addObject:lessonBt];
             [self addSubview:lessonBt];
 

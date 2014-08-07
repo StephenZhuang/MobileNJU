@@ -10,6 +10,7 @@
 #import "NewsDetailVC.h"
 #import "NewsCell.h"
 #import "ZsndNews.pb.h"
+#import "WelcomeViewController.h"
 @interface NewsListTVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)NSMutableArray* newsList;
 @end
@@ -85,7 +86,16 @@
                 [self doneWithView:_footer];
             }
         }
-    } 
+    }  else {
+        [super disposMessage:son];
+    }
+}
+- (void) returnToWelcome
+{
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    WelcomeViewController* welcome = (WelcomeViewController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"welcome"];
+    [ToolUtils setIsLogin:NO];
+    [self presentViewController:welcome animated:NO completion:nil];
 }
 
 //       // Uncomment the following line to preserve selection between presentations.
@@ -101,6 +111,7 @@
         NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.currentUrl]];
         NSLog(@"设置的网址%@",self.currentUrl);
         [destinationVC setUrl:url];
+        [destinationVC setTitle:@"新闻详情"];
         [destinationVC setImg:self.currentImg];
         [destinationVC setCurrentNew:self.currentNew];
     }

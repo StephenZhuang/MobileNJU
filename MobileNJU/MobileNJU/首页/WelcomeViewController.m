@@ -22,6 +22,8 @@
 #import "RegisterVC.h"
 #import "ZsndIndex.pb.h"
 #import "loginDelegate.h"
+#import <Frontia/Frontia.h>
+
 @interface WelcomeViewController ()<UITextFieldDelegate,RDVTabBarControllerDelegate,loginDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
@@ -29,15 +31,22 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *indicateView;
+@property (weak, nonatomic) IBOutlet UIButton *registBt;
 @property (nonatomic)NSInteger page;
 @property(nonatomic)BOOL firstOpen;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIButton *forgetBt;
 @property (nonatomic)NSInteger time;
 @property(nonatomic,strong)MUnread_Builder* unread;
+@property (strong,nonatomic)NSMutableArray* imageArrays;
+@property (strong,nonatomic)NSMutableArray* imageArraysSelected;
+@property (nonatomic)int complete;
+@property (nonatomic)int jumpState;
+@property (nonatomic,strong)RDVTabBarController* tabBarController;
 @end
 
 @implementation WelcomeViewController
-
+static NSArray* buttonImages;
 
 #pragma mark UIViewController
 - (void)viewDidLoad
@@ -57,29 +66,35 @@
     [self.usernameTextField setText:[ToolUtils getAccount]==nil?@"":[ToolUtils getAccount]];
     [self.passwordTextField setText:[ToolUtils getPassword]==nil?@"":[ToolUtils getPassword]];
     [self.view setUserInteractionEnabled:NO];
+    self.complete = 0;
+    self.jumpState = 0 ; 
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    self.complete = 0 ;
+    self.jumpState = 0;
+    [self loadImages];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)login:(UIButton *)sender {
     
     if ([self.usernameTextField.text isEqualToString:@""]) {
-        [ProgressHUD showError:@"请输入您的手机号"];
+        [ToolUtils showMessage:@"请输入您的手机号"];
         return;
     }
     if ([self.passwordTextField.text isEqualToString:@""]) {
-        [ProgressHUD showError:@"密码不能为空"];
+        [ToolUtils showMessage:@"密码不能为空"];
         return;
     }
     [self resignAllResponders:sender];
     [self waiting:@"登录中"];
-    [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:
-     [mMD5 md5s:self.passwordTextField.text]
-     pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"] device:@"ios"];
+    [[ApisFactory getApiMLogin] load:self selecter:@selector(disposMessage:) phone:self.usernameTextField.text password:[mMD5 md5s:self.passwordTextField.text] device:@"ios"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -107,7 +122,6 @@
         }
     } else if ([[son getMethod] isEqualToString:@"MGetWelcomePage"]) {
         if ([son getError] == 0) {
-            [self.view setUserInteractionEnabled:YES];
             //获得返回类
             self.time=0;
             MRet_Builder *ret = (MRet_Builder *)[son getBuild];
@@ -115,6 +129,7 @@
             if ([ToolUtils isLogin]) {
                 [self login:nil ];
             } else {
+
                 [self showLoginView];
             }
         }
@@ -134,6 +149,27 @@
             [ToolUtils setIsLogin:YES];
             [ToolUtils setAccount:self.usernameTextField.text];
             [ToolUtils setPassword:self.passwordTextField.text];
+            
+            FrontiaPush *push = [Frontia getPush];
+            if(push) {
+                
+                NSString *tags = user.verify;
+                if (![@"" isEqualToString:tags]) {
+                    NSArray *tagArr = [tags componentsSeparatedByString:@";"];
+                    
+                    [push setTags:tagArr tagOpResult:^(int count, NSArray *failureTag) {
+//                        NSString *message = [[NSString alloc] initWithFormat:@"set tag success result: %d with failure tags %@", count, failureTag];
+//                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
+                        
+                    } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
+                        NSString *message = [[NSString alloc] initWithFormat:@"set tag failed with %@ error code : %d error message %@", action, errorCode, errorMessage];
+//                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
+                        [ToolUtils showMessage:message];
+                        
+                    }];
+                }
+                
+            }
             [self getUnread];
         }
     } else if ([[son getMethod]isEqualToString:@"MUnreadModule"])
@@ -141,6 +177,7 @@
         if ([son getError] == 0) {
             MUnread_Builder* unread = (MUnread_Builder*)[son getBuild];
             self.unread = unread;
+            
             [self loadMain];
         }
     }
@@ -149,14 +186,16 @@
 {
     [[ApisFactory getApiMUnreadModule]load:self selecter:@selector(disposMessage:)];
 }
+
 - (void)loadMain
 
 {
-    [self hideLoad];
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     MainMenuViewController* mainMenuVC = (MainMenuViewController*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"home"]; //test2为viewcontroller的StoryboardId
     mainMenuVC.unread = self.unread;
     mainMenuVC.offline = self.offline;
+    mainMenuVC.imageArrays = self.imageArrays;
+    mainMenuVC.imageArraysSelected = self.imageArraysSelected;
     UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:mainMenuVC];
     
     
@@ -173,12 +212,17 @@
     
     ActivityVC* activityVC = (ActivityVC*)[thirdStoryBoard instantiateViewControllerWithIdentifier:@"activity"]; //test2为viewcontroller的StoryboardId
     UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:activityVC];
-    RDVTabBarController *tabBarController = [[RDVTabBarController alloc] init];
-    [tabBarController setViewControllers:@[nav1, nav2,
+    self.tabBarController = [[RDVTabBarController alloc] init];
+    [self.tabBarController setViewControllers:@[nav1, nav2,
                                            nav3,nav4]];
-    [tabBarController setDelegate:self];
-    [self customizeTabBarForController:tabBarController];
-    [self presentViewController:tabBarController animated:YES completion:nil];
+    [self.tabBarController setDelegate:self];
+    [self customizeTabBarForController:self.tabBarController];
+    if (self.complete>=buttonImages.count*2) {
+        [self hideLoad];
+        [self presentViewController:self.tabBarController animated:YES completion:nil];
+    } else {
+        self.jumpState=1;
+    }
     
 }
 
@@ -304,8 +348,6 @@
     [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
         CGRect loginViewFrame = CGRectMake(self.loginView.frame.origin.x, 146,self.loginView.frame.size.width, self.loginView.frame.size.height);
         self.loginView.frame = loginViewFrame;
-       
-        
         CGRect loginLogoFrame = CGRectMake(self.logoImage.frame.origin.x, -74,self.logoImage.frame.size.width, self.logoImage.frame.size.height);
         self.logoImage.frame = loginLogoFrame;
         
@@ -332,6 +374,13 @@
 {
     if ([segue.identifier isEqualToString:@"next"]) {
         RegisterVC* next = (RegisterVC*)segue.destinationViewController;
+        if (sender==self.forgetBt) {
+            next.myTitle = @"忘记密码";
+
+        } else {
+            next.myTitle = @"注册";
+
+        }
         next.myDelegate = self;
     }
 }
@@ -343,8 +392,46 @@
     [self loadMain];
 }
 - (IBAction)goToRegist:(id)sender {
-    [self performSegueWithIdentifier:@"next" sender:nil];
+    
+    [self performSegueWithIdentifier:@"next" sender:sender];
 }
 
+-(void)loadImages
+{
+    buttonImages = [ToolUtils getButtonImage];
+    
+    if (buttonImages!=nil) {
+        self.imageArrays = [[NSMutableArray alloc]init];
+        self.imageArraysSelected = [[NSMutableArray alloc]init];
+        for (NSString* imageUrl in buttonImages) {
+            CGRect frame = CGRectMake(0, 0, 52, 52);
+            NSArray* imageUrls = [imageUrl componentsSeparatedByString:@","];;
+            UIImageView* image = [[UIImageView alloc]init];
+            image.frame = frame;
+            [image setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls firstObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                self.complete++;
+                if (self.complete==buttonImages.count*2&&self.jumpState==1) {
+                    [self hideLoad];
+                    
+                    [self presentViewController:self.tabBarController animated:YES completion:nil];
+                }
+            }];
+            UIImageView* imageSelected = [[UIImageView alloc]init];
+            imageSelected.frame = frame;
+            [imageSelected setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls lastObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                self.complete++;
+                if (self.complete==buttonImages.count*2&&self.jumpState==1) {
+                    [self hideLoad];
+                    
+                    [self presentViewController:self.tabBarController animated:YES completion:nil];
+                }
+            }];
+            [self.imageArrays addObject:image];
+            [self.imageArraysSelected addObject:imageSelected];
+        }
+
+    }
+        //    [self.tableView reloadData];
+}
 
 @end

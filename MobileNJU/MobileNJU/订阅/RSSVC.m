@@ -25,6 +25,7 @@
     }
     return self;
 }
+
 - (void)backToMain
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
@@ -84,7 +85,10 @@
             MRssList_Builder* ret = (MRssList_Builder*)[son getBuild];
             self.myRss = ret.listList;
         }
+    } else {
+        [super disposMessage:son];
     }
+
     [self doneWithView:_header];
 
 }

@@ -28,9 +28,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation_bg_clear"] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
+//    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
     [self.titleView.titleLabel setTextColor:[UIColor blackColor]];
-    [self.titleView.subtitleLabel setTextColor:[UIColor blackColor]];
+//    [self.titleView.subtitleLabel setTextColor:[UIColor blackColor]];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"nangua_bg"]]];
     
     UIButton *button  = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 30)];

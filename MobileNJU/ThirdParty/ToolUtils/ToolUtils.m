@@ -10,6 +10,16 @@
 
 @implementation ToolUtils
 
++ (instancetype) sharedToolUtils
+{
+    static id _sharedInstance = nil;
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&oncePredicate, ^{
+        _sharedInstance = [[self alloc] init];
+    });
+    return _sharedInstance;
+}
+
 + (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
 {
     // Create a graphics image context
@@ -569,5 +579,16 @@
 
 }
 
++(void)setHasLogOut:(NSString*) hasLogout
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: hasLogout  forKey:@"haslogout"];
+    [userDefaults synchronize];
 
+}
++(NSString*)getHasLogOut
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"haslogout"];
+
+}
 @end

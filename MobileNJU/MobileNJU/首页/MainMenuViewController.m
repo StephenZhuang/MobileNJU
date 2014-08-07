@@ -31,8 +31,7 @@
 @property (strong,nonatomic)UIImageView* touchButton;
 @property (strong,nonatomic)UIImageView* cloudBack;
 @property (strong,nonatomic)NSArray* focusList;
-@property (strong,nonatomic)NSMutableArray* imageArrays;
-@property (strong,nonatomic)NSMutableArray* imageArraysSelected;
+
 @property (strong,nonatomic)NSArray* newsImgList;
 @property (strong,nonatomic)NSString* tempUrl;
 @property (strong,nonatomic)NSMutableArray* newsList;
@@ -41,6 +40,7 @@
 @property (nonatomic)int complete;
 @property (nonatomic,strong)NSMutableDictionary* stateDic;
 @property (nonatomic)int prepare;
+
 @end
 
 @implementation MainMenuViewController
@@ -51,7 +51,6 @@ static NSArray* descriptions;
 #pragma mark ViewController
 - (void)viewDidLoad
 {
-    
     [super viewDidLoad];
     self.navigationController.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCall:) name:@"getCall" object:nil];
@@ -61,35 +60,32 @@ static NSArray* descriptions;
     [self.pageScroller addGestureRecognizer:singleTap];
     self.changeHeader = NO;
     [self.tableView setAllowsSelection:NO];
-//    [self loadTableData];
     self.newsImgList = [ToolUtils getImgList];
     self.complete=0;
     self.prepare = 0;
     if (self.newsImgList!=nil) {
         [self prepareForNews];
     }
-    
+    [self.pageScroller setBackgroundColor:[UIColor whiteColor]];
+    functionNames = [ToolUtils getFunctionName];
+    buttonImages= [ToolUtils getButtonImage];
+    descriptions = [ToolUtils getFunctionDetails];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-
     
     [self loadTableData];
-//    [self.tableView reloadData];
     [self loadIndex];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
-//    [self.tableView reloadData];
 }
 - (void)loadIndex
 {
     if (!self.offline) {
         [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
-        [[[ApisFactory getApiMNewsList]setPage:1 pageCount:10]load:self selecter:@selector(disposeMessage:)];
     }
 }
 
@@ -103,7 +99,7 @@ static NSArray* descriptions;
             self.allNews = newsList.newsList;
             
         } else if ([[son getMethod] isEqualToString:@"MIndex"]) {
-            BOOL isLoad = functionNames==nil;
+            [[[ApisFactory getApiMNewsList]setPage:1 pageCount:10]load:self selecter:@selector(disposeMessage:)];
             MIndex_Builder* index = (MIndex_Builder*)[son getBuild];
             NSMutableArray* image = [[NSMutableArray alloc]init];
             NSMutableArray* names = [[NSMutableArray alloc]init];
@@ -137,12 +133,12 @@ static NSArray* descriptions;
                 [imgList addObject:focus.img];
             }
             [ToolUtils setImgList:imgList];
-            if (isLoad) {
-                [self loadTableData];
-                [self.tableView reloadData];
-            }
-//            [self loadTableData];
-//            [self.tableView reloadData];
+//            if (isLoad) {
+//                [self loadTableData];
+////                [self.tableView reloadData];
+//            }
+            [self loadTableData];
+            [self.tableView reloadData];
             
             
             
@@ -158,8 +154,9 @@ static NSArray* descriptions;
 
             }
         }
+    } else {
+        [super disposMessage:son];
     }
-
     
 }
 #warning 这里需要加上从服务器载下来的临时功能
@@ -187,17 +184,17 @@ static NSArray* descriptions;
         image.frame = frame;
         [image setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls firstObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             self.prepare++;
-            if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count) {
-                
+            if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count*2) {
                 [self.tableView reloadData];
-
             }
         }];
         UIImageView* imageSelected = [[UIImageView alloc]init];
         imageSelected.frame = frame;
         [imageSelected setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls lastObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count) {
+            self.prepare++;
+            if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count*2) {
                 [self.tableView reloadData];
+                
             }
         }];
         [self.imageArrays addObject:image];
@@ -238,6 +235,7 @@ static NSArray* descriptions;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
     // set header view colour
     self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 100)];
     [self.headerView setBackgroundColor:[UIColor clearColor]];
@@ -268,7 +266,6 @@ static NSArray* descriptions;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeCell *cell = nil;
-    
     if (indexPath.row % 2 == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"LeftCell"];
     } else {
@@ -297,6 +294,7 @@ static NSArray* descriptions;
         [cell.menuTitle setText:@""];
         [cell.menuSubTitle setText:@""];
         [cell.redCircle setHidden:YES];
+        
     }
     
    
@@ -321,15 +319,14 @@ static NSArray* descriptions;
         [self.stateDic setObject:@"ok" forKey:str];
         if (indexPath.row%2==0) {
             homecell.menuView.transform = CGAffineTransformMakeTranslation(-300, 0);
-            [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
                 homecell.menuView.transform = CGAffineTransformMakeTranslation(0, 0);
             } completion:^(BOOL finished) {
                 
             }];
-            
         } else {
             homecell.menuView.transform = CGAffineTransformMakeTranslation(300, 0);
-            [UIView animateWithDuration:0.5 delay:0.3 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
                 homecell.menuView.transform = CGAffineTransformMakeTranslation(0, 0);
             } completion:^(BOOL finished) {
                 
@@ -387,6 +384,7 @@ static NSArray* descriptions;
                                                       self.pageScroller.frame.size.height), NO, 0.0);
     UIImage *blank = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
     return blank;
 }
 
@@ -400,14 +398,14 @@ static NSArray* descriptions;
         [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             self.complete++;
             if (image!=nil) {
-                [self.photoList addObject:image];
+                [self.photoList setObject:image atIndexedSubscript:site-1];
             }
         }];
     } else {
         [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site-1]width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             self.complete++;
             if (image!=nil) {
-                [self.photoList addObject:image];
+                [self.photoList setObject:image atIndexedSubscript:site-1];
             }
         }];
     }
@@ -567,50 +565,50 @@ static NSArray* descriptions;
 }
 
 #pragma - mark callview
-- (void)getCall:(NSNotification *)notification
-{
-    if (![[self.navigationController.viewControllers lastObject] isKindOfClass:NSClassFromString(@"ChatViewController")]) {
-        [self showCallView:notification.userInfo];
-    }
-}
+//- (void)getCall:(NSNotification *)notification
+//{
+//    if (![[self.navigationController.viewControllers lastObject] isKindOfClass:NSClassFromString(@"ChatViewController")]) {
+//        [self showCallView:notification.userInfo];
+//    }
+//}
 
-- (void)cancelCall
-{
-    [[ApisFactory getApiMChatCallBack] load:self selecter:@selector(disposMessage:) id:self.callView.targetid type:0];
-    [self dismissCallView];
-}
+//- (void)cancelCall
+//{
+//    [[ApisFactory getApiMChatCallBack] load:self selecter:@selector(disposMessage:) id:self.callView.targetid type:0];
+//    [self dismissCallView];
+//}
+//
+//- (void)confirmCall
+//{
+//    [[ApisFactory getApiMChatCallBack] load:self selecter:@selector(disposMessage:) id:self.callView.targetid type:1];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
+//    ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+//    vc.targetid = self.callView.targetid;
+//    [self.navigationController pushViewController:vc animated:YES];
+//    [self dismissCallView];
+//}
 
-- (void)confirmCall
-{
-    [[ApisFactory getApiMChatCallBack] load:self selecter:@selector(disposMessage:) id:self.callView.targetid type:1];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
-    ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-    vc.targetid = self.callView.targetid;
-    [self.navigationController pushViewController:vc animated:YES];
-    [self dismissCallView];
-}
-
-- (void)showCallView:(NSDictionary *)userInfo
-{
-    [self addMask];
-    if (!self.callView) {
-        self.callView = [[[NSBundle mainBundle] loadNibNamed:@"CallView" owner:self options:nil] firstObject];
-    }
-    self.callView.transform = CGAffineTransformIdentity;
-    [self.callView setTargetid:[userInfo objectForKey:@"id"]];
-    [self.callView.cancelButton addTarget:self action:@selector(cancelCall) forControlEvents:UIControlEventTouchUpInside];
-    [self.callView.confirmButton addTarget:self action:@selector(confirmCall) forControlEvents:UIControlEventTouchUpInside];
-
-    self.callView.center = [UIApplication sharedApplication].keyWindow.center;
-    [self show];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.callView];
-}
-
-- (void)dismissCallView
-{
-    [self removeMask];
-    [self hide];
-}
+//- (void)showCallView:(NSDictionary *)userInfo
+//{
+//    [self addMask];
+//    if (!self.callView) {
+//        self.callView = [[[NSBundle mainBundle] loadNibNamed:@"CallView" owner:self options:nil] firstObject];
+//    }
+//    self.callView.transform = CGAffineTransformIdentity;
+//    [self.callView setTargetid:[userInfo objectForKey:@"id"]];
+//    [self.callView.cancelButton addTarget:self action:@selector(cancelCall) forControlEvents:UIControlEventTouchUpInside];
+//    [self.callView.confirmButton addTarget:self action:@selector(confirmCall) forControlEvents:UIControlEventTouchUpInside];
+//
+//    self.callView.center = [UIApplication sharedApplication].keyWindow.center;
+//    [self show];
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.callView];
+//}
+//
+//- (void)dismissCallView
+//{
+//    [self removeMask];
+//    [self hide];
+//}
 
 - (void)addMask
 {
@@ -627,47 +625,47 @@ static NSArray* descriptions;
     [self.maskView removeFromSuperview];
 }
 
-- (void)show
-{
-//    self.editView.center = CGPointMake(self.view.center.x, 150);
-    CAKeyframeAnimation *popAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    popAnimation.duration = 0.4;
-    popAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.01f, 0.01f, 1.0f)],
-                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
-                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9f, 0.9f, 1.0f)],
-                            [NSValue valueWithCATransform3D:CATransform3DIdentity]];
-    popAnimation.keyTimes = @[@0.2f, @0.5f, @0.75f, @1.0f];
-    popAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    [self.callView.layer addAnimation:popAnimation forKey:nil];
-}
-
-- (void)hide
-{
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.callView.transform = CGAffineTransformMakeScale(1.1, 1.1);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            self.callView.transform = CGAffineTransformMakeScale(0, 0);
-        } completion:^(BOOL finished) {
-            [self.callView removeFromSuperview];
-        }];
-    }];
-}
-
-
-- (void)goToChat:(NSNotification *)notification
-{
-    NSString *type = notification.object;
-    if (type.integerValue == 1) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
-        ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-        vc.targetid = [notification.userInfo objectForKey:@"target"];
-        [self.navigationController pushViewController:vc animated:YES];
-        [self dismissCallView];
-    }
-}
+//- (void)show
+//{
+////    self.editView.center = CGPointMake(self.view.center.x, 150);
+//    CAKeyframeAnimation *popAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+//    popAnimation.duration = 0.4;
+//    popAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.01f, 0.01f, 1.0f)],
+//                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
+//                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9f, 0.9f, 1.0f)],
+//                            [NSValue valueWithCATransform3D:CATransform3DIdentity]];
+//    popAnimation.keyTimes = @[@0.2f, @0.5f, @0.75f, @1.0f];
+//    popAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+//                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+//                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+//    [self.callView.layer addAnimation:popAnimation forKey:nil];
+//}
+//
+//- (void)hide
+//{
+//    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//        self.callView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+//    } completion:^(BOOL finished) {
+//        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//            self.callView.transform = CGAffineTransformMakeScale(0, 0);
+//        } completion:^(BOOL finished) {
+//            [self.callView removeFromSuperview];
+//        }];
+//    }];
+//}
+//
+//
+//- (void)goToChat:(NSNotification *)notification
+//{
+//    NSString *type = notification.object;
+//    if (type.integerValue == 1) {
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
+//        ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+//        vc.targetid = [notification.userInfo objectForKey:@"target"];
+//        [self.navigationController pushViewController:vc animated:YES];
+//        [self dismissCallView];
+//    }
+//}
 
 
 @end

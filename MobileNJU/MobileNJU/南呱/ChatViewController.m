@@ -49,8 +49,9 @@
         [self addConnect];
     } else {
         [self setTitle:@"聊天"];
-        [self addCall];
+//        [self addCall];
         [self addHeader];
+        [[ApisFactory getApiMChatReq] load:self selecter:@selector(disposMessage:) targetid:_targetid topicid:_topicid];
     }
 }
 
@@ -122,7 +123,7 @@
                 break;
         }
     };
-    [header beginRefreshing];
+//    [header beginRefreshing];
     _header = header;
     [_header.arrowImage setAlpha:0];
     [_header.statusLabel setHidden:YES];
@@ -147,7 +148,7 @@
         beginStr = chat.createtime;
     }
     
-    [[ApisFactory getApiMChat] load:self selecter:@selector(disposMessage:) id:_targetid begin:beginStr];
+    [[ApisFactory getApiMChat] load:self selecter:@selector(disposMessage:) id:_targetid topicid:_topicid begin:beginStr];
 }
 
 - (void)getNewMessage:(NSNotification *)notification
@@ -189,7 +190,7 @@
 
 - (void)callAction:(id)sender
 {
-    [[ApisFactory getApiMChatCall] load:self selecter:@selector(disposMessage:) id:_targetid];
+//    [[ApisFactory getApiMChatCall] load:self selecter:@selector(disposMessage:) id:_targetid];
     [UIView transitionWithView:self.view duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^(void){
     } completion:^(BOOL isFinished) {
         if (isFinished) {
@@ -272,7 +273,7 @@
                 MChat *chat = [chats.chatList objectAtIndex:i];
                 [_dataArray insertObject:chat atIndex:0];
                 _targetHead = chats.headImg;
-                _headImg = [ToolUtils getHeadImg];
+//                _headImg = [ToolUtils getHeadImg];
             }
         } else if ([[son getMethod] isEqualToString:@"MAddChat"]){
             if ([[son getParam:@"content"] length] <= 0) {
@@ -291,6 +292,11 @@
             [self.dataArray addObject:chat.build];
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        } else if ([[son getMethod] isEqualToString:@"MChatReq"]) {
+            MView_Builder *viewBuilder = (MView_Builder *)[son getBuild];
+            _targetHead = viewBuilder.targetHeadImg;
+            _headImg = viewBuilder.headImg;
+            [self loadData];
         }
     }
     if ([[son getMethod] isEqualToString:@"MChat"]) {
@@ -367,7 +373,7 @@
     }
     cell.talkData=data;
     if ([data.userid isEqualToString:_targetid]) {
-        [cell setLogoImageWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i_s" ,_targetHead]]];
+        [cell setLogoImageWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"logo_default_%i" ,_targetHead]]];
     } else {
         [cell setLogoImage:_headImg];
     }
@@ -430,8 +436,8 @@
         [self.dataArray addObject:chat.build];
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-#warning api更新
-//        [[ApisFactory getApiMAddChat] load:self selecter:@selector(disposMessage:) id:_targetid content:string];
+
+        [[ApisFactory getApiMAddChat] load:self selecter:@selector(disposMessage:) id:_targetid topicid:_topicid content:string image:nil];
     }
     [_messageField resignFirstResponder];
     [_messageField setText:@""];
@@ -491,11 +497,12 @@
     MImg_Builder *img = [MImg_Builder new];
     [img setImg:UIImagePNGRepresentation(_image)];
     
-    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddChat" params:img  delegate:self selecter:@selector(disposMessage:)];
-    [updateone addParam:@"id" value:_targetid];
-    [updateone addParam:@"content" value:@""];
-    [updateone setShowLoading:YES];
-    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
+//    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddChat" params:img  delegate:self selecter:@selector(disposMessage:)];
+//    [updateone addParam:@"id" value:_targetid];
+//    [updateone addParam:@"content" value:@""];
+//    [updateone setShowLoading:YES];
+//    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
+    [[[ApisFactory getApiMAddChat] isShowLoad:YES] load:self selecter:@selector(disposMessage:) id:_targetid topicid:_topicid content:@"" image:img];
 }
 
 - (UIImage *)useImage:(UIImage *)image {
