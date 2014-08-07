@@ -38,7 +38,7 @@
 
 - (void)adjust
 {
-    CGRect myFrame = CGRectMake(30, 100, 260, 219+20*(self.lessonName.text.length/9+self.teacher.text.length/9+self.time.text.length/9+self.location.text.length/9+self.week.text.length/9));
+    CGRect myFrame = CGRectMake(30, 100, 260, 219+20*(self.lessonName.text.length/9+self.teacher.text.length/9*0.6+self.time.text.length/9*0.6+self.location.text.length/9*0.6+self.week.text.length/9*0.6));
     self.frame = myFrame;
     self.adjustFrame = myFrame;
     [self setNeedsDisplay];
