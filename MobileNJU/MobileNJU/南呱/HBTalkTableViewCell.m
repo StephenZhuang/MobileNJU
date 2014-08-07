@@ -63,9 +63,9 @@
 
 #pragma -mark 接口方法
 
--(void) setLogoImage:(NSString*)url
+-(void) setLogoImage:(int)head
 {
-    [_mLogo setImageWithURL:[ToolUtils getImageUrlWtihString:url] placeholderImage:[UIImage imageNamed:@"fruit_0_s"]];
+    [_mLogo setImage:[UIImage imageNamed:[NSString stringWithFormat:@"logo_default_%i",head]]];
 }
 
 -(void)setLogoImageWithImage:(UIImage*)image

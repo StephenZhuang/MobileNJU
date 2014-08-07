@@ -13,6 +13,7 @@
 #import "AddTreeHoleViewController.h"
 #import "TreeHoleDetailViewController.h"
 #import "NewMessageListViewController.h"
+#import "ChatViewController.h"
 
 @interface TreeHoleListViewController ()
 
@@ -33,7 +34,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setTitle:@"树洞"];
+    if (_mtag) {
+        [self setTitle:_mtag.title];
+        self.tableView.tableHeaderView = nil;
+    } else {
+        [self setTitle:@"树洞"];
+    }
     
     _sectionHeader = [[UIView alloc] initWithFrame:CGRectZero];
     
@@ -42,16 +48,17 @@
     
     _messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_messageButton setTitle:@"99" forState:UIControlStateNormal];
-    [_messageButton setFrame:CGRectMake(0, 0, 30, 22)];
+    [_messageButton setImage:[UIImage imageNamed:@"bt_treehole_reply"] forState:UIControlStateNormal];
+    [_messageButton setFrame:CGRectMake(0, 0, 52, 22)];
     [_messageButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [_messageButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 6, 0, 0)];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:_messageButton];
     
-    UIBarButtonItem *mesageitem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bt_treehole_reply"] style:UIBarButtonItemStyleBordered target:nil action:nil];
-    [item setTintColor:[UIColor whiteColor]];
-    
-    self.navigationItem.rightBarButtonItems = @[releaseItem ,item , mesageitem];
+    self.navigationItem.rightBarButtonItems = @[releaseItem ,item];
     
     [[ApisFactory getApiMGetTags] load:self selecter:@selector(disposMessage:)];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -80,13 +87,38 @@
         type = 2;
         
     }
-    [[ApisFactory getApiMTreeHoleList] load:self selecter:@selector(disposMessage:) type:type begin:beginStr];
+    if (_mtag) {
+        if ([_mtag.id isEqualToString:@"热门"]) {
+            [[ApisFactory getApiMTreeHoleQuery] load:self selecter:@selector(disposMessage:) type:2];
+        } else if ([_mtag.id isEqualToString:@"推荐"]) {
+            [[ApisFactory getApiMTreeHoleQuery] load:self selecter:@selector(disposMessage:) type:2];
+        } else {
+            [[ApisFactory getApiMTagTreeHole] load:self selecter:@selector(disposMessage:) tagid:_mtag.id begin:beginStr];
+        }
+    } else {
+        [[ApisFactory getApiMTreeHoleList] load:self selecter:@selector(disposMessage:) type:type begin:beginStr];
+    }
+}
+
+- (void)addFooter
+{
+    if (_mtag) {
+        if ([_mtag.id isEqualToString:@"热门"]) {
+
+        } else if ([_mtag.id isEqualToString:@"推荐"]) {
+
+        } else {
+            [super addFooter];
+        }
+    } else {
+        [super addFooter];
+    }
 }
 
 - (void)disposMessage:(Son *)son
 {
     if ([son getError] == 0) {
-        if ([[son getMethod] isEqualToString:@"MTreeHoleList"]) {
+        if ([[son getMethod] isEqualToString:@"MTreeHoleList"] || [[son getMethod] isEqualToString:@"MTagTreeHole"] || [[son getMethod] isEqualToString:@"MTreeHoleQuery"]) {
             MTreeHole_Builder *treeHole = (MTreeHole_Builder *)[son getBuild];
             if (page == 1) {
                 [self.dataArray removeAllObjects];
@@ -110,7 +142,7 @@
             }
         }
     }
-    if ([[son getMethod] isEqualToString:@"MTreeHoleList"]) {
+    if ([[son getMethod] isEqualToString:@"MTreeHoleList"] || [[son getMethod] isEqualToString:@"MTagTreeHole"] || [[son getMethod] isEqualToString:@"MTreeHoleQuery"]) {
         if (page == 1) {
             [self doneWithView:_header];
         } else {
@@ -172,6 +204,7 @@
     [cell.commentButton setTag:indexPath.section];
     [cell.moreButton setTag:indexPath.section];
     [cell.messageButton setTag:indexPath.section];
+    [cell.topicButton setTag:indexPath.section];
     [cell.zanButton setTitle:[NSString stringWithFormat:@"%i" , topic.praiseCnt] forState:UIControlStateNormal];
     [cell.commentButton setTitle:[NSString stringWithFormat:@"%i" , topic.commentCnt] forState:UIControlStateNormal];
 
@@ -224,6 +257,17 @@
     [alert show];
 }
 
+- (IBAction)messageAction:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    MTopic *topic = self.dataArray[button.tag];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
+    ChatViewController *vc = [sb instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    vc.targetid = topic.author;
+    vc.topicid = topic.id;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
@@ -240,6 +284,28 @@
 - (IBAction)newMessageAction:(id)sender
 {
     [self performSegueWithIdentifier:@"NewMessage" sender:sender];
+}
+
+- (IBAction)tagAction:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    MTag *tag = [[ToolUtils sharedToolUtils].tagArray objectAtIndex:button.tag-100];
+    TreeHoleListViewController *vc = [[self storyboard] instantiateInitialViewController];
+    vc.mtag = tag;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)cellTagAction:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    MTopic *topic = self.dataArray[button.tag];
+    MTag_Builder *tag = [MTag_Builder new];
+    [tag setTitle:topic.tag];
+    [tag setId:topic.tagid];
+    TreeHoleListViewController *vc = [[self storyboard] instantiateInitialViewController];
+    vc.mtag = tag.build;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -264,6 +330,15 @@
             page = 1;
             [self loadData];
         };
+        if (_mtag) {
+            if ([_mtag.id isEqualToString:@"热门"]) {
+                
+            } else if ([_mtag.id isEqualToString:@"推荐"]) {
+                
+            } else {
+                vc.mtag = _mtag;
+            }
+        }
     } else if ([segue.identifier isEqualToString:@"detail"] || [segue.identifier isEqualToString:@"detail1"]) {
         TreeHoleDetailViewController *vc = [segue destinationViewController];
         if ([sender isKindOfClass:NSClassFromString(@"UIButton")]) {

@@ -37,8 +37,9 @@
     [self setTitle:@"详情"];
     _targetid = @"";
     _commentid = @"";
-    _cometName = @"";
-    _imageArray = [[NSMutableArray alloc] init];
+    _replyfloor = 0;
+    [_textView setPlaceholder:@"评论不能超过120字！"];
+    [_textView setPlaceholderColor:RGB(147, 147, 147)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
@@ -72,10 +73,15 @@
     if ([son getError] == 0) {
         if ([[son getMethod] isEqualToString:@"MTreeHole"]) {
             _topic = (MTopic_Builder *)[son getBuild];
-            
+            if ([_topic.author isEqualToString:[ToolUtils getLoginId]]) {
+                [_lzButton setHidden:NO];
+            } else {
+                [_lzButton setHidden:YES];
+            }
             [self.tableView reloadData];
         } else if ([[son getMethod] isEqualToString:@"MTreeHoleComment"]) {
-//            [self loadData];
+            page = 1;
+            [self loadData];
         } else if ([[son getMethod] isEqualToString:@"MTreeHoleComments"]) {
             MCommentList_Builder *commentList = (MCommentList_Builder *)[son getBuild];
             if (page == 1) {
@@ -112,13 +118,10 @@
     if (indexPath.section == 0) {
         return [TreeHoleCell getDetailHeightByTopic:_topic];
     } else if (indexPath.section == 1) {
-            return 38;
+        return 38;
     }
-//    } else {
-//        CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
-        MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
-//        return [cell matchContent:comment author:_topic.author] + 10;
-//    }
+
+    MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
     return [CommentCell getHeightByComment:comment];
 }
 
@@ -145,14 +148,33 @@
         MComment *comment = [self.dataArray objectAtIndex:indexPath.row];
         if (comment.replyid.length > 0 || comment.isLz == 1) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCellReply"];
+            
         } else {
             cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
         }
+        
+        if (comment.isLz == 1) {
+            if (comment.replyid.length > 0) {
+                [cell.replyLabel setText:[NSString stringWithFormat:@"楼主 回复%d楼",comment.replyFloor]];
+            } else {
+                [cell.replyLabel setText:[NSString stringWithFormat:@"楼主"]];
+            }
+            [cell.replyLabel setTextColor:RGB(168, 16, 166)];
+            [cell.contentLabel setTextColor:RGB(168, 16, 166)];
+        } else {
+            if (comment.replyid.length > 0) {
+                [cell.replyLabel setText:[NSString stringWithFormat:@"回复%d楼",comment.replyFloor]];
+            }
+            [cell.replyLabel setTextColor:RGB(164, 164, 164)];
+            [cell.contentLabel setTextColor:RGB(82, 82, 82)];
+        }
+        
         [cell.floorLabel setBackgroundColor:_colorArray[indexPath.row % _colorArray.count]];
         [cell.floorLabel setText:[NSString stringWithFormat:@"%i",indexPath.row+1]];
         
         [cell.contentLabel setText:comment.content];
-        [cell.timeLabel setText:comment.createTime];
+        [cell.timeLabel setText:comment.time];
+        [cell.messageButton setTag:indexPath.row];
         return cell;
     }
 }
@@ -174,10 +196,10 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    _targetid = @"";
-    _commentid = @"";
-    _cometName = @"";
-    [_messageField setPlaceholder:@""];
+//    _targetid = @"";
+//    _commentid = @"";
+//    _cometName = @"";
+//    [_messageField setPlaceholder:@""];
 }
 
 #pragma mark - 键盘处理
@@ -185,17 +207,19 @@
 - (void)keyBoardWillShow:(NSNotification *)note{
     
     CGRect rect = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGFloat ty = - rect.size.height;
+    CGFloat ty = - rect.size.height - _editView.frame.size.height;
     [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
-        self.view.transform = CGAffineTransformMakeTranslation(0, ty);
+        self.editView.transform = CGAffineTransformMakeTranslation(0, ty);
     }];
+    [self.textView becomeFirstResponder];
     
 }
 #pragma mark 键盘即将退出
 - (void)keyBoardWillHide:(NSNotification *)note{
     [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
-        self.view.transform = CGAffineTransformIdentity;
+        self.editView.transform = CGAffineTransformIdentity;
     }];
+    [self removeMask];
 }
 
 - (IBAction)emojiAction:(id)sender
@@ -212,23 +236,40 @@
     }];
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self addMask];
+    _targetid = @"";
+    _replyfloor = 0;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self sendAction:nil];
     return YES;
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [self sendAction:nil];
+//        [textView resignFirstResponder];
+    }
+    return YES;
+}
+
 - (IBAction)sendAction:(id)sender
 {
-    NSString *string = _messageField.text;
+    NSString *string = _textView.text;
     string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if (string.length > 100) {
-        [_messageField resignFirstResponder];
-        [ProgressHUD showError:@"回复不能超过100字"];
+    if (string.length > 120) {
+        [_textView resignFirstResponder];
+        [ProgressHUD showError:@"回复不能超过120字"];
         return;
     }
-//    if (string.length > 0) {
+    if (string.length > 0) {
 //        MComment_Builder *comment = [MComment_Builder new];
+//        comment 
 //        [comment setUserid1:[ToolUtils getLoginId]];
 //        [comment setNickname1:[ToolUtils getNickName]];
 //        [comment setUserid2:_commentid];
@@ -242,14 +283,11 @@
 //        
 //        [_topic setCommentCnt:_topic.commentCnt + 1];
 //        [_detailView.commentButton setTitle:[NSString stringWithFormat:@"%i",_topic.commentCnt] forState:UIControlStateNormal];
-//        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_topic.id content:string reply:_targetid commentid:_commentid];
-//    }
-    [_messageField resignFirstResponder];
-    [_messageField setText:@""];
+        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_treeHoleid content:string reply:_targetid floor:_replyfloor islz:_lzButton.selected?0:1];
+    }
+    [_textView resignFirstResponder];
+    [_textView setText:@""];
     _targetid = @"";
-    _commentid = @"";
-    _cometName = @"";
-    [_messageField setPlaceholder:@""];
 }
 
 - (IBAction)zanAction:(id)sender
@@ -270,57 +308,37 @@
     [[ApisFactory getApiMPraise] load:self selecter:@selector(disposMessage:) id:_topic.id type:_topic.hasPraise == 0?2:1];
 }
 
+- (IBAction)replyAction:(id)sender
+{
+    [self addMask];
+    UIButton *button = (UIButton *)sender;
+    MComment *comment = self.dataArray[button.tag];
+    _replyfloor = comment.floor;
+    _targetid = comment.userid;
+    [self.textView becomeFirstResponder];
+}
+
+- (IBAction)changeLz:(id)sender
+{
+    [self.lzButton setSelected:!self.lzButton.selected];
+}
+
+- (void)addMask
+{
+//    if (!self.maskView) {
+        self.maskView = [[UIView alloc] initWithFrame:self.view.bounds];
+        [self.maskView setAlpha:0.8];
+        [self.maskView setBackgroundColor:[UIColor blackColor]];
+//    }
+    [self.view addSubview:self.maskView];
+    [self.view bringSubviewToFront:self.editView];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma - mark collectionview delegate
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    if (_imageArray) {
-        return _imageArray.count;
-    }
-    return 0;
-}
-
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    TreeHoleImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TreeHoleImageCell" forIndexPath:indexPath];
-//    
-//    NSString *imageUrl = [_imageArray objectAtIndex:indexPath.row];
-//    [cell.contentImage setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@""]];
-//    cell.contentImage.layer.contentsGravity = kCAGravityResizeAspectFill;
-//    
-//    return cell;
-//}
-//
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSInteger count = _imageArray.count;
-//    // 1.封装图片数据
-//    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:count];
-//    for (int i = 0; i<count; i++) {
-//        // 替换为中等尺寸图片
-//        NSString *imageUrl = [_imageArray objectAtIndex:i];
-//        NSString *url = [imageUrl stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
-//        NSString * encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes( kCFAllocatorDefault, (CFStringRef)url, NULL, NULL,  kCFStringEncodingUTF8 ));
-//        MJPhoto *photo = [[MJPhoto alloc] init];
-//        photo.url = [NSURL URLWithString:encodedString]; // 图片路径
-//        
-//        TreeHoleImageCell *cell = (TreeHoleImageCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//        photo.srcImageView = cell.contentImage; // 来源于哪个UIImageView
-//        //        photo.description = [NSString stringWithFormat:@"========%i" , i];
-//        [photos addObject:photo];
-//    }
-//    
-//    // 2.显示相册
-//    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
-//    browser.currentPhotoIndex = indexPath.row; // 弹出相册时显示的第一张图片是？
-//    browser.photos = photos; // 设置所有的图片
-//    [browser show];
-//}
 
 
 /*

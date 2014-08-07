@@ -41,7 +41,7 @@
 
 +(float)getHeightByContent:(MChat *)data;
 
--(void) setLogoImage:(NSString*)url;
+-(void) setLogoImage:(int)head;
 
 -(void)setLogoImageWithImage:(UIImage*)image;
 

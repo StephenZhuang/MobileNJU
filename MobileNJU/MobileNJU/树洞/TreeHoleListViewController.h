@@ -11,4 +11,5 @@
 @interface TreeHoleListViewController : RefreshTableViewController<UIAlertViewDelegate , UITableViewDataSource , UITableViewDelegate>
 @property (nonatomic , strong) UIView *sectionHeader;
 @property (nonatomic , strong) UIButton *messageButton;
+@property (nonatomic , strong) MTag *mtag;
 @end
