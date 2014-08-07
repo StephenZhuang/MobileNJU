@@ -15,6 +15,7 @@
 #import "MyNavigationController.h"
 #import "RDVTabBarController.h"
 #import "RegisterVC.h"
+#import "WelcomeViewController.h"
 @interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImg;
@@ -59,16 +60,25 @@
 }
 
 - (IBAction)logout:(id)sender {
-    [ToolUtils setHasLogOut:@"yes"];
     [ToolUtils setIsLogin:NO];
+//    if (sender==nil) {
+//        [ToolUtils setHasLogOut:@"yes"];
+//    }
     [self dismissViewControllerAnimated:NO completion:^{
         [self.rdv_tabBarController dismissViewControllerAnimated:NO completion:nil];
     }];
 //    [self.navigationController popToRootViewControllerAnimated:YES];
 }
-
+- (void) returnToWelcome
+{
+    UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
+    WelcomeViewController* welcome = (WelcomeViewController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"welcome"];
+    [ToolUtils setIsLogin:NO];
+    [self presentViewController:welcome animated:NO completion:nil];
+}
 - (void)disposMessage:(Son *)son
 {
+    
     self.OK = YES;
     [self.loginIndicator removeFromSuperview];
     if ([son getError] == 0) {
@@ -112,6 +122,8 @@
                 [self loadData];
             }
         }
+    } else {
+        [super disposMessage:son];
     }
 
 }
@@ -361,6 +373,7 @@
 - (IBAction)modifyPassword:(id)sender {
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     RegisterVC* reg = (RegisterVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"register"]; //test2为viewcontroller的StoryboardId
+    reg.myTitle = @"修改密码";
     [self.navigationController pushViewController:reg animated:YES];
 }
 

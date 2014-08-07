@@ -20,13 +20,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"新闻详情"];
+    [self setTitle:self.myTitle];
     
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)share:(id)sender {
     FrontiaShareContent *content = [[FrontiaShareContent alloc] init];
-    content.url = self.url.absoluteString;
+    content.url = [[self.url.absoluteString componentsSeparatedByString:@"?"]firstObject];
     content.description = self.currentNew.content;
     content.title =    self.currentNew.title;
     content.imageObj = [self useImage:self.img];

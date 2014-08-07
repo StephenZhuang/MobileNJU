@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 Stephen Zhuang. All rights reserved.
 //
 
-#import "BBSDetail.h"
+#import "NewsDetailVC.h"
 
-@interface ActivityDetailVC : BBSDetail
+@interface ActivityDetailVC : NewsDetailVC
 @end

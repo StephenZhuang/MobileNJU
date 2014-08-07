@@ -145,7 +145,7 @@
         if ([[son getMethod]isEqualToString:@"MCardInfo"]) {
             MCardList_Builder* cardList = (MCardList_Builder*)[son getBuild];
             if (cardList.cardList.count>0) {
-                [self.dataArray removeAllObjects];
+                self.detaiList = [[NSArray alloc]init];
                 [self closeAlertView:nil];
                 [self.tableView reloadData];
                 self.isRe=1;
@@ -197,6 +197,8 @@
        }
     } else if ([son getError]==10021){
         [self getCode];
+    } else {
+        [super disposMessage:son];
     }
 }
 

@@ -212,7 +212,7 @@
             [button setTitle:@"" forState:UIControlStateNormal];
             [button setBackgroundColor:[UIColor clearColor]];
             lessonBt.backgroundColor = [lessonBt getColor];
-            CGRect nameFrame = CGRectMake(3, 7, WIDTH-6, HEIGHT*lesson.length-22);
+            CGRect nameFrame = CGRectMake(3, 0, WIDTH-6, HEIGHT*lesson.length-22);
             VerticallyAlignedLabel *lessonNameLabel = [[VerticallyAlignedLabel alloc]initWithFrame:nameFrame];
             [lessonNameLabel setFont:[UIFont fontWithName:@"Helvetica" size:11]];
             [lessonNameLabel setText:lesson.name];
@@ -225,6 +225,7 @@
             
             CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-30, WIDTH-6, 30);
             VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
+            
             [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
             [locationLabel setNumberOfLines:0];
             [locationLabel setVerticalAlignment:VerticalAlignmentBottom];
@@ -239,6 +240,10 @@
             lessonBt.locationLabel = locationLabel;
             lessonBt.lessonNameLabel = lessonNameLabel;
             lessonBt.touchButton = button;
+            
+            if (lesson.length==1) {
+                [locationLabel setHidden:YES];
+            }
             [self.buttonList addObject:lessonBt];
             [self addSubview:lessonBt];
 

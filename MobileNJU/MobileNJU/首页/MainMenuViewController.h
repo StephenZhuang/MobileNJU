@@ -15,4 +15,6 @@
 @property(nonatomic,strong)NSMutableArray* photoList;
 @property (nonatomic , strong) CallView *callView;
 @property (nonatomic,strong)MUnread_Builder* unread;
+@property (strong,nonatomic)NSMutableArray* imageArrays;
+@property (strong,nonatomic)NSMutableArray* imageArraysSelected;
 @end

@@ -56,7 +56,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self loadSavedState];
+
 }
+
 - (void)initAlert
 {
     self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
@@ -105,12 +107,13 @@
     [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
     if (![self.schIdTextField.text isEqualToString:@""]&&![self.passwordTextField.text isEqualToString:@""]&&!self.hasLogin) {
         [self search:nil];
-    } else {
+    } else if (!self.hasLogin){
         [self showAlert];
     }
     self.termList = [ToolUtils getTermList];
     [self.tableView reloadData];
 }
+
 - (IBAction)search:(id)sender {
     
     [self.schIdTextField resignFirstResponder];
@@ -187,7 +190,9 @@
         }
     } else if ([son getError]==10015&&self.codeField!=nil)
     {
-        [self load:self selecter:@selector(disposMessage:) code:self.codeField==nil?nil:self.codeField.text account:self.schIdTextField.text password:self.passwordTextField.text];
+        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+    } else {
+        [super disposMessage:son];
     }
 }
 - (void)loadColor
@@ -230,9 +235,10 @@
 
 - (void)showAlert
 {
+    
     [self.tableView setUserInteractionEnabled:NO];
     [self.alertView setHidden:NO];
-//    [self.maskView setHidden:NO];
+    [self.maskView setHidden:NO];
     [self addMask];
 }
 
@@ -320,6 +326,8 @@
         if (str.length>0) {
             [self performSegueWithIdentifier:@"gradeDetail" sender:[term objectAtIndex:1]];
         }
+    } else {
+        [self showAlert];
     }
 }
 ///*

@@ -39,7 +39,10 @@
         self.procedureContents = ret.contactList;
         NSLog(@"%d",ret.contactList.count);
         [self doneWithView:_header];
+    }else {
+        [super disposMessage:son];
     }
+
 }
 
 ///**

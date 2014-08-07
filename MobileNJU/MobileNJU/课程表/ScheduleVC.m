@@ -256,7 +256,10 @@
             [self closeAlert];
             [self loadLast];
         }
+    } else {
+        [super disposMessage:son];
     }
+
 }
 - (void)removeCode
 {
@@ -328,7 +331,8 @@
 - (void)showSchedule:(ScheduleLesson *)lesson
 {
     [self.lessonDetail removeFromSuperview];
-    CGRect frame = CGRectMake(30, 100, 260, 219);
+    CGFloat initY = self.view.bounds.size.height==480?70:100;
+    CGRect frame = CGRectMake(30, initY, 260, 219);
     [self.icarousel setHidden:YES];
     [self initLessonDetail];
     self.lessonDetail.frame = frame;

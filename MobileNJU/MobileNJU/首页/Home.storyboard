@@ -8,7 +8,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="nm8-xE-z7v">
             <objects>
-                <viewController id="Vd6-tb-kEi" customClass="WelcomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="welcome" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vd6-tb-kEi" customClass="WelcomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="p4k-SY-2Lu"/>
                         <viewControllerLayoutGuide type="bottom" id="fhJ-bh-jPH"/>
@@ -140,18 +140,20 @@
                     </view>
                     <navigationItem key="navigationItem" id="9tC-TJ-Tay"/>
                     <connections>
+                        <outlet property="forgetBt" destination="xt4-Qw-PWQ" id="dcS-Hz-g8E"/>
                         <outlet property="indicateView" destination="yCk-kJ-MxY" id="Z2Y-uN-JMX"/>
                         <outlet property="loginButton" destination="1k1-vG-KaY" id="ewt-jm-eq6"/>
                         <outlet property="loginView" destination="xNG-qI-6Xr" id="gMq-cf-P1a"/>
                         <outlet property="logoImage" destination="A36-I3-Ado" id="zJX-QK-iPe"/>
                         <outlet property="passwordTextField" destination="fzd-ZJ-IfL" id="tDx-uM-Trg"/>
+                        <outlet property="registBt" destination="1k1-vG-KaY" id="BEm-Mq-JNO"/>
                         <outlet property="usernameTextField" destination="Gqd-L7-cHM" id="c1c-Uy-Ncu"/>
                         <segue destination="0nO-l6-z6N" kind="push" identifier="next" id="59g-nW-pqA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4xv-sd-PE5" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1044" y="-897"/>
+            <point key="canvasLocation" x="1037" y="-897"/>
         </scene>
         <!--RegisterVC-->
         <scene sceneID="NZW-PL-KPN">
@@ -174,15 +176,6 @@
                                 <connections>
                                     <action selector="resignAll:" destination="0nO-l6-z6N" eventType="touchUpInside" id="1XB-C1-1Ti"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHX-3g-gHe">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="AE2-pt-lCC" userLabel="手机填写框">
                                 <rect key="frame" x="63" y="41" width="188" height="32"/>

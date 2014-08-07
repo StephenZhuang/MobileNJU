@@ -99,6 +99,8 @@
             }
             
         }
+    } else {
+        [super disposMessage:son];
     }
 }
 

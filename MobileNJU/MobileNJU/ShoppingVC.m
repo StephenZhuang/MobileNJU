@@ -78,7 +78,10 @@
                 [self doneWithView:_footer];
             }
         }
+    } else {
+        [super disposMessage:son];
     }
+
 }
 /**
 // *

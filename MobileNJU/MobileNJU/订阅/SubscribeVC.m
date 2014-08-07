@@ -63,7 +63,10 @@
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
             NSLog(@"code:%d msg%@",ret.code,ret.msg);
         }
+    } else {
+        [super disposMessage:son];
     }
+
 }
 
 - (void)didReceiveMemoryWarning

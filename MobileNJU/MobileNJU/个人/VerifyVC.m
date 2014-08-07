@@ -62,7 +62,10 @@
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }
+    } else {
+        [super disposMessage:son];
     }
+
 }
 #pragma mark textfield
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

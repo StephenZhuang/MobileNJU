@@ -184,6 +184,8 @@
             self.gradeList = courseList.courseList;
             [self.tableView reloadData];
         }
+    } else {
+        [super disposMessage:son];
     }
 }
 

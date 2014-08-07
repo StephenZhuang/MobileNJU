@@ -12,4 +12,6 @@
 @interface NewsDetailVC : BBSDetail
 @property (nonatomic,strong)MNews* currentNew;
 @property (nonatomic,strong)UIImage* img;
+- (IBAction)share:(id)sender;
+@property (nonatomic,strong)NSString* myTitle;
 @end

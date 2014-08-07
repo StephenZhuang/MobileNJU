@@ -81,7 +81,10 @@
                 [self.downShelfBt setEnabled:NO];
             }
         }
+    } else {
+        [super disposMessage:son];
     }
+
 }
     
     

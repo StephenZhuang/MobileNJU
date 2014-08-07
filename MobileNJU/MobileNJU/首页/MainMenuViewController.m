@@ -31,8 +31,7 @@
 @property (strong,nonatomic)UIImageView* touchButton;
 @property (strong,nonatomic)UIImageView* cloudBack;
 @property (strong,nonatomic)NSArray* focusList;
-@property (strong,nonatomic)NSMutableArray* imageArrays;
-@property (strong,nonatomic)NSMutableArray* imageArraysSelected;
+
 @property (strong,nonatomic)NSArray* newsImgList;
 @property (strong,nonatomic)NSString* tempUrl;
 @property (strong,nonatomic)NSMutableArray* newsList;
@@ -52,7 +51,6 @@ static NSArray* descriptions;
 #pragma mark ViewController
 - (void)viewDidLoad
 {
-    
     [super viewDidLoad];
     self.navigationController.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCall:) name:@"getCall" object:nil];
@@ -62,44 +60,34 @@ static NSArray* descriptions;
     [self.pageScroller addGestureRecognizer:singleTap];
     self.changeHeader = NO;
     [self.tableView setAllowsSelection:NO];
-//    [self loadTableData];
     self.newsImgList = [ToolUtils getImgList];
     self.complete=0;
     self.prepare = 0;
     if (self.newsImgList!=nil) {
         [self prepareForNews];
     }
-    
-
-    [self loadTableData];
-    [self loadIndex];
-    
-   
+    [self.pageScroller setBackgroundColor:[UIColor whiteColor]];
+    functionNames = [ToolUtils getFunctionName];
+    buttonImages= [ToolUtils getButtonImage];
+    descriptions = [ToolUtils getFunctionDetails];
 }
-
-//- (void)viewDidDisappear:(BOOL)animated
-//{
-//    self.prepare=0;
-//    self.stateDic = nil;
-//}
 - (void)viewDidAppear:(BOOL)animated
 {
-//    if ([ToolUtils getHasLogOut]==nil||[ToolUtils getHasLogOut].length==0) {
-//        [self loadTableData];
-//        [self loadIndex];
-//    }
+    
+        [self loadTableData];
+        [self loadIndex];
+    
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
-//    [self.tableView reloadData];
 }
 - (void)loadIndex
 {
     if (!self.offline) {
         [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
-        [[[ApisFactory getApiMNewsList]setPage:1 pageCount:10]load:self selecter:@selector(disposeMessage:)];
     }
 }
 
@@ -113,7 +101,7 @@ static NSArray* descriptions;
             self.allNews = newsList.newsList;
             
         } else if ([[son getMethod] isEqualToString:@"MIndex"]) {
-            BOOL isLoad = functionNames==nil;
+            [[[ApisFactory getApiMNewsList]setPage:1 pageCount:10]load:self selecter:@selector(disposeMessage:)];
             MIndex_Builder* index = (MIndex_Builder*)[son getBuild];
             NSMutableArray* image = [[NSMutableArray alloc]init];
             NSMutableArray* names = [[NSMutableArray alloc]init];
@@ -147,12 +135,12 @@ static NSArray* descriptions;
                 [imgList addObject:focus.img];
             }
             [ToolUtils setImgList:imgList];
-            if (isLoad) {
-                [self loadTableData];
-//                [self.tableView reloadData];
-            }
-//            [self loadTableData];
-//            [self.tableView reloadData];
+//            if (isLoad) {
+//                [self loadTableData];
+////                [self.tableView reloadData];
+//            }
+            [self loadTableData];
+            [self.tableView reloadData];
             
             
             
@@ -168,6 +156,8 @@ static NSArray* descriptions;
 
             }
         }
+    } else {
+        [super disposMessage:son];
     }
 
     
@@ -197,7 +187,7 @@ static NSArray* descriptions;
         image.frame = frame;
         [image setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls firstObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             self.prepare++;
-            if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count) {
+            if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count*2) {
                 [self.tableView reloadData];
             }
         }];
@@ -205,7 +195,7 @@ static NSArray* descriptions;
         imageSelected.frame = frame;
         [imageSelected setImageWithURL:[ToolUtils getImageUrlWtihString:[imageUrls lastObject]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             self.prepare++;
-            if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count) {
+            if (self.imageArrays.count==buttonImages.count&&self.prepare==buttonImages.count*2) {
                 [self.tableView reloadData];
                 
             }
@@ -397,6 +387,7 @@ static NSArray* descriptions;
                                                       self.pageScroller.frame.size.height), NO, 0.0);
     UIImage *blank = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
     return blank;
 }
 

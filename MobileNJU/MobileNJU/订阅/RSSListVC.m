@@ -13,6 +13,8 @@
 #import "ApiMRssNews.h"
 @interface RSSListVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSArray* rssNews;
+@property(nonatomic,strong)MNews* currentNew;
+@property(nonatomic,strong)UIImage* currentImg;
 @property(nonatomic,strong)NSString* currentUrl;
 @end
 
@@ -57,7 +59,10 @@
             MMyRss_Builder* ret = (MMyRss_Builder*)[son getBuild];
             self.rssNews = ret.newsList;
         }
+    } else {
+        [super disposMessage:son];
     }
+
     [self doneWithView:_header];
 }
 
@@ -88,6 +93,9 @@
 {
     MNews* news = [self.rssNews objectAtIndex:indexPath.row];
     self.currentUrl = news.url;
+    self.currentNew = news;
+    NewsCell* cell  = (NewsCell*)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
+    self.currentImg = cell.newsImage.image;
     [self performSegueWithIdentifier:@"detail" sender:indexPath];
 }
 
@@ -98,9 +106,12 @@
         NewsDetailVC* destinationVC = (NewsDetailVC*)segue.destinationViewController;
         NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.currentUrl]];
         NSLog(@"设置的网址%@",self.currentUrl);
+        [destinationVC setMyTitle:@"订阅详情"];
         [destinationVC setUrl:url];
+        
+        [destinationVC setCurrentNew:self.currentNew];
+        [destinationVC setImg:self.currentImg];
     }
-
 }
 /*
 #pragma mark - Navigation

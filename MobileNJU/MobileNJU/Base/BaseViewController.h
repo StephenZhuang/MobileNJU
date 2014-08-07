@@ -16,12 +16,13 @@
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (nonatomic,strong)WaitingView* loginIndicator;
 @property (nonatomic)BOOL OK;
+@property (nonatomic)BOOL hasAlert;
 @property (nonatomic)BOOL offline;
 -(void)closeSelf;
 - (void)addTitleView;
 - (void)addMask;
 - (void)removeMask;
-
+- (void)returnToWelcome;
 - (void) showAlert:(NSString*)msg;
 - (void) waiting:(NSString*)msg;
 - (void)disposMessage:(Son *)son;

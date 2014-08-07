@@ -161,6 +161,8 @@
         [ToolUtils showMessage:ret.msg];
         self.myLast.shoudReturn=YES;
         [self.navigationController popViewControllerAnimated:NO];
+    } else {
+        [super disposMessage:son];
     }
 }
 

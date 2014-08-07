@@ -147,6 +147,8 @@
             [self performSegueWithIdentifier:@"myLibrary" sender:myBookList.newsList];
             
         }
+    } else {
+        [super disposMessage:son];
     }
 }
 

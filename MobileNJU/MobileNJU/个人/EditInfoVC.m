@@ -96,6 +96,8 @@
                 break;
         }
         [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [super disposMessage:son];
     }
 }
 

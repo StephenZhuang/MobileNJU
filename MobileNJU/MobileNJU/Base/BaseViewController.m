@@ -16,7 +16,8 @@
 #import "WelcomeViewController.h"
 #import "RDVTabBarController.h"
 #import "BookViewController.h"
-@interface BaseViewController ()<UINavigationBarDelegate,UINavigationControllerDelegate>
+#import "RDVTabBarController.h"
+@interface BaseViewController ()<UINavigationBarDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 
 @end
 
@@ -51,6 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasAlert = NO;
     // Do any additional setup after loading the view.
     if([self.navigationController.navigationBar
         respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
@@ -119,6 +121,7 @@
 
 - (void)didReceiveMemoryWarning
 {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -159,7 +162,25 @@ UIView* view;
 
 - (void)disposMessage:(Son *)son
 {
-    
+    if ([son getError]!=0) {
+        if ([[son getMsg] isEqualToString:@"登录验证失败"]) {
+            if (!self.hasAlert) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您的账户在别处登录" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+                alert.delegate = self;
+                [alert show];
+                self.hasAlert = YES;
+            }
+            
+        }
+    }
+}
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self returnToWelcome];
+}
+- (void)returnToWelcome
+{
+    [self.rdv_tabBarController dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)removeMask
 {

@@ -507,6 +507,9 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <outlet property="delegate" destination="pjI-7M-fAW" id="toP-Mb-wUS"/>
+                                </connections>
                             </tableView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="odX-qq-az7">
                                 <rect key="frame" x="140" y="491" width="39" height="37"/>

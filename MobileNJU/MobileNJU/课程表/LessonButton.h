@@ -25,4 +25,6 @@
 @property (nonatomic,strong)UILabel* lessonNameLabel;
 @property (nonatomic,strong)UILabel* locationLabel;
 @property (nonatomic,strong)UIButton* touchButton;
+
+
 @end

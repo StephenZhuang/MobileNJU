@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"注册"];
+    [self setTitle:self.myTitle];
     if (self.myDelegate==nil) {
         [self.phoneNumField setText:[ToolUtils getAccount]];
     }
@@ -39,9 +39,10 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)getCode:(id)sender {
-    [self waiting:@"正在发送.."];
     if ([ToolUtils checkTel:self.phoneNumField.text]) {
+        [self waiting:@"正在发送.."];
         [[ApisFactory getApiMGetMobileVerify]load:self selecter:@selector(disposMessage:) phone:self.phoneNumField.text];
+        
     }
 }
 - (IBAction)complete:(id)sender {
@@ -65,7 +66,6 @@
     }
     [self waiting:@"注册中..."];
     NSString* password = [mMD5 md5s:self.passwordField.text];
-
     
    [[ApisFactory getApiMRegist]load:self selecter:@selector(disposMessage:) phone:self.phoneNum password:password nickname:@"" code:self.codeField.text pushid:[ToolUtils getPushid] device:@"IOS"];
   
@@ -110,7 +110,10 @@
             [self.navigationController popViewControllerAnimated:NO];
             
         }
+    } else {
+        [super disposMessage:son];
     }
+
 }
 - (IBAction)resignAll:(id)sender {
     [self.phoneNumField resignFirstResponder];
@@ -142,6 +145,7 @@
                              pushid:[[NSUserDefaults standardUserDefaults] objectForKey:@"pushId"] device:@"ios"];
 
 }
+
 
 /*
 #pragma mark - Navigation

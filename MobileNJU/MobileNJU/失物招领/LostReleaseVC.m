@@ -154,6 +154,8 @@
             NSLog(@"return %@",ret.msg);
             [self.navigationController popViewControllerAnimated:YES];
         }
+    } else {
+        [super disposMessage:son];
     }
 }
 @end

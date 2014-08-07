@@ -13,6 +13,8 @@
 #import "UtilMethods.h"
 @interface ActivityVC ()<UITableViewDataSource,UITableViewDelegate,ActivityCellDelegate>
 @property (nonatomic,strong)NSMutableArray* activityList;
+@property (nonatomic,strong)MNews* currentNew;
+@property(nonatomic,strong)UIImage* currentImg;
 @end
 
 @implementation ActivityVC
@@ -63,6 +65,8 @@
             }
 
         }
+    } else {
+        [super disposMessage:son];
     }
 }
 - (void) viewWillAppear: (BOOL)inAnimated {
@@ -71,16 +75,21 @@
         [self.tableView deselectRowAtIndexPath:selected animated:NO];
 }
 
-- (void)showAll:(NSURL *)url
+- (void)showAll:(MNews *)news img:(UIImage *)img
 {
-    [self performSegueWithIdentifier:@"detail" sender:url];
+    self.currentImg = img;
+    [self performSegueWithIdentifier:@"detail" sender:news];
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"detail"]) {
         ActivityDetailVC* nextVC = (ActivityDetailVC*)segue.destinationViewController;
-        nextVC.url = sender;
+        nextVC.currentNew = sender;
+        MNews* new = (MNews*)sender;
+        nextVC.img = self.currentImg;
+        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",new.url]];
     }
 }
 - (void)didReceiveMemoryWarning
@@ -106,6 +115,7 @@
     [cell.contentLabel setText:news.content];
 //    [cell.imageView setImageWithURL:[UtilMethods getImageUrlWtihString:news.img width:267 height:140]];
     [cell setImageName:news.img];
+    cell.currentNew = news;
     NSLog(@"%f   %f",cell.imageView.center.x,cell.center.x);
     CGPoint center = cell.imageView.center;
     center.x = cell.center.x;
