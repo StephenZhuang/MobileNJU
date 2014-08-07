@@ -227,8 +227,7 @@
             self.detaiList = [[NSArray alloc]init];
         }
         [self waiting:@"正在查询"];
-#warning api 更改
-//        [[[[ApisFactory getApiMCardHistory]setPage:page pageCount:10] load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate account:self.schIDText.text password:self.passwordText.text] setShowLoading:NO];
+        [[[[ApisFactory getApiMCardHistory]setPage:page pageCount:10] load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate account:self.schIDText.text password:self.passwordText.text]setShowLoading:NO];
 //        [self load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate];
  
     }
@@ -387,18 +386,25 @@
 #pragma mark IQActionSheetDelegate
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray *)titles
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatterwithoutYear = [[NSDateFormatter alloc] init];
     // 为日期格式器设置格式字符串
-    [dateFormatter setDateFormat:@"MM月dd日"];
+    [dateFormatterwithoutYear setDateFormat:@"MM月dd日"];
     // 使用日期格式器格式化日期、时间
-    NSString *destDateString = [dateFormatter stringFromDate:pickerView.date];
+    NSString *destDateString = [dateFormatterwithoutYear stringFromDate:pickerView.date];
     [self.selectedButton setTitle:destDateString forState:UIControlStateNormal];
- 
+  
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY/MM/dd"];
     if (self.selectedButton==self.startButton) {
         self.startDate = [dateFormatter stringFromDate:pickerView.date];
         NSDate *end = [dateFormatter dateFromString:self.endDate];
         NSDate *start = [dateFormatter dateFromString:self.startDate];
+        
+        NSTimeInterval timeBetweenNow = [start timeIntervalSinceNow];
+        if (timeBetweenNow>0) {
+            start = [NSDate date];
+            [self.startButton setTitle:[dateFormatterwithoutYear stringFromDate:start] forState:UIControlStateNormal];
+        }
         NSTimeInterval timeBetween = [end timeIntervalSinceDate:start];
         if (timeBetween<0) {
             self.endDate  = self.startDate;
@@ -408,11 +414,18 @@
         self.endDate = [dateFormatter stringFromDate:pickerView.date];
         NSDate *end = [dateFormatter dateFromString:self.endDate];
         NSDate *start = [dateFormatter dateFromString:self.startDate];
+        
+        NSTimeInterval timeBetweenNow = [end timeIntervalSinceNow];
+        if (timeBetweenNow>0) {
+            end = [NSDate date];
+            [self.endButton setTitle:[dateFormatterwithoutYear stringFromDate:end] forState:UIControlStateNormal];
+        }
         NSTimeInterval timeBetween = [end timeIntervalSinceDate:start];
+
         if (timeBetween<0) {
             self.startDate  = self.endDate;
             [self.startButton setTitle:self.endButton.titleLabel.text forState:UIControlStateNormal];
-
+            
         }
     }
 }

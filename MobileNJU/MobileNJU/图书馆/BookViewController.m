@@ -141,7 +141,7 @@
                 [myBooks addObject:book];
             }
             if (myBooks.count==0) {
-                [ToolUtils showMessage:@"该书不存在"];
+                [ToolUtils showMessage:@"此书刊为电子书或正在订购中或者处理中"];
                 return;
             }
             [self.bookDetail addBooks:myBooks];

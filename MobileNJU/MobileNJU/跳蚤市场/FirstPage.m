@@ -124,7 +124,7 @@
 {
     [self returnLabel:self.lastField];
     [self changeLabel:textView];
-    CGFloat height_off = 420 ;
+    CGFloat height_off = 500 ;
     CGRect frame = textView.frame;
     if (
     [[UIScreen mainScreen] bounds].size.height >= 568.0f && [[UIScreen mainScreen] bounds].size.height < 1024.0f

@@ -157,7 +157,6 @@ static NSArray* descriptions;
     } else {
         [super disposMessage:son];
     }
-
     
 }
 #warning 这里需要加上从服务器载下来的临时功能

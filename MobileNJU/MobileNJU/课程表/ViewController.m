@@ -155,6 +155,9 @@
             [self.weekPicker removeFromSuperview];
         }
         [self enableAll:NO];
+        if (self.weekPicker!=nil) {
+            [self.weekPicker removeFromSuperview];
+        }
         WeekPicker* weekPicker = [[[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil] objectAtIndex:0];
         [weekPicker setFrame:CGRectMake(0, self.view.bounds.size.height, 320, 280)];
         [weekPicker addWeek];
@@ -184,6 +187,7 @@
 
 -(void)showDateChoose
 {
+    
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择节数" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     [picker setTag:233];
    
