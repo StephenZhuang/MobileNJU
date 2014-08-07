@@ -171,6 +171,7 @@
     if (scrollView==self.scrollView) {
         int index=scrollView.contentOffset.x/scrollView.frame.size.width;
         self.pageControl.currentPage=index;
+        
     }
 }
 
@@ -208,7 +209,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MarketDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"market" forIndexPath:indexPath];
-    
     [cell.nameLabel setText:self.market.name];
     [cell.priceLabel setText:[NSString stringWithFormat:@"%@元",self.market.price]];
     [cell.originPriceLabel setText:[NSString stringWithFormat:@"%@元",self.market.priceOriginal]];

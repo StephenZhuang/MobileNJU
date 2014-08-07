@@ -20,6 +20,7 @@
 @property (nonatomic)NSInteger remainTime;
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property(nonatomic)BOOL canGetCode;
+@property(nonatomic)BOOL hasStartTime;
 @end
 
 @implementation RegisterVC
@@ -33,15 +34,19 @@
         [self.phoneNumField setText:[ToolUtils getAccount]];
     }
     self.canGetCode = YES;
+    self.hasStartTime = NO;
+    
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 - (IBAction)getCode:(id)sender {
+    if (!self.canGetCode) {
+        return;
+    }
     if ([ToolUtils checkTel:self.phoneNumField.text]) {
         [self waiting:@"正在发送.."];
         [[ApisFactory getApiMGetMobileVerify]load:self selecter:@selector(disposMessage:) phone:self.phoneNumField.text];
@@ -80,7 +85,10 @@
         if ([[son getMethod] isEqualToString:@"MGetMobileVerify"]) {
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
             [ToolUtils showMessage:ret.msg];
-             [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timer) userInfo:nil repeats:YES];
+            if (!self.hasStartTime) {
+                [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timer) userInfo:nil repeats:YES];
+                self.hasStartTime=YES;
+            }
             self.remainTime = 60;
             self.canGetCode = NO;
             self.phoneNum = self.phoneNumField.text;
@@ -132,7 +140,7 @@
         [self.timerLabel setText:@""];
         [self.veryfyBt setTitle:@"验证" forState:UIControlStateNormal];
         self.canGetCode = YES;
-    } else {
+    } else if (self.remainTime>0){
         
         [self.timerLabel setText:[NSString stringWithFormat:@"%d",self.remainTime]];
     }

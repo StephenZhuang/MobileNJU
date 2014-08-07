@@ -16,6 +16,7 @@
 @interface QCSlideViewController ()
 @property (nonatomic,strong)NSArray* titleArray;
 @property (nonatomic,strong)NSArray* typeList;
+
 @end
 
 @implementation QCSlideViewController
@@ -43,7 +44,6 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    
     self.title = @"跳蚤";
     
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
@@ -105,6 +105,7 @@
 {
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
     AddShopVC* vc = (AddShopVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"add"];
+    vc.typeList = self.typeList;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

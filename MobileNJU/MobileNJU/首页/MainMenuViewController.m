@@ -40,7 +40,7 @@
 @property (nonatomic)int complete;
 @property (nonatomic,strong)NSMutableDictionary* stateDic;
 @property (nonatomic)int prepare;
-
+@property (nonatomic)BOOL firstOpen;
 @end
 
 @implementation MainMenuViewController
@@ -66,6 +66,7 @@ static NSArray* descriptions;
     if (self.newsImgList!=nil) {
         [self prepareForNews];
     }
+    self.firstOpen  = YES;
     [self.pageScroller setBackgroundColor:[UIColor whiteColor]];
     functionNames = [ToolUtils getFunctionName];
     buttonImages= [ToolUtils getButtonImage];
@@ -73,9 +74,12 @@ static NSArray* descriptions;
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    if (self.firstOpen) {
+        [self loadTableData];
+        [self loadIndex];
+        self.firstOpen = NO;
+    }
     
-    [self loadTableData];
-    [self loadIndex];
 }
 
 - (void)viewWillAppear:(BOOL)animated

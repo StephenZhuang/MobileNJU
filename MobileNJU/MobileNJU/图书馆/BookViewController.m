@@ -100,7 +100,7 @@
 
 
 - (void)loadData{
-    [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:20] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
+    [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:18] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
 }
 -(void)addHeader
 {
@@ -177,7 +177,7 @@
             page=1;
         }
         [self waiting:@"正在搜索"];
-        [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:20] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
+        [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:18] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
     }
 }
 - (IBAction)showSelf:(id)sender {

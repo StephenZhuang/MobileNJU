@@ -29,7 +29,12 @@
 
 }
 - (IBAction)chooseType:(id)sender {
-    self.typeArr= [NSArray arrayWithObjects:@"电子产品",@"生活用品",@"书籍",@"衣服", nil];
+    NSMutableArray* typeArr = [[NSMutableArray alloc]init];
+    for (int i = 1 ; i < self.typeList.count; i++) {
+        MMarketType* type = [self.typeList objectAtIndex:i];
+        [typeArr addObject:type.title];
+    }
+    self.typeArr= typeArr;
     [self returnLabel:self.lastField];
     [self.QQField resignFirstResponder];
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择商品类别" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
@@ -59,6 +64,12 @@
 {
     if (textField==self.phoneField) {
         if (range.location >=11)
+            return NO; // return NO to not change text
+        return YES;
+    }
+    if (textField==self.QQField)
+    {
+        if (range.location >=12)
             return NO; // return NO to not change text
         return YES;
     }
@@ -116,7 +127,7 @@
         label = self.phoneLabel;
     }
     [UIView animateWithDuration:0.2f animations:^{
-        [label setTextColor:[UIColor blueColor]];
+        [label setTextColor:[UIColor purpleColor]];
         [label setFont:[UIFont fontWithName:@"Helvetica" size:10.0]];
         label.transform = CGAffineTransformMakeTranslation(0, -10);
     }];

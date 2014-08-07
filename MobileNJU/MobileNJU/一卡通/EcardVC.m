@@ -214,6 +214,7 @@
 }
 - (IBAction)searchDetail:(id)sender {
 
+    
     if (self.schIDText.text.length==0) {
         [ToolUtils showMessage:@"请输入您的学号"];
         [self showAlertView:nil];
@@ -337,6 +338,9 @@
 }
 
 - (IBAction)showAlertView:(id)sender {
+    [self.schIDText resignFirstResponder];
+    [self.passwordText resignFirstResponder];
+    [self.confirmCodeText resignFirstResponder];
     if (sender!=nil) {
         [self getCode];
     }
@@ -360,7 +364,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.detaiList.count-1;
+    return self.detaiList.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -373,7 +377,7 @@
     
     static NSString *CellIdentifier = @"ecard";
     EcardCell *cell = (EcardCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    MCard* card = [self.detaiList objectAtIndex:indexPath.row+1];
+    MCard* card = [self.detaiList objectAtIndex:indexPath.row];
     [cell.locationLabel setText:card.name];
     [cell.timeLabel setText:card.time];
     [cell.remainLabel setText:card.total];

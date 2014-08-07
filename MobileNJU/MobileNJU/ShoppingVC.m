@@ -60,22 +60,25 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MMarketList"]) {
             MMarketList_Builder* list = (MMarketList_Builder*)[son getBuild];
-            NSMutableArray *removeArray  = [[NSMutableArray alloc]init];
-            if (self.selectedMarket!=nil) {
-                [removeArray addObject:self.selectedMarket];
-            }
-            for (MMarket* market in list.marketList) {
-                for (MMarket* currentMarket in self.marketList) {
-                    if ([currentMarket.id isEqualToString:market.id]) {
-                        [removeArray addObject:currentMarket];
-                    }
-                }
-            }
-            [self.marketList removeObjectsInArray:removeArray];
-            [self.marketList addObjectsFromArray:list.marketList];
+            
+//            NSMutableArray *removeArray  = [[NSMutableArray alloc]init];
+//            if (self.selectedMarket!=nil) {
+//                [removeArray addObject:self.selectedMarket];
+//            }
+//            for (MMarket* market in list.marketList) {
+//                for (MMarket* currentMarket in self.marketList) {
+//                    if ([currentMarket.id isEqualToString:market.id]) {
+//                        [removeArray addObject:currentMarket];
+//                    }
+//                }
+//            }
+//            [self.marketList removeObjectsInArray:removeArray];
             if (page==1) {
-                [self doneWithView:_header];
+                [self.marketList removeAllObjects];
+                [self.marketList addObjectsFromArray:list.marketList];
+                [self.tableView reloadData];
             } else {
+                [self.marketList addObjectsFromArray:list.marketList];
                 [self doneWithView:_footer];
             }
         }

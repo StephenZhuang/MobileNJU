@@ -44,8 +44,13 @@
     self.isRe = 0;
     self.isV=0;
     
+    
 
 }
+//- (void)addHeader
+//{
+//    
+//}
 - (void)initAlert
 {
     self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertView" owner:self options:nil] firstObject];
