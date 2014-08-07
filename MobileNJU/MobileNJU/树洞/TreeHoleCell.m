@@ -71,4 +71,20 @@
     return height;
 }
 
++ (CGFloat)getMessageHeightByTopic:(MTopicMini *)topic
+{
+    CGFloat height = 18;
+    if (topic.tag.length > 0) {
+        height += 29;
+    }
+    
+    UIFont *font = [UIFont systemFontOfSize:17];
+    CGSize size = CGSizeMake(286,2000);
+    CGSize labelsize = [topic.content sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+    height += labelsize.height;
+    
+    height += 41;
+    return height;
+}
+
 @end

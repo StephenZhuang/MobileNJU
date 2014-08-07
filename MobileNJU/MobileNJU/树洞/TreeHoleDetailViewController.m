@@ -14,6 +14,8 @@
 #import "ProgressHUD.h"
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
+#import <Frontia/Frontia.h>
+#import "ChatViewController.h"
 
 @interface TreeHoleDetailViewController ()
 
@@ -88,6 +90,8 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:commentList.commentsList];
+        } else if ([[son getMethod] isEqualToString:@"MTreeHoleReport"]) {
+            [ProgressHUD showSuccess:@"举报成功"];
         }
     }
     if ([[son getMethod] isEqualToString:@"MTreeHoleComments"]) {
@@ -137,6 +141,8 @@
             [cell.moreButton setTag:indexPath.section];
             [cell.messageButton setTag:indexPath.section];
             [cell.zanButton setTitle:[NSString stringWithFormat:@"%i" , _topic.praiseCnt] forState:UIControlStateNormal];
+            [cell.zanButton setTitle:[NSString stringWithFormat:@"%i" , _topic.praiseCnt] forState:UIControlStateSelected];
+            [cell.zanButton setSelected:_topic.hasPraise ==1];
             [cell.commentButton setTitle:[NSString stringWithFormat:@"%i" , _topic.commentCnt] forState:UIControlStateNormal];
         }
         return cell;
@@ -304,8 +310,22 @@
         [_topic setPraiseCnt:_topic.praiseCnt - 1];
         [_topic setHasPraise:0];
     }
-    //    [self.tableView reloadData];
+    [self.tableView reloadData];
     [[ApisFactory getApiMPraise] load:self selecter:@selector(disposMessage:) id:_topic.id type:_topic.hasPraise == 0?2:1];
+}
+
+- (IBAction)commentAction:(id)sender
+{
+    [self.messageField becomeFirstResponder];
+}
+
+- (IBAction)messageAction:(id)sender
+{
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
+    ChatViewController *vc = [sb instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    vc.targetid = _topic.author;
+    vc.topicid = _topic.id;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)replyAction:(id)sender
@@ -316,6 +336,12 @@
     _replyfloor = comment.floor;
     _targetid = comment.userid;
     [self.textView becomeFirstResponder];
+}
+
+- (IBAction)moreAction:(id)sender
+{
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享",@"举报", nil];
+    [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (IBAction)changeLz:(id)sender
@@ -329,9 +355,70 @@
         self.maskView = [[UIView alloc] initWithFrame:self.view.bounds];
         [self.maskView setAlpha:0.8];
         [self.maskView setBackgroundColor:[UIColor blackColor]];
+    self.maskView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelEdit)];
+    [self.maskView addGestureRecognizer:tap];
 //    }
     [self.view addSubview:self.maskView];
     [self.view bringSubviewToFront:self.editView];
+}
+
+- (void)cancelEdit
+{
+    [self.view endEditing:YES];
+}
+
+#pragma mark-
+#pragma mark- action sheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+        {
+            FrontiaShare *share = [Frontia getShare];
+            
+            //授权取消回调函数
+            FrontiaShareCancelCallback onCancel = ^(){
+                NSLog(@"OnCancel: share is cancelled");
+            };
+            
+            //授权失败回调函数
+            FrontiaShareFailureCallback onFailure = ^(int errorCode, NSString *errorMessage){
+                NSLog(@"OnFailure: %d  %@", errorCode, errorMessage);
+                [ProgressHUD showError:@"分享失败"];
+            };
+            
+            //授权成功回调函数
+            FrontiaMultiShareResultCallback onResult = ^(NSDictionary *respones){
+                NSLog(@"OnResult: %@", [respones description]);
+                [ProgressHUD showSuccess:@"分享成功"];
+            };
+            
+            FrontiaShareContent *content=[[FrontiaShareContent alloc] init];
+            //    content.url = ShareUrl;
+            NSString *contentUrl = @"http://www.s1.smartjiangsu.com";
+            content.url = contentUrl;
+            if (_topic.tag.length > 0) {
+                content.title = _topic.tag;
+            } else {
+                content.title = _topic.content;
+            }
+            content.description = _topic.content;
+            content.imageObj = [ToolUtils getImageUrlWtihString:_topic.img].absoluteString;
+            
+            NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_SINAWEIBO,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
+            
+            [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
+        }
+            break;
+        case 1:
+        {
+            [[ApisFactory getApiMTreeHoleReport] load:self selecter:@selector(disposMessage:) id:_topic.id];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning
