@@ -10,6 +10,14 @@
 
 typedef void(^ReadMessageBlock)(NSInteger num);
 
-@interface NewMessageListViewController : RefreshTableViewController
+@interface NewMessageListViewController : BaseViewController
+{
+    NSInteger selectIndex;
+}
 @property (nonatomic , copy) ReadMessageBlock readMessageBlock;
+@property (nonatomic , weak) IBOutlet UITableView *tableView;
+@property (nonatomic , weak) IBOutlet UILabel *commentNumLabel;
+@property (nonatomic , weak) IBOutlet UILabel *messageNumLabel;
+@property (nonatomic , strong) NSMutableArray *topicArray;
+@property (nonatomic , strong) NSMutableArray *chatArray;
 @end

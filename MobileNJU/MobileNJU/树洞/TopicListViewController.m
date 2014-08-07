@@ -7,6 +7,7 @@
 //
 
 #import "TopicListViewController.h"
+#import "TreeHoleListViewController.h"
 
 @interface TopicListViewController ()
 
@@ -73,11 +74,17 @@
         return cell;
     } else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        if (indexPath.row == 0) {
-            [cell.textLabel setText:@"无话题"];
-            [cell.textLabel setTextColor:RGB(168, 16, 166)];
+        if (_selectTagBlock) {
+            if (indexPath.row == 0) {
+                [cell.textLabel setText:@"无话题"];
+                [cell.textLabel setTextColor:RGB(168, 16, 166)];
+            } else {
+                MTag *tag = [self.dataArray objectAtIndex:indexPath.row - 1];
+                [cell.textLabel setText:[NSString stringWithFormat:@"#%@",tag.title]];
+                [cell.textLabel setTextColor:RGB(87, 87, 87)];
+            }
         } else {
-            MTag *tag = [self.dataArray objectAtIndex:indexPath.row - 1];
+            MTag *tag = [self.dataArray objectAtIndex:indexPath.row];
             [cell.textLabel setText:[NSString stringWithFormat:@"#%@",tag.title]];
             [cell.textLabel setTextColor:RGB(87, 87, 87)];
         }
@@ -87,13 +94,32 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (_selectTagBlock) {
+    if (tableView.tag == 1) {
+        MTag_Builder *tag = [MTag_Builder new];
         if (indexPath.row == 0) {
-            _selectTagBlock(nil);
+            [tag setTitle:@"推荐"];
+            [tag setId:@"推荐"];
         } else {
-            _selectTagBlock(self.dataArray[indexPath.row - 1]);
+            [tag setTitle:@"热门"];
+            [tag setId:@"热门"];
         }
-        [self.navigationController popViewControllerAnimated:YES];
+        TreeHoleListViewController *vc = [[self storyboard] instantiateInitialViewController];
+        vc.mtag = tag.build;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        if (_selectTagBlock) {
+            if (indexPath.row == 0) {
+                _selectTagBlock(nil);
+            } else {
+                _selectTagBlock(self.dataArray[indexPath.row - 1]);
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            MTag *tag = [[ToolUtils sharedToolUtils].tagArray objectAtIndex:indexPath.row];
+            TreeHoleListViewController *vc = [[self storyboard] instantiateInitialViewController];
+            vc.mtag = tag;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

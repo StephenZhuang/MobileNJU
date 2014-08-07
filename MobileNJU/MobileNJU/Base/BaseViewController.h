@@ -13,7 +13,7 @@
 @interface BaseViewController : UIViewController
 @property (strong, nonatomic) NSArray *backIcons;
 @property (nonatomic , strong) TitleView *titleView;
-@property (weak, nonatomic) IBOutlet UIView *maskView;
+@property (strong, nonatomic) IBOutlet UIView *maskView;
 @property (nonatomic,strong)WaitingView* loginIndicator;
 @property (nonatomic)BOOL OK;
 @property (nonatomic)BOOL offline;

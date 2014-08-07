@@ -10,7 +10,7 @@
 #import "NewMessageCell.h"
 #import "TreeHoleDetailViewController.h"
 #import "ZsndTreehole.pb.h"
-#import "NSString+unicode.h"
+#import "ZsndChat.pb.h"
 
 @interface NewMessageListViewController ()
 
@@ -31,46 +31,67 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setTitle:@"树洞的回复"];
+//    [self setTitle:@"树洞的回复"];
+    selectIndex = 0;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self loadData];
+}
+
+- (void)loadData
+{
+    [[ApisFactory getApiMGetMsgCount] load:self selecter:@selector(disposMessage:)];
+    if (selectIndex == 0) {
+        [[ApisFactory getApiMTreeHoleNewComment] load:self selecter:@selector(disposMessage:)];
+    } else {
+        [[ApisFactory getApiMChatIndex] load:self selecter:@selector(disposMessage:)];
+    }
     
 }
 
-//- (void)loadData
-//{
-//    NSString *beginStr = @"";
-//    if (page == 1) {
-//        beginStr = @"";
-//    } else {
-//        if (self.dataArray.count > 0) {
-//            MComment *comment = [self.dataArray lastObject];
-//            beginStr = comment.time;
-//        }
-//        
-//    }
-//    [[ApisFactory getApiMTreeHoleNews] load:self selecter:@selector(disposMessage:) begin:beginStr];
-//}
-//
-//- (void)disposMessage:(Son *)son
-//{
-//    if ([son getError] == 0) {
-//        if ([[son getMethod] isEqualToString:@"MTreeHoleNews"]) {
-//            MNewComments_Builder *commentList = (MNewComments_Builder *)[son getBuild];
-//            if (page == 1) {
-//                [self.dataArray removeAllObjects];
-//            }
-//            [self.dataArray addObjectsFromArray:commentList.newsList];
-//            if (_readMessageBlock) {
-//                _readMessageBlock(self.dataArray.count);
-//            }
-//        }
-//    }
-//    if (page == 1) {
-//        [self doneWithView:_header];
-//    } else {
-//        [self doneWithView:_footer];
-//    }
-//}
-//
+- (void)disposMessage:(Son *)son
+{
+    if ([son getError] == 0) {
+        if ([[son getMethod] isEqualToString:@"MGetMsgCount"]) {
+            MMsgCount_Builder *msgCount = (MMsgCount_Builder *)[son getBuild];
+            [self setNum:_commentNumLabel num:msgCount.comment];
+            [self setNum:_messageNumLabel num:msgCount.chat];
+        } else if ([[son getMethod] isEqualToString:@"MTreeHoleNewComment"]) {
+            MTopicMiniList_Builder *topicList = (MTopicMiniList_Builder *)[son getBuild];
+            [_topicArray removeAllObjects];
+            [_topicArray addObjectsFromArray:topicList.topicsList];
+            [self.tableView reloadData];
+            
+        } else if ([[son getMethod] isEqualToString:@"MChatIndex"]) {
+            MChatList_Builder *chatList = (MChatList_Builder *)[son getBuild];
+            [_chatArray removeAllObjects];
+            [_chatArray addObjectsFromArray:chatList.chatList];
+            [self.tableView reloadData];
+        }
+    }
+}
+
+- (void)setNum:(UILabel *)label num:(int)num
+{
+    [label setText:[NSString stringWithFormat:@"%i",num]];
+    if (num == 0) {
+        [label setHidden:YES];
+    } else {
+        [label setHidden:NO];
+    }
+}
+
+- (IBAction)changeIndex:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    selectIndex = button.tag;
+    [self.tableView reloadData];
+    [self loadData];
+}
+
 //- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    NewMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewMessageCell"];
@@ -110,11 +131,11 @@
 //    return cell;
 //}
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    page = 1;
-    [self loadData];
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    page = 1;
+//    [self loadData];
+//}
 
 - (void)didReceiveMemoryWarning
 {
