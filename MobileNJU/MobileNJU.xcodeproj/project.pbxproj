@@ -24,11 +24,45 @@
 		774972041942EFF3006767A7 /* CheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774972031942EFF3006767A7 /* CheckViewController.m */; };
 		774B92CD1951194C007CB817 /* CallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 774B92CC1951194C007CB817 /* CallView.m */; };
 		774B92CF1951196D007CB817 /* CallView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774B92CE1951196D007CB817 /* CallView.xib */; };
-		774B92D1195163F4007CB817 /* TreeHoleListHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774B92D0195163F3007CB817 /* TreeHoleListHeader.xib */; };
-		774B92D419516405007CB817 /* TreeHoleListHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 774B92D319516405007CB817 /* TreeHoleListHeader.m */; };
+		774D4B981991B9A800D675D7 /* GKCropBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4B8D1991B9A800D675D7 /* GKCropBorderView.m */; };
+		774D4B991991B9A800D675D7 /* GKImageCropOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4B8F1991B9A800D675D7 /* GKImageCropOverlayView.m */; };
+		774D4B9A1991B9A800D675D7 /* GKImageCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4B911991B9A800D675D7 /* GKImageCropView.m */; };
+		774D4B9B1991B9A800D675D7 /* GKImageCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4B931991B9A800D675D7 /* GKImageCropViewController.m */; };
+		774D4B9C1991B9A800D675D7 /* GKImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4B951991B9A800D675D7 /* GKImagePicker.m */; };
+		774D4B9D1991B9A800D675D7 /* GKResizeableCropOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4B971991B9A800D675D7 /* GKResizeableCropOverlayView.m */; };
+		774D4BA01991CA1D00D675D7 /* TopicListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4B9F1991CA1D00D675D7 /* TopicListViewController.m */; };
+		774D4BA31991CC8600D675D7 /* ic_treehole_hot@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 774D4BA11991CC8600D675D7 /* ic_treehole_hot@2x.png */; };
+		774D4BA41991CC8600D675D7 /* ic_treehole_recommend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 774D4BA21991CC8600D675D7 /* ic_treehole_recommend@2x.png */; };
+		774D4BA61991D2D600D675D7 /* bg_treehole_bottombar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 774D4BA51991D2D600D675D7 /* bg_treehole_bottombar@2x.png */; };
+		774D4BA81991D33C00D675D7 /* bg_treehole_listbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 774D4BA71991D33C00D675D7 /* bg_treehole_listbar@2x.png */; };
+		774D4BAA1991DBE100D675D7 /* ic_treehole_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 774D4BA91991DBE100D675D7 /* ic_treehole_right@2x.png */; };
+		774D4BBB19920A9200D675D7 /* ApiMChatReq.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4BAC19920A9200D675D7 /* ApiMChatReq.m */; };
+		774D4BBC19920A9200D675D7 /* ApiMGetMsgCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4BAE19920A9200D675D7 /* ApiMGetMsgCount.m */; };
+		774D4BBD19920A9200D675D7 /* ApiMGetTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4BB019920A9200D675D7 /* ApiMGetTags.m */; };
+		774D4BBE19920A9200D675D7 /* ApiMTagTreeHole.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4BB219920A9200D675D7 /* ApiMTagTreeHole.m */; };
+		774D4BBF19920A9200D675D7 /* ApiMTreeHoleComments.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4BB419920A9200D675D7 /* ApiMTreeHoleComments.m */; };
+		774D4BC019920A9200D675D7 /* ApiMTreeHoleNewComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4BB619920A9200D675D7 /* ApiMTreeHoleNewComment.m */; };
+		774D4BC119920A9200D675D7 /* ApiMTreeHoleQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4BB819920A9200D675D7 /* ApiMTreeHoleQuery.m */; };
+		774D4BC219920A9200D675D7 /* ApiMTreeHoleReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D4BBA19920A9200D675D7 /* ApiMTreeHoleReport.m */; };
+		774D4BC91992615900D675D7 /* bt_treehole_detailreply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 774D4BC81992615900D675D7 /* bt_treehole_detailreply@2x.png */; };
 		7765DB4719416C8E00EDDA68 /* NewMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */; };
 		7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4919416CA800EDDA68 /* NewMessageCell.m */; };
 		7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */; };
+		777B41FB1990BBB4007A498D /* bt_treehole_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B41F41990BBB4007A498D /* bt_treehole_add@2x.png */; };
+		777B41FC1990BBB4007A498D /* bt_treehole_comment_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B41F51990BBB4007A498D /* bt_treehole_comment_h@2x.png */; };
+		777B41FD1990BBB4007A498D /* bt_treehole_comment_n@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B41F61990BBB4007A498D /* bt_treehole_comment_n@2x.png */; };
+		777B41FE1990BBB4007A498D /* bt_treehole_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B41F71990BBB4007A498D /* bt_treehole_more@2x.png */; };
+		777B41FF1990BBB4007A498D /* bt_treehole_reply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B41F81990BBB4007A498D /* bt_treehole_reply@2x.png */; };
+		777B42001990BBB4007A498D /* bt_treehole_zan_n@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B41F91990BBB4007A498D /* bt_treehole_zan_n@2x.png */; };
+		777B42011990BBB4007A498D /* bt_treehole_zan_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B41FA1990BBB4007A498D /* bt_treehole_zan_s@2x.png */; };
+		777B42031990D100007A498D /* bt_treehole_message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B42021990D100007A498D /* bt_treehole_message@2x.png */; };
+		777B42071990DD16007A498D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 777B42061990DD16007A498D /* UIPlaceHolderTextView.m */; };
+		777B420A1990F56B007A498D /* TopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 777B42091990F56B007A498D /* TopicCell.m */; };
+		777B420F1990F640007A498D /* bt_treehole_camara@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B420B1990F640007A498D /* bt_treehole_camara@2x.png */; };
+		777B42101990F640007A498D /* bt_treehole_change@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B420C1990F640007A498D /* bt_treehole_change@2x.png */; };
+		777B42111990F640007A498D /* bt_treehole_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B420D1990F640007A498D /* bt_treehole_delete@2x.png */; };
+		777B42121990F640007A498D /* bt_treehole_lib@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777B420E1990F640007A498D /* bt_treehole_lib@2x.png */; };
+		777B42151990F757007A498D /* AddImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 777B42141990F757007A498D /* AddImageCell.m */; };
 		77883D4B1947F09C00197F59 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77883D4A1947F09C00197F59 /* ChatViewController.m */; };
 		77883D4E1947F21800197F59 /* ConnectVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 77883D4D1947F21800197F59 /* ConnectVIew.m */; };
 		77883D531947F7AF00197F59 /* nangua_connect_line1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77883D4F1947F7AF00197F59 /* nangua_connect_line1@2x.png */; };
@@ -133,7 +167,6 @@
 		77E072C8194043140098BA09 /* TreeHole.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77E072BE194043140098BA09 /* TreeHole.storyboard */; };
 		77E072C9194043140098BA09 /* TreeHoleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E072C0194043140098BA09 /* TreeHoleCell.m */; };
 		77E072CA194043140098BA09 /* TreeHoleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E072C2194043140098BA09 /* TreeHoleDetailViewController.m */; };
-		77E072CB194043140098BA09 /* TreeHoleImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E072C4194043140098BA09 /* TreeHoleImageCell.m */; };
 		77E072CC194043140098BA09 /* TreeHoleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E072C6194043140098BA09 /* TreeHoleListViewController.m */; };
 		77E073A41940435D0098BA09 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 77E072F91940435D0098BA09 /* README */; };
 		77E073A51940435D0098BA09 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 77E072FA1940435D0098BA09 /* ProgressHUD.bundle */; };
@@ -606,9 +639,42 @@
 		774B92CB1951194C007CB817 /* CallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallView.h; sourceTree = "<group>"; };
 		774B92CC1951194C007CB817 /* CallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallView.m; sourceTree = "<group>"; };
 		774B92CE1951196D007CB817 /* CallView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CallView.xib; sourceTree = "<group>"; };
-		774B92D0195163F3007CB817 /* TreeHoleListHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TreeHoleListHeader.xib; sourceTree = "<group>"; };
-		774B92D219516405007CB817 /* TreeHoleListHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeHoleListHeader.h; sourceTree = "<group>"; };
-		774B92D319516405007CB817 /* TreeHoleListHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeHoleListHeader.m; sourceTree = "<group>"; };
+		774D4B8C1991B9A800D675D7 /* GKCropBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKCropBorderView.h; sourceTree = "<group>"; };
+		774D4B8D1991B9A800D675D7 /* GKCropBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKCropBorderView.m; sourceTree = "<group>"; };
+		774D4B8E1991B9A800D675D7 /* GKImageCropOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKImageCropOverlayView.h; sourceTree = "<group>"; };
+		774D4B8F1991B9A800D675D7 /* GKImageCropOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKImageCropOverlayView.m; sourceTree = "<group>"; };
+		774D4B901991B9A800D675D7 /* GKImageCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKImageCropView.h; sourceTree = "<group>"; };
+		774D4B911991B9A800D675D7 /* GKImageCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKImageCropView.m; sourceTree = "<group>"; };
+		774D4B921991B9A800D675D7 /* GKImageCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKImageCropViewController.h; sourceTree = "<group>"; };
+		774D4B931991B9A800D675D7 /* GKImageCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKImageCropViewController.m; sourceTree = "<group>"; };
+		774D4B941991B9A800D675D7 /* GKImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKImagePicker.h; sourceTree = "<group>"; };
+		774D4B951991B9A800D675D7 /* GKImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKImagePicker.m; sourceTree = "<group>"; };
+		774D4B961991B9A800D675D7 /* GKResizeableCropOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKResizeableCropOverlayView.h; sourceTree = "<group>"; };
+		774D4B971991B9A800D675D7 /* GKResizeableCropOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKResizeableCropOverlayView.m; sourceTree = "<group>"; };
+		774D4B9E1991CA1D00D675D7 /* TopicListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicListViewController.h; sourceTree = "<group>"; };
+		774D4B9F1991CA1D00D675D7 /* TopicListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicListViewController.m; sourceTree = "<group>"; };
+		774D4BA11991CC8600D675D7 /* ic_treehole_hot@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_treehole_hot@2x.png"; sourceTree = "<group>"; };
+		774D4BA21991CC8600D675D7 /* ic_treehole_recommend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_treehole_recommend@2x.png"; sourceTree = "<group>"; };
+		774D4BA51991D2D600D675D7 /* bg_treehole_bottombar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_treehole_bottombar@2x.png"; sourceTree = "<group>"; };
+		774D4BA71991D33C00D675D7 /* bg_treehole_listbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_treehole_listbar@2x.png"; sourceTree = "<group>"; };
+		774D4BA91991DBE100D675D7 /* ic_treehole_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_treehole_right@2x.png"; sourceTree = "<group>"; };
+		774D4BAB19920A9200D675D7 /* ApiMChatReq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMChatReq.h; sourceTree = "<group>"; };
+		774D4BAC19920A9200D675D7 /* ApiMChatReq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMChatReq.m; sourceTree = "<group>"; };
+		774D4BAD19920A9200D675D7 /* ApiMGetMsgCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMGetMsgCount.h; sourceTree = "<group>"; };
+		774D4BAE19920A9200D675D7 /* ApiMGetMsgCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMGetMsgCount.m; sourceTree = "<group>"; };
+		774D4BAF19920A9200D675D7 /* ApiMGetTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMGetTags.h; sourceTree = "<group>"; };
+		774D4BB019920A9200D675D7 /* ApiMGetTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMGetTags.m; sourceTree = "<group>"; };
+		774D4BB119920A9200D675D7 /* ApiMTagTreeHole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMTagTreeHole.h; sourceTree = "<group>"; };
+		774D4BB219920A9200D675D7 /* ApiMTagTreeHole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMTagTreeHole.m; sourceTree = "<group>"; };
+		774D4BB319920A9200D675D7 /* ApiMTreeHoleComments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMTreeHoleComments.h; sourceTree = "<group>"; };
+		774D4BB419920A9200D675D7 /* ApiMTreeHoleComments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMTreeHoleComments.m; sourceTree = "<group>"; };
+		774D4BB519920A9200D675D7 /* ApiMTreeHoleNewComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMTreeHoleNewComment.h; sourceTree = "<group>"; };
+		774D4BB619920A9200D675D7 /* ApiMTreeHoleNewComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMTreeHoleNewComment.m; sourceTree = "<group>"; };
+		774D4BB719920A9200D675D7 /* ApiMTreeHoleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMTreeHoleQuery.h; sourceTree = "<group>"; };
+		774D4BB819920A9200D675D7 /* ApiMTreeHoleQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMTreeHoleQuery.m; sourceTree = "<group>"; };
+		774D4BB919920A9200D675D7 /* ApiMTreeHoleReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiMTreeHoleReport.h; sourceTree = "<group>"; };
+		774D4BBA19920A9200D675D7 /* ApiMTreeHoleReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiMTreeHoleReport.m; sourceTree = "<group>"; };
+		774D4BC81992615900D675D7 /* bt_treehole_detailreply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_detailreply@2x.png"; sourceTree = "<group>"; };
 		7765226D1987C9E20061AF4E /* ApiUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiUpdate.h; sourceTree = "<group>"; };
 		7765226E1987C9E20061AF4E /* RegExCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegExCategories.h; sourceTree = "<group>"; };
 		7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageListViewController.h; sourceTree = "<group>"; };
@@ -617,6 +683,24 @@
 		7765DB4919416CA800EDDA68 /* NewMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageCell.m; sourceTree = "<group>"; };
 		7765DB4B19418FFC00EDDA68 /* AddTreeHoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTreeHoleViewController.h; sourceTree = "<group>"; };
 		7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTreeHoleViewController.m; sourceTree = "<group>"; };
+		777B41F41990BBB4007A498D /* bt_treehole_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_add@2x.png"; sourceTree = "<group>"; };
+		777B41F51990BBB4007A498D /* bt_treehole_comment_h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_comment_h@2x.png"; sourceTree = "<group>"; };
+		777B41F61990BBB4007A498D /* bt_treehole_comment_n@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_comment_n@2x.png"; sourceTree = "<group>"; };
+		777B41F71990BBB4007A498D /* bt_treehole_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_more@2x.png"; sourceTree = "<group>"; };
+		777B41F81990BBB4007A498D /* bt_treehole_reply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_reply@2x.png"; sourceTree = "<group>"; };
+		777B41F91990BBB4007A498D /* bt_treehole_zan_n@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_zan_n@2x.png"; sourceTree = "<group>"; };
+		777B41FA1990BBB4007A498D /* bt_treehole_zan_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_zan_s@2x.png"; sourceTree = "<group>"; };
+		777B42021990D100007A498D /* bt_treehole_message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_message@2x.png"; sourceTree = "<group>"; };
+		777B42051990DD16007A498D /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		777B42061990DD16007A498D /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
+		777B42081990F56B007A498D /* TopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicCell.h; sourceTree = "<group>"; };
+		777B42091990F56B007A498D /* TopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicCell.m; sourceTree = "<group>"; };
+		777B420B1990F640007A498D /* bt_treehole_camara@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_camara@2x.png"; sourceTree = "<group>"; };
+		777B420C1990F640007A498D /* bt_treehole_change@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_change@2x.png"; sourceTree = "<group>"; };
+		777B420D1990F640007A498D /* bt_treehole_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_delete@2x.png"; sourceTree = "<group>"; };
+		777B420E1990F640007A498D /* bt_treehole_lib@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bt_treehole_lib@2x.png"; sourceTree = "<group>"; };
+		777B42131990F757007A498D /* AddImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddImageCell.h; sourceTree = "<group>"; };
+		777B42141990F757007A498D /* AddImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddImageCell.m; sourceTree = "<group>"; };
 		77883D491947F09C00197F59 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		77883D4A1947F09C00197F59 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		77883D4C1947F21800197F59 /* ConnectVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectVIew.h; sourceTree = "<group>"; };
@@ -779,8 +863,6 @@
 		77E072C0194043140098BA09 /* TreeHoleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeHoleCell.m; sourceTree = "<group>"; };
 		77E072C1194043140098BA09 /* TreeHoleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeHoleDetailViewController.h; sourceTree = "<group>"; };
 		77E072C2194043140098BA09 /* TreeHoleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeHoleDetailViewController.m; sourceTree = "<group>"; };
-		77E072C3194043140098BA09 /* TreeHoleImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeHoleImageCell.h; sourceTree = "<group>"; };
-		77E072C4194043140098BA09 /* TreeHoleImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeHoleImageCell.m; sourceTree = "<group>"; };
 		77E072C5194043140098BA09 /* TreeHoleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeHoleListViewController.h; sourceTree = "<group>"; };
 		77E072C6194043140098BA09 /* TreeHoleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeHoleListViewController.m; sourceTree = "<group>"; };
 		77E072CF1940435D0098BA09 /* AppUpdate.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUpdate.pb.h; sourceTree = "<group>"; };
@@ -1974,6 +2056,34 @@
 			path = NotificationStatusBar;
 			sourceTree = "<group>";
 		};
+		774D4B8B1991B9A800D675D7 /* GKClasses */ = {
+			isa = PBXGroup;
+			children = (
+				774D4B8C1991B9A800D675D7 /* GKCropBorderView.h */,
+				774D4B8D1991B9A800D675D7 /* GKCropBorderView.m */,
+				774D4B8E1991B9A800D675D7 /* GKImageCropOverlayView.h */,
+				774D4B8F1991B9A800D675D7 /* GKImageCropOverlayView.m */,
+				774D4B901991B9A800D675D7 /* GKImageCropView.h */,
+				774D4B911991B9A800D675D7 /* GKImageCropView.m */,
+				774D4B921991B9A800D675D7 /* GKImageCropViewController.h */,
+				774D4B931991B9A800D675D7 /* GKImageCropViewController.m */,
+				774D4B941991B9A800D675D7 /* GKImagePicker.h */,
+				774D4B951991B9A800D675D7 /* GKImagePicker.m */,
+				774D4B961991B9A800D675D7 /* GKResizeableCropOverlayView.h */,
+				774D4B971991B9A800D675D7 /* GKResizeableCropOverlayView.m */,
+			);
+			path = GKClasses;
+			sourceTree = "<group>";
+		};
+		777B42041990DD16007A498D /* PlaceHolderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				777B42051990DD16007A498D /* UIPlaceHolderTextView.h */,
+				777B42061990DD16007A498D /* UIPlaceHolderTextView.m */,
+			);
+			path = PlaceHolderTextView;
+			sourceTree = "<group>";
+		};
 		778EA7801945D3F8007B6C7E /* 南呱 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2124,6 +2234,24 @@
 		77B90458192C433F0062237D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				774D4BC81992615900D675D7 /* bt_treehole_detailreply@2x.png */,
+				774D4BA91991DBE100D675D7 /* ic_treehole_right@2x.png */,
+				774D4BA71991D33C00D675D7 /* bg_treehole_listbar@2x.png */,
+				774D4BA51991D2D600D675D7 /* bg_treehole_bottombar@2x.png */,
+				774D4BA11991CC8600D675D7 /* ic_treehole_hot@2x.png */,
+				774D4BA21991CC8600D675D7 /* ic_treehole_recommend@2x.png */,
+				777B420B1990F640007A498D /* bt_treehole_camara@2x.png */,
+				777B420C1990F640007A498D /* bt_treehole_change@2x.png */,
+				777B420D1990F640007A498D /* bt_treehole_delete@2x.png */,
+				777B420E1990F640007A498D /* bt_treehole_lib@2x.png */,
+				777B42021990D100007A498D /* bt_treehole_message@2x.png */,
+				777B41F41990BBB4007A498D /* bt_treehole_add@2x.png */,
+				777B41F51990BBB4007A498D /* bt_treehole_comment_h@2x.png */,
+				777B41F61990BBB4007A498D /* bt_treehole_comment_n@2x.png */,
+				777B41F71990BBB4007A498D /* bt_treehole_more@2x.png */,
+				777B41F81990BBB4007A498D /* bt_treehole_reply@2x.png */,
+				777B41F91990BBB4007A498D /* bt_treehole_zan_n@2x.png */,
+				777B41FA1990BBB4007A498D /* bt_treehole_zan_s@2x.png */,
 				7796F1EC1949B84B00015307 /* nangua_add@2x.png */,
 				7D784D221991DE5C00E7CE64 /* Nipic_2897814_20110209144722712129.gif */,
 				7796F1EA19498B3C00015307 /* SenderTextNodeBkg@2x.png */,
@@ -2173,6 +2301,8 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				774D4B8B1991B9A800D675D7 /* GKClasses */,
+				777B42041990DD16007A498D /* PlaceHolderTextView */,
 				7D943E5C198D29290060222B /* iCarousel */,
 				7DB0460D1987D1C600A7612B /* QCSlideTableView */,
 				7DB045FA1987C17500A7612B /* GuGuSegmentNavigationController */,
@@ -2293,21 +2423,22 @@
 				77932C9F194AF2F300FBDFEF /* DetailView.h */,
 				77932CA0194AF2F300FBDFEF /* DetailView.m */,
 				77932CA2194AF30700FBDFEF /* DetailView.xib */,
-				77E072C3194043140098BA09 /* TreeHoleImageCell.h */,
-				77E072C4194043140098BA09 /* TreeHoleImageCell.m */,
 				77E072C5194043140098BA09 /* TreeHoleListViewController.h */,
 				77E072C6194043140098BA09 /* TreeHoleListViewController.m */,
-				774B92D0195163F3007CB817 /* TreeHoleListHeader.xib */,
-				774B92D219516405007CB817 /* TreeHoleListHeader.h */,
-				774B92D319516405007CB817 /* TreeHoleListHeader.m */,
 				7765DB4519416C8E00EDDA68 /* NewMessageListViewController.h */,
 				7765DB4619416C8E00EDDA68 /* NewMessageListViewController.m */,
 				7765DB4819416CA800EDDA68 /* NewMessageCell.h */,
 				7765DB4919416CA800EDDA68 /* NewMessageCell.m */,
 				7765DB4B19418FFC00EDDA68 /* AddTreeHoleViewController.h */,
 				7765DB4C19418FFC00EDDA68 /* AddTreeHoleViewController.m */,
+				774D4B9E1991CA1D00D675D7 /* TopicListViewController.h */,
+				774D4B9F1991CA1D00D675D7 /* TopicListViewController.m */,
 				774972021942EFF3006767A7 /* CheckViewController.h */,
 				774972031942EFF3006767A7 /* CheckViewController.m */,
+				777B42081990F56B007A498D /* TopicCell.h */,
+				777B42091990F56B007A498D /* TopicCell.m */,
+				777B42131990F757007A498D /* AddImageCell.h */,
+				777B42141990F757007A498D /* AddImageCell.m */,
 			);
 			path = "树洞";
 			sourceTree = "<group>";
@@ -2726,6 +2857,22 @@
 		7D947B631989EAF80000EB4E /* iosApi */ = {
 			isa = PBXGroup;
 			children = (
+				774D4BAB19920A9200D675D7 /* ApiMChatReq.h */,
+				774D4BAC19920A9200D675D7 /* ApiMChatReq.m */,
+				774D4BAD19920A9200D675D7 /* ApiMGetMsgCount.h */,
+				774D4BAE19920A9200D675D7 /* ApiMGetMsgCount.m */,
+				774D4BAF19920A9200D675D7 /* ApiMGetTags.h */,
+				774D4BB019920A9200D675D7 /* ApiMGetTags.m */,
+				774D4BB119920A9200D675D7 /* ApiMTagTreeHole.h */,
+				774D4BB219920A9200D675D7 /* ApiMTagTreeHole.m */,
+				774D4BB319920A9200D675D7 /* ApiMTreeHoleComments.h */,
+				774D4BB419920A9200D675D7 /* ApiMTreeHoleComments.m */,
+				774D4BB519920A9200D675D7 /* ApiMTreeHoleNewComment.h */,
+				774D4BB619920A9200D675D7 /* ApiMTreeHoleNewComment.m */,
+				774D4BB719920A9200D675D7 /* ApiMTreeHoleQuery.h */,
+				774D4BB819920A9200D675D7 /* ApiMTreeHoleQuery.m */,
+				774D4BB919920A9200D675D7 /* ApiMTreeHoleReport.h */,
+				774D4BBA19920A9200D675D7 /* ApiMTreeHoleReport.m */,
 				7DFC4436198A4B250018BCB9 /* ApiMActivity.h */,
 				7DFC4437198A4B250018BCB9 /* ApiMActivity.m */,
 				7DFC4438198A4B250018BCB9 /* ApiMAddChat.h */,
@@ -3117,6 +3264,7 @@
 				77E07570194043A90098BA09 /* f075.png in Resources */,
 				77E07509194043A90098BA09 /* f023@2x.png in Resources */,
 				77E075FF194044110098BA09 /* LessonDetailView.xib in Resources */,
+				774D4BAA1991DBE100D675D7 /* ic_treehole_right@2x.png in Resources */,
 				77E07528194043A90098BA09 /* f039.png in Resources */,
 				77E074E6194043A90098BA09 /* f006.png in Resources */,
 				77E0751F194043A90098BA09 /* f034@2x.png in Resources */,
@@ -3125,7 +3273,6 @@
 				77E0755E194043A90098BA09 /* f066.png in Resources */,
 				77E07505194043A90098BA09 /* f021@2x.png in Resources */,
 				778F9B1E1946B3AE00F89E66 /* fruit_2_s@2x.png in Resources */,
-				774B92D1195163F4007CB817 /* TreeHoleListHeader.xib in Resources */,
 				77E074EC194043A90098BA09 /* f009.png in Resources */,
 				77E07596194043A90098BA09 /* f094.png in Resources */,
 				77E074F9194043A90098BA09 /* f015@2x.png in Resources */,
@@ -3133,10 +3280,12 @@
 				77E07598194043A90098BA09 /* f095.png in Resources */,
 				77E07550194043A90098BA09 /* f059.png in Resources */,
 				77E074DD194043A90098BA09 /* f001@2x.png in Resources */,
+				777B42111990F640007A498D /* bt_treehole_delete@2x.png in Resources */,
 				77E07548194043A90098BA09 /* f055.png in Resources */,
 				77E0751E194043A90098BA09 /* f034.png in Resources */,
 				77E074FC194043A90098BA09 /* f017.png in Resources */,
 				77E074F0194043A90098BA09 /* f011.png in Resources */,
+				774D4BA31991CC8600D675D7 /* ic_treehole_hot@2x.png in Resources */,
 				77E07593194043A90098BA09 /* f092@2x.png in Resources */,
 				77E07511194043A90098BA09 /* f027@2x.png in Resources */,
 				77E074E2194043A90098BA09 /* f004.png in Resources */,
@@ -3153,7 +3302,9 @@
 				77E0755C194043A90098BA09 /* f065.png in Resources */,
 				77E0755A194043A90098BA09 /* f064.png in Resources */,
 				77E074DC194043A90098BA09 /* f001.png in Resources */,
+				777B41FD1990BBB4007A498D /* bt_treehole_comment_n@2x.png in Resources */,
 				77E074FA194043A90098BA09 /* f016.png in Resources */,
+				777B41FC1990BBB4007A498D /* bt_treehole_comment_h@2x.png in Resources */,
 				77E0762D194044340098BA09 /* BookDetailView.xib in Resources */,
 				7DB046061987C1B400A7612B /* shop.storyboard in Resources */,
 				771EDF4B193F37A200A3DCBB /* News.storyboard in Resources */,
@@ -3164,9 +3315,11 @@
 				7DC4C58D19443D97007C6888 /* loading@2x.gif in Resources */,
 				778EA78C1945DA83007B6C7E /* nangua_bg@2x.png in Resources */,
 				778F9B271946E6EF00F89E66 /* nangua_delete@2x.png in Resources */,
+				774D4BA61991D2D600D675D7 /* bg_treehole_bottombar@2x.png in Resources */,
 				77E074F2194043A90098BA09 /* f012.png in Resources */,
 				77E07564194043A90098BA09 /* f069.png in Resources */,
 				77E0753C194043A90098BA09 /* f049.png in Resources */,
+				777B41FF1990BBB4007A498D /* bt_treehole_reply@2x.png in Resources */,
 				77883D621948075A00197F59 /* f103@2x.png in Resources */,
 				77E07594194043A90098BA09 /* f093.png in Resources */,
 				77E0751B194043A90098BA09 /* f032@2x.png in Resources */,
@@ -3190,6 +3343,7 @@
 				77E07501194043A90098BA09 /* f019@2x.png in Resources */,
 				77E0759A194043A90098BA09 /* f096.png in Resources */,
 				77E0751A194043A90098BA09 /* f032.png in Resources */,
+				777B41FB1990BBB4007A498D /* bt_treehole_add@2x.png in Resources */,
 				77E0750D194043A90098BA09 /* f025@2x.png in Resources */,
 				77E07522194043A90098BA09 /* f036.png in Resources */,
 				77E0754E194043A90098BA09 /* f058.png in Resources */,
@@ -3206,20 +3360,25 @@
 				77883D611948075A00197F59 /* f102@2x.png in Resources */,
 				77E07544194043A90098BA09 /* f053.png in Resources */,
 				77E0752D194043A90098BA09 /* f041@2x.png in Resources */,
+				777B42011990BBB4007A498D /* bt_treehole_zan_s@2x.png in Resources */,
+				774D4BA81991D33C00D675D7 /* bg_treehole_listbar@2x.png in Resources */,
 				77E07534194043A90098BA09 /* f045.png in Resources */,
 				77E073F81940436E0098BA09 /* treehole_delete@2x.png in Resources */,
 				77E07536194043A90098BA09 /* f046.png in Resources */,
 				77883D541947F7AF00197F59 /* nangua_connect_line2@2x.png in Resources */,
 				77883D601948075A00197F59 /* f101@2x.png in Resources */,
 				77E0753F194043A90098BA09 /* f050@2x.png in Resources */,
+				777B41FE1990BBB4007A498D /* bt_treehole_more@2x.png in Resources */,
 				77E074F5194043A90098BA09 /* f013@2x.png in Resources */,
 				778F9B151946B30100F89E66 /* fruit_5@2x.png in Resources */,
 				77E07520194043A90098BA09 /* f035.png in Resources */,
 				77E07526194043A90098BA09 /* f038.png in Resources */,
+				777B420F1990F640007A498D /* bt_treehole_camara@2x.png in Resources */,
 				77E07590194043A90098BA09 /* f091.png in Resources */,
 				778F9B201946B3AE00F89E66 /* fruit_4_s@2x.png in Resources */,
 				77E07524194043A90098BA09 /* f037.png in Resources */,
 				77E073F91940436E0098BA09 /* treehole_logo_n@2x.png in Resources */,
+				777B42121990F640007A498D /* bt_treehole_lib@2x.png in Resources */,
 				77E0756F194043A90098BA09 /* f074@2x.png in Resources */,
 				77E07508194043A90098BA09 /* f023.png in Resources */,
 				77E07543194043A90098BA09 /* f052@2x.png in Resources */,
@@ -3230,6 +3389,7 @@
 				77E0754A194043A90098BA09 /* f056.png in Resources */,
 				77E0759E194043A90098BA09 /* f098.png in Resources */,
 				77E07599194043A90098BA09 /* f095@2x.png in Resources */,
+				774D4BA41991CC8600D675D7 /* ic_treehole_recommend@2x.png in Resources */,
 				77E07595194043A90098BA09 /* f093@2x.png in Resources */,
 				7DB0461E1987EBD300A7612B /* AddFirstPage.xib in Resources */,
 				77E07532194043A90098BA09 /* f044.png in Resources */,
@@ -3238,6 +3398,7 @@
 				77E074F4194043A90098BA09 /* f013.png in Resources */,
 				77E073A41940435D0098BA09 /* README in Resources */,
 				77B904B9192C4B3B0062237D /* MJRefresh.bundle in Resources */,
+				777B42001990BBB4007A498D /* bt_treehole_zan_n@2x.png in Resources */,
 				77E073F51940436E0098BA09 /* btn_send@2x.png in Resources */,
 				77E07579194043A90098BA09 /* f079@2x.png in Resources */,
 				77E0750B194043A90098BA09 /* f024@2x.png in Resources */,
@@ -3260,6 +3421,7 @@
 				77883D651948075A00197F59 /* f106@2x.png in Resources */,
 				7DFC4508198A93FD0018BCB9 /* View.xib in Resources */,
 				77E07582194043A90098BA09 /* f084.png in Resources */,
+				777B42101990F640007A498D /* bt_treehole_change@2x.png in Resources */,
 				77E07589194043A90098BA09 /* f087@2x.png in Resources */,
 				77E073FC1940436E0098BA09 /* treehole_news@2x.png in Resources */,
 				77E07525194043A90098BA09 /* f037@2x.png in Resources */,
@@ -3289,6 +3451,7 @@
 				7D947B621989EA660000EB4E /* InitConfig.plist in Resources */,
 				77E07567194043A90098BA09 /* f070@2x.png in Resources */,
 				7D6AA9001983F0E100E11C31 /* Home.storyboard in Resources */,
+				774D4BC91992615900D675D7 /* bt_treehole_detailreply@2x.png in Resources */,
 				77B904C0192C4B3B0062237D /* MBProgressHUD.bundle in Resources */,
 				77E074ED194043A90098BA09 /* f009@2x.png in Resources */,
 				77E07518194043A90098BA09 /* f031.png in Resources */,
@@ -3301,6 +3464,7 @@
 				77E074EE194043A90098BA09 /* f010.png in Resources */,
 				77E07591194043A90098BA09 /* f091@2x.png in Resources */,
 				77E07541194043A90098BA09 /* f051@2x.png in Resources */,
+				777B42031990D100007A498D /* bt_treehole_message@2x.png in Resources */,
 				77E07553194043A90098BA09 /* f060@2x.png in Resources */,
 				77E07583194043A90098BA09 /* f084@2x.png in Resources */,
 				77E0755B194043A90098BA09 /* f064@2x.png in Resources */,
@@ -3395,12 +3559,16 @@
 				77E0762B194044340098BA09 /* BookCell.m in Sources */,
 				7DB045E11987486600A7612B /* RDVTabBar.m in Sources */,
 				77E0760F1940441F0098BA09 /* ClassroomVC.m in Sources */,
+				774D4B9C1991B9A800D675D7 /* GKImagePicker.m in Sources */,
 				7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */,
 				7DFC44C8198A4B250018BCB9 /* ApiMChatCallBack.m in Sources */,
+				774D4B9B1991B9A800D675D7 /* GKImageCropViewController.m in Sources */,
 				778EA7851945D415007B6C7E /* NanguaBaseViewController.m in Sources */,
 				7DFC44FD198A656E0018BCB9 /* VerticallyAlignedLabel.m in Sources */,
 				77B904D8192C4B3B0062237D /* UIImageView+WebCache.m in Sources */,
 				7D947C3A1989EAFE0000EB4E /* ZsndSystem.pb.m in Sources */,
+				777B42071990DD16007A498D /* UIPlaceHolderTextView.m in Sources */,
+				774D4BC119920A9200D675D7 /* ApiMTreeHoleQuery.m in Sources */,
 				778F9B091946B20A00F89E66 /* LeaveMessageCell.m in Sources */,
 				7DFC44D4198A4B250018BCB9 /* ApiMHelp.m in Sources */,
 				7DD25B39192D9C230066494D /* HomeCell.m in Sources */,
@@ -3424,6 +3592,7 @@
 				77E076381940443F0098BA09 /* BusVC.m in Sources */,
 				77E07600194044110098BA09 /* ScheduleLesson.m in Sources */,
 				7DA343B5198BF539007DE453 /* RefreshCollectionViewController.m in Sources */,
+				777B420A1990F56B007A498D /* TopicCell.m in Sources */,
 				77E07632194044340098BA09 /* MyLibraryVC.m in Sources */,
 				7D6496B1198F9D610086435F /* AlertView.m in Sources */,
 				77B90439192C3F040062237D /* AppDelegate.m in Sources */,
@@ -3452,7 +3621,6 @@
 				77E0760C1940441F0098BA09 /* ClassroomCell.m in Sources */,
 				77E0763D194044470098BA09 /* EcardCell.m in Sources */,
 				77B904BB192C4B3B0062237D /* MJRefreshConst.m in Sources */,
-				774B92D419516405007CB817 /* TreeHoleListHeader.m in Sources */,
 				77E076431940445C0098BA09 /* MySubscribeCell.m in Sources */,
 				77B904C5192C4B3B0062237D /* MJPhotoLoadingView.m in Sources */,
 				77B904D0192C4B3B0062237D /* SDWebImageManager+MJ.m in Sources */,
@@ -3463,6 +3631,7 @@
 				7796F1E119496FD000015307 /* HBTalkTableViewImageLeftCell.m in Sources */,
 				77B904D1192C4B3B0062237D /* SDWebImageManager.m in Sources */,
 				7DFC44D5198A4B250018BCB9 /* ApiMIndex.m in Sources */,
+				774D4BC219920A9200D675D7 /* ApiMTreeHoleReport.m in Sources */,
 				7DFC44B8198A4B250018BCB9 /* ApiMAddChat.m in Sources */,
 				7796F1D119492EB500015307 /* ConnectViewController.m in Sources */,
 				7DFC44D8198A4B250018BCB9 /* ApiMLostAndFound.m in Sources */,
@@ -3491,6 +3660,7 @@
 				7DFC44D0198A4B250018BCB9 /* ApiMGetMobileVerify.m in Sources */,
 				77E0764C194044670098BA09 /* ActivityDetailVC.m in Sources */,
 				7DFC44EB198A4B250018BCB9 /* ApiMTermList.m in Sources */,
+				774D4B991991B9A800D675D7 /* GKImageCropOverlayView.m in Sources */,
 				771EDF4C193F37A200A3DCBB /* NewsListView.m in Sources */,
 				77E072CA194043140098BA09 /* TreeHoleDetailViewController.m in Sources */,
 				77B904BD192C4B3B0062237D /* MJRefreshHeaderView.m in Sources */,
@@ -3514,6 +3684,7 @@
 				7D7A487E1986AD460019E9B3 /* UIImage+ImageEffects.m in Sources */,
 				7DFC44D9198A4B250018BCB9 /* ApiMMarketList.m in Sources */,
 				7DFC44CF198A4B250018BCB9 /* ApiMDelClass.m in Sources */,
+				774D4BBC19920A9200D675D7 /* ApiMGetMsgCount.m in Sources */,
 				7DFC44DE198A4B250018BCB9 /* ApiMNewsList.m in Sources */,
 				7DFC44CD198A4B250018BCB9 /* ApiMChatMsg.m in Sources */,
 				7DFC44BC198A4B250018BCB9 /* ApiMAddTreeHole.m in Sources */,
@@ -3524,6 +3695,7 @@
 				7DFC44E4198A4B250018BCB9 /* ApiMRssNews.m in Sources */,
 				77B904CB192C4B3B0062237D /* SDImageCache.m in Sources */,
 				7DFC44D1198A4B250018BCB9 /* ApiMGetUserInfo.m in Sources */,
+				774D4BBF19920A9200D675D7 /* ApiMTreeHoleComments.m in Sources */,
 				77E07631194044340098BA09 /* MyBookCell.m in Sources */,
 				77B904CE192C4B3B0062237D /* SDWebImageDownloader.m in Sources */,
 				7DB046021987C17500A7612B /* GuGuSegmentBarView.m in Sources */,
@@ -3542,14 +3714,17 @@
 				7796F1E619496FD000015307 /* HBTalkTableViewTextRightCell.m in Sources */,
 				7DFC44FA198A648C0018BCB9 /* UILabel+VerticalAlign.m in Sources */,
 				7DFC44ED198A4B250018BCB9 /* ApiMTreeHoleComment.m in Sources */,
+				774D4BBB19920A9200D675D7 /* ApiMChatReq.m in Sources */,
 				77E075E7194043F10098BA09 /* GradeCell.m in Sources */,
 				7796F1E019496FD000015307 /* HBTalkTableViewCell.m in Sources */,
-				77E072CB194043140098BA09 /* TreeHoleImageCell.m in Sources */,
 				771EDF42193F377100A3DCBB /* EditInfoVC.m in Sources */,
 				7D9A6BD61988CDC100185A16 /* SecondPage.m in Sources */,
 				77B904D5192C4B3B0062237D /* UIImage+MultiFormat.m in Sources */,
+				774D4BBD19920A9200D675D7 /* ApiMGetTags.m in Sources */,
 				77E075C6194043CD0098BA09 /* JSONKit.m in Sources */,
+				774D4BBE19920A9200D675D7 /* ApiMTagTreeHole.m in Sources */,
 				77E0760E1940441F0098BA09 /* ClassroomDetailVC.m in Sources */,
+				774D4B981991B9A800D675D7 /* GKCropBorderView.m in Sources */,
 				7DFC44F0198A4B250018BCB9 /* ApiMTreeHoleNews.m in Sources */,
 				7DFC44E5198A4B250018BCB9 /* ApiMSchedule.m in Sources */,
 				771EDF37193F373000A3DCBB /* HasLoginController.m in Sources */,
@@ -3563,11 +3738,13 @@
 				7D7A4875198698CE0019E9B3 /* AllRssVC.m in Sources */,
 				77B904C9192C4B3B0062237D /* MKAnnotationView+WebCache.m in Sources */,
 				771EDF22193F367600A3DCBB /* SegmentView.m in Sources */,
+				774D4BA01991CA1D00D675D7 /* TopicListViewController.m in Sources */,
 				77E07630194044340098BA09 /* BookViewController.m in Sources */,
 				7765DB4719416C8E00EDDA68 /* NewMessageListViewController.m in Sources */,
 				7DD869B4192DB74500D4ADAA /* SelfInfoVC.m in Sources */,
 				77E0762A194044340098BA09 /* Book.m in Sources */,
 				7DFC44C1198A4B250018BCB9 /* ApiMBusSearch.m in Sources */,
+				774D4B9D1991B9A800D675D7 /* GKResizeableCropOverlayView.m in Sources */,
 				7D7A486F198690640019E9B3 /* subscribeCell_n.m in Sources */,
 				77E0762C194044340098BA09 /* BookDetailView.m in Sources */,
 				7DFC44F6198A4B250018BCB9 /* ApisFactory.m in Sources */,
@@ -3577,6 +3754,7 @@
 				77B904C8192C4B3B0062237D /* MJPhotoView.m in Sources */,
 				7DFC44E6198A4B250018BCB9 /* ApiMScheduleAuto.m in Sources */,
 				77B904D9192C4B3B0062237D /* ToolUtils.m in Sources */,
+				774D4BC019920A9200D675D7 /* ApiMTreeHoleNewComment.m in Sources */,
 				7DFC44E1198A4B250018BCB9 /* ApiMRegist.m in Sources */,
 				77E07617194044290098BA09 /* LostReleaseVC.m in Sources */,
 				7DB0460C1987C1D500A7612B /* ShoppingVC.m in Sources */,
@@ -3586,6 +3764,7 @@
 				7DFC44CA198A4B250018BCB9 /* ApiMChatDel.m in Sources */,
 				77E0765319405DDD0098BA09 /* EmojiCell.m in Sources */,
 				7796F1E319496FD000015307 /* HBTalkTableViewLeftCell.m in Sources */,
+				774D4B9A1991B9A800D675D7 /* GKImageCropView.m in Sources */,
 				7DFC44BB198A4B250018BCB9 /* ApiMAddMarket.m in Sources */,
 				7DD8699F192DB6D700D4ADAA /* NewsListTVC.m in Sources */,
 				7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */,
@@ -3607,6 +3786,7 @@
 				7D9CF9F61990B358005FEDDE /* MarketDetailCell.m in Sources */,
 				7DFC44D2198A4B250018BCB9 /* ApiMGetWelcomePage.m in Sources */,
 				7DFC44EC198A4B250018BCB9 /* ApiMTreeHole.m in Sources */,
+				777B42151990F757007A498D /* AddImageCell.m in Sources */,
 				7DD86998192DB68A00D4ADAA /* TelephoneInfoVC.m in Sources */,
 				7765DB4D19418FFC00EDDA68 /* AddTreeHoleViewController.m in Sources */,
 				7DFC44BD198A4B250018BCB9 /* ApiMAllRss.m in Sources */,
@@ -3749,7 +3929,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0C9A534F-E018-458D-BFA5-F805E9A7A6C4";
+				PROVISIONING_PROFILE = "6404FFFA-B73A-4D3F-BD2B-5A8357C36EA3";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -3779,7 +3959,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0C9A534F-E018-458D-BFA5-F805E9A7A6C4";
+				PROVISIONING_PROFILE = "6404FFFA-B73A-4D3F-BD2B-5A8357C36EA3";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

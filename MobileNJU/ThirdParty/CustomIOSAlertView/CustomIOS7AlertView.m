@@ -120,12 +120,13 @@ CGFloat buttonSpacerHeight = 0;
 // Button has been touched
 - (IBAction)customIOS7dialogButtonTouchUpInside:(id)sender
 {
+    UIButton *button = (UIButton *)sender;
     if (delegate != NULL) {
-        [delegate customIOS7dialogButtonTouchUpInside:self clickedButtonAtIndex:[sender tag]];
+        [delegate customIOS7dialogButtonTouchUpInside:self clickedButtonAtIndex:[button tag]];
     }
 
     if (onButtonTouchUpInside != NULL) {
-        onButtonTouchUpInside(self, [sender tag]);
+        onButtonTouchUpInside(self, [button tag]);
     }
 }
 

@@ -1,7 +1,7 @@
 //
 //  ApisFactory
 //
-//  Created by ryan on 2014-07-31 17:37:07
+//  Created by ryan on 2014-08-06 14:28:21
 //  Copyright (c) ryan All rights reserved.
 
 
@@ -23,31 +23,45 @@
 	}
 	
 	/**
-	 *  南呱详情 /mobile?methodno=MChat&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=&begin=
+	 *  详情 /mobile?methodno=MChat&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=&begin=&topicid=
 	 */
 	+(ApiMChat*) getApiMChat{
 		return [[ApiMChat alloc ] init];
 	}
 	
 	/**
-	 *  南呱单条记录 /mobile?methodno=MChatMsg&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=
+	 *  单条记录 /mobile?methodno=MChatMsg&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=
 	 */
 	+(ApiMChatMsg*) getApiMChatMsg{
 		return [[ApiMChatMsg alloc ] init];
 	}
 	
 	/**
-	 *  南呱添加聊天(MImg)  /mobile?methodno=MAddChat&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=&content=   
+	 *  添加聊天(MImg)  /mobile?methodno=MAddChat&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=&content=&topicid=
 	 */
 	+(ApiMAddChat*) getApiMAddChat{
 		return [[ApiMAddChat alloc ] init];
 	}
 	
 	/**
-	 *  南呱匹配 /mobile?methodno=MChatMatch&debug=1&appid=nju&deviceid=1&userid=1&verify=1
+	 *  树洞发起会话 /mobile?methodno=MChatReq&debug=1&appid=nju&deviceid=1&userid=1&verify=1&targetid=&topicid=
 	 */
-	+(ApiMChatMatch*) getApiMChatMatch{
-		return [[ApiMChatMatch alloc ] init];
+	+(ApiMChatReq*) getApiMChatReq{
+		return [[ApiMChatReq alloc ] init];
+	}
+	
+	/**
+	 *  南呱记录删除  /mobile?methodno=MChatDel&debug=1&appid=nju&deviceid=1&userid=1&verify=1&viewid=
+	 */
+	+(ApiMChatDel*) getApiMChatDel{
+		return [[ApiMChatDel alloc ] init];
+	}
+	
+	/**
+	 *  南呱黑名单 /mobile?methodno=MChatBlack&debug=1&appid=nju&deviceid=1&userid=1&verify=1&viewid=
+	 */
+	+(ApiMChatBlack*) getApiMChatBlack{
+		return [[ApiMChatBlack alloc ] init];
 	}
 	
 	/**
@@ -163,38 +177,10 @@
 	}
 	
 	/**
-	 * 退出登录   /mobile?methodno=MLogout&debug=1&deviceid=&appid=&userid=
-	 */
-	+(ApiMLogout*) getApiMLogout{
-		return [[ApiMLogout alloc ] init];
-	}
-	
-	/**
 	 * 获取欢迎页   /mobile?methodno=MGetWelcomePage&debug=&deviceid=&appid=
 	 */
 	+(ApiMGetWelcomePage*) getApiMGetWelcomePage{
 		return [[ApiMGetWelcomePage alloc ] init];
-	}
-	
-	/**
-	 * 获取手机验证码 /mobile?methodno=MGetMobileVerify&debug=1&deviceid=1&phone=&appid=
-	 */
-	+(ApiMGetMobileVerify*) getApiMGetMobileVerify{
-		return [[ApiMGetMobileVerify alloc ] init];
-	}
-	
-	/**
-	 * 验证手机号 /mobile?methodno=MVerifyMobile&debug=1&deviceid=1&phone=&appid=&code=
-	 */
-	+(ApiMVerifyMobile*) getApiMVerifyMobile{
-		return [[ApiMVerifyMobile alloc ] init];
-	}
-	
-	/**
-	 * 修改头像:MImg   /mobile?methodno=UpdateHeadImg&debug=1&deviceid=1&userid=&verify=&appid=
-	 */
-	+(ApiMUpdateHeadImg*) getApiMUpdateHeadImg{
-		return [[ApiMUpdateHeadImg alloc ] init];
 	}
 	
 	/**
@@ -209,69 +195,6 @@
 	 */
 	+(ApiMRss*) getApiMRss{
 		return [[ApiMRss alloc ] init];
-	}
-	
-	/**
-	 *  树洞赞 /mobile?methodno=MPraise&debug=1&deviceid=1&appid=1&userid=1&verify=1&id=1&type=1
-	 */
-	+(ApiMPraise*) getApiMPraise{
-		return [[ApiMPraise alloc ] init];
-	}
-	
-	/**
-	 *  发布树洞:MAddTopic     /mobile?methodno=MAddTreeHole&debug=1&deviceid=1&userid=1&verify=1
-	 */
-	+(ApiMAddTreeHole*) getApiMAddTreeHole{
-		return [[ApiMAddTreeHole alloc ] init];
-	}
-	
-	/**
-	 *  树洞删除 /mobile?methodno=MTreeHoleDel&debug=1&deviceid=1&appid=1&userid=1&verify=1&id=1
-	 */
-	+(ApiMTreeHoleDel*) getApiMTreeHoleDel{
-		return [[ApiMTreeHoleDel alloc ] init];
-	}
-	
-	/**
-	 *  发布树洞评论 /mobile?methodno=MTreeHoleComment&debug=1&deviceid=1&appid=1&userid=1&verify=1&id=&content=&reply=&commentId=
-	 */
-	+(ApiMTreeHoleComment*) getApiMTreeHoleComment{
-		return [[ApiMTreeHoleComment alloc ] init];
-	}
-	
-	/**
-	 *  南呱记录删除  /mobile?methodno=MChatDel&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=
-	 */
-	+(ApiMChatDel*) getApiMChatDel{
-		return [[ApiMChatDel alloc ] init];
-	}
-	
-	/**
-	 *  南呱黑名单 /mobile?methodno=MChatBlack&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=
-	 */
-	+(ApiMChatBlack*) getApiMChatBlack{
-		return [[ApiMChatBlack alloc ] init];
-	}
-	
-	/**
-	 *  南呱换人 /mobile?methodno=MChatChange&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=
-	 */
-	+(ApiMChatChange*) getApiMChatChange{
-		return [[ApiMChatChange alloc ] init];
-	}
-	
-	/**
-	 *  南呱呼叫  /mobile?methodno=MChatCall&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=
-	 */
-	+(ApiMChatCall*) getApiMChatCall{
-		return [[ApiMChatCall alloc ] init];
-	}
-	
-	/**
-	 *  南呱呼叫应答 /mobile?methodno=MChatCallBack&debug=1&appid=nju&deviceid=1&userid=1&verify=1&id=&type=
-	 */
-	+(ApiMChatCallBack*) getApiMChatCallBack{
-		return [[ApiMChatCallBack alloc ] init];
 	}
 	
 	/**
@@ -298,8 +221,29 @@
 	/**
 	 *  课程表 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
 	 */
+	+(ApiMScheduleAuto*) getApiMScheduleAuto{
+		return [[ApiMScheduleAuto alloc ] init];
+	}
+	
+	/**
+	 *   课程表-教务处全新抓取 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+	 */
 	+(ApiMSchedule*) getApiMSchedule{
 		return [[ApiMSchedule alloc ] init];
+	}
+	
+	/**
+	 *   课程表-添加课程 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+	 */
+	+(ApiMAddClass*) getApiMAddClass{
+		return [[ApiMAddClass alloc ] init];
+	}
+	
+	/**
+	 *   课程表-删除课程 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+	 */
+	+(ApiMDelClass*) getApiMDelClass{
+		return [[ApiMDelClass alloc ] init];
 	}
 	
 	/**
@@ -366,17 +310,31 @@
 	}
 	
 	/**
-	 *  树洞首页 /mobile?methodno=MTreeHoleList&debug=1&deviceid=1&appid=1&userid=1&verify=1&type=0&begin=
+	 *  获取所有话题(前三个首页显示) /mobile?methodno=MGetTags&debug=1&deviceid=1&appid=1&userid=1&verify=1
+	 */
+	+(ApiMGetTags*) getApiMGetTags{
+		return [[ApiMGetTags alloc ] init];
+	}
+	
+	/**
+	 *  树洞首页 /mobile?methodno=MTreeHoleList&debug=1&deviceid=1&appid=1&userid=1&verify=1&begin=
 	 */
 	+(ApiMTreeHoleList*) getApiMTreeHoleList{
 		return [[ApiMTreeHoleList alloc ] init];
 	}
 	
 	/**
-	 *  树洞新消息 /mobile?methodno=MTreeHoleNews&debug=1&deviceid=1&appid=1&userid=1&verify=1&begin=
+	 *  树洞查询 /mobile?methodno=MTreeHoleQuery&debug=1&deviceid=1&appid=1&userid=1&verify=1&type=
 	 */
-	+(ApiMTreeHoleNews*) getApiMTreeHoleNews{
-		return [[ApiMTreeHoleNews alloc ] init];
+	+(ApiMTreeHoleQuery*) getApiMTreeHoleQuery{
+		return [[ApiMTreeHoleQuery alloc ] init];
+	}
+	
+	/**
+	 *  话题树洞 /mobile?methodno=MTagTreeHole&debug=1&deviceid=1&appid=1&userid=1&verify=1&tagid=&begin=
+	 */
+	+(ApiMTagTreeHole*) getApiMTagTreeHole{
+		return [[ApiMTagTreeHole alloc ] init];
 	}
 	
 	/**
@@ -387,14 +345,70 @@
 	}
 	
 	/**
-	 * 登录 /mobile?methodno=MLogin&debug=1&phone=&password=&deviceid=&appid=&pushId=&device=
+	 *  树洞评论 /mobile?methodno=MTreeHoleComments&debug=1&deviceid=1&appid=1&userid=1&verify=1&id=1&begin=
+	 */
+	+(ApiMTreeHoleComments*) getApiMTreeHoleComments{
+		return [[ApiMTreeHoleComments alloc ] init];
+	}
+	
+	/**
+	 *  获取消息数 /mobile?methodno=MGetMsgCount&debug=1&deviceid=1&appid=1&userid=1&verify=1
+	 */
+	+(ApiMGetMsgCount*) getApiMGetMsgCount{
+		return [[ApiMGetMsgCount alloc ] init];
+	}
+	
+	/**
+	 *  树洞赞 /mobile?methodno=MPraise&debug=1&deviceid=1&appid=1&userid=1&verify=1&id=1&type=1
+	 */
+	+(ApiMPraise*) getApiMPraise{
+		return [[ApiMPraise alloc ] init];
+	}
+	
+	/**
+	 *  发布树洞:MAddTopic   /mobile?methodno=MAddTreeHole&debug=1&deviceid=1&userid=1&verify=1
+	 */
+	+(ApiMAddTreeHole*) getApiMAddTreeHole{
+		return [[ApiMAddTreeHole alloc ] init];
+	}
+	
+	/**
+	 *  树洞删除 /mobile?methodno=MTreeHoleDel&debug=1&deviceid=1&appid=1&userid=1&verify=1&id=1
+	 */
+	+(ApiMTreeHoleDel*) getApiMTreeHoleDel{
+		return [[ApiMTreeHoleDel alloc ] init];
+	}
+	
+	/**
+	 *  树洞举报 /mobile?methodno=MTreeHoleReport&debug=1&deviceid=1&appid=1&userid=1&verify=1&id=1
+	 */
+	+(ApiMTreeHoleReport*) getApiMTreeHoleReport{
+		return [[ApiMTreeHoleReport alloc ] init];
+	}
+	
+	/**
+	 *  发布树洞评论 /mobile?methodno=MTreeHoleComment&debug=1&deviceid=1&appid=1&userid=1&verify=1&id=&content=&reply=&floor=
+	 */
+	+(ApiMTreeHoleComment*) getApiMTreeHoleComment{
+		return [[ApiMTreeHoleComment alloc ] init];
+	}
+	
+	/**
+	 *  树洞新的评论 /mobile?methodno=MTreeHoleNewComment&debug=1&deviceid=1&appid=1&userid=1&verify=1
+	 */
+	+(ApiMTreeHoleNewComment*) getApiMTreeHoleNewComment{
+		return [[ApiMTreeHoleNewComment alloc ] init];
+	}
+	
+	/**
+	 * 登录 /mobile?methodno=MLogin&debug=1&phone=&password=&deviceid=&appid=&device=
 	 */
 	+(ApiMLogin*) getApiMLogin{
 		return [[ApiMLogin alloc ] init];
 	}
 	
 	/**
-	 * 注册或忘记密码 /mobile?methodno=MRegist&debug=1&deviceid=1&phone=&password=&nickname=&code=&appid=&pushId=&device=
+	 * 注册或忘记密码 /mobile?methodno=MRegist&debug=1&deviceid=1&phone=&password=&nickname=&code=&appid=&device=
 	 */
 	+(ApiMRegist*) getApiMRegist{
 		return [[ApiMRegist alloc ] init];
@@ -419,6 +433,34 @@
 	 */
 	+(ApiMUpdateUserInfo*) getApiMUpdateUserInfo{
 		return [[ApiMUpdateUserInfo alloc ] init];
+	}
+	
+	/**
+	 * 退出登录   /mobile?methodno=MLogout&debug=1&deviceid=&appid=&userid=
+	 */
+	+(ApiMLogout*) getApiMLogout{
+		return [[ApiMLogout alloc ] init];
+	}
+	
+	/**
+	 * 获取手机验证码 /mobile?methodno=MGetMobileVerify&debug=1&deviceid=1&phone=&appid=
+	 */
+	+(ApiMGetMobileVerify*) getApiMGetMobileVerify{
+		return [[ApiMGetMobileVerify alloc ] init];
+	}
+	
+	/**
+	 * 验证手机号 /mobile?methodno=MVerifyMobile&debug=1&deviceid=1&phone=&appid=&code=
+	 */
+	+(ApiMVerifyMobile*) getApiMVerifyMobile{
+		return [[ApiMVerifyMobile alloc ] init];
+	}
+	
+	/**
+	 * 修改头像:MImg   /mobile?methodno=UpdateHeadImg&debug=1&deviceid=1&userid=&verify=&appid=
+	 */
+	+(ApiMUpdateHeadImg*) getApiMUpdateHeadImg{
+		return [[ApiMUpdateHeadImg alloc ] init];
 	}
 
 @end

@@ -566,50 +566,50 @@ static NSArray* descriptions;
 }
 
 #pragma - mark callview
-- (void)getCall:(NSNotification *)notification
-{
-    if (![[self.navigationController.viewControllers lastObject] isKindOfClass:NSClassFromString(@"ChatViewController")]) {
-        [self showCallView:notification.userInfo];
-    }
-}
+//- (void)getCall:(NSNotification *)notification
+//{
+//    if (![[self.navigationController.viewControllers lastObject] isKindOfClass:NSClassFromString(@"ChatViewController")]) {
+//        [self showCallView:notification.userInfo];
+//    }
+//}
 
-- (void)cancelCall
-{
-    [[ApisFactory getApiMChatCallBack] load:self selecter:@selector(disposMessage:) id:self.callView.targetid type:0];
-    [self dismissCallView];
-}
+//- (void)cancelCall
+//{
+//    [[ApisFactory getApiMChatCallBack] load:self selecter:@selector(disposMessage:) id:self.callView.targetid type:0];
+//    [self dismissCallView];
+//}
+//
+//- (void)confirmCall
+//{
+//    [[ApisFactory getApiMChatCallBack] load:self selecter:@selector(disposMessage:) id:self.callView.targetid type:1];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
+//    ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+//    vc.targetid = self.callView.targetid;
+//    [self.navigationController pushViewController:vc animated:YES];
+//    [self dismissCallView];
+//}
 
-- (void)confirmCall
-{
-    [[ApisFactory getApiMChatCallBack] load:self selecter:@selector(disposMessage:) id:self.callView.targetid type:1];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
-    ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-    vc.targetid = self.callView.targetid;
-    [self.navigationController pushViewController:vc animated:YES];
-    [self dismissCallView];
-}
-
-- (void)showCallView:(NSDictionary *)userInfo
-{
-    [self addMask];
-    if (!self.callView) {
-        self.callView = [[[NSBundle mainBundle] loadNibNamed:@"CallView" owner:self options:nil] firstObject];
-    }
-    self.callView.transform = CGAffineTransformIdentity;
-    [self.callView setTargetid:[userInfo objectForKey:@"id"]];
-    [self.callView.cancelButton addTarget:self action:@selector(cancelCall) forControlEvents:UIControlEventTouchUpInside];
-    [self.callView.confirmButton addTarget:self action:@selector(confirmCall) forControlEvents:UIControlEventTouchUpInside];
-
-    self.callView.center = [UIApplication sharedApplication].keyWindow.center;
-    [self show];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.callView];
-}
-
-- (void)dismissCallView
-{
-    [self removeMask];
-    [self hide];
-}
+//- (void)showCallView:(NSDictionary *)userInfo
+//{
+//    [self addMask];
+//    if (!self.callView) {
+//        self.callView = [[[NSBundle mainBundle] loadNibNamed:@"CallView" owner:self options:nil] firstObject];
+//    }
+//    self.callView.transform = CGAffineTransformIdentity;
+//    [self.callView setTargetid:[userInfo objectForKey:@"id"]];
+//    [self.callView.cancelButton addTarget:self action:@selector(cancelCall) forControlEvents:UIControlEventTouchUpInside];
+//    [self.callView.confirmButton addTarget:self action:@selector(confirmCall) forControlEvents:UIControlEventTouchUpInside];
+//
+//    self.callView.center = [UIApplication sharedApplication].keyWindow.center;
+//    [self show];
+//    [[UIApplication sharedApplication].keyWindow addSubview:self.callView];
+//}
+//
+//- (void)dismissCallView
+//{
+//    [self removeMask];
+//    [self hide];
+//}
 
 - (void)addMask
 {
@@ -626,47 +626,47 @@ static NSArray* descriptions;
     [self.maskView removeFromSuperview];
 }
 
-- (void)show
-{
-//    self.editView.center = CGPointMake(self.view.center.x, 150);
-    CAKeyframeAnimation *popAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    popAnimation.duration = 0.4;
-    popAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.01f, 0.01f, 1.0f)],
-                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
-                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9f, 0.9f, 1.0f)],
-                            [NSValue valueWithCATransform3D:CATransform3DIdentity]];
-    popAnimation.keyTimes = @[@0.2f, @0.5f, @0.75f, @1.0f];
-    popAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    [self.callView.layer addAnimation:popAnimation forKey:nil];
-}
-
-- (void)hide
-{
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.callView.transform = CGAffineTransformMakeScale(1.1, 1.1);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            self.callView.transform = CGAffineTransformMakeScale(0, 0);
-        } completion:^(BOOL finished) {
-            [self.callView removeFromSuperview];
-        }];
-    }];
-}
-
-
-- (void)goToChat:(NSNotification *)notification
-{
-    NSString *type = notification.object;
-    if (type.integerValue == 1) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
-        ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-        vc.targetid = [notification.userInfo objectForKey:@"target"];
-        [self.navigationController pushViewController:vc animated:YES];
-        [self dismissCallView];
-    }
-}
+//- (void)show
+//{
+////    self.editView.center = CGPointMake(self.view.center.x, 150);
+//    CAKeyframeAnimation *popAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+//    popAnimation.duration = 0.4;
+//    popAnimation.values = @[[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.01f, 0.01f, 1.0f)],
+//                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.1f, 1.1f, 1.0f)],
+//                            [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9f, 0.9f, 1.0f)],
+//                            [NSValue valueWithCATransform3D:CATransform3DIdentity]];
+//    popAnimation.keyTimes = @[@0.2f, @0.5f, @0.75f, @1.0f];
+//    popAnimation.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+//                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+//                                     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+//    [self.callView.layer addAnimation:popAnimation forKey:nil];
+//}
+//
+//- (void)hide
+//{
+//    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//        self.callView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+//    } completion:^(BOOL finished) {
+//        [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//            self.callView.transform = CGAffineTransformMakeScale(0, 0);
+//        } completion:^(BOOL finished) {
+//            [self.callView removeFromSuperview];
+//        }];
+//    }];
+//}
+//
+//
+//- (void)goToChat:(NSNotification *)notification
+//{
+//    NSString *type = notification.object;
+//    if (type.integerValue == 1) {
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
+//        ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+//        vc.targetid = [notification.userInfo objectForKey:@"target"];
+//        [self.navigationController pushViewController:vc animated:YES];
+//        [self dismissCallView];
+//    }
+//}
 
 
 @end

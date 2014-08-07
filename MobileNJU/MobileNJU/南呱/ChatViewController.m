@@ -147,7 +147,7 @@
         beginStr = chat.createtime;
     }
     
-    [[ApisFactory getApiMChat] load:self selecter:@selector(disposMessage:) id:_targetid begin:beginStr];
+//    [[ApisFactory getApiMChat] load:self selecter:@selector(disposMessage:) id:_targetid begin:beginStr];
 }
 
 - (void)getNewMessage:(NSNotification *)notification
@@ -189,7 +189,7 @@
 
 - (void)callAction:(id)sender
 {
-    [[ApisFactory getApiMChatCall] load:self selecter:@selector(disposMessage:) id:_targetid];
+//    [[ApisFactory getApiMChatCall] load:self selecter:@selector(disposMessage:) id:_targetid];
     [UIView transitionWithView:self.view duration:1 options:UIViewAnimationOptionTransitionFlipFromRight animations:^(void){
     } completion:^(BOOL isFinished) {
         if (isFinished) {

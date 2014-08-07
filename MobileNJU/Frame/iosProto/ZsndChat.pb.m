@@ -21,17 +21,26 @@ static PBExtensionRegistry* extensionRegistry = nil;
 
 @interface MChatList ()
 @property (retain) NSMutableArray* mutableChatList;
+@property int32_t unreadCnt;
 @end
 
 @implementation MChatList
 
 @synthesize mutableChatList;
+- (BOOL) hasUnreadCnt {
+  return !!hasUnreadCnt_;
+}
+- (void) setHasUnreadCnt:(BOOL) value {
+  hasUnreadCnt_ = !!value;
+}
+@synthesize unreadCnt;
 - (void) dealloc {
   self.mutableChatList = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
+    self.unreadCnt = 0;
   }
   return self;
 }
@@ -61,6 +70,9 @@ static MChatList* defaultMChatListInstance = nil;
   for (MChatIndex* element in self.chatList) {
     [output writeMessage:1 value:element];
   }
+  if (self.hasUnreadCnt) {
+    [output writeInt32:2 value:self.unreadCnt];
+  }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -72,6 +84,9 @@ static MChatList* defaultMChatListInstance = nil;
   size = 0;
   for (MChatIndex* element in self.chatList) {
     size += computeMessageSize(1, element);
+  }
+  if (self.hasUnreadCnt) {
+    size += computeInt32Size(2, self.unreadCnt);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -154,6 +169,9 @@ static MChatList* defaultMChatListInstance = nil;
     }
     [result.mutableChatList addObjectsFromArray:other.mutableChatList];
   }
+  if (other.hasUnreadCnt) {
+    [self setUnreadCnt:other.unreadCnt];
+  }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -179,6 +197,10 @@ static MChatList* defaultMChatListInstance = nil;
         MChatIndex_Builder* subBuilder = [MChatIndex builder];
         [input readMessage:subBuilder extensionRegistry:extensionRegistry];
         [self addChat:[subBuilder buildPartial]];
+        break;
+      }
+      case 16: {
+        [self setUnreadCnt:[input readInt32]];
         break;
       }
     }
@@ -213,16 +235,36 @@ static MChatList* defaultMChatListInstance = nil;
   [result.mutableChatList addObject:value];
   return self;
 }
+- (BOOL) hasUnreadCnt {
+  return result.hasUnreadCnt;
+}
+- (int32_t) unreadCnt {
+  return result.unreadCnt;
+}
+- (MChatList_Builder*) setUnreadCnt:(int32_t) value {
+  result.hasUnreadCnt = YES;
+  result.unreadCnt = value;
+  return self;
+}
+- (MChatList_Builder*) clearUnreadCnt {
+  result.hasUnreadCnt = NO;
+  result.unreadCnt = 0;
+  return self;
+}
 @end
 
 @interface MChatIndex ()
 @property (retain) NSString* id;
 @property (retain) NSString* targetid;
+@property int32_t targetHeadImg;
+@property (retain) NSString* userid;
 @property int32_t headImg;
-@property int32_t total;
-@property (retain) NSString* content;
+@property int32_t hasNew;
+@property (retain) NSString* msg;
 @property (retain) NSString* time;
-@property (retain) NSString* speaker;
+@property (retain) NSString* topicid;
+@property (retain) NSString* topicImg;
+@property (retain) NSString* topicContent;
 @end
 
 @implementation MChatIndex
@@ -241,6 +283,20 @@ static MChatList* defaultMChatListInstance = nil;
   hasTargetid_ = !!value;
 }
 @synthesize targetid;
+- (BOOL) hasTargetHeadImg {
+  return !!hasTargetHeadImg_;
+}
+- (void) setHasTargetHeadImg:(BOOL) value {
+  hasTargetHeadImg_ = !!value;
+}
+@synthesize targetHeadImg;
+- (BOOL) hasUserid {
+  return !!hasUserid_;
+}
+- (void) setHasUserid:(BOOL) value {
+  hasUserid_ = !!value;
+}
+@synthesize userid;
 - (BOOL) hasHeadImg {
   return !!hasHeadImg_;
 }
@@ -248,20 +304,20 @@ static MChatList* defaultMChatListInstance = nil;
   hasHeadImg_ = !!value;
 }
 @synthesize headImg;
-- (BOOL) hasTotal {
-  return !!hasTotal_;
+- (BOOL) hasHasNew {
+  return !!hasHasNew_;
 }
-- (void) setHasTotal:(BOOL) value {
-  hasTotal_ = !!value;
+- (void) setHasHasNew:(BOOL) value {
+  hasHasNew_ = !!value;
 }
-@synthesize total;
-- (BOOL) hasContent {
-  return !!hasContent_;
+@synthesize hasNew;
+- (BOOL) hasMsg {
+  return !!hasMsg_;
 }
-- (void) setHasContent:(BOOL) value {
-  hasContent_ = !!value;
+- (void) setHasMsg:(BOOL) value {
+  hasMsg_ = !!value;
 }
-@synthesize content;
+@synthesize msg;
 - (BOOL) hasTime {
   return !!hasTime_;
 }
@@ -269,30 +325,51 @@ static MChatList* defaultMChatListInstance = nil;
   hasTime_ = !!value;
 }
 @synthesize time;
-- (BOOL) hasSpeaker {
-  return !!hasSpeaker_;
+- (BOOL) hasTopicid {
+  return !!hasTopicid_;
 }
-- (void) setHasSpeaker:(BOOL) value {
-  hasSpeaker_ = !!value;
+- (void) setHasTopicid:(BOOL) value {
+  hasTopicid_ = !!value;
 }
-@synthesize speaker;
+@synthesize topicid;
+- (BOOL) hasTopicImg {
+  return !!hasTopicImg_;
+}
+- (void) setHasTopicImg:(BOOL) value {
+  hasTopicImg_ = !!value;
+}
+@synthesize topicImg;
+- (BOOL) hasTopicContent {
+  return !!hasTopicContent_;
+}
+- (void) setHasTopicContent:(BOOL) value {
+  hasTopicContent_ = !!value;
+}
+@synthesize topicContent;
 - (void) dealloc {
   self.id = nil;
   self.targetid = nil;
-  self.content = nil;
+  self.userid = nil;
+  self.msg = nil;
   self.time = nil;
-  self.speaker = nil;
+  self.topicid = nil;
+  self.topicImg = nil;
+  self.topicContent = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
     self.id = @"";
     self.targetid = @"";
+    self.targetHeadImg = 0;
+    self.userid = @"";
     self.headImg = 0;
-    self.total = 0;
-    self.content = @"";
+    self.hasNew = 0;
+    self.msg = @"";
     self.time = @"";
-    self.speaker = @"";
+    self.topicid = @"";
+    self.topicImg = @"";
+    self.topicContent = @"";
   }
   return self;
 }
@@ -318,20 +395,32 @@ static MChatIndex* defaultMChatIndexInstance = nil;
   if (self.hasTargetid) {
     [output writeString:2 value:self.targetid];
   }
+  if (self.hasTargetHeadImg) {
+    [output writeInt32:3 value:self.targetHeadImg];
+  }
+  if (self.hasUserid) {
+    [output writeString:4 value:self.userid];
+  }
   if (self.hasHeadImg) {
-    [output writeInt32:3 value:self.headImg];
+    [output writeInt32:5 value:self.headImg];
   }
-  if (self.hasTotal) {
-    [output writeInt32:4 value:self.total];
+  if (self.hasHasNew) {
+    [output writeInt32:6 value:self.hasNew];
   }
-  if (self.hasContent) {
-    [output writeString:5 value:self.content];
+  if (self.hasMsg) {
+    [output writeString:7 value:self.msg];
   }
   if (self.hasTime) {
-    [output writeString:6 value:self.time];
+    [output writeString:8 value:self.time];
   }
-  if (self.hasSpeaker) {
-    [output writeString:7 value:self.speaker];
+  if (self.hasTopicid) {
+    [output writeString:9 value:self.topicid];
+  }
+  if (self.hasTopicImg) {
+    [output writeString:10 value:self.topicImg];
+  }
+  if (self.hasTopicContent) {
+    [output writeString:11 value:self.topicContent];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -348,20 +437,32 @@ static MChatIndex* defaultMChatIndexInstance = nil;
   if (self.hasTargetid) {
     size += computeStringSize(2, self.targetid);
   }
+  if (self.hasTargetHeadImg) {
+    size += computeInt32Size(3, self.targetHeadImg);
+  }
+  if (self.hasUserid) {
+    size += computeStringSize(4, self.userid);
+  }
   if (self.hasHeadImg) {
-    size += computeInt32Size(3, self.headImg);
+    size += computeInt32Size(5, self.headImg);
   }
-  if (self.hasTotal) {
-    size += computeInt32Size(4, self.total);
+  if (self.hasHasNew) {
+    size += computeInt32Size(6, self.hasNew);
   }
-  if (self.hasContent) {
-    size += computeStringSize(5, self.content);
+  if (self.hasMsg) {
+    size += computeStringSize(7, self.msg);
   }
   if (self.hasTime) {
-    size += computeStringSize(6, self.time);
+    size += computeStringSize(8, self.time);
   }
-  if (self.hasSpeaker) {
-    size += computeStringSize(7, self.speaker);
+  if (self.hasTopicid) {
+    size += computeStringSize(9, self.topicid);
+  }
+  if (self.hasTopicImg) {
+    size += computeStringSize(10, self.topicImg);
+  }
+  if (self.hasTopicContent) {
+    size += computeStringSize(11, self.topicContent);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
@@ -444,20 +545,32 @@ static MChatIndex* defaultMChatIndexInstance = nil;
   if (other.hasTargetid) {
     [self setTargetid:other.targetid];
   }
+  if (other.hasTargetHeadImg) {
+    [self setTargetHeadImg:other.targetHeadImg];
+  }
+  if (other.hasUserid) {
+    [self setUserid:other.userid];
+  }
   if (other.hasHeadImg) {
     [self setHeadImg:other.headImg];
   }
-  if (other.hasTotal) {
-    [self setTotal:other.total];
+  if (other.hasHasNew) {
+    [self setHasNew:other.hasNew];
   }
-  if (other.hasContent) {
-    [self setContent:other.content];
+  if (other.hasMsg) {
+    [self setMsg:other.msg];
   }
   if (other.hasTime) {
     [self setTime:other.time];
   }
-  if (other.hasSpeaker) {
-    [self setSpeaker:other.speaker];
+  if (other.hasTopicid) {
+    [self setTopicid:other.topicid];
+  }
+  if (other.hasTopicImg) {
+    [self setTopicImg:other.topicImg];
+  }
+  if (other.hasTopicContent) {
+    [self setTopicContent:other.topicContent];
   }
   [self mergeUnknownFields:other.unknownFields];
   return self;
@@ -489,23 +602,39 @@ static MChatIndex* defaultMChatIndexInstance = nil;
         break;
       }
       case 24: {
+        [self setTargetHeadImg:[input readInt32]];
+        break;
+      }
+      case 34: {
+        [self setUserid:[input readString]];
+        break;
+      }
+      case 40: {
         [self setHeadImg:[input readInt32]];
         break;
       }
-      case 32: {
-        [self setTotal:[input readInt32]];
-        break;
-      }
-      case 42: {
-        [self setContent:[input readString]];
-        break;
-      }
-      case 50: {
-        [self setTime:[input readString]];
+      case 48: {
+        [self setHasNew:[input readInt32]];
         break;
       }
       case 58: {
-        [self setSpeaker:[input readString]];
+        [self setMsg:[input readString]];
+        break;
+      }
+      case 66: {
+        [self setTime:[input readString]];
+        break;
+      }
+      case 74: {
+        [self setTopicid:[input readString]];
+        break;
+      }
+      case 82: {
+        [self setTopicImg:[input readString]];
+        break;
+      }
+      case 90: {
+        [self setTopicContent:[input readString]];
         break;
       }
     }
@@ -543,6 +672,38 @@ static MChatIndex* defaultMChatIndexInstance = nil;
   result.targetid = @"";
   return self;
 }
+- (BOOL) hasTargetHeadImg {
+  return result.hasTargetHeadImg;
+}
+- (int32_t) targetHeadImg {
+  return result.targetHeadImg;
+}
+- (MChatIndex_Builder*) setTargetHeadImg:(int32_t) value {
+  result.hasTargetHeadImg = YES;
+  result.targetHeadImg = value;
+  return self;
+}
+- (MChatIndex_Builder*) clearTargetHeadImg {
+  result.hasTargetHeadImg = NO;
+  result.targetHeadImg = 0;
+  return self;
+}
+- (BOOL) hasUserid {
+  return result.hasUserid;
+}
+- (NSString*) userid {
+  return result.userid;
+}
+- (MChatIndex_Builder*) setUserid:(NSString*) value {
+  result.hasUserid = YES;
+  result.userid = value;
+  return self;
+}
+- (MChatIndex_Builder*) clearUserid {
+  result.hasUserid = NO;
+  result.userid = @"";
+  return self;
+}
 - (BOOL) hasHeadImg {
   return result.hasHeadImg;
 }
@@ -559,36 +720,36 @@ static MChatIndex* defaultMChatIndexInstance = nil;
   result.headImg = 0;
   return self;
 }
-- (BOOL) hasTotal {
-  return result.hasTotal;
+- (BOOL) hasHasNew {
+  return result.hasHasNew;
 }
-- (int32_t) total {
-  return result.total;
+- (int32_t) hasNew {
+  return result.hasNew;
 }
-- (MChatIndex_Builder*) setTotal:(int32_t) value {
-  result.hasTotal = YES;
-  result.total = value;
+- (MChatIndex_Builder*) setHasNew:(int32_t) value {
+  result.hasHasNew = YES;
+  result.hasNew = value;
   return self;
 }
-- (MChatIndex_Builder*) clearTotal {
-  result.hasTotal = NO;
-  result.total = 0;
+- (MChatIndex_Builder*) clearHasNew {
+  result.hasHasNew = NO;
+  result.hasNew = 0;
   return self;
 }
-- (BOOL) hasContent {
-  return result.hasContent;
+- (BOOL) hasMsg {
+  return result.hasMsg;
 }
-- (NSString*) content {
-  return result.content;
+- (NSString*) msg {
+  return result.msg;
 }
-- (MChatIndex_Builder*) setContent:(NSString*) value {
-  result.hasContent = YES;
-  result.content = value;
+- (MChatIndex_Builder*) setMsg:(NSString*) value {
+  result.hasMsg = YES;
+  result.msg = value;
   return self;
 }
-- (MChatIndex_Builder*) clearContent {
-  result.hasContent = NO;
-  result.content = @"";
+- (MChatIndex_Builder*) clearMsg {
+  result.hasMsg = NO;
+  result.msg = @"";
   return self;
 }
 - (BOOL) hasTime {
@@ -607,20 +768,52 @@ static MChatIndex* defaultMChatIndexInstance = nil;
   result.time = @"";
   return self;
 }
-- (BOOL) hasSpeaker {
-  return result.hasSpeaker;
+- (BOOL) hasTopicid {
+  return result.hasTopicid;
 }
-- (NSString*) speaker {
-  return result.speaker;
+- (NSString*) topicid {
+  return result.topicid;
 }
-- (MChatIndex_Builder*) setSpeaker:(NSString*) value {
-  result.hasSpeaker = YES;
-  result.speaker = value;
+- (MChatIndex_Builder*) setTopicid:(NSString*) value {
+  result.hasTopicid = YES;
+  result.topicid = value;
   return self;
 }
-- (MChatIndex_Builder*) clearSpeaker {
-  result.hasSpeaker = NO;
-  result.speaker = @"";
+- (MChatIndex_Builder*) clearTopicid {
+  result.hasTopicid = NO;
+  result.topicid = @"";
+  return self;
+}
+- (BOOL) hasTopicImg {
+  return result.hasTopicImg;
+}
+- (NSString*) topicImg {
+  return result.topicImg;
+}
+- (MChatIndex_Builder*) setTopicImg:(NSString*) value {
+  result.hasTopicImg = YES;
+  result.topicImg = value;
+  return self;
+}
+- (MChatIndex_Builder*) clearTopicImg {
+  result.hasTopicImg = NO;
+  result.topicImg = @"";
+  return self;
+}
+- (BOOL) hasTopicContent {
+  return result.hasTopicContent;
+}
+- (NSString*) topicContent {
+  return result.topicContent;
+}
+- (MChatIndex_Builder*) setTopicContent:(NSString*) value {
+  result.hasTopicContent = YES;
+  result.topicContent = value;
+  return self;
+}
+- (MChatIndex_Builder*) clearTopicContent {
+  result.hasTopicContent = NO;
+  result.topicContent = @"";
   return self;
 }
 @end
@@ -1349,15 +1542,15 @@ static MChat* defaultMChatInstance = nil;
 }
 @end
 
-@interface MMatch ()
+@interface MView ()
 @property (retain) NSString* userid;
 @property int32_t headImg;
-@property int32_t flower;
-@property (retain) NSString* school;
-@property (retain) NSString* belong;
+@property (retain) NSString* targetid;
+@property int32_t targetHeadImg;
+@property (retain) NSString* topicid;
 @end
 
-@implementation MMatch
+@implementation MView
 
 - (BOOL) hasUserid {
   return !!hasUserid_;
@@ -1373,54 +1566,54 @@ static MChat* defaultMChatInstance = nil;
   hasHeadImg_ = !!value;
 }
 @synthesize headImg;
-- (BOOL) hasFlower {
-  return !!hasFlower_;
+- (BOOL) hasTargetid {
+  return !!hasTargetid_;
 }
-- (void) setHasFlower:(BOOL) value {
-  hasFlower_ = !!value;
+- (void) setHasTargetid:(BOOL) value {
+  hasTargetid_ = !!value;
 }
-@synthesize flower;
-- (BOOL) hasSchool {
-  return !!hasSchool_;
+@synthesize targetid;
+- (BOOL) hasTargetHeadImg {
+  return !!hasTargetHeadImg_;
 }
-- (void) setHasSchool:(BOOL) value {
-  hasSchool_ = !!value;
+- (void) setHasTargetHeadImg:(BOOL) value {
+  hasTargetHeadImg_ = !!value;
 }
-@synthesize school;
-- (BOOL) hasBelong {
-  return !!hasBelong_;
+@synthesize targetHeadImg;
+- (BOOL) hasTopicid {
+  return !!hasTopicid_;
 }
-- (void) setHasBelong:(BOOL) value {
-  hasBelong_ = !!value;
+- (void) setHasTopicid:(BOOL) value {
+  hasTopicid_ = !!value;
 }
-@synthesize belong;
+@synthesize topicid;
 - (void) dealloc {
   self.userid = nil;
-  self.school = nil;
-  self.belong = nil;
+  self.targetid = nil;
+  self.topicid = nil;
   [super dealloc];
 }
 - (id) init {
   if ((self = [super init])) {
     self.userid = @"";
     self.headImg = 0;
-    self.flower = 0;
-    self.school = @"";
-    self.belong = @"";
+    self.targetid = @"";
+    self.targetHeadImg = 0;
+    self.topicid = @"";
   }
   return self;
 }
-static MMatch* defaultMMatchInstance = nil;
+static MView* defaultMViewInstance = nil;
 + (void) initialize {
-  if (self == [MMatch class]) {
-    defaultMMatchInstance = [[MMatch alloc] init];
+  if (self == [MView class]) {
+    defaultMViewInstance = [[MView alloc] init];
   }
 }
-+ (MMatch*) defaultInstance {
-  return defaultMMatchInstance;
++ (MView*) defaultInstance {
+  return defaultMViewInstance;
 }
-- (MMatch*) defaultInstance {
-  return defaultMMatchInstance;
+- (MView*) defaultInstance {
+  return defaultMViewInstance;
 }
 - (BOOL) isInitialized {
   return YES;
@@ -1432,14 +1625,14 @@ static MMatch* defaultMMatchInstance = nil;
   if (self.hasHeadImg) {
     [output writeInt32:2 value:self.headImg];
   }
-  if (self.hasFlower) {
-    [output writeInt32:3 value:self.flower];
+  if (self.hasTargetid) {
+    [output writeString:3 value:self.targetid];
   }
-  if (self.hasSchool) {
-    [output writeString:4 value:self.school];
+  if (self.hasTargetHeadImg) {
+    [output writeInt32:4 value:self.targetHeadImg];
   }
-  if (self.hasBelong) {
-    [output writeString:5 value:self.belong];
+  if (self.hasTopicid) {
+    [output writeString:5 value:self.topicid];
   }
   [self.unknownFields writeToCodedOutputStream:output];
 }
@@ -1456,53 +1649,53 @@ static MMatch* defaultMMatchInstance = nil;
   if (self.hasHeadImg) {
     size += computeInt32Size(2, self.headImg);
   }
-  if (self.hasFlower) {
-    size += computeInt32Size(3, self.flower);
+  if (self.hasTargetid) {
+    size += computeStringSize(3, self.targetid);
   }
-  if (self.hasSchool) {
-    size += computeStringSize(4, self.school);
+  if (self.hasTargetHeadImg) {
+    size += computeInt32Size(4, self.targetHeadImg);
   }
-  if (self.hasBelong) {
-    size += computeStringSize(5, self.belong);
+  if (self.hasTopicid) {
+    size += computeStringSize(5, self.topicid);
   }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
   return size;
 }
-+ (MMatch*) parseFromData:(NSData*) data {
-  return (MMatch*)[[[MMatch builder] mergeFromData:data] build];
++ (MView*) parseFromData:(NSData*) data {
+  return (MView*)[[[MView builder] mergeFromData:data] build];
 }
-+ (MMatch*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MMatch*)[[[MMatch builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
++ (MView*) parseFromData:(NSData*) data extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MView*)[[[MView builder] mergeFromData:data extensionRegistry:extensionRegistry] build];
 }
-+ (MMatch*) parseFromInputStream:(NSInputStream*) input {
-  return (MMatch*)[[[MMatch builder] mergeFromInputStream:input] build];
++ (MView*) parseFromInputStream:(NSInputStream*) input {
+  return (MView*)[[[MView builder] mergeFromInputStream:input] build];
 }
-+ (MMatch*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MMatch*)[[[MMatch builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
++ (MView*) parseFromInputStream:(NSInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MView*)[[[MView builder] mergeFromInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (MMatch*) parseFromCodedInputStream:(PBCodedInputStream*) input {
-  return (MMatch*)[[[MMatch builder] mergeFromCodedInputStream:input] build];
++ (MView*) parseFromCodedInputStream:(PBCodedInputStream*) input {
+  return (MView*)[[[MView builder] mergeFromCodedInputStream:input] build];
 }
-+ (MMatch*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
-  return (MMatch*)[[[MMatch builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
++ (MView*) parseFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+  return (MView*)[[[MView builder] mergeFromCodedInputStream:input extensionRegistry:extensionRegistry] build];
 }
-+ (MMatch_Builder*) builder {
-  return [[[MMatch_Builder alloc] init] autorelease];
++ (MView_Builder*) builder {
+  return [[[MView_Builder alloc] init] autorelease];
 }
-+ (MMatch_Builder*) builderWithPrototype:(MMatch*) prototype {
-  return [[MMatch builder] mergeFrom:prototype];
++ (MView_Builder*) builderWithPrototype:(MView*) prototype {
+  return [[MView builder] mergeFrom:prototype];
 }
-- (MMatch_Builder*) builder {
-  return [MMatch builder];
+- (MView_Builder*) builder {
+  return [MView builder];
 }
 @end
 
-@interface MMatch_Builder()
-@property (retain) MMatch* result;
+@interface MView_Builder()
+@property (retain) MView* result;
 @end
 
-@implementation MMatch_Builder
+@implementation MView_Builder
 @synthesize result;
 - (void) dealloc {
   self.result = nil;
@@ -1510,34 +1703,34 @@ static MMatch* defaultMMatchInstance = nil;
 }
 - (id) init {
   if ((self = [super init])) {
-    self.result = [[[MMatch alloc] init] autorelease];
+    self.result = [[[MView alloc] init] autorelease];
   }
   return self;
 }
 - (PBGeneratedMessage*) internalGetResult {
   return result;
 }
-- (MMatch_Builder*) clear {
-  self.result = [[[MMatch alloc] init] autorelease];
+- (MView_Builder*) clear {
+  self.result = [[[MView alloc] init] autorelease];
   return self;
 }
-- (MMatch_Builder*) clone {
-  return [MMatch builderWithPrototype:result];
+- (MView_Builder*) clone {
+  return [MView builderWithPrototype:result];
 }
-- (MMatch*) defaultInstance {
-  return [MMatch defaultInstance];
+- (MView*) defaultInstance {
+  return [MView defaultInstance];
 }
-- (MMatch*) build {
+- (MView*) build {
   [self checkInitialized];
   return [self buildPartial];
 }
-- (MMatch*) buildPartial {
-  MMatch* returnMe = [[result retain] autorelease];
+- (MView*) buildPartial {
+  MView* returnMe = [[result retain] autorelease];
   self.result = nil;
   return returnMe;
 }
-- (MMatch_Builder*) mergeFrom:(MMatch*) other {
-  if (other == [MMatch defaultInstance]) {
+- (MView_Builder*) mergeFrom:(MView*) other {
+  if (other == [MView defaultInstance]) {
     return self;
   }
   if (other.hasUserid) {
@@ -1546,22 +1739,22 @@ static MMatch* defaultMMatchInstance = nil;
   if (other.hasHeadImg) {
     [self setHeadImg:other.headImg];
   }
-  if (other.hasFlower) {
-    [self setFlower:other.flower];
+  if (other.hasTargetid) {
+    [self setTargetid:other.targetid];
   }
-  if (other.hasSchool) {
-    [self setSchool:other.school];
+  if (other.hasTargetHeadImg) {
+    [self setTargetHeadImg:other.targetHeadImg];
   }
-  if (other.hasBelong) {
-    [self setBelong:other.belong];
+  if (other.hasTopicid) {
+    [self setTopicid:other.topicid];
   }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
-- (MMatch_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
+- (MView_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input {
   return [self mergeFromCodedInputStream:input extensionRegistry:[PBExtensionRegistry emptyRegistry]];
 }
-- (MMatch_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
+- (MView_Builder*) mergeFromCodedInputStream:(PBCodedInputStream*) input extensionRegistry:(PBExtensionRegistry*) extensionRegistry {
   PBUnknownFieldSet_Builder* unknownFields = [PBUnknownFieldSet builderWithUnknownFields:self.unknownFields];
   while (YES) {
     int32_t tag = [input readTag];
@@ -1584,16 +1777,16 @@ static MMatch* defaultMMatchInstance = nil;
         [self setHeadImg:[input readInt32]];
         break;
       }
-      case 24: {
-        [self setFlower:[input readInt32]];
+      case 26: {
+        [self setTargetid:[input readString]];
         break;
       }
-      case 34: {
-        [self setSchool:[input readString]];
+      case 32: {
+        [self setTargetHeadImg:[input readInt32]];
         break;
       }
       case 42: {
-        [self setBelong:[input readString]];
+        [self setTopicid:[input readString]];
         break;
       }
     }
@@ -1605,12 +1798,12 @@ static MMatch* defaultMMatchInstance = nil;
 - (NSString*) userid {
   return result.userid;
 }
-- (MMatch_Builder*) setUserid:(NSString*) value {
+- (MView_Builder*) setUserid:(NSString*) value {
   result.hasUserid = YES;
   result.userid = value;
   return self;
 }
-- (MMatch_Builder*) clearUserid {
+- (MView_Builder*) clearUserid {
   result.hasUserid = NO;
   result.userid = @"";
   return self;
@@ -1621,62 +1814,62 @@ static MMatch* defaultMMatchInstance = nil;
 - (int32_t) headImg {
   return result.headImg;
 }
-- (MMatch_Builder*) setHeadImg:(int32_t) value {
+- (MView_Builder*) setHeadImg:(int32_t) value {
   result.hasHeadImg = YES;
   result.headImg = value;
   return self;
 }
-- (MMatch_Builder*) clearHeadImg {
+- (MView_Builder*) clearHeadImg {
   result.hasHeadImg = NO;
   result.headImg = 0;
   return self;
 }
-- (BOOL) hasFlower {
-  return result.hasFlower;
+- (BOOL) hasTargetid {
+  return result.hasTargetid;
 }
-- (int32_t) flower {
-  return result.flower;
+- (NSString*) targetid {
+  return result.targetid;
 }
-- (MMatch_Builder*) setFlower:(int32_t) value {
-  result.hasFlower = YES;
-  result.flower = value;
+- (MView_Builder*) setTargetid:(NSString*) value {
+  result.hasTargetid = YES;
+  result.targetid = value;
   return self;
 }
-- (MMatch_Builder*) clearFlower {
-  result.hasFlower = NO;
-  result.flower = 0;
+- (MView_Builder*) clearTargetid {
+  result.hasTargetid = NO;
+  result.targetid = @"";
   return self;
 }
-- (BOOL) hasSchool {
-  return result.hasSchool;
+- (BOOL) hasTargetHeadImg {
+  return result.hasTargetHeadImg;
 }
-- (NSString*) school {
-  return result.school;
+- (int32_t) targetHeadImg {
+  return result.targetHeadImg;
 }
-- (MMatch_Builder*) setSchool:(NSString*) value {
-  result.hasSchool = YES;
-  result.school = value;
+- (MView_Builder*) setTargetHeadImg:(int32_t) value {
+  result.hasTargetHeadImg = YES;
+  result.targetHeadImg = value;
   return self;
 }
-- (MMatch_Builder*) clearSchool {
-  result.hasSchool = NO;
-  result.school = @"";
+- (MView_Builder*) clearTargetHeadImg {
+  result.hasTargetHeadImg = NO;
+  result.targetHeadImg = 0;
   return self;
 }
-- (BOOL) hasBelong {
-  return result.hasBelong;
+- (BOOL) hasTopicid {
+  return result.hasTopicid;
 }
-- (NSString*) belong {
-  return result.belong;
+- (NSString*) topicid {
+  return result.topicid;
 }
-- (MMatch_Builder*) setBelong:(NSString*) value {
-  result.hasBelong = YES;
-  result.belong = value;
+- (MView_Builder*) setTopicid:(NSString*) value {
+  result.hasTopicid = YES;
+  result.topicid = value;
   return self;
 }
-- (MMatch_Builder*) clearBelong {
-  result.hasBelong = NO;
-  result.belong = @"";
+- (MView_Builder*) clearTopicid {
+  result.hasTopicid = NO;
+  result.topicid = @"";
   return self;
 }
 @end

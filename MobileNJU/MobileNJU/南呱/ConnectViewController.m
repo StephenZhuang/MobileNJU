@@ -25,79 +25,79 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    _headImg = @"";
-    [_connentView setIsCall:_isCall];
-    [[ApisFactory getApiMGetUserInfo] load:self selecter:@selector(disposMessage:)];
-    
-    if (_isCall) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedCall:) name:@"receivedCall" object:nil];
-        [_connentView.fruitImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i",_targetHead]]];
-        [_connentView.collectionView setHidden:YES];
-    } else {
-        [[ApisFactory getApiMChatMatch] load:self selecter:@selector(disposMessage:)];
-    }
-    [_connentView startConnecting];
-}
-
-- (void)disposMessage:(Son *)son
-{
-    if ([son getError] == 0) {
-        if ([[son getMethod] isEqualToString:@"MGetUserInfo"]) {
-            MUser_Builder *user = (MUser_Builder *)[son getBuild];
-            [_connentView.logoImage setImageWithURL:[ToolUtils getImageUrlWtihString:user.headImg] placeholderImage:[UIImage imageNamed:@""]];
-            _headImg = user.headImg;
-            [_connentView.nameLabel setText:user.nickname];
-            [_connentView.flowerLabel setText:[NSString stringWithFormat:@"鲜花数：%i",user.flower]];
-            
-        } else if ([[son getMethod] isEqualToString:@"MChatMatch"]) {
-            MMatch_Builder *match = (MMatch_Builder *)[son getBuild];
-            [_connentView.fruitImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i" , match.headImg]]];
-            [_connentView.cardView setMatch:match];
-            
-            [_connentView stopAnimation];
-            [_connentView.tipLabel setHidden:YES];
-            [_connentView.cancelButton setHidden:YES];
-            [_connentView.collectionView setHidden:YES];
-            
-            if (_matchSuccessBlock) {
-                _matchSuccessBlock(match.userid , match.headImg , _headImg);
-            }
-            
-            [self performSelector:@selector(doAnimation) withObject:nil afterDelay:2];
-        }
-    }
-}
-
-- (void)doAnimation
-{
-    [UIView transitionFromView:self.view
-                        toView:self.view
-                      duration:1
-                       options: UIViewAnimationOptionTransitionCurlUp
-                    completion:^(BOOL finished) {
-                        if (finished) {
-                            
-                        }
-                    }];
-    [self removeFromParentViewController];
-    [self.view removeFromSuperview];
-}
-
-- (IBAction)buttonAction:(id)sender
-{
-    UIButton *button = (UIButton *)sender;
-    if ([button.titleLabel.text isEqualToString:@"取消"]) {
-        [self.parentViewController.navigationController popViewControllerAnimated:YES];
-    } else {
-        [[ApisFactory getApiMChatMatch] load:self selecter:@selector(disposMessage:)];
-        [_connentView startConnecting];
-    }
-}
+//- (void)viewDidLoad
+//{
+//    [super viewDidLoad];
+//    // Do any additional setup after loading the view.
+//    
+//    _headImg = @"";
+//    [_connentView setIsCall:_isCall];
+//    [[ApisFactory getApiMGetUserInfo] load:self selecter:@selector(disposMessage:)];
+//    
+//    if (_isCall) {
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedCall:) name:@"receivedCall" object:nil];
+//        [_connentView.fruitImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i",_targetHead]]];
+//        [_connentView.collectionView setHidden:YES];
+//    } else {
+//        [[ApisFactory getApiMChatMatch] load:self selecter:@selector(disposMessage:)];
+//    }
+//    [_connentView startConnecting];
+//}
+//
+//- (void)disposMessage:(Son *)son
+//{
+//    if ([son getError] == 0) {
+//        if ([[son getMethod] isEqualToString:@"MGetUserInfo"]) {
+//            MUser_Builder *user = (MUser_Builder *)[son getBuild];
+//            [_connentView.logoImage setImageWithURL:[ToolUtils getImageUrlWtihString:user.headImg] placeholderImage:[UIImage imageNamed:@""]];
+//            _headImg = user.headImg;
+//            [_connentView.nameLabel setText:user.nickname];
+//            [_connentView.flowerLabel setText:[NSString stringWithFormat:@"鲜花数：%i",user.flower]];
+//            
+//        } else if ([[son getMethod] isEqualToString:@"MChatMatch"]) {
+//            MMatch_Builder *match = (MMatch_Builder *)[son getBuild];
+//            [_connentView.fruitImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i" , match.headImg]]];
+//            [_connentView.cardView setMatch:match];
+//            
+//            [_connentView stopAnimation];
+//            [_connentView.tipLabel setHidden:YES];
+//            [_connentView.cancelButton setHidden:YES];
+//            [_connentView.collectionView setHidden:YES];
+//            
+//            if (_matchSuccessBlock) {
+//                _matchSuccessBlock(match.userid , match.headImg , _headImg);
+//            }
+//            
+//            [self performSelector:@selector(doAnimation) withObject:nil afterDelay:2];
+//        }
+//    }
+//}
+//
+//- (void)doAnimation
+//{
+//    [UIView transitionFromView:self.view
+//                        toView:self.view
+//                      duration:1
+//                       options: UIViewAnimationOptionTransitionCurlUp
+//                    completion:^(BOOL finished) {
+//                        if (finished) {
+//                            
+//                        }
+//                    }];
+//    [self removeFromParentViewController];
+//    [self.view removeFromSuperview];
+//}
+//
+//- (IBAction)buttonAction:(id)sender
+//{
+//    UIButton *button = (UIButton *)sender;
+//    if ([button.titleLabel.text isEqualToString:@"取消"]) {
+//        [self.parentViewController.navigationController popViewControllerAnimated:YES];
+//    } else {
+//        [[ApisFactory getApiMChatMatch] load:self selecter:@selector(disposMessage:)];
+//        [_connentView startConnecting];
+//    }
+//}
 
 - (void)closeSelf
 {

@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ToolUtils : NSObject+ (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize;
+@interface ToolUtils : NSObject
+@property (nonatomic , strong) NSMutableArray *tagArray;
+
++ (instancetype) sharedToolUtils;
++ (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize;
 + (BOOL)checkTel:(NSString *)str;
 + (BOOL)checkEmail:(NSString *)email;
 + (void)showMessage:(NSString *)message;
