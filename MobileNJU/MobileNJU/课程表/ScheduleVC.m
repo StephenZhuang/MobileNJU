@@ -234,7 +234,7 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MSchedule"]) {
                        MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
-            if (classList.week!=0||classList.classList==nil||classList.classList.count==0) {
+            if (classList.week!=0) {
                 [self.addButton setHidden:NO];
                 [self.addBack setHidden:NO];
                 self.isRe=1;
@@ -254,6 +254,7 @@
                 [self loadSchedule];
                 [ToolUtils setIsVeryfy:1];
             } else {
+                [self removeCode];
                 [self addCode:classList.img];
            }
             
@@ -279,7 +280,12 @@
             [self closeAlert];
             [self loadLast];
         }
-    } else {
+    } else if ([[son getMsg]hasPrefix:@"信息"])
+    {
+        [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdField.text    password:self.passwordField.text];
+
+    }
+        else {
         [super disposMessage:son];
     }
 

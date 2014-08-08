@@ -98,6 +98,7 @@
     self.codeField = nil;
     [self.imgView removeFromSuperview];
     [self.imgView setHidden:YES];
+    self.imgView = nil;
     self.searchButton.transform = CGAffineTransformMakeTranslation(0, 0);
     
     
@@ -166,6 +167,8 @@
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }
+                
+                [self removeCode];
                 [self addCode:termList.img];
             } else {
                 self.hasLogin = YES;
@@ -190,7 +193,7 @@
                 [self.tableView reloadData];
             }
         }
-    } else if ([son getError]==10015&&self.codeField!=nil)
+    } else if ([[son getMsg]hasPrefix:@"信息"]&&self.codeField!=nil)
     {
         [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
     } else {
