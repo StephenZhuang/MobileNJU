@@ -102,9 +102,12 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex==0) {
-        NSString* str = [NSString stringWithFormat:@"tel://%@",self.market.phone];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        if (self.market.phone.length>0) {
+            NSString* str = [NSString stringWithFormat:@"tel://%@",self.market.phone];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 
+        }
+      
     } else if (buttonIndex==1){
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = self.market.qq;
@@ -171,6 +174,7 @@
     if (scrollView==self.scrollView) {
         int index=scrollView.contentOffset.x/scrollView.frame.size.width;
         self.pageControl.currentPage=index;
+        
     }
 }
 
@@ -208,7 +212,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MarketDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"market" forIndexPath:indexPath];
-    
     [cell.nameLabel setText:self.market.name];
     [cell.priceLabel setText:[NSString stringWithFormat:@"%@元",self.market.price]];
     [cell.originPriceLabel setText:[NSString stringWithFormat:@"%@元",self.market.priceOriginal]];

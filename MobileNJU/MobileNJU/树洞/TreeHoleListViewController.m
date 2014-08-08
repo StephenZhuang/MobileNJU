@@ -14,6 +14,8 @@
 #import "TreeHoleDetailViewController.h"
 #import "NewMessageListViewController.h"
 #import "ChatViewController.h"
+#import <Frontia/Frontia.h>
+#import "VerifyVC.h"
 
 @interface TreeHoleListViewController ()
 
@@ -47,11 +49,12 @@
     [releaseItem setTintColor:[UIColor whiteColor]];
     
     _messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_messageButton setTitle:@"99" forState:UIControlStateNormal];
+    [_messageButton setTitle:@"0" forState:UIControlStateNormal];
     [_messageButton setImage:[UIImage imageNamed:@"bt_treehole_reply"] forState:UIControlStateNormal];
     [_messageButton setFrame:CGRectMake(0, 0, 52, 22)];
     [_messageButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [_messageButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 6, 0, 0)];
+    [_messageButton addTarget:self action:@selector(newMessageAction:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:_messageButton];
     
     self.navigationItem.rightBarButtonItems = @[releaseItem ,item];
@@ -140,6 +143,8 @@
                 [button setTitle:[NSString stringWithFormat:@"#%@",tag.title] forState:UIControlStateNormal];
                 
             }
+        } else if ([[son getMethod] isEqualToString:@"MTreeHoleReport"]) {
+            [ProgressHUD showSuccess:@"举报成功"];
         }
     }
     if ([[son getMethod] isEqualToString:@"MTreeHoleList"] || [[son getMethod] isEqualToString:@"MTagTreeHole"] || [[son getMethod] isEqualToString:@"MTreeHoleQuery"]) {
@@ -206,6 +211,8 @@
     [cell.messageButton setTag:indexPath.section];
     [cell.topicButton setTag:indexPath.section];
     [cell.zanButton setTitle:[NSString stringWithFormat:@"%i" , topic.praiseCnt] forState:UIControlStateNormal];
+    [cell.zanButton setTitle:[NSString stringWithFormat:@"%i" , topic.praiseCnt] forState:UIControlStateSelected];
+    [cell.zanButton setSelected:topic.hasPraise ==1];
     [cell.commentButton setTitle:[NSString stringWithFormat:@"%i" , topic.commentCnt] forState:UIControlStateNormal];
 
     return cell;
@@ -213,6 +220,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (![self verifyIndentity]) {
+        return;
+    };
     MTopic *topic = [self.dataArray objectAtIndex:indexPath.section];
     TreeHoleDetailViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"TreeHoleDetailViewController"];
     vc.treeHoleid = topic.id;
@@ -221,12 +231,15 @@
 
 - (IBAction)zanAction:(id)sender
 {
+    if (![self verifyIndentity]) {
+        return;
+    };
     UIButton *button = (UIButton *)sender;
     MTopic *topic = [self.dataArray objectAtIndex:button.tag];
     MTopic_Builder *newTopic = [MTopic_Builder new];
     //0:没赞 1：已赞
     if (topic.hasPraise == 0) {
-        [button setTitle:[NSString stringWithFormat:@"%d" , topic.praiseCnt + 1] forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"%d" , topic.praiseCnt + 1] forState:UIControlStateSelected];
         [newTopic setPraiseCnt:topic.praiseCnt +1];
         [newTopic setHasPraise:1];
         
@@ -237,35 +250,46 @@
     }
     [newTopic setCommentCnt:topic.commentCnt];
     [newTopic setId:topic.id];
-//    [newTopic setTitle:topic.title];
+    [newTopic setTag:topic.tag];
+    [newTopic setTagid:topic.tagid];
     [newTopic setContent:topic.content];
     [newTopic setTime:topic.time];
-//    [newTopic setImgs:topic.imgs];
+    [newTopic setImg:topic.img];
     [newTopic setCreateTime:topic.createTime];
     [newTopic setAuthor:topic.author];
     
     [self.dataArray replaceObjectAtIndex:button.tag withObject:newTopic.build];
-//    [self.tableView reloadData];
+    [self.tableView reloadData];
     [[ApisFactory getApiMPraise] load:self selecter:@selector(disposMessage:) id:topic.id type:topic.hasPraise == 0?1:2];
-}
-
-- (IBAction)deleteAction:(id)sender
-{
-    UIButton *button = (UIButton *)sender;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确定删除吗" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除", nil];
-    alert.tag = button.tag;
-    [alert show];
 }
 
 - (IBAction)messageAction:(id)sender
 {
+    
+    if (![self verifyIndentity]) {
+        return;
+    };
     UIButton *button = (UIButton *)sender;
     MTopic *topic = self.dataArray[button.tag];
+    if ([topic.author isEqualToString:[ToolUtils getLoginId]]) {
+        return;
+    }
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
     ChatViewController *vc = [sb instantiateViewControllerWithIdentifier:@"ChatViewController"];
     vc.targetid = topic.author;
     vc.topicid = topic.id;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)moreAction:(id)sender
+{
+    if (![self verifyIndentity]) {
+        return;
+    };
+    UIButton *button = (UIButton *)sender;
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享",@"举报", nil];
+    sheet.tag = button.tag;
+    [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -288,6 +312,9 @@
 
 - (IBAction)tagAction:(id)sender
 {
+    if (![self verifyIndentity]) {
+        return;
+    };
     UIButton *button = (UIButton *)sender;
     MTag *tag = [[ToolUtils sharedToolUtils].tagArray objectAtIndex:button.tag-100];
     TreeHoleListViewController *vc = [[self storyboard] instantiateInitialViewController];
@@ -297,6 +324,9 @@
 
 - (IBAction)cellTagAction:(id)sender
 {
+    if (![self verifyIndentity]) {
+        return;
+    };
     UIButton *button = (UIButton *)sender;
     MTopic *topic = self.dataArray[button.tag];
     MTag_Builder *tag = [MTag_Builder new];
@@ -306,6 +336,77 @@
     vc.mtag = tag.build;
     [self.navigationController pushViewController:vc animated:YES];
     
+}
+
+- (BOOL)verifyIndentity
+{
+    if ([ToolUtils getIsVeryfy]==0) {
+        [ProgressHUD showError:@"请先验证身份"];
+        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
+        VerifyVC* vc = (VerifyVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"verify"]; //test2为viewcontroller的StoryboardId
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:vc action:@selector(cancelVerify)];
+        [item setTintColor:[UIColor whiteColor]];
+        vc.navigationItem.rightBarButtonItem = item;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:nav animated:YES completion:nil];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+#pragma mark-
+#pragma mark- action sheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    MTopic *topic = self.dataArray[actionSheet.tag];
+    switch (buttonIndex) {
+        case 0:
+        {
+            FrontiaShare *share = [Frontia getShare];
+            
+            //授权取消回调函数
+            FrontiaShareCancelCallback onCancel = ^(){
+                NSLog(@"OnCancel: share is cancelled");
+            };
+            
+            //授权失败回调函数
+            FrontiaShareFailureCallback onFailure = ^(int errorCode, NSString *errorMessage){
+                NSLog(@"OnFailure: %d  %@", errorCode, errorMessage);
+                [ProgressHUD showError:@"分享失败"];
+            };
+            
+            //授权成功回调函数
+            FrontiaMultiShareResultCallback onResult = ^(NSDictionary *respones){
+                NSLog(@"OnResult: %@", [respones description]);
+                [ProgressHUD showSuccess:@"分享成功"];
+            };
+            
+            FrontiaShareContent *content=[[FrontiaShareContent alloc] init];
+            //    content.url = ShareUrl;
+            NSString *contentUrl = @"http://www.s1.smartjiangsu.com";
+            content.url = contentUrl;
+            if (topic.tag.length > 0) {
+                content.title = topic.tag;
+            } else {
+                content.title = topic.content;
+            }
+            content.description = topic.content;
+            content.imageObj = [ToolUtils getImageUrlWtihString:topic.img].absoluteString;
+            
+            NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_SINAWEIBO,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
+            
+            [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
+        }
+            break;
+        case 1:
+        {
+            [[ApisFactory getApiMTreeHoleReport] load:self selecter:@selector(disposMessage:) id:topic.id];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -318,6 +419,12 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    return [self verifyIndentity];
+    return YES;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].

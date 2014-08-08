@@ -50,7 +50,6 @@ static const NSUInteger kTagOfRightSideButton = 999;
     _isBuildUI = NO;
     
     
-    
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder

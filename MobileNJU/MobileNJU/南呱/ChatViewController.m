@@ -18,6 +18,7 @@
 #import "HBTalkTableViewTextRightCell.h"
 #import "ZsndSystem.pb.h"
 #import "JDStatusBarNotification.h"
+#import "RDVTabBarController.h"
 
 @interface ChatViewController ()
 
@@ -53,6 +54,12 @@
         [self addHeader];
         [[ApisFactory getApiMChatReq] load:self selecter:@selector(disposMessage:) targetid:_targetid topicid:_topicid];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.rdv_tabBarController setTabBarHidden:YES];
 }
 
 - (void)addConnect
@@ -154,7 +161,7 @@
 - (void)getNewMessage:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
-    if ([[userInfo objectForKey:@"target"] isEqualToString:_targetid]) {
+    if ([[userInfo objectForKey:@"target"] isEqualToString:_targetid] && [[userInfo objectForKey:@"topicid"] isEqualToString:_topicid]) {
         [[ApisFactory getApiMChatMsg] load:self selecter:@selector(disposMessage:) id:[userInfo objectForKey:@"id"]];
     } else {
         [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
@@ -272,7 +279,7 @@
             for (int i = 0; i < chats.chatList.count; i++) {
                 MChat *chat = [chats.chatList objectAtIndex:i];
                 [_dataArray insertObject:chat atIndex:0];
-                _targetHead = chats.headImg;
+//                _targetHead = chats.headImg;
 //                _headImg = [ToolUtils getHeadImg];
             }
         } else if ([[son getMethod] isEqualToString:@"MAddChat"]){
@@ -350,7 +357,7 @@
     }
     cell.talkData=data;
     if ([data.userid isEqualToString:_targetid]) {
-        [cell setLogoImageWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"fruit_%i_s" ,_targetHead]]];
+        [cell setLogoImageWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"logo_default_%i" ,_targetHead]]];
     } else {
         [cell setLogoImage:_headImg];
     }

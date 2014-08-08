@@ -112,7 +112,7 @@
         label = self.discLabel;
     }
     [UIView animateWithDuration:0.2f animations:^{
-        [label setTextColor:[UIColor blueColor]];
+        [label setTextColor:[UIColor purpleColor]];
         [label setFont:[UIFont fontWithName:@"Helvetica" size:10.0]];
         label.transform = CGAffineTransformMakeTranslation(0, -10);
     }];
@@ -211,8 +211,12 @@
 {
     if (sender.tag==204) {
         [self.photoArray removeLastObject];
+        
         [[self.buttonArray objectAtIndex:self.photoArray.count]setImage:[UIImage imageNamed:@"10-发布-已选照片-添加"] forState:UIControlStateNormal];
-    } else {
+        UIButton* button = [self.buttonArray objectAtIndex:self.photoArray.count ];
+        [button setTag:self.photoArray.count+200];
+        
+    } else if (sender.tag>=200){
         [self takePhoto];
     }
  }
@@ -239,8 +243,10 @@
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     image = [self useImage:image];
     [self.photoArray addObject:image];
-    if (_photoArray.count < 4) {
-        [[self.buttonArray objectAtIndex:_photoArray.count-1] setImage:[self OriginImage:image scaleToSize:CGSizeMake(51, 51)] forState:UIControlStateNormal];;
+    if (_photoArray.count <= 4) {
+        [[self.buttonArray objectAtIndex:_photoArray.count-1] setImage:[self OriginImage:image scaleToSize:CGSizeMake(51, 51)] forState:UIControlStateNormal];
+        UIButton* button = [self.buttonArray objectAtIndex:_photoArray.count-1];
+        button.tag = _photoArray.count;
         if (self.photoArray.count==1) {
             [self.takePhotoBt setHidden:YES];
         }
@@ -343,6 +349,12 @@
     if (textField==self.priceFIeld||textField==self.originPriceField) {
         if (range.location >=4)
             return NO; // return NO to not change text
+        return YES;
+    }
+    if (textField==self.titleField)
+    {
+        if(range.location>=20)
+            return NO;
         return YES;
     }
     return YES;

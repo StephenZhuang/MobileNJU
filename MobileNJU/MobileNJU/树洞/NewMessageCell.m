@@ -22,6 +22,8 @@
 - (void)awakeFromNib
 {
     // Initialization code
+    _tipView.layer.cornerRadius = 5;
+    _topicImage.layer.contentsGravity = kCAGravityResizeAspectFill;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -32,6 +32,12 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+- (void)setType:(NSArray *)typeList
+{
+        self.secondPage.typeList = self.typeList;
+
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -42,7 +48,9 @@
     //    [self addViews];
     if (self.currentPage==1) {
         self.secondPage.myController = self;
+        self.secondPage.typeList = self.typeList;
         self.pageControl.currentPage=1;
+
     }
     UISwipeGestureRecognizer *recognizer;
     recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
@@ -58,12 +66,11 @@
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
     [[self scrollerView] addGestureRecognizer:recognizer];
     
-    
     recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
     [[self scrollerView] addGestureRecognizer:recognizer];
     
-    
+
     if (self.pageControl.currentPage==0) {
         [self.firstPage initial];
         UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
@@ -119,9 +126,6 @@
 - (void)complete
 {
  
-    
-    
-    
     SecondPage* page = self.secondPage;
     if (page.typeField.text.length==0) {
         [ToolUtils showMessage:@"请选择分类"];
@@ -141,13 +145,25 @@
     }
     [page.QQField resignFirstResponder];
     [page.phoneField resignFirstResponder];
-    self.market.type = page.typeId;
+    
+    
+    NSString* typeStr = page.typeField.text;
+    for (MMarketType* type in self.typeList) {
+        if ([type.title isEqualToString:typeStr]) {
+            self.market.type = type.id;
+            break;
+        }
+    }
+    
+    
+//    self.market.type = page.typeId;
     self.market.address = page.locationField.text;
+    
     self.market.qq = page.QQField.text;
     self.market.phone = page.phoneField.text;
- 
+
     
-       UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddMarket" params:self.market  delegate:self selecter:@selector(disposMessage:)];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddMarket" params:self.market  delegate:self selecter:@selector(disposMessage:)];
     [updateone setShowLoading:NO];
     [self waiting:@"正在发布"];
     [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
@@ -235,6 +251,7 @@
         nextVC.currentPage = 1;
         nextVC.market = self.market;
         nextVC.myLast = self;
+        nextVC.typeList = self.typeList;
     }
 }
 
@@ -247,6 +264,10 @@
         [self.secondPage resignAll];
     }
 }
+
+
+
+
 
 /*
 #pragma mark - Navigation
@@ -261,6 +282,9 @@
 - (IBAction)resignAll:(id)sender {
     if (self.firstPage!=nil) {
         [self.firstPage resignAll];
+    } else if (self.secondPage!=nil)
+    {
+        [self.secondPage resignAll];
     }
 }
 

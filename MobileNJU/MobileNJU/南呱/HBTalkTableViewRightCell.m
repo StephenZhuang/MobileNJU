@@ -15,11 +15,11 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        _mLogo.frame=CGRectMake(270, 10, 40, 40);
-        _backView.frame=CGRectMake(250, 15, 35, 30);
-        _content.frame=CGRectMake(8, 8, 10, 10);
+        _mLogo.frame=CGRectMake(SCREEN_WIDTH - LOGO_WIDTH - 10, 10, LOGO_WIDTH, LOGO_WIDTH);
+        _backView.frame=CGRectMake(SCREEN_WIDTH - LOGO_WIDTH - 15 - BUBBLE_MIN_WIDTH, 10, BUBBLE_MIN_WIDTH, BUBBLe_MIN_HEIGHT);
+        _content.frame=CGRectMake(10, 15, 10, 10);
         UIImage* image=[UIImage imageNamed:@"SenderTextNodeBkg"];
-        image=[image stretchableImageWithLeftCapWidth:30 topCapHeight:30];
+        image=[image stretchableImageWithLeftCapWidth:60 topCapHeight:30];
         _backView.image=image;
 
     }
@@ -30,16 +30,16 @@
 -(void)clear
 {
     [super clear];
-    _backView.frame=CGRectMake(250, 15, 35, 30);
-    _content.frame=CGRectMake(8, 8, 10, 10);
+    _backView.frame=CGRectMake(SCREEN_WIDTH - LOGO_WIDTH - 15 - BUBBLE_MIN_WIDTH, 10, BUBBLE_MIN_WIDTH, BUBBLe_MIN_HEIGHT);
+    _content.frame=CGRectMake(10, 15, 10, 10);
 }
 
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    CGRect frame=_backView.frame;
-    frame.origin.x=265-frame.size.width;
-    _backView.frame=frame;
+    CGRect frame = _backView.frame;
+    frame.origin.x = SCREEN_WIDTH - LOGO_WIDTH - 15 -frame.size.width;
+    _backView.frame = frame;
 }
 
 @end

@@ -17,6 +17,7 @@
 #import "RDVTabBarController.h"
 #import "BookViewController.h"
 #import "RDVTabBarController.h"
+#import "VerifyVC.h"
 @interface BaseViewController ()<UINavigationBarDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 
 @end

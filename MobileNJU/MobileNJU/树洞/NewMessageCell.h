@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "HBCoreLabel.h"
+#import "SWTableViewCell.h"
 
-@interface NewMessageCell : UITableViewCell
-@property (nonatomic , strong) IBOutlet UILabel *titleLabel;
+@interface NewMessageCell : SWTableViewCell
+@property (nonatomic , strong) IBOutlet UILabel *timeLabel;
 @property (nonatomic , strong) IBOutlet HBCoreLabel *contentLabel;
+@property (nonatomic , strong) IBOutlet UIImageView *logoImage;
+@property (nonatomic , strong) IBOutlet UIView *tipView;
+@property (nonatomic , strong) IBOutlet UILabel *smallLabel;
+@property (nonatomic , strong) IBOutlet UIImageView *topicImage;
 @end

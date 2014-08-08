@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+
+#import "VerticallyAlignedLabel.h"
 #import "AlertCloseDelegate.h"
 #import "Book.h"
 @interface BookDetailView : UIView
@@ -14,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *location;
 @property (weak, nonatomic) IBOutlet UILabel *barCode;
 @property (weak, nonatomic) IBOutlet UILabel *state;
-@property (weak, nonatomic) IBOutlet UILabel *bookName;
+@property (weak, nonatomic) IBOutlet VerticallyAlignedLabel *bookName;
+
 @property(nonatomic,strong)Book* book;
 @end

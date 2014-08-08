@@ -17,6 +17,7 @@
 #import "RDVTabBarController.h"
 #import "QCSlideViewController.h"
 #import "ShoppingVC.h"
+#import "ScheduleVC.h"
 #import "ProcedureDetailVC.h"
 #import "ZsndNews.pb.h"
 #define NEWSCOUNT 4
@@ -40,7 +41,7 @@
 @property (nonatomic)int complete;
 @property (nonatomic,strong)NSMutableDictionary* stateDic;
 @property (nonatomic)int prepare;
-
+@property (nonatomic)BOOL firstOpen;
 @end
 
 @implementation MainMenuViewController
@@ -66,6 +67,7 @@ static NSArray* descriptions;
     if (self.newsImgList!=nil) {
         [self prepareForNews];
     }
+    self.firstOpen  = YES;
     [self.pageScroller setBackgroundColor:[UIColor whiteColor]];
     functionNames = [ToolUtils getFunctionName];
     buttonImages= [ToolUtils getButtonImage];
@@ -73,9 +75,12 @@ static NSArray* descriptions;
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    if (self.firstOpen) {
+        [self loadTableData];
+        [self loadIndex];
+        self.firstOpen = NO;
+    }
     
-    [self loadTableData];
-    [self loadIndex];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -86,6 +91,8 @@ static NSArray* descriptions;
 {
     if (!self.offline) {
         [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
+    } else {
+        [self loadTableData];
     }
 }
 
@@ -222,6 +229,10 @@ static NSArray* descriptions;
         ProcedureDetailVC* nextVC = (ProcedureDetailVC*)[segue destinationViewController];
         nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.tempUrl]];
 
+    }
+    if ([[segue identifier] isEqual:@"课程表"]) {
+        ScheduleVC* vc = (ScheduleVC*)[segue destinationViewController];
+        vc.offline = self.offline;
     }
 }
 
@@ -655,17 +666,24 @@ static NSArray* descriptions;
 //}
 //
 //
-//- (void)goToChat:(NSNotification *)notification
-//{
-//    NSString *type = notification.object;
-//    if (type.integerValue == 1) {
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
-//        ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-//        vc.targetid = [notification.userInfo objectForKey:@"target"];
-//        [self.navigationController pushViewController:vc animated:YES];
-//        [self dismissCallView];
-//    }
-//}
+- (void)goToChat:(NSNotification *)notification
+{
+    NSString *type = notification.object;
+    if (type.integerValue == 1) {
+        UIViewController *vc = (UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
+        UINavigationController *nav = (UINavigationController *)[tabbar selectedViewController];
+        if ([nav isEqual:self.navigationController]) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
+            ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+            vc.targetid = [notification.userInfo objectForKey:@"target"];
+            vc.topicid = [notification.userInfo objectForKey:@"topicid"];
+            [self.navigationController pushViewController:vc animated:YES];
+            //        [self dismissCallView];
+        }
+        
+    }
+}
 
 
 @end

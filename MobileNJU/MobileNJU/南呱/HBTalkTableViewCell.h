@@ -22,6 +22,12 @@
 #define ACTIVITYINDICATOR_TAG 1000
 #define IMAGE_MAX_WIDTH  150
 #define IMAGE_MAX_HEIGHT  100
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define BUBBLE_MIN_WIDTH 120
+#define BUBBLe_MIN_HEIGHT 45
+#define LOGO_WIDTH 50
+
+
 
 @interface HBTalkTableViewCell : UITableViewCell
 {

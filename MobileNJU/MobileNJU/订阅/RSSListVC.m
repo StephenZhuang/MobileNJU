@@ -16,6 +16,7 @@
 @property(nonatomic,strong)MNews* currentNew;
 @property(nonatomic,strong)UIImage* currentImg;
 @property(nonatomic,strong)NSString* currentUrl;
+@property (nonatomic)NSIndexPath* selected;
 @end
 
 @implementation RSSListVC
@@ -37,10 +38,11 @@
 }
 
 - (void) viewWillAppear: (BOOL)inAnimated {
-    NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
-    if(selected)
+//    NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+    if(self.selected)
     {
-        [self.tableView deselectRowAtIndexPath:selected animated:NO];
+//        UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:self.selected];
+             [self.tableView deselectRowAtIndexPath:self.selected animated:NO];
     }
     
 //    [self.tableView reloadData];
@@ -99,10 +101,9 @@
     cell.detail = new.content;
     cell.date = new.time;
     [cell.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:new.img width:178 height:134] placeholderImage:[UIImage imageNamed:@"news_loading"]];
-    
-//    UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
-//    cell.selectedBackgroundView = backView;
-//    cell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];
+    UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
+    cell.selectedBackgroundView = backView;
+    cell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 
@@ -115,6 +116,7 @@
     self.currentImg = cell.newsImage.image;
     [self performSegueWithIdentifier:@"detail" sender:indexPath];
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    self.selected = indexPath;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -126,9 +128,9 @@
         NSLog(@"设置的网址%@",self.currentUrl);
         [destinationVC setMyTitle:@"订阅详情"];
         [destinationVC setUrl:url];
-        
         [destinationVC setCurrentNew:self.currentNew];
         [destinationVC setImg:self.currentImg];
+        
     }
 }
 /*

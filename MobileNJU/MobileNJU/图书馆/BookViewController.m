@@ -100,7 +100,7 @@
 
 
 - (void)loadData{
-    [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:20] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
+    [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:18] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
 }
 -(void)addHeader
 {
@@ -152,6 +152,7 @@
             [ToolUtils setIsVeryfy:1];
             [self.loginIndicator removeFromSuperview];
             [self setOK:YES];
+
             MBookList_Builder* myBookList = (MBookList_Builder*)[son getBuild];
             [self cancelAlert:nil];
             [self performSegueWithIdentifier:@"myLibrary" sender:myBookList.newsList];
@@ -177,7 +178,7 @@
             page=1;
         }
         [self waiting:@"正在搜索"];
-        [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:20] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
+        [[[[ApisFactory getApiMSearchBook]setPage:page pageCount:18] load:self selecter:@selector(disposMessage:) keyword:self.searchField.text]showLoading];
     }
 }
 - (IBAction)showSelf:(id)sender {
@@ -223,8 +224,11 @@
         if (self.rememberSwitch.isOn) {
             [ToolUtils setLibraryId:self.schIdField.text];
             [ToolUtils setLibraryPassword:self.passwordField.text];
+        } else {
+            [ToolUtils setLibraryPassword:@""];
+
         }
-         
+        
          [self load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
     }
     

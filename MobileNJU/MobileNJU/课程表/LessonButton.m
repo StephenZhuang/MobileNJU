@@ -49,6 +49,7 @@
     return [UIColor blackColor];
 }
 
+
 - (void)setMyButton:(UIButton *)myButton
 {
     [myButton addTarget:self action:@selector(showDetail) forControlEvents:UIControlEventTouchUpInside];

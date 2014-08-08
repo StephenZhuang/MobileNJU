@@ -21,6 +21,7 @@
 @property (strong,nonatomic)UIFont *font;
 @property (strong,nonatomic)UITextField* lastField;
 @property(weak,nonatomic)UIViewController* myController;
+@property (nonatomic,strong)NSArray* typeList;
 -(void)resignAll;
 
 @end

@@ -16,12 +16,12 @@
 
     if (self) {
         // Initialization code
-        _mLogo.frame=CGRectMake(10, 10, 40, 40);
-        _backView.frame=CGRectMake(55,15, 35, 30);
-        _content.frame=CGRectMake(12, 8, 10, 10);
+        _mLogo.frame=CGRectMake(10, 10, LOGO_WIDTH, LOGO_WIDTH);
+        _backView.frame=CGRectMake(15 + LOGO_WIDTH ,10, BUBBLE_MIN_WIDTH, BUBBLe_MIN_HEIGHT);
+        _content.frame=CGRectMake(12, 15, 10, 10);
 
         UIImage* image=[UIImage imageNamed:@"ReceiverTextNodeBkg"];
-        image=[image stretchableImageWithLeftCapWidth:30 topCapHeight:30];
+        image=[image stretchableImageWithLeftCapWidth:60 topCapHeight:30];
         _backView.image=image;
 
     }
@@ -33,15 +33,15 @@
 {
     [super layoutSubviews];
     CGRect frame=_backView.frame;
-    frame.origin.x=55;
+    frame.origin.x = 15 + LOGO_WIDTH;
     _backView.frame=frame;
 }
 -(void)clear
 {
     [super clear];
     
-    _backView.frame=CGRectMake(55,15, 35, 30);
-    _content.frame=CGRectMake(12, 8, 10, 10);
+    _backView.frame=CGRectMake(15 + LOGO_WIDTH ,10, BUBBLE_MIN_WIDTH, BUBBLe_MIN_HEIGHT);
+    _content.frame=CGRectMake(12, 15, 10, 10);
 }
 #pragma -mark 事件响应方法
 

@@ -16,6 +16,7 @@
 #import <Frontia/FrontiaPush.h>
 #import <Frontia/Frontia.h>
 #import "JDStatusBarNotification.h"
+#import "RDVTabBarController.h"
 
 #define APP_KEY @"ezHXvwFL0chMGB3h2L2Girtg"
 #define REPORT_ID @"d5dd317228"
@@ -253,7 +254,9 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 - (void)operaUserInfo:(NSDictionary *)userInfo appliccation:(UIApplication *)application
 {
     if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
-        UINavigationController *nav = (UINavigationController *)application.keyWindow.rootViewController;
+        UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
+        RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
+        UINavigationController *nav = [tabbar.viewControllers firstObject];
         if (![[nav.viewControllers lastObject] isKindOfClass:NSClassFromString(@"ChatViewController")]) {
             [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
                 style.font = [UIFont systemFontOfSize:12];

@@ -76,19 +76,43 @@
 	<array>
 		<dict>
 			<key>name</key>
-			<string>MDelMarket</string>
+			<string>MRssNews</string>
 			<key>type</key>
 			<string>1</string>
 			<key>classname</key>
-			<string>MRet_Builder</string>
+			<string>MMyRss_Builder</string>
 			<key>errortype</key>
 			<string>0</string>
 			<key>value</key>
-			<string>MDelMarket</string>
+			<string>MRssNews</string>
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>MSoldMarket</string>
+			<string>MMarketType</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MMarketTypeList_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MMarketType</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MChatIndex</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MChatList_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MChatIndex</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MRssCancel</string>
 			<key>type</key>
 			<string>1</string>
 			<key>classname</key>
@@ -96,7 +120,7 @@
 			<key>errortype</key>
 			<string>0</string>
 			<key>value</key>
-			<string>MSoldMarket</string>
+			<string>MRssCancel</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -136,15 +160,39 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>MChatMatch</string>
+			<string>MChatReq</string>
 			<key>type</key>
 			<string>1</string>
 			<key>classname</key>
-			<string>MMatch_Builder</string>
+			<string>MView_Builder</string>
 			<key>errortype</key>
 			<string>0</string>
 			<key>value</key>
-			<string>MChatMatch</string>
+			<string>MChatReq</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MChatDel</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MChatDel</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MChatBlack</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MChatBlack</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -220,18 +268,6 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>MMarketType</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MMarketTypeList_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MMarketType</string>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>MMarketList</string>
 			<key>type</key>
 			<string>1</string>
@@ -253,6 +289,18 @@
 			<string>0</string>
 			<key>value</key>
 			<string>MAddMarket</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MSoldMarket</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MSoldMarket</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -328,18 +376,6 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>MRssNews</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MMyRss_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MRssNews</string>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>MPushClear</string>
 			<key>type</key>
 			<string>1</string>
@@ -352,18 +388,6 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>MLogout</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MLogout</string>
-		</dict>
-		<dict>
-			<key>name</key>
 			<string>MGetWelcomePage</string>
 			<key>type</key>
 			<string>1</string>
@@ -373,42 +397,6 @@
 			<string>0</string>
 			<key>value</key>
 			<string>MGetWelcomePage</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MGetMobileVerify</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MGetMobileVerify</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MVerifyMobile</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MVerifyMobile</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MUpdateHeadImg</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MUpdateHeadImg</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -433,114 +421,6 @@
 			<string>0</string>
 			<key>value</key>
 			<string>MRss</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MPraise</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MPraise</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MAddTreeHole</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MAddTreeHole</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MTreeHoleDel</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MTreeHoleDel</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MTreeHoleComment</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MTreeHoleComment</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MChatDel</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MChatDel</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MChatBlack</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MChatBlack</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MChatChange</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MChatChange</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MChatCall</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MChatCall</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>MChatCallBack</string>
-			<key>type</key>
-			<string>1</string>
-			<key>classname</key>
-			<string>MRet_Builder</string>
-			<key>errortype</key>
-			<string>0</string>
-			<key>value</key>
-			<string>MChatCallBack</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -736,6 +616,18 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>MGetTags</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MTagList_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MGetTags</string>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>MTreeHoleList</string>
 			<key>type</key>
 			<string>1</string>
@@ -748,15 +640,27 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>MTreeHoleNews</string>
+			<string>MTreeHoleQuery</string>
 			<key>type</key>
 			<string>1</string>
 			<key>classname</key>
-			<string>MNewComments_Builder</string>
+			<string>MTreeHole_Builder</string>
 			<key>errortype</key>
 			<string>0</string>
 			<key>value</key>
-			<string>MTreeHoleNews</string>
+			<string>MTreeHoleQuery</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MTagTreeHole</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MTreeHole_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MTagTreeHole</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -772,6 +676,102 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>MTreeHoleComments</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MCommentList_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MTreeHoleComments</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MGetMsgCount</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MMsgCount_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MGetMsgCount</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MPraise</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MPraise</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MAddTreeHole</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MAddTreeHole</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MTreeHoleDel</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MTreeHoleDel</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MTreeHoleReport</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MTreeHoleReport</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MTreeHoleComment</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MTreeHoleComment</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MTreeHoleNewComment</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MTopicMiniList_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MTreeHoleNewComment</string>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>MLogin</string>
 			<key>type</key>
 			<string>1</string>
@@ -829,6 +829,54 @@
 			<string>0</string>
 			<key>value</key>
 			<string>MUpdateUserInfo</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MLogout</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MLogout</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MGetMobileVerify</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MGetMobileVerify</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MVerifyMobile</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MVerifyMobile</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MUpdateHeadImg</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MUpdateHeadImg</string>
 		</dict>
 	</array>
 </dict>

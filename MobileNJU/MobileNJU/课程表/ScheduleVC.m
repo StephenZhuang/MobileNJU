@@ -42,6 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *addBack;
 @property (strong,nonatomic)UIImageView* imgView;
+@property (strong,nonatomic)NSString* lastUserId;
 
 @end
 
@@ -55,9 +56,11 @@
     [self initNavigationBar];
     self.code=nil;
     self.hasCode=NO;
-    self.schIdField.text=[ToolUtils getJWID];
-    self.passwordField.text = [ToolUtils getJWPassword];
-//    [self loadLast];
+    if ([ToolUtils getScheduleAuto]==YES) {
+        self.schIdField.text=[ToolUtils getJWID];
+        self.passwordField.text = [ToolUtils getJWPassword];
+    }
+   //    [self loadLast];
     self.isRe=0;
     [self addTitleView];
     self.icarousel = [[iCarousel alloc]initWithFrame:CGRectMake(20, 120, 280, 200)];
@@ -68,15 +71,17 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    if (self.schIdField.text.length==0) {
+    if ([ToolUtils getScheduleAuto]==NO) {
         [self.maskView setHidden:NO];
         [self addMask];
         [self.alertView setHidden:NO];
-        [self.addBack setHidden:YES];
-        [self.addButton setHidden:YES];
+        if ([ToolUtils getJWID]==nil||[ToolUtils getJWID].length==0) {
+            [self.addBack setHidden:YES];
+            [self.addButton setHidden:YES];
+        }
     } else {
-        if ([self.schIdField.text hasPrefix:@"Mg"]) {
-            [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdField.text    password:self.passwordField.text];
+        if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]) {
+            [self load:self selecter:@selector(disposMessage:) code:nil account:@"mg......."  password:@"....."];
         }
         [self loadLast];
     }
@@ -104,9 +109,9 @@
 
 - (void)textFieldDidChange:(NSNotification *)note
 {
-    if ([self.schIdField.text hasPrefix:@"Mg"]&&self.codeView==nil) {
+    if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]&&self.codeView==nil) {
         [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
-    } else if (![self.schIdField.text hasPrefix:@"Mg"]){
+    } else if (![[self.schIdField.text uppercaseString] hasPrefix:@"MG"]){
         if (self.hasCode) {
             [self removeCode];
         }
@@ -119,7 +124,6 @@
 {
     if ([ToolUtils getJWID].length>0) {
         [self loadLast];
-
     }
 }
 
@@ -139,9 +143,12 @@
         return;
     }
     [self loadSavedLesson];
-    ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
-    [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
-}
+    if (!self.offline) {
+        ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
+        [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
+
+    }
+  }
 
 //加载缓存课表
 - (void)loadSavedLesson
@@ -184,8 +191,19 @@
     }
     if (sender!=nil) {
         [self waiting:@"正在查询"];
+        [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
+        return;
     }
-    [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
+    if (self.lastUserId!=nil&&![self.lastUserId isEqualToString:self.schIdField.text]) {
+        self.isRe=1;
+    }
+    if ([[ToolUtils getJWID] isEqualToString:self.schIdField.text]) {
+        ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
+        [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
+    } else {
+        [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
+        
+    }
     
     
 }
@@ -208,7 +226,6 @@
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
     [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
-    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MSchedule" params:array  delegate:delegate selecter:select];
     [updateone setShowLoading:NO];
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
@@ -228,12 +245,15 @@
                 [self.addBack setHidden:NO];
                 self.isRe=1;
                 [self closeAlert];
+                self.lastUserId = self.schIdField.text;
                 if (self.autoSwitch.isOn) {
+                    [ToolUtils setScheduleAuto:YES];
                     [ToolUtils setJWPassword:self.passwordField.text];
                     [ToolUtils setJWId:self.schIdField.text];
                 } else{
-                    [ToolUtils setJWPassword:@""];
-                    [ToolUtils setJWId:@""];
+                    [ToolUtils setScheduleAuto:NO];
+                    [ToolUtils setJWPassword:self.passwordField.text];
+                    [ToolUtils setJWId:self.schIdField.text];
                 }
                 [ToolUtils setCurrentWeek:classList.week];
                 [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",classList.week]];
@@ -241,22 +261,39 @@
                 [self loadSchedule];
                 [ToolUtils setIsVeryfy:1];
             } else {
+                [self removeCode];
                 [self addCode:classList.img];
            }
             
         } else if ([[son getMethod]isEqualToString:@"MScheduleAuto"]){
             MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
             [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",classList.week]];
+            if (self.autoSwitch.isOn) {
+//                [ToolUtils setScheduleAuto:YES];
+//                [ToolUtils setJWPassword:self.passwordField.text];
+//                [ToolUtils setJWId:self.schIdField.text];
+            } else{
+                [ToolUtils setScheduleAuto:NO];
+//                [ToolUtils setJWPassword:self.passwordField.text];
+//                [ToolUtils setJWId:self.schIdField.text];
+            }
+            self.lastUserId = [ToolUtils getJWID];
+            [ToolUtils setCurrentWeek:classList.week];
             self.lessonList = classList.classList;
             [self loadSchedule];
-
+            [self cancelAlert:nil];
         } else if ([[son getMethod]isEqualToString:@"MDelClass"]){
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
             [ToolUtils showMessage:ret.msg];
             [self closeAlert];
             [self loadLast];
         }
-    } else {
+    } else if ([[son getMsg]hasPrefix:@"信息"]      &&  self.imgView!=nil )
+    {
+        [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdField.text   password:self.passwordField.text];
+
+    }
+        else {
         [super disposMessage:son];
     }
 
@@ -310,8 +347,6 @@
             
             CGFloat offset= self.frame.origin.y+self.frame.size.height-(self.view.bounds.size.height-216);
             self.alertView.transform = CGAffineTransformMakeTranslation(0, -offset);
-
-        
         }         ];
 
 

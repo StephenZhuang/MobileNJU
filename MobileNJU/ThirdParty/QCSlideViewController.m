@@ -16,6 +16,7 @@
 @interface QCSlideViewController ()
 @property (nonatomic,strong)NSArray* titleArray;
 @property (nonatomic,strong)NSArray* typeList;
+
 @end
 
 @implementation QCSlideViewController
@@ -43,7 +44,6 @@
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    
     self.title = @"跳蚤";
     
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
@@ -52,7 +52,6 @@
     [button addTarget:self action:@selector(addNew) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = rightButton;
-    
     
     self.slideSwitchView.tabItemNormalColor = [QCSlideSwitchView colorFromHexRGB:@"868686"];
     self.slideSwitchView.tabItemSelectedColor = [QCSlideSwitchView colorFromHexRGB:@"bb0b15"];
@@ -105,6 +104,7 @@
 {
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
     AddShopVC* vc = (AddShopVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"add"];
+    vc.typeList = self.typeList;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

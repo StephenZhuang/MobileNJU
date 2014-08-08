@@ -7,10 +7,11 @@
 //
 
 #import "RefreshTableViewController.h"
+#import "NewMessageCell.h"
 
 typedef void(^ReadMessageBlock)(NSInteger num);
 
-@interface NewMessageListViewController : BaseViewController
+@interface NewMessageListViewController : BaseViewController<UITableViewDataSource , UITableViewDelegate , SWTableViewCellDelegate>
 {
     NSInteger selectIndex;
 }
@@ -20,4 +21,7 @@ typedef void(^ReadMessageBlock)(NSInteger num);
 @property (nonatomic , weak) IBOutlet UILabel *messageNumLabel;
 @property (nonatomic , strong) NSMutableArray *topicArray;
 @property (nonatomic , strong) NSMutableArray *chatArray;
+@property (nonatomic , weak) IBOutlet UIButton *commentButton;
+@property (nonatomic , weak) IBOutlet UIButton *messageButton;
+@property (nonatomic , strong) UIView *sectionHeader;
 @end

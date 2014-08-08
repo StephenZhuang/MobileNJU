@@ -8,7 +8,7 @@
 
 #import "RefreshTableViewController.h"
 
-@interface TreeHoleListViewController : RefreshTableViewController<UIAlertViewDelegate , UITableViewDataSource , UITableViewDelegate>
+@interface TreeHoleListViewController : RefreshTableViewController<UIAlertViewDelegate , UITableViewDataSource , UITableViewDelegate , UIActionSheetDelegate>
 @property (nonatomic , strong) UIView *sectionHeader;
 @property (nonatomic , strong) UIButton *messageButton;
 @property (nonatomic , strong) MTag *mtag;

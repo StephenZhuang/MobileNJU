@@ -16,4 +16,6 @@
 @property (weak, nonatomic) IBOutlet SecondPage *secondPage;
 @property (nonatomic) AddShopVC* myLast;
 @property(nonatomic)BOOL shoudReturn;
+@property (nonatomic,strong)NSArray* typeList;
+- (void)setType:(NSArray *)typeList;
 @end

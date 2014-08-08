@@ -73,14 +73,12 @@
     [dateFormatter setDateFormat:@"yyyy/MM/dd"];
     NSString *searchDateFormat = [dateFormatter stringFromDate:[NSDate date]];
     self.endDate = searchDateFormat;
-    
     NSString* searchStartDate = [dateFormatter stringFromDate:newDate];
     self.startDate = searchStartDate;
     if (self.alertView.isHidden) {
         [self waiting:@"正在读取"];
         [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
-        
-//        [self load:self selecter:@selector(disposeMessage:) code:@"" account:self.schIDText.text password:self.passwordText.text];
+
     } else {
         [self getCode];
     }
@@ -162,12 +160,9 @@
                 }
                 [ToolUtils setIsVeryfy:1];
                 [self searchDetail:nil];
-                
             } else {
                 [self.confirmCode setImage:[UIImage imageWithData:cardList.img]];
-            
             }
-
        } else if ([[son getMethod]isEqualToString:@"MCardHistory"])
        {
            
@@ -192,8 +187,6 @@
            } else {
                [self.tableView reloadData];
            }
-           
-           
        }
     } else if ([son getError]==10021){
         [self getCode];
@@ -213,7 +206,8 @@
     
 }
 - (IBAction)searchDetail:(id)sender {
-
+    
+    
     if (self.schIDText.text.length==0) {
         [ToolUtils showMessage:@"请输入您的学号"];
         [self showAlertView:nil];
@@ -330,13 +324,15 @@
         [self.confirmCodeText resignFirstResponder];
         [self.schIDText resignFirstResponder];
         self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
-//        [self load:self selecter:@selector(disposMessage:) code:self.confirmCodeText.text account:self.schIDText.text password:self.passwordText.text];
         [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:self.confirmCodeText.text account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
 
     }
 }
 
 - (IBAction)showAlertView:(id)sender {
+    [self.schIDText resignFirstResponder];
+    [self.passwordText resignFirstResponder];
+    [self.confirmCodeText resignFirstResponder];
     if (sender!=nil) {
         [self getCode];
     }
@@ -360,7 +356,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.detaiList.count-1;
+    return self.detaiList.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -373,7 +369,7 @@
     
     static NSString *CellIdentifier = @"ecard";
     EcardCell *cell = (EcardCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    MCard* card = [self.detaiList objectAtIndex:indexPath.row+1];
+    MCard* card = [self.detaiList objectAtIndex:indexPath.row];
     [cell.locationLabel setText:card.name];
     [cell.timeLabel setText:card.time];
     [cell.remainLabel setText:card.total];
@@ -405,6 +401,14 @@
             start = [NSDate date];
             [self.startButton setTitle:[dateFormatterwithoutYear stringFromDate:start] forState:UIControlStateNormal];
         }
+        if(timeBetweenNow<-60*60*24*60)
+        {
+            NSDate *newDate = [[NSDate alloc] initWithTimeInterval:-60*60*24*59 sinceDate:[NSDate date]];
+            start = newDate;
+            [self.startButton setTitle:[dateFormatterwithoutYear stringFromDate:start] forState:UIControlStateNormal];
+            self.startDate = [dateFormatter stringFromDate:newDate];
+            [ToolUtils showMessage:@"只能查询2个月之内的消费记录"];
+        }
         NSTimeInterval timeBetween = [end timeIntervalSinceDate:start];
         if (timeBetween<0) {
             self.endDate  = self.startDate;
@@ -419,9 +423,9 @@
         if (timeBetweenNow>0) {
             end = [NSDate date];
             [self.endButton setTitle:[dateFormatterwithoutYear stringFromDate:end] forState:UIControlStateNormal];
+            self.endDate = [dateFormatter stringFromDate:end];
         }
         NSTimeInterval timeBetween = [end timeIntervalSinceDate:start];
-
         if (timeBetween<0) {
             self.startDate  = self.endDate;
             [self.startButton setTitle:self.endButton.titleLabel.text forState:UIControlStateNormal];

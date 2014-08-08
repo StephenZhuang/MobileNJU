@@ -250,7 +250,7 @@
     }
     
     MAddClass_Builder* builder = [[MAddClass_Builder alloc]init];
-    builder.account = self.account==nil?@"":self.account;
+    builder.account = [ToolUtils getJWID]==nil?@"":[ToolUtils getJWID];
     builder.name = self.lessonNameField.text;
     builder.teacher = self.teacherNameField.text;
     builder.address = self.classroomField.text;

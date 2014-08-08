@@ -29,6 +29,10 @@
     [self.location setText:book.location];
     [self.state setText:book.state];
     [self.bookName setText:book.bookName];
+    [self.bookName setVerticalAlignment:VerticalAlignmentMiddle];
+    if (book.bookName.length>8) {
+        [self.bookName setFont:[UIFont fontWithName:@"Helvetica" size:17]];
+    }
 }
 /*
 // Only override drawRect: if you perform custom drawing.
