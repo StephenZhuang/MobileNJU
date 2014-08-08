@@ -364,6 +364,8 @@
         case 0:
         {
             FrontiaShare *share = [Frontia getShare];
+//            [share registerSinaweiboAppId:@"306527345"];
+            [share registerWeixinAppId:@"wx277782943f4c36be"];
             
             //授权取消回调函数
             FrontiaShareCancelCallback onCancel = ^(){
