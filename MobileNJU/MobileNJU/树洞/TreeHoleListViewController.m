@@ -166,6 +166,11 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 10;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     return _sectionHeader;
@@ -386,7 +391,7 @@
             
             FrontiaShareContent *content=[[FrontiaShareContent alloc] init];
             //    content.url = ShareUrl;
-            NSString *contentUrl = @"http://www.s1.smartjiangsu.com";
+            NSString *contentUrl = @"http://www.baidu.com";
             content.url = contentUrl;
             if (topic.tag.length > 0) {
                 content.title = topic.tag;
