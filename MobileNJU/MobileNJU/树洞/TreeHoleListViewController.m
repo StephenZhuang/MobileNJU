@@ -94,7 +94,7 @@
         if ([_mtag.id isEqualToString:@"热门"]) {
             [[ApisFactory getApiMTreeHoleQuery] load:self selecter:@selector(disposMessage:) type:2];
         } else if ([_mtag.id isEqualToString:@"推荐"]) {
-            [[ApisFactory getApiMTreeHoleQuery] load:self selecter:@selector(disposMessage:) type:2];
+            [[ApisFactory getApiMTreeHoleQuery] load:self selecter:@selector(disposMessage:) type:1];
         } else {
             [[ApisFactory getApiMTagTreeHole] load:self selecter:@selector(disposMessage:) tagid:_mtag.id begin:beginStr];
         }
