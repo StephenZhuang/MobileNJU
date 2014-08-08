@@ -591,4 +591,19 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"haslogout"];
 
 }
+
++(void)setScheduleAuto:(BOOL) isAuto
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setBool: isAuto  forKey:@"scheduleAuto"];
+    [userDefaults synchronize];
+}
+                        
+
+
++(BOOL)getScheduleAuto;
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"scheduleAuto"];
+}
+
 @end

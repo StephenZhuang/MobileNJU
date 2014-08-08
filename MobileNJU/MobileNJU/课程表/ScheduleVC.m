@@ -55,9 +55,11 @@
     [self initNavigationBar];
     self.code=nil;
     self.hasCode=NO;
-    self.schIdField.text=[ToolUtils getJWID];
-    self.passwordField.text = [ToolUtils getJWPassword];
-//    [self loadLast];
+    if ([ToolUtils getScheduleAuto]==YES) {
+        self.schIdField.text=[ToolUtils getJWID];
+        self.passwordField.text = [ToolUtils getJWPassword];
+    }
+   //    [self loadLast];
     self.isRe=0;
     [self addTitleView];
     self.icarousel = [[iCarousel alloc]initWithFrame:CGRectMake(20, 120, 280, 200)];
@@ -74,6 +76,7 @@
         [self.alertView setHidden:NO];
         [self.addBack setHidden:YES];
         [self.addButton setHidden:YES];
+
     } else {
         if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]) {
             [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdField.text    password:self.passwordField.text];
@@ -119,7 +122,6 @@
 {
     if ([ToolUtils getJWID].length>0) {
         [self loadLast];
-
     }
 }
 
@@ -188,7 +190,13 @@
     if (sender!=nil) {
         [self waiting:@"正在查询"];
     }
-    [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
+    if ([ToolUtils getJWID].length>0) {
+        ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
+        [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
+    } else {
+        [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
+        
+    }
     
     
 }
@@ -226,17 +234,19 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MSchedule"]) {
                        MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
-            if (classList.week!=0) {
+            if (classList.week!=0||classList.classList==nil||classList.classList.count==0) {
                 [self.addButton setHidden:NO];
                 [self.addBack setHidden:NO];
                 self.isRe=1;
                 [self closeAlert];
                 if (self.autoSwitch.isOn) {
+                    [ToolUtils setScheduleAuto:YES];
                     [ToolUtils setJWPassword:self.passwordField.text];
                     [ToolUtils setJWId:self.schIdField.text];
                 } else{
-                    [ToolUtils setJWPassword:@""];
-                    [ToolUtils setJWId:@""];
+                    [ToolUtils setScheduleAuto:NO];
+                    [ToolUtils setJWPassword:self.passwordField.text];
+                    [ToolUtils setJWId:self.schIdField.text];
                 }
                 [ToolUtils setCurrentWeek:classList.week];
                 [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",classList.week]];
@@ -250,9 +260,19 @@
         } else if ([[son getMethod]isEqualToString:@"MScheduleAuto"]){
             MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
             [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",classList.week]];
+            if (self.autoSwitch.isOn) {
+                [ToolUtils setScheduleAuto:YES];
+                [ToolUtils setJWPassword:self.passwordField.text];
+                [ToolUtils setJWId:self.schIdField.text];
+            } else{
+                [ToolUtils setScheduleAuto:NO];
+                [ToolUtils setJWPassword:self.passwordField.text];
+                [ToolUtils setJWId:self.schIdField.text];
+            }
+            [ToolUtils setCurrentWeek:classList.week];
             self.lessonList = classList.classList;
             [self loadSchedule];
-
+            [self cancelAlert:nil];
         } else if ([[son getMethod]isEqualToString:@"MDelClass"]){
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
             [ToolUtils showMessage:ret.msg];
@@ -313,8 +333,6 @@
             
             CGFloat offset= self.frame.origin.y+self.frame.size.height-(self.view.bounds.size.height-216);
             self.alertView.transform = CGAffineTransformMakeTranslation(0, -offset);
-
-        
         }         ];
 
 

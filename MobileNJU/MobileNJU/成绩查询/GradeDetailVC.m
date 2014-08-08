@@ -336,20 +336,32 @@
     switch (course.type) {
         case 1:
             cell.lessonTypeLabel.text = @"核心";
-            [cell setTick:YES];
             break;
         case 2:
             cell.lessonTypeLabel.text = @"平台";
-            [cell setTick:YES];
             break;
         case 3:
             cell.lessonTypeLabel.text = @"通修";
-            [cell setTick:YES];
+            break;
+        case 0:
+            cell.lessonTypeLabel.text =@"选修";
+            break;
+        case 4:
+            cell.lessonTypeLabel.text = @"A类";
+            break;
+        case 5:
+            cell.lessonTypeLabel.text =@"B类";
+            break;
+        case 6:
+            cell.lessonTypeLabel.text =@"C类";
+            break;
+        case 7:
+            cell.lessonTypeLabel.text =@"D类";
             break;
         default:
             cell.lessonTypeLabel.text =@"选修";
-            [cell setTick:NO];
-            break;
+
+            
     }
     if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
         NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);

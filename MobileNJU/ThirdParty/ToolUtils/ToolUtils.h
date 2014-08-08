@@ -102,5 +102,6 @@
 +(NSString*)getLibraryPassword;
 +(void)setHasLogOut:(NSString*) hasLogout;
 +(NSString*)getHasLogOut;
-
++(void)setScheduleAuto:(BOOL) isAuto;
+                        +(BOOL)getScheduleAuto;
 @end

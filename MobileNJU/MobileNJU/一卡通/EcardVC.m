@@ -73,14 +73,12 @@
     [dateFormatter setDateFormat:@"yyyy/MM/dd"];
     NSString *searchDateFormat = [dateFormatter stringFromDate:[NSDate date]];
     self.endDate = searchDateFormat;
-    
     NSString* searchStartDate = [dateFormatter stringFromDate:newDate];
     self.startDate = searchStartDate;
     if (self.alertView.isHidden) {
         [self waiting:@"正在读取"];
         [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
-        
-//        [self load:self selecter:@selector(disposeMessage:) code:@"" account:self.schIDText.text password:self.passwordText.text];
+
     } else {
         [self getCode];
     }
@@ -162,12 +160,9 @@
                 }
                 [ToolUtils setIsVeryfy:1];
                 [self searchDetail:nil];
-                
             } else {
                 [self.confirmCode setImage:[UIImage imageWithData:cardList.img]];
-            
             }
-
        } else if ([[son getMethod]isEqualToString:@"MCardHistory"])
        {
            
@@ -192,8 +187,6 @@
            } else {
                [self.tableView reloadData];
            }
-           
-           
        }
     } else if ([son getError]==10021){
         [self getCode];
@@ -213,7 +206,7 @@
     
 }
 - (IBAction)searchDetail:(id)sender {
-
+    
     
     if (self.schIDText.text.length==0) {
         [ToolUtils showMessage:@"请输入您的学号"];
@@ -430,12 +423,10 @@
         NSTimeInterval timeBetweenNow = [end timeIntervalSinceNow];
         if (timeBetweenNow>0) {
             end = [NSDate date];
-            
             [self.endButton setTitle:[dateFormatterwithoutYear stringFromDate:end] forState:UIControlStateNormal];
             self.endDate = [dateFormatter stringFromDate:end];
         }
         NSTimeInterval timeBetween = [end timeIntervalSinceDate:start];
-
         if (timeBetween<0) {
             self.startDate  = self.endDate;
             [self.startButton setTitle:self.endButton.titleLabel.text forState:UIControlStateNormal];
