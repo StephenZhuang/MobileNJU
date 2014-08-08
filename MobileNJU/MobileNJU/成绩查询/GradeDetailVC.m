@@ -277,7 +277,7 @@
     UIImageView* imgView = [[UIImageView alloc]initWithFrame:codeFrame];
     [imgView setImage:[UIImage imageWithData:img]];
     [self.alertView addSubview:imgView];
-    
+    self.imgView = imgView;
 }
 #pragma mark textFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField

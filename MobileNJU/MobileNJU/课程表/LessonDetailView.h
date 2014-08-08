@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "AlertCloseDelegate.h"
 #import "ScheduleLesson.h"
-@interface LessonDetailView : UIView
+@interface LessonDetailView : UIView<UIAlertViewDelegate>
+
 
 {
     id<AlertCloseDelegate> myDelegate;

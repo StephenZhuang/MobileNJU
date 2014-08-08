@@ -409,6 +409,14 @@
             start = [NSDate date];
             [self.startButton setTitle:[dateFormatterwithoutYear stringFromDate:start] forState:UIControlStateNormal];
         }
+        if(timeBetweenNow<-60*60*24*60)
+        {
+            NSDate *newDate = [[NSDate alloc] initWithTimeInterval:-60*60*24*59 sinceDate:[NSDate date]];
+            start = newDate;
+            [self.startButton setTitle:[dateFormatterwithoutYear stringFromDate:start] forState:UIControlStateNormal];
+            self.startDate = [dateFormatter stringFromDate:newDate];
+            [ToolUtils showMessage:@"只能查询2个月之内的消费记录"];
+        }
         NSTimeInterval timeBetween = [end timeIntervalSinceDate:start];
         if (timeBetween<0) {
             self.endDate  = self.startDate;
@@ -422,7 +430,9 @@
         NSTimeInterval timeBetweenNow = [end timeIntervalSinceNow];
         if (timeBetweenNow>0) {
             end = [NSDate date];
+            
             [self.endButton setTitle:[dateFormatterwithoutYear stringFromDate:end] forState:UIControlStateNormal];
+            self.endDate = [dateFormatter stringFromDate:end];
         }
         NSTimeInterval timeBetween = [end timeIntervalSinceDate:start];
 

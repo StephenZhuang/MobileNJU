@@ -75,7 +75,7 @@
         [self.addBack setHidden:YES];
         [self.addButton setHidden:YES];
     } else {
-        if ([self.schIdField.text hasPrefix:@"Mg"]) {
+        if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]) {
             [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdField.text    password:self.passwordField.text];
         }
         [self loadLast];
@@ -104,9 +104,9 @@
 
 - (void)textFieldDidChange:(NSNotification *)note
 {
-    if ([self.schIdField.text hasPrefix:@"Mg"]&&self.codeView==nil) {
+    if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]&&self.codeView==nil) {
         [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
-    } else if (![self.schIdField.text hasPrefix:@"Mg"]){
+    } else if (![[self.schIdField.text uppercaseString] hasPrefix:@"MG"]){
         if (self.hasCode) {
             [self removeCode];
         }
@@ -139,9 +139,12 @@
         return;
     }
     [self loadSavedLesson];
-    ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
-    [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
-}
+    if (!self.offline) {
+        ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
+        [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
+
+    }
+  }
 
 //加载缓存课表
 - (void)loadSavedLesson

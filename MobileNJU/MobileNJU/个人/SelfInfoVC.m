@@ -17,6 +17,7 @@
 #import "RegisterVC.h"
 #import "WelcomeViewController.h"
 @interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImg;
 @property (weak, nonatomic) IBOutlet UITableView *infoTable;
@@ -45,12 +46,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[self rdv_tabBarController] setTabBarHidden:YES animated:NO];
     [self loadData];
     [self.infoTable reloadData];
     if (!self.offline) {
         [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
     }
+    NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+    if(selected)
+        [self.tableView deselectRowAtIndexPath:selected animated:NO];
+
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -248,7 +253,6 @@
         [sheet showInView:[UIApplication sharedApplication].keyWindow];
     
 }
-
 
 
 #pragma mark - image picker delegte

@@ -123,6 +123,13 @@
     cell.url =     [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",news.url]];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ActivityCell* cell = (ActivityCell*) [self.tableView cellForRowAtIndexPath:indexPath];
+    self.currentImg = cell.imgView.image;
+    [self performSegueWithIdentifier:@"detail" sender:cell.currentNew];
+}
 /*
 #pragma mark - Navigation
 

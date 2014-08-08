@@ -102,9 +102,12 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex==0) {
-        NSString* str = [NSString stringWithFormat:@"tel://%@",self.market.phone];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        if (self.market.phone.length>0) {
+            NSString* str = [NSString stringWithFormat:@"tel://%@",self.market.phone];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 
+        }
+      
     } else if (buttonIndex==1){
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = self.market.qq;

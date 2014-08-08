@@ -9,7 +9,6 @@
 #import "LessonDetailView.h"
 
 @implementation LessonDetailView
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -60,10 +59,21 @@
 }
 
 - (IBAction)deleteLesson:(id)sender {
-    [myDelegate deleteLesson:self.id];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您是否确定删除" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
+    alert.delegate = self;
 }
 
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        return;
+    } else {
+        [myDelegate deleteLesson:self.id];
+ 
+    }
+}
 
 
 @end

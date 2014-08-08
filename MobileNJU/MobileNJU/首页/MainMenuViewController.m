@@ -17,6 +17,7 @@
 #import "RDVTabBarController.h"
 #import "QCSlideViewController.h"
 #import "ShoppingVC.h"
+#import "ScheduleVC.h"
 #import "ProcedureDetailVC.h"
 #import "ZsndNews.pb.h"
 #define NEWSCOUNT 4
@@ -90,6 +91,8 @@ static NSArray* descriptions;
 {
     if (!self.offline) {
         [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
+    } else {
+        [self loadTableData];
     }
 }
 
@@ -226,6 +229,10 @@ static NSArray* descriptions;
         ProcedureDetailVC* nextVC = (ProcedureDetailVC*)[segue destinationViewController];
         nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.tempUrl]];
 
+    }
+    if ([[segue identifier] isEqual:@"课程表"]) {
+        ScheduleVC* vc = (ScheduleVC*)[segue destinationViewController];
+        vc.offline = self.offline;
     }
 }
 
