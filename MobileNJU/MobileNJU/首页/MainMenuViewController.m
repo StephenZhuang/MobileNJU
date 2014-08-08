@@ -407,7 +407,6 @@ static NSArray* descriptions;
     if (self.focusList.count>site) {
         MFocus* focus = [self.focusList objectAtIndex:site-1];
         [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-<<<<<<< HEAD
             self.complete++;
             if (image!=nil) {
                 [self.photoList setObject:image atIndexedSubscript:site-1];
@@ -419,13 +418,6 @@ static NSArray* descriptions;
             if (image!=nil) {
                 [self.photoList setObject:image atIndexedSubscript:site-1];
             }
-=======
-            [self.photoList addObject:image];
-        }];
-    } else {
-        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site-1]width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [self.photoList addObject:image];
->>>>>>> NewDevelop
         }];
     }
 }

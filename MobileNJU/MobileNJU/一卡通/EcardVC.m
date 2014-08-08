@@ -324,7 +324,6 @@
         [self.confirmCodeText resignFirstResponder];
         [self.schIDText resignFirstResponder];
         self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
-//        [self load:self selecter:@selector(disposMessage:) code:self.confirmCodeText.text account:self.schIDText.text password:self.passwordText.text];
         [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:self.confirmCodeText.text account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
 
     }

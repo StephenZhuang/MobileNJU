@@ -2544,7 +2544,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="scJ-4T-Cej"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -2564,7 +2564,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xHM-BD-igw" secondAttribute="bottom" id="dZU-RX-bKg"/>
                                                 <constraint firstItem="ke5-vl-AAQ" firstAttribute="leading" secondItem="cxj-A7-P17" secondAttribute="trailing" id="ejX-wg-87m"/>
                                                 <constraint firstItem="xHM-BD-igw" firstAttribute="leading" secondItem="zFD-Pr-dW4" secondAttribute="leading" id="sQf-iQ-4gU"/>
-                                                <constraint firstItem="ePG-Ug-0Vh" firstAttribute="baseline" secondItem="N7V-SH-Qgs" secondAttribute="baseline" id="sSF-2t-TvO"/>
+                                                <constraint firstItem="ePG-Ug-0Vh" firstAttribute="baseline" secondItem="N7V-SH-Qgs" secondAttribute="baseline" constant="1" id="sSF-2t-TvO"/>
                                                 <constraint firstAttribute="bottom" secondItem="xHM-BD-igw" secondAttribute="bottom" constant="3" id="xlG-LM-Azw"/>
                                             </constraints>
                                         </tableViewCellContentView>

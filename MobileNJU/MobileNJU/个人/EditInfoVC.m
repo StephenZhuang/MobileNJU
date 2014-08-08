@@ -176,6 +176,16 @@
      
     }
 }
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField==self.nickNameField) {
+        if (range.location >=10)
+            return NO; // return NO to not change text
+        return YES;
+    }
+    return YES;
+}
 /*
 #pragma mark - Navigation
 

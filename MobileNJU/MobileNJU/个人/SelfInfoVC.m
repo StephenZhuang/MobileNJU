@@ -40,14 +40,34 @@
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.headImage addGestureRecognizer:singleTap];
     [self.headImage setClipsToBounds:YES];
-    
+    [self initImg];
 }
 
+-(void)initImg
+{
+    if ([ToolUtils getHeadImg]!=nil&&[ToolUtils getHeadImg].length>0) {
+        NSLog(@"%@ headImage",[ToolUtils getHeadImg]);
+        [self.headImage setImageWithURL:[ToolUtils getImageUrlWtihString:[ToolUtils getHeadImg] width:111 height:111] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
+            [self.backgroundImg setImageToBlur:image blurRadius:10 completionBlock:nil];
+            [self.backgroundImg setClipsToBounds:YES];
+            [self.headImage removeFromSuperview];
+            [self.headView addSubview:self.headImage];
+        }];
+    } else {
+        [self.headImage setImage:[UIImage imageNamed:@"05个人－个人头像"]];
+//        [self.backgroundImg setImage:[UIImage imageNamed:@"05个人－个人头像"]];
+        [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
+        [self.backgroundImg setImageToBlur:self.headImage.image blurRadius:10 completionBlock:nil];
+        [self.backgroundImg setClipsToBounds:YES];
+        
+    }
 
+}
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self loadData];
-    [self.infoTable reloadData];
+//    [self loadData];
+//    [self.infoTable reloadData];
     if (!self.offline) {
         [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
     }
@@ -124,7 +144,7 @@
             NSLog(@"%d",ret.code);
             if (ret.code==1) {
                 [ToolUtils setHeadImg:ret.msg];
-                [self loadData];
+                [self initImg];
             }
         }
     } else {
@@ -154,7 +174,7 @@
 #pragma toDo
 - (void)loadData
 {
-    [self.flowerLabel setText:[NSString stringWithFormat:@"%d",[ToolUtils getFlowerCount]]];
+    [self.flowerLabel setText:[NSString stringWithFormat:@"%ld",[ToolUtils getFlowerCount]]];
     NSArray* keys = [[NSArray alloc]initWithObjects:@"image", @"content",nil];
     NSArray* images = [[NSArray alloc]initWithObjects:@"昵称",@"院系",@"性别",@"生日",@"版本号", nil];
     NSArray* content = [[NSArray alloc]initWithObjects:
@@ -162,27 +182,8 @@
                         [ToolUtils getBelong]==nil?@"":[ToolUtils getBelong],
                         [ToolUtils getSex]==nil?@"":[ToolUtils getSex],
                         [ToolUtils getBirthday]==nil?@"":[ToolUtils getBirthday], [ToolUtils getVersion]==nil?@"":[ToolUtils getVersion],nil];
-    if ([ToolUtils getHeadImg]!=nil&&[ToolUtils getHeadImg].length>0) {
-        NSLog(@"%@ headImage",[ToolUtils getHeadImg]);
-        [self.headImage setImageWithURL:[ToolUtils getImageUrlWtihString:[ToolUtils getHeadImg] width:111 height:111] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
-            [self.backgroundImg setImageToBlur:image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:nil];
-            [self.backgroundImg setClipsToBounds:YES];
-            
-            [self.headImage removeFromSuperview];
-            [self.headView addSubview:self.headImage];
-        }];
-        } else {
-        
-        [self.headImage setImage:[UIImage imageNamed:@"05个人－个人头像"]];
-        [self.backgroundImg setImage:[UIImage imageNamed:@"05个人－个人头像"]];
-        [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
-        [self.backgroundImg setImageToBlur:self.headImage.image blurRadius:kLBBlurredImageDefaultBlurRadius completionBlock:nil];
-        [self.backgroundImg setClipsToBounds:YES];
-           
-    }
-    
-       [self.nameLabel setText:[ToolUtils getNickName]==nil?@"":[ToolUtils getNickName]];
+
+    [self.nameLabel setText:[ToolUtils getNickName]==nil?@"":[ToolUtils getNickName]];
     NSMutableArray* mutableArray = [[NSMutableArray alloc]init];
     for (int i = 0 ; i < images.count; i++)
     {

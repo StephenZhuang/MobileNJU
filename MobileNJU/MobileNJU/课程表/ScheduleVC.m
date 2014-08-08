@@ -42,6 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *addBack;
 @property (strong,nonatomic)UIImageView* imgView;
+@property (strong,nonatomic)NSString* lastUserId;
 
 @end
 
@@ -70,16 +71,17 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    if (self.schIdField.text.length==0) {
+    if ([ToolUtils getScheduleAuto]==NO) {
         [self.maskView setHidden:NO];
         [self addMask];
         [self.alertView setHidden:NO];
-        [self.addBack setHidden:YES];
-        [self.addButton setHidden:YES];
-
+        if ([ToolUtils getJWID]==nil||[ToolUtils getJWID].length==0) {
+            [self.addBack setHidden:YES];
+            [self.addButton setHidden:YES];
+        }
     } else {
         if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]) {
-            [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdField.text    password:self.passwordField.text];
+            [self load:self selecter:@selector(disposMessage:) code:nil account:@"mg......."  password:@"....."];
         }
         [self loadLast];
     }
@@ -189,8 +191,13 @@
     }
     if (sender!=nil) {
         [self waiting:@"正在查询"];
+        [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
+        return;
     }
-    if ([ToolUtils getJWID].length>0) {
+    if (self.lastUserId!=nil&&![self.lastUserId isEqualToString:self.schIdField.text]) {
+        self.isRe=1;
+    }
+    if ([[ToolUtils getJWID] isEqualToString:self.schIdField.text]) {
         ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
         [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
     } else {
@@ -219,7 +226,6 @@
     [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
     [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
-    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MSchedule" params:array  delegate:delegate selecter:select];
     [updateone setShowLoading:NO];
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
@@ -239,6 +245,7 @@
                 [self.addBack setHidden:NO];
                 self.isRe=1;
                 [self closeAlert];
+                self.lastUserId = self.schIdField.text;
                 if (self.autoSwitch.isOn) {
                     [ToolUtils setScheduleAuto:YES];
                     [ToolUtils setJWPassword:self.passwordField.text];
@@ -262,14 +269,15 @@
             MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
             [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",classList.week]];
             if (self.autoSwitch.isOn) {
-                [ToolUtils setScheduleAuto:YES];
-                [ToolUtils setJWPassword:self.passwordField.text];
-                [ToolUtils setJWId:self.schIdField.text];
+//                [ToolUtils setScheduleAuto:YES];
+//                [ToolUtils setJWPassword:self.passwordField.text];
+//                [ToolUtils setJWId:self.schIdField.text];
             } else{
                 [ToolUtils setScheduleAuto:NO];
-                [ToolUtils setJWPassword:self.passwordField.text];
-                [ToolUtils setJWId:self.schIdField.text];
+//                [ToolUtils setJWPassword:self.passwordField.text];
+//                [ToolUtils setJWId:self.schIdField.text];
             }
+            self.lastUserId = [ToolUtils getJWID];
             [ToolUtils setCurrentWeek:classList.week];
             self.lessonList = classList.classList;
             [self loadSchedule];
@@ -280,9 +288,9 @@
             [self closeAlert];
             [self loadLast];
         }
-    } else if ([[son getMsg]hasPrefix:@"信息"])
+    } else if ([[son getMsg]hasPrefix:@"信息"]      &&  self.imgView!=nil )
     {
-        [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdField.text    password:self.passwordField.text];
+        [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdField.text   password:self.passwordField.text];
 
     }
         else {

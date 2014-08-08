@@ -152,6 +152,7 @@
             [ToolUtils setIsVeryfy:1];
             [self.loginIndicator removeFromSuperview];
             [self setOK:YES];
+
             MBookList_Builder* myBookList = (MBookList_Builder*)[son getBuild];
             [self cancelAlert:nil];
             [self performSegueWithIdentifier:@"myLibrary" sender:myBookList.newsList];
@@ -223,8 +224,11 @@
         if (self.rememberSwitch.isOn) {
             [ToolUtils setLibraryId:self.schIdField.text];
             [ToolUtils setLibraryPassword:self.passwordField.text];
+        } else {
+            [ToolUtils setLibraryPassword:@""];
+
         }
-         
+        
          [self load:self selecter:@selector(disposMessage:) account:self.schIdField.text password:self.passwordField.text];
     }
     

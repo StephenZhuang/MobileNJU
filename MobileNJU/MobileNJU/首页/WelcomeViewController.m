@@ -170,7 +170,7 @@ static NSArray* buttonImages;
                 }
                 
             }
-            [self getUnread];
+            [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
         }
     } else if ([[son getMethod]isEqualToString:@"MUnreadModule"])
     {
@@ -180,7 +180,31 @@ static NSArray* buttonImages;
             
             [self loadMain];
         }
+    } else if ([[son getMethod] isEqualToString:@"MGetUserInfo"]) {
+        //获得返回类
+        MUser_Builder *user = (MUser_Builder *)[son getBuild];
+        [ToolUtils setBelong:user.belong==nil?@"":user.belong];
+        [ToolUtils setBirthday:user.birthday==nil?@"":user.birthday];
+        [ToolUtils setNickname:user.nickname==nil?@"":user.nickname];
+        [ToolUtils setHeadImg:user.headImg==nil?@"":user.headImg];
+        [ToolUtils setIsVeryfy:user.isV];
+        switch (user.sex) {
+            case 0:
+                [ToolUtils setSex:@"女"];
+                break;
+            case 1:
+                [ToolUtils setSex:@"男"];
+                break;
+            case 2:
+                [ToolUtils setSex:@"未知"];
+                break;
+            default:
+                break;
+        }
+        [ToolUtils setFlowerCount:user.flower];
+        [self getUnread];
     }
+
 }
 - (void)getUnread
 {

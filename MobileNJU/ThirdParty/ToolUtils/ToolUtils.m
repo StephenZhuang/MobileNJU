@@ -603,7 +603,7 @@
 
 +(BOOL)getScheduleAuto;
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"scheduleAuto"];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"scheduleAuto"];
 }
 
 @end

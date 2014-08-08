@@ -53,7 +53,6 @@
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = rightButton;
     
-    
     self.slideSwitchView.tabItemNormalColor = [QCSlideSwitchView colorFromHexRGB:@"868686"];
     self.slideSwitchView.tabItemSelectedColor = [QCSlideSwitchView colorFromHexRGB:@"bb0b15"];
     self.slideSwitchView.shadowImage = [[UIImage imageNamed:@"red_line_and_shadow.png"]

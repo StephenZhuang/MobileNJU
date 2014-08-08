@@ -65,19 +65,6 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MMarketList"]) {
             MMarketList_Builder* list = (MMarketList_Builder*)[son getBuild];
-            
-//            NSMutableArray *removeArray  = [[NSMutableArray alloc]init];
-//            if (self.selectedMarket!=nil) {
-//                [removeArray addObject:self.selectedMarket];
-//            }
-//            for (MMarket* market in list.marketList) {
-//                for (MMarket* currentMarket in self.marketList) {
-//                    if ([currentMarket.id isEqualToString:market.id]) {
-//                        [removeArray addObject:currentMarket];
-//                    }
-//                }
-//            }
-//            [self.marketList removeObjectsInArray:removeArray];
             if (page==1) {
                 [self.marketList removeAllObjects];
                 [self.marketList addObjectsFromArray:list.marketList];
@@ -139,20 +126,23 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-//    if ([ToolUtils getIsVeryfy]==0) {
-//        [ToolUtils showMessage:@"请先验证身份"];
-//        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
-//        VerifyVC* vc = (VerifyVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"verify"]; //test2为viewcontroller的StoryboardId
-//        [self.myDelegate showView:vc];
-//        
-//    }
-    
-    UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
-    ShoppingDetailVC* vc = (ShoppingDetailVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"detail"]; //test2为viewcontroller的StoryboardId
-    vc.market = [self.marketList objectAtIndex:indexPath.row];
-    self.selectedMarket = [self.marketList objectAtIndex:indexPath.row];
-    [self.myDelegate moveToDetail:vc];
-    
+    if ([ToolUtils getIsVeryfy]==0) {
+        [ToolUtils showMessage:@"请先验证身份"];
+        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
+        VerifyVC* vc = (VerifyVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"verify"]; //test2为viewcontroller的StoryboardId
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:vc action:@selector(cancelVerify)];
+        [item setTintColor:[UIColor whiteColor]];
+        vc.navigationItem.rightBarButtonItem = item;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:nav animated:YES completion:nil];
+    } else {
+        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
+        ShoppingDetailVC* vc = (ShoppingDetailVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"detail"]; //test2为viewcontroller的StoryboardId
+        vc.market = [self.marketList objectAtIndex:indexPath.row];
+        self.selectedMarket = [self.marketList objectAtIndex:indexPath.row];
+        [self.myDelegate moveToDetail:vc];
+
+    }
 }
 
 @end

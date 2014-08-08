@@ -211,7 +211,11 @@
 {
     if (sender.tag==204) {
         [self.photoArray removeLastObject];
+        
         [[self.buttonArray objectAtIndex:self.photoArray.count]setImage:[UIImage imageNamed:@"10-发布-已选照片-添加"] forState:UIControlStateNormal];
+        UIButton* button = [self.buttonArray objectAtIndex:self.photoArray.count ];
+        [button setTag:self.photoArray.count+200];
+        
     } else if (sender.tag>=200){
         [self takePhoto];
     }
