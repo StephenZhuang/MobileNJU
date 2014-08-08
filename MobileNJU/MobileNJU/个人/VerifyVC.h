@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface VerifyVC : BaseViewController
-
+- (void)cancelVerify;
 @end

@@ -84,6 +84,7 @@
         } else if ([[son getMethod] isEqualToString:@"MTreeHoleComment"]) {
             page = 1;
             [self loadData];
+            [self showFlower];
         } else if ([[son getMethod] isEqualToString:@"MTreeHoleComments"]) {
             MCommentList_Builder *commentList = (MCommentList_Builder *)[son getBuild];
             if (page == 1) {
@@ -304,6 +305,7 @@
         [button setTitle:[NSString stringWithFormat:@"%d" , _topic.praiseCnt + 1] forState:UIControlStateNormal];
         [_topic setPraiseCnt:_topic.praiseCnt +1];
         [_topic setHasPraise:1];
+        [self showFlower];
 
     } else {
         [button setTitle:[NSString stringWithFormat:@"%d" , _topic.praiseCnt - 1] forState:UIControlStateNormal];
@@ -321,6 +323,9 @@
 
 - (IBAction)messageAction:(id)sender
 {
+    if ([_topic.author isEqualToString:[ToolUtils getLoginId]]) {
+        return;
+    }
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
     ChatViewController *vc = [sb instantiateViewControllerWithIdentifier:@"ChatViewController"];
     vc.targetid = _topic.author;
@@ -366,6 +371,22 @@
 - (void)cancelEdit
 {
     [self.view endEditing:YES];
+}
+
+- (void)showFlower
+{
+    [_flowerView setAlpha:0];
+    [_flowerView setHidden:NO];
+    
+    [UIView animateWithDuration:0.2 animations:^(void) {
+        [_flowerView setAlpha:1];
+        _flowerView.transform = CGAffineTransformMakeTranslation(0, -50);
+    }];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_flowerView setHidden:YES];
+        _flowerView.transform = CGAffineTransformIdentity;
+    });
 }
 
 #pragma mark-

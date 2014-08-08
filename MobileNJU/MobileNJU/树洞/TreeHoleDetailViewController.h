@@ -22,4 +22,5 @@
 @property (nonatomic , weak) IBOutlet UIButton *lzButton;
 @property (nonatomic , weak) IBOutlet UIPlaceHolderTextView *textView;
 @property (nonatomic , weak) IBOutlet UIView *editView;
+@property (nonatomic , weak) IBOutlet UIView *flowerView;
 @end

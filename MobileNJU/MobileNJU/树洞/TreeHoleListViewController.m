@@ -15,6 +15,7 @@
 #import "NewMessageListViewController.h"
 #import "ChatViewController.h"
 #import <Frontia/Frontia.h>
+#import "VerifyVC.h"
 
 @interface TreeHoleListViewController ()
 
@@ -219,6 +220,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (![self verifyIndentity]) {
+        return;
+    };
     MTopic *topic = [self.dataArray objectAtIndex:indexPath.section];
     TreeHoleDetailViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"TreeHoleDetailViewController"];
     vc.treeHoleid = topic.id;
@@ -227,6 +231,9 @@
 
 - (IBAction)zanAction:(id)sender
 {
+    if (![self verifyIndentity]) {
+        return;
+    };
     UIButton *button = (UIButton *)sender;
     MTopic *topic = [self.dataArray objectAtIndex:button.tag];
     MTopic_Builder *newTopic = [MTopic_Builder new];
@@ -258,8 +265,15 @@
 
 - (IBAction)messageAction:(id)sender
 {
+    
+    if (![self verifyIndentity]) {
+        return;
+    };
     UIButton *button = (UIButton *)sender;
     MTopic *topic = self.dataArray[button.tag];
+    if ([topic.author isEqualToString:[ToolUtils getLoginId]]) {
+        return;
+    }
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
     ChatViewController *vc = [sb instantiateViewControllerWithIdentifier:@"ChatViewController"];
     vc.targetid = topic.author;
@@ -268,7 +282,11 @@
 }
 
 - (IBAction)moreAction:(id)sender
-{   UIButton *button = (UIButton *)sender;
+{
+    if (![self verifyIndentity]) {
+        return;
+    };
+    UIButton *button = (UIButton *)sender;
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享",@"举报", nil];
     sheet.tag = button.tag;
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
@@ -294,6 +312,9 @@
 
 - (IBAction)tagAction:(id)sender
 {
+    if (![self verifyIndentity]) {
+        return;
+    };
     UIButton *button = (UIButton *)sender;
     MTag *tag = [[ToolUtils sharedToolUtils].tagArray objectAtIndex:button.tag-100];
     TreeHoleListViewController *vc = [[self storyboard] instantiateInitialViewController];
@@ -303,6 +324,9 @@
 
 - (IBAction)cellTagAction:(id)sender
 {
+    if (![self verifyIndentity]) {
+        return;
+    };
     UIButton *button = (UIButton *)sender;
     MTopic *topic = self.dataArray[button.tag];
     MTag_Builder *tag = [MTag_Builder new];
@@ -312,6 +336,23 @@
     vc.mtag = tag.build;
     [self.navigationController pushViewController:vc animated:YES];
     
+}
+
+- (BOOL)verifyIndentity
+{
+    if ([ToolUtils getIsVeryfy]==0) {
+        [ProgressHUD showError:@"请先验证身份"];
+        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
+        VerifyVC* vc = (VerifyVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"verify"]; //test2为viewcontroller的StoryboardId
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:vc action:@selector(cancelVerify)];
+        [item setTintColor:[UIColor whiteColor]];
+        vc.navigationItem.rightBarButtonItem = item;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:nav animated:YES completion:nil];
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 #pragma mark-
@@ -378,6 +419,12 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    return [self verifyIndentity];
+    return YES;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].

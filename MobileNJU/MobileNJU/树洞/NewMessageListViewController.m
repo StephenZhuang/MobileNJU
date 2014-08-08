@@ -232,8 +232,11 @@
         [cell.logoImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"logo_default_%i",chat.headImg]]];
         [cell.timeLabel setText:chat.time];
         if (chat.topicImg.length > 0) {
+            [cell.topicImage setHidden:NO];
             [cell.topicImage setImageWithURL:[ToolUtils getImageUrlWtihString:chat.topicImg] placeholderImage:[UIImage imageNamed:@""]];
+            [cell.smallLabel setText:@""];
         } else {
+            [cell.topicImage setHidden:YES];
             [cell.smallLabel setText:chat.topicContent];
         }
         MatchParser *match = [[MatchParser alloc] init];

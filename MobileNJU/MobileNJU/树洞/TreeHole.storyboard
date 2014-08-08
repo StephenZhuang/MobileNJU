@@ -769,6 +769,28 @@
                                     <constraint firstAttribute="height" constant="142" id="d9t-1Y-BS1"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Coz-tx-MX5">
+                                <rect key="frame" x="115" y="113" width="90" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" alpha="0.38" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_treehole_flower.png" translatesAutoresizingMaskIntoConstraints="NO" id="qGN-5R-bG6">
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_treehole_flower.png" translatesAutoresizingMaskIntoConstraints="NO" id="y83-nD-KM0">
+                                        <rect key="frame" x="27" y="6" width="15" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2oo-Lb-bTC">
+                                        <rect key="frame" x="48" y="5" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -788,6 +810,7 @@
                     <connections>
                         <outlet property="bottomView" destination="2YL-Rc-ntg" id="YXv-VF-vMA"/>
                         <outlet property="editView" destination="K2a-lJ-woL" id="CoO-bq-Kmo"/>
+                        <outlet property="flowerView" destination="Coz-tx-MX5" id="bUd-eY-ZuY"/>
                         <outlet property="lzButton" destination="PtL-Nt-iGz" id="x6K-Il-zCw"/>
                         <outlet property="messageField" destination="CPS-oE-0JC" id="ztn-6u-CSv"/>
                         <outlet property="tableView" destination="O7n-iH-Igc" id="qkB-dD-vk6"/>
@@ -1572,6 +1595,7 @@
     </scenes>
     <resources>
         <image name="bg_treehole_bottombar.png" width="320" height="43"/>
+        <image name="bg_treehole_flower.png" width="90" height="30"/>
         <image name="bg_treehole_listbar.png" width="319" height="32"/>
         <image name="bt_treehole_camara.png" width="21" height="19"/>
         <image name="bt_treehole_change.png" width="104" height="35"/>
@@ -1584,6 +1608,7 @@
         <image name="bt_treehole_more.png" width="15" height="2"/>
         <image name="bt_treehole_zan_n.png" width="18" height="18"/>
         <image name="bt_treehole_zan_s.png" width="18" height="18"/>
+        <image name="ic_treehole_flower.png" width="15" height="19"/>
         <image name="ic_treehole_hot.png" width="25" height="25"/>
         <image name="ic_treehole_lz_n.png" width="15" height="15"/>
         <image name="ic_treehole_lz_s.png" width="15" height="15"/>

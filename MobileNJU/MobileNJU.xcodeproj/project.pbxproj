@@ -18,6 +18,8 @@
 		771EDF4C193F37A200A3DCBB /* NewsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 771EDF47193F37A200A3DCBB /* NewsListView.m */; };
 		771EDF4D193F37A200A3DCBB /* NewsListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771EDF48193F37A200A3DCBB /* NewsListView.xib */; };
 		771EDF4E193F37A200A3DCBB /* SubscribeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 771EDF4A193F37A200A3DCBB /* SubscribeCell.m */; };
+		774717AB19945706000551FC /* bg_treehole_flower@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 774717A919945706000551FC /* bg_treehole_flower@2x.png */; };
+		774717AC19945706000551FC /* ic_treehole_flower@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 774717AA19945706000551FC /* ic_treehole_flower@2x.png */; };
 		7747D0FB1952C2230008C36C /* JDStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7747D0F61952C2230008C36C /* JDStatusBarNotification.m */; };
 		7747D0FC1952C2230008C36C /* JDStatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7747D0F81952C2230008C36C /* JDStatusBarStyle.m */; };
 		7747D0FD1952C2230008C36C /* JDStatusBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7747D0FA1952C2230008C36C /* JDStatusBarView.m */; };
@@ -654,6 +656,8 @@
 		771EDF47193F37A200A3DCBB /* NewsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListView.m; sourceTree = "<group>"; };
 		771EDF48193F37A200A3DCBB /* NewsListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListView.xib; sourceTree = "<group>"; };
 		771EDF4A193F37A200A3DCBB /* SubscribeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeCell.m; sourceTree = "<group>"; };
+		774717A919945706000551FC /* bg_treehole_flower@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_treehole_flower@2x.png"; sourceTree = "<group>"; };
+		774717AA19945706000551FC /* ic_treehole_flower@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_treehole_flower@2x.png"; sourceTree = "<group>"; };
 		7747D0F51952C2230008C36C /* JDStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarNotification.h; sourceTree = "<group>"; };
 		7747D0F61952C2230008C36C /* JDStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDStatusBarNotification.m; sourceTree = "<group>"; };
 		7747D0F71952C2230008C36C /* JDStatusBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDStatusBarStyle.h; sourceTree = "<group>"; };
@@ -2311,6 +2315,8 @@
 		77B90458192C433F0062237D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				774717A919945706000551FC /* bg_treehole_flower@2x.png */,
+				774717AA19945706000551FC /* ic_treehole_flower@2x.png */,
 				775B18271993519800EF1C48 /* logo_default_1@2x.png */,
 				775B18281993519800EF1C48 /* logo_default_2@2x.png */,
 				775B18291993519800EF1C48 /* logo_default_3@2x.png */,
@@ -3572,6 +3578,7 @@
 				77E0756A194043A90098BA09 /* f072.png in Resources */,
 				77E073FA1940436E0098BA09 /* treehole_logo_s@2x.png in Resources */,
 				77E07538194043A90098BA09 /* f047.png in Resources */,
+				774717AC19945706000551FC /* ic_treehole_flower@2x.png in Resources */,
 				775B18481993519800EF1C48 /* logo_default_14@2x.png in Resources */,
 				77E074FB194043A90098BA09 /* f016@2x.png in Resources */,
 				77E074E9194043A90098BA09 /* f007@2x.png in Resources */,
@@ -3591,6 +3598,7 @@
 				77E07546194043A90098BA09 /* f054.png in Resources */,
 				77E074F3194043A90098BA09 /* f012@2x.png in Resources */,
 				7796F1ED1949B84B00015307 /* nangua_add@2x.png in Resources */,
+				774717AB19945706000551FC /* bg_treehole_flower@2x.png in Resources */,
 				778EA78E1945DCF7007B6C7E /* nangua_back@2x.png in Resources */,
 				77E0740B194043A20098BA09 /* faceMap_ch.plist in Resources */,
 				77E07581194043A90098BA09 /* f083@2x.png in Resources */,
