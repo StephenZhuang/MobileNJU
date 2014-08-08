@@ -10,7 +10,7 @@
 #import "ZsndTreehole.pb.h"
 #import "UIPlaceHolderTextView.h"
 
-@interface TreeHoleDetailViewController : RefreshTableViewController<UITextFieldDelegate , UITextViewDelegate>
+@interface TreeHoleDetailViewController : RefreshTableViewController<UITextFieldDelegate , UITextViewDelegate ,UIActionSheetDelegate>
 @property (nonatomic , weak) IBOutlet UIView *bottomView;
 @property (nonatomic , weak) IBOutlet UITextField *messageField;
 @property (nonatomic , copy) NSString *treeHoleid;
@@ -22,4 +22,5 @@
 @property (nonatomic , weak) IBOutlet UIButton *lzButton;
 @property (nonatomic , weak) IBOutlet UIPlaceHolderTextView *textView;
 @property (nonatomic , weak) IBOutlet UIView *editView;
+@property (nonatomic , weak) IBOutlet UIView *flowerView;
 @end

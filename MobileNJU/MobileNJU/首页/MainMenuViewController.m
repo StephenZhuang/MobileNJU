@@ -407,6 +407,7 @@ static NSArray* descriptions;
     if (self.focusList.count>site) {
         MFocus* focus = [self.focusList objectAtIndex:site-1];
         [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+<<<<<<< HEAD
             self.complete++;
             if (image!=nil) {
                 [self.photoList setObject:image atIndexedSubscript:site-1];
@@ -418,6 +419,13 @@ static NSArray* descriptions;
             if (image!=nil) {
                 [self.photoList setObject:image atIndexedSubscript:site-1];
             }
+=======
+            [self.photoList addObject:image];
+        }];
+    } else {
+        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site-1]width:640 height:434] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self.photoList addObject:image];
+>>>>>>> NewDevelop
         }];
     }
 }
@@ -666,17 +674,24 @@ static NSArray* descriptions;
 //}
 //
 //
-//- (void)goToChat:(NSNotification *)notification
-//{
-//    NSString *type = notification.object;
-//    if (type.integerValue == 1) {
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
-//        ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-//        vc.targetid = [notification.userInfo objectForKey:@"target"];
-//        [self.navigationController pushViewController:vc animated:YES];
-//        [self dismissCallView];
-//    }
-//}
+- (void)goToChat:(NSNotification *)notification
+{
+    NSString *type = notification.object;
+    if (type.integerValue == 1) {
+        UIViewController *vc = (UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
+        UINavigationController *nav = (UINavigationController *)[tabbar selectedViewController];
+        if ([nav isEqual:self.navigationController]) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
+            ChatViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+            vc.targetid = [notification.userInfo objectForKey:@"target"];
+            vc.topicid = [notification.userInfo objectForKey:@"topicid"];
+            [self.navigationController pushViewController:vc animated:YES];
+            //        [self dismissCallView];
+        }
+        
+    }
+}
 
 
 @end

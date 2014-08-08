@@ -18,6 +18,9 @@
 @property (nonatomic , strong) IBOutlet UIButton *messageButton;
 @property (nonatomic , strong) IBOutlet UIButton *moreButton;
 
+@property (nonatomic , strong) IBOutlet UILabel *unreadLabel;
+
 + (CGFloat)getHeightByTopic:(MTopic *)topic;
 + (CGFloat)getDetailHeightByTopic:(MTopic_Builder *)topic;
++ (CGFloat)getMessageHeightByTopic:(MTopicMini *)topic;
 @end
