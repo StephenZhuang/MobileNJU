@@ -31,9 +31,9 @@
         [_time setBackgroundColor:[UIColor clearColor]];
         
         _mLogo=[[UIImageView alloc]init];
-        _mLogo.layer.cornerRadius=20;
-        _mLogo.clipsToBounds=YES;
-        _mLogo.image=[UIImage imageNamed:@"fruit_0_s"];
+        _mLogo.layer.cornerRadius = 25;
+        _mLogo.clipsToBounds = YES;
+        _mLogo.image=[UIImage imageNamed:@"logo_default_1"];
         _mLogo.layer.shadowColor=[UIColor lightGrayColor].CGColor;
         _mLogo.layer.shadowOpacity=0.5;
         _mLogo.layer.shadowOffset=CGSizeMake(4, 4);
@@ -88,7 +88,7 @@
         match.width = 200;
         match.font = [UIFont systemFontOfSize:17];
         [match match:data.content];
-        return MAX(19, match.height) + 40 + height;
+        return MAX(20, match.height) + 50 + height;
     }
     return 60+height;
 }
@@ -130,13 +130,13 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    CGRect frame=_backView.frame;
-    frame.size.width=_content.frame.size.width+20;
-    frame.size.height=_content.frame.size.height+16;
+    CGRect frame= _backView.frame;
+    frame.size.width = MAX(BUBBLE_MIN_WIDTH, _content.frame.size.width + 20);
+    frame.size.height = MAX(BUBBLe_MIN_HEIGHT, _content.frame.size.height + 25);
     _backView.frame=frame;
     
-    frame=_cellContent.frame;
-    frame.size.height=_backView.frame.origin.y+_backView.frame.size.height;
+    frame = _cellContent.frame;
+    frame.size.height = MAX(60, _backView.frame.origin.y+_backView.frame.size.height);
     _cellContent.frame=frame;
 }
 
@@ -148,7 +148,7 @@
 
 -(void)clear
 {
-    _mLogo.image=[UIImage imageNamed:@"fruit_0_s"];
+    _mLogo.image=[UIImage imageNamed:@"logo_default_1"];
     for(UIView * view in _content.subviews)
         [view removeFromSuperview];
     for(UIView * view in _time.subviews)
