@@ -83,7 +83,7 @@
                                                 <segue destination="QmX-Lb-fdO" kind="push" id="Sex-8x-8sn"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="102" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evw-N2-63I">
+                                        <button opaque="NO" tag="101" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evw-N2-63I">
                                             <rect key="frame" x="20" y="51" width="120" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="#开学啦">
@@ -94,18 +94,22 @@
                                                 <action selector="tagAction:" destination="0ge-uU-3Ri" eventType="touchUpInside" id="aGj-cM-TkV"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dn-JN-umz">
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dn-JN-umz">
                                             <rect key="frame" x="20" y="7" width="120" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="#今日精选">
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <state key="normal" title="最新">
                                                 <color key="titleColor" red="0.3411764706" green="0.3411764706" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <state key="selected" title="热门">
+                                                <color key="titleColor" red="0.3411764706" green="0.3411764706" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
                                             <connections>
-                                                <action selector="tagAction:" destination="0ge-uU-3Ri" eventType="touchUpInside" id="d4c-qS-eve"/>
+                                                <action selector="indexButtonAction:" destination="0ge-uU-3Ri" eventType="touchUpInside" id="Zfl-lB-1ZU"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" tag="101" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRC-P7-m9l">
+                                        <button opaque="NO" tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRC-P7-m9l">
                                             <rect key="frame" x="180" y="7" width="124" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="#用户反馈">
@@ -367,6 +371,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="indexButton" destination="9dn-JN-umz" id="zu4-FT-plB"/>
                         <outlet property="tableView" destination="Bju-YY-S1i" id="RMr-2Y-vle"/>
                         <segue destination="so6-y9-Fzk" kind="push" identifier="add" id="J1n-HG-fkw"/>
                         <segue destination="74H-KB-r0H" kind="push" identifier="NewMessage" id="e38-Cb-a3q"/>
