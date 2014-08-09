@@ -147,7 +147,6 @@
         vc.market = [self.marketList objectAtIndex:indexPath.row];
         self.selectedMarket = [self.marketList objectAtIndex:indexPath.row];
         [self.myDelegate moveToDetail:vc];
-
     }
 }
 
