@@ -36,11 +36,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    selectedIndex = 1;
     if (_mtag) {
         [self setTitle:_mtag.title];
         self.tableView.tableHeaderView = nil;
     } else {
-        [self setTitle:@"树洞"];
+//        [self setTitle:@"树洞"];
+        self.title = @"热门";
     }
     
     _sectionHeader = [[UIView alloc] initWithFrame:CGRectZero];
@@ -78,16 +80,13 @@
 - (void)loadData
 {
     NSString *beginStr = @"";
-    double type = 1;
     if (page == 1) {
         beginStr = @"";
-        type = 1;
     } else {
         if (self.dataArray.count > 0) {
             MTopic *topic = [self.dataArray lastObject];
             beginStr = topic.createTime;
         }
-        type = 2;
         
     }
     if (_mtag) {
@@ -99,7 +98,7 @@
             [[ApisFactory getApiMTagTreeHole] load:self selecter:@selector(disposMessage:) tagid:_mtag.id begin:beginStr];
         }
     } else {
-        [[ApisFactory getApiMTreeHoleList] load:self selecter:@selector(disposMessage:) type:type begin:beginStr];
+        [[ApisFactory getApiMTreeHoleList] load:self selecter:@selector(disposMessage:) type:selectedIndex begin:beginStr];
     }
 }
 
@@ -137,7 +136,7 @@
             [ToolUtils sharedToolUtils].tagArray = tagArray;
             
             
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 2; i++) {
                 UIButton *button = (UIButton *)[self.tableView viewWithTag:i+100];
                 MTag *tag = tagArray[i];
                 [button setTitle:[NSString stringWithFormat:@"#%@",tag.title] forState:UIControlStateNormal];
@@ -164,6 +163,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 10;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -322,6 +326,21 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (IBAction)indexButtonAction:(id)sender
+{
+    [_indexButton setSelected:!_indexButton.selected];
+    if (_indexButton.selected) {
+        selectedIndex = 2;
+        self.title = @"最新";
+    } else {
+        selectedIndex = 1;
+        self.title = @"热门";
+    }
+//    [_header beginRefreshing];
+    page = 1;
+    [self loadData];
+}
+
 - (IBAction)cellTagAction:(id)sender
 {
     if (![self verifyIndentity]) {
@@ -386,7 +405,7 @@
             
             FrontiaShareContent *content=[[FrontiaShareContent alloc] init];
             //    content.url = ShareUrl;
-            NSString *contentUrl = @"http://www.s1.smartjiangsu.com";
+            NSString *contentUrl = @"http://www.baidu.com";
             content.url = contentUrl;
             if (topic.tag.length > 0) {
                 content.title = topic.tag;
@@ -436,8 +455,9 @@
     } else if ([segue.identifier isEqualToString:@"add"]) {
         AddTreeHoleViewController *vc = [segue destinationViewController];
         vc.addSuccessBlock = ^() {
-            page = 1;
-            [self loadData];
+//            page = 1;
+//            [self loadData];
+            [self indexButtonAction:_indexButton];
         };
         if (_mtag) {
             if ([_mtag.id isEqualToString:@"热门"]) {

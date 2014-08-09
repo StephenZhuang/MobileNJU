@@ -30,7 +30,15 @@
     [self setTitle:@"详情"];
     [self.webView setDelegate:self];
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(timer) userInfo:nil repeats:NO];
+
     // Do any additional setup after loading the view.
+}
+
+
+- (void)timer
+{
+    [self.loginIndicator removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -11,4 +11,5 @@
 @interface BBSDetail : BaseViewController
 @property (nonatomic,strong)NSURL* url;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+- (void)timer;
 @end

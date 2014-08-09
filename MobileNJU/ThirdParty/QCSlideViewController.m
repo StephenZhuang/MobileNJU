@@ -12,6 +12,7 @@
 #import "ZsndMarket.pb.h"
 #import "ShoppingVC.h"
 #import "RDVTabBarController.h"
+#import "VerifyVC.h"
 
 @interface QCSlideViewController ()
 @property (nonatomic,strong)NSArray* titleArray;
@@ -102,10 +103,21 @@
 }
 - (void)addNew
 {
-    UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
-    AddShopVC* vc = (AddShopVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"add"];
-    vc.typeList = self.typeList;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([ToolUtils getIsVeryfy]==0) {
+        [ToolUtils showMessage:@"请先验证身份"];
+        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
+        VerifyVC* vc = (VerifyVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"verify"]; //test2为viewcontroller的StoryboardId
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:vc action:@selector(cancelVerify)];
+        [item setTintColor:[UIColor whiteColor]];
+        vc.navigationItem.rightBarButtonItem = item;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:nav animated:YES completion:nil];
+    } else {
+        UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
+        AddShopVC* vc = (AddShopVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"add"];
+        vc.typeList = self.typeList;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 
