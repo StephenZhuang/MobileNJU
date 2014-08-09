@@ -154,7 +154,7 @@ static NSArray* descriptions;
                 [self prepareForNews];
             } else if (self.complete==4){
                 self.newsImgList = imgList;
-                [self.photoList removeAllObjects];
+//                [self.photoList removeAllObjects];
                 for (int i = 1; i<=NEWSCOUNT; i++) {
                     [self loadNewsCache:i];
                 }
@@ -404,11 +404,10 @@ static NSArray* descriptions;
 - (void)reloadNews:(NSInteger)site
 {
     UIImageView *imageView = [self.UIImageViewList objectAtIndex:site-1];;
-    if (self.focusList.count>site) {
+    if (self.focusList.count>=site) {
         MFocus* focus = [self.focusList objectAtIndex:site-1];
         [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434]
                         placeholderImage:[UIImage imageNamed:@"640乘400"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            self.complete++;
             if (image!=nil) {
                 [self.photoList setObject:image atIndexedSubscript:site-1];
             }
@@ -553,6 +552,7 @@ static NSArray* descriptions;
         [ToolUtils showMessage:@"脱机状态下无法浏览新闻"];
         return;
     }
+    [self.newsList removeAllObjects];
     for (MFocus *focus in self.focusList) {
         for (MNews* news in self.allNews) {
             if ([news.url isEqualToString:focus.id]) {
