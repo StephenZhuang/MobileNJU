@@ -78,7 +78,7 @@
 - (IBAction)search:(id)sender {
     [self.schIDText resignFirstResponder];
     if (self.schIDText.text.length!=9) {
-        [self showAlert:@"请输入正确的9位学号"];
+        [ToolUtils showMessage:@"请输入正确的9位学号"];
         return;
     }
     [self.schIDText resignFirstResponder];
