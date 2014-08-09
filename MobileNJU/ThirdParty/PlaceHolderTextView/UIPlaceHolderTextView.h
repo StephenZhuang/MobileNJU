@@ -29,6 +29,7 @@
 @property(nonatomic, retain) NSString *placeholder;
 
 @property(nonatomic, retain) UIColor *placeholderColor;
+@property (nonatomic , strong) IBOutlet UILabel *letterNumLabel;
 
 
 

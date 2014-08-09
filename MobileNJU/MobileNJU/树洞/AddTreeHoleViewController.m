@@ -142,6 +142,9 @@
     [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
         self.bottomView.transform = CGAffineTransformMakeTranslation(0, ty);
     }];
+//    rect = _footView.frame;
+//    rect.size.height = [UIScreen mainScreen].bounds.size.height - 64 - 44 + ty - 42;
+//    [_footView setFrame:rect];
     
 }
 #pragma mark 键盘即将退出

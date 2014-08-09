@@ -104,6 +104,21 @@
         
     }
     
+    CGSize size = CGSizeMake(self.bounds.size.width - 16,2000);
+    CGSize newsize = [self.text sizeWithFont:[self font] constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+    CGRect rect = _letterNumLabel.frame;
+    rect.origin.y = 8 + newsize.height;
+    [_letterNumLabel setFrame:rect];
+    [_letterNumLabel setText:[NSString stringWithFormat:@"%i/120",self.text.length]];
+    if (self.text.length > 120) {
+        [_letterNumLabel setTextColor:[UIColor redColor]];
+    } else {
+        [_letterNumLabel setTextColor:[UIColor lightGrayColor]];
+    }
+    self.contentSize = CGSizeMake(self.contentSize.width, CGRectGetMaxY(_letterNumLabel.frame));
+    [self setNeedsLayout];
+    [self setNeedsDisplay];
+    NSLog(@"%f,%f",self.contentSize.height ,CGRectGetMaxY(_letterNumLabel.frame));
 }
 
 - (void)setPlaceholder:(NSString *)aPlaceholder
@@ -143,7 +158,7 @@
 
 {
     if ( IOS7_OR_LATER ) {
-        self.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
+        self.contentInset=UIEdgeInsetsMake(0, 0, 20, 0);
     }
     
     if( [[self placeholder] length] > 0 )
@@ -172,6 +187,15 @@
             
             [self addSubview:placeHolderLabel];
             
+        }
+        
+        if (_letterNumLabel == nil) {
+            _letterNumLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 30, self.bounds.size.width - 16, 21)];
+            _letterNumLabel.textAlignment = NSTextAlignmentRight;
+            _letterNumLabel.font = [UIFont systemFontOfSize:12];
+            _letterNumLabel.text = @"0/120";
+            _letterNumLabel.textColor = [UIColor lightGrayColor];
+            [self addSubview:_letterNumLabel];
         }
         
         
