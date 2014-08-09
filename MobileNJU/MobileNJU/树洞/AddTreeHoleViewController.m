@@ -124,6 +124,7 @@
     } else {
         AddImageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddImageCell"];
         [cell.backImage setImage:_image];
+//        cell.backImage.layer.contentsGravity=kCAGravityCenter;
         return cell;
     }
 }
@@ -209,11 +210,21 @@
             break;
     }
     // 跳转到相机或相册页面
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     
-    _imagePicker = [[GKImagePicker alloc] initWithSourceType:sourceType];
-    self.imagePicker.cropSize = CGSizeMake(320, 220);
-    self.imagePicker.delegate = self;
-    [self presentViewController:_imagePicker.imagePickerController animated:YES completion:nil];
+    imagePickerController.delegate = self;
+    
+    imagePickerController.allowsEditing = YES;
+    
+    imagePickerController.sourceType = sourceType;
+    
+    [self presentViewController:imagePickerController animated:YES completion:^{}];
+
+//    _imagePicker = [[GKImagePicker alloc] initWithSourceType:sourceType];
+//    self.imagePicker.cropSize = CGSizeMake(320, 220);
+//    self.imagePicker.delegate = self;
+//    [self presentViewController:_imagePicker.imagePickerController animated:YES completion:nil];
+    
 }
 
 #pragma mark - image picker delegte
@@ -223,13 +234,13 @@
     
     //    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    image = [self useImage:image];
-    
+    _image = [self useImage:image];
+    [self.tableView reloadData];
+    [self hidesBottomBarWhenPushed];
 }
 
 - (UIImage *)useImage:(UIImage *)image {
     //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
     // Create a graphics image context
     CGSize newSize = CGSizeMake(640, 640 * image.size.height / image.size.width);
     UIGraphicsBeginImageContext(newSize);
@@ -240,8 +251,14 @@
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     // End the context
     UIGraphicsEndImageContext();
-    
+    newImage = [self imageFromImage:newImage inRect:CGRectMake(0, 100, 640, 440)];
     //    [pool release];
+    return newImage;
+}
+- (UIImage *)imageFromImage:(UIImage *)image inRect:(CGRect)rect {
+    CGImageRef sourceImageRef = [image CGImage];
+    CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, rect);
+    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
     return newImage;
 }
 
@@ -283,10 +300,16 @@
             }
         }
         // 跳转到相机或相册页面
-        _imagePicker = [[GKImagePicker alloc] initWithSourceType:sourceType];
-        self.imagePicker.cropSize = CGSizeMake(320, 220);
-        self.imagePicker.delegate = self;
-        [self presentViewController:_imagePicker.imagePickerController animated:YES completion:nil];
+//        _imagePicker = [[GKImagePicker alloc] initWithSourceType:sourceType];
+//        self.imagePicker.cropSize = CGSizeMake(320, 220);
+//        self.imagePicker.delegate = self;
+//        [self presentViewController:_imagePicker.imagePickerController animated:YES completion:nil];
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = YES;
+        imagePickerController.sourceType = sourceType;
+        [self presentViewController:imagePickerController animated:YES completion:^{}];
+
     }
 }
 
@@ -301,9 +324,9 @@
 }
 
 - (void)hideImagePicker{
-    [self.imagePicker.imagePickerController dismissViewControllerAnimated:YES completion:^(void){
-        [self.rdv_tabBarController setTabBarHidden:YES];
-    }];
+//    [self.imagePicker.imagePickerController dismissViewControllerAnimated:YES completion:^(void){
+//        [self.rdv_tabBarController setTabBarHidden:YES];
+//    }];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView

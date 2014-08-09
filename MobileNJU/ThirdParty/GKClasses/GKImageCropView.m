@@ -245,18 +245,22 @@ static CGRect GKScaleRect(CGRect rect, CGFloat scale)
         faktor = width / size.width;
         faktoredWidth = size.width;
         faktoredHeight =  height / faktor;
-        
+        self.cropOverlayView.frame = self.bounds;
+        self.scrollView.frame = CGRectMake(xOffset, yOffset, size.width, size.height);
+        self.scrollView.contentSize = CGSizeMake(size.width, size.height);
+        self.imageView.frame = CGRectMake(0, floor((size.height - faktoredHeight) * 0.5), faktoredWidth, faktoredHeight);
     } else {
         
-        faktor = height / size.height;
-        faktoredWidth = width / faktor;
-        faktoredHeight =  size.height;
+        faktor = 1;
+        faktoredWidth = size.width;
+        faktoredHeight = self.bounds.size.height;
+        self.cropOverlayView.frame = self.bounds;
+        self.scrollView.frame = CGRectMake(0, 0, size.width, size.height);
+        self.scrollView.contentSize = CGSizeMake(size.width, size.height);
+        self.imageView.frame = CGRectMake(0, floor((size.height - faktoredHeight) * 0.5), faktoredWidth, faktoredHeight);
     }
     
-    self.cropOverlayView.frame = self.bounds;
-    self.scrollView.frame = CGRectMake(xOffset, yOffset, size.width, size.height);
-    self.scrollView.contentSize = CGSizeMake(size.width, size.height);
-    self.imageView.frame = CGRectMake(0, floor((size.height - faktoredHeight) * 0.5), faktoredWidth, faktoredHeight);
+   
 }
 
 #pragma mark -

@@ -29,7 +29,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    
+    [NSThread sleepForTimeInterval:1.0];
+
     [self initDeviceid];
     [self initApiFrame];
     [self initShare:application options:launchOptions];
@@ -46,7 +47,8 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-      return YES;
+
+    return YES;
 }
 
 #pragma - mark init param

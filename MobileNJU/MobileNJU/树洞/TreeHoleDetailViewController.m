@@ -137,6 +137,7 @@
         if (_topic) {            
             [cell.contentLabel setText:_topic.content];
             [cell.logoImage setImageWithURL:[ToolUtils getImageUrlWtihString:_topic.img] placeholderImage:[UIImage imageNamed:@""]];
+            cell.logoImage.layer.contentsGravity = kCAGravityCenter;
             [cell.zanButton setTag:indexPath.section];
             [cell.commentButton setTag:indexPath.section];
             [cell.moreButton setTag:indexPath.section];
@@ -291,7 +292,17 @@
 //        
 //        [_topic setCommentCnt:_topic.commentCnt + 1];
 //        [_detailView.commentButton setTitle:[NSString stringWithFormat:@"%i",_topic.commentCnt] forState:UIControlStateNormal];
-        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_treeHoleid content:string reply:_targetid floor:_replyfloor islz:_lzButton.selected?0:1];
+        int isLz=1;
+        if (_lzButton.isHidden) {
+            isLz=0;
+        } else {
+            if (_lzButton.isSelected) {
+                isLz=1;
+            } else {
+                isLz=0;
+            }
+        }
+        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_treeHoleid content:string reply:_targetid floor:_replyfloor islz:isLz];
     }
     [_textView resignFirstResponder];
     [_textView setText:@""];

@@ -22,10 +22,19 @@
 	 * @param begin  开始时间
 	 * @callback MTreeHole_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  type:(double)type begin:(NSString*)begin {
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  type:(double)type begin:(NSString*)begin page:(int) page limit:(int)limit{
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
 		[array addObject:[NSString stringWithFormat:@"type=%@",[Frame number2String:type]]];
 		[array addObject:[NSString stringWithFormat:@"begin=%@",begin==nil?@"":begin]];
+        
+        if (page!=0) {
+            [array addObject:[NSString stringWithFormat:@"page=%d",page]];
+             
+        }
+        if (limit!=0) {
+            [array addObject:[NSString stringWithFormat:@"limit=%d",limit]];
+
+        }
 		UpdateOne *updateone=[[UpdateOne alloc] init:@"MTreeHoleList" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
@@ -38,8 +47,8 @@
 	 * @param begin  开始时间
 	 * @callback MTreeHole_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  type:(double)type begin:(NSString*)begin {
-		UpdateOne *update=[self get:delegate selecter:select type:type begin:begin];
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  type:(double)type begin:(NSString*)begin page:(int) page limit:(int)limit{
+		UpdateOne *update=[self get:delegate selecter:select type:type begin:begin page:page limit:limit];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
 		return update;
 	}

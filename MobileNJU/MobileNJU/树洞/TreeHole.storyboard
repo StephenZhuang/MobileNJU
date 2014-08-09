@@ -205,6 +205,8 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="110" id="CAK-K6-kIX"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="110" id="DgO-di-tA1"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="LHg-UX-aRq"/>
                                                         <constraint firstAttribute="width" constant="160" id="hcH-eD-CXx"/>
                                                     </constraints>
                                                 </imageView>
@@ -1283,6 +1285,13 @@
                                                         <constraint firstAttribute="height" constant="68" id="xlc-4t-86q"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="用户反馈" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhk-O9-yGK">
+                                                    <rect key="frame" x="223" y="34" width="77" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="oR0-Ei-XUw" firstAttribute="top" secondItem="eZg-7N-fkN" secondAttribute="top" constant="8" id="Cxb-YJ-04G"/>
@@ -1301,6 +1310,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="adminLabel" destination="uhk-O9-yGK" id="Y6M-f4-G65"/>
                                             <outlet property="contentLabel" destination="s2g-Yo-gus" id="hEG-8z-jCZ"/>
                                             <outlet property="logoImage" destination="HdL-9g-HZj" id="Sxe-Tb-6xx"/>
                                             <outlet property="smallLabel" destination="BF5-lt-L77" id="uWr-Ir-EKB"/>
