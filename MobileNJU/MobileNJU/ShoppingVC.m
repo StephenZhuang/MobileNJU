@@ -61,6 +61,9 @@
 
 - (void)disposMessage:(Son *)son
 {
+    
+    
+    
     [self.loginIndicator removeFromSuperview];
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MMarketList"]) {
@@ -74,7 +77,9 @@
                 [self doneWithView:_footer];
             }
         }
-    } else {
+    } 
+    
+        else {
         [super disposMessage:son];
     }
 
@@ -134,7 +139,8 @@
         [item setTintColor:[UIColor whiteColor]];
         vc.navigationItem.rightBarButtonItem = item;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-        [self presentViewController:nav animated:YES completion:nil];
+        [self.myDelegate showView:nav];
+//        [self presentViewController:nav animated:YES completion:nil];
     } else {
         UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
         ShoppingDetailVC* vc = (ShoppingDetailVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"detail"]; //test2为viewcontroller的StoryboardId
