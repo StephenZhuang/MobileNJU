@@ -18,7 +18,7 @@
 #import "JDStatusBarNotification.h"
 #import "RDVTabBarController.h"
 
-#define APP_KEY @"ezHXvwFL0chMGB3h2L2Girtg"
+#define APP_KEY @"MGZF96fGRexFypz7bvgapVY1"
 #define REPORT_ID @"d5dd317228"
 
 #define IosAppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
@@ -263,7 +263,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                 style.textColor = [UIColor whiteColor];
                 style.barColor = RGB(60, 139, 253);
                 style.animationType = JDStatusBarAnimationTypeMove;
-                
+
                 //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
                 //        style.progressBarPosition = self.progressBarPosition;
                 //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
