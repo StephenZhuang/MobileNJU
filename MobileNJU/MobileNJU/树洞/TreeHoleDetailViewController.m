@@ -248,6 +248,7 @@
     [self addMask];
     _targetid = @"";
     _replyfloor = 0;
+    [_textView setPlaceholder:@"评论不得超过120字"];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -295,6 +296,7 @@
     [_textView resignFirstResponder];
     [_textView setText:@""];
     _targetid = @"";
+    [_textView setPlaceholder:@"评论不得超过120字"];
 }
 
 - (IBAction)zanAction:(id)sender
@@ -340,6 +342,7 @@
     MComment *comment = self.dataArray[button.tag];
     _replyfloor = comment.floor;
     _targetid = comment.userid;
+    [_textView setPlaceholder:[NSString stringWithFormat:@"回复%d楼",comment.floor]];
     [self.textView becomeFirstResponder];
 }
 

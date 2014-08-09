@@ -33,7 +33,7 @@
 
 
 -(void)textChanged:(NSNotification*)notification;
-
+- (void)setPlaceholder:(NSString *)aPlaceholder;
 
 
 @end

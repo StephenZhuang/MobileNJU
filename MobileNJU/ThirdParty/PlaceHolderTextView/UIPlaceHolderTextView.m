@@ -106,6 +106,27 @@
     
 }
 
+- (void)setPlaceholder:(NSString *)aPlaceholder
+{
+    placeholder = aPlaceholder;
+    [self.placeHolderLabel setText:self.placeholder];
+    if([[self text] length] == 0)
+        
+    {
+        
+        [[self viewWithTag:999] setAlpha:1];
+        
+    }
+    
+    else
+        
+    {
+        
+        [[self viewWithTag:999] setAlpha:0];
+        
+    }
+}
+
 
 
 - (void)setText:(NSString *)text {
