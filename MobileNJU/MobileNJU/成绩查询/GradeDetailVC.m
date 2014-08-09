@@ -334,36 +334,8 @@
     [cell addBorder];
     MCourse* course = [self.gradeList objectAtIndex:indexPath.row];
     [cell.lessonNameLabel setText:course.name ];
-    switch (course.type) {
-        case 1:
-            cell.lessonTypeLabel.text = @"核心";
-            break;
-        case 2:
-            cell.lessonTypeLabel.text = @"平台";
-            break;
-        case 3:
-            cell.lessonTypeLabel.text = @"通修";
-            break;
-        case 0:
-            cell.lessonTypeLabel.text =@"选修";
-            break;
-        case 4:
-            cell.lessonTypeLabel.text = @"A类";
-            break;
-        case 5:
-            cell.lessonTypeLabel.text =@"B类";
-            break;
-        case 6:
-            cell.lessonTypeLabel.text =@"C类";
-            break;
-        case 7:
-            cell.lessonTypeLabel.text =@"D类";
-            break;
-        default:
-            cell.lessonTypeLabel.text =@"选修";
-
-            
-    }
+    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"学位课",@"选修课",@"通识教育课" ,@"学科基础课",@"实践环节课" ,@"学科选修课",  @"专业必修课",@"专业选修课" ,@"文化素质课"  ,@"公共选修课" ,@"学科教育课",@"专业基础课",@"专业方向课",@"人文素质课" ,@"科学素质课", @"外国语言课" ,@"计划外课程" ,@"学位课程", nil];
+    cell.lessonTypeLabel.text =  [typeList objectAtIndex:course.type];
     if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
         NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);
         [cell setTick:[[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text] isEqualToString:@"YES"]?YES:NO];

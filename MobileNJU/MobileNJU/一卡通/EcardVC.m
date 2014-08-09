@@ -15,11 +15,11 @@
 @property (weak, nonatomic) IBOutlet UIView *maskView;
 @property (strong, nonatomic)  UITextField *schIDText;
 @property (strong, nonatomic)  UITextField *passwordText;
-@property (strong, nonatomic)  UITextField *confirmCodeText;
+//@property (strong, nonatomic)  UITextField *confirmCodeText;
 @property (strong, nonatomic)  UISwitch *autoSearch;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) AlertViewWithCode *alertView;
-@property (strong, nonatomic) UIImageView *confirmCode;
+//@property (strong, nonatomic) UIImageView *confirmCode;
 @property (weak, nonatomic) IBOutlet UILabel *ecardTitle;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet UIButton *endButton;
@@ -80,7 +80,7 @@
         [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
 
     } else {
-        [self getCode];
+//        [self getCode];
     }
     // Do any additional setup after loading the view.
 }
@@ -91,8 +91,8 @@
 
 - (void)initAlert
 {
-    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewCode" owner:self options:nil] objectAtIndex:0];
-    CGRect frame = CGRectMake((self.view.bounds.size.width-281)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 281);
+    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
+    CGRect frame = CGRectMake((self.view.bounds.size.width-261)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 257);
     self.alertView.frame = frame;
     self.frame = frame;
     [self.view addSubview:self.alertView];
@@ -101,22 +101,19 @@
     self.schIDText.delegate = self;
     self.autoSearch = self.alertView.autoSwitch;
     self.passwordText = self.alertView.passwordField;
+    self.schIDText.delegate = self;
     self.passwordText.delegate = self;
-    self.passwordText.delegate = self;
-    self.confirmCode = self.alertView.codeView;
-    self.confirmCodeText = self.alertView.codeField;
-    self.confirmCodeText.delegate = self;
     [self.alertView.searchBt addTarget:self action:@selector(searchResult:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(closeAlertView:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-
-- (void)getCode
-{
-    [self.confirmCode setImage:[UIImage imageNamed:@"news_loading"]];
-    [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:@"111" password:@"111" isV:0 isReInput:self.isRe];
-//    [self load:self selecter:@selector(disposeMessage:) code:nil account:@"1" password:@"1"];
-}
+#warning 南理工不需要验证码
+//- (void)getCode
+//{
+//    [self.confirmCode setImage:[UIImage imageNamed:@"news_loading"]];
+//    [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:@"111" password:@"111" isV:0 isReInput:self.isRe];
+////    [self load:self selecter:@selector(disposeMessage:) code:nil account:@"1" password:@"1"];
+//}
 
 
 
@@ -177,7 +174,7 @@
                 [ToolUtils setIsVeryfy:1];
                 [self searchDetail:nil];
             } else {
-                [self.confirmCode setImage:[self useImage:[UIImage imageWithData:cardList.img]]];
+//                [self.confirmCode setImage:[self useImage:[UIImage imageWithData:cardList.img]]];
             }
        } else if ([[son getMethod]isEqualToString:@"MCardHistory"])
        {
@@ -205,7 +202,7 @@
            }
        }
     } else if ([son getError]==10021){
-        [self getCode];
+//        [self getCode];
     } else {
         [super disposMessage:son];
     }
@@ -314,7 +311,7 @@
 - (IBAction)closeAlertView:(id)sender {
     [self.passwordText resignFirstResponder];
     [self.schIDText resignFirstResponder];
-    [self.confirmCode resignFirstResponder];
+//    [self.confirmCode resignFirstResponder];
     [self.alertView setHidden:YES];
     [self.maskView setHidden:YES];
     self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
@@ -337,10 +334,10 @@
         }
         [self waiting:@"正在查询"];
         [self.passwordText resignFirstResponder];
-        [self.confirmCodeText resignFirstResponder];
+//        [self.confirmCodeText resignFirstResponder];
         [self.schIDText resignFirstResponder];
         self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
-        [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:self.confirmCodeText.text account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
+        [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
 
     }
 }
@@ -348,10 +345,10 @@
 - (IBAction)showAlertView:(id)sender {
     [self.schIDText resignFirstResponder];
     [self.passwordText resignFirstResponder];
-    [self.confirmCodeText resignFirstResponder];
-    if (sender!=nil) {
-        [self getCode];
-    }
+//    [self.confirmCodeText resignFirstResponder];
+//    if (sender!=nil) {
+//        [self getCode];
+//    }
     [self.alertView setHidden:NO];
     [self.maskView setHidden:NO];
     [self addMask];
