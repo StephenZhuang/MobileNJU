@@ -138,9 +138,9 @@ static NSArray* buttonImages;
         if ([son getError] == 0) {
             self.offline=NO;
             MUser_Builder *user = (MUser_Builder *)[son getBuild];
-            NSLog(@"account%@  nickname%@ verify  %@ ",user.account,user.nickname,user.verify);
             [ToolUtils setVerify:user.verify];
             [ToolUtils setLoginId:user.id];
+            [ToolUtils setIsVeryfy:user.isV];
             if (user.headImg.length>0) {
                 [ToolUtils setHeadImg:user.headImg];
             }
@@ -149,7 +149,6 @@ static NSArray* buttonImages;
             [ToolUtils setIsLogin:YES];
             [ToolUtils setAccount:self.usernameTextField.text];
             [ToolUtils setPassword:self.passwordTextField.text];
-            
             FrontiaPush *push = [Frontia getPush];
             if(push) {
                 
@@ -170,7 +169,8 @@ static NSArray* buttonImages;
                 }
                 
             }
-            [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
+            [self getUnread];
+//            [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
         }
     } else if ([[son getMethod]isEqualToString:@"MUnreadModule"])
     {
@@ -202,7 +202,8 @@ static NSArray* buttonImages;
                 break;
         }
         [ToolUtils setFlowerCount:user.flower];
-        [self getUnread];
+    } else if ([son getError]!=0){
+        [self showLoginView];
     }
 
 }
