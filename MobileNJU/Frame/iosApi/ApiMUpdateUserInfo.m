@@ -31,7 +31,6 @@
 		[array addObject:[NSString stringWithFormat:@"belong=%@",belong==nil?@"":belong]];
 		[array addObject:[NSString stringWithFormat:@"sex=%@",[Frame number2String:sex]]];
 		[array addObject:[NSString stringWithFormat:@"birthday=%@",birthday==nil?@"":birthday]];
-		[array addObject:[NSString stringWithFormat:@"tags=%@",tags==nil?@"":tags]];
 		UpdateOne *updateone=[[UpdateOne alloc] init:@"MUpdateUserInfo" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}

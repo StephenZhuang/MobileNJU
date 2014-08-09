@@ -22,7 +22,7 @@
 {
     _imageName = imageName;
     UIImageView* img = [[UIImageView alloc]initWithFrame:CGRectMake(7, 70, 267, 140)];
-    [img setImageWithURL:[UtilMethods getImageUrlWtihString:imageName width:534 height:280]];
+    [img setImageWithURL:[UtilMethods getImageUrlWtihString:imageName width:534 height:280] placeholderImage:[UIImage imageNamed:@"560乘280"]];
     [self.activityView addSubview:img];
     self.imgView = img;
     

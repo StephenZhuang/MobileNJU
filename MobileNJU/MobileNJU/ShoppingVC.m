@@ -113,9 +113,9 @@
 {
     ShoppingCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     MMarket* market = [self.marketList objectAtIndex:indexPath.row];
-    UIImage* loading = [UIImage imageNamed:@"news_loading"];
+    UIImage* loading = [UIImage imageNamed:@"280乘280"];
     NSString* img = [[market.imgs componentsSeparatedByString:@","] firstObject];
-    [cell.img setImageWithURL:[ToolUtils getImageUrlWtihString:img width:140 height:140] placeholderImage:loading];
+    [cell.img setImageWithURL:[ToolUtils getImageUrlWtihString:img width:280 height:280] placeholderImage:loading];
     [cell.name setText:market.name==nil?@"":market.name];
     [cell.price setText:[NSString stringWithFormat:@"%@元",market.price==nil?@"":market.price]];
     NSString* state = market.isSold==1?@"（已售）":@"";

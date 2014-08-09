@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "GradeVC.h"
 @interface GradeDetailVC : BaseViewController
 @property (nonatomic,strong)NSString* term;
 @property (nonatomic,strong)NSString* account;
 @property(nonatomic,strong)NSString* password;
+@property(nonatomic,weak)GradeVC* lastVC;
 @end

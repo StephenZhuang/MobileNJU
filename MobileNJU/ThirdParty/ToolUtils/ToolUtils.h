@@ -81,8 +81,7 @@
 +(void)setMySchedule:(NSArray*)schedule;
 +(NSArray*)getMySchedule;
 +(NSInteger)getCurrentWeek;
-+(NSArray*)getTermList;
-+(void)setTermList:(NSArray*)termList;
+
 + (NSInteger)getIsVeryfy;
 +(void)setIsVeryfy:(NSInteger)verify;
 + (NSString*)getAccount;

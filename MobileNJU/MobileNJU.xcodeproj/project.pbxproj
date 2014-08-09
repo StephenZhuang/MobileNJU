@@ -1385,6 +1385,7 @@
 		7D7A48801986B2A80019E9B3 /* MyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNavigationController.h; sourceTree = "<group>"; };
 		7D7A48811986B2A80019E9B3 /* MyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNavigationController.m; sourceTree = "<group>"; };
 		7D7A48831986B2C30019E9B3 /* myNavigationControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myNavigationControllerDelegate.h; sourceTree = "<group>"; };
+		7D8DFA561994DBAB0045DC1A /* SelfVCDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelfVCDelegate.h; sourceTree = "<group>"; };
 		7D930428198F2ACA0084412C /* Frontia */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Frontia; path = ThirdParty/Frontia/Frontia.framework/Versions/2.0.2/Frontia; sourceTree = "<group>"; };
 		7D93042B198F2B090084412C /* BPushConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BPushConfig.plist; sourceTree = "<group>"; };
 		7D93042C198F2B090084412C /* Frontia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Frontia.framework; sourceTree = "<group>"; };
@@ -2477,6 +2478,7 @@
 				7D2FFEDD192F16B200E6C040 /* SelfCell.m */,
 				7D930444198F61CC0084412C /* VerifyVC.h */,
 				7D930445198F61CC0084412C /* VerifyVC.m */,
+				7D8DFA561994DBAB0045DC1A /* SelfVCDelegate.h */,
 			);
 			path = "个人";
 			sourceTree = "<group>";
@@ -2520,6 +2522,7 @@
 			isa = PBXGroup;
 			children = (
 				77E0765119405DDD0098BA09 /* EmojiCell.h */,
+				77E072C2194043140098BA09 /* TreeHoleDetailViewController.m */,
 				77E0765219405DDD0098BA09 /* EmojiCell.m */,
 				77E0764E19405C730098BA09 /* EmojiViewController.h */,
 				77E0764F19405C730098BA09 /* EmojiViewController.m */,
@@ -2529,7 +2532,6 @@
 				77E072BF194043140098BA09 /* TreeHoleCell.h */,
 				77E072C0194043140098BA09 /* TreeHoleCell.m */,
 				77E072C1194043140098BA09 /* TreeHoleDetailViewController.h */,
-				77E072C2194043140098BA09 /* TreeHoleDetailViewController.m */,
 				77932C9F194AF2F300FBDFEF /* DetailView.h */,
 				77932CA0194AF2F300FBDFEF /* DetailView.m */,
 				77932CA2194AF30700FBDFEF /* DetailView.xib */,
@@ -3287,6 +3289,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Stephen Zhuang";
 				TargetAttributes = {
+					77B90424192C3F030062237D = {
+						DevelopmentTeam = 2GRZFYGA77;
+					};
 					77B9043F192C3F040062237D = {
 						TestTargetID = 77B90424192C3F030062237D;
 					};
@@ -4006,7 +4011,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "6404FFFA-B73A-4D3F-BD2B-5A8357C36EA3";
+				PROVISIONING_PROFILE = "2C19D93E-D1FE-4CBA-9086-6B5C7B4D666D";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4039,7 +4044,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PROVISIONING_PROFILE = "6404FFFA-B73A-4D3F-BD2B-5A8357C36EA3";
+				PROVISIONING_PROFILE = "2C19D93E-D1FE-4CBA-9086-6B5C7B4D666D";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4051,6 +4056,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ThirdParty/Frontia",
@@ -4069,7 +4075,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6404FFFA-B73A-4D3F-BD2B-5A8357C36EA3";
+				PROVISIONING_PROFILE = "082086E4-4A6D-42B9-BA95-08C9A1C06194";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -4081,6 +4087,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ThirdParty/Frontia",
@@ -4099,7 +4106,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6404FFFA-B73A-4D3F-BD2B-5A8357C36EA3";
+				PROVISIONING_PROFILE = "082086E4-4A6D-42B9-BA95-08C9A1C06194";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

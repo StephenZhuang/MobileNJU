@@ -134,7 +134,23 @@
 //    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
 //    return updateone;
 //}
-
+- (UIImage *)useImage:(UIImage *)image {
+    //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // Create a graphics image context
+    CGSize newSize = CGSizeMake(80,40);
+    UIGraphicsBeginImageContext(newSize);
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    //    [pool release];
+    return newImage;
+}
 
 - (void)disposeMessage:(Son *)son
 {
@@ -161,7 +177,7 @@
                 [ToolUtils setIsVeryfy:1];
                 [self searchDetail:nil];
             } else {
-                [self.confirmCode setImage:[UIImage imageWithData:cardList.img]];
+                [self.confirmCode setImage:[self useImage:[UIImage imageWithData:cardList.img]]];
             }
        } else if ([[son getMethod]isEqualToString:@"MCardHistory"])
        {

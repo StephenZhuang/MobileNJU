@@ -15,6 +15,7 @@
 #import "MyNavigationController.h"
 #import "RDVTabBarController.h"
 #import "RegisterVC.h"
+#import "EditInfoVC.h"
 #import "WelcomeViewController.h"
 @interface SelfInfoVC ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -41,7 +42,12 @@
     [self.headImage addGestureRecognizer:singleTap];
     [self.headImage setClipsToBounds:YES];
     [self initImg];
+    if (!self.offline) {
+        [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
+    }
+
 }
+
 
 -(void)initImg
 {
@@ -56,7 +62,6 @@
         }];
     } else {
         [self.headImage setImage:[UIImage imageNamed:@"05个人－个人头像"]];
-//        [self.backgroundImg setImage:[UIImage imageNamed:@"05个人－个人头像"]];
         [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
         [self.backgroundImg setImageToBlur:self.headImage.image blurRadius:10 completionBlock:nil];
         [self.backgroundImg setClipsToBounds:YES];
@@ -68,13 +73,12 @@
 {
 //    [self loadData];
 //    [self.infoTable reloadData];
-    if (!self.offline) {
-        [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
-    }
-    NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+    [self loadData];
+    [self.infoTable reloadData];
+        NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
     if(selected)
         [self.tableView deselectRowAtIndexPath:selected animated:NO];
-
+    [self.rdv_tabBarController setTabBarHidden:YES];
     
 }
 
@@ -89,9 +93,10 @@
 //    if (sender==nil) {
 //        [ToolUtils setHasLogOut:@"yes"];
 //    }
-    [self dismissViewControllerAnimated:NO completion:^{
-        [self.rdv_tabBarController dismissViewControllerAnimated:NO completion:nil];
-    }];
+//    [self dismissViewControllerAnimated:NO completion:^{
+//        [self.rdv_tabBarController dismissViewControllerAnimated:NO completion:nil];
+//    }];
+    [self.rdv_tabBarController dismissViewControllerAnimated:YES completion:nil];
 //    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (void) returnToWelcome
@@ -154,8 +159,9 @@
 }
 
 - (IBAction)backToMain:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
     [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
+    [self.rdv_tabBarController setSelectedIndex:0];
 }
 
 # pragma ViewController
@@ -167,14 +173,23 @@
     }
     return self;
 }
+- (IBAction)edit:(id)sender {
+    UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Self" bundle:nil];
+    EditInfoVC* vc = (EditInfoVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"edit"]; //test2为viewcontroller的StoryboardId
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:vc action:@selector(cancelVC)];
+    [item setTintColor:[UIColor whiteColor]];
+    vc.navigationItem.rightBarButtonItem = item;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
 
+}
 
 
 
 #pragma toDo
 - (void)loadData
 {
-    [self.flowerLabel setText:[NSString stringWithFormat:@"%ld",[ToolUtils getFlowerCount]]];
+    [self.flowerLabel setText:[NSString stringWithFormat:@"%d",[ToolUtils getFlowerCount]]];
     NSArray* keys = [[NSArray alloc]initWithObjects:@"image", @"content",nil];
     NSArray* images = [[NSArray alloc]initWithObjects:@"昵称",@"院系",@"性别",@"生日",@"版本号", nil];
     NSArray* content = [[NSArray alloc]initWithObjects:
@@ -182,7 +197,6 @@
                         [ToolUtils getBelong]==nil?@"":[ToolUtils getBelong],
                         [ToolUtils getSex]==nil?@"":[ToolUtils getSex],
                         [ToolUtils getBirthday]==nil?@"":[ToolUtils getBirthday], [ToolUtils getVersion]==nil?@"":[ToolUtils getVersion],nil];
-
     [self.nameLabel setText:[ToolUtils getNickName]==nil?@"":[ToolUtils getNickName]];
     NSMutableArray* mutableArray = [[NSMutableArray alloc]init];
     for (int i = 0 ; i < images.count; i++)
@@ -214,8 +228,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"self";
-    SelfCell *cell = (SelfCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SelfCell *cell = (SelfCell*)[tableView dequeueReusableCellWithIdentifier:@"self"];
     NSString *imageName = [[self.infos objectAtIndex:indexPath.row] objectForKey:@"image"];
     [cell setImageName:imageName];
     NSString* content = [[self.infos objectAtIndex:indexPath.row]objectForKey:@"content"];
@@ -374,6 +387,13 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row==self.infos.count-1) {
+        return;
+    }
+    [self edit:nil];
+}
 
 - (IBAction)modifyPassword:(id)sender {
     UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];

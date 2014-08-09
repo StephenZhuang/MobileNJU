@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 @interface GradeVC : BaseViewController
-@property (weak, nonatomic) IBOutlet UIView *maskView;
 - (void)showAlert;
 - (IBAction)cancelAlert:(id)sender;
+@property(nonatomic,strong)NSArray* termList;
+
 @end

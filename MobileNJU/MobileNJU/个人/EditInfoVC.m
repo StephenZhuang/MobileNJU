@@ -32,11 +32,10 @@
     [self.nickNameField setDelegate:self];
     [self.instituteField setDelegate:self];
     [self.birthField setDelegate:self];
-    [self.instituteField addTarget:self action:@selector(showComboBox:) forControlEvents:UIControlEventAllTouchEvents];
-    [self.birthField addTarget:self action:@selector(showDataPicker:) forControlEvents:UIControlEventAllTouchEvents];
     [self initField];
     // Do any additional setup after loading the view.
 }
+
 
 - (void)initField
 {
@@ -95,7 +94,7 @@
             default:
                 break;
         }
-        [self.navigationController popViewControllerAnimated:YES];
+        [self cancelVC];
     } else {
         [super disposMessage:son];
     }
@@ -185,6 +184,11 @@
         return YES;
     }
     return YES;
+}
+
+-(void)cancelVC
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 /*
 #pragma mark - Navigation

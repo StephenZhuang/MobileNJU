@@ -8,5 +8,5 @@
 
 #import "BaseViewController.h"
 @interface EditInfoVC : BaseViewController
-
+-(void)cancelVC;
 @end

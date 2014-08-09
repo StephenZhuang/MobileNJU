@@ -21,7 +21,6 @@
 @property (strong,nonatomic)UITextField* codeField;
 @property (strong, nonatomic)  UIButton *searchButton;
 @property (strong, nonatomic)  UISwitch *autoSwitch;
-@property(nonatomic,strong)NSArray* termList;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong,nonatomic)NSString* account;
 @property(strong,nonatomic)NSString* password;
@@ -53,9 +52,10 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [self loadSavedState];
+    
 
 }
 
@@ -113,12 +113,13 @@
     } else if (!self.hasLogin){
         [self showAlert];
     }
-    self.termList = [ToolUtils getTermList];
     [self.tableView reloadData];
 }
 
 - (IBAction)search:(id)sender {
-    
+    if (sender!=nil) {
+        self.isRe=1;
+    }
     [self.schIdTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     [self.codeField resignFirstResponder];
@@ -188,7 +189,7 @@
                     NSArray* arr = [[NSArray alloc]initWithObjects:term.name,term.url,nil];
                     [termArray addObject:arr];
                 }
-                [ToolUtils setTermList:termArray];
+//                [ToolUtils setTermList:termArray];
                 self.termList = termArray;
                 [self.tableView reloadData];
             }
@@ -400,6 +401,7 @@
         [nextVC setTerm:sender];
         [nextVC setPassword:self.password];
         [nextVC setAccount:self.account];
+        [nextVC setLastVC:self];
     }
 }
 

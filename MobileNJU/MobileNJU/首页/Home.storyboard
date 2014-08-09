@@ -1184,7 +1184,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可借：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9x-Go-eoF">
-                                                    <rect key="frame" x="47" y="89" width="30" height="12"/>
+                                                    <rect key="frame" x="53" y="89" width="30" height="12"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1204,15 +1204,15 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUZ-1r-b5I">
-                                                    <rect key="frame" x="36" y="85" width="8" height="16"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUZ-1r-b5I">
+                                                    <rect key="frame" x="35" y="87" width="8" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.6705882353" green="0.0" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-nE-EFL">
-                                                    <rect key="frame" x="77" y="85" width="8" height="16"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-nE-EFL">
+                                                    <rect key="frame" x="75" y="87" width="8" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.6705882353" green="0.0" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1233,18 +1233,22 @@
                                             <constraint firstItem="Wmt-vG-Ma9" firstAttribute="top" secondItem="foz-DV-Qrl" secondAttribute="bottom" constant="3" id="7ej-Ng-9MP"/>
                                             <constraint firstItem="Wmt-vG-Ma9" firstAttribute="leading" secondItem="foz-DV-Qrl" secondAttribute="leading" id="8Am-HV-UyC"/>
                                             <constraint firstItem="g9x-Go-eoF" firstAttribute="top" secondItem="t92-em-mJM" secondAttribute="bottom" constant="-12" id="97B-Em-nen"/>
+                                            <constraint firstItem="uUZ-1r-b5I" firstAttribute="centerY" secondItem="t92-em-mJM" secondAttribute="centerY" id="9Fr-bW-qnI"/>
                                             <constraint firstAttribute="bottom" secondItem="Wmt-vG-Ma9" secondAttribute="bottom" constant="19" id="Ikf-78-9vg"/>
                                             <constraint firstItem="Wmt-vG-Ma9" firstAttribute="trailing" secondItem="cV8-Ei-wBq" secondAttribute="trailing" id="K8b-Fq-KYF"/>
                                             <constraint firstItem="foz-DV-Qrl" firstAttribute="top" secondItem="t92-em-mJM" secondAttribute="bottom" constant="3" id="L8f-hZ-IA9"/>
+                                            <constraint firstItem="fcc-nE-EFL" firstAttribute="centerY" secondItem="g9x-Go-eoF" secondAttribute="centerY" id="Mu4-14-Bgr"/>
                                             <constraint firstAttribute="trailing" secondItem="lSv-Gn-qfd" secondAttribute="trailing" constant="1" id="Pht-Hg-SkG"/>
                                             <constraint firstItem="cV8-Ei-wBq" firstAttribute="top" secondItem="grl-Q2-qrn" secondAttribute="top" constant="10" id="SnR-Il-4Bd"/>
-                                            <constraint firstItem="g9x-Go-eoF" firstAttribute="leading" secondItem="t92-em-mJM" secondAttribute="trailing" constant="7" id="Sne-z1-oHP"/>
+                                            <constraint firstItem="g9x-Go-eoF" firstAttribute="leading" secondItem="t92-em-mJM" secondAttribute="trailing" constant="13" id="Sne-z1-oHP"/>
                                             <constraint firstAttribute="bottom" secondItem="cV8-Ei-wBq" secondAttribute="bottom" constant="9" id="Vno-wY-4jp"/>
                                             <constraint firstItem="lSv-Gn-qfd" firstAttribute="leading" secondItem="grl-Q2-qrn" secondAttribute="leading" constant="10" id="Xbf-bR-jlH"/>
                                             <constraint firstItem="cV8-Ei-wBq" firstAttribute="leading" secondItem="grl-Q2-qrn" secondAttribute="leading" constant="7" id="ctc-N8-UTG"/>
+                                            <constraint firstItem="fcc-nE-EFL" firstAttribute="leading" secondItem="g9x-Go-eoF" secondAttribute="trailing" constant="-8" id="fCK-ZP-AVg"/>
                                             <constraint firstItem="lSv-Gn-qfd" firstAttribute="top" secondItem="grl-Q2-qrn" secondAttribute="top" constant="13" id="kJr-FY-XOu"/>
                                             <constraint firstItem="foz-DV-Qrl" firstAttribute="leading" secondItem="grl-Q2-qrn" secondAttribute="leading" constant="10" id="nNy-0s-Um3"/>
                                             <constraint firstItem="t92-em-mJM" firstAttribute="leading" secondItem="grl-Q2-qrn" secondAttribute="leading" constant="10" id="oof-Uk-fXq"/>
+                                            <constraint firstItem="uUZ-1r-b5I" firstAttribute="leading" secondItem="t92-em-mJM" secondAttribute="trailing" constant="-5" id="x4e-Ev-LQL"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="auther" destination="foz-DV-Qrl" id="5JG-No-Pl2"/>

@@ -76,6 +76,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)search:(id)sender {
+    [self.schIDText resignFirstResponder];
     if (self.schIDText.text.length!=9) {
         [self showAlert:@"请输入正确的9位学号"];
         return;
@@ -180,8 +181,6 @@
     [self.maskView setHidden:YES];
     [self.schIDText resignFirstResponder];
 }
-- (IBAction)searchResult:(id)sender {
-}
 
 - (IBAction)showAlertView:(id)sender {
     [self.alertView setHidden:NO];
@@ -225,7 +224,7 @@
     static NSString *CellIdentifier = @"exercise";
     ExerciseCell *cell = (ExerciseCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     MSignIn* record = [self.infoList objectAtIndex:indexPath.row];
-    [cell.recordId setText:[NSString stringWithFormat:@"%d",indexPath.row+1]];
+    [cell.recordId setText:[NSString stringWithFormat:@"%ld",indexPath.row+1]];
     [cell.startTime setText:record.begin];
     [cell.endTime setText:record.end];
     [cell.date setText:record.time];

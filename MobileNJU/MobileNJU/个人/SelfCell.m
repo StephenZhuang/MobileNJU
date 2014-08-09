@@ -11,13 +11,12 @@
 @implementation SelfCell
 - (void)setImageName:(NSString *)imageName
 {
-    _imageName = imageName;
     [self.typeLabel setText:imageName];
 }
 
 - (void)setContent:(NSString *)content
 {
-    _content = content;
     [self.contentLabel setText:content];
 }
 @end
+

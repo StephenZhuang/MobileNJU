@@ -47,6 +47,7 @@
     [self loadSavedState];
     self.LessonChooseDic = [[NSMutableDictionary alloc]init];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
+    self.isRe=1;
 
     // Do any additional setup after loading the view.
 }
@@ -67,7 +68,6 @@
     self.passwordTextField.delegate = self;
     [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
-    self.isRe = 0 ;
     self.searchButton = self.alertView.searchBt;
 }
 
@@ -174,7 +174,7 @@
                     NSArray* arr = [[NSArray alloc]initWithObjects:term.name,term.url,nil];
                     [termArray addObject:arr];
                 }
-                [ToolUtils setTermList:termArray];
+                self.lastVC.termList = termArray;
                 [self cancelAlert:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             }
@@ -196,7 +196,6 @@
     [self waiting:@"正在加载"];
     [self.passwordTextField setText:self.password];
     [self.schIdTextField setText:self.account];
-#warning api更改，原有api错误，需要更正
     [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
 //    [[ApisFactory getApiMGradeSearch] load:self selecter:@selector(disposMessage:) url:self.term];
 }
@@ -283,10 +282,12 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [UIView animateWithDuration:0.3f animations:^{
-        [self.view bringSubviewToFront:self.alertView];
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, -50);
+        
+        CGFloat offset= self.frame.origin.y+self.frame.size.height-(self.view.bounds.size.height-216);
+        self.alertView.transform = CGAffineTransformMakeTranslation(0, -offset);
+
+        
     } completion:^(BOOL finished) {
-        [self.view bringSubviewToFront:self.alertView];
     }];
     //    [textField becomeFirstResponder];
     

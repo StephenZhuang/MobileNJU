@@ -385,11 +385,11 @@ static NSArray* buttonImages;
 - (BOOL)tabBarController:(RDVTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     if ([tabBarController.viewControllers indexOfObject:viewController]==3) {
-//        [viewController.rdv_tabBarController setTabBarHidden:YES];
-        [tabBarController presentViewController:viewController animated:YES completion:^{
-            
-        }];
-        return NO;
+        [viewController.rdv_tabBarController setTabBarHidden:YES];
+//        [tabBarController presentViewController:viewController animated:YES completion:^{
+//            
+//        }];
+//        return NO;
     };
     return YES;
 

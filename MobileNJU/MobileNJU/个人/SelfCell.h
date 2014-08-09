@@ -12,6 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
-@property(strong,nonatomic)NSString* imageName;
-@property(strong,nonatomic)NSString* content;
+- (void)setImageName:(NSString *)imageName;
+- (void)setContent:(NSString *)content;
 @end

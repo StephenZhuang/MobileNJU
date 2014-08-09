@@ -73,7 +73,7 @@
     MRss* rss = [self.allRss objectAtIndex:indexPath.row];
     [cell.typeTitle setText:rss.title ];
     [cell.typeDetail setText:rss.content];
-    [cell.myImageView setImageWithURL:[ToolUtils getImageUrlWtihString:rss.img width:90 height:90] placeholderImage:[UIImage imageNamed:@"news_loading"]];
+    [cell.myImageView setImageWithURL:[ToolUtils getImageUrlWtihString:rss.img width:90 height:90] placeholderImage:[UIImage imageNamed:@"90乘92"]];
     [cell.subscribeSwitch setOn:rss.state==1];
     cell.id = rss.id;
     cell.delegate = self;

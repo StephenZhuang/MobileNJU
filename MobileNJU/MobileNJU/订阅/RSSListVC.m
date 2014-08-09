@@ -100,7 +100,7 @@
     cell.type = new.source;
     cell.detail = new.content;
     cell.date = new.time;
-    [cell.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:new.img width:178 height:134] placeholderImage:[UIImage imageNamed:@"news_loading"]];
+    [cell.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:new.img width:178 height:134] placeholderImage:[UIImage imageNamed:@"178乘134"]];
     UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
     cell.selectedBackgroundView = backView;
     cell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];

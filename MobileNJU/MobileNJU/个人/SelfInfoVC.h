@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "RDVTabBarController.h"
 @interface SelfInfoVC : BaseViewController
 @property(nonatomic,strong)NSArray* infos;
 @property (nonatomic)int flowerCount;
-
+@property (nonatomic,strong)RDVTabBarController* tabBarVC;
 @end

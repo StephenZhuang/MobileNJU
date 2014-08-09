@@ -438,20 +438,7 @@
     
 }
 
-+ (NSArray *)getTermList
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"termList"];
 
-}
-
-+ (void)setTermList:(NSArray *)termList
-{
-    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:termList  forKey:@"termList"];
-    [userDefaults synchronize];
-    
-    
-}
 +(void)setIsVeryfy:(NSInteger)verify
 {
     NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];

@@ -202,6 +202,7 @@ UIView* view;
         || [viewController class]==[EcardVC class]
         || [viewController class]==[ExerciseVC class]
         || [viewController class]==[BookViewController class]
+        || [viewController class]==[RDVTabBarController class]
         ) {
         [navigationController setNavigationBarHidden:YES animated:animated];
     } else if ( [navigationController isNavigationBarHidden] ) {

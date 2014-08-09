@@ -106,7 +106,7 @@
     } else {
         [cell.unReadButton setTitle:[NSString stringWithFormat:@"%d",rss.count] forState:UIControlStateNormal];
     }
-    [cell.rssImg setImageWithURL:[ToolUtils getImageUrlWtihString:rss.img width:90 height:92] placeholderImage:[UIImage imageNamed:@"news_loading"]];
+    [cell.rssImg setImageWithURL:[ToolUtils getImageUrlWtihString:rss.img width:90 height:92] placeholderImage:[UIImage imageNamed:@"90乘92"]];
     return cell;
     
 }

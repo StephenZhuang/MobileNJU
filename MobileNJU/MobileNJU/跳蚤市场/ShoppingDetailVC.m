@@ -53,7 +53,11 @@
         UIButton* button = [[UIButton alloc]initWithFrame:frame];
         [button setBackgroundImage:[UIImage imageNamed:@"purpleButton"] forState:UIControlStateNormal];
         [button setBackgroundImage:[UIImage imageNamed:@"purpleButtonhighlighted"] forState:UIControlStateHighlighted];
+        [button setBackgroundImage:[UIImage imageNamed:@"grayButton"] forState:UIControlStateDisabled];
         [self.footView addSubview:button];
+        if (self.market.isSold==1) {
+            [button setEnabled:NO];
+        }
         [button setTitle:state forState:UIControlStateNormal];
         [button addTarget:self action:@selector(contact) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -163,7 +167,7 @@
         frame.origin.y = 0;
         frame.size = self.scrollView.frame.size;
         UIImageView *pageView = [[UIImageView alloc]initWithFrame:frame];
-        [pageView setImageWithURL:[ToolUtils getImageUrlWtihString:[photoList objectAtIndex:i] width:320 height:320] placeholderImage:[UIImage imageNamed:@"news_loading"]];
+        [pageView setImageWithURL:[ToolUtils getImageUrlWtihString:[photoList objectAtIndex:i] width:640 height:640] placeholderImage:[UIImage imageNamed:@"640乘640"]];
         pageView.contentMode = UIViewContentModeScaleAspectFit;
         [pageView setClipsToBounds:YES];
         [self.scrollView addSubview:pageView];
