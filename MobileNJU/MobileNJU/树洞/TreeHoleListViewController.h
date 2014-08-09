@@ -9,7 +9,11 @@
 #import "RefreshTableViewController.h"
 
 @interface TreeHoleListViewController : RefreshTableViewController<UIAlertViewDelegate , UITableViewDataSource , UITableViewDelegate , UIActionSheetDelegate>
+{
+    NSInteger selectedIndex;
+}
 @property (nonatomic , strong) UIView *sectionHeader;
 @property (nonatomic , strong) UIButton *messageButton;
 @property (nonatomic , strong) MTag *mtag;
+@property (nonatomic , weak) IBOutlet UIButton *indexButton;
 @end

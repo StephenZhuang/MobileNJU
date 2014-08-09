@@ -29,11 +29,12 @@
 @property(nonatomic, retain) NSString *placeholder;
 
 @property(nonatomic, retain) UIColor *placeholderColor;
+@property (nonatomic , strong) IBOutlet UILabel *letterNumLabel;
 
 
 
 -(void)textChanged:(NSNotification*)notification;
-
+- (void)setPlaceholder:(NSString *)aPlaceholder;
 
 
 @end
