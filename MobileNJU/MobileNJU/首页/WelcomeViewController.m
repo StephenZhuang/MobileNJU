@@ -154,22 +154,27 @@ static NSArray* buttonImages;
             [ToolUtils setPassword:self.passwordTextField.text];
             FrontiaPush *push = [Frontia getPush];
             if(push) {
-                
-                NSString *tags = user.verify;
-                if (![@"" isEqualToString:tags]) {
-                    NSArray *tagArr = [tags componentsSeparatedByString:@";"];
-                    
-                    [push setTags:tagArr tagOpResult:^(int count, NSArray *failureTag) {
-//                        NSString *message = [[NSString alloc] initWithFormat:@"set tag success result: %d with failure tags %@", count, failureTag];
-//                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
+                 UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+                if(types!= UIRemoteNotificationTypeNone)
+                {
+                    NSString *tags = user.verify;
+                    if (![@"" isEqualToString:tags]) {
+                        NSArray *tagArr = [tags componentsSeparatedByString:@";"];
                         
-                    } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
-                        NSString *message = [[NSString alloc] initWithFormat:@"set tag failed with %@ error code : %d error message %@", action, errorCode, errorMessage];
-//                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
-                        [ToolUtils showMessage:message];
-                        
-                    }];
+                        [push setTags:tagArr tagOpResult:^(int count, NSArray *failureTag) {
+                            //                        NSString *message = [[NSString alloc] initWithFormat:@"set tag success result: %d with failure tags %@", count, failureTag];
+                            //                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
+                            
+                        } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
+                            NSString *message = [[NSString alloc] initWithFormat:@"set tag failed with %@ error code : %d error message %@", action, errorCode, errorMessage];
+                            //                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
+                            [ToolUtils showMessage:message];
+                            
+                        }];
+                    }
+
                 }
+                    
                 
             }
             [self getUnread];
@@ -205,7 +210,8 @@ static NSArray* buttonImages;
                 break;
         }
         [ToolUtils setFlowerCount:user.flower];
-    } else if ([son getError]!=0){
+    }
+    if ([son getError]!=0){
         [self showLoginView];
     }
 

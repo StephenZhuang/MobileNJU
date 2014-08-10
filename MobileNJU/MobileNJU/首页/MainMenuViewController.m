@@ -290,6 +290,7 @@ static NSArray* descriptions;
          [cell.menuButton setImage:imageSelected.image forState:UIControlStateSelected];
         [cell.menuButton setDesitination:[descriptions objectAtIndex:indexPath.row]];
         [cell.menuTitle setText:[functionNames objectAtIndex:indexPath.row]];
+        [cell setUserInteractionEnabled:YES];
 //        [cell.menuSubTitle setText:[descriptions objectAtIndex:indexPath.row]];
         [cell.menuButton addTarget:self action:@selector(
                                                          goToDetail
@@ -305,7 +306,7 @@ static NSArray* descriptions;
         [cell.menuTitle setText:@""];
         [cell.menuSubTitle setText:@""];
         [cell.redCircle setHidden:YES];
-        
+        [cell setUserInteractionEnabled:NO];
     }
     
    
