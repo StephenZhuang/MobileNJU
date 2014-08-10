@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="欢迎" translatesAutoresizingMaskIntoConstraints="NO" id="A36-I3-Ado">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="302"/>
+                                <rect key="frame" x="-20" y="0.0" width="320" height="302"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="C5I-gb-hJn"/>
@@ -124,8 +124,8 @@
                             <constraint firstItem="dS8-St-LHa" firstAttribute="leading" secondItem="JSk-EC-kht" secondAttribute="leading" id="Dgo-D3-s7f"/>
                             <constraint firstAttribute="trailing" secondItem="1k1-vG-KaY" secondAttribute="trailing" constant="116" id="DnP-ii-GeC"/>
                             <constraint firstItem="yCk-kJ-MxY" firstAttribute="centerX" secondItem="dS8-St-LHa" secondAttribute="centerX" id="E9G-hM-aMy"/>
-                            <constraint firstAttribute="trailing" secondItem="A36-I3-Ado" secondAttribute="trailing" id="J0R-jb-ObY"/>
-                            <constraint firstItem="A36-I3-Ado" firstAttribute="leading" secondItem="JSk-EC-kht" secondAttribute="leading" id="Lg2-sM-MoL"/>
+                            <constraint firstAttribute="trailing" secondItem="A36-I3-Ado" secondAttribute="trailing" constant="20" id="J0R-jb-ObY"/>
+                            <constraint firstItem="A36-I3-Ado" firstAttribute="leading" secondItem="JSk-EC-kht" secondAttribute="leading" constant="-20" id="Lg2-sM-MoL"/>
                             <constraint firstAttribute="trailing" secondItem="dS8-St-LHa" secondAttribute="trailing" id="VAF-ct-ssp"/>
                             <constraint firstAttribute="trailing" secondItem="xNG-qI-6Xr" secondAttribute="trailing" id="dCE-gS-ENk"/>
                             <constraint firstItem="A36-I3-Ado" firstAttribute="top" secondItem="JSk-EC-kht" secondAttribute="top" id="dWo-cg-wgG"/>

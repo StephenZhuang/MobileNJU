@@ -202,7 +202,8 @@ static NSArray* buttonImages;
                 break;
         }
         [ToolUtils setFlowerCount:user.flower];
-    } else if ([son getError]!=0){
+    }
+    if ([son getError]!=0){
         [self showLoginView];
     }
 
