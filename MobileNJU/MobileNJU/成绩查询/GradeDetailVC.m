@@ -216,6 +216,8 @@
 {
     if ([self.schIdTextField.text hasPrefix:@"Mg"]) {
         [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+    } else {
+        [self removeCode];
     }
     [self.alertView setHidden:NO];
     [self.maskView setHidden:NO];

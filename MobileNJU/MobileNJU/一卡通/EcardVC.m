@@ -78,9 +78,9 @@
     if (self.alertView.isHidden) {
         [self waiting:@"正在读取"];
         [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
-
+        
     } else {
-//        [self getCode];
+        [self getCode];
     }
     // Do any additional setup after loading the view.
 }
@@ -91,11 +91,8 @@
 
 - (void)initAlert
 {
-//    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
-//    CGRect frame = CGRectMake((self.view.bounds.size.width-261)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 257);
-    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
-    CGRect frame = CGRectMake((self.view.bounds.size.width-261)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 257);
-    
+    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewCode" owner:self options:nil] objectAtIndex:0];
+    CGRect frame = CGRectMake((self.view.bounds.size.width-281)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 281);
     self.alertView.frame = frame;
     self.frame = frame;
     [self.view addSubview:self.alertView];
@@ -104,9 +101,8 @@
     self.schIDText.delegate = self;
     self.autoSearch = self.alertView.autoSwitch;
     self.passwordText = self.alertView.passwordField;
-//    self.schIDText.delegate = self;
     self.passwordText.delegate = self;
-//    self.passwordText.delegate = self;
+    self.passwordText.delegate = self;
     self.confirmCode = self.alertView.codeView;
     self.confirmCodeText = self.alertView.codeField;
     self.confirmCodeText.delegate = self;
@@ -114,12 +110,12 @@
     [self.alertView.closeBt addTarget:self action:@selector(closeAlertView:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-//#warning 南理工不需要验证码
+
 - (void)getCode
 {
     [self.confirmCode setImage:[UIImage imageNamed:@"news_loading"]];
     [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:@"111" password:@"111" isV:0 isReInput:self.isRe];
-//    [self load:self selecter:@selector(disposeMessage:) code:nil account:@"1" password:@"1"];
+    //    [self load:self selecter:@selector(disposeMessage:) code:nil account:@"1" password:@"1"];
 }
 
 
@@ -138,23 +134,7 @@
 //    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
 //    return updateone;
 //}
-- (UIImage *)useImage:(UIImage *)image {
-    //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    // Create a graphics image context
-    CGSize newSize = CGSizeMake(80,40);
-    UIGraphicsBeginImageContext(newSize);
-    // Tell the old image to draw in this new context, with the desired
-    // new size
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    // Get the new image from the context
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    // End the context
-    UIGraphicsEndImageContext();
-    
-    //    [pool release];
-    return newImage;
-}
+
 
 - (void)disposeMessage:(Son *)son
 {
@@ -181,33 +161,33 @@
                 [ToolUtils setIsVeryfy:1];
                 [self searchDetail:nil];
             } else {
-                [self.confirmCode setImage:[self useImage:[UIImage imageWithData:cardList.img]]];
+                [self.confirmCode setImage:[UIImage imageWithData:cardList.img]];
             }
-       } else if ([[son getMethod]isEqualToString:@"MCardHistory"])
-       {
-           
-           MCardList_Builder* ret = (MCardList_Builder*)[son getBuild];
-           NSMutableArray* tmp = [[NSMutableArray alloc]initWithArray:self.detaiList];
-           for (MCard* newCard in ret.cardList) {
-               int flag=0;
-               for (MCard* card in tmp) {
-                   if ([card.time isEqualToString:newCard.time]) {
-                       flag=1;
-                       break;
-                   }
-               }
-               if (!flag) {
-                   [tmp addObjectsFromArray:ret.cardList];
-                   break;
-               }
-           }
-           self.detaiList  = tmp;
-           if (page>=1) {
-               [self doneWithView:_footer];
-           } else {
-               [self.tableView reloadData];
-           }
-       }
+        } else if ([[son getMethod]isEqualToString:@"MCardHistory"])
+        {
+            
+            MCardList_Builder* ret = (MCardList_Builder*)[son getBuild];
+            NSMutableArray* tmp = [[NSMutableArray alloc]initWithArray:self.detaiList];
+            for (MCard* newCard in ret.cardList) {
+                int flag=0;
+                for (MCard* card in tmp) {
+                    if ([card.time isEqualToString:newCard.time]) {
+                        flag=1;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    [tmp addObjectsFromArray:ret.cardList];
+                    break;
+                }
+            }
+            self.detaiList  = tmp;
+            if (page>=1) {
+                [self doneWithView:_footer];
+            } else {
+                [self.tableView reloadData];
+            }
+        }
     } else if ([son getError]==10021){
         [self getCode];
     } else {
@@ -242,34 +222,34 @@
         }
         [self waiting:@"正在查询"];
         [[[[ApisFactory getApiMCardHistory]setPage:page pageCount:10] load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate account:self.schIDText.text password:self.passwordText.text]setShowLoading:NO];
-//        [self load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate];
- 
+        //        [self load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate];
+        
     }
 }
-     
-     /**
-      *  一卡通消费记录  /mobile?methodno=MCardHistory&debug=1&deviceid=1&userid=&verify=&begin=&end=&account=&password=
-      * @param delegate 回调类
-      * @param select  回调函数
-      * @param begin * 起始
-      * @param end * 结束
-      * @callback MCardList_Builder
-      */
-     -(UpdateOne*)load:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end {
-         NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-         [array addObject:[NSString stringWithFormat:@"account=%@",self.schIDText.text]];
-         [array addObject:[NSString stringWithFormat:@"password=%@",self.passwordText.text]];
-         [array addObject:[NSString stringWithFormat:@"begin=%@",self.startDate]];
-         [array addObject:[NSString stringWithFormat:@"end=%@",self.endDate]];
-         [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
-         [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
-         [array addObject:[NSString stringWithFormat:@"page=%d",page]];
-         [array addObject:[NSString stringWithFormat:@"limit=%d",20]];
-         UpdateOne *updateone=[[UpdateOne alloc] init:@"MCardHistory" params:array  delegate:delegate selecter:select];         [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
-         [updateone setShowLoading:NO];
-         [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
-         return updateone;
-     }
+
+/**
+ *  一卡通消费记录  /mobile?methodno=MCardHistory&debug=1&deviceid=1&userid=&verify=&begin=&end=&account=&password=
+ * @param delegate 回调类
+ * @param select  回调函数
+ * @param begin * 起始
+ * @param end * 结束
+ * @callback MCardList_Builder
+ */
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  begin:(NSString*)begin end:(NSString*)end {
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    [array addObject:[NSString stringWithFormat:@"account=%@",self.schIDText.text]];
+    [array addObject:[NSString stringWithFormat:@"password=%@",self.passwordText.text]];
+    [array addObject:[NSString stringWithFormat:@"begin=%@",self.startDate]];
+    [array addObject:[NSString stringWithFormat:@"end=%@",self.endDate]];
+    [array addObject:[NSString stringWithFormat:@"isReInput=%d",self.isRe]];
+    [array addObject:[NSString stringWithFormat:@"isV=%d",[ToolUtils getIsVeryfy]]];
+    [array addObject:[NSString stringWithFormat:@"page=%d",page]];
+    [array addObject:[NSString stringWithFormat:@"limit=%d",20]];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MCardHistory" params:array  delegate:delegate selecter:select];         [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    [updateone setShowLoading:NO];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
+}
 
 
 - (IBAction)showDataPicker:(UIButton *)sender {
@@ -297,8 +277,8 @@
         CGFloat offset= self.frame.origin.y+self.frame.size.height-(self.view.bounds.size.height-216);
         self.alertView.transform = CGAffineTransformMakeTranslation(0, -offset);
         
-        } completion:^(BOOL finished) {
-        }];
+    } completion:^(BOOL finished) {
+    }];
 }
 
 
@@ -310,7 +290,7 @@
         //    self.logoImage.center = CGPointMake(self.logoImage.center.x, 100);
     } completion:^(BOOL finished) {
     }];
-
+    
     return YES;
 }
 
@@ -345,7 +325,7 @@
         [self.schIDText resignFirstResponder];
         self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
         [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:self.confirmCodeText.text account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
-
+        
     }
 }
 
@@ -408,7 +388,7 @@
     // 使用日期格式器格式化日期、时间
     NSString *destDateString = [dateFormatterwithoutYear stringFromDate:pickerView.date];
     [self.selectedButton setTitle:destDateString forState:UIControlStateNormal];
-  
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY/MM/dd"];
     if (self.selectedButton==self.startButton) {
@@ -456,14 +436,14 @@
 #pragma mark - Table view delegate
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
