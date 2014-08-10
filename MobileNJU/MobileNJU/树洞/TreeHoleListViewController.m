@@ -43,7 +43,7 @@
         self.tableView.tableHeaderView = nil;
     } else {
 //        [self setTitle:@"树洞"];
-        self.title = @"热门";
+        self.title = @"最热";
     }
     
     _sectionHeader = [[UIView alloc] initWithFrame:CGRectZero];
@@ -358,7 +358,7 @@
         self.title = @"最新";
     } else {
         selectedIndex = 1;
-        self.title = @"热门";
+        self.title = @"最热";
     }
 //    [_header beginRefreshing];
     page = 1;
@@ -440,7 +440,10 @@
             content.imageObj = [ToolUtils getImageUrlWtihString:topic.img].absoluteString;
             
             NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_SINAWEIBO,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
-            
+            [share registerQQAppId:@"100358052" enableSSO:YES];
+            [share registerWeixinAppId:@"wx277782943f4c36be"];
+            [share registerSinaweiboAppId:@"306527345"];
+
             [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
         }
             break;

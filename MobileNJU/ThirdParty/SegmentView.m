@@ -48,16 +48,16 @@
        
         
         [button.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
-        [button setTitleColor:blackColor forState:UIControlStateNormal];
-        [button setTitleColor:GrayColor forState:UIControlStateHighlighted];
-        [button setTitleColor:GrayColor forState:UIControlStateSelected];
-        [button setBackgroundColor:[UIColor whiteColor]];
+        [button setTitleColor:GrayColor forState:UIControlStateNormal];
+        [button setTitleColor:blackColor forState:UIControlStateHighlighted];
+        [button setTitleColor:blackColor forState:UIControlStateSelected];
+        [button setBackgroundColor:DarkGrayColor];
         
         [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         if (i == [_dataSource defaultSelectedSegment]) {
             [button setSelected:YES];
-            [button setBackgroundColor:DarkGrayColor];
+            [button setBackgroundColor:[UIColor whiteColor]];
            
         }
         
@@ -85,13 +85,13 @@
         
         for (UIButton *btn in buttonArray) {
             [btn setSelected:NO];
-            [btn setBackgroundColor:[UIColor whiteColor]];
+            [btn setBackgroundColor:DarkGrayColor];
             
 //            [btn setHidden:YES];
         }
         
         [button setSelected:YES];
-        [button setBackgroundColor:DarkGrayColor];
+        [button setBackgroundColor:[UIColor whiteColor]];
         _selectedIndex = button.tag;
         [_delegate selectSegmentAtIndex:button.tag];
     }
