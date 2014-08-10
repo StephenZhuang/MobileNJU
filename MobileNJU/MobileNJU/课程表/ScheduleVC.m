@@ -67,7 +67,7 @@
     self.icarousel = [[iCarousel alloc]initWithFrame:CGRectMake(20, 120, 280, 200)];
     [self.view addSubview:self.icarousel];
     [self.icarousel setHidden:YES];
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdField];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdField];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -81,9 +81,9 @@
             [self.addButton setHidden:YES];
         }
     } else {
-//        if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]) {
-//            [self load:self selecter:@selector(disposMessage:) code:nil account:@"mg......."  password:@"....."];
-//        }
+        if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]) {
+            [self load:self selecter:@selector(disposMessage:) code:nil account:@"mg......."  password:@"....."];
+        }
         [self loadLast];
     }
 }
@@ -107,17 +107,17 @@
     [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-//
-//- (void)textFieldDidChange:(NSNotification *)note
-//{
-//    if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]&&self.codeView==nil) {
-//        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
-//    } else if (![[self.schIdField.text uppercaseString] hasPrefix:@"MG"]){
-//        if (self.hasCode) {
-//            [self removeCode];
-//        }
-//    }
-//}
+
+- (void)textFieldDidChange:(NSNotification *)note
+{
+    if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]&&self.codeView==nil) {
+        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+    } else if (![[self.schIdField.text uppercaseString] hasPrefix:@"MG"]){
+        if (self.hasCode) {
+            [self removeCode];
+        }
+    }
+}
 
 
 //返回时重新加载
@@ -289,12 +289,12 @@
             [self closeAlert];
             [self loadLast];
         }
+    
+    } else if ([[son getMsg]hasPrefix:@"信息"]      &&  self.imgView!=nil )
+    {
+        [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdField.text   password:self.passwordField.text];
+
     }
-//    } else if ([[son getMsg]hasPrefix:@"信息"]      &&  self.imgView!=nil )
-//    {
-//        [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdField.text   password:self.passwordField.text];
-//
-//    }
         else {
         [super disposMessage:son];
     }
