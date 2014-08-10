@@ -233,7 +233,11 @@
     [cell setImageName:imageName];
     NSString* content = [[self.infos objectAtIndex:indexPath.row]objectForKey:@"content"];
     [cell setContent:content];
-    return cell;
+
+    if (indexPath.row==self.infos.count-1) {
+        [cell setUserInteractionEnabled:NO];
+    }
+        return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
