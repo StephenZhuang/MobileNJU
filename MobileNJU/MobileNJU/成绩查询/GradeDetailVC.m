@@ -334,13 +334,13 @@
     [cell addBorder];
     MCourse* course = [self.gradeList objectAtIndex:indexPath.row];
     [cell.lessonNameLabel setText:course.name ];
-    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"专业主干课程",@"通识教育课程",@"学科基础课程",@"博雅课程"
+    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"专业主干课程",@"通识教育课程",@"学科基础课程",@"博雅课程",
                          @"学位课" ,@"选修及其他",nil];
     cell.lessonTypeLabel.text =  [typeList objectAtIndex:course.type];
-    if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
-        NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);
-        [cell setTick:[[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text] isEqualToString:@"YES"]?YES:NO];
-    }
+//    if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
+//        NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);
+//        [cell setTick:[[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text] isEqualToString:@"YES"]?YES:NO];
+//    }
     [cell setDelegate:self];
     [cell.scoreLabel setText:course.grade];
     [cell.creditLabel setText:course.point];

@@ -43,7 +43,7 @@
 #warning  todo
 - (void)loadData
 {
-    [[ApisFactory getApiMAllRss]load:self selecter:@selector(disposMessage:)];
+    [[[ApisFactory getApiMAllRss] setPage:page pageCount:10] load:self selecter:@selector(disposMessage:)];
 }
 
 
@@ -54,10 +54,10 @@
             MRssList_Builder* builder = (MRssList_Builder*)[son getBuild];
             if (page==1) {
                 [self.allRss removeAllObjects];
-                [self.allRss addObjectsFromArray:builder.listList];
+                [self.allRss  addObjectsFromArray:builder.listList];
                 [self doneWithView:_header];
             } else {
-                [self.allRss addObjectsFromArray:builder.listList];
+                [self.allRss  addObjectsFromArray:builder.listList];
                 [self doneWithView:_footer];
             }
         } else if ([[son getMethod]isEqualToString:@"MRss"]||[[son getMethod]isEqualToString:@"MRssCancel"])
