@@ -51,6 +51,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <state key="selected" backgroundImage="purpleButtonhighlighted"/>
                                         <state key="highlighted" backgroundImage="purpleButtonhighlighted"/>
                                         <connections>
                                             <action selector="login:" destination="Vd6-tb-kEi" eventType="touchUpInside" id="KQW-da-PDV"/>
@@ -535,7 +536,7 @@
                                                         <constraint firstAttribute="width" constant="152" id="rHD-3h-twt"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.070588235294117646" green="0.74901960784313726" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="UpAccessory" translatesAutoresizingMaskIntoConstraints="NO" id="uno-Gf-1t7">
@@ -647,7 +648,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="158"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top_back" translatesAutoresizingMaskIntoConstraints="NO" id="G6N-DF-eBT">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="top_back" translatesAutoresizingMaskIntoConstraints="NO" id="G6N-DF-eBT">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="158"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
@@ -1003,7 +1004,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.6588235294117647" green="0.039215686274509803" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.070588235294117646" green="0.74901960784313726" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="Lx1-ce-5oS"/>
                                 </constraints>
@@ -1208,14 +1209,14 @@
                                                     <rect key="frame" x="35" y="87" width="8" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.6705882353" green="0.0" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.070588235294117646" green="0.74901960784313726" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-nE-EFL">
                                                     <rect key="frame" x="75" y="87" width="8" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.6705882353" green="0.0" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.070588235294117646" green="0.74901960784313726" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="书名" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="89" translatesAutoresizingMaskIntoConstraints="NO" id="lSv-Gn-qfd">
@@ -2658,7 +2659,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </connections>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.54509803921568623" green="0.24705882352941178" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.070588235294117646" green="0.74901960784313726" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="40R-cm-pjT" firstAttribute="leading" secondItem="V9h-Ek-dSi" secondAttribute="leading" constant="20" id="ERZ-n6-mdo"/>
                                     <constraint firstItem="40R-cm-pjT" firstAttribute="top" secondItem="V9h-Ek-dSi" secondAttribute="top" constant="10" id="JZK-dc-Zg6"/>
@@ -3010,7 +3011,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <rect key="frame" x="15" y="0.0" width="290" height="49"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" red="0.50980392159999999" green="0.2470588235" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.070588235294117646" green="0.74901960784313726" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -3279,7 +3280,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="self_right_barButton" width="40" height="36"/>
         <image name="tabBar_home" width="30" height="30"/>
         <image name="tableBackGround" width="320" height="370"/>
-        <image name="top_back" width="320" height="158"/>
+        <image name="top_back" width="320" height="164"/>
         <image name="tree-dot" width="20" height="20"/>
         <image name="tree_line_smaller" width="10" height="568"/>
         <image name="一" width="21" height="21"/>
@@ -3300,6 +3301,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Qh6-rb-c2N"/>
+        <segue reference="rTY-II-oOd"/>
     </inferredMetricsTieBreakers>
 </document>

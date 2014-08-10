@@ -125,7 +125,6 @@ static NSArray* descriptions;
                 descriptions=details;
                 [self loadImages];
             } else {
-    
                 functionNames=names;
                 buttonImages=image;
                 descriptions=details;

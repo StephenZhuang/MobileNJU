@@ -140,8 +140,8 @@ UIView* view;
     CGRect frame = CGRectMake(100, 100, self.view.center.x-50, self.view.center.y);
     self.loginIndicator = [[UIActivityIndicatorView alloc] initWithFrame:frame];
     
-	[self.loginIndicator setTintColor:[UIColor purpleColor]];
-    [self.loginIndicator setColor:[UIColor purpleColor]];
+	[self.loginIndicator setTintColor:[UIColor greenColor]];
+    [self.loginIndicator setColor:[UIColor greenColor]];
     [self.navigationController.view addSubview:self.loginIndicator];
     [self.navigationController.view bringSubviewToFront:self.loginIndicator];
     [self.loginIndicator startAnimating];

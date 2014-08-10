@@ -127,7 +127,7 @@
         label = self.phoneLabel;
     }
     [UIView animateWithDuration:0.2f animations:^{
-        [label setTextColor:[UIColor purpleColor]];
+        [label setTextColor:[UIColor greenColor]];
         [label setFont:[UIFont fontWithName:@"Helvetica" size:10.0]];
         label.transform = CGAffineTransformMakeTranslation(0, -10);
     }];
