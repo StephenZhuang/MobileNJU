@@ -5607,8 +5607,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "341"
             endingLineNumber = "341"
-            landmarkName = "@implementation WelcomeViewController"
-            landmarkType = "3">
+            landmarkName = "-setDelegate"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7441,7 +7441,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "414"
             endingLineNumber = "414"
-            landmarkName = "-login"
+            landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7457,7 +7457,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "415"
             endingLineNumber = "415"
-            landmarkName = "-login"
+            landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7473,7 +7473,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "418"
             endingLineNumber = "418"
-            landmarkName = "-goToRegist:"
+            landmarkName = "-login"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7489,7 +7489,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "424"
             endingLineNumber = "424"
-            landmarkName = "-loadImages"
+            landmarkName = "-goToRegist:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7505,7 +7505,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "425"
             endingLineNumber = "425"
-            landmarkName = "-loadImages"
+            landmarkName = "-goToRegist:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7521,8 +7521,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "428"
             endingLineNumber = "428"
-            landmarkName = "-loadImages"
-            landmarkType = "5">
+            landmarkName = "@implementation WelcomeViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7569,7 +7569,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "426"
             endingLineNumber = "426"
-            landmarkName = "-loadImages"
+            landmarkName = "-goToRegist:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -9373,7 +9373,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "388"
             endingLineNumber = "388"
-            landmarkName = "-tabBarController:shouldSelectViewController:"
+            landmarkName = "-showLoginView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

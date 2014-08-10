@@ -140,7 +140,10 @@ static NSArray* buttonImages;
             MUser_Builder *user = (MUser_Builder *)[son getBuild];
             [ToolUtils setVerify:user.verify];
             [ToolUtils setLoginId:user.id];
+            [ToolUtils setBelong:user.belong];
+            [ToolUtils setNickname:user.nickname];
             [ToolUtils setIsVeryfy:user.isV];
+            [ToolUtils setBirthday:user.birthday];
             if (user.headImg.length>0) {
                 [ToolUtils setHeadImg:user.headImg];
             }
