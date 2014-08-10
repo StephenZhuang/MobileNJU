@@ -17,4 +17,6 @@
 @property (nonatomic , strong) IBOutlet UIView *tipView;
 @property (nonatomic , strong) IBOutlet UILabel *smallLabel;
 @property (nonatomic , strong) IBOutlet UIImageView *topicImage;
+@property (weak, nonatomic) IBOutlet UILabel *adminLabel;
+
 @end

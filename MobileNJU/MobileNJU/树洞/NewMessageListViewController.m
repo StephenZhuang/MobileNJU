@@ -243,6 +243,11 @@
         match.width = 152;
         [match match:chat.msg];
         cell.contentLabel.match = match;
+        
+        if (indexPath.row==0) {
+            [cell.logoImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"logo_default_%i",20]]];
+            [cell.adminLabel setHidden:NO];
+        }
         return cell;
     }
 }

@@ -18,7 +18,7 @@
 #import "VerifyVC.h"
 
 @interface TreeHoleListViewController ()
-
+@property (nonatomic)BOOL isError;
 @end
 
 @implementation TreeHoleListViewController
@@ -35,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.isError=NO;
     // Do any additional setup after loading the view.
     selectedIndex = 1;
     if (_mtag) {
@@ -42,7 +43,7 @@
         self.tableView.tableHeaderView = nil;
     } else {
 //        [self setTitle:@"树洞"];
-        self.title = @"热门";
+        self.title = @"最热";
     }
     
     _sectionHeader = [[UIView alloc] initWithFrame:CGRectZero];
@@ -62,8 +63,15 @@
     self.navigationItem.rightBarButtonItems = @[releaseItem ,item];
     
     [[ApisFactory getApiMGetTags] load:self selecter:@selector(disposMessage:)];
+    [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(timer) userInfo:nil repeats:YES];
+
     
-    
+}
+- (void)timer
+{
+    if (!self.isError) {
+        [[ApisFactory getApiMGetMsgCount] load:self selecter:@selector(disposMessage:)];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -91,14 +99,16 @@
     }
     if (_mtag) {
         if ([_mtag.id isEqualToString:@"热门"]) {
-            [[ApisFactory getApiMTreeHoleQuery] load:self selecter:@selector(disposMessage:) type:2];
+            [[ApisFactory getApiMTreeHoleQuery]
+             load:self selecter:@selector(disposMessage:) type:2];
         } else if ([_mtag.id isEqualToString:@"推荐"]) {
-            [[ApisFactory getApiMTreeHoleQuery] load:self selecter:@selector(disposMessage:) type:1];
+            [[ApisFactory getApiMTreeHoleQuery] load:self selecter:@selector(disposMessage:) type:1 ];
         } else {
             [[ApisFactory getApiMTagTreeHole] load:self selecter:@selector(disposMessage:) tagid:_mtag.id begin:beginStr];
         }
     } else {
-        [[ApisFactory getApiMTreeHoleList] load:self selecter:@selector(disposMessage:) type:selectedIndex begin:beginStr];
+        
+        [[ApisFactory getApiMTreeHoleList] load:self selecter:@selector(disposMessage:) type:selectedIndex begin:beginStr page:selectedIndex==1?page:0 limit:selectedIndex==1?20:0];
     }
 }
 
@@ -124,7 +134,18 @@
             MTreeHole_Builder *treeHole = (MTreeHole_Builder *)[son getBuild];
             if (page == 1) {
                 [self.dataArray removeAllObjects];
+                
             }
+            NSMutableArray* removedArr = [[NSMutableArray alloc]init];
+            for (MTopic* topic in treeHole.topicsList) {
+                for (MTopic* TopicExit in self.dataArray) {
+                    if ([TopicExit.content isEqualToString:topic.content]) {
+                        [removedArr addObject:TopicExit];
+                        break;
+                    }
+                }
+            }
+            [self.dataArray removeObjectsInArray:removedArr];
             [self.dataArray addObjectsFromArray:treeHole.topicsList];
         } else if ([[son getMethod] isEqualToString:@"MGetMsgCount"]) {
             MMsgCount_Builder *msgCountBuilder = (MMsgCount_Builder *)[son getBuild];
@@ -145,6 +166,8 @@
         } else if ([[son getMethod] isEqualToString:@"MTreeHoleReport"]) {
             [ProgressHUD showSuccess:@"举报成功"];
         }
+    } else {
+        self.isError = YES;
     }
     if ([[son getMethod] isEqualToString:@"MTreeHoleList"] || [[son getMethod] isEqualToString:@"MTagTreeHole"] || [[son getMethod] isEqualToString:@"MTreeHoleQuery"]) {
         if (page == 1) {
@@ -209,6 +232,7 @@
     
     [cell.contentLabel setText:topic.content];
     [cell.logoImage setImageWithURL:[ToolUtils getImageUrlWtihString:topic.img] placeholderImage:[UIImage imageNamed:@""]];
+//    cell.logoImage.layer.contentsGravity = kCAGravityCenter;
     [cell.zanButton setTag:indexPath.section];
     [cell.commentButton setTag:indexPath.section];
     [cell.moreButton setTag:indexPath.section];
@@ -334,7 +358,7 @@
         self.title = @"最新";
     } else {
         selectedIndex = 1;
-        self.title = @"热门";
+        self.title = @"最热";
     }
 //    [_header beginRefreshing];
     page = 1;
@@ -416,7 +440,10 @@
             content.imageObj = [ToolUtils getImageUrlWtihString:topic.img].absoluteString;
             
             NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_SINAWEIBO,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
-            
+            [share registerQQAppId:@"100358052" enableSSO:YES];
+            [share registerWeixinAppId:@"wx277782943f4c36be"];
+            [share registerSinaweiboAppId:@"306527345"];
+
             [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
         }
             break;
@@ -457,7 +484,11 @@
         vc.addSuccessBlock = ^() {
 //            page = 1;
 //            [self loadData];
-            [self indexButtonAction:_indexButton];
+            if (!_mtag) {
+                if (selectedIndex==1) {
+                    [self indexButtonAction:_indexButton];
+                }
+            }
         };
         if (_mtag) {
             if ([_mtag.id isEqualToString:@"热门"]) {

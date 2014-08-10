@@ -268,6 +268,14 @@
         [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
         
     }
+    
+    if (index==3)
+    {
+        RDVTabBarItem* item = [self.tabBar.items objectAtIndex:3];
+        UIImage *selectedimage = [UIImage imageNamed:@"个人选中"];
+        UIImage *unselectedimage = [UIImage imageNamed:@"个人"];
+        [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
+    }
 
 }
 

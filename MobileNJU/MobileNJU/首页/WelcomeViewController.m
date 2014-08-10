@@ -255,13 +255,18 @@ static NSArray* buttonImages;
 - (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
     NSString* rssName = @"订阅";
     NSString* activityName = @"活动";
+    NSString* selfName = @"个人";
     if (self.unread.module3>0) {
         rssName = @"订阅消息";
     }
     if (self.unread.module4>0) {
         activityName = @"活动消息";
     }
-    NSArray* buttonImages = @[@"首页",rssName,activityName,@"个人"];
+    if ([ToolUtils getNickName].length+[ToolUtils getBelong].length+[ToolUtils getBirthday].length==0) {
+       selfName = @"个人消息";
+    }
+    
+    NSArray* buttonImages = @[@"首页",rssName,activityName,selfName];
     NSArray* buttonImagesSelected=@[@"首页选中",@"订阅选中",@"活动选中",@"个人选中"];
     NSInteger index = 0;
     for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {

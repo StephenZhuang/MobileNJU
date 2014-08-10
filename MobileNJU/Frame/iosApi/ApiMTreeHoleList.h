@@ -23,7 +23,7 @@
 	 * @param type * 1:置顶+热门 2:按时间倒序分页
 	 * @param begin  开始时间
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  type:(double)type begin:(NSString*)begin;
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  type:(double)type begin:(NSString*)begin page:(int) page limit:(int)limit;
 	/**
 	 *  树洞首页 /mobile?methodno=MTreeHoleList&debug=1&deviceid=1&appid=1&userid=1&verify=1&begin=
 	 * @param delegate 回调类
@@ -32,6 +32,6 @@
 	 * @param begin  开始时间
 	 * @callback MTreeHole_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  type:(double)type begin:(NSString*)begin;
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  type:(double)type begin:(NSString*)begin page:(int) page limit:(int)limit;
 
 @end

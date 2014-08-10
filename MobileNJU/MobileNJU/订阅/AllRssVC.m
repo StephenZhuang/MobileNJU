@@ -43,6 +43,8 @@
 {
     [[ApisFactory getApiMAllRss]load:self selecter:@selector(disposMessage:)];
 }
+
+
 - (void)disposMessage:(Son *)son
 {
     if ([son getError]==0) {

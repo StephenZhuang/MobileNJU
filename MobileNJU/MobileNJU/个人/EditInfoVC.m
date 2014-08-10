@@ -64,6 +64,10 @@
 }
 
 - (IBAction)save:(id)sender {
+    if (self.nickNameField.text.length==0) {
+        [ToolUtils showMessage:@"请填写昵称"];
+        return;
+    }
     [self waiting:@"正在保存"];
     int gender = self.maleCheckBox.choose?1:0;
     [[ApisFactory getApiMUpdateUserInfo]load:self selecter:@selector(disposMessage:) nickname:self.nickNameField.text belong:self.instituteField.text sex:gender birthday:self.birthField.text tags:@""];

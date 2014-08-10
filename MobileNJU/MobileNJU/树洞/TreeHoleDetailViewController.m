@@ -137,6 +137,7 @@
         if (_topic) {            
             [cell.contentLabel setText:_topic.content];
             [cell.logoImage setImageWithURL:[ToolUtils getImageUrlWtihString:_topic.img] placeholderImage:[UIImage imageNamed:@""]];
+//            cell.logoImage.layer.contentsGravity = kCAGravityCenter;
             [cell.zanButton setTag:indexPath.section];
             [cell.commentButton setTag:indexPath.section];
             [cell.moreButton setTag:indexPath.section];
@@ -291,7 +292,17 @@
 //        
 //        [_topic setCommentCnt:_topic.commentCnt + 1];
 //        [_detailView.commentButton setTitle:[NSString stringWithFormat:@"%i",_topic.commentCnt] forState:UIControlStateNormal];
-        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_treeHoleid content:string reply:_targetid floor:_replyfloor islz:_lzButton.selected?0:1];
+        int isLz=1;
+        if (_lzButton.isHidden) {
+            isLz=0;
+        } else {
+            if (_lzButton.isSelected) {
+                isLz=0;
+            } else {
+                isLz=1;
+            }
+        }
+        [[ApisFactory getApiMTreeHoleComment] load:self selecter:@selector(disposMessage:) id:_treeHoleid content:string reply:_targetid floor:_replyfloor islz:isLz];
     }
     [_textView resignFirstResponder];
     [_textView setText:@""];
@@ -431,7 +442,10 @@
             content.imageObj = [ToolUtils getImageUrlWtihString:_topic.img].absoluteString;
             
             NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_SINAWEIBO,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
-            
+            [share registerQQAppId:@"100358052" enableSSO:YES];
+            [share registerWeixinAppId:@"wx277782943f4c36be"];
+            [share registerSinaweiboAppId:@"306527345"];
+
             [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
         }
             break;
