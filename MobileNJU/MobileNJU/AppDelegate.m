@@ -265,11 +265,9 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                 style.textColor = [UIColor whiteColor];
                 style.barColor = RGB(60, 139, 253);
                 style.animationType = JDStatusBarAnimationTypeMove;
-
                 //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
                 //        style.progressBarPosition = self.progressBarPosition;
                 //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
-                
                 return style;
             }];
             [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0

@@ -305,7 +305,7 @@ static NSArray* descriptions;
         [cell.menuTitle setText:@""];
         [cell.menuSubTitle setText:@""];
         [cell.redCircle setHidden:YES];
-        
+        [cell setUserInteractionEnabled:NO];
     }
     
    
