@@ -16,10 +16,11 @@
 @property (strong, nonatomic)  UITextField *schIDText;
 @property (strong, nonatomic)  UITextField *passwordText;
 //@property (strong, nonatomic)  UITextField *confirmCodeText;
+//@property (strong, nonatomic) UIImageView *confirmCode;
+
 @property (strong, nonatomic)  UISwitch *autoSearch;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) AlertViewWithCode *alertView;
-//@property (strong, nonatomic) UIImageView *confirmCode;
 @property (weak, nonatomic) IBOutlet UILabel *ecardTitle;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
 @property (weak, nonatomic) IBOutlet UIButton *endButton;
