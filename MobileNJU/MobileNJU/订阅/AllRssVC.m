@@ -11,7 +11,7 @@
 #import "ZsndNews.pb.h"
 
 @interface AllRssVC ()<UITableViewDelegate,UITableViewDataSource,RssDelegate>
-@property (nonatomic,strong)NSArray* allRss;
+@property (nonatomic,strong)NSMutableArray* allRss;
 @end
 
 @implementation AllRssVC
@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     [self setTitle:@"全部订阅"];
+    self.allRss = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
 }
 
@@ -41,7 +42,7 @@
 #warning  todo
 - (void)loadData
 {
-    [[ApisFactory getApiMAllRss]load:self selecter:@selector(disposMessage:)];
+    [[[ApisFactory getApiMAllRss] setPage:page pageCount:10] load:self selecter:@selector(disposMessage:)];
 }
 
 
@@ -50,9 +51,14 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MAllRss"]) {
             MRssList_Builder* builder = (MRssList_Builder*)[son getBuild];
-            self.allRss = builder.listList;
-            [self doneWithView:_header];
-
+            if (page==1) {
+                [self.allRss removeAllObjects];
+                [self.allRss addObjectsFromArray:builder.listList];
+                [self doneWithView:_header];
+            } else {
+                [self.allRss addObjectsFromArray:builder.listList];
+                [self doneWithView:_footer];
+            }
         } else if ([[son getMethod]isEqualToString:@"MRss"]||[[son getMethod]isEqualToString:@"MRssCancel"])
         {
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
