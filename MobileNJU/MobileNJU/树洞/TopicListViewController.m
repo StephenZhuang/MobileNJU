@@ -105,6 +105,8 @@
         }
         TreeHoleListViewController *vc = [[self storyboard] instantiateInitialViewController];
         vc.mtag = tag.build;
+        vc.level=3;
+        vc.rootVC = self.rootVC;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         if (_selectTagBlock) {
@@ -118,6 +120,8 @@
             MTag *tag = [[ToolUtils sharedToolUtils].tagArray objectAtIndex:indexPath.row];
             TreeHoleListViewController *vc = [[self storyboard] instantiateInitialViewController];
             vc.mtag = tag;
+            vc.level=3;
+            vc.rootVC = self.rootVC;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

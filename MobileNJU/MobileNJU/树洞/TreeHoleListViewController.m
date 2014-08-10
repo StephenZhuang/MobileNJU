@@ -14,6 +14,7 @@
 #import "TreeHoleDetailViewController.h"
 #import "NewMessageListViewController.h"
 #import "ChatViewController.h"
+#import "TopicListViewController.h"
 #import <Frontia/Frontia.h>
 #import "VerifyVC.h"
 
@@ -308,6 +309,9 @@
     vc.topicid = topic.id;
     [self.navigationController pushViewController:vc animated:YES];
 }
+- (IBAction)topicAction:(id)sender {
+    [self performSegueWithIdentifier:@"topic" sender:sender];
+}
 
 - (IBAction)moreAction:(id)sender
 {
@@ -347,6 +351,8 @@
     MTag *tag = [[ToolUtils sharedToolUtils].tagArray objectAtIndex:button.tag-100];
     TreeHoleListViewController *vc = [[self storyboard] instantiateInitialViewController];
     vc.mtag = tag;
+    vc.level = 2;
+    vc.rootVC = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -377,6 +383,9 @@
     [tag setId:topic.tagid];
     TreeHoleListViewController *vc = [[self storyboard] instantiateInitialViewController];
     vc.mtag = tag.build;
+    
+    vc.level = 2;
+    vc.rootVC = self;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -439,7 +448,7 @@
             content.description = topic.content;
             content.imageObj = [ToolUtils getImageUrlWtihString:topic.img].absoluteString;
             
-            NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_SINAWEIBO,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
+            NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
             [share registerQQAppId:@"100358052" enableSSO:YES];
             [share registerWeixinAppId:@"wx277782943f4c36be"];
             [share registerSinaweiboAppId:@"306527345"];
@@ -472,7 +481,12 @@
     return [self verifyIndentity];
     return YES;
 }
-
+- (void)changeToNewest
+{
+    if (selectedIndex==1) {
+        [self indexButtonAction:_indexButton];
+    }
+}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
@@ -488,7 +502,15 @@
                 if (selectedIndex==1) {
                     [self indexButtonAction:_indexButton];
                 }
+            } else {
+//                if (self.level==2) {
+                    [self.rootVC changeToNewest];
+                    [self.navigationController popToViewController:self.rootVC animated:NO];
+//                } else if (self.level==3)
+//                {
+//                }
             }
+            
         };
         if (_mtag) {
             if ([_mtag.id isEqualToString:@"热门"]) {
@@ -515,6 +537,14 @@
 //            [_treeHoleListHeader.messageButton setTitle:[NSString stringWithFormat:@"%i" , num] forState:UIControlStateNormal];
 //            [_treeHoleListHeader setMessageButtonHidden:(num <=0)];
 //        };
+    }
+    else if ([segue.identifier isEqualToString:@"topic"]) {
+        TopicListViewController *vc = [segue destinationViewController];
+        vc.rootVC = self;
+        //        vc.readMessageBlock = ^(NSInteger num) {
+        //            [_treeHoleListHeader.messageButton setTitle:[NSString stringWithFormat:@"%i" , num] forState:UIControlStateNormal];
+        //            [_treeHoleListHeader setMessageButtonHidden:(num <=0)];
+        //        };
     }
 }
 

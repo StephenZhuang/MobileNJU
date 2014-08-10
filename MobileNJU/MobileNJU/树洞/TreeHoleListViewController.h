@@ -16,4 +16,7 @@
 @property (nonatomic , strong) UIButton *messageButton;
 @property (nonatomic , strong) MTag *mtag;
 @property (nonatomic , weak) IBOutlet UIButton *indexButton;
+@property (nonatomic,weak) TreeHoleListViewController* rootVC;
+@property (nonatomic)NSInteger level;
+- (void)changeToNewest;
 @end
