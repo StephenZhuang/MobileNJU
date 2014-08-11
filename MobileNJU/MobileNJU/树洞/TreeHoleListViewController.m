@@ -70,7 +70,7 @@
 }
 - (void)timer
 {
-    if (!self.isError) {
+    if (!self.isError&&self.view.window) {
         [[ApisFactory getApiMGetMsgCount] load:self selecter:@selector(disposMessage:)];
     }
 }
@@ -485,6 +485,8 @@
 {
     if (selectedIndex==1) {
         [self indexButtonAction:_indexButton];
+    } else {
+        [self loadData];
     }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -501,6 +503,8 @@
             if (!_mtag) {
                 if (selectedIndex==1) {
                     [self indexButtonAction:_indexButton];
+                } else {
+                    [self loadData];
                 }
             } else {
 //                if (self.level==2) {

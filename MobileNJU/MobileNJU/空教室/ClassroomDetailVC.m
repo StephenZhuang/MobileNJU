@@ -64,7 +64,8 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger line = [[self.classrooms objectForKey:[self.floors objectAtIndex:indexPath.row]] count]/5+1;
+    NSArray* classrooms =[self.classrooms objectForKey:[self.floors objectAtIndex:indexPath.row]];
+    NSInteger line = [classrooms count]/5+1;
     return 50.0+line*25.0;
 ;
 }
