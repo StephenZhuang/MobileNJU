@@ -271,7 +271,8 @@
                 self.lessonList = classList.classList;
                 [self loadSchedule];
                 [ToolUtils setIsVeryfy:1];
-            } else if (classList.img.length>0) {
+            }
+            else if (classList.img.length>0) {
                 [self removeCode];
                 [self addCode:classList.img];
             } else {
@@ -309,6 +310,7 @@
 //
 //    }
         else {
+            [self removeCode];
         [super disposMessage:son];
     }
 

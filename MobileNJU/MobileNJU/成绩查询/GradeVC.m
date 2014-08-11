@@ -169,13 +169,14 @@
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
             [ToolUtils setIsVeryfy:1];
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
-            if (termList.termList.count==0) {
+            
+            if (termList.img.length>0) {
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }
                 [self removeCode];
                 [self addCode:termList.img];
-            } else {
+            } else if (termList.termList.count>0){
                 self.hasLogin = YES;
                 self.isRe=1;
                 self.password  = self.passwordTextField.text;
@@ -199,11 +200,8 @@
             }
         }
     }
-    else if ([[son getMsg]hasPrefix:@"信息"]&&self.codeField!=nil)
-    {
-        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
-    }
     else {
+        [self removeCode];
         [super disposMessage:son];
     }
 }

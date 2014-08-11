@@ -51,7 +51,7 @@
         return;
     } else if (self.veryfyCode.isHidden==NO&&self.codeText.text.length==0)
     {
-        [ToolUtils showMessage:@"请输入密码"];
+        [ToolUtils showMessage:@"请输入验证码"];
         return;
     }
     [self waiting:@"正在验证"];
@@ -73,6 +73,7 @@
             }
         }
     } else {
+        [self.veryfyCode setHidden:YES];
         [super disposMessage:son];
     }
 

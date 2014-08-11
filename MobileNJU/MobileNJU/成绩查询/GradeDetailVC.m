@@ -157,9 +157,10 @@
         
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
-            if (termList.termList.count==0) {
+            if (termList.img>0) {
+                [self removeCode];
                 [self addCode:termList.img];
-            } else {
+            } else if (termList.termList.count>0) {
                 self.password  = self.passwordTextField.text;
                 self.account = self.schIdTextField.text;
                 if (self.autoSwitch.isOn) {
@@ -185,6 +186,7 @@
             [self.tableView reloadData];
         }
     } else {
+        [self removeCode];
         [super disposMessage:son];
     }
 }
