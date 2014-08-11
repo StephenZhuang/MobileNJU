@@ -146,6 +146,7 @@
             [cell.zanButton setTitle:[NSString stringWithFormat:@"%i" , _topic.praiseCnt] forState:UIControlStateSelected];
             [cell.zanButton setSelected:_topic.hasPraise ==1];
             [cell.commentButton setTitle:[NSString stringWithFormat:@"%i" , _topic.commentCnt] forState:UIControlStateNormal];
+            
         }
         return cell;
     } else if (indexPath.section == 1){
