@@ -215,8 +215,7 @@
         [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
         
     }
-    
-    
+
 }
 
 /**

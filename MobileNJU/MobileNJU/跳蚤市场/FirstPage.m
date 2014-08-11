@@ -112,7 +112,7 @@
         label = self.discLabel;
     }
     [UIView animateWithDuration:0.2f animations:^{
-        [label setTextColor:[UIColor colorWithRed:18/255.0 green:191/255.0 blue:125/255.0 alpha:1]];
+        [label setTextColor:[UIColor colorWithRed:0/255.0 green:147/255.0 blue:212/255.0 alpha:1]];
         [label setFont:[UIFont fontWithName:@"Helvetica" size:10.0]];
         label.transform = CGAffineTransformMakeTranslation(0, -10);
     }];

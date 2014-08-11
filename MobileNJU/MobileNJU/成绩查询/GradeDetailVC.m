@@ -46,7 +46,7 @@
     [self.tableView setAllowsSelection:NO];
     [self loadSavedState];
     self.LessonChooseDic = [[NSMutableDictionary alloc]init];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
     self.isRe=1;
 
     // Do any additional setup after loading the view.
@@ -71,17 +71,17 @@
     self.searchButton = self.alertView.searchBt;
 }
 
-
-- (void)textFieldDidChange:(NSNotification *)note
-{
-    NSLog(@"%@",self.schIdTextField.text);
-    if ([self.schIdTextField.text hasPrefix:@"Mg"]&&self.codeField==nil) {
-        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
-    } else if (![self.schIdTextField.text hasPrefix:@"Mg"]){
-        [self removeCode];
-    }
-
-}
+//
+//- (void)textFieldDidChange:(NSNotification *)note
+//{
+//    NSLog(@"%@",self.schIdTextField.text);
+//    if ([self.schIdTextField.text hasPrefix:@"Mg"]&&self.codeField==nil) {
+//        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+//    } else if (![self.schIdTextField.text hasPrefix:@"Mg"]){
+//        [self removeCode];
+//    }
+//
+//}
 
 - (IBAction)search:(id)sender {
     
@@ -334,8 +334,7 @@
     [cell addBorder];
     MCourse* course = [self.gradeList objectAtIndex:indexPath.row];
     [cell.lessonNameLabel setText:course.name ];
-    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"专业主干课程",@"通识教育课程",@"学科基础课程",@"博雅课程",
-                         @"学位课" ,@"选修及其他",nil];
+    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修",@"公共选修",@"实践",@"学位课",@"选修",nil];
     cell.lessonTypeLabel.text =  [typeList objectAtIndex:course.type];
 //    if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
 //        NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);
