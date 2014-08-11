@@ -46,7 +46,7 @@
     [self.tableView setAllowsSelection:NO];
     [self loadSavedState];
     self.LessonChooseDic = [[NSMutableDictionary alloc]init];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
     self.isRe=1;
 
     // Do any additional setup after loading the view.
@@ -71,17 +71,17 @@
     self.searchButton = self.alertView.searchBt;
 }
 
-
-- (void)textFieldDidChange:(NSNotification *)note
-{
-    NSLog(@"%@",self.schIdTextField.text);
-    if ([self.schIdTextField.text hasPrefix:@"Mg"]&&self.codeField==nil) {
-        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
-    } else if (![self.schIdTextField.text hasPrefix:@"Mg"]){
-        [self removeCode];
-    }
-
-}
+//
+//- (void)textFieldDidChange:(NSNotification *)note
+//{
+//    NSLog(@"%@",self.schIdTextField.text);
+//    if ([self.schIdTextField.text hasPrefix:@"Mg"]&&self.codeField==nil) {
+//        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+//    } else if (![self.schIdTextField.text hasPrefix:@"Mg"]){
+//        [self removeCode];
+//    }
+//
+//}
 
 - (IBAction)search:(id)sender {
     
