@@ -80,7 +80,7 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <segue destination="QmX-Lb-fdO" kind="push" id="Sex-8x-8sn"/>
+                                                <action selector="topicAction:" destination="0ge-uU-3Ri" eventType="touchUpInside" id="mdr-RJ-tFX"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" tag="101" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evw-N2-63I">
@@ -377,6 +377,7 @@
                         <outlet property="tableView" destination="Bju-YY-S1i" id="RMr-2Y-vle"/>
                         <segue destination="so6-y9-Fzk" kind="push" identifier="add" id="J1n-HG-fkw"/>
                         <segue destination="74H-KB-r0H" kind="push" identifier="NewMessage" id="e38-Cb-a3q"/>
+                        <segue destination="QmX-Lb-fdO" kind="push" identifier="topic" id="N0D-PI-8vl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSU-5Q-cUg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -613,6 +614,9 @@
                                                             <state key="selected" image="bt_treehole_zan_s.png">
                                                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="zanAction:" destination="LYS-Ol-EDz" eventType="touchUpInside" id="fSm-no-od2"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nve-3G-8pz">
                                                             <rect key="frame" x="112" y="8" width="52" height="22"/>
@@ -623,6 +627,9 @@
                                                                 <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
                                                             <state key="highlighted" image="bt_treehole_comment_h.png"/>
+                                                            <connections>
+                                                                <action selector="commentAction:" destination="LYS-Ol-EDz" eventType="touchUpInside" id="v08-Ze-urt"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKi-jy-3Sj">
                                                             <rect key="frame" x="206" y="8" width="29" height="22"/>
@@ -631,6 +638,9 @@
                                                             <state key="normal" image="bt_treehole_message.png">
                                                                 <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="messageAction:" destination="LYS-Ol-EDz" eventType="touchUpInside" id="Gvu-xQ-4nm"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08e-ZD-HRE">
                                                             <rect key="frame" x="269" y="8" width="31" height="22"/>
@@ -639,6 +649,9 @@
                                                             <state key="normal" image="bt_treehole_more.png">
                                                                 <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="moreAction:" destination="LYS-Ol-EDz" eventType="touchUpInside" id="Acv-tz-lm1"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

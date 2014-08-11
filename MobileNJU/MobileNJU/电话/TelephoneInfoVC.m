@@ -108,7 +108,8 @@
 {
     if (self.isOpen) {
         if (self.selectIndex.section == section) {
-            return [[[dataArray objectAtIndex:section] objectForKey:@"list"] count]+1;;
+            NSArray* data = [[dataArray objectAtIndex:section] objectForKey:@"list"];
+            return [data count]+1;;
         }
     }
     return 1;
@@ -194,7 +195,8 @@
     [self.tableView beginUpdates];
     
     NSInteger section = self.selectIndex.section;
-    NSInteger contentCount = [[[dataArray objectAtIndex:section] objectForKey:@"list"] count];
+    NSArray* data =[[dataArray objectAtIndex:section] objectForKey:@"list"];
+    NSInteger contentCount = [data count];
 	NSMutableArray* rowToInsert = [[NSMutableArray alloc] init];
 	for (NSUInteger i = 1; i < contentCount + 1; i++) {
 		NSIndexPath* indexPathToInsert = [NSIndexPath indexPathForRow:i inSection:section];
