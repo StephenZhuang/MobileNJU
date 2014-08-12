@@ -27,6 +27,7 @@
 @property (strong,nonatomic)NSMutableDictionary* LessonChooseDic;
 @property (nonatomic)CGRect frame;
 @property (nonatomic)int isRe;
+@property (nonatomic,strong)NSString* lastUserId;
 //@property (nonatomic,strong)UIImageView* imgView;
 @end
 
@@ -87,8 +88,9 @@
 //}
 
 - (IBAction)search:(id)sender {
-    
-    
+    if (sender!=nil&&self.lastUserId!=nil&&![self.lastUserId isEqualToString:self.schIdTextField.text]) {
+        self.isRe=1;
+    }
     [self.schIdTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     [self.codeField resignFirstResponder];
@@ -164,6 +166,7 @@
             if (termList.termList.count==0) {
 //                [self addCode:termList.img];
             } else {
+                self.lastUserId = self.schIdTextField.text;
                 self.password  = self.passwordTextField.text;
                 self.account = self.schIdTextField.text;
                 if (self.autoSwitch.isOn) {
@@ -337,7 +340,7 @@
     [cell addBorder];
     MCourse* course = [self.gradeList objectAtIndex:indexPath.row];
     [cell.lessonNameLabel setText:course.name ];
-    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修",@"任选",@"限选",@"学位公共课",@"学位基础课",@"学位专业课",@"选修",nil];
+    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"学位课",@"选修课",@"通识教育课" ,@"学科基础课",@"实践环节课" ,@"学科选修课",  @"专业必修课",@"专业选修课" ,@"文化素质课"  ,@"公共选修课" ,@"学科教育课",@"专业基础课",@"专业方向课",@"人文素质课" ,@"科学素质课", @"外国语言课" ,@"计划外课程" ,@"学位课程", nil];
     cell.lessonTypeLabel.text =  [typeList objectAtIndex:course.type];
     if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
         NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);
