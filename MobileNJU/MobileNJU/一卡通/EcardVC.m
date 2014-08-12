@@ -98,6 +98,7 @@
     [self.view addSubview:self.alertView];
     [self.alertView setHidden:YES];
     self.schIDText =self.alertView.schIdField;
+    self.alertView.passwordField.placeholder=@"请输入校园卡密码";
     self.schIDText.delegate = self;
     self.autoSearch = self.alertView.autoSwitch;
     self.passwordText = self.alertView.passwordField;
