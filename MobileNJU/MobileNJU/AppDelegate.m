@@ -272,8 +272,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                 
                 return style;
             }];
-            [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
-                                          styleName:@"style" object:@"1" userInfo:userInfo];
+            [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0                                          styleName:@"style" object:@"1" userInfo:userInfo];
         } else {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"getNanguaMessage" object:nil userInfo:userInfo];
         }

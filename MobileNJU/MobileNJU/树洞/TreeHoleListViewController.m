@@ -64,7 +64,7 @@
     self.navigationItem.rightBarButtonItems = @[releaseItem ,item];
     
     [[ApisFactory getApiMGetTags] load:self selecter:@selector(disposMessage:)];
-    [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(timer) userInfo:nil repeats:YES];
+//    [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(timer) userInfo:nil repeats:YES];
 
     
 }
@@ -75,7 +75,7 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [[ApisFactory getApiMGetMsgCount] load:self selecter:@selector(disposMessage:)];

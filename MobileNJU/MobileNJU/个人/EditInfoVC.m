@@ -68,6 +68,14 @@
         [ToolUtils showMessage:@"请填写昵称"];
         return;
     }
+    if (self.instituteField.text.length==0) {
+        [ToolUtils showMessage:@"请选择院系"];
+        return;
+    }
+    if (self.birthField.text.length==0) {
+        [ToolUtils showMessage:@"请选择生日"];
+        return;
+    }
     [self waiting:@"正在保存"];
     int gender = self.maleCheckBox.choose?1:0;
     [[ApisFactory getApiMUpdateUserInfo]load:self selecter:@selector(disposMessage:) nickname:self.nickNameField.text belong:self.instituteField.text sex:gender birthday:self.birthField.text tags:@""];

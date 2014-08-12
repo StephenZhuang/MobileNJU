@@ -169,7 +169,6 @@ static NSArray* buttonImages;
                             NSString *message = [[NSString alloc] initWithFormat:@"set tag failed with %@ error code : %d error message %@", action, errorCode, errorMessage];
                             //                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
                             [ToolUtils showMessage:message];
-                            
                         }];
                     }
 
@@ -271,7 +270,8 @@ static NSArray* buttonImages;
     if (self.unread.module4>0) {
         activityName = @"活动消息";
     }
-    if ([ToolUtils getNickName].length+[ToolUtils getBelong].length+[ToolUtils getBirthday].length==0) {
+    if ([ToolUtils getNickName].length*[ToolUtils getBelong].length*[ToolUtils getBirthday].length*[ToolUtils getHeadImg].length==0) {
+        NSLog(@"Nickname %@  Belong %@  Birthday %@ HeadImg %@",[ToolUtils getNickName],[ToolUtils getBelong],[ToolUtils getBirthday],[ToolUtils getHeadImg]);
        selfName = @"个人消息";
     }
     
