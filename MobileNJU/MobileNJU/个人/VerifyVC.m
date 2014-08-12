@@ -57,6 +57,7 @@
     [self waiting:@"正在验证"];
     [[ApisFactory getApiMVerifyUser]load:self selecter:@selector(disposMessage:) num:self.brasNameField.text pwd:self.brasPasswordField.text code:self.codeText.text];
 }
+
 - (void)disposMessage:(Son *)son
 {
     [self.loginIndicator removeFromSuperview];
