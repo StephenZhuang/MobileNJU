@@ -495,6 +495,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyW-T2-hjM">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="24身份认证-提示点" translatesAutoresizingMaskIntoConstraints="NO" id="fJd-E4-Ncf">
                                 <rect key="frame" x="26" y="42" width="7" height="7"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -566,6 +573,16 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="FyW-T2-hjM" secondAttribute="trailing" id="802-q5-dOm"/>
+                            <constraint firstItem="E0j-Fl-6hG" firstAttribute="top" secondItem="FyW-T2-hjM" secondAttribute="bottom" id="FIe-j7-dfc"/>
+                            <constraint firstItem="FyW-T2-hjM" firstAttribute="top" secondItem="PUt-Lx-Lgc" secondAttribute="top" id="LHW-Kw-YJv"/>
+                            <constraint firstItem="FyW-T2-hjM" firstAttribute="top" secondItem="PUt-Lx-Lgc" secondAttribute="top" id="UB6-Em-DUw"/>
+                            <constraint firstAttribute="trailing" secondItem="FyW-T2-hjM" secondAttribute="trailing" id="VTn-Jw-kcU"/>
+                            <constraint firstItem="E0j-Fl-6hG" firstAttribute="top" secondItem="FyW-T2-hjM" secondAttribute="bottom" id="YVM-9z-a4d"/>
+                            <constraint firstItem="FyW-T2-hjM" firstAttribute="leading" secondItem="PUt-Lx-Lgc" secondAttribute="leading" id="ioQ-8V-YQH"/>
+                            <constraint firstItem="FyW-T2-hjM" firstAttribute="leading" secondItem="PUt-Lx-Lgc" secondAttribute="leading" id="l9U-ne-Q03"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="brasNameField" destination="PA8-Ad-Xso" id="2ba-WP-IPV"/>
