@@ -140,7 +140,10 @@ static NSArray* buttonImages;
             MUser_Builder *user = (MUser_Builder *)[son getBuild];
             [ToolUtils setVerify:user.verify];
             [ToolUtils setLoginId:user.id];
+            [ToolUtils setBelong:user.belong];
+            [ToolUtils setNickname:user.nickname];
             [ToolUtils setIsVeryfy:user.isV];
+            [ToolUtils setBirthday:user.birthday];
             if (user.headImg.length>0) {
                 [ToolUtils setHeadImg:user.headImg];
             }
@@ -151,8 +154,8 @@ static NSArray* buttonImages;
             [ToolUtils setPassword:self.passwordTextField.text];
             FrontiaPush *push = [Frontia getPush];
             if(push) {
-                if([[UIApplication sharedApplication] enabledRemoteNotificationTypes]
-                   != UIRemoteNotificationTypeNone)
+                 UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+                if(types!= UIRemoteNotificationTypeNone)
                 {
                     NSString *tags = user.verify;
                     if (![@"" isEqualToString:tags]) {
@@ -166,10 +169,12 @@ static NSArray* buttonImages;
                             NSString *message = [[NSString alloc] initWithFormat:@"set tag failed with %@ error code : %d error message %@", action, errorCode, errorMessage];
                             //                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
                             [ToolUtils showMessage:message];
-                            
                         }];
                     }
+
                 }
+                    
+                
             }
             [self getUnread];
 //            [[ApisFactory getApiMGetUserInfo]load:self selecter:@selector(disposMessage:)];
@@ -204,7 +209,8 @@ static NSArray* buttonImages;
                 break;
         }
         [ToolUtils setFlowerCount:user.flower];
-    } else if ([son getError]!=0){
+    }
+    if ([son getError]!=0){
         [self showLoginView];
     }
 
@@ -264,7 +270,8 @@ static NSArray* buttonImages;
     if (self.unread.module4>0) {
         activityName = @"活动消息";
     }
-    if ([ToolUtils getNickName].length+[ToolUtils getBelong].length+[ToolUtils getBirthday].length==0) {
+    if ([ToolUtils getNickName].length*[ToolUtils getBelong].length*[ToolUtils getBirthday].length*[ToolUtils getHeadImg].length==0) {
+        NSLog(@"Nickname %@  Belong %@  Birthday %@ HeadImg %@",[ToolUtils getNickName],[ToolUtils getBelong],[ToolUtils getBirthday],[ToolUtils getHeadImg]);
        selfName = @"个人消息";
     }
     
@@ -372,7 +379,7 @@ static NSArray* buttonImages;
     [self hideLoad];
     [self.loginView removeFromSuperview];
     [self.logoImage removeFromSuperview];
-    [self.logoImage setImage:[UIImage imageNamed:@"欢迎"]];
+    [self.logoImage setImage:[UIImage imageNamed:@"欢迎2"]];
     [self.view addSubview:self.logoImage];
     [self.view addSubview:self.loginView];
 
