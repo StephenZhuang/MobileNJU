@@ -27,7 +27,7 @@
 @property (strong,nonatomic)NSMutableDictionary* LessonChooseDic;
 @property (nonatomic)CGRect frame;
 @property (nonatomic)int isRe;
-//@property (nonatomic,strong)UIImageView* imgView;
+@property (nonatomic,strong)UIImageView* imgView;
 @end
 
 @implementation GradeDetailVC
@@ -96,15 +96,14 @@
     if (self.schIdTextField.text.length==0) {
         [ToolUtils showMessage:@"学号不得为空"];
         return;
-    } else if (self.schIdTextField.text.length==0){
+    } else if (self.passwordTextField.text.length==0){
         [ToolUtils showMessage:@"密码不得为空"];
         return;
+    } else if (self.codeField!=nil&&self.codeField.text.length==0)
+    {
+        [ToolUtils showMessage:@"验证码不得为空"];
+        return;
     }
-//    else if (self.codeField!=nil&&self.codeField.text.length==0)
-//    {
-//        [ToolUtils showMessage:@"验证码不得为空"];
-//        return;
-//    }
     [self waiting:@"正在加载"];
     [self load:self selecter:@selector(disposMessage:) code:self.codeField==nil?nil:self.codeField.text account:self.schIdTextField.text password:self.passwordTextField.text];
 }
@@ -123,19 +122,19 @@
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
     return updateone;
 }
-//
-//- (void)removeCode
-//{
-//    [self.codeField setHidden:YES];
-//    [self.codeField removeFromSuperview];
-//    [self.codeField setText:@""];
-//    self.codeField = nil;
-//    [self.imgView removeFromSuperview];
-//    [self.imgView setHidden:YES];
-//    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 0);
-//    
-//    
-//}
+
+- (void)removeCode
+{
+    [self.codeField setHidden:YES];
+    [self.codeField removeFromSuperview];
+    [self.codeField setText:@""];
+    self.codeField = nil;
+    [self.imgView removeFromSuperview];
+    [self.imgView setHidden:YES];
+    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 0);
+    
+    
+}
 
 
 
@@ -161,9 +160,10 @@
         
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
-            if (termList.termList.count==0) {
-//                [self addCode:termList.img];
-            } else {
+            if (termList.img.length>0) {
+                [self removeCode];
+                [self addCode:termList.img];
+            } else if (termList.termList.count>0) {
                 self.password  = self.passwordTextField.text;
                 self.account = self.schIdTextField.text;
                 if (self.autoSwitch.isOn) {
@@ -189,6 +189,7 @@
             [self.tableView reloadData];
         }
     } else {
+        [self removeCode];
         [super disposMessage:son];
     }
 }
@@ -218,9 +219,9 @@
 
 - (void)showAlert
 {
-//    if ([self.schIdTextField.text hasPrefix:@"Mg"]) {
-//        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
-//    }
+    if ([self.schIdTextField.text hasPrefix:@"Mg"]) {
+        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+    }
     [self.alertView setHidden:NO];
     [self.maskView setHidden:NO];
     [self addMask];
@@ -261,26 +262,27 @@
 
 
 #pragma mark textFieldDelegate
-//- (void)addCode:(NSData*)img
-//{
-//    
-//    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 60);
-//    
-//    self.codeField = [[UITextField alloc]init];
-//    self.codeField.delegate = self;
-//    self.codeField.borderStyle = self.schIdTextField.borderStyle;
-//    self.codeField.placeholder = @"请输入验证码";
-//    CGRect codeFrame = self.passwordTextField.frame;
-//    codeFrame.size.width = codeFrame.size.width/2;
-//    codeFrame.origin.y = codeFrame.origin.y+codeFrame.origin.y-self.schIdTextField.frame.origin.y+self.autoSwitch.frame.size.height;
-//    self.codeField.frame = codeFrame;
-//    [self.alertView addSubview:self.codeField];
-//    codeFrame.origin.x = codeFrame.size.width+20;
-//    UIImageView* imgView = [[UIImageView alloc]initWithFrame:codeFrame];
-//    [imgView setImage:[UIImage imageWithData:img]];
-//    [self.alertView addSubview:imgView];
-//    self.imgView = imgView;
-//}
+
+- (void)addCode:(NSData*)img
+{
+    
+    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 60);
+    
+    self.codeField = [[UITextField alloc]init];
+    self.codeField.delegate = self;
+    self.codeField.borderStyle = self.schIdTextField.borderStyle;
+    self.codeField.placeholder = @"请输入验证码";
+    CGRect codeFrame = self.passwordTextField.frame;
+    codeFrame.size.width = codeFrame.size.width/2;
+    codeFrame.origin.y = codeFrame.origin.y+codeFrame.origin.y-self.schIdTextField.frame.origin.y+self.autoSwitch.frame.size.height;
+    self.codeField.frame = codeFrame;
+    [self.alertView addSubview:self.codeField];
+    codeFrame.origin.x = codeFrame.size.width+20;
+    UIImageView* imgView = [[UIImageView alloc]initWithFrame:codeFrame];
+    [imgView setImage:[UIImage imageWithData:img]];
+    [self.alertView addSubview:imgView];
+    self.imgView = imgView;
+}
 #pragma mark textFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -337,18 +339,13 @@
     [cell addBorder];
     MCourse* course = [self.gradeList objectAtIndex:indexPath.row];
     [cell.lessonNameLabel setText:course.name ];
-    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修",@"任选",@"限选",@"学位公共课",@"学位基础课",@"学位专业课",@"选修",nil];
+    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"通识类必修",@"专业课程",@"学科基础",@"专业综合选修",@"专业实践",@"专业理论",nil];
     cell.lessonTypeLabel.text =  [typeList objectAtIndex:course.type];
-    if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
-        NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);
-        [cell setTick:[[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text] isEqualToString:@"YES"]?YES:NO];
-    }
     [cell setDelegate:self];
     [cell.scoreLabel setText:course.grade];
     [cell.creditLabel setText:course.point];
     return cell;
 }
-
 
 #pragma mark gradeCellDelegate
 - (void)chooseLesson:(NSString*)select lesson:(NSString *)lesson

@@ -42,9 +42,11 @@
 @property (nonatomic)BOOL hasCode;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *addBack;
-//@property (strong,nonatomic)UIImageView* imgView;
+@property (strong,nonatomic)UIImageView* imgView;
 @property (strong,nonatomic)NSString* lastUserId;
 
+@property (strong, nonatomic)  UITextField *confirmCodeText;
+//@property (strong, nonatomic) UIImageView *confirmCode;
 @end
 
 
@@ -75,18 +77,25 @@
     if ([ToolUtils getScheduleAuto]==NO) {
         [self.maskView setHidden:NO];
         [self addMask];
+        [self load:self selecter:@selector(disposMessage:) code:nil account:@"mg......."  password:@"....."];
         [self.alertView setHidden:NO];
         if ([ToolUtils getJWID]==nil||[ToolUtils getJWID].length==0) {
             [self.addBack setHidden:YES];
             [self.addButton setHidden:YES];
         }
     } else {
-//        if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]) {
-//            [self load:self selecter:@selector(disposMessage:) code:nil account:@"mg......."  password:@"....."];
-//        }
         [self loadLast];
     }
 }
+
+//
+//- (void)getCode
+//{
+//    [self.confirmCode setImage:[UIImage imageNamed:@"news_loading"]];
+//    [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:@"111" password:@"111" isV:0 isReInput:self.isRe];
+//    [self load:self selecter:@selector(disposeMessage:) code:nil account:@"1" password:@"1"];
+//}
+
 
 - (void)initAlert
 {
@@ -241,7 +250,7 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MSchedule"]) {
                        MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
-            if (classList.week!=0||classList.classList.count!=0) {
+            if (classList.week!=0||classList.classList.count>0) {
                 [self.addButton setHidden:NO];
                 [self.addBack setHidden:NO];
                 self.isRe=1;
@@ -261,10 +270,14 @@
                 self.lessonList = classList.classList;
                 [self loadSchedule];
                 [ToolUtils setIsVeryfy:1];
+            }
+            else if (classList.img.length>0) {
+                [self removeCode];
+                [self addCode:classList.img];
             } else {
-//                [self removeCode];
-//                [self addCode:classList.img];
-           }
+                [ToolUtils showMessage:@"教务处没有该学期课表"];
+                [self cancelAlert:nil];
+            }
             
         } else if ([[son getMethod]isEqualToString:@"MScheduleAuto"]){
             MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
@@ -296,44 +309,45 @@
 //
 //    }
         else {
+            [self removeCode];
         [super disposMessage:son];
     }
 
 }
-//- (void)removeCode
-//{
-//    [self.codeView setHidden:YES];
-//    [self.codeView removeFromSuperview];
-//    self.codeView = nil;
-//    [self.imgView removeFromSuperview];
-//    [self.imgView setHidden:YES];
-//    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 0);
-//    
-//
-//}
+- (void)removeCode
+{
+    [self.codeView setHidden:YES];
+    [self.codeView removeFromSuperview];
+    self.codeView = nil;
+    [self.imgView removeFromSuperview];
+    [self.imgView setHidden:YES];
+    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 0);
+    
+
+}
 //添加验证码
-//- (void)addCode:(NSData*)img
-//{
-//    self.hasCode = YES;
-//    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 60);
-//    self.codeView = [[UITextField alloc]init];
-//    self.codeView.delegate = self;
-//    self.codeView.borderStyle = self.schIdField.borderStyle;
-//    self.codeView.placeholder = @"请输入验证码";
-//    CGRect codeFrame = self.passwordField.frame;
-//    codeFrame.size.width = codeFrame.size.width/2;
-//    codeFrame.origin.y = codeFrame.origin.y+codeFrame.origin.y-self.schIdField.frame.origin.y+self.autoSwitch.frame.size.height;
-//    self.codeView.frame = codeFrame;
-//    
-//    [self.alertView addSubview:self.codeView];
-//    
-//    codeFrame.origin.x = codeFrame.size.width+20;
-//    UIImageView* imgView = [[UIImageView alloc]initWithFrame:codeFrame];
-//    [imgView setImage:[UIImage imageWithData:img]];
-//    [self.alertView addSubview:imgView];
-//    self.imgView = imgView;
-//
-//}
+- (void)addCode:(NSData*)img
+{
+    self.hasCode = YES;
+    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 60);
+    self.codeView = [[UITextField alloc]init];
+    self.codeView.delegate = self;
+    self.codeView.borderStyle = self.schIdField.borderStyle;
+    self.codeView.placeholder = @"请输入验证码";
+    CGRect codeFrame = self.passwordField.frame;
+    codeFrame.size.width = codeFrame.size.width/2;
+    codeFrame.origin.y = codeFrame.origin.y+codeFrame.origin.y-self.schIdField.frame.origin.y+self.autoSwitch.frame.size.height;
+    self.codeView.frame = codeFrame;
+    
+    [self.alertView addSubview:self.codeView];
+    
+    codeFrame.origin.x = codeFrame.size.width+20;
+    UIImageView* imgView = [[UIImageView alloc]initWithFrame:codeFrame];
+    [imgView setImage:[UIImage imageWithData:img]];
+    [self.alertView addSubview:imgView];
+    self.imgView = imgView;
+
+}
 
 
 #pragma mark textFieldDelegate
@@ -459,6 +473,7 @@
 //登录窗口
 - (void)showAlert
 {
+    [self load:self selecter:@selector(disposMessage:) code:nil account:@"mg......."  password:@"....."];
     [self.alertView setHidden:NO];
     [self.maskView setHidden:NO];
     [self addMask];
@@ -566,6 +581,18 @@
 - (BOOL)carouselShouldWrap:(iCarousel *)carousel
 {
     return NO;
+}
+
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField==self.schIdField) {
+        if (range.location ==0)
+        {
+            [self removeCode];
+        }
+    }
+    return YES;
 }
 
 @end
