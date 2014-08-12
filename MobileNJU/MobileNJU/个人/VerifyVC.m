@@ -57,6 +57,11 @@
     [self waiting:@"正在验证"];
     [[ApisFactory getApiMVerifyUser]load:self selecter:@selector(disposMessage:) num:self.brasNameField.text pwd:self.brasPasswordField.text code:self.codeText.text];
 }
+- (IBAction)resignAll:(id)sender {
+    [self.brasNameField resignFirstResponder];
+    [self.brasPasswordField resignFirstResponder];
+    [self.codeText resignFirstResponder];
+}
 
 - (void)disposMessage:(Son *)son
 {
