@@ -42,6 +42,7 @@
 @property (nonatomic,strong)NSMutableDictionary* stateDic;
 @property (nonatomic)int prepare;
 @property (nonatomic)BOOL firstOpen;
+@property (nonatomic,strong)HomeCell* treeholeCell;
 @end
 
 @implementation MainMenuViewController
@@ -290,12 +291,14 @@ static NSArray* descriptions;
          [cell.menuButton setImage:imageSelected.image forState:UIControlStateSelected];
         [cell.menuButton setDesitination:[descriptions objectAtIndex:indexPath.row]];
         [cell.menuTitle setText:[functionNames objectAtIndex:indexPath.row]];
+        [cell setUserInteractionEnabled:YES];
 //        [cell.menuSubTitle setText:[descriptions objectAtIndex:indexPath.row]];
         [cell.menuButton addTarget:self action:@selector(
                                                          goToDetail
                                                 :) forControlEvents:UIControlEventTouchUpInside];
         if (self.unread.module2>0&&[[functionNames objectAtIndex:indexPath.row]isEqualToString:@"树洞"]) {
             [cell addUnread];
+            self.treeholeCell = cell;
         } else {
             [cell.redCircle setHidden:YES];
         }
@@ -324,7 +327,6 @@ static NSArray* descriptions;
             [((HomeCell*)cell).redCircle setHidden:YES];
         }
     }
-    
     NSString* str = [NSString stringWithFormat:@"%d",indexPath.row];
     if ([self.stateDic objectForKey:str]==nil) {
         HomeCell* homecell = (HomeCell*)cell;
@@ -358,6 +360,7 @@ static NSArray* descriptions;
     MenuButton* menuButton = (MenuButton*)sender;
     if ([menuButton.desitination isEqualToString:@"树洞"]) {
         self.unread=nil;
+        [self.treeholeCell.redCircle setHidden:YES];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
         TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
         [self.navigationController pushViewController:vc animated:YES];

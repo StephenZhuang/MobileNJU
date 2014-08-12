@@ -18,7 +18,7 @@
 #import "JDStatusBarNotification.h"
 #import "RDVTabBarController.h"
 
-#define APP_KEY @"ezHXvwFL0chMGB3h2L2Girtg"
+#define APP_KEY @"MGZF96fGRexFypz7bvgapVY1"
 #define REPORT_ID @"d5dd317228"
 
 #define IosAppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
