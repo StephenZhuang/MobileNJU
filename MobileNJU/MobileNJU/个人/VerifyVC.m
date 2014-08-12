@@ -40,6 +40,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)resignAll:(id)sender {
+    [self.brasNameField resignFirstResponder];
+    [self.brasPasswordField resignFirstResponder];
+    [self.codeText resignFirstResponder];
+}
 
 - (IBAction)verify:(id)sender {
     if (self.brasNameField.text.length==0) {

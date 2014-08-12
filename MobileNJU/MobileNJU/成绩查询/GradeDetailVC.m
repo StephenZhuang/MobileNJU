@@ -44,12 +44,15 @@
     [self.view addSubview:self.gpaView];
     [self.gpaView setDelegate:self];
     [self.tableView setAllowsSelection:NO];
-    [self loadSavedState];
     self.LessonChooseDic = [[NSMutableDictionary alloc]init];
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
     self.isRe=1;
 
     // Do any additional setup after loading the view.
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self loadSavedState];
 }
 
 - (void)initAlert
@@ -93,7 +96,7 @@
     if (self.schIdTextField.text.length==0) {
         [ToolUtils showMessage:@"学号不得为空"];
         return;
-    } else if (self.schIdTextField.text.length==0){
+    } else if (self.passwordTextField.text.length==0){
         [ToolUtils showMessage:@"密码不得为空"];
         return;
     } else if (self.codeField!=nil&&self.codeField.text.length==0)
@@ -157,7 +160,7 @@
         
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
-            if (termList.img>0) {
+            if (termList.img.length>0) {
                 [self removeCode];
                 [self addCode:termList.img];
             } else if (termList.termList.count>0) {
