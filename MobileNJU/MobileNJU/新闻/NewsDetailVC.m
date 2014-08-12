@@ -56,7 +56,7 @@
     FrontiaShare *share = [Frontia getShare];
     [share registerQQAppId:@"100358052" enableSSO:YES];
     [share registerWeixinAppId:@"wx277782943f4c36be"];
-    [share registerSinaweiboAppId:@"306527345"];
+//    [share registerSinaweiboAppId:@"306527345"];
     
     [share showShareMenuWithShareContent:content displayPlatforms:sharePlatforms supportedInterfaceOrientations:UIInterfaceOrientationMaskAll isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
 }

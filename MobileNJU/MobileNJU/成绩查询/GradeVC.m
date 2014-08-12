@@ -131,10 +131,9 @@
     if (self.schIdTextField.text.length==0) {
         [ToolUtils showMessage:@"学号不得为空"];
         return;
-    } else if (self.schIdTextField.text.length==0){
+    } else if (self.passwordTextField.text.length==0){
         [ToolUtils showMessage:@"密码不得为空"];
         return;
-    
     } else if (self.codeField!=nil&&self.codeField.text.length==0)
     {
         [ToolUtils showMessage:@"验证码不得为空"];
@@ -170,7 +169,7 @@
             [ToolUtils setIsVeryfy:1];
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
             
-            if (termList.img.length>0) {
+            if (termList.img.length>0&&termList.termList.count==0) {
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }
