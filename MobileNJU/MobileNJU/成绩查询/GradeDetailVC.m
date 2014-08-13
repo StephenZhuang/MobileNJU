@@ -340,7 +340,7 @@
     [cell addBorder];
     MCourse* course = [self.gradeList objectAtIndex:indexPath.row];
     [cell.lessonNameLabel setText:course.name];
-    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修课",@"任选课",@"限选课",@"集中性实践",@"校公共选修课",@"课外培养任选", nil];
+    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修课",@"公选课",@"学位课" ,@"选修课",nil];
     cell.lessonTypeLabel.text =  [typeList objectAtIndex:course.type];
     if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
         NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);
