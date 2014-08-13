@@ -332,7 +332,6 @@
     if (indexPath.row<self.termList.count&&self.hasLogin) {
         NSArray* term = [self.termList objectAtIndex:indexPath.row];
         NSString* str = [term objectAtIndex:1];
-        
         if (str.length>0) {
             [self performSegueWithIdentifier:@"gradeDetail" sender:[term objectAtIndex:1]];
         }

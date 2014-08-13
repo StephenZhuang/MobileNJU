@@ -31,6 +31,10 @@
     if (lesson.week.length>10) {
         [self.week setFont:[UIFont fontWithName:@"Helvetica" size:9]];
     }
+    if (lesson.teacher.length==0)
+    {
+        [self.teacher setText:@"   "];
+    }
     if (lesson.location.length==0) {
         lesson.location = @"   ";
     }

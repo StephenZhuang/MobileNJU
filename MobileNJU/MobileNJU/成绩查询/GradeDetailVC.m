@@ -219,9 +219,9 @@
 
 - (void)showAlert
 {
-    if ([self.schIdTextField.text hasPrefix:@"Mg"]) {
-        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
-    }
+//    if ([self.schIdTextField.text hasPrefix:@"Mg"]) {
+//        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
+//    }
     [self.alertView setHidden:NO];
     [self.maskView setHidden:NO];
     [self addMask];
@@ -328,8 +328,6 @@
 }
 
 
-
-
 #warning 超过6个字符就要换行了
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -339,7 +337,7 @@
     [cell addBorder];
     MCourse* course = [self.gradeList objectAtIndex:indexPath.row];
     [cell.lessonNameLabel setText:course.name ];
-    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修课",@"限选课",@"任选课",@"课程",nil];
+    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修课",@"限选课",@"任选课",@"课程" ,nil ];
     cell.lessonTypeLabel.text =  [typeList objectAtIndex:course.type];
 //    if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
 //        NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);
