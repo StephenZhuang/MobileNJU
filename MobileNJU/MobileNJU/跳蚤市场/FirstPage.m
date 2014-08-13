@@ -267,7 +267,7 @@
     //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     // Create a graphics image context
-    CGSize newSize = CGSizeMake(320, 320);
+    CGSize newSize = CGSizeMake(640, 640);
     //    [pool release];
     return [self OriginImage:image scaleToSize:newSize];
 }

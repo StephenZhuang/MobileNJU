@@ -1198,15 +1198,15 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUZ-1r-b5I">
-                                                    <rect key="frame" x="35" y="87" width="8" height="16"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="66" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUZ-1r-b5I">
+                                                    <rect key="frame" x="35" y="87" width="15" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.57647058823529407" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-nE-EFL">
-                                                    <rect key="frame" x="75" y="87" width="8" height="16"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="66" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-nE-EFL">
+                                                    <rect key="frame" x="82" y="87" width="15" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.57647058823529407" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
@@ -1238,7 +1238,7 @@
                                             <constraint firstAttribute="bottom" secondItem="cV8-Ei-wBq" secondAttribute="bottom" constant="9" id="Vno-wY-4jp"/>
                                             <constraint firstItem="lSv-Gn-qfd" firstAttribute="leading" secondItem="grl-Q2-qrn" secondAttribute="leading" constant="10" id="Xbf-bR-jlH"/>
                                             <constraint firstItem="cV8-Ei-wBq" firstAttribute="leading" secondItem="grl-Q2-qrn" secondAttribute="leading" constant="7" id="ctc-N8-UTG"/>
-                                            <constraint firstItem="fcc-nE-EFL" firstAttribute="leading" secondItem="g9x-Go-eoF" secondAttribute="trailing" constant="-8" id="fCK-ZP-AVg"/>
+                                            <constraint firstItem="fcc-nE-EFL" firstAttribute="leading" secondItem="g9x-Go-eoF" secondAttribute="trailing" constant="-1" id="fCK-ZP-AVg"/>
                                             <constraint firstItem="lSv-Gn-qfd" firstAttribute="top" secondItem="grl-Q2-qrn" secondAttribute="top" constant="13" id="kJr-FY-XOu"/>
                                             <constraint firstItem="foz-DV-Qrl" firstAttribute="leading" secondItem="grl-Q2-qrn" secondAttribute="leading" constant="10" id="nNy-0s-Um3"/>
                                             <constraint firstItem="t92-em-mJM" firstAttribute="leading" secondItem="grl-Q2-qrn" secondAttribute="leading" constant="10" id="oof-Uk-fXq"/>

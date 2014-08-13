@@ -262,6 +262,7 @@
                 [self loadSchedule];
                 [ToolUtils setIsVeryfy:1];
             } else {
+                
 //                [self removeCode];
 //                [self addCode:classList.img];
            }
