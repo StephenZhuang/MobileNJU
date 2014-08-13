@@ -98,7 +98,7 @@
     if (self.schIdTextField.text.length==0) {
         [ToolUtils showMessage:@"学号不得为空"];
         return;
-    } else if (self.schIdTextField.text.length==0){
+    } else if (self.passwordTextField.text.length==0){
         [ToolUtils showMessage:@"密码不得为空"];
         return;
     }
@@ -340,7 +340,7 @@
     [cell addBorder];
     MCourse* course = [self.gradeList objectAtIndex:indexPath.row];
     [cell.lessonNameLabel setText:course.name];
-    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修课",@"公选课",@"学位课" ,@"选修课",nil];
+    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修课",@"限选课",@"通识限选课",@"任选课",nil];
     cell.lessonTypeLabel.text =  [typeList objectAtIndex:course.type];
     if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
         NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);

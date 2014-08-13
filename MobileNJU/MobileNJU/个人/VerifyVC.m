@@ -40,11 +40,11 @@
 
 - (IBAction)verify:(id)sender {
     if (self.brasNameField.text.length==0) {
-        [ToolUtils showMessage:@"请输入bras账号"];
+        [ToolUtils showMessage:@"请输入教务处账号"];
         return;
     } else if (self.brasPasswordField.text.length==0)
     {
-        [ToolUtils showMessage:@"请输入bras密码"];
+        [ToolUtils showMessage:@"请输入教务处密码"];
         return;
     }
     [self waiting:@"正在验证"];
