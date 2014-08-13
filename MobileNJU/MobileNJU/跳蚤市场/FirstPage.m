@@ -112,7 +112,7 @@
         label = self.discLabel;
     }
     [UIView animateWithDuration:0.2f animations:^{
-        [label setTextColor:[UIColor purpleColor]];
+        [label setTextColor:[UIColor colorWithRed:0 green:147/255.0 blue:212/255.0 alpha:1]];
         [label setFont:[UIFont fontWithName:@"Helvetica" size:10.0]];
         label.transform = CGAffineTransformMakeTranslation(0, -10);
     }];
@@ -267,7 +267,7 @@
     //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     // Create a graphics image context
-    CGSize newSize = CGSizeMake(320, 320);
+    CGSize newSize = CGSizeMake(640, 640);
     //    [pool release];
     return [self OriginImage:image scaleToSize:newSize];
 }

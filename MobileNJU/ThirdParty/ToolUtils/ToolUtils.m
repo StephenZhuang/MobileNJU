@@ -279,6 +279,7 @@
     if (urlString == nil || [urlString isEqualToString:@""]) {
         return [NSURL URLWithString:@""];
     }
+//    NSLog(@"%@",[NSString stringWithFormat:@"%@%@&w=%.0f&h=%.0f",[[Frame INITCONFIG] getDUrl],urlString , width , height]);
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@&w=%.0f&h=%.0f",[[Frame INITCONFIG] getDUrl],urlString , width , height]];
 }
 

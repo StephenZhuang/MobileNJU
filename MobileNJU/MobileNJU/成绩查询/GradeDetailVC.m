@@ -339,7 +339,7 @@
     [cell addBorder];
     MCourse* course = [self.gradeList objectAtIndex:indexPath.row];
     [cell.lessonNameLabel setText:course.name ];
-    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"通识类必修",@"专业课程",@"学科基础",@"专业综合选修",@"专业实践",@"专业理论",nil];
+    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修",@"选修",nil];
     cell.lessonTypeLabel.text =  [typeList objectAtIndex:course.type];
     [cell setDelegate:self];
     [cell.scoreLabel setText:course.grade];
