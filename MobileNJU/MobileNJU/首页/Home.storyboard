@@ -1791,7 +1791,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="余额：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQN-8E-nrb">
-                                                    <rect key="frame" x="265" y="33" width="90" height="21"/>
+                                                    <rect key="frame" x="240" y="33" width="90" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="8AF-vR-xs7"/>
@@ -1806,8 +1806,8 @@
                                                 <constraint firstItem="L3N-Cd-3gl" firstAttribute="top" secondItem="oUx-jY-MMr" secondAttribute="top" constant="33" id="C82-ke-NcB"/>
                                                 <constraint firstAttribute="bottom" secondItem="yqR-HF-vZA" secondAttribute="bottom" constant="24" id="ETv-Wa-GPu"/>
                                                 <constraint firstItem="yqR-HF-vZA" firstAttribute="top" secondItem="6fc-Fm-rtr" secondAttribute="top" id="Fkw-73-uCD"/>
-                                                <constraint firstItem="AQN-8E-nrb" firstAttribute="leading" secondItem="L3N-Cd-3gl" secondAttribute="trailing" constant="3" id="O8z-Sj-xAG"/>
-                                                <constraint firstAttribute="trailing" secondItem="AQN-8E-nrb" secondAttribute="trailing" constant="-35" id="OJ0-og-4g2"/>
+                                                <constraint firstItem="AQN-8E-nrb" firstAttribute="leading" secondItem="L3N-Cd-3gl" secondAttribute="trailing" constant="-22" id="O8z-Sj-xAG"/>
+                                                <constraint firstAttribute="trailing" secondItem="AQN-8E-nrb" secondAttribute="trailing" constant="-10" id="OJ0-og-4g2"/>
                                                 <constraint firstItem="AQN-8E-nrb" firstAttribute="baseline" secondItem="L3N-Cd-3gl" secondAttribute="baseline" id="SRh-2a-ibY"/>
                                                 <constraint firstAttribute="trailing" secondItem="yqR-HF-vZA" secondAttribute="trailing" constant="20" symbolic="YES" id="WSK-BN-AFA"/>
                                                 <constraint firstItem="6fc-Fm-rtr" firstAttribute="top" secondItem="oUx-jY-MMr" secondAttribute="top" constant="14" id="diF-6e-c5M"/>

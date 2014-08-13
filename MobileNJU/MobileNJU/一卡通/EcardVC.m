@@ -34,6 +34,7 @@
 @property(strong,nonatomic)NSArray* detaiList;
 @property(nonatomic)int isRe;
 @property (nonatomic)CGRect frame;
+@property (nonatomic)int lastCount;
 @end
 
 @implementation EcardVC
@@ -54,7 +55,7 @@
     [super viewDidLoad];
     [self initAlert];
     self.isRe=0;
-    page=0;
+    page=1;
     [self.maskView setHidden:YES];
     [self.alertView setHidden:!([ToolUtils getEcardId]==nil)];
     [self.maskView setHidden:!([ToolUtils getEcardId]==nil)];
@@ -83,6 +84,7 @@
     } else {
 //        [self getCode];
     }
+    self.lastCount = 19;
     // Do any additional setup after loading the view.
 }
 
@@ -104,6 +106,7 @@
     self.passwordText = self.alertView.passwordField;
     self.schIDText.delegate = self;
     self.passwordText.delegate = self;
+    self.passwordText.placeholder = @"请输入校园卡密码";
     [self.alertView.searchBt addTarget:self action:@selector(searchResult:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(closeAlertView:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -201,6 +204,7 @@
            } else {
                [self.tableView reloadData];
            }
+           self.lastCount = ret.cardList.count;
        }
     } else if ([son getError]==10021){
 //        [self getCode];
@@ -212,7 +216,16 @@
 
 - (void)loadData
 {
-    [self searchDetail:nil];
+    if (page==1)
+    {
+        self.lastCount=19;
+    }
+    if (self.lastCount==19)
+    {
+        [self searchDetail:nil];
+    } else {
+        [self doneWithView:_footer];
+    }
 }
 
 - (void)addHeader
@@ -231,7 +244,7 @@
         [self showAlertView:nil];
     } else {
         if (sender!=nil) {
-            page=0;
+            page=1;
             self.detaiList = [[NSArray alloc]init];
         }
         [self waiting:@"正在查询"];
