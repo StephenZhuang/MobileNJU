@@ -23,7 +23,7 @@
 {
     [super viewDidLoad];
     self.refreshCount = 0;
-    [self setTitle:@"7788"];
+    [self setTitle:@"贴吧十大"];
     self.colorArray = [[NSArray alloc]initWithObjects:@"一",@"二",@"三",@"四",@"五",@"六",@"七",@"八",@"九",@"十", nil];
     
     // Do any additional setup after loading the view.

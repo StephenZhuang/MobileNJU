@@ -495,18 +495,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmL-4p-au7">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resignAll:" destination="w8b-jt-DFo" eventType="touchUpInside" id="xTa-4P-Zo1"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="24身份认证-提示点" translatesAutoresizingMaskIntoConstraints="NO" id="fJd-E4-Ncf">
                                 <rect key="frame" x="26" y="42" width="7" height="7"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="此处都学号和密码仅为验证是否为南大学生" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8W-A1-jsW">
-                                <rect key="frame" x="39" y="35" width="209" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="此处的学号和密码仅为验证是否为河海学生" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8W-A1-jsW">
+                                <rect key="frame" x="39" y="35" width="248" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" 请输入bras账号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PA8-Ad-Xso">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" 请输入教务处账号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PA8-Ad-Xso">
                                 <rect key="frame" x="35" y="58" width="254" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -519,7 +529,7 @@
                                 <rect key="frame" x="30" y="81" width="254" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" 请输入bras密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UTK-FW-TWy">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" 请输入教务处密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UTK-FW-TWy">
                                 <rect key="frame" x="33" y="116" width="254" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -533,7 +543,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8j-iE-wNJ">
-                                <rect key="frame" x="30" y="190" width="252" height="40"/>
+                                <rect key="frame" x="30" y="221" width="252" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="验证" backgroundImage="purpleButton">
@@ -544,12 +554,41 @@
                                     <action selector="verify:" destination="w8b-jt-DFo" eventType="touchUpInside" id="pJT-bb-SfI"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ggd-JF-thB">
+                                <rect key="frame" x="30" y="160" width="252" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder=" 验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oPG-J9-7iv">
+                                        <rect key="frame" x="4" y="10" width="85" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="w8b-jt-DFo" id="9Rh-na-eM6"/>
+                                        </connections>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cxm-eT-9Il">
+                                        <rect key="frame" x="97" y="7" width="87" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nmL-4p-au7" firstAttribute="top" secondItem="PUt-Lx-Lgc" secondAttribute="top" id="Zxc-7R-tCn"/>
+                            <constraint firstItem="nmL-4p-au7" firstAttribute="leading" secondItem="PUt-Lx-Lgc" secondAttribute="leading" id="gCP-9L-1TJ"/>
+                            <constraint firstItem="E0j-Fl-6hG" firstAttribute="top" secondItem="nmL-4p-au7" secondAttribute="bottom" id="mSm-Gt-q5F"/>
+                            <constraint firstAttribute="trailing" secondItem="nmL-4p-au7" secondAttribute="trailing" id="y5M-Sv-t7g"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="brasNameField" destination="PA8-Ad-Xso" id="2ba-WP-IPV"/>
                         <outlet property="brasPasswordField" destination="UTK-FW-TWy" id="PiF-pf-YUC"/>
+                        <outlet property="codeText" destination="oPG-J9-7iv" id="Bc4-ma-Pj2"/>
+                        <outlet property="codeView" destination="cxm-eT-9Il" id="b0E-9h-atO"/>
+                        <outlet property="veryfyCode" destination="ggd-JF-thB" id="l7D-Si-q81"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="epz-5Y-Eoz" userLabel="First Responder" sceneMemberID="firstResponder"/>

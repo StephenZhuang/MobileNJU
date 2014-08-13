@@ -102,6 +102,7 @@
     self.schIDText.delegate = self;
     self.autoSearch = self.alertView.autoSwitch;
     self.passwordText = self.alertView.passwordField;
+    self.passwordText.placeholder=@"请输入一卡通密码";
     self.schIDText.delegate = self;
     self.passwordText.delegate = self;
     [self.alertView.searchBt addTarget:self action:@selector(searchResult:) forControlEvents:UIControlEventTouchUpInside];

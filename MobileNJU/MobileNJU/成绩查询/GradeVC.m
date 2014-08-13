@@ -18,17 +18,16 @@
 @property (strong, nonatomic)  AlertViewWithPassword *alertView;
 @property (strong, nonatomic)  UITextField *schIdTextField;
 @property (strong, nonatomic)  UITextField *passwordTextField;
-//@property (strong,nonatomic)UITextField* codeField;
-//@property (strong, nonatomic)  UIButton *searchButton;
+@property (strong,nonatomic)UITextField* codeField;
+@property (strong, nonatomic)  UIButton *searchButton;
 @property (strong, nonatomic)  UISwitch *autoSwitch;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong,nonatomic)NSString* account;
 @property(strong,nonatomic)NSString* password;
 @property(nonatomic)int isRe;
-//@property (nonatomic,strong) UIImageView* imgView;
+@property (nonatomic,strong) UIImageView* imgView;
 @property (nonatomic)CGRect frame;
 @property (nonatomic)BOOL hasLogin;
-@property (nonatomic,strong)NSString* lastUserId;
 @end
 
 @implementation GradeVC
@@ -76,7 +75,7 @@
     self.passwordTextField.delegate = self;
     [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
-//    self.searchButton = self.alertView.searchBt;
+    self.searchButton = self.alertView.searchBt;
 }
 
 
@@ -89,27 +88,28 @@
 //        [self removeCode];
 //    }
 //}
-//- (void)removeCode
-//{
-//    
-//    
-//    [self.codeField setHidden:YES];
-//    [self.codeField removeFromSuperview];
-//    [self.codeField setText:@""];
-//    self.codeField = nil;
-//    [self.imgView removeFromSuperview];
-//    [self.imgView setHidden:YES];
-//    self.imgView = nil;
-//    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 0);
-//    
-//    
-//}
+- (void)removeCode
+{
+    
+    
+    [self.codeField setHidden:YES];
+    [self.codeField removeFromSuperview];
+    [self.codeField setText:@""];
+    self.codeField = nil;
+    [self.imgView removeFromSuperview];
+    [self.imgView setHidden:YES];
+    self.imgView = nil;
+    self.searchButton.transform = CGAffineTransformMakeTranslation(0, 0);
+    
+    
+}
 - (void)loadSavedState
 {
     
     [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
     [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
     if (![self.schIdTextField.text isEqualToString:@""]&&![self.passwordTextField.text isEqualToString:@""]&&!self.hasLogin) {
+        
         [self search:nil];
     } else if (!self.hasLogin){
         [self showAlert];
@@ -118,29 +118,31 @@
 }
 
 - (IBAction)search:(id)sender {
-    if (sender!=nil&&self.lastUserId!=nil&&![self.lastUserId isEqualToString:self.schIdTextField.text]) {
+    if (sender!=nil) {
         self.isRe=1;
+    } else {
+        [self.maskView setHidden:NO];
+        [self addMask];
     }
     [self.schIdTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
-//    [self.codeField resignFirstResponder];
+    [self.codeField resignFirstResponder];
     
     if (self.schIdTextField.text.length==0) {
         [ToolUtils showMessage:@"学号不得为空"];
         return;
-    } else if (self.schIdTextField.text.length==0){
+    } else if (self.passwordTextField.text.length==0){
         [ToolUtils showMessage:@"密码不得为空"];
         return;
+    } else if (self.codeField!=nil&&self.codeField.text.length==0)
+    {
+        [ToolUtils showMessage:@"验证码不得为空"];
+        return;
     }
-//    } else if (self.codeField!=nil&&self.codeField.text.length==0)
-//    {
-//        [ToolUtils showMessage:@"验证码不得为空"];
-//        return;
-//    }
     if (sender!=nil) {
         [self waiting:@"正在登录"];
     }
-    [self load:self selecter:@selector(disposMessage:) code:nil account:self.schIdTextField.text password:self.passwordTextField.text];
+    [self load:self selecter:@selector(disposMessage:) code:(self.codeField==nil)?nil:self.codeField.text account:self.schIdTextField.text password:self.passwordTextField.text];
 }
 
 -(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
@@ -166,14 +168,14 @@
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
             [ToolUtils setIsVeryfy:1];
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
-            if (termList.termList.count==0) {
+            
+            if (termList.img.length>0&&termList.termList.count==0) {
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }
-//                [self removeCode];
-//                [self addCode:termList.img];
-            } else {
-                self.lastUserId = self.schIdTextField.text;
+                [self removeCode];
+                [self addCode:termList.img];
+            } else if (termList.termList.count>0){
                 self.hasLogin = YES;
                 self.isRe=1;
                 self.password  = self.passwordTextField.text;
@@ -197,11 +199,8 @@
             }
         }
     }
-//    else if ([[son getMsg]hasPrefix:@"信息"]&&self.codeField!=nil)
-//    {
-//        [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
-//    }
     else {
+        [self removeCode];
         [super disposMessage:son];
     }
 }
@@ -263,31 +262,31 @@
 
 
 #pragma mark textFieldDelegate
-//
-//- (void)addCode:(NSData*)img
-//{
-//    self.isRe=0;
-//    if (self.imgView!=nil) {
-//        [self.imgView setImage:[UIImage imageWithData:img]];
-//    } else {
-//        self.alertView.searchBt.transform = CGAffineTransformMakeTranslation(0, 60);
-//        self.codeField = [[UITextField alloc]init];
-//        self.codeField.delegate = self;
-//        self.codeField.borderStyle = self.schIdTextField.borderStyle;
-//        self.codeField.placeholder = @"请输入验证码";
-//        CGRect codeFrame = self.passwordTextField.frame;
-//        codeFrame.size.width = codeFrame.size.width/2;
-//        codeFrame.origin.y = codeFrame.origin.y+codeFrame.origin.y-self.schIdTextField.frame.origin.y+self.autoSwitch.frame.size.height;
-//        self.codeField.frame = codeFrame;
-//        [self.alertView addSubview:self.codeField];
-//        codeFrame.origin.x = codeFrame.size.width+20;
-//        UIImageView* imgView = [[UIImageView alloc]initWithFrame:codeFrame];
-//        [imgView setImage:[UIImage imageWithData:img]];
-//        [self.alertView addSubview:imgView];
-//        self.imgView = imgView;
-//    }
-//    
-//}
+
+- (void)addCode:(NSData*)img
+{
+    self.isRe=0;
+    if (self.imgView!=nil) {
+        [self.imgView setImage:[UIImage imageWithData:img]];
+    } else {
+        self.alertView.searchBt.transform = CGAffineTransformMakeTranslation(0, 60);
+        self.codeField = [[UITextField alloc]init];
+        self.codeField.delegate = self;
+        self.codeField.borderStyle = self.schIdTextField.borderStyle;
+        self.codeField.placeholder = @"请输入验证码";
+        CGRect codeFrame = self.passwordTextField.frame;
+        codeFrame.size.width = codeFrame.size.width/2;
+        codeFrame.origin.y = codeFrame.origin.y+codeFrame.origin.y-self.schIdTextField.frame.origin.y+self.autoSwitch.frame.size.height;
+        self.codeField.frame = codeFrame;
+        [self.alertView addSubview:self.codeField];
+        codeFrame.origin.x = codeFrame.size.width+20;
+        UIImageView* imgView = [[UIImageView alloc]initWithFrame:codeFrame];
+        [imgView setImage:[UIImage imageWithData:img]];
+        [self.alertView addSubview:imgView];
+        self.imgView = imgView;
+    }
+    
+}
 #pragma mark textFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -333,6 +332,7 @@
     if (indexPath.row<self.termList.count&&self.hasLogin) {
         NSArray* term = [self.termList objectAtIndex:indexPath.row];
         NSString* str = [term objectAtIndex:1];
+        
         if (str.length>0) {
             [self performSegueWithIdentifier:@"gradeDetail" sender:[term objectAtIndex:1]];
         }
@@ -392,7 +392,16 @@
 }
 
 
-
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField==self.schIdTextField) {
+        if (range.location ==0)
+        {
+            [self removeCode];
+        }
+    }
+    return YES;
+}
 
 #pragma mark - Navigation
 
