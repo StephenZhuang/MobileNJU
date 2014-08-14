@@ -251,7 +251,7 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MSchedule"]) {
                        MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
-            if (classList.week!=0||classList.classList.count>0) {
+            if (classList.classList.count>0) {
                 [self.addButton setHidden:NO];
                 [self.addBack setHidden:NO];
                 self.isRe=1;
