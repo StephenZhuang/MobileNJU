@@ -125,7 +125,7 @@
     [self.nickNameField resignFirstResponder];
 //    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"selfInfo" ofType:@"plist"];
 //    NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    NSArray* items = [NSArray arrayWithObjects:@"矿业工程学院",@"安全工程学院",@"力学与建筑工程学院",@"机电工程学院",@"信息与电气工程学院",@"资源与地球科学学院",@"化工学院",@"环境与测绘学院",@"电力工程学院",@"材料科学与工程学院",@"理学院",@"计算机科学与技术学院",@"管理学院",@"文学与法政学院",@"马克思主义学院",@"外国语言文化学院",@"艺术与设计学院",@"体育学院",@"徐海学院",@"银川学院",@"其他",nil];
+    NSArray* items = [NSArray arrayWithObjects:@"经济学院",@"财政与税务学院",@"金融学院",@"国际经贸学院",@"会计学院",@"工商管理学院",@"营销与物流管理学院",@"公共管理学院@管理科学与工程学院",@"法学院",@"外国语学院",@"新闻学院",@"艺术设计学院",@"食品科学与工程学院",@"信息工程学院",@"应用数学学院",@"马克思主义学院",@"体育部",@"经济管理实验教学中心",@"MBA中心",@"国际学院",@"继续教育学院",@"宿迁学院经济贸易系",@"红山学院",@"其他",nil];
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择院系" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     [picker setTag:1];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
