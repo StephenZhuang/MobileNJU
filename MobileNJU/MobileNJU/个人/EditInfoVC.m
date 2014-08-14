@@ -125,7 +125,7 @@
     [self.nickNameField resignFirstResponder];
 //    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"selfInfo" ofType:@"plist"];
 //    NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    NSArray* items = [NSArray arrayWithObjects:@"强化培养学院" ,@"教师教育学院", @"国际文化教育学院", @"金陵女子学院", @"公共管理学院", @"商学院", @"法学院",@"马克思主义学院", @"教育科学学院", @"心理学院", @"体育科学学院", @"文学院", @"外国语学院", @"新闻与传播学院", @"社会发展学院", @"数学科学学院", @"物理科学与技术学院", @"化学与材料科学学院", @"地理科学学院", @"生命科学学院", @"能源与机械工程学院", @"电气与自动化工程学院", @"计算机科学与技术学院", @"音乐学院", @"美术学院", @"中北学院", @"泰州学院", @"其他", nil];
+    NSArray* items = [NSArray arrayWithObjects:@"森林资源与环境学院",@"材料科学与工程学院",@"化学工程学院",@"机械电子工程学院",@"土木工程学院",@"经济管理学院",@"人文社会科学学院",@"信息科学技术学院",@"风景园林学院",@"理学院",@"外国语学院",@"艺术设计学院",@"家具与工业设计学院",@"轻工科学与工程学院",@"汽车与交通工程学院", @"继续教育学院",@"应用技术学院",@"国际教育学院",@"南方学院",@"思想政治理论教学研究部",@"体育教育部",@"其他", nil];
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择院系" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     [picker setTag:1];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
@@ -176,7 +176,6 @@
         // 使用日期格式器格式化日期、时间
         NSString *destDateString = [dateFormatter stringFromDate:pickerView.date];
         [self.birthField setText:destDateString];
-     
     }
 }
 

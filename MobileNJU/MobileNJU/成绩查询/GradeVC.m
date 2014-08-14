@@ -169,7 +169,7 @@
             [ToolUtils setIsVeryfy:1];
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
             
-            if (termList.img.length>0&&termList.termList.count==0) {
+            if (termList.img.length>0) {
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }

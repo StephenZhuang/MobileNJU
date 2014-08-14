@@ -187,6 +187,9 @@
             MCourseList_Builder* courseList = (MCourseList_Builder*)[son getBuild];
             self.gradeList = courseList.courseList;
             [self.tableView reloadData];
+            if (courseList.courseList.count==0) {
+                [ToolUtils showMessage:@"教务系统无现实，请使用电脑端登录教务系统确认，谢谢！"];
+            }
         }
     } else {
         [self removeCode];
@@ -339,8 +342,7 @@
     [cell addBorder];
     MCourse* course = [self.gradeList objectAtIndex:indexPath.row];
     [cell.lessonNameLabel setText:course.name ];
-    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"专业主干课程",@"通识教育课程",@"学科基础课程",@"博雅课程",
-                         @"学位课" ,@"选修及其他",nil];
+    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修课",@"选修课",@"任选课",@"课程设计",@"毕业设计",@"学位课",nil];
     cell.lessonTypeLabel.text =  [typeList objectAtIndex:course.type];
 //    if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
 //        NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);
