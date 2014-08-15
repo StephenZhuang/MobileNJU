@@ -11,7 +11,10 @@
 @interface VerifyVC ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *brasPasswordField;
 @property (weak, nonatomic) IBOutlet UITextField *brasNameField;
+@property (weak, nonatomic) IBOutlet UITextField *codeText;
+@property (weak, nonatomic) IBOutlet UIImageView *codeView;
 
+@property (weak, nonatomic) IBOutlet UIView *veryfyCode;
 @end
 
 @implementation VerifyVC
@@ -37,18 +40,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)resignAll:(id)sender {
+    [self.brasNameField resignFirstResponder];
+    [self.brasPasswordField resignFirstResponder];
+    [self.codeText resignFirstResponder];
+}
 
 - (IBAction)verify:(id)sender {
     if (self.brasNameField.text.length==0) {
-        [ToolUtils showMessage:@"请输入教务处账号"];
+        [ToolUtils showMessage:@"请输入账号"];
         return;
     } else if (self.brasPasswordField.text.length==0)
     {
-        [ToolUtils showMessage:@"请输入教务处密码"];
+        [ToolUtils showMessage:@"请输入密码"];
+        return;
+    } else if (self.veryfyCode.isHidden==NO&&self.codeText.text.length==0)
+    {
+        [ToolUtils showMessage:@"请输入验证码"];
         return;
     }
     [self waiting:@"正在验证"];
-    [[ApisFactory getApiMVerifyUser]load:self selecter:@selector(disposMessage:) num:self.brasNameField.text pwd:self.brasPasswordField.text code:@""];
+    [[ApisFactory getApiMVerifyUser]load:self selecter:@selector(disposMessage:) num:self.brasNameField.text pwd:self.brasPasswordField.text code:self.codeText.text];
 }
 - (void)disposMessage:(Son *)son
 {
@@ -56,13 +68,17 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MVerifyUser"]) {
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
-            [ToolUtils showMessage:ret.msg];
-            if (ret.code==1) {
+            if (ret.img.length>0) {
+                [self.veryfyCode setHidden:NO];
+                [self.codeView setImage:[UIImage imageWithData:ret.img]];
+            } else if (ret.code==1) {
+                [ToolUtils showMessage:ret.msg];
                 [ToolUtils setIsVeryfy:1];
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }
     } else {
+        [self.veryfyCode setHidden:YES];
         [super disposMessage:son];
     }
 
