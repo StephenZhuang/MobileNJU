@@ -52,7 +52,7 @@
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择交易地点" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     [picker setTag:654321];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
-                                     [NSArray arrayWithObjects:@"仙林校区",@"鼓楼校区", nil],
+                                     [NSArray arrayWithObjects:@"蠡湖校区",@"其他", nil],
                                      nil]];
     
     [picker showInView:self];

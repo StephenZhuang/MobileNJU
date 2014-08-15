@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *schIdField;
 @property (weak, nonatomic) IBOutlet UISwitch *autoSwitch;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UILabel *tintLabel;
+
 @end

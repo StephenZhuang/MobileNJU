@@ -70,6 +70,7 @@
     self.passwordTextField = self.alertView.passwordField;
     self.schIdTextField.delegate = self;
     self.passwordTextField.delegate = self;
+    [self.alertView.tintLabel setHidden:NO];
     [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
     self.searchButton = self.alertView.searchBt;
@@ -340,7 +341,7 @@
     [cell addBorder];
     MCourse* course = [self.gradeList objectAtIndex:indexPath.row];
     [cell.lessonNameLabel setText:course.name];
-    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"必修课",@"任选课",@"限选课",@"集中性实践",@"校公共选修课",@"课外培养任选", nil];
+    NSArray* typeList = [NSArray arrayWithObjects:@"其他",@"通识教育课程",@"学科平台课程",@"素质教育课程",@"集中性实践环节",@"专业选修课程",@"专业核心课程",@"学位课程",@"选修课程",nil];
     cell.lessonTypeLabel.text =  [typeList objectAtIndex:course.type];
     if ([self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]!=nil) {
         NSLog(@"%@",[self.LessonChooseDic valueForKey:cell.lessonNameLabel.text]);

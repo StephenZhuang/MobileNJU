@@ -74,6 +74,7 @@
     self.passwordTextField = self.alertView.passwordField;
     self.schIdTextField.delegate = self;
     self.passwordTextField.delegate = self;
+    [self.alertView.tintLabel setHidden:NO];
     [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
 //    self.searchButton = self.alertView.searchBt;

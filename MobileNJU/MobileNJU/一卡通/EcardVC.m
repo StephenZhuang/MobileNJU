@@ -104,6 +104,7 @@
     self.passwordText = self.alertView.passwordField;
     self.schIDText.delegate = self;
     self.passwordText.delegate = self;
+    self.passwordText.placeholder = @"请输入一卡通密码";
     [self.alertView.searchBt addTarget:self action:@selector(searchResult:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(closeAlertView:) forControlEvents:UIControlEventTouchUpInside];
 }
