@@ -255,7 +255,10 @@
                 [self removeCode];
                 [self addCode:classList.img];
             } else
-            if (classList.week!=0||classList.classList.count>0) {
+            if (classList.week!=0) {
+                if (classList.classList.count==0) {
+                    [ToolUtils showMessage:@"教务处系统当前学期无显示，请用电脑端登陆或自行添加"];
+                }
                 [self.addButton setHidden:NO];
                 [self.addBack setHidden:NO];
                 self.isRe=1;

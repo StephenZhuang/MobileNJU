@@ -250,7 +250,8 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[_titlesForComponenets objectAtIndex:component] count];
+    NSArray* arr = [_titlesForComponenets objectAtIndex:component];
+    return [arr count];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component

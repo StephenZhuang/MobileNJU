@@ -33,7 +33,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xNG-qI-6Xr" customClass="UIControl">
-                                <rect key="frame" x="0.0" y="568" width="320" height="250"/>
+                                <rect key="frame" x="0.0" y="568" width="320" height="269"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gqd-L7-cHM">
@@ -82,6 +82,17 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.68627450980000004" green="0.68627450980000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1k1-vG-KaY">
+                                        <rect key="frame" x="116" y="230" width="88" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="注册账号">
+                                            <color key="titleColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goToRegist:" destination="Vd6-tb-kEi" eventType="touchUpInside" id="FUG-tE-0ov"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xt4-Qw-PWQ">
                                         <rect key="frame" x="236" y="112" width="56" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -95,39 +106,35 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="8jm-q4-8kE"/>
+                                    <constraint firstAttribute="height" constant="269" id="8jm-q4-8kE"/>
                                     <constraint firstAttribute="width" constant="320" id="brN-Rc-a91"/>
                                 </constraints>
                                 <connections>
                                     <action selector="resignAllResponders:" destination="Vd6-tb-kEi" eventType="touchDown" id="Mlh-sM-ewW"/>
                                 </connections>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1k1-vG-KaY">
-                                <rect key="frame" x="116" y="506" width="88" height="34"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kuangda" translatesAutoresizingMaskIntoConstraints="NO" id="dDe-Xm-2cm">
+                                <rect key="frame" x="175" y="525" width="137" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="注册账号">
-                                    <color key="titleColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="goToRegist:" destination="Vd6-tb-kEi" eventType="touchUpInside" id="FUG-tE-0ov"/>
-                                </connections>
-                            </button>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="137" id="EKi-aN-DHi"/>
+                                    <constraint firstAttribute="height" constant="23" id="zhS-qC-lTd"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95294117647058818" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="xNG-qI-6Xr" firstAttribute="top" secondItem="fhJ-bh-jPH" secondAttribute="bottom" id="17Y-Wp-i56"/>
                             <constraint firstItem="xNG-qI-6Xr" firstAttribute="leading" secondItem="JSk-EC-kht" secondAttribute="leading" id="1Gt-Yi-SMH"/>
                             <constraint firstItem="dS8-St-LHa" firstAttribute="leading" secondItem="JSk-EC-kht" secondAttribute="leading" id="Dgo-D3-s7f"/>
-                            <constraint firstAttribute="trailing" secondItem="1k1-vG-KaY" secondAttribute="trailing" constant="116" id="DnP-ii-GeC"/>
                             <constraint firstAttribute="trailing" secondItem="A36-I3-Ado" secondAttribute="trailing" id="J0R-jb-ObY"/>
                             <constraint firstItem="A36-I3-Ado" firstAttribute="leading" secondItem="JSk-EC-kht" secondAttribute="leading" id="Lg2-sM-MoL"/>
                             <constraint firstAttribute="trailing" secondItem="dS8-St-LHa" secondAttribute="trailing" id="VAF-ct-ssp"/>
                             <constraint firstAttribute="trailing" secondItem="xNG-qI-6Xr" secondAttribute="trailing" id="dCE-gS-ENk"/>
                             <constraint firstItem="A36-I3-Ado" firstAttribute="top" secondItem="JSk-EC-kht" secondAttribute="top" id="dWo-cg-wgG"/>
                             <constraint firstItem="fhJ-bh-jPH" firstAttribute="top" secondItem="dS8-St-LHa" secondAttribute="bottom" id="dbs-yD-iN6"/>
-                            <constraint firstItem="fhJ-bh-jPH" firstAttribute="top" secondItem="1k1-vG-KaY" secondAttribute="bottom" constant="28" id="vxv-UN-hes"/>
-                            <constraint firstItem="1k1-vG-KaY" firstAttribute="leading" secondItem="JSk-EC-kht" secondAttribute="leading" constant="116" id="wkS-Mo-sjK"/>
+                            <constraint firstItem="fhJ-bh-jPH" firstAttribute="top" secondItem="dDe-Xm-2cm" secondAttribute="bottom" constant="20" id="mtc-yH-JC5"/>
+                            <constraint firstAttribute="trailing" secondItem="dDe-Xm-2cm" secondAttribute="trailing" constant="8" id="xcd-NJ-9zE"/>
                         </constraints>
                         <connections>
                             <action selector="resignAllResponders:" destination="Vd6-tb-kEi" eventType="touchDown" id="AN5-7Y-1SL"/>
@@ -272,6 +279,10 @@
                                     <action selector="getCode:" destination="0nO-l6-z6N" eventType="touchUpInside" id="Uqz-LF-eYJ"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="RegisterTint" translatesAutoresizingMaskIntoConstraints="NO" id="eS1-PR-4FH">
+                                <rect key="frame" x="29" y="288" width="271" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95294117647058818" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -3259,6 +3270,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="09课程表-加号" width="23" height="23"/>
         <image name="09课程表-添加-背景" width="88" height="44"/>
         <image name="11图书馆续借-续借" width="63" height="36"/>
+        <image name="RegisterTint" width="271" height="51"/>
         <image name="UpAccessory" width="33" height="23"/>
         <image name="bus_table_background" width="320" height="422"/>
         <image name="buttonBar" width="320" height="50"/>
@@ -3266,6 +3278,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="check_box_unselected" width="27" height="27"/>
         <image name="goto" width="17" height="28"/>
         <image name="grayButton" width="245" height="40"/>
+        <image name="kuangda" width="137" height="23"/>
         <image name="navigation_back_n.png" width="15" height="30"/>
         <image name="purpleButton" width="245" height="40"/>
         <image name="purpleButtonhighlighted" width="245" height="40"/>
