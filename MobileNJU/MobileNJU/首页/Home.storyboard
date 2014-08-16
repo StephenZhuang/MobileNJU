@@ -272,6 +272,10 @@
                                     <action selector="getCode:" destination="0nO-l6-z6N" eventType="touchUpInside" id="Uqz-LF-eYJ"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="RegisterTint" translatesAutoresizingMaskIntoConstraints="NO" id="EQ3-5w-1eS">
+                                <rect key="frame" x="20" y="283" width="271" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95294117647058818" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -3259,6 +3263,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="09课程表-加号" width="23" height="23"/>
         <image name="09课程表-添加-背景" width="88" height="44"/>
         <image name="11图书馆续借-续借" width="63" height="36"/>
+        <image name="RegisterTint" width="542" height="102"/>
         <image name="UpAccessory" width="33" height="23"/>
         <image name="bus_table_background" width="320" height="422"/>
         <image name="buttonBar" width="320" height="50"/>
