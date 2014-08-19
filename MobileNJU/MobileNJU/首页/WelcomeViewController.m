@@ -85,7 +85,7 @@ static NSArray* buttonImages;
 - (IBAction)login:(UIButton *)sender {
     
     if ([self.usernameTextField.text isEqualToString:@""]) {
-        [ToolUtils showMessage:@"请输入您的手机号"];
+        [ToolUtils showMessage:@"请输入您的用户名"];
         return;
     }
     if ([self.passwordTextField.text isEqualToString:@""]) {
