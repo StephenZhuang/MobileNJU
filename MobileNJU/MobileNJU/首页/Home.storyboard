@@ -278,11 +278,22 @@
                                     <action selector="getCode:" destination="0nO-l6-z6N" eventType="touchUpInside" id="Uqz-LF-eYJ"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RegisterTint" translatesAutoresizingMaskIntoConstraints="NO" id="G5F-Dp-Vos">
+                                <rect key="frame" x="22" y="497" width="271" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="271" id="QPh-hx-4aJ"/>
+                                    <constraint firstAttribute="height" constant="51" id="u3A-pg-oQU"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.95294117647058818" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6gc-rV-kWm" firstAttribute="leading" secondItem="4gw-eh-29e" secondAttribute="leading" id="8Uu-mk-BSQ"/>
+                            <constraint firstAttribute="trailing" secondItem="G5F-Dp-Vos" secondAttribute="trailing" constant="27" id="LlU-nw-09O"/>
+                            <constraint firstItem="WYg-YV-Q49" firstAttribute="top" secondItem="G5F-Dp-Vos" secondAttribute="bottom" constant="20" id="U2w-88-3sE"/>
                             <constraint firstItem="WYg-YV-Q49" firstAttribute="top" secondItem="6gc-rV-kWm" secondAttribute="bottom" id="feP-hH-uxN"/>
+                            <constraint firstItem="G5F-Dp-Vos" firstAttribute="leading" secondItem="4gw-eh-29e" secondAttribute="leading" constant="22" id="g8H-3t-4jF"/>
                             <constraint firstAttribute="trailing" secondItem="6gc-rV-kWm" secondAttribute="trailing" id="lKD-xK-LtK"/>
                             <constraint firstItem="6gc-rV-kWm" firstAttribute="top" secondItem="4gw-eh-29e" secondAttribute="top" id="y7g-sg-yYT"/>
                         </constraints>
@@ -3265,6 +3276,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="09课程表-加号" width="23" height="23"/>
         <image name="09课程表-添加-背景" width="88" height="44"/>
         <image name="11图书馆续借-续借" width="63" height="36"/>
+        <image name="RegisterTint" width="271" height="51"/>
         <image name="UpAccessory" width="33" height="23"/>
         <image name="bus_table_background" width="320" height="422"/>
         <image name="buttonBar" width="320" height="50"/>
