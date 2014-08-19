@@ -33,7 +33,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xNG-qI-6Xr" customClass="UIControl">
-                                <rect key="frame" x="0.0" y="568" width="320" height="250"/>
+                                <rect key="frame" x="0.0" y="568" width="320" height="270"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gqd-L7-cHM">
@@ -54,6 +54,20 @@
                                         <state key="highlighted" backgroundImage="purpleButtonhighlighted"/>
                                         <connections>
                                             <action selector="login:" destination="Vd6-tb-kEi" eventType="touchUpInside" id="KQW-da-PDV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sp4-oO-sgH">
+                                        <rect key="frame" x="40" y="230" width="245" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="直接开始" backgroundImage="greenButton">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected" backgroundImage="greenButtonhighlited"/>
+                                        <state key="highlighted" backgroundImage="greenButtonhighlited"/>
+                                        <connections>
+                                            <action selector="tryUse:" destination="Vd6-tb-kEi" eventType="touchUpInside" id="aVc-xq-AFG"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="00登录2" translatesAutoresizingMaskIntoConstraints="NO" id="wiH-E2-jsK">
@@ -94,7 +108,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="8jm-q4-8kE"/>
+                                    <constraint firstAttribute="height" constant="270" id="8jm-q4-8kE"/>
                                     <constraint firstAttribute="width" constant="320" id="brN-Rc-a91"/>
                                 </constraints>
                                 <connections>
@@ -3284,6 +3298,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="check_box_unselected" width="27" height="27"/>
         <image name="goto" width="17" height="28"/>
         <image name="grayButton" width="490" height="80"/>
+        <image name="greenButton" width="320" height="54"/>
+        <image name="greenButtonhighlited" width="320" height="54"/>
         <image name="navigation_back_n.png" width="15" height="30"/>
         <image name="purpleButton" width="245" height="40"/>
         <image name="purpleButtonhighlighted" width="245" height="40"/>

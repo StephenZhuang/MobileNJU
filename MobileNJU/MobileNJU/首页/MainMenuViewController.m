@@ -355,41 +355,54 @@ static NSArray* descriptions;
 
 #pragma mark 各个按钮监听
 -(void)goToDetail:(id)sender{
-    [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
     MenuButton* menuButton = (MenuButton*)sender;
-    if ([menuButton.desitination isEqualToString:@"树洞"]) {
-        if ([ToolUtils getLoginId].length>0) {
-            self.unread=nil;
-            [self.treeholeCell.redCircle setHidden:YES];
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
-            TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-            
+    
+    if ([ToolUtils getLoginId].length==0) {
+        NSString* menu = menuButton.desitination;
+        if ([menu isEqualToString:@"树洞"]|| [menu isEqualToString:@"跳蚤市场"]) {
+            [self gotoLogin];
+            return;
         }
+    }
+    if ([menuButton.desitination isEqualToString:@"树洞"]) {
+        [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
+        
+        self.unread=nil;
+        [self.treeholeCell.redCircle setHidden:YES];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
+        TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
+        [self.navigationController pushViewController:vc animated:YES];
+        
     } else if ([menuButton.desitination isEqualToString:@"南呱"]) {
+        [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
+
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Nangua" bundle:nil];
         NanguaViewController *vc = [storyboard instantiateInitialViewController];
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([menuButton.desitination isEqualToString:@"跳蚤市场"])
     {
+        [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
+
         [self goToShop];
     } else if ([menuButton.desitination hasSuffix:@"html"]){
+        [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
+
         [self performSegueWithIdentifier:@"临时功能"  sender:menuButton.desitination];
 
     }
-        else {
+    else {
+        [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
             NSLog(@"%@ destination",menuButton.desitination);
         [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
     }
 }
 
 
-- (void) alertLogin
+- (void) gotoLogin
 {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您必须登录才能使用该功能" delegate:self cancelButtonTitle:@"继续使用" otherButtonTitles:@"登录", nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您必须登录才能使用该功能" delegate:self.rdv_tabBarController cancelButtonTitle:@"继续使用" otherButtonTitles:@"登录", nil];
+//    alert.delegate = self;
     [alert show];
-    alert.delegate = self;
 }
 
 
@@ -398,11 +411,9 @@ static NSArray* descriptions;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex==0) {
-        return;
-    } else {
-        [self.rdv_tabBarController dismissViewControllerAnimated:YES completion:nil];
-    }
+//    if (buttonIndex==1) {
+//        [self.rdv_tabBarController dismissViewControllerAnimated:YES completion:nil];
+//    }
 }
 
 - (void)goToShop

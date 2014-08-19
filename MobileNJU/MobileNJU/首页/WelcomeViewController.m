@@ -215,16 +215,16 @@ static NSArray* buttonImages;
     }
 
 }
-
-- (void)tryUse
-{
+- (IBAction)tryUse:(id)sender {
     [ToolUtils setVerify:@""];
     [ToolUtils setLoginId:@""];
     NSArray *array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],@"device=IOS",nil];
     [Frame setAutoAddParams:array];
     [ToolUtils setIsLogin:NO];
     [self loadMain];
+
 }
+
 - (void)getUnread
 {
     [[ApisFactory getApiMUnreadModule]load:self selecter:@selector(disposMessage:)];
@@ -431,8 +431,9 @@ static NSArray* buttonImages;
 #pragma mark -RDVTabbarcontrollerdelegate
 - (BOOL)tabBarController:(RDVTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if ([ToolUtils getLoginId].length==0) {
+    if ([ToolUtils getLoginId].length&&[tabBarController.viewControllers indexOfObject:viewController]!=0) {
         [self alertLogin];
+        return NO;
     } else if ([tabBarController.viewControllers indexOfObject:viewController]==3) {
         [viewController.rdv_tabBarController setTabBarHidden:YES];
 //        [tabBarController presentViewController:viewController animated:YES completion:^{
