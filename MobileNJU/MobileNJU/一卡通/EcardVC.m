@@ -55,8 +55,11 @@
     self.isRe=0;
     page=0;
     [self.maskView setHidden:YES];
-    [self.alertView setHidden:!([ToolUtils getEcardId]==nil)];
-    [self.maskView setHidden:!([ToolUtils getEcardId]==nil)];
+    if ([ToolUtils getEcardId].length==0) {
+        [self.alertView setHidden:NO];
+        [self.maskView setHidden:NO];
+    }
+   
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backToMain:)];
     [self.ecardTitle addGestureRecognizer:singleTap];
     [self.schIDText setText:[ToolUtils getEcardId]==nil?@"":[ToolUtils getEcardId]];
@@ -171,6 +174,9 @@
                 {
                     [ToolUtils setEcardId:self.schIDText.text];
                     [ToolUtils setEcardPassword:self.passwordText.text];
+                } else {
+                    [ToolUtils setEcardId:@""];
+                    [ToolUtils setEcardPassword:@""];
                 }
                 [ToolUtils setIsVeryfy:1];
                 [self searchDetail:nil];

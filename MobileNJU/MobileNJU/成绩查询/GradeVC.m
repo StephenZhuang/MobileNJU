@@ -28,6 +28,7 @@
 //@property (nonatomic,strong) UIImageView* imgView;
 @property (nonatomic)CGRect frame;
 @property (nonatomic)BOOL hasLogin;
+@property (nonatomic,strong)NSString* lastUser;
 @end
 
 @implementation GradeVC
@@ -117,7 +118,7 @@
 }
 
 - (IBAction)search:(id)sender {
-    if (sender!=nil) {
+    if (sender!=nil&&self.lastUser!=nil&& ![self.lastUser isEqualToString:self.schIdTextField.text]) {
         self.isRe=1;
     }
     [self.schIdTextField resignFirstResponder];
@@ -172,8 +173,10 @@
 //                [self removeCode];
 //                [self addCode:termList.img];
             } else {
+                
                 self.hasLogin = YES;
-                self.isRe=1;
+//                self.isRe=1;
+                self.lastUser = self.schIdTextField.text;
                 self.password  = self.passwordTextField.text;
                 self.account = self.schIdTextField.text;
                 if (self.autoSwitch.isOn) {

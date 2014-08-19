@@ -244,7 +244,6 @@
             if (classList.week!=0||classList.classList.count!=0) {
                 [self.addButton setHidden:NO];
                 [self.addBack setHidden:NO];
-                self.isRe=1;
                 [self closeAlert];
                 self.lastUserId = self.schIdField.text;
                 if (self.autoSwitch.isOn) {

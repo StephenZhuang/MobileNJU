@@ -53,7 +53,7 @@
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择交易地点" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     [picker setTag:654321];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
-                                     [NSArray arrayWithObjects:@"孝陵卫",@"其他", nil],
+                                     [NSArray arrayWithObjects:@"滨江",@"其他", nil],
                                      nil]];
     [picker showInView:self];
     
@@ -127,7 +127,7 @@
         label = self.phoneLabel;
     }
     [UIView animateWithDuration:0.2f animations:^{
-        [label setTextColor:[UIColor purpleColor]];
+        [label setTextColor:[UIColor colorWithRed:0 green:147/255.0 blue:242/255.0 alpha:1]];
         [label setFont:[UIFont fontWithName:@"Helvetica" size:10.0]];
         label.transform = CGAffineTransformMakeTranslation(0, -10);
     }];
