@@ -431,7 +431,7 @@ static NSArray* buttonImages;
 #pragma mark -RDVTabbarcontrollerdelegate
 - (BOOL)tabBarController:(RDVTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if ([ToolUtils getLoginId].length&&[tabBarController.viewControllers indexOfObject:viewController]!=0) {
+    if ([ToolUtils getLoginId].length==0&&[tabBarController.viewControllers indexOfObject:viewController]!=0) {
         [self alertLogin];
         return NO;
     } else if ([tabBarController.viewControllers indexOfObject:viewController]==3) {
@@ -450,10 +450,8 @@ static NSArray* buttonImages;
         RegisterVC* next = (RegisterVC*)segue.destinationViewController;
         if (sender==self.forgetBt) {
             next.myTitle = @"忘记密码";
-
         } else {
             next.myTitle = @"注册";
-
         }
         next.myDelegate = self;
     }
