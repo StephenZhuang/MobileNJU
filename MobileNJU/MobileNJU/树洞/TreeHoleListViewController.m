@@ -417,7 +417,7 @@
         {
             FrontiaShare *share = [Frontia getShare];
 //            [share registerSinaweiboAppId:@"306527345"];
-            [share registerWeixinAppId:@"wxea47194dd88f89c9"];
+            [share registerWeixinAppId:@"wxf4c6fb8fd85fa6b1"];
             
             //授权取消回调函数
             FrontiaShareCancelCallback onCancel = ^(){
@@ -449,7 +449,7 @@
             content.imageObj = [ToolUtils getImageUrlWtihString:topic.img].absoluteString;
             NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
             [share registerQQAppId:@"100358052" enableSSO:YES];
-            [share registerWeixinAppId:@"wxea47194dd88f89c9"];
+            [share registerWeixinAppId:@"wxf4c6fb8fd85fa6b1"];
             [share registerSinaweiboAppId:@"306527345"];
 
             [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
