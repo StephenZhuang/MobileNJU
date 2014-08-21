@@ -105,6 +105,8 @@
     self.searchButton = self.alertView.searchBt;
     [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
+    [self.alertView.tintLabel setHidden:NO];
+
 }
 
 //
@@ -241,7 +243,7 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MSchedule"]) {
                        MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
-            if (classList.week!=0||classList.classList.count!=0) {
+            if (classList.classList.count!=0) {
                 [self.addButton setHidden:NO];
                 [self.addBack setHidden:NO];
                 self.isRe=1;
@@ -261,7 +263,28 @@
                 self.lessonList = classList.classList;
                 [self loadSchedule];
                 [ToolUtils setIsVeryfy:1];
-            } else {
+            } else if (classList.classList.count==0){
+                [ToolUtils showMessage:@"教务处没有本学期课表，您可以点击“＋”号手动添加"];
+                [self.addButton setHidden:NO];
+                [self.addBack setHidden:NO];
+                self.isRe=1;
+                [self closeAlert];
+                self.lastUserId = self.schIdField.text;
+                if (self.autoSwitch.isOn) {
+                    [ToolUtils setScheduleAuto:YES];
+                    [ToolUtils setJWPassword:self.passwordField.text];
+                    [ToolUtils setJWId:self.schIdField.text];
+                } else{
+                    [ToolUtils setScheduleAuto:NO];
+                    [ToolUtils setJWPassword:self.passwordField.text];
+                    [ToolUtils setJWId:self.schIdField.text];
+                }
+                [ToolUtils setCurrentWeek:classList.week];
+                [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",classList.week]];
+                self.lessonList = classList.classList;
+                [self loadSchedule];
+                [ToolUtils setIsVeryfy:1];
+
 //                [self removeCode];
 //                [self addCode:classList.img];
            }

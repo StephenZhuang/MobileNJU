@@ -73,6 +73,7 @@
     [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
     self.searchButton = self.alertView.searchBt;
+    [self.alertView.tintLabel setHidden:NO];
 }
 
 //
@@ -190,6 +191,10 @@
             MCourseList_Builder* courseList = (MCourseList_Builder*)[son getBuild];
             self.gradeList = courseList.courseList;
             [self.tableView reloadData];
+            if (courseList.courseList.count==0) {
+                [ToolUtils showMessage:@"教务系统无显示，请使用电脑端登录教务系统确认，谢谢！"];
+            }
+
         }
     } else {
         [super disposMessage:son];

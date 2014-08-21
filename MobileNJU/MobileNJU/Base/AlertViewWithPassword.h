@@ -10,6 +10,7 @@
 @interface AlertViewWithPassword : UIView
 @property (weak, nonatomic) IBOutlet UIButton *closeBt;
 @property (weak, nonatomic) IBOutlet UIButton *searchBt;
+@property (weak, nonatomic) IBOutlet UILabel *tintLabel;
 @property (weak, nonatomic) IBOutlet UITextField *schIdField;
 @property (weak, nonatomic) IBOutlet UISwitch *autoSwitch;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
