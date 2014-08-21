@@ -24,7 +24,7 @@
 #import "loginDelegate.h"
 #import <Frontia/Frontia.h>
 
-@interface WelcomeViewController ()<UITextFieldDelegate,RDVTabBarControllerDelegate,loginDelegate>
+@interface WelcomeViewController ()<UITextFieldDelegate,RDVTabBarControllerDelegate,loginDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 
@@ -85,7 +85,7 @@ static NSArray* buttonImages;
 - (IBAction)login:(UIButton *)sender {
     
     if ([self.usernameTextField.text isEqualToString:@""]) {
-        [ToolUtils showMessage:@"请输入您的手机号"];
+        [ToolUtils showMessage:@"请输入您的用户名"];
         return;
     }
     if ([self.passwordTextField.text isEqualToString:@""]) {
@@ -215,6 +215,16 @@ static NSArray* buttonImages;
     }
 
 }
+- (IBAction)tryUse:(id)sender {
+    [ToolUtils setVerify:@""];
+    [ToolUtils setLoginId:@""];
+    NSArray *array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],@"device=IOS",nil];
+    [Frame setAutoAddParams:array];
+    [ToolUtils setIsLogin:NO];
+    [self loadMain];
+
+}
+
 - (void)getUnread
 {
     [[ApisFactory getApiMUnreadModule]load:self selecter:@selector(disposMessage:)];
@@ -225,7 +235,9 @@ static NSArray* buttonImages;
 {
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     MainMenuViewController* mainMenuVC = (MainMenuViewController*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"home"]; //test2为viewcontroller的StoryboardId
-    mainMenuVC.unread = self.unread;
+    if (self.unread) {
+        mainMenuVC.unread = self.unread;
+    }
     mainMenuVC.offline = self.offline;
     mainMenuVC.imageArrays = self.imageArrays;
     mainMenuVC.imageArraysSelected = self.imageArraysSelected;
@@ -396,10 +408,33 @@ static NSArray* buttonImages;
     }];
 }
 
+- (void) alertLogin
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您必须登录才能使用该功能" delegate:self cancelButtonTitle:@"继续使用" otherButtonTitles:@"登录", nil];
+    [alert show];
+    alert.delegate = self;
+}
+
+
+
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        return;
+    } else {
+        [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 #pragma mark -RDVTabbarcontrollerdelegate
 - (BOOL)tabBarController:(RDVTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if ([tabBarController.viewControllers indexOfObject:viewController]==3) {
+    if ([ToolUtils getLoginId].length==0&&[tabBarController.viewControllers indexOfObject:viewController]!=0) {
+        [self alertLogin];
+        return NO;
+    } else if ([tabBarController.viewControllers indexOfObject:viewController]==3) {
         [viewController.rdv_tabBarController setTabBarHidden:YES];
 //        [tabBarController presentViewController:viewController animated:YES completion:^{
 //            
@@ -415,10 +450,8 @@ static NSArray* buttonImages;
         RegisterVC* next = (RegisterVC*)segue.destinationViewController;
         if (sender==self.forgetBt) {
             next.myTitle = @"忘记密码";
-
         } else {
             next.myTitle = @"注册";
-
         }
         next.myDelegate = self;
     }
