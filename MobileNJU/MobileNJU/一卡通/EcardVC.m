@@ -53,8 +53,9 @@
 {
     [super viewDidLoad];
     [self initAlert];
+    self.helper = [[LoginHelper alloc]init];
     self.isRe=0;
-    page=0;
+    page=1;
     [self.maskView setHidden:YES];
     [self.alertView setHidden:!([ToolUtils getEcardId]==nil)];
     [self.maskView setHidden:!([ToolUtils getEcardId]==nil)];
@@ -78,8 +79,17 @@
     self.startDate = searchStartDate;
     if (self.alertView.isHidden) {
         [self waiting:@"正在读取"];
-        [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
-
+        NSString* result = [self.helper login:self.schIDText.text password:self.passwordText.text];
+//        NSString *encodedValue = [result stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        if (result)
+        {
+            [self analyse:result];
+            
+//            [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:encodedValue account:@"11" password:@"11" isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
+        } else {
+            [ToolUtils showMessage:@"用户名或密码输入错误"];
+        }
+      
     } else {
 //        [self getCode];
     }
@@ -87,9 +97,84 @@
 }
 
 
+- (void) analyse :(NSString*)content
+{
+    [self waiting:@"正在查找"];
+    NSRange range;
 
+    range = [content rangeOfString:@"姓名</td>"];
+    range.location=range.location+35;
+    NSString* name = [content substringWithRange:range];
+    name = [[name componentsSeparatedByString:@"</t"]firstObject];
+//    NSLog(@"%@",name);
+    
+    range = [content rangeOfString:@"余额</td>"];
+    range.location = range.location+35;
+    NSString* remain = [content substringWithRange:range];
+//    remain = [[remain componentsSeparatedByString:@"元</t"]firstObject];
+    NSLog(@"%@",remain);
+    remain =  [[remain componentsSeparatedByString:@" 元"] firstObject] ;
+    [self closeAlertView:nil];
+    [self.tableView reloadData];
+    self.isRe=1;
+//    MCard* card = [cardList.cardList firstObject];
+    [self.nameLabel setText:name];
+    [self.remainLabel setText:remain];
+    [self.unitLabel setHidden:NO];
+    [self.remainNameLabel setHidden:NO];
+    [self.tableView reloadData];
+    if (self.autoSearch.isOn)
+    {
+        [ToolUtils setEcardId:self.schIDText.text];
+        [ToolUtils setEcardPassword:self.passwordText.text];
+    }
+    [ToolUtils setIsVeryfy:1];
+    [self searchDetail:nil];
+//    [infos addObject:cardId];
+//    [settingDefaults saveValue:@"cardId" value:cardId];
+//    content
+    
+    
+//    <td class="elefttd">姓名</td>
+//    return card;
+}
 
-
+//- (void) getHistory :(NSString*) content;
+//{
+//    NSString* tag = @"<td align=\"center\">";
+//    NSString* endTag = @"</td>";
+//    for (int i = 1 ; i <= 15 ; i++)
+//    {
+//        NSString* spilitTag = [NSString stringWithFormat:@"<td align=\"center\">%d</td>",i];
+//        content = [[content componentsSeparatedByString:spilitTag] objectAtIndex:1];
+//        NSString* thisRow = [[content componentsSeparatedByString:@"</tr>"] firstObject];
+//        NSArray* arryWithSuffic = [thisRow componentsSeparatedByString:tag];
+//        NSMutableArray* infoArr = [[NSMutableArray alloc]init];
+//        MCard_Builder* card = [[MCard_Builder alloc]init];
+//        for ( int i = 0 ; i < 6; i ++)
+//        {
+//            NSString* str = [arryWithSuffic objectAtIndex:i];
+//            NSString* contentStr = [[str componentsSeparatedByString:endTag]firstObject];
+//            if (i == 0)
+//            {
+//                card.time = contentStr;
+//            } else if ( i ==3)
+//            {
+//                card.cost = contentStr;
+//            } else if (i==4)
+//            {
+//                card.name = contentStr;
+//            } else if (i==2)
+//            {
+//                card.total = contentStr;
+//            }
+//        }
+//        [infoArr addObject:card];
+//    }
+//    [self.tableView reloadData];
+//}
+//
+//
 - (void)initAlert
 {
     self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
@@ -210,6 +295,10 @@
     }
 }
 
+- (void)getHistory
+{
+    
+}
 
 - (void)loadData
 {
@@ -232,13 +321,13 @@
         [self showAlertView:nil];
     } else {
         if (sender!=nil) {
-            page=0;
+            page=1;
             self.detaiList = [[NSArray alloc]init];
         }
         [self waiting:@"正在查询"];
-        [[[[ApisFactory getApiMCardHistory]setPage:page pageCount:10] load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate account:self.schIDText.text password:self.passwordText.text]setShowLoading:NO];
+        [[[[ApisFactory getApiMCardHistory]setPage:page pageCount:10] load:self selecter:@selector(disposeMessage:) begin:[self.helper getHistory:page] end:self.endDate account:self.schIDText.text password:@",,"]setShowLoading:NO];
 //        [self load:self selecter:@selector(disposeMessage:) begin:self.startDate end:self.endDate];
- 
+
     }
 }
      
@@ -335,11 +424,22 @@
             [ToolUtils setEcardPassword:self.passwordText.text];
         }
         [self waiting:@"正在查询"];
+        NSString* result = [self.helper login:self.schIDText.text password:self.passwordText.text];
+        NSLog(@"%@",result);
+        if (result)
+        {
+            [self.dataArray removeAllObjects];
+            page=1;
+//            [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:result account:@"11" password:@"11" isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
+            [self analyse:result];
+            [self.schIDText resignFirstResponder];
+            self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
+        } else {
+            [ToolUtils showMessage:@"用户名或密码输入错误"];
+        }
         [self.passwordText resignFirstResponder];
 //        [self.confirmCodeText resignFirstResponder];
-        [self.schIDText resignFirstResponder];
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
-        [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
+        //        [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
 
     }
 }
@@ -385,9 +485,9 @@
     static NSString *CellIdentifier = @"ecard";
     EcardCell *cell = (EcardCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     MCard* card = [self.detaiList objectAtIndex:indexPath.row];
-    [cell.locationLabel setText:card.name];
+    [cell.locationLabel setText:card.total];
     [cell.timeLabel setText:card.time];
-    [cell.remainLabel setText:card.total];
+    [cell.remainLabel setText:card.name];
     [cell.spendLabel setText:card.cost];
     return cell;
 }
@@ -403,7 +503,6 @@
     // 使用日期格式器格式化日期、时间
     NSString *destDateString = [dateFormatterwithoutYear stringFromDate:pickerView.date];
     [self.selectedButton setTitle:destDateString forState:UIControlStateNormal];
-  
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY/MM/dd"];
     if (self.selectedButton==self.startButton) {
@@ -444,7 +543,7 @@
         if (timeBetween<0) {
             self.startDate  = self.endDate;
             [self.startButton setTitle:self.endButton.titleLabel.text forState:UIControlStateNormal];
-            
+
         }
     }
 }

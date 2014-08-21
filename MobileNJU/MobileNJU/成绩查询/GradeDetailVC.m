@@ -187,6 +187,9 @@
             MCourseList_Builder* courseList = (MCourseList_Builder*)[son getBuild];
             self.gradeList = courseList.courseList;
             [self.tableView reloadData];
+            if (courseList.courseList.count==0) {
+                [ToolUtils showMessage:@"教务处无课程显示，请使用电脑端登录教务处查看，谢谢！"];
+            }
         }
     } else {
         [self removeCode];

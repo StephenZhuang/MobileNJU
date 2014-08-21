@@ -516,6 +516,7 @@
 		7D947C3A1989EAFE0000EB4E /* ZsndSystem.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D947C2F1989EAFE0000EB4E /* ZsndSystem.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7D947C3B1989EAFE0000EB4E /* ZsndTreehole.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D947C311989EAFE0000EB4E /* ZsndTreehole.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7D947C3C1989EAFE0000EB4E /* ZsndUser.pb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D947C331989EAFE0000EB4E /* ZsndUser.pb.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7D94BCA1199E0530005970BF /* LoginHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D94BCA0199E0530005970BF /* LoginHelper.m */; };
 		7D9A6BD61988CDC100185A16 /* SecondPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9A6BD51988CDC100185A16 /* SecondPage.m */; };
 		7D9CF9F61990B358005FEDDE /* MarketDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D9CF9F51990B358005FEDDE /* MarketDetailCell.m */; };
 		7D9CF9F81990D707005FEDDE /* AlertViewCode.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D9CF9F71990D707005FEDDE /* AlertViewCode.xib */; };
@@ -1438,6 +1439,8 @@
 		7D947C311989EAFE0000EB4E /* ZsndTreehole.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZsndTreehole.pb.m; sourceTree = "<group>"; };
 		7D947C321989EAFE0000EB4E /* ZsndUser.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZsndUser.pb.h; sourceTree = "<group>"; };
 		7D947C331989EAFE0000EB4E /* ZsndUser.pb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZsndUser.pb.m; sourceTree = "<group>"; };
+		7D94BC9F199E0530005970BF /* LoginHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginHelper.h; sourceTree = "<group>"; };
+		7D94BCA0199E0530005970BF /* LoginHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginHelper.m; sourceTree = "<group>"; };
 		7D9A6BD31988BEEB00185A16 /* PageDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PageDelegate.h; path = "跳蚤市场/PageDelegate.h"; sourceTree = "<group>"; };
 		7D9A6BD41988CDC100185A16 /* SecondPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecondPage.h; path = "跳蚤市场/SecondPage.h"; sourceTree = "<group>"; };
 		7D9A6BD51988CDC100185A16 /* SecondPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecondPage.m; path = "跳蚤市场/SecondPage.m"; sourceTree = "<group>"; };
@@ -1857,6 +1860,8 @@
 				77E0763A194044470098BA09 /* EcardCell.m */,
 				77E0763B194044470098BA09 /* EcardVC.h */,
 				77E0763C194044470098BA09 /* EcardVC.m */,
+				7D94BC9F199E0530005970BF /* LoginHelper.h */,
+				7D94BCA0199E0530005970BF /* LoginHelper.m */,
 			);
 			path = "一卡通";
 			sourceTree = "<group>";
@@ -3867,6 +3872,7 @@
 				77E075C6194043CD0098BA09 /* JSONKit.m in Sources */,
 				774D4BBE19920A9200D675D7 /* ApiMTagTreeHole.m in Sources */,
 				77E0760E1940441F0098BA09 /* ClassroomDetailVC.m in Sources */,
+				7D94BCA1199E0530005970BF /* LoginHelper.m in Sources */,
 				774D4B981991B9A800D675D7 /* GKCropBorderView.m in Sources */,
 				7DFC44F0198A4B250018BCB9 /* ApiMTreeHoleNews.m in Sources */,
 				7DFC44E5198A4B250018BCB9 /* ApiMSchedule.m in Sources */,
@@ -4011,7 +4017,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "05c926a9-d9e8-41f9-a22e-dc98ef9c9fdf";
+				PROVISIONING_PROFILE = "90bf0a96-ce07-4266-a055-5fad09782035";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4044,7 +4050,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PROVISIONING_PROFILE = "05c926a9-d9e8-41f9-a22e-dc98ef9c9fdf";
+				PROVISIONING_PROFILE = "90bf0a96-ce07-4266-a055-5fad09782035";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4075,7 +4081,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3140BB16-1099-40BE-B7AE-0D02F6B4CC36";
+				PROVISIONING_PROFILE = "90bf0a96-ce07-4266-a055-5fad09782035";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -4107,7 +4113,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3140BB16-1099-40BE-B7AE-0D02F6B4CC36";
+				PROVISIONING_PROFILE = "90bf0a96-ce07-4266-a055-5fad09782035";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

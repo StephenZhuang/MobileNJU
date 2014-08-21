@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RefreshTableViewController.h"
+#import "LoginHelper.h"
 @interface EcardVC : RefreshTableViewController
-
+@property (nonatomic,strong)LoginHelper* helper;
 @end
