@@ -324,4 +324,13 @@
     [tabBar setItems:tabBarItems];
 }
 
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==1) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } 
+}
+
+
 @end
