@@ -58,10 +58,8 @@
         if (i == [_dataSource defaultSelectedSegment]) {
             [button setSelected:YES];
             [button setBackgroundColor:[UIColor whiteColor]];
-           
         }
-        
-        
+
         [self addSubview:button];
         if (i != 0) {
             [self drawLine:i * buttonWidth end:self.frame.size.height];
