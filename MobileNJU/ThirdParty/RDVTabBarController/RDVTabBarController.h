@@ -26,7 +26,7 @@
 
 @protocol RDVTabBarControllerDelegate;
 
-@interface RDVTabBarController : UIViewController <RDVTabBarDelegate>
+@interface RDVTabBarController : UIViewController <RDVTabBarDelegate,UIAlertViewDelegate>
 
 /**
  * The tab bar controller’s delegate object.
