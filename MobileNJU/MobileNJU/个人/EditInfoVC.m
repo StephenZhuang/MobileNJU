@@ -191,8 +191,8 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if (textField==self.nickNameField) {
-        if (range.location >=10)
-            return NO; // return NO to not change text
+        if (range.location >=16)
+            return NO; // reurn NO to not change text
         return YES;
     }
     return YES;

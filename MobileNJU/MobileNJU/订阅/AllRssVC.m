@@ -28,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"全部订阅"];
+    [self setTitle:@"全部兴趣"];
     self.allRss = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
 }
