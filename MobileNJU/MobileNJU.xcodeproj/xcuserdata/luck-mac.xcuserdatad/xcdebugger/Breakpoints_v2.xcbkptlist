@@ -93,8 +93,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "553"
             endingLineNumber = "553"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
+            landmarkName = "-initNewScroller"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -763,7 +763,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "183"
             endingLineNumber = "183"
-            landmarkName = "-loadTableData"
+            landmarkName = "-loadImages"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -843,7 +843,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "540"
             endingLineNumber = "540"
-            landmarkName = "-prepareForNews"
+            landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -859,7 +859,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "547"
             endingLineNumber = "547"
-            landmarkName = "-prepareForNews"
+            landmarkName = "-pageChange:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -875,7 +875,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "548"
             endingLineNumber = "548"
-            landmarkName = "-prepareForNews"
+            landmarkName = "-pageChange:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -891,7 +891,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "549"
             endingLineNumber = "549"
-            landmarkName = "-prepareForNews"
+            landmarkName = "-pageChange:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -907,7 +907,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "550"
             endingLineNumber = "550"
-            landmarkName = "-prepareForNews"
+            landmarkName = "-pageChange:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -2853,8 +2853,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "220"
             endingLineNumber = "220"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
+            landmarkName = "-prepareForSegue:sender:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5053,7 +5053,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "513"
             endingLineNumber = "513"
-            landmarkName = "-pageChange:"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5069,7 +5069,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "514"
             endingLineNumber = "514"
-            landmarkName = "-pageChange:"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5085,7 +5085,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "515"
             endingLineNumber = "515"
-            landmarkName = "-pageChange:"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5101,7 +5101,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "516"
             endingLineNumber = "516"
-            landmarkName = "-pageChange:"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5117,8 +5117,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "517"
             endingLineNumber = "517"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
+            landmarkName = "-changeSectionHeader:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5133,7 +5133,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "424"
             endingLineNumber = "424"
-            landmarkName = "-reloadNews:"
+            landmarkName = "-goToShop"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5149,7 +5149,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "519"
             endingLineNumber = "519"
-            landmarkName = "-initNewScroller"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5165,7 +5165,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "521"
             endingLineNumber = "521"
-            landmarkName = "-initNewScroller"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5245,7 +5245,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "520"
             endingLineNumber = "520"
-            landmarkName = "-initNewScroller"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5261,7 +5261,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "500"
             endingLineNumber = "500"
-            landmarkName = "-scrollViewDidScroll:"
+            landmarkName = "-newImage"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5309,23 +5309,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "395"
             endingLineNumber = "395"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MobileNJU/&#x9996;&#x9875;/MainMenuViewController.m"
-            timestampString = "429158500.79807"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
-            landmarkName = "-getEmptyUIImage"
+            landmarkName = "-goToDetail:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5341,7 +5325,23 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "397"
             endingLineNumber = "397"
-            landmarkName = "-getEmptyUIImage"
+            landmarkName = "-goToDetail:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x9996;&#x9875;/MainMenuViewController.m"
+            timestampString = "429158500.79807"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
+            landmarkName = "-goToDetail:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5357,8 +5357,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "399"
             endingLineNumber = "399"
-            landmarkName = "-getEmptyUIImage"
-            landmarkType = "5">
+            landmarkName = "@implementation MainMenuViewController"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -5403,8 +5403,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "405"
             endingLineNumber = "405"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
+            landmarkName = "-gotoLogin"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5419,8 +5419,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "406"
             endingLineNumber = "406"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
+            landmarkName = "-gotoLogin"
+            landmarkType = "5">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -6775,7 +6775,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "397"
             endingLineNumber = "397"
-            landmarkName = "-getEmptyUIImage"
+            landmarkName = "-goToDetail:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -6837,8 +6837,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "408"
             endingLineNumber = "408"
-            landmarkName = "-reloadNews:"
-            landmarkType = "5">
+            landmarkName = "@implementation MainMenuViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6853,8 +6853,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "409"
             endingLineNumber = "409"
-            landmarkName = "-reloadNews:"
-            landmarkType = "5">
+            landmarkName = "@implementation MainMenuViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7029,7 +7029,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "318"
             endingLineNumber = "318"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7347,7 +7347,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "414"
             endingLineNumber = "414"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-alertLogin"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7363,7 +7363,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "415"
             endingLineNumber = "415"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-alertLogin"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7379,8 +7379,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "418"
             endingLineNumber = "418"
-            landmarkName = "-prepareForSegue:sender:"
-            landmarkType = "5">
+            landmarkName = "@implementation WelcomeViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7395,7 +7395,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "424"
             endingLineNumber = "424"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7411,7 +7411,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "425"
             endingLineNumber = "425"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7427,7 +7427,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "428"
             endingLineNumber = "428"
-            landmarkName = "-login"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7443,7 +7443,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "224"
             endingLineNumber = "224"
-            landmarkName = "-loadMain"
+            landmarkName = "-tryUse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7459,7 +7459,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
             endingLineNumber = "226"
-            landmarkName = "-loadMain"
+            landmarkName = "-tryUse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7475,8 +7475,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "426"
             endingLineNumber = "426"
-            landmarkName = "@implementation WelcomeViewController"
-            landmarkType = "3">
+            landmarkName = "-alertView:clickedButtonAtIndex:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7681,7 +7681,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "223"
             endingLineNumber = "223"
-            landmarkName = "-loadMain"
+            landmarkName = "-tryUse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
