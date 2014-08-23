@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
     [self setTitle:@"校车"];
-    self.segmentArray = [[NSArray alloc]initWithObjects:@"江浦",@"莫愁", nil];
+    self.segmentArray = [[NSArray alloc]initWithObjects:@"滨江",@"花旗营", nil];
     [self.segmentView setBackgroundColor:[UIColor clearColor]];
     
     // Do any additional setup after loading the view.
