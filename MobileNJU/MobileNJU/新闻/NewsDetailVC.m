@@ -55,7 +55,7 @@
 //    [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
     FrontiaShare *share = [Frontia getShare];
     [share registerQQAppId:@"100358052" enableSSO:YES];
-    [share registerWeixinAppId:@"wx5ee7e85b6c865fd2"];
+    [share registerWeixinAppId:@"wx8ede9b487850c10a"];
 //    [share registerSinaweiboAppId:@"306527345"];
     
     [share showShareMenuWithShareContent:content displayPlatforms:sharePlatforms supportedInterfaceOrientations:UIInterfaceOrientationMaskAll isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];

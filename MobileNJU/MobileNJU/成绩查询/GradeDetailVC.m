@@ -188,7 +188,7 @@
             self.gradeList = courseList.courseList;
             [self.tableView reloadData];
             if (courseList.courseList.count==0) {
-                [ToolUtils showMessage:@"教务系统无现实，请使用电脑端登录教务系统确认，谢谢！"];
+                [ToolUtils showMessage:@"教务系统无显示，请使用电脑端登录教务系统确认，谢谢！"];
             }
         }
     } else {

@@ -417,7 +417,7 @@
         {
             FrontiaShare *share = [Frontia getShare];
 //            [share registerSinaweiboAppId:@"306527345"];
-            [share registerWeixinAppId:@"wx277782943f4c36be"];
+            [share registerWeixinAppId:@"wx8ede9b487850c10a"];
             
             //授权取消回调函数
             FrontiaShareCancelCallback onCancel = ^(){
@@ -450,7 +450,7 @@
             
             NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
             [share registerQQAppId:@"100358052" enableSSO:YES];
-            [share registerWeixinAppId:@"wx5ee7e85b6c865fd2"];
+            [share registerWeixinAppId:@"wx8ede9b487850c10a"];
 //            [share registerSinaweiboAppId:@"306527345"];
 
             [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];

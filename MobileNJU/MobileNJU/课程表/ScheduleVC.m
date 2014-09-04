@@ -276,8 +276,27 @@
                 [self removeCode];
                 [self addCode:classList.img];
             } else {
-                [ToolUtils showMessage:@"教务处没有该学期课表"];
+                [ToolUtils showMessage:@"教务处没有该学期课表,请登陆教务处查看或手动添加课程"];
+                [self.addButton setHidden:NO];
+                [self.addBack setHidden:NO];
+                self.isRe=1;
                 [self cancelAlert:nil];
+                self.lastUserId = self.schIdField.text;
+                if (self.autoSwitch.isOn) {
+                    [ToolUtils setScheduleAuto:YES];
+                    [ToolUtils setJWPassword:self.passwordField.text];
+                    [ToolUtils setJWId:self.schIdField.text];
+                } else{
+                    [ToolUtils setScheduleAuto:NO];
+                    [ToolUtils setJWPassword:self.passwordField.text];
+                    [ToolUtils setJWId:self.schIdField.text];
+                }
+                [ToolUtils setCurrentWeek:classList.week];
+                [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",classList.week]];
+                self.lessonList = classList.classList;
+                [self loadSchedule];
+                [ToolUtils setIsVeryfy:1];
+                
             }
             
         } else if ([[son getMethod]isEqualToString:@"MScheduleAuto"]){
