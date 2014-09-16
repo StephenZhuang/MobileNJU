@@ -105,7 +105,7 @@
     ProcedureDetailVC* nextVC = (ProcedureDetailVC*)[segue destinationViewController];
     MContact* contact = [self.procedureContents objectAtIndex:((NSIndexPath*)sender).row];
     nextVC.title = contact.name;
-    nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",contact.desc]];
+    nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",contact.desc]];
 }
 
 /*

@@ -44,7 +44,13 @@
                                           fromDate:date];
     //    NSInteger week = [compos week]; // 今年的第几周
     NSInteger weekday = [compos weekday]; // 星期几（注意，周日是“1”，周一是“2”。。。。）
-    self.currentWeek.transform = CGAffineTransformMakeTranslation(((weekday-2)%7)*WIDTH*2, 0);
+    if (weekday>1) {
+        self.currentWeek.transform = CGAffineTransformMakeTranslation(((weekday-2)%7)*WIDTH*2, 0);
+
+    } else {
+        self.currentWeek.transform = CGAffineTransformMakeTranslation(6*WIDTH*2, 0);
+
+    }
     NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
     // 设置日期格式
     
@@ -158,23 +164,25 @@
                 [touchButton setTitle:@"" forState:UIControlStateNormal];
                 [touchButton setBackgroundColor:[UIColor clearColor]];
                 touchButton.backgroundColor = [button getColor];
-                CGRect nameFrame = CGRectMake(3, 7, WIDTH-6, HEIGHT*lesson.length-22);
+                CGRect nameFrame = CGRectMake(3, 0, WIDTH-6, HEIGHT*lesson.length-22);
                 VerticallyAlignedLabel *lessonNameLabel = [[VerticallyAlignedLabel alloc]initWithFrame:nameFrame];
                 [lessonNameLabel setFont:[UIFont fontWithName:@"Helvetica" size:11]];
-                [lessonNameLabel setText:button.myLesson.name];
+                [lessonNameLabel setText:lesson.name];
                 [lessonNameLabel setTextColor:[UIColor whiteColor]];
                 // 0代表不限制行数
-                [lessonNameLabel setNumberOfLines:0];
+                [lessonNameLabel setNumberOfLines:3];
                 [lessonNameLabel setVerticalAlignment:VerticalAlignmentTop];
                 // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
                 //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
                 
-                CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-30, WIDTH-6, 30);
+                CGRect loactionFrame = CGRectMake(3, 50, WIDTH-6, 60);
                 VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
+                
+                
                 [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
                 [locationLabel setNumberOfLines:0];
-                [locationLabel setVerticalAlignment:VerticalAlignmentBottom];
-                [locationLabel setText:button.myLesson.location];
+                [locationLabel setVerticalAlignment:VerticalAlignmentTop];
+                [locationLabel setText:[NSString stringWithFormat:@"@%@",lesson.location]];
                 [locationLabel setTextColor:[UIColor whiteColor]];
                 [button addSubview:touchButton];
                 [button setMyButton:touchButton];
@@ -218,18 +226,19 @@
             [lessonNameLabel setText:lesson.name];
             [lessonNameLabel setTextColor:[UIColor whiteColor]];
             // 0代表不限制行数
-            [lessonNameLabel setNumberOfLines:0];
+            [lessonNameLabel setNumberOfLines:3];
             [lessonNameLabel setVerticalAlignment:VerticalAlignmentTop];
             // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
             //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
             
-            CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-30, WIDTH-6, 30);
+            CGRect loactionFrame = CGRectMake(3, 50, WIDTH-6, 60);
             VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
+            
             
             [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
             [locationLabel setNumberOfLines:0];
-            [locationLabel setVerticalAlignment:VerticalAlignmentBottom];
-            [locationLabel setText:lesson.location];
+            [locationLabel setVerticalAlignment:VerticalAlignmentTop];
+            [locationLabel setText:[NSString stringWithFormat:@"@%@",lesson.location]];
             [locationLabel setTextColor:[UIColor whiteColor]];
             
             

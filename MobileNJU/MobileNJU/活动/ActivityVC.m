@@ -89,7 +89,7 @@
         nextVC.currentNew = sender;
         MNews* new = (MNews*)sender;
         nextVC.img = self.currentImg;
-        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",new.url]];
+        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com/%@",new.url]];
     }
 }
 - (void)didReceiveMemoryWarning
@@ -120,7 +120,7 @@
     CGPoint center = cell.imageView.center;
     center.x = cell.center.x;
     cell.imageView.center = center;
-    cell.url =     [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",news.url]];
+    cell.url =     [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",news.url]];
     return cell;
 }
 

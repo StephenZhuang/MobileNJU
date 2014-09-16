@@ -124,7 +124,7 @@
     
     if ([[segue identifier] isEqualToString:@"detail"]) {
         NewsDetailVC* destinationVC = (NewsDetailVC*)segue.destinationViewController;
-        NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.currentUrl]];
+        NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",self.currentUrl]];
         NSLog(@"设置的网址%@",self.currentUrl);
         [destinationVC setMyTitle:@"订阅详情"];
         [destinationVC setUrl:url];
