@@ -32,6 +32,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES];
     int location = self.slideSwitchView.rootScrollView.contentOffset.x/320;
     ShoppingVC* vc = [self.viewControllers objectAtIndex:location];

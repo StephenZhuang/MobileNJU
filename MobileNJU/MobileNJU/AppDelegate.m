@@ -17,8 +17,10 @@
 #import <Frontia/Frontia.h>
 #import "JDStatusBarNotification.h"
 #import "RDVTabBarController.h"
-
+#import "NewsListTVC.h"
+#import "MobClick.h"
 #define APP_KEY @"ikKR37FYgutHGDrrjq3c4SDS"
+
 #define REPORT_ID @"d5dd317228"
 
 #define IosAppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
@@ -42,16 +44,36 @@
     
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
-        [self operaUserInfo:userInfo appliccation:application];
+//        [self operaUserInfo:userInfo appliccation:application];
+        [ToolUtils setShowNews:YES];
     }
+    
+    [self initUmen];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-
+    
     return YES;
 }
 
 #pragma - mark init param
+- (void) initUmen
+{
+    
+    [MobClick startWithAppkey:@"5415286ffd98c50aa70c16e7" reportPolicy:BATCH   channelId:nil];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+//    [MobClick setLogEnabled:YES];
+//    Class cls = NSClassFromString(@"UMANUtil");
+//    SEL deviceIDSelector = @selector(openUDIDString);
+//    NSString *deviceID = nil;
+//    if(cls && [cls respondsToSelector:deviceIDSelector]){
+//        deviceID = [cls performSelector:deviceIDSelector];
+//    }
+//    NSLog(@"{\"oid\": \"%@\"}", deviceID);
+    
+}
+
 - (void)initApiFrame
 {
     [Frame build];
@@ -247,6 +269,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     } else {
         int bage = [[userInfo objectForKey:@"badge"] intValue];
         [application setApplicationIconBadgeNumber:bage];
+        
     }
     
     [FrontiaPush handleNotification:userInfo];
@@ -281,6 +304,32 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getCall" object:nil userInfo:userInfo];        
     } else if ([[userInfo objectForKey:@"type"] integerValue] == 4) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"receivedCall" object:nil userInfo:userInfo];
+    } else {
+        if (application.applicationState != UIApplicationStateActive){
+#warning 此处判断是否在新闻列表界面
+            UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
+            RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
+            UINavigationController *nav = (UINavigationController*)tabbar.selectedViewController;
+            UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+            UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
+            [[nav.viewControllers lastObject] presentViewController:unc animated:YES completion:nil];
+            [ToolUtils setShowNews:NO];
+        } else {
+            [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
+                style.font = [UIFont systemFontOfSize:12];
+                style.textColor = [UIColor whiteColor];
+                style.barColor = RGB(60, 139, 253);
+                style.animationType = JDStatusBarAnimationTypeMove;
+                //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
+                //        style.progressBarPosition = self.progressBarPosition;
+                //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
+                
+                return style;
+            }];
+            [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
+                                          styleName:@"style" object:@"2" userInfo:userInfo];
+
+        }
     }
     [application setApplicationIconBadgeNumber:0];
 }

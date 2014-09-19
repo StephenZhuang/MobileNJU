@@ -70,6 +70,7 @@
     }
 }
 - (void) viewWillAppear: (BOOL)inAnimated {
+    [super viewWillAppear:inAnimated];
     NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
     if(selected)
         [self.tableView deselectRowAtIndexPath:selected animated:NO];
@@ -89,7 +90,7 @@
         nextVC.currentNew = sender;
         MNews* new = (MNews*)sender;
         nextVC.img = self.currentImg;
-        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com/%@",new.url]];
+        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",new.url]];
     }
 }
 - (void)didReceiveMemoryWarning

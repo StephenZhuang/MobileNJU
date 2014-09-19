@@ -121,11 +121,11 @@
     CGSize labelsize = [comment.content sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
     height += labelsize.height;
     
-    if (comment.replyid.length > 0 || comment.isLz == 1) {
+//    if (comment.replyid.length > 0 || comment.isLz == 1) {
         height += 53;
-    } else {
-        height += 36;
-    }
+//    } else {
+//        height += 36;
+//    }
     
     return height;
 }

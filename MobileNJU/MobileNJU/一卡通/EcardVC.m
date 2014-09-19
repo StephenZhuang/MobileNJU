@@ -83,11 +83,28 @@
     } else {
 //        [self getCode];
     }
+    [self loadLast];
     // Do any additional setup after loading the view.
 }
 
 
-
+- (void)loadLast
+{
+    NSArray* cardHistory = [ToolUtils getEcardList];
+    NSMutableArray* detailList = [[NSMutableArray alloc]init];
+    if (cardHistory) {
+        for (NSDictionary* dic in cardHistory) {
+            MCard_Builder* card = [[MCard_Builder alloc]init];
+            card.time = [dic objectForKey:@"time"];
+            card.name = [dic objectForKey:@"name"];
+            card.total = [dic objectForKey:@"total"];
+            card.cost = [dic objectForKey:@"cost"];
+            [detailList addObject:card];
+        }
+        self.detaiList = detailList;
+        [self.tableView reloadData];
+    }
+}
 
 
 - (void)initAlert
@@ -201,6 +218,12 @@
            } else {
                [self.tableView reloadData];
            }
+           NSMutableArray* savableList = [[ NSMutableArray alloc]init];
+           for (MCard* card in self.detaiList) {
+               NSDictionary* dic = [[NSDictionary alloc]initWithObjectsAndKeys:@"name",card.name,@"cost",card.cost,@"time",card.time,@"total",card.total, nil];
+               [savableList addObject:dic];
+           }
+           [ToolUtils setEcardList:savableList];
        }
     } else if ([son getError]==10021){
 //        [self getCode];

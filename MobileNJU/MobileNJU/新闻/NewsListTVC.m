@@ -19,13 +19,15 @@
 #pragma viewController
 
 - (IBAction)backToMain:(UIBarButtonItem *)sender {
-    if (self.jump) {
+//    if (self.jump) {
         [self dismissViewControllerAnimated:YES completion:NULL];
-    } else{
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+//    } else{
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
 }
 - (void) viewWillAppear: (BOOL)inAnimated {
+    [super viewWillAppear:inAnimated];
+
     NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
     if(selected)
         [self.tableView deselectRowAtIndexPath:selected animated:NO];

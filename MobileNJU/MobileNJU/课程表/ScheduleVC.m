@@ -44,7 +44,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addBack;
 @property (strong,nonatomic)UIImageView* imgView;
 @property (strong,nonatomic)NSString* lastUserId;
-
+@property (nonatomic)int week;
 @property (strong, nonatomic)  UITextField *confirmCodeText;
 //@property (strong, nonatomic) UIImageView *confirmCode;
 @end
@@ -133,6 +133,7 @@
 //返回时重新加载
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if ([ToolUtils getJWID].length>0) {
         [self loadLast];
     }
@@ -452,6 +453,7 @@
 
     [schedule addLessons:self.lessons delegate:self];
     self.scheduleView = schedule;
+    self.scheduleView.week = self.week;
 }
 
 

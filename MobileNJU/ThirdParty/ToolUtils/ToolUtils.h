@@ -102,5 +102,13 @@
 +(void)setHasLogOut:(NSString*) hasLogout;
 +(NSString*)getHasLogOut;
 +(void)setScheduleAuto:(BOOL) isAuto;
-                        +(BOOL)getScheduleAuto;
++(BOOL)getScheduleAuto;
++(BOOL)shouldShowNews;
++(void)setShowNews:(BOOL)should;
++ (void) setTermList:(NSArray*)termArray;
++ (NSArray*) getTermList;
++ (void) setGradeDic:(NSDictionary*)grades;
++ (NSDictionary*) getGradeDic;
++ (NSArray*) getEcardList;
++ (void)setEcardList:(NSArray*)ecardList;
 @end

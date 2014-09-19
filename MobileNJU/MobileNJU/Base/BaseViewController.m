@@ -18,6 +18,7 @@
 #import "BookViewController.h"
 #import "RDVTabBarController.h"
 #import "VerifyVC.h"
+#import "MobClick.h"
 @interface BaseViewController ()<UINavigationBarDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 
 @end
@@ -92,6 +93,8 @@
     [self.navigationController.navigationBar setAlpha:1];
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToChat:) name:@"getPushInfo" object:nil];
+
 }
 
 - (void)addTitleView
@@ -106,8 +109,10 @@
 {
     [self.loginIndicator setHidden:YES];
     [self.loginIndicator removeFromSuperview];
-}
+    [MobClick beginLogPageView:self.title];
+    
 
+}
 -(void)closeSelf{
     if (self.loginIndicator) {
         [self.loginIndicator setHidden:YES];
@@ -215,6 +220,8 @@ UIView* view;
     [self.loginIndicator removeFromSuperview];
     [view removeFromSuperview];
     [self removeMask];
+    [MobClick endLogPageView:self.title];
+
 }
 /*
 #pragma mark - Navigation
@@ -226,5 +233,17 @@ UIView* view;
     // Pass the selected object to the new view controller.
 }
 */
+
+
+- (void)goToChat:(NSNotification *)notification
+{
+    if (self.view.window) {
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+        UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
+        [self presentViewController:unc animated:YES completion:^{
+            
+        }];
+    }
+}
 
 @end

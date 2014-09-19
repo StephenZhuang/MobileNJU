@@ -99,6 +99,7 @@ static NSArray* buttonImages;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (!self.firstOpen) {
         NSLog(@"调用showLoginView");
         [self showLoginView];

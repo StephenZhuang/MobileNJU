@@ -593,4 +593,54 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"scheduleAuto"];
 }
 
++(BOOL)shouldShowNews
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"showNews"];
+
+    
+}
++(void)setShowNews:(BOOL)should;
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setBool: should  forKey:@"showNews"];
+    [userDefaults synchronize];
+}
+
++ (void) setTermList:(NSArray*)termArray
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: termArray forKey:@"termList"];
+    [userDefaults synchronize];
+
+}
++ (NSArray*) getTermList
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"termList"];
+
+}
++ (void) setGradeDic:(NSDictionary*)grades
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: grades forKey:@"grades"];
+    [userDefaults synchronize];
+
+}
++ (NSDictionary*) getGradeDic
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"grades"];
+
+}
+
++ (NSArray*) getEcardList
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ecardList"];
+
+}
++ (void)setEcardList:(NSArray*)ecardList
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: ecardList forKey:@"ecardList"];
+    [userDefaults synchronize];
+}
+
 @end

@@ -73,6 +73,7 @@ static NSArray* descriptions;
     functionNames = [ToolUtils getFunctionName];
     buttonImages= [ToolUtils getButtonImage];
     descriptions = [ToolUtils getFunctionDetails];
+    
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -81,11 +82,19 @@ static NSArray* descriptions;
         [self loadIndex];
         self.firstOpen = NO;
     }
-    
+    if ([ToolUtils shouldShowNews]) {
+        [ToolUtils setShowNews:NO];
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+        UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
+        [self presentViewController:unc animated:YES completion:^{
+            
+        }];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
 }
 - (void)loadIndex
@@ -587,7 +596,12 @@ static NSArray* descriptions;
 
 -(void) onClickImage:(id) sender{
     if (self.allNews==nil) {
-        [ToolUtils showMessage:@"脱机状态下无法浏览新闻"];
+        if ([ToolUtils isLogin]){
+            [ToolUtils showMessage:@"新闻列表未获取，请稍等片刻"];
+        } else {
+            [ToolUtils showMessage:@"网络未连接，请检查网络情况"];
+
+        }
         return;
     }
     [self.newsList removeAllObjects];
@@ -721,6 +735,8 @@ static NSArray* descriptions;
             //        [self dismissCallView];
         }
         
+    } else {
+        [super goToChat:notification];
     }
 }
 

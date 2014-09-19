@@ -71,8 +71,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-//    [self loadData];
-//    [self.infoTable reloadData];
+    [super viewWillAppear:animated];
     [self loadData];
     [self.infoTable reloadData];
         NSIndexPath *selected = [self.tableView indexPathForSelectedRow];

@@ -260,6 +260,63 @@
     }
     
     
+    for (LessonButton* button in self.buttonList) {
+        if (button.lessonArr.count==1) {
+            if (![self judgeHasLesson:button.myLesson]) {
+                button.backgroundColor =  [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+                [button.locationLabel setText:@"@本周无课程"];
+            }
+        } else {
+            BOOL hasLesson = NO;
+            for (ScheduleLesson* lesson in button.lessonArr) {
+                if ([self judgeHasLesson:lesson]) {
+                    [button.lessonNameLabel setText:lesson.name];
+                    [button.locationLabel setText:[NSString stringWithFormat:@"@%@",lesson.location]];
+                    hasLesson = YES;
+                }
+            }
+            if (!hasLesson) {
+                button.backgroundColor =  [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+                [button.locationLabel setText:@"@本周无课程"];
+            }
+        }
+    }
+    
+    
+}
+
+- (BOOL)judgeHasLesson:(ScheduleLesson*)lesson
+{
+    NSString* week = lesson.week;
+    if ([week isEqualToString:@"双周"]) {
+        if (self.week%2!=0) {
+            return NO;
+        }
+    } else if ([week isEqualToString:@"单周"]){
+        if (self.week%2==0) {
+            return NO;
+        }
+    } else if ([week rangeOfString:@"-"].length>0)
+    {
+        NSArray* range = [week componentsSeparatedByString:@"-"];
+        if ([[range firstObject] integerValue] > self.week||[[range objectAtIndex:1] integerValue]< self.week) {
+            return NO;
+        }
+    } else if ([week rangeOfString:@"-"].length>0)
+    {
+        NSArray* range = [week componentsSeparatedByString:@","];
+        BOOL has = NO;
+        for (NSString* day in range) {
+            if ( [day integerValue]==self.week) {
+                has = YES;
+                break;
+            }
+        }
+        if (!has) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 

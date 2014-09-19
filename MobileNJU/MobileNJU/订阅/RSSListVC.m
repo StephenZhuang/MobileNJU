@@ -38,6 +38,8 @@
 }
 
 - (void) viewWillAppear: (BOOL)inAnimated {
+    [super viewWillAppear:inAnimated];
+
 //    NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
     if(self.selected)
     {

@@ -42,10 +42,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.webView setDelegate:self];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [self.webView setDelegate:nil];
 }
 - (void)didReceiveMemoryWarning
