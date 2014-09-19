@@ -160,6 +160,8 @@
             
         } else {
             cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+            NSLog(@"%@",comment.content);
+            NSLog(@"%d",comment.content.length);
         }
         
         if (comment.isLz == 1) {
@@ -180,8 +182,18 @@
         
         [cell.floorLabel setBackgroundColor:_colorArray[indexPath.row % _colorArray.count]];
         [cell.floorLabel setText:[NSString stringWithFormat:@"%i",indexPath.row+1]];
-        
-        [cell.contentLabel setText:comment.content];
+//        NSMutableString* str = [[NSMutableString alloc]initWithString:comment.content];
+//        if (comment.content.length>16) {
+//            int space = 16-comment.content.length%16;
+//            for (int i = 0 ; i < space ; i ++)
+//            {
+//                [str appendString:@"    "];
+//            }
+//        }
+//        [str appendString:@"."];
+
+        [cell.contentLabel setText:[NSString stringWithFormat:@"%@",comment.content]];
+//        [cell.contentLabel setText:comment.content];
         [cell.timeLabel setText:comment.time];
         [cell.messageButton setTag:indexPath.row];
         return cell;
