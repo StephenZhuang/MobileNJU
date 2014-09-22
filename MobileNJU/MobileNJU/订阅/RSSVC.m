@@ -64,8 +64,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [_header beginRefreshing];
-
+    [self loadData];
 }
 - (void)didReceiveMemoryWarning
 {

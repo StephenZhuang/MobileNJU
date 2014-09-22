@@ -36,6 +36,7 @@
 
 - (void)initDate
 {
+    self.week = [ToolUtils getCurrentWeek];
     NSArray* dayLabels = [NSArray arrayWithObjects:self.dayOne,self.dayTwo,self.dayThree,self.dayFour,self.dayFive,self.daySex,self.daySeven, nil];
     
     NSCalendar*calendar = [NSCalendar currentCalendar];
@@ -299,12 +300,14 @@
     } else if ([week rangeOfString:@"-"].length>0)
     {
         NSArray* range = [week componentsSeparatedByString:@"-"];
-        if ([[range firstObject] integerValue] > self.week||[[range objectAtIndex:1] integerValue]< self.week) {
+        NSString* end = [[[range objectAtIndex:1] componentsSeparatedByString:@"周"] firstObject];
+        
+        if ([[range firstObject] integerValue] > self.week|| [end integerValue] < self.week) {
             return NO;
         }
-    } else if ([week rangeOfString:@"-"].length>0)
+    } else if ([week rangeOfString:@" "].length>0)
     {
-        NSArray* range = [week componentsSeparatedByString:@","];
+        NSArray* range = [week componentsSeparatedByString:@" "];
         BOOL has = NO;
         for (NSString* day in range) {
             if ( [day integerValue]==self.week) {
