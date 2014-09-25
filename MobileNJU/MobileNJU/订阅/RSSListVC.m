@@ -11,6 +11,7 @@
 #import "ZsndNews.pb.h"
 #import "NewsDetailVC.h"
 #import "ApiMRssNews.h"
+#import "NewsDetailVC.h"
 @interface RSSListVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSMutableArray* rssNews;
 @property(nonatomic,strong)MNews* currentNew;
@@ -50,6 +51,7 @@
 //    [self.tableView reloadData];
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -66,6 +68,7 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MRssNews"]) {
             MMyRss_Builder* ret = (MMyRss_Builder*)[son getBuild];
+            
             if (page==1) {
                 [self.rssNews removeAllObjects];
                 [self.rssNews addObjectsFromArray:ret.newsList];
@@ -73,7 +76,6 @@
             } else {
                 [self.rssNews addObjectsFromArray:ret.newsList];
                 [self doneWithView:_footer];
-                
             }
         }
     } else {
@@ -132,7 +134,6 @@
         [destinationVC setUrl:url];
         [destinationVC setCurrentNew:self.currentNew];
         [destinationVC setImg:self.currentImg];
-        
     }
 }
 /*

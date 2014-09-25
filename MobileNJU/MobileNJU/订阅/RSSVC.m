@@ -11,6 +11,7 @@
 #import "ZsndNews.pb.h"
 #import "RSSListVC.h"
 #import "ZsndSystem.pb.h"
+#import "NewsDetailVC.h"
 @interface RSSVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSArray* myRss;
 @end
@@ -65,6 +66,24 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self loadData];
+    
+    if ([ToolUtils showRss]) {
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+        NewsDetailVC* detail = (NewsDetailVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"NewsDetail"]; //test2为viewcontroller的StoryboardId
+        MNews_Builder* focus = [[MNews_Builder alloc]init];
+        NSDictionary* pushNews = [ToolUtils showActivity];
+        focus.title = [pushNews objectForKey:@"title"];
+        focus.source = [pushNews objectForKey:@"source"];
+        focus.img = [pushNews objectForKey:@"img"];
+        focus.url = [pushNews objectForKey:@"url"];
+        detail.currentNew = focus.build;
+        [detail setMyTitle:@"订阅详情"];
+        NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",focus.url]];
+        detail.url = url;
+        [self.navigationController pushViewController:detail animated:YES];
+        [ToolUtils setShowRss:nil];
+    }
+    
 }
 - (void)didReceiveMemoryWarning
 {

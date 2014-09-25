@@ -17,7 +17,7 @@
 		<key>uurl</key>
 		<string>http://app.udows.com:82/mobile?methodno=MUpdate</string>
 		<key>uri</key>
-		<string>http://114.215.196.179:8080/zsnd</string>
+		<string>http://s1.smartjiangsu.com:8089/zsnd</string>
 		<key>temppath</key>
 		<string>temppath</string>
 		<key>loading</key>
@@ -74,6 +74,30 @@
 	</array>
 	<key>urls</key>
 	<array>
+		<dict>
+			<key>name</key>
+			<string>MIndexNew</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MIndex_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MIndexNew</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MWeek</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MWeek</string>
+		</dict>
 		<dict>
 			<key>name</key>
 			<string>MFeedback</string>

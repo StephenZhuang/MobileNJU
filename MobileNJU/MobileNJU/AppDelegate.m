@@ -44,8 +44,9 @@
     
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
-//        [self operaUserInfo:userInfo appliccation:application];
-        [ToolUtils setShowNews:YES];
+        [self operaUserInfo:userInfo appliccation:application];
+        
+//        [ToolUtils setShowNews:YES];
     }
     
     [self initUmen];
@@ -304,7 +305,13 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getCall" object:nil userInfo:userInfo];        
     } else if ([[userInfo objectForKey:@"type"] integerValue] == 4) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"receivedCall" object:nil userInfo:userInfo];
-    } else {
+    } else if ([[userInfo objectForKey:@"type"] integerValue] == 11){
+            NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+            [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+            [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+            [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+            [pushNews setObject:[userInfo objectForKey:@"title"] forKey:@"title"];
+            [ToolUtils setShowNews:pushNews];
         if (application.applicationState != UIApplicationStateActive){
 #warning 此处判断是否在新闻列表界面
             UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
@@ -312,8 +319,20 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
             UINavigationController *nav = (UINavigationController*)tabbar.selectedViewController;
             UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
             UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
+            NewsListTVC* newsList = (NewsListTVC*)[unc.childViewControllers firstObject];
+            newsList.jump = YES;
+            MNews_Builder* focus = [[MNews_Builder alloc]init];
+            NSDictionary* pushNews = [ToolUtils shouldShowNews];
+            focus.title = [pushNews objectForKey:@"title"];
+            focus.source = [pushNews objectForKey:@"source"];
+            focus.img = [pushNews objectForKey:@"img"];
+            focus.url = [pushNews objectForKey:@"url"];
+            [newsList setCurrentNew:focus];
+            [newsList setCurrentUrl:focus.url];
             [[nav.viewControllers lastObject] presentViewController:unc animated:YES completion:nil];
-            [ToolUtils setShowNews:NO];
+            //        [newsList setCurrentImg:[self.photoList objectAtIndex:self.pageController.currentPage]];
+            [ToolUtils setShowNews:nil];
+
         } else {
             [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
                 style.font = [UIFont systemFontOfSize:12];
@@ -330,7 +349,64 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                                           styleName:@"style" object:@"2" userInfo:userInfo];
 
         }
+    }else if ([[userInfo objectForKey:@"type"] integerValue] == 13){
+        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+        [pushNews setObject:[userInfo objectForKey:@"title"] forKey:@"title"];
+        [ToolUtils setShowRss:pushNews];
+        if (application.applicationState != UIApplicationStateActive){
+#warning 此处判断是否在新闻列表界面
+            UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
+            RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
+            [tabbar setSelectedIndex:1];
+        } else {
+            [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
+                style.font = [UIFont systemFontOfSize:12];
+                style.textColor = [UIColor whiteColor];
+                style.barColor = RGB(60, 139, 253);
+                style.animationType = JDStatusBarAnimationTypeMove;
+                //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
+                //        style.progressBarPosition = self.progressBarPosition;
+                //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
+                
+                return style;
+            }];
+            [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
+                                          styleName:@"style" object:@"3" userInfo:userInfo];
+        }
+
+    }else if ([[userInfo objectForKey:@"type"] integerValue] == 14){
+        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+        [pushNews setObject:[userInfo objectForKey:@"title"] forKey:@"title"];
+        [ToolUtils setShowActivity:pushNews];
+        if (application.applicationState != UIApplicationStateActive){
+#warning 此处判断是否在新闻列表界面
+            UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
+            RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
+            [tabbar setSelectedIndex:2];
+        } else {
+            [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
+                style.font = [UIFont systemFontOfSize:12];
+                style.textColor = [UIColor whiteColor];
+                style.barColor = RGB(60, 139, 253);
+                style.animationType = JDStatusBarAnimationTypeMove;
+                //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
+                //        style.progressBarPosition = self.progressBarPosition;
+                //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
+                
+                return style;
+            }];
+            [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
+                                          styleName:@"style" object:@"4" userInfo:userInfo];
+        }
+        
     }
+
     [application setApplicationIconBadgeNumber:0];
 }
 

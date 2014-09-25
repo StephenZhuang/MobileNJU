@@ -169,7 +169,7 @@ static NSArray* buttonImages;
                         } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
                             NSString *message = [[NSString alloc] initWithFormat:@"set tag failed with %@ error code : %d error message %@", action, errorCode, errorMessage];
                             //                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
-                            [ToolUtils showMessage:message];
+//                            [ToolUtils showMessage:message];
                         }];
                     }
 

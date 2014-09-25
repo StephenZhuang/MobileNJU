@@ -83,12 +83,23 @@ static NSArray* descriptions;
         self.firstOpen = NO;
     }
     if ([ToolUtils shouldShowNews]) {
-        [ToolUtils setShowNews:NO];
         UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
         UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
+        NewsListTVC* newsList = (NewsListTVC*)[unc.childViewControllers firstObject];
+        newsList.jump = YES;
+        MNews_Builder* focus = [[MNews_Builder alloc]init];
+        NSDictionary* pushNews = [ToolUtils shouldShowNews];
+        focus.title = [pushNews objectForKey:@"title"];
+        focus.source = [pushNews objectForKey:@"source"];
+        focus.img = [pushNews objectForKey:@"img"];
+        focus.url = [pushNews objectForKey:@"url"];
+        [newsList setCurrentNew:focus];
+        [newsList setCurrentUrl:focus.url];
+//        [newsList setCurrentImg:[self.photoList objectAtIndex:self.pageController.currentPage]];
         [self presentViewController:unc animated:YES completion:^{
-            
         }];
+        [ToolUtils setShowNews:nil];
+
     }
 }
 
@@ -100,7 +111,7 @@ static NSArray* descriptions;
 - (void)loadIndex
 {
     if (!self.offline) {
-        [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
+        [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:) version:[NSString stringWithFormat:@"%d",2]];
     } else {
         [self loadTableData];
     }
@@ -115,7 +126,7 @@ static NSArray* descriptions;
             MNewsList_Builder *newsList = (MNewsList_Builder *)[son getBuild];
             self.allNews = newsList.newsList;
             
-        } else if ([[son getMethod] isEqualToString:@"MIndex"]) {
+        } else if ([[son getMethod] isEqualToString:@"MIndexNew"]) {
             [[[ApisFactory getApiMNewsList]setPage:1 pageCount:10]load:self selecter:@selector(disposeMessage:)];
             MIndex_Builder* index = (MIndex_Builder*)[son getBuild];
             NSMutableArray* image = [[NSMutableArray alloc]init];
@@ -619,7 +630,9 @@ static NSArray* descriptions;
     newsList.jump = YES;
     if (self.newsList!=nil) {
         MNews* focus = [self.newsList objectAtIndex:self.pageController.currentPage];
-        [newsList setCurrentNew:focus];
+        MNews_Builder* news_builders = [[MNews_Builder alloc]init];
+        news_builders = [news_builders mergeFrom:focus];
+        [newsList setCurrentNew:news_builders];
         [newsList setCurrentUrl:focus.url];
         [newsList setCurrentImg:[self.photoList objectAtIndex:self.pageController.currentPage]];
     }
@@ -735,8 +748,12 @@ static NSArray* descriptions;
             //        [self dismissCallView];
         }
         
-    } else {
+    } else if (type.integerValue ==2 ){
         [super goToChat:notification];
+    } else if (type.integerValue ==3) {
+        [self.rdv_tabBarController setSelectedIndex:1];
+    } else if (type.integerValue ==4) {
+        [self.rdv_tabBarController setSelectedIndex:2];
     }
 }
 

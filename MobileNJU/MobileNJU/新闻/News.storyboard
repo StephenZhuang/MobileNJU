@@ -8,7 +8,7 @@
         <!--News DetailVC-->
         <scene sceneID="UNy-LH-gUI">
             <objects>
-                <viewController id="OTm-be-dhq" customClass="NewsDetailVC" sceneMemberID="viewController">
+                <viewController restorationIdentifier="NewsDetail" storyboardIdentifier="NewsDetail" id="OTm-be-dhq" customClass="NewsDetailVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="br2-BW-rdd"/>
                         <viewControllerLayoutGuide type="bottom" id="dpj-vO-0fw"/>
@@ -314,7 +314,7 @@
         <!--Activity DetailVC-->
         <scene sceneID="VKE-8L-kfA">
             <objects>
-                <viewController id="gjW-z7-ieA" customClass="ActivityDetailVC" sceneMemberID="viewController">
+                <viewController restorationIdentifier="activityDetail" storyboardIdentifier="activityDetail" id="gjW-z7-ieA" customClass="ActivityDetailVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="J2r-CP-Tdv"/>
                         <viewControllerLayoutGuide type="bottom" id="HTS-Pj-1fp"/>

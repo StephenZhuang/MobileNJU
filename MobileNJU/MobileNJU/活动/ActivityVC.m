@@ -32,10 +32,23 @@
     if (!_activityList) {
         _activityList  = [[ NSMutableArray alloc]init];
     }
-    
     return _activityList;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if ([ToolUtils showActivity]) {
+        MNews_Builder* focus = [[MNews_Builder alloc]init];
+        NSDictionary* pushNews = [ToolUtils showActivity];
+        focus.title = [pushNews objectForKey:@"title"];
+        focus.source = [pushNews objectForKey:@"source"];
+        focus.img = [pushNews objectForKey:@"img"];
+        focus.url = [pushNews objectForKey:@"url"];
+        [self performSegueWithIdentifier:@"detail" sender:focus.build];
+        [ToolUtils setShowActivity:nil];
+    }
+}
 - (void)loadData
 {
     [[[ApisFactory getApiMActivity] setPage:page pageCount:5]load:self selecter:@selector(disposMessage:)];

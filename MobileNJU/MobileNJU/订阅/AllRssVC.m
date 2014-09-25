@@ -9,10 +9,11 @@
 #import "AllRssVC.h"
 #import "MySubscribeCell.h"
 #import "ZsndNews.pb.h"
+#import <Frontia/Frontia.h>
 
 @interface AllRssVC ()<UITableViewDelegate,UITableViewDataSource,RssDelegate>
 @property (nonatomic,strong)NSMutableArray* allRss;
-
+@property (nonatomic,strong)NSString* selectedId;
 @end
 
 @implementation AllRssVC
@@ -60,11 +61,34 @@
                 [self.allRss  addObjectsFromArray:builder.listList];
                 [self doneWithView:_footer];
             }
-        } else if ([[son getMethod]isEqualToString:@"MRss"]||[[son getMethod]isEqualToString:@"MRssCancel"])
+        } else if ([[son getMethod]isEqualToString:@"MRss"])
         {
-            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
-//            [ToolUtils showMessage:ret.msg];
-//            [_header beginRefreshing];
+            FrontiaPush *push = [Frontia getPush];
+            if (push) {
+                UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+                if(types!= UIRemoteNotificationTypeNone)
+                {
+                    [push setTag:[NSString stringWithFormat:@"%@rss",self.selectedId] tagOpResult:^(int count, NSArray *failureTag) {
+                    } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
+                    }];
+                }
+            }
+            
+        } else if ([[son getMethod]isEqualToString:@"MRssCancel"])
+        {
+            FrontiaPush *push = [Frontia getPush];
+            if (push) {
+                UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+                if(types!= UIRemoteNotificationTypeNone)
+                {
+                    [push delTag:[NSString stringWithFormat:@"%@rss",self.selectedId] tagOpResult:^(int count, NSArray *failureTag) {
+                    } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
+                          NSString *message = [[NSString alloc] initWithFormat:@"set tag failed with %@ error code : %d error message %@", action, errorCode, errorMessage];
+//                        [ToolUtils showMessage:message];
+                    }];
+                }
+            }
+            
         }
     } else {
         [super disposMessage:son];
@@ -95,6 +119,7 @@
     {
         if ([rss.id isEqualToString:id])
         {
+            self.selectedId = id;
             if (rss.state==0)
             {
                [[[ApisFactory getApiMRss]load:self selecter:@selector(disposMessage:) rssid:id] setShowLoading:NO];

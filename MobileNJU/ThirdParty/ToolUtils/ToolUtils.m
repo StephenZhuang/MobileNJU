@@ -593,16 +593,16 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"scheduleAuto"];
 }
 
-+(BOOL)shouldShowNews
++(NSDictionary*)shouldShowNews
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"showNews"];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"showNews"];
 
     
 }
-+(void)setShowNews:(BOOL)should;
++(void)setShowNews:(NSDictionary*)should;
 {
     NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
-    [userDefaults setBool: should  forKey:@"showNews"];
+    [userDefaults setObject: should  forKey:@"showNews"];
     [userDefaults synchronize];
 }
 
@@ -643,4 +643,28 @@
     [userDefaults synchronize];
 }
 
++ (void)setShowRss:(NSDictionary *)dic
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: dic forKey:@"showRss"];
+    [userDefaults synchronize];
+}
+
++ (NSDictionary *)showRss
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"showRss"];
+
+}
++ (void)setShowActivity:(NSDictionary *)dic
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: dic forKey:@"showActivity"];
+    [userDefaults synchronize];
+}
+
++ (NSDictionary *)showActivity
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"showActivity"];
+
+}
 @end

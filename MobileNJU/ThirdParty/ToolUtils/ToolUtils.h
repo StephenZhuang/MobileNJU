@@ -103,12 +103,16 @@
 +(NSString*)getHasLogOut;
 +(void)setScheduleAuto:(BOOL) isAuto;
 +(BOOL)getScheduleAuto;
-+(BOOL)shouldShowNews;
-+(void)setShowNews:(BOOL)should;
++(NSDictionary*)shouldShowNews;
++(void)setShowNews:(NSDictionary*)should;
 + (void) setTermList:(NSArray*)termArray;
 + (NSArray*) getTermList;
 + (void) setGradeDic:(NSDictionary*)grades;
 + (NSDictionary*) getGradeDic;
 + (NSArray*) getEcardList;
 + (void)setEcardList:(NSArray*)ecardList;
++ (NSDictionary*)showRss;
++ (void) setShowRss: (NSDictionary*)dic;
++ (NSDictionary*)showActivity;
++ (void) setShowActivity: (NSDictionary*)dic;
 @end

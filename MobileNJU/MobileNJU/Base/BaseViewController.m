@@ -19,6 +19,7 @@
 #import "RDVTabBarController.h"
 #import "VerifyVC.h"
 #import "MobClick.h"
+#import "NewsListTVC.h"
 @interface BaseViewController ()<UINavigationBarDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 
 @end
@@ -240,6 +241,18 @@ UIView* view;
     if (self.view.window) {
         UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
         UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
+        
+        NewsListTVC* newsList = (NewsListTVC*)[unc.childViewControllers firstObject];
+        newsList.jump = YES;
+        MNews_Builder* focus = [[MNews_Builder alloc]init];
+        NSDictionary* pushNews = [ToolUtils shouldShowNews];
+        focus.title = [pushNews objectForKey:@"title"];
+        focus.source = [pushNews objectForKey:@"source"];
+        focus.img = [pushNews objectForKey:@"img"];
+        focus.url = [pushNews objectForKey:@"url"];
+        [newsList setCurrentNew:focus.build];
+        [newsList setCurrentUrl:focus.url];
+        [ToolUtils setShowNews:nil];
         [self presentViewController:unc animated:YES completion:^{
             
         }];
