@@ -17,7 +17,8 @@
     self.textArea.layer.borderColor = [UIColor colorWithRed:0/255.0 green:147/255.0 blue:242/255.0 alpha:1].CGColor;
     
     //    self.textArea.layer.borderColor = [UIColor colorWithRed:169/255.0 green:16/255.0 blue:166/255.0 alpha:1].CGColor;
-    //    self.textArea.layer.borderColor = [UIColor colorWithRed:18/255.0 green:191/255.0 blue:125/255.0 alpha:1].CGColor;    self.textArea.layer.borderWidth = 1;
+    //    self.textArea.layer.borderColor = [UIColor colorWithRed:18/255.0 green:191/255.0 blue:125/255.0 alpha:1].CGColor;
+    self.textArea.layer.borderWidth = 1;
     self.textArea.layer.cornerRadius = 10;
     self.submitBt = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
     [self.submitBt setTitle:@"提交" forState:UIControlStateNormal];

@@ -47,6 +47,12 @@
     [self.gpaView setDelegate:self];
     [self.tableView setAllowsSelection:NO];
     self.LessonChooseDic = [[NSMutableDictionary alloc]init];
+    
+    if ([ToolUtils getGradeDic]) {
+        self.gradesDic = [[NSMutableDictionary alloc]initWithDictionary:[ToolUtils getGradeDic]];
+    } else {
+        self.gradesDic = [[NSMutableDictionary alloc]init];
+    }
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
     self.isRe=1;
 
