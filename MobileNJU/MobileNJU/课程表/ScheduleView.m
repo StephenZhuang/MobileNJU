@@ -265,6 +265,8 @@
         if (button.lessonArr.count==1) {
             if (![self judgeHasLesson:button.myLesson]) {
                 button.backgroundColor =  [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+                button.touchButton.backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+                
                 [button.locationLabel setText:@"@本周无课程"];
             }
         } else {
@@ -278,6 +280,7 @@
             }
             if (!hasLesson) {
                 button.backgroundColor =  [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+                 button.touchButton.backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
                 [button.locationLabel setText:@"@本周无课程"];
             }
         }

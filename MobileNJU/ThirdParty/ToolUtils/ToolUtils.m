@@ -693,4 +693,16 @@
     
 }
 
++ (NSDictionary*)ecardRemain
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ecardRemain"];
+
+}
++ (void) setEcardRemain: (NSDictionary*)dic
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:dic forKey:@"ecardRemain"];
+    [userDefaults synchronize];
+}
+
 @end

@@ -107,7 +107,7 @@
     UIFont *font = [UIFont systemFontOfSize:14];
     CGSize size = CGSizeMake(100,2000);
     CGSize labelsize = [pass sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
-    return labelsize.height+10;
+    return labelsize.height+30;
 }
 
 

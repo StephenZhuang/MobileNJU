@@ -119,5 +119,6 @@
 + (void) setShowTreeHole: (NSString*)dic;
 +(BOOL) offLine;
 +(void)setOffline:(BOOL)offline;
-
++ (NSDictionary*)ecardRemain;
++ (void) setEcardRemain: (NSDictionary*)dic;
 @end

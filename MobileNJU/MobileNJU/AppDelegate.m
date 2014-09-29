@@ -44,6 +44,8 @@
     self.window.rootViewController = nav;
     
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
+    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"13",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
 
     if (userInfo) {
         [self savePush:userInfo];
@@ -62,7 +64,7 @@
 - (void) initUmen
 {
     
-    [MobClick startWithAppkey:@"5415286ffd98c50aa70c16e7" reportPolicy:BATCH   channelId:nil];
+    [MobClick startWithAppkey:@"54158e02fd98c50b430c6111" reportPolicy:BATCH   channelId:nil];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
 //    [MobClick setLogEnabled:YES];
