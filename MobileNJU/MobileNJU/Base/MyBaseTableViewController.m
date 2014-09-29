@@ -91,6 +91,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.loginIndicator setHidden:YES];
     [self.loginIndicator removeFromSuperview];
 }

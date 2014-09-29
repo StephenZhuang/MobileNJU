@@ -115,8 +115,6 @@
     [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
     return updateone;
 }
-
-
 //
 //- (void)getCode
 //{
@@ -161,6 +159,7 @@
 //返回时重新加载
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if ([ToolUtils getJWID].length>0) {
         [self loadLast];
     }
@@ -279,7 +278,14 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MSchedule"]) {
                        MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
-            if (classList.week!=0||classList.classList.count>0) {
+            if (classList.img.length>0) {
+                [self removeCode];
+                [self addCode:classList.img];
+            } else
+            if (classList.week!=0) {
+                if (classList.classList.count==0) {
+                    [ToolUtils showMessage:@"教务处系统当前学期无显示，请用电脑端登陆或自行添加"];
+                }
                 [self.addButton setHidden:NO];
                 [self.addBack setHidden:NO];
                 self.isRe=1;
@@ -300,10 +306,7 @@
                 [self loadSchedule];
                 [ToolUtils setIsVeryfy:1];
             }
-            else if (classList.img.length>0) {
-                [self removeCode];
-                [self addCode:classList.img];
-            } else {
+             else {
                 [ToolUtils showMessage:@"教务处没有该学期课表"];
                 [self cancelAlert:nil];
             }
@@ -330,7 +333,11 @@
             [ToolUtils showMessage:ret.msg];
             [self closeAlert];
             [self loadLast];
-        } 
+        } else if ( [[son getMethod]isEqualToString:@"MWeek"])
+        {
+            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+            [ToolUtils setCurrentWeek:ret.code];
+        }
     }
 //    } else if ([[son getMsg]hasPrefix:@"信息"]      &&  self.imgView!=nil )
 //    {
@@ -473,7 +480,6 @@
         lesson.id = each_class.id;
         lesson.busyweeks = each_class.busyweeks;
         [schedules addObject:lesson];
-        
         [canSaveLessons addObject:[lesson getDic]];
     }
     self.lessons= schedules;
