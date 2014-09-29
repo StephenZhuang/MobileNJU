@@ -55,10 +55,27 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    if (!self.termList) {
+        self.termList = [ToolUtils getTermList];
+    }
     [self loadSavedState];
-    
-
 }
+
+
+- (void)loadSavedState
+{
+    
+    [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
+    [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
+    if (![self.schIdTextField.text isEqualToString:@""]&&![self.passwordTextField.text isEqualToString:@""]&&!self.hasLogin&&![ToolUtils offLine]) {
+        [self search:nil];
+    } else if (!self.hasLogin&&![ToolUtils offLine]){
+        [self showAlert];
+    }
+    [self.tableView reloadData];
+}
+
 
 - (void)initAlert
 {
@@ -104,18 +121,6 @@
 //    
 //    
 //}
-- (void)loadSavedState
-{
-    
-    [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
-    [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
-    if (![self.schIdTextField.text isEqualToString:@""]&&![self.passwordTextField.text isEqualToString:@""]&&!self.hasLogin) {
-        [self search:nil];
-    } else if (!self.hasLogin){
-        [self showAlert];
-    }
-    [self.tableView reloadData];
-}
 
 - (IBAction)search:(id)sender {
     if (sender!=nil&&self.lastUserId!=nil&&![self.lastUserId isEqualToString:self.schIdTextField.text]) {
@@ -191,7 +196,7 @@
                     NSArray* arr = [[NSArray alloc]initWithObjects:term.name,term.url,nil];
                     [termArray addObject:arr];
                 }
-//                [ToolUtils setTermList:termArray];
+                [ToolUtils setTermList:termArray];
                 self.termList = termArray;
                 [self.tableView reloadData];
             }
@@ -330,16 +335,17 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.row<self.termList.count&&self.hasLogin) {
+    if (indexPath.row<self.termList.count) {
         NSArray* term = [self.termList objectAtIndex:indexPath.row];
         NSString* str = [term objectAtIndex:1];
         if (str.length>0) {
             [self performSegueWithIdentifier:@"gradeDetail" sender:[term objectAtIndex:1]];
         }
-    } else {
+    } else if (![ToolUtils offLine]){
         [self showAlert];
     }
-}
+                 }
+
 ///*
 // 进入屏幕后开启动画
 // */

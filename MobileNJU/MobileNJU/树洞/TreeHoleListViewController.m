@@ -79,6 +79,12 @@
 {
     [super viewWillAppear:animated];
     [[ApisFactory getApiMGetMsgCount] load:self selecter:@selector(disposMessage:)];
+    if ([ToolUtils showTreeHole]) {
+        TreeHoleDetailViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"TreeHoleDetailViewController"];
+        vc.treeHoleid = [ToolUtils showTreeHole];
+        [ToolUtils setShowTreeHole:nil];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)goToAdd
@@ -447,6 +453,7 @@
             }
             content.description = topic.content;
             content.imageObj = [ToolUtils getImageUrlWtihString:topic.img].absoluteString;
+            
             NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
             [share registerQQAppId:@"100358052" enableSSO:YES];
             [share registerWeixinAppId:@"wxd953d3ff514e0ded"];

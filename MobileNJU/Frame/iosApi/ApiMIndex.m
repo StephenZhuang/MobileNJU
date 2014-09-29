@@ -20,9 +20,10 @@
 	 * @param select  回调函数
 	 * @callback MIndex_Builder
 	*/
-	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  {
+	-(UpdateOne*)get:(id)delegate selecter:(SEL)select  version:(NSString *)version{
 		NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
-		UpdateOne *updateone=[[UpdateOne alloc] init:@"MIndex" params:array  delegate:delegate selecter:select];
+        [array addObject:[NSString stringWithFormat:@"version=%@",version]];
+		UpdateOne *updateone=[[UpdateOne alloc] init:@"MIndexNew" params:array  delegate:delegate selecter:select];
 		return [self instanceUpdate:updateone];
 	}
 
@@ -32,8 +33,8 @@
 	 * @param select  回调函数
 	 * @callback MIndex_Builder
 	*/
-	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  {
-		UpdateOne *update=[self get:delegate selecter:select];
+	-(UpdateOne*)load:(id)delegate selecter:(SEL)select  version:(NSString *)version{
+		UpdateOne *update=[self get:delegate selecter:select version:version];
 		[DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
 		return update;
 	}

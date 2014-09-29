@@ -115,6 +115,11 @@
     [[[self selectedViewController] view] setFrame:[[self contentView] bounds]];
     [[self contentView] addSubview:[[self selectedViewController] view]];
     [[self selectedViewController] didMoveToParentViewController:self];
+    
+    if (selectedIndex!=3) {
+        [self setTabBarHidden:NO];
+    }
+    
 }
 
 - (void)setViewControllers:(NSArray *)viewControllers {

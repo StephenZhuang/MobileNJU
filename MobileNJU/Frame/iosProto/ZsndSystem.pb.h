@@ -356,7 +356,10 @@
   BOOL hasTeacher_:1;
   BOOL hasAddress_:1;
   BOOL hasWeek_:1;
-  BOOL hasTime_:1;
+    BOOL hasTime_:1;
+    BOOL hasBusyweeks_:1;
+
+    
   int32_t day;
   int32_t begin;
   int32_t end;
@@ -366,6 +369,7 @@
   NSString* address;
   NSString* week;
   NSString* time;
+    NSString* busyweeks;
 }
 - (BOOL) hasId;
 - (BOOL) hasName;
@@ -376,11 +380,14 @@
 - (BOOL) hasBegin;
 - (BOOL) hasEnd;
 - (BOOL) hasTime;
+- (BOOL) hasBusyweeks;
 @property (readonly, retain) NSString* id;
 @property (readonly, retain) NSString* name;
 @property (readonly, retain) NSString* teacher;
 @property (readonly, retain) NSString* address;
 @property (readonly, retain) NSString* week;
+@property (readonly, retain) NSString* busyweeks;
+
 @property (readonly) int32_t day;
 @property (readonly) int32_t begin;
 @property (readonly) int32_t end;
@@ -439,6 +446,11 @@
 - (NSString*) address;
 - (MClass_Builder*) setAddress:(NSString*) value;
 - (MClass_Builder*) clearAddress;
+
+- (BOOL) hasBusyweeks;
+- (NSString*) busyweeks;
+- (MClass_Builder*) setBusyweeks:(NSString*) value;
+- (MClass_Builder*) clearBusyweeks;
 
 - (BOOL) hasWeek;
 - (NSString*) week;

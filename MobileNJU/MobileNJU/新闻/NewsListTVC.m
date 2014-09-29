@@ -19,13 +19,15 @@
 #pragma viewController
 
 - (IBAction)backToMain:(UIBarButtonItem *)sender {
-    if (self.jump) {
+//    if (self.jump) {
         [self dismissViewControllerAnimated:YES completion:NULL];
-    } else{
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+//    } else{
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
 }
 - (void) viewWillAppear: (BOOL)inAnimated {
+    [super viewWillAppear:inAnimated];
+
     NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
     if(selected)
         [self.tableView deselectRowAtIndexPath:selected animated:NO];
@@ -108,7 +110,12 @@
 {
     if ([[segue identifier] isEqualToString:@"detail"]) {
         NewsDetailVC* destinationVC = (NewsDetailVC*)segue.destinationViewController;
-        NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.currentUrl]];
+        NSURL* url;
+        if (![self.currentUrl hasPrefix:@"http"]) {
+           url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",self.currentUrl]];
+        } else {
+            url = [[NSURL alloc]initWithString:self.currentUrl];
+        }
         NSLog(@"设置的网址%@",self.currentUrl);
         [destinationVC setUrl:url];
         [destinationVC setTitle:@"新闻详情"];
@@ -139,7 +146,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 80;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

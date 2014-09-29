@@ -85,9 +85,36 @@
 //        [self getCode];
     }
     self.lastCount = 19;
+    [self loadLast];
     // Do any additional setup after loading the view.
 }
 
+
+- (void)loadLast
+{
+    NSArray* cardHistory = [ToolUtils getEcardList];
+    NSMutableArray* detailList = [[NSMutableArray alloc]init];
+    if (cardHistory) {
+        for (NSDictionary* dic in cardHistory) {
+            MCard_Builder* card = [[MCard_Builder alloc]init];
+            card.time = [dic objectForKey:@"time"];
+            card.name = [dic objectForKey:@"name"];
+            card.total = [dic objectForKey:@"total"];
+            card.cost = [dic objectForKey:@"cost"];
+            [detailList addObject:card];
+        }
+        self.detaiList = detailList;
+        [self.tableView reloadData];
+    }
+    
+    NSDictionary* card = [ToolUtils ecardRemain];
+    if (card) {
+        [self.nameLabel setText:[card objectForKey:@"name"]];
+        [self.remainLabel setText:[card objectForKey:@"total"]];
+        [self.unitLabel setHidden:NO];
+        [self.remainNameLabel setHidden:NO];
+    }
+}
 
 
 
@@ -177,9 +204,20 @@
                 }
                 [ToolUtils setIsVeryfy:1];
                 [self searchDetail:nil];
+                NSDictionary* ecardRemain = [[NSDictionary alloc]initWithObjectsAndKeys:card.name,@"name",card.total,@"total", nil];
+                [ToolUtils setEcardRemain:ecardRemain];
+                
+                [self.tableView reloadData];
+                if (self.autoSearch.isOn)
+                {
+                    [ToolUtils setEcardId:self.schIDText.text];
+                    [ToolUtils setEcardPassword:self.passwordText.text];
+                }
+
             } else {
 //                [self.confirmCode setImage:[self useImage:[UIImage imageWithData:cardList.img]]];
             }
+            
        } else if ([[son getMethod]isEqualToString:@"MCardHistory"])
        {
            
@@ -205,6 +243,21 @@
                [self.tableView reloadData];
            }
            self.lastCount = ret.cardList.count;
+           NSMutableArray* savableList = [[ NSMutableArray alloc]init];
+           for (MCard* card in self.detaiList) {
+               NSDictionary* dic = [[NSDictionary alloc]initWithObjectsAndKeys:card.name,@"name",card.cost,@"cost",card.time,@"time",card.total,@"total", nil];
+               [savableList addObject:dic];
+           }
+           [ToolUtils setEcardList:savableList];
+           
+           NSDictionary* card = [ToolUtils ecardRemain];
+           if (card) {
+               [self.nameLabel setText:[card objectForKey:@"name"]];
+               [self.remainLabel setText:[card objectForKey:@"total"]];
+               [self.unitLabel setHidden:NO];
+               [self.remainNameLabel setHidden:NO];
+           }
+
        }
     } else if ([son getError]==10021){
 //        [self getCode];
