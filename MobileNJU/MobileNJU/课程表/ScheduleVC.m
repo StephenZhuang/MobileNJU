@@ -170,11 +170,11 @@
         return;
     }
     [self loadSavedLesson];
-    if (!self.offline) {
-        ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
-        [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
-
-    }
+//    if (!self.offline) {
+//        ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
+//        [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
+//
+//    }
   }
 
 //加载缓存课表
