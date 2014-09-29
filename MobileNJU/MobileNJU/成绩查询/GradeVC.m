@@ -54,9 +54,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    if (!self.termList) {
+        self.termList = [ToolUtils getTermList];
+    }
     [self loadSavedState];
-    
-
 }
 
 - (void)initAlert
@@ -108,14 +110,14 @@
     
     [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
     [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
-    if (![self.schIdTextField.text isEqualToString:@""]&&![self.passwordTextField.text isEqualToString:@""]&&!self.hasLogin) {
-        
+    if (![self.schIdTextField.text isEqualToString:@""]&&![self.passwordTextField.text isEqualToString:@""]&&!self.hasLogin&&![ToolUtils offLine]) {
         [self search:nil];
-    } else if (!self.hasLogin){
+    } else if (!self.hasLogin&&![ToolUtils offLine]){
         [self showAlert];
     }
     [self.tableView reloadData];
 }
+
 
 - (IBAction)search:(id)sender {
     if (sender!=nil) {
@@ -192,7 +194,7 @@
                     NSArray* arr = [[NSArray alloc]initWithObjects:term.name,term.url,nil];
                     [termArray addObject:arr];
                 }
-//                [ToolUtils setTermList:termArray];
+                [ToolUtils setTermList:termArray];
                 self.termList = termArray;
                 [self.tableView reloadData];
             }

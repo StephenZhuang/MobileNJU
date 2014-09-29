@@ -83,11 +83,37 @@
             [self.addButton setHidden:YES];
         }
     } else {
-//        if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]) {
-//            [self load:self selecter:@selector(disposMessage:) code:nil account:@"mg......."  password:@"....."];
-//        }
+        //        if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]) {
+        //            [self load:self selecter:@selector(disposMessage:) code:nil account:@"mg......."  password:@"....."];
+        //        }
         [self loadLast];
+        [self getCurrentWeek];
     }
+}
+
+- (void)getCurrentWeek
+{
+    if ([ToolUtils offLine]) {
+        return;
+    }
+    [self load:self selecter:@selector(disposMessage:)];
+}
+
+/**
+ *  课程表 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+ * @param delegate 回调类
+ * @param select  回调函数
+ * @param code * 第一次登录时不需要，如果有验证码，则第二次请求时必须
+ * @param account * account
+ * @param password * password
+ * @callback MClassList_Builder
+ */
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select   {
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MWeek" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
 }
 //
 //- (void)getCode
@@ -447,6 +473,7 @@
         lesson.length = each_class.end-each_class.begin+1;
         lesson.time = each_class.time;
         lesson.id = each_class.id;
+        lesson.busyweeks = each_class.busyweeks;
         [schedules addObject:lesson];
         [canSaveLessons addObject:[lesson getDic]];
     }

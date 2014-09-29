@@ -37,8 +37,8 @@
     
     _imageName = imageName;
     UIImage* loading = [UIImage imageNamed:@"178乘134"];
-    [self.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:imageName width:178 height:134] placeholderImage:loading];
-    [self.newsImage setClipsToBounds:YES];
+    [self.newsImage setImageWithURL:[ToolUtils getImageUrlWtihString:imageName width:214 height:134] placeholderImage:loading];
+//    [self.newsImage setClipsToBounds:YES];
 }
 - (void)setType:(NSString *)type
 {
