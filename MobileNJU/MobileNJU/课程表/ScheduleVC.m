@@ -93,6 +93,9 @@
 
 - (void)getCurrentWeek
 {
+    if ([ToolUtils offLine]) {
+        return;
+    }
     [self load:self selecter:@selector(disposMessage:)];
 }
 

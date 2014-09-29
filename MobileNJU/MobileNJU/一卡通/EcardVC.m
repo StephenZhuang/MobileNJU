@@ -220,7 +220,7 @@
            }
            NSMutableArray* savableList = [[ NSMutableArray alloc]init];
            for (MCard* card in self.detaiList) {
-               NSDictionary* dic = [[NSDictionary alloc]initWithObjectsAndKeys:@"name",card.name,@"cost",card.cost,@"time",card.time,@"total",card.total, nil];
+               NSDictionary* dic = [[NSDictionary alloc]initWithObjectsAndKeys:card.name,@"name",card.cost,@"cost",card.time,@"time",card.total,@"total", nil];
                [savableList addObject:dic];
            }
            [ToolUtils setEcardList:savableList];

@@ -215,7 +215,6 @@
 
 - (void)loadSavedState
 {
-    [self waiting:@"正在加载"];
     [self.passwordTextField setText:self.password];
     [self.schIdTextField setText:self.account];
     NSArray* grades = [self.gradesDic objectForKey:self.term];
@@ -232,7 +231,11 @@
         self.gradeList = courses;
         [self.tableView reloadData];
     }
-    [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
+    if (![ToolUtils offLine]) {
+        [self waiting:@"正在加载"];
+        [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
+
+    }
     
 //    [[ApisFactory getApiMGradeSearch] load:self selecter:@selector(disposMessage:) url:self.term];
 }

@@ -19,6 +19,7 @@
 #import "RDVTabBarController.h"
 #import "NewsListTVC.h"
 #import "MobClick.h"
+#import "TreeHoleListViewController.h"
 #define APP_KEY @"ikKR37FYgutHGDrrjq3c4SDS"
 
 #define REPORT_ID @"d5dd317228"
@@ -43,10 +44,10 @@
     self.window.rootViewController = nav;
     
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+
     if (userInfo) {
-        [self operaUserInfo:userInfo appliccation:application];
-        
-//        [ToolUtils setShowNews:YES];
+        [self savePush:userInfo];
+//        [self operaUserInfo:userInfo appliccation:application];
     }
     
     [self initUmen];
@@ -257,6 +258,7 @@
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     NSLog(@"frontia applciation receive Notify: %@", [userInfo description]);
+    
 //    NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if (application.applicationState == UIApplicationStateActive || application.applicationState == UIApplicationStateInactive) {
         // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
@@ -276,9 +278,53 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     [FrontiaPush handleNotification:userInfo];
     
 }
+- (void) savePush:(NSDictionary*)userInfo
+{
+    
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
 
+    int type = [[userInfo objectForKey:@"type"] integerValue];
+    if (type==11) {
+        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+        [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+        //        [pushNews setObject:@"title" forKey:@"title"];
+        [ToolUtils setShowNews:pushNews];
+        
+    } else if (type == 13)
+    {
+        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+        [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+        //        [pushNews setObject:@"title" forKey:@"title"];
+        [ToolUtils setShowActivity:pushNews];
+        
+    } else if (type == 14)
+    {
+        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+        [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+        //        [pushNews setObject:@"title" forKey:@"title"];
+        [ToolUtils setShowRss:pushNews];
+    } else if (type==15)
+    {
+        NSString* url = [userInfo objectForKey:@"target"];
+        [ToolUtils setShowTreeHole:url];
+    }
+
+}
 - (void)operaUserInfo:(NSDictionary *)userInfo appliccation:(UIApplication *)application
 {
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"11",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
+    [self savePush:userInfo];
+    
+    
     if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
         UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
         RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
@@ -306,14 +352,14 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     } else if ([[userInfo objectForKey:@"type"] integerValue] == 4) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"receivedCall" object:nil userInfo:userInfo];
     } else if ([[userInfo objectForKey:@"type"] integerValue] == 11){
-            NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
-            [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
-            [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
-            [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
-            [pushNews setObject:[userInfo objectForKey:@"title"] forKey:@"title"];
-            [ToolUtils setShowNews:pushNews];
-        if (application.applicationState != UIApplicationStateActive){
-#warning 此处判断是否在新闻列表界面
+//            NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+//            [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+//            [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+//            [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+//            [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+////        [pushNews setObject:@"title" forKey:@"title"];
+//            [ToolUtils setShowNews:pushNews];
+        if (application.applicationState == UIApplicationStateInactive){
             UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
             RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
             UINavigationController *nav = (UINavigationController*)tabbar.selectedViewController;
@@ -327,13 +373,13 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
             focus.source = [pushNews objectForKey:@"source"];
             focus.img = [pushNews objectForKey:@"img"];
             focus.url = [pushNews objectForKey:@"url"];
-            [newsList setCurrentNew:focus];
             [newsList setCurrentUrl:focus.url];
+            [newsList setCurrentNew:focus.build];
             [[nav.viewControllers lastObject] presentViewController:unc animated:YES completion:nil];
             //        [newsList setCurrentImg:[self.photoList objectAtIndex:self.pageController.currentPage]];
             [ToolUtils setShowNews:nil];
 
-        } else {
+        } else if(application.applicationState == UIApplicationStateActive){
             [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
                 style.font = [UIFont systemFontOfSize:12];
                 style.textColor = [UIColor whiteColor];
@@ -349,13 +395,14 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                                           styleName:@"style" object:@"2" userInfo:userInfo];
 
         }
-    }else if ([[userInfo objectForKey:@"type"] integerValue] == 13){
-        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
-        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
-        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
-        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
-        [pushNews setObject:[userInfo objectForKey:@"title"] forKey:@"title"];
-        [ToolUtils setShowRss:pushNews];
+    }else if ([[userInfo objectForKey:@"type"] integerValue] == 14){
+//        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+//        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+//        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+//        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+//        [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+////        [pushNews setObject:@"title" forKey:@"title"];
+//        [ToolUtils setShowRss:pushNews];
         if (application.applicationState != UIApplicationStateActive){
 #warning 此处判断是否在新闻列表界面
             UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
@@ -377,13 +424,14 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                                           styleName:@"style" object:@"3" userInfo:userInfo];
         }
 
-    }else if ([[userInfo objectForKey:@"type"] integerValue] == 14){
-        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
-        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
-        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
-        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
-        [pushNews setObject:[userInfo objectForKey:@"title"] forKey:@"title"];
-        [ToolUtils setShowActivity:pushNews];
+    }else if ([[userInfo objectForKey:@"type"] integerValue] == 13){
+//        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+//        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+//        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+//        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+//        [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+////        [pushNews setObject:@"title" forKey:@"title"];
+//        [ToolUtils setShowActivity:pushNews];
         if (application.applicationState != UIApplicationStateActive){
 #warning 此处判断是否在新闻列表界面
             UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
@@ -405,6 +453,32 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                                           styleName:@"style" object:@"4" userInfo:userInfo];
         }
         
+    } else if ([[userInfo objectForKey:@"type"] integerValue] == 15)
+    {
+        if (application.applicationState != UIApplicationStateActive){
+            UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
+            RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
+            [tabbar setTabBarHidden:YES];
+            UINavigationController *nav = (UINavigationController*)tabbar.selectedViewController;
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
+            TreeHoleListViewController *treeHole = [storyboard instantiateInitialViewController];
+            [nav pushViewController:treeHole animated:YES];
+        } else {
+            [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
+                style.font = [UIFont systemFontOfSize:12];
+                style.textColor = [UIColor whiteColor];
+                style.barColor = RGB(60, 139, 253);
+                style.animationType = JDStatusBarAnimationTypeMove;
+                //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
+                //        style.progressBarPosition = self.progressBarPosition;
+                //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
+                
+                return style;
+            }];
+            [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
+                                          styleName:@"style" object:@"5" userInfo:userInfo];
+
+        }
     }
 
     [application setApplicationIconBadgeNumber:0];

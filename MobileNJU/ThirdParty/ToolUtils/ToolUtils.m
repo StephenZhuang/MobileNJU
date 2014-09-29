@@ -667,4 +667,30 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"showActivity"];
 
 }
+
++ (void)setShowTreeHole:(NSString *)dic
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: dic forKey:@"showTreeHole"];
+    [userDefaults synchronize];
+}
+
++ (NSString *)showTreeHole
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"showTreeHole"];
+}
+
++(BOOL) offLine
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"offline"];
+
+}
++(void)setOffline:(BOOL)offline
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:offline forKey:@"offline"];
+    [userDefaults synchronize];
+    
+}
+
 @end

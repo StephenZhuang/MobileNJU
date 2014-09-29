@@ -109,9 +109,9 @@
     
     [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
     [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
-    if (![self.schIdTextField.text isEqualToString:@""]&&![self.passwordTextField.text isEqualToString:@""]&&!self.hasLogin) {
+    if (![self.schIdTextField.text isEqualToString:@""]&&![self.passwordTextField.text isEqualToString:@""]&&!self.hasLogin&&![ToolUtils offLine]) {
         [self search:nil];
-    } else if (!self.hasLogin){
+    } else if (!self.hasLogin&&![ToolUtils offLine]){
         [self showAlert];
     }
     [self.tableView reloadData];

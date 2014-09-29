@@ -238,7 +238,7 @@ UIView* view;
 
 - (void)goToChat:(NSNotification *)notification
 {
-    if (self.view.window) {
+    if (self.view.window&&[ToolUtils shouldShowNews]) {
         UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
         UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
         
@@ -250,11 +250,10 @@ UIView* view;
         focus.source = [pushNews objectForKey:@"source"];
         focus.img = [pushNews objectForKey:@"img"];
         focus.url = [pushNews objectForKey:@"url"];
-        [newsList setCurrentNew:focus.build];
         [newsList setCurrentUrl:focus.url];
-        [ToolUtils setShowNews:nil];
+        [newsList setCurrentNew:focus.build];
         [self presentViewController:unc animated:YES completion:^{
-            
+            [ToolUtils setShowNews:nil];
         }];
     }
 }

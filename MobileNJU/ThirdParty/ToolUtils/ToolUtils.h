@@ -115,4 +115,9 @@
 + (void) setShowRss: (NSDictionary*)dic;
 + (NSDictionary*)showActivity;
 + (void) setShowActivity: (NSDictionary*)dic;
++ (NSString*)showTreeHole;
++ (void) setShowTreeHole: (NSString*)dic;
++(BOOL) offLine;
++(void)setOffline:(BOOL)offline;
+
 @end

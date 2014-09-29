@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0HC-43-OVy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0HC-43-OVy">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -71,44 +71,38 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ast-uU-mia">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ast-uU-mia">
                                                     <rect key="frame" x="8" y="7" width="107" height="67"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="107" id="ubz-HK-phJ"/>
-                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="党委新闻" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FR-1z-WzB">
-                                                    <rect key="frame" x="153" y="60" width="52" height="16"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="党委新闻" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FR-1z-WzB">
+                                                    <rect key="frame" x="153" y="60" width="85" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="来自" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tb7-6B-4lc">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="来自" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tb7-6B-4lc">
                                                     <rect key="frame" x="119" y="60" width="26" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-05-21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAP-t6-b0P">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2014-05-21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAP-t6-b0P">
                                                     <rect key="frame" x="246" y="61" width="65" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.4039215686" green="0.4039215686" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="南京大学举行党委书记任免大会" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVz-Ni-JIB">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="南京大学举行党委书记任免大会" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVz-Ni-JIB">
                                                     <rect key="frame" x="117" y="7" width="192" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="LJF-eM-ahI"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="highlightedColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扬子晚报网5月21日讯 据南京日报官方微博5月21日下午2点46分发布消息称南京大学换书记了。“南京大学党委书记任免大会正在进行。张异宾(图" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="188" translatesAutoresizingMaskIntoConstraints="NO" id="GYY-YC-YoW">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="扬子晚报网5月21日讯 据南京日报官方微博5月21日下午2点46分发布消息称南京大学换书记了。“南京大学党委书记任免大会正在进行。张异宾(图" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="188" translatesAutoresizingMaskIntoConstraints="NO" id="GYY-YC-YoW">
                                                     <rect key="frame" x="118" y="29" width="188" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -116,25 +110,6 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="ast-uU-mia" secondAttribute="bottom" constant="5" id="08c-2n-pzk"/>
-                                                <constraint firstItem="hVz-Ni-JIB" firstAttribute="leading" secondItem="ast-uU-mia" secondAttribute="trailing" constant="2" id="0Si-CN-hOh"/>
-                                                <constraint firstItem="hVz-Ni-JIB" firstAttribute="leading" secondItem="ast-uU-mia" secondAttribute="trailing" constant="2" id="13i-5K-NAD"/>
-                                                <constraint firstItem="ast-uU-mia" firstAttribute="leading" secondItem="IuC-jK-Dgd" secondAttribute="leading" constant="8" id="1mN-J1-xEM"/>
-                                                <constraint firstItem="1FR-1z-WzB" firstAttribute="leading" secondItem="tb7-6B-4lc" secondAttribute="trailing" constant="8" id="2zl-ds-67c"/>
-                                                <constraint firstAttribute="trailing" secondItem="EAP-t6-b0P" secondAttribute="trailing" constant="9" id="7YG-no-jYz"/>
-                                                <constraint firstAttribute="trailing" secondItem="GYY-YC-YoW" secondAttribute="trailing" constant="14" id="BE0-RG-ib2"/>
-                                                <constraint firstAttribute="bottom" secondItem="tb7-6B-4lc" secondAttribute="bottom" constant="3" id="Cj1-f2-JGc"/>
-                                                <constraint firstItem="GYY-YC-YoW" firstAttribute="top" secondItem="hVz-Ni-JIB" secondAttribute="bottom" constant="1" id="Cui-Lx-VRe"/>
-                                                <constraint firstAttribute="trailing" secondItem="hVz-Ni-JIB" secondAttribute="trailing" constant="11" id="Xf0-yX-WIH"/>
-                                                <constraint firstItem="hVz-Ni-JIB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="IuC-jK-Dgd" secondAttribute="top" constant="7" id="jpy-B6-vAL"/>
-                                                <constraint firstAttribute="bottom" secondItem="1FR-1z-WzB" secondAttribute="bottom" constant="3" id="phy-mH-OHh"/>
-                                                <constraint firstItem="tb7-6B-4lc" firstAttribute="leading" secondItem="ast-uU-mia" secondAttribute="trailing" constant="4" id="qcI-KG-Zec"/>
-                                                <constraint firstItem="hVz-Ni-JIB" firstAttribute="top" secondItem="IuC-jK-Dgd" secondAttribute="top" constant="7" id="qmh-7u-TOG"/>
-                                                <constraint firstAttribute="bottom" secondItem="EAP-t6-b0P" secondAttribute="bottom" constant="3" id="rpj-xI-BDT"/>
-                                                <constraint firstItem="GYY-YC-YoW" firstAttribute="leading" secondItem="ast-uU-mia" secondAttribute="trailing" constant="3" id="tUh-Ci-RIs"/>
-                                                <constraint firstItem="ast-uU-mia" firstAttribute="top" secondItem="IuC-jK-Dgd" secondAttribute="top" constant="7" id="xUP-9k-cgd"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="newsDate" destination="EAP-t6-b0P" id="Ehx-Cv-eXG"/>

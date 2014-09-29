@@ -93,13 +93,21 @@ static NSArray* descriptions;
         focus.source = [pushNews objectForKey:@"source"];
         focus.img = [pushNews objectForKey:@"img"];
         focus.url = [pushNews objectForKey:@"url"];
-        [newsList setCurrentNew:focus];
         [newsList setCurrentUrl:focus.url];
+        [newsList setCurrentNew:focus.build];
 //        [newsList setCurrentImg:[self.photoList objectAtIndex:self.pageController.currentPage]];
         [self presentViewController:unc animated:YES completion:^{
+            [ToolUtils setShowNews:nil];
         }];
-        [ToolUtils setShowNews:nil];
-
+    } else if ([ToolUtils showActivity])
+    {
+        [self.rdv_tabBarController setSelectedIndex:2];
+    } else if ([ToolUtils showRss])
+    {
+        [self.rdv_tabBarController setSelectedIndex:1];
+    } else if ([ToolUtils showTreeHole])
+    {
+        [self gotoTreeHole];
     }
 }
 
@@ -464,14 +472,14 @@ static NSArray* descriptions;
     UIImageView *imageView = [self.UIImageViewList objectAtIndex:site-1];;
     if (self.focusList.count>=site) {
         MFocus* focus = [self.focusList objectAtIndex:site-1];
-        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434]
+        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:400]
                         placeholderImage:[UIImage imageNamed:@"640乘400"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             if (image!=nil) {
                 [self.photoList setObject:image atIndexedSubscript:site-1];
             }
         }];
     } else {
-        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site-1]width:640 height:434]   placeholderImage:[UIImage imageNamed:@"640乘400"]  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site-1]width:640 height:400]   placeholderImage:[UIImage imageNamed:@"640乘400"]  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             self.complete++;
             if (image!=nil) {
                 [self.photoList setObject:image atIndexedSubscript:site-1];
@@ -521,9 +529,9 @@ static NSArray* descriptions;
         frame.origin.y = self.headerView.frame.size.height-frame.size.height-40;
         _newImage = [[UIImageView alloc]initWithFrame:frame];
         if (focus==nil) {
-            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:page]   width:640 height:434]];
+            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:page]   width:640 height:400]];
         } else {
-            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434]];
+            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:400]];
         }
     }
     return _newImage;
@@ -747,14 +755,24 @@ static NSArray* descriptions;
             [self.navigationController pushViewController:vc animated:YES];
             //        [self dismissCallView];
         }
-        
-    } else if (type.integerValue ==2 ){
+    }
+    else if (type.integerValue ==2 ){
         [super goToChat:notification];
     } else if (type.integerValue ==3) {
         [self.rdv_tabBarController setSelectedIndex:1];
     } else if (type.integerValue ==4) {
         [self.rdv_tabBarController setSelectedIndex:2];
+    } else if (type.integerValue ==5) {
+        [self gotoTreeHole];
     }
+}
+
+- (void) gotoTreeHole
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
+    TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
+    [self.rdv_tabBarController setTabBarHidden:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

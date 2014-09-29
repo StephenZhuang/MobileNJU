@@ -103,7 +103,14 @@
         nextVC.currentNew = sender;
         MNews* new = (MNews*)sender;
         nextVC.img = self.currentImg;
-        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",new.url]];
+        NSURL* url;
+        if (![new.url hasPrefix:@"http"]) {
+            url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",new.url]];
+        } else {
+            url = [[NSURL alloc]initWithString:new.url];
+        }
+
+        nextVC.url = url;
     }
 }
 - (void)didReceiveMemoryWarning

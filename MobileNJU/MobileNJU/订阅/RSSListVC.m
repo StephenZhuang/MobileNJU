@@ -12,6 +12,8 @@
 #import "NewsDetailVC.h"
 #import "ApiMRssNews.h"
 #import "NewsDetailVC.h"
+#import <Frontia/Frontia.h>
+
 @interface RSSListVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSMutableArray* rssNews;
 @property(nonatomic,strong)MNews* currentNew;

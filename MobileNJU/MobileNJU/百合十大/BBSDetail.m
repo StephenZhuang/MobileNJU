@@ -169,13 +169,20 @@ document.location=\"myweb:touch:end\";};";
         }
         NSString *urlToSave = [self.webView stringByEvaluatingJavaScriptFromString:_imgURL];
         NSLog(@"image url=%@", urlToSave);
-        NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlToSave]];
-        UIImage* image = [UIImage imageWithData:data];
-        //UIImageWriteToSavedPhotosAlbum(image, nil, nil,nil);
-        UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        NSThread* myThread = [[NSThread alloc] initWithTarget:self selector:@selector(downloadImage:) object:urlToSave];
+        [myThread start];
+       
     }
 }
-                                                      
+
+- (void)downloadImage:(NSString*) urlToSave
+{
+    NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlToSave]];
+    UIImage* image = [UIImage imageWithData:data];
+    //UIImageWriteToSavedPhotosAlbum(image, nil, nil,nil);
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo
 {
     [self.loginIndicator removeFromSuperview];

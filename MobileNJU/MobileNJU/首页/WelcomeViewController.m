@@ -61,6 +61,7 @@ static NSArray* buttonImages;
     [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timeChangeIndicate) userInfo:nil repeats:YES];
     self.time = 1;
     self.offline = NO;
+    [ToolUtils setOffline:NO];
     //api调用方式 可以点进去查看，也可按option + 左键查看 ， 回调函数统一写作disposMessage ， 如下
     [[ApisFactory getApiMGetWelcomePage] load:self selecter:@selector(disposMessage:)];
     [self.usernameTextField setText:[ToolUtils getAccount]==nil?@"":[ToolUtils getAccount]];
@@ -107,6 +108,10 @@ static NSArray* buttonImages;
         NSLog(@"firstOpen设为YES");
         self.firstOpen = NO;
     }
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [ToolUtils setOffline:self.offline];
 }
 #pragma - mark api回调
 - (void)disposMessage:(Son *)son

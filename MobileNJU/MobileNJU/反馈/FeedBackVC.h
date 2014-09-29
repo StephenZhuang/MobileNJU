@@ -8,8 +8,9 @@
 
 #import "BaseViewController.h"
 
-@interface FeedBackVC : BaseViewController
+@interface FeedBackVC : BaseViewController <UITextViewDelegate>
 @property (strong, nonatomic) UIButton *submitBt;
 @property (weak, nonatomic) IBOutlet UITextView *textArea;
 
+@property (weak, nonatomic) IBOutlet UILabel *placeholder;
 @end
