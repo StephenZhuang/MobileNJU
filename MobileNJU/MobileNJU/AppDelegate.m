@@ -20,7 +20,7 @@
 #import "NewsListTVC.h"
 #import "MobClick.h"
 #import "TreeHoleListViewController.h"
-#define APP_KEY @"ikKR37FYgutHGDrrjq3c4SDS"
+#define APP_KEY @"AkPTDSp3fqKbqy7Sumedrqws"
 
 #define REPORT_ID @"d5dd317228"
 
@@ -45,7 +45,7 @@
     
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
 //    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
-    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"13",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"14",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
 
     if (userInfo) {
         [self savePush:userInfo];
@@ -324,6 +324,8 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 - (void)operaUserInfo:(NSDictionary *)userInfo appliccation:(UIApplication *)application
 {
 //    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"11",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
+    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
+
     [self savePush:userInfo];
     
     
