@@ -160,9 +160,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if ([ToolUtils getJWID].length>0) {
-        [self loadLast];
-    }
+//    if ([ToolUtils getJWID].length>0) {
+//        [self loadLast];
+//    }
 }
 
 //标题栏
@@ -181,11 +181,11 @@
         return;
     }
     [self loadSavedLesson];
-    if (!self.offline) {
-        ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
-        [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
-
-    }
+//    if (!self.offline) {
+//        ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
+//        [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
+//
+//    }
   }
 
 //加载缓存课表
@@ -544,16 +544,30 @@
     [self performSegueWithIdentifier:@"addLesson" sender:nil];
 }
 
-//删除课程
 - (void)deleteLesson:(NSString *)id
 {
     [self cancelAlert:nil];
-    [self waiting:@"正在删除"];
-    ApiMDelClass* api = [[ApiMDelClass alloc]init];
-    [api load:self selecter:@selector(disposMessage:) id:id];
+    //    [self waiting:@"正在删除"];
+    NSDictionary* removedDic = nil;
+    NSMutableArray* arr = [[NSMutableArray alloc]initWithArray:[ToolUtils getMySchedule]];
+    for (NSDictionary* dic in arr)
+    {
+        if ([[dic objectForKey:@"id"]isEqualToString:id])
+        {
+            removedDic = dic;
+            break;
+        }
+    }
+    if (removedDic)
+    {
+        [arr removeObject:removedDic];
+    }
+    [ToolUtils setMySchedule:arr];
+    [self loadSavedLesson];
+    //    ApiMDelClass* api = [[ApiMDelClass alloc]init];
+    //    [api load:self selecter:@selector(disposMessage:) id:id];
+    
 }
-
-
 
 #pragma mark -icaursel
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
