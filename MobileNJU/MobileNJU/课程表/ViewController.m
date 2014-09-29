@@ -299,8 +299,16 @@
 //    }
     lesson.busyweeks = self.weekStr;
     self.addedLesson = lesson;
-    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddClass" params:builder  delegate:self selecter:@selector(disposeMessage:)];
-    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
+    NSMutableArray* currentLessons = [[NSMutableArray alloc]init];
+    if ([ToolUtils getMySchedule]) {
+        [currentLessons addObjectsFromArray:[ToolUtils getMySchedule]];
+    }
+    [currentLessons addObject:[self.addedLesson getDic]];
+    [ToolUtils setMySchedule:currentLessons];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    //    UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddClass" params:builder  delegate:self selecter:@selector(disposeMessage:)];
+//    [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
 
 }
 
