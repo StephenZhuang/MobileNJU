@@ -12,6 +12,7 @@
 #import "weekPickerDelegate.h"
 #import "WeekCell.h"
 #import "RDVTabBarController.h"
+#import "ScheduleLesson.h"
 @interface ViewController ()<IQActionSheetPickerViewDelegate,weekPickerDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *lessonNameField;
 @property (weak, nonatomic) IBOutlet UITextField *teacherNameField;
@@ -23,7 +24,9 @@
 @property (nonatomic,strong)NSArray* classTitle;
 @property (nonatomic)int day;
 @property (nonatomic)int start;
+@property (nonatomic,strong) NSString* weekStr;
 @property (nonatomic)int end;
+@property (nonatomic,strong)ScheduleLesson* addedLesson;
 @end
 
 @implementation ViewController
@@ -35,7 +38,7 @@
     self.start = 0;
     self.end = 0;
     self.weekTitle = [NSArray arrayWithObjects:@"周一" ,@"周二",@"周三",@"周四",@"周五",@"周六",@"周日",nil];
-    self.classTitle =  [NSArray arrayWithObjects:@"第1节",@"第2节",@"第3节",@"第4节",@"第5节",@"第6节",@"第7节",@"第8节",@"第9节",@"第10节",@"第11节",@"第12节",nil];
+    self.classTitle =  [NSArray arrayWithObjects:@"第1节",@"第2节",@"第3节",@"第4节",@"第5节",@"第6节",@"第7节",@"第8节",@"第9节",@"第10节",@"第11节",@"第12节",@"第13节",@"第14节",@"第15节",nil];
 //    [self.tableView setScrollEnabled:NO];
     if([self.navigationController.navigationBar
         respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
@@ -82,7 +85,14 @@
     if ([son getError]==0) {
         MRet_Builder* ret = (MRet_Builder*)[son getBuild];
         [ToolUtils showMessage:ret.msg];
+        NSMutableArray* currentLessons = [[NSMutableArray alloc]init];
+        if ([ToolUtils getMySchedule]) {
+            [currentLessons addObjectsFromArray:[ToolUtils getMySchedule]];
+        }
+        [currentLessons addObject:[self.addedLesson getDic]];
+        [ToolUtils setMySchedule:currentLessons];
         [self.navigationController popViewControllerAnimated:YES];
+        
     }  else {
         if ([[son getMsg] isEqualToString:@"登录验证失败"]) {
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您的账户在别处登录" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
@@ -204,6 +214,15 @@
 #pragma -mark weekchooseDelegate
 - (void)cancel
 {
+    NSArray* selectedButton = self.weekPicker.weekButtons;
+    NSMutableString* weekStr = [[NSMutableString alloc]init];
+    for (WeekCell* button in selectedButton) {
+        if (button.select) {
+            [weekStr appendString:button.numLabel.text];
+            [weekStr appendString:@","];
+        }
+    }
+    self.weekStr = weekStr;
     [self enableAll:YES];
     CGRect frame = CGRectMake(0, self.view.bounds.size.height, 320, 280);
     [UIView animateWithDuration:0.3 animations:^{
@@ -225,6 +244,7 @@
     for (NSString* chooseNum in result) {
         [string appendFormat:@"%@ ",chooseNum];
     }
+
     [self.weekField setText:string];
     
     
@@ -259,6 +279,26 @@
     builder.begin = self.start;
     builder.end = self.end;
     builder.time = self.timeField.text;
+    ScheduleLesson* lesson = [[ScheduleLesson alloc]init];
+    lesson.name = builder.name;
+    lesson.teacher = builder.teacher;
+    lesson.location = builder.address;
+    lesson.week = builder.week;
+    lesson.day = builder.day;
+    lesson.start = builder.begin;
+    lesson.length = builder.end-builder.begin+1;
+    lesson.time = builder.time;
+    lesson.id = lesson.name;
+//    NSArray* selectedButton = self.weekPicker.weekButtons;
+//    NSMutableString* weekStr = [[NSMutableString alloc]init];
+//    for (WeekCell* button in selectedButton) {
+//        if (button.select) {
+//            [weekStr appendString:button.numLabel.text];
+//            [weekStr appendString:@","];
+//        }
+//    }
+    lesson.busyweeks = self.weekStr;
+    self.addedLesson = lesson;
     UpdateOne *updateone=[[UpdateOne alloc] init:@"MAddClass" params:builder  delegate:self selecter:@selector(disposeMessage:)];
     [DataManager loadData:[[NSArray alloc] initWithObjects:updateone, nil] delegate:self];
 

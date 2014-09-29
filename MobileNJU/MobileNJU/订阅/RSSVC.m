@@ -11,6 +11,9 @@
 #import "ZsndNews.pb.h"
 #import "RSSListVC.h"
 #import "ZsndSystem.pb.h"
+#import "NewsDetailVC.h"
+#import <Frontia/Frontia.h>
+
 @interface RSSVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSArray* myRss;
 @end
@@ -39,6 +42,8 @@
     
 }
 - (void) viewWillAppear: (BOOL)inAnimated {
+    [super viewWillAppear:inAnimated];
+
     NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
     if(selected)
         [self.tableView deselectRowAtIndexPath:selected animated:NO];
@@ -61,9 +66,32 @@
 
 
 - (void)viewDidAppear:(BOOL)animated
-{
-    [_header beginRefreshing];
+{   
+    [self loadData];
+    
+    if ([ToolUtils showRss]) {
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+        NewsDetailVC* detail = (NewsDetailVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"NewsDetail"]; //test2为viewcontroller的StoryboardId
+        MNews_Builder* focus = [[MNews_Builder alloc]init];
+        NSDictionary* pushNews = [ToolUtils showRss];
+        focus.title = [pushNews objectForKey:@"title"];
+        focus.source = [pushNews objectForKey:@"source"];
+        focus.img = [pushNews objectForKey:@"img"];
+        focus.url = [pushNews objectForKey:@"url"];
+        [detail setMyTitle:@"订阅详情"];
+        NSURL* url;
+        if (![focus.url hasPrefix:@"http"]) {
+            url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",focus.url]];
+        } else {
+            url = [[NSURL alloc]initWithString:focus.url];
+        }
+        detail.url = url;
+        detail.currentNew = focus.build;
 
+        [self.navigationController pushViewController:detail animated:YES];
+        [ToolUtils setShowRss:nil];
+    }
+    
 }
 - (void)didReceiveMemoryWarning
 {
@@ -84,6 +112,26 @@
         if ([[son getMethod]isEqualToString:@"MMyRss"]) {
             MRssList_Builder* ret = (MRssList_Builder*)[son getBuild];
             self.myRss = ret.listList;
+            NSMutableArray* idList = [[NSMutableArray alloc]init];
+            for (MRss* news in self.myRss) {
+                [idList addObject:[NSString stringWithFormat:@"%@rss",news.id]];
+            }
+            FrontiaPush *push = [Frontia getPush];
+            if (push) {
+                UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+                if(types!= UIRemoteNotificationTypeNone)
+                {
+                    [push setTags:idList tagOpResult:^(int count, NSArray *failureTag) {
+                        
+                    } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
+                        
+                    }];
+                    //                    [push setTag:[NSString stringWithFormat:@"%@rss",self.selectedId] tagOpResult:^(int count, NSArray *failureTag) {
+                    //                    } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
+                    //                    }];
+                }
+            }
+
         }
     } else {
         [super disposMessage:son];

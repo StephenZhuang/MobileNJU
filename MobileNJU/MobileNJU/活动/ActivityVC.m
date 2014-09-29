@@ -70,11 +70,16 @@
     }
 }
 - (void) viewWillAppear: (BOOL)inAnimated {
+    [super viewWillAppear:inAnimated];
     NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
     if(selected)
         [self.tableView deselectRowAtIndexPath:selected animated:NO];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
 - (void)showAll:(MNews *)news img:(UIImage *)img
 {
     self.currentImg = img;

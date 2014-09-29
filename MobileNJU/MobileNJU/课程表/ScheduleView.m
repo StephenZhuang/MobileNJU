@@ -176,7 +176,7 @@
                 // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
                 //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
                 
-                CGRect loactionFrame = CGRectMake(3, 50, WIDTH-6, 60);
+                CGRect loactionFrame = CGRectMake(3, 40, WIDTH-6, 60);
                 VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
                 
                 
@@ -232,7 +232,7 @@
             // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
             //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
             
-            CGRect loactionFrame = CGRectMake(3, 50, WIDTH-6, 60);
+            CGRect loactionFrame = CGRectMake(3,40, WIDTH-6, 60);
             VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
             
             
@@ -288,38 +288,45 @@
 
 - (BOOL)judgeHasLesson:(ScheduleLesson*)lesson
 {
-    NSString* week = lesson.week;
-    if ([week isEqualToString:@"双周"]) {
-        if (self.week%2!=0) {
-            return NO;
-        }
-    } else if ([week isEqualToString:@"单周"]){
-        if (self.week%2==0) {
-            return NO;
-        }
-    } else if ([week rangeOfString:@"-"].length>0)
-    {
-        NSArray* range = [week componentsSeparatedByString:@"-"];
-        NSString* end = [[[range objectAtIndex:1] componentsSeparatedByString:@"周"] firstObject];
-        
-        if ([[range firstObject] integerValue] > self.week|| [end integerValue] < self.week) {
-            return NO;
-        }
-    } else if ([week rangeOfString:@" "].length>0)
-    {
-        NSArray* range = [week componentsSeparatedByString:@" "];
-        BOOL has = NO;
-        for (NSString* day in range) {
-            if ( [day integerValue]==self.week) {
-                has = YES;
-                break;
-            }
-        }
-        if (!has) {
-            return NO;
+    NSArray* busyweeks = [lesson.busyweeks componentsSeparatedByString:@","];
+    for (NSString* week in busyweeks) {
+        if (week.integerValue == self.week) {
+            return YES;
         }
     }
-    return YES;
+    return NO;
+//    NSString* week = lesson.week;
+//    if ([week isEqualToString:@"双周"]) {
+//        if (self.week%2!=0) {
+//            return NO;
+//        }
+//    } else if ([week isEqualToString:@"单周"]){
+//        if (self.week%2==0) {
+//            return NO;
+//        }
+//    } else if ([week rangeOfString:@"-"].length>0)
+//    {
+//        NSArray* range = [week componentsSeparatedByString:@"-"];
+//        NSString* end = [[[range objectAtIndex:1] componentsSeparatedByString:@"周"] firstObject];
+//        
+//        if ([[range firstObject] integerValue] > self.week|| [end integerValue] < self.week) {
+//            return NO;
+//        }
+//    } else if ([week rangeOfString:@" "].length>0)
+//    {
+//        NSArray* range = [week componentsSeparatedByString:@" "];
+//        BOOL has = NO;
+//        for (NSString* day in range) {
+//            if ( [day integerValue]==self.week) {
+//                has = YES;
+//                break;
+//            }
+//        }
+//        if (!has) {
+//            return NO;
+//        }
+//    }
+//    return YES;
 }
 
 

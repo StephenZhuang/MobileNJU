@@ -27,12 +27,12 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES];
     if ([self shoudReturn]) {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-
 - (void)setType:(NSArray *)typeList
 {
         self.secondPage.typeList = self.typeList;

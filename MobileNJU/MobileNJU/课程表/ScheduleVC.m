@@ -84,8 +84,33 @@
         if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]) {
             [self load:self selecter:@selector(disposMessage:) code:nil account:@"mg......."  password:@"....."];
         }
-        [self loadLast];
+        [self loadLast];[self getCurrentWeek];
     }
+}
+
+- (void)getCurrentWeek
+{
+    if ([ToolUtils offLine]) {
+        return;
+    }
+    [self load:self selecter:@selector(disposMessage:)];
+}
+
+/**
+ *  课程表 /mobile?methodno=MSchedule&debug=1&deviceid=1&account=&password=&code=
+ * @param delegate 回调类
+ * @param select  回调函数
+ * @param code * 第一次登录时不需要，如果有验证码，则第二次请求时必须
+ * @param account * account
+ * @param password * password
+ * @callback MClassList_Builder
+ */
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select   {
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    UpdateOne *updateone=[[UpdateOne alloc] init:@"MWeek" params:array  delegate:delegate selecter:select];
+    [updateone setShowLoading:NO];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:updateone,nil] delegate:delegate];
+    return updateone;
 }
 
 - (void)initAlert
@@ -123,6 +148,7 @@
 //返回时重新加载
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if ([ToolUtils getJWID].length>0) {
         [self loadLast];
     }
@@ -288,6 +314,10 @@
             [ToolUtils showMessage:ret.msg];
             [self closeAlert];
             [self loadLast];
+        } else if ( [[son getMethod]isEqualToString:@"MWeek"])
+        {
+            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+            [ToolUtils setCurrentWeek:ret.code];
         }
     
     } else if ([[son getMsg]hasPrefix:@"信息"]      &&  self.imgView!=nil )
@@ -427,6 +457,7 @@
         lesson.start = each_class.begin;
         lesson.length = each_class.end-each_class.begin+1;
         lesson.time = each_class.time;
+        lesson.busyweeks = each_class.busyweeks;
         lesson.id = each_class.id;
         [schedules addObject:lesson];
         [canSaveLessons addObject:[lesson getDic]];
@@ -497,11 +528,27 @@
 - (void)deleteLesson:(NSString *)id
 {
     [self cancelAlert:nil];
-    [self waiting:@"正在删除"];
-    ApiMDelClass* api = [[ApiMDelClass alloc]init];
-    [api load:self selecter:@selector(disposMessage:) id:id];
+    //    [self waiting:@"正在删除"];
+    NSDictionary* removedDic = nil;
+    NSMutableArray* arr = [[NSMutableArray alloc]initWithArray:[ToolUtils getMySchedule]];
+    for (NSDictionary* dic in arr)
+    {
+        if ([[dic objectForKey:@"id"]isEqualToString:id])
+        {
+            removedDic = dic;
+            break;
+        }
+    }
+    if (removedDic)
+    {
+        [arr removeObject:removedDic];
+    }
+    [ToolUtils setMySchedule:arr];
+    [self loadSavedLesson];
+    //    ApiMDelClass* api = [[ApiMDelClass alloc]init];
+    //    [api load:self selecter:@selector(disposMessage:) id:id];
+    
 }
-
 
 
 #pragma mark -icaursel

@@ -35,6 +35,7 @@
 }
 
 - (void) viewWillAppear: (BOOL)inAnimated {
+    [super viewWillAppear:inAnimated];
     NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
     if(selected)
         [self.tableView deselectRowAtIndexPath:selected animated:NO];
