@@ -333,6 +333,10 @@
             [ToolUtils showMessage:ret.msg];
             [self closeAlert];
             [self loadLast];
+        }  else if ( [[son getMethod]isEqualToString:@"MWeek"])
+        {
+            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
+            [ToolUtils setCurrentWeek:ret.code];
         }
     }
 //    } else if ([[son getMsg]hasPrefix:@"信息"]      &&  self.imgView!=nil )

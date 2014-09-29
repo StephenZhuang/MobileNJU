@@ -29,6 +29,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (self.myDelegate!=nil) {
         self.passwordField.placeholder = @"设置密码";
         self.confirmField.placeholder = @"确认密码";
