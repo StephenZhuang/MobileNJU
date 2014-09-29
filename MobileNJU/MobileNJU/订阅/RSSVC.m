@@ -78,7 +78,7 @@
         focus.source = [pushNews objectForKey:@"source"];
         focus.img = [pushNews objectForKey:@"img"];
         focus.url = [pushNews objectForKey:@"url"];
-        [detail setMyTitle:@"订阅详情"];
+        [detail setMyTitle:@"兴趣详情"];
         NSURL* url;
         if (![focus.url hasPrefix:@"http"]) {
             url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",focus.url]];

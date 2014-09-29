@@ -132,7 +132,7 @@
         NewsDetailVC* destinationVC = (NewsDetailVC*)segue.destinationViewController;
         NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",self.currentUrl]];
         NSLog(@"设置的网址%@",self.currentUrl);
-        [destinationVC setMyTitle:@"订阅详情"];
+        [destinationVC setMyTitle:@"兴趣详情"];
         [destinationVC setUrl:url];
         [destinationVC setCurrentNew:self.currentNew];
         [destinationVC setImg:self.currentImg];

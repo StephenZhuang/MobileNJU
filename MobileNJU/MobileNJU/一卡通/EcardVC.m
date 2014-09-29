@@ -75,12 +75,14 @@
     self.endDate = searchDateFormat;
     NSString* searchStartDate = [dateFormatter stringFromDate:newDate];
     self.startDate = searchStartDate;
-    if (self.alertView.isHidden) {
-        [self waiting:@"正在读取"];
-        [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
-        
-    } else {
-        [self getCode];
+    if (![ToolUtils offLine]) {
+        if (self.alertView.isHidden) {
+            [self waiting:@"正在读取"];
+            [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
+            
+        } else {
+            [self getCode];
+        }
     }
     [self loadLast];
     // Do any additional setup after loading the view.

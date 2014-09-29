@@ -32,10 +32,23 @@
     if (!_activityList) {
         _activityList  = [[ NSMutableArray alloc]init];
     }
-    
     return _activityList;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if ([ToolUtils showActivity]) {
+        MNews_Builder* focus = [[MNews_Builder alloc]init];
+        NSDictionary* pushNews = [ToolUtils showActivity];
+        focus.title = [pushNews objectForKey:@"title"];
+        focus.source = [pushNews objectForKey:@"source"];
+        focus.img = [pushNews objectForKey:@"img"];
+        focus.url = [pushNews objectForKey:@"url"];
+        [self performSegueWithIdentifier:@"detail" sender:focus.build];
+        [ToolUtils setShowActivity:nil];
+    }
+}
 - (void)loadData
 {
     [[[ApisFactory getApiMActivity] setPage:page pageCount:5]load:self selecter:@selector(disposMessage:)];
@@ -76,10 +89,6 @@
         [self.tableView deselectRowAtIndexPath:selected animated:NO];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
 - (void)showAll:(MNews *)news img:(UIImage *)img
 {
     self.currentImg = img;
@@ -94,7 +103,14 @@
         nextVC.currentNew = sender;
         MNews* new = (MNews*)sender;
         nextVC.img = self.currentImg;
-        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",new.url]];
+        NSURL* url;
+        if (![new.url hasPrefix:@"http"]) {
+            url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",new.url]];
+        } else {
+            url = [[NSURL alloc]initWithString:new.url];
+        }
+
+        nextVC.url = url;
     }
 }
 - (void)didReceiveMemoryWarning
@@ -125,7 +141,7 @@
     CGPoint center = cell.imageView.center;
     center.x = cell.center.x;
     cell.imageView.center = center;
-    cell.url =     [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",news.url]];
+    cell.url =     [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",news.url]];
     return cell;
 }
 

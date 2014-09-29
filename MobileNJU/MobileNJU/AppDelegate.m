@@ -45,7 +45,8 @@
     
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
 
-    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"14",@"type",@"nju/news/1411992130101.html",@"target", @"source",@"source",@"img",@"img",@"titlepush",@"titlepush",nil];
 
     if (userInfo) {
         [self savePush:userInfo];
@@ -283,7 +284,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 - (void) savePush:(NSDictionary*)userInfo
 {
     
-    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
 
     int type = [[userInfo objectForKey:@"type"] integerValue];
     if (type==11) {
@@ -323,7 +324,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
 }
 - (void)operaUserInfo:(NSDictionary *)userInfo appliccation:(UIApplication *)application
 {
-//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"11",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"14",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
     [self savePush:userInfo];
     
     
