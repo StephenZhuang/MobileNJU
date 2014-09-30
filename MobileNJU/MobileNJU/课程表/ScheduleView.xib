@@ -8,15 +8,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1ya-nR-fY7" customClass="ScheduleView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="620"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ga-4n-Nb7">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="620"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="课程表背景" translatesAutoresizingMaskIntoConstraints="NO" id="kXe-Z5-mpB">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="597"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vFw-x4-3oe">
@@ -154,6 +154,6 @@
         </view>
     </objects>
     <resources>
-        <image name="课程表背景" width="320" height="597"/>
+        <image name="课程表背景" width="320" height="750"/>
     </resources>
 </document>

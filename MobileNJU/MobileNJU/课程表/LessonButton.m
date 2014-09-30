@@ -33,7 +33,7 @@
 
 - (UIColor*)getColor
 {
-    switch (self.lessonId%10) {
+    switch (self.lessonId%9+1) {
         case 0:return [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
         case 1:return [UIColor colorWithRed:255/255.0 green:169/255.0 blue:165/255.0 alpha:1];
         case 2:return [UIColor colorWithRed:118/255.0 green:233/255.0 blue:188/255.0 alpha:1];
@@ -55,6 +55,7 @@
     [myButton addTarget:self action:@selector(showDetail) forControlEvents:UIControlEventTouchUpInside];
 
 }
+
 
 
 

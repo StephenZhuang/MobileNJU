@@ -21,6 +21,8 @@
     [dic setValue:self.teacher forKey:@"teacher"];
     [dic setValue:self.week forKey:@"week"];
     [dic setValue:self.time forKey:@"time"];
+    [dic setValue:self.busyweeks forKey:@"busyweeks"];
+    [dic setValue:self.id forKey:@"id"];
     return dic;
 }
 - (void)loadDic:(NSDictionary *)dic
@@ -34,5 +36,7 @@
     self.teacher = [dic objectForKey:@"teacher"];
     self.week = [dic objectForKey:@"week"];
     self.time = [dic objectForKey:@"time"];
+    self.busyweeks = [dic objectForKey:@"busyweeks"];
+    self.id = [dic objectForKey:@"id"];
 }
 @end
