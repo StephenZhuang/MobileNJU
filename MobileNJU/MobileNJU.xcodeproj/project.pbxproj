@@ -482,6 +482,8 @@
 		77E7D9F0193089BE00BFA983 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E7D9EF193089BE00BFA983 /* libz.dylib */; };
 		77E7D9F319308BE400BFA983 /* RefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7D9F219308BE400BFA983 /* RefreshTableViewController.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
+		7D41F5E619DA8A9100C01E83 /* FeedBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D41F5E519DA8A9100C01E83 /* FeedBackVC.m */; };
+		7D41F5EB19DA8AFB00C01E83 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D41F5E819DA8AFB00C01E83 /* libMobClickLibrary.a */; };
 		7D54A7B01945F3040082909E /* BookDetailScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */; };
 		7D6496AE198F9CDE0086435F /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6496AD198F9CDE0086435F /* AlertView.xib */; };
 		7D6496B1198F9D610086435F /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6496B0198F9D610086435F /* AlertView.m */; };
@@ -1352,6 +1354,11 @@
 		77E7D9F219308BE400BFA983 /* RefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshTableViewController.m; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
+		7D41F5E419DA8A9100C01E83 /* FeedBackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackVC.h; sourceTree = "<group>"; };
+		7D41F5E519DA8A9100C01E83 /* FeedBackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackVC.m; sourceTree = "<group>"; };
+		7D41F5E819DA8AFB00C01E83 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		7D41F5E919DA8AFB00C01E83 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		7D41F5EA19DA8AFB00C01E83 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		7D54A7A9194550670082909E /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
 		7D54A7AE1945F3040082909E /* BookDetailScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailScrollerView.h; sourceTree = "<group>"; };
 		7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailScrollerView.m; sourceTree = "<group>"; };
@@ -1667,6 +1674,7 @@
 				77E7D9EE193089B500BFA983 /* libstdc++.dylib in Frameworks */,
 				77E7D9EC193089AD00BFA983 /* libsqlite3.dylib in Frameworks */,
 				77E7D9EA1930899A00BFA983 /* CoreLocation.framework in Frameworks */,
+				7D41F5EB19DA8AFB00C01E83 /* libMobClickLibrary.a in Frameworks */,
 				77E7D9E81930898A00BFA983 /* CoreTelephony.framework in Frameworks */,
 				77E7D9E61930897C00BFA983 /* QuartzCore.framework in Frameworks */,
 				77E7D9E41930897500BFA983 /* MessageUI.framework in Frameworks */,
@@ -2258,6 +2266,7 @@
 		77B9042E192C3F040062237D /* MobileNJU */ = {
 			isa = PBXGroup;
 			children = (
+				7D41F5E319DA8A9100C01E83 /* 反馈 */,
 				771EDEA3193F363D00A3DCBB /* 成绩查询 */,
 				7DD25B3D192D9DF30066494D /* 电话 */,
 				7DB046041987C19900A7612B /* 跳蚤市场 */,
@@ -2411,6 +2420,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7D41F5E719DA8AFB00C01E83 /* UMAnalytics_Sdk_3.1.2 */,
 				775B184F1993909200EF1C48 /* SWCell */,
 				774D4B8B1991B9A800D675D7 /* GKClasses */,
 				777B42041990DD16007A498D /* PlaceHolderTextView */,
@@ -2875,6 +2885,25 @@
 				77E075C2194043CD0098BA09 /* WXApiObject.h */,
 			);
 			path = WX;
+			sourceTree = "<group>";
+		};
+		7D41F5E319DA8A9100C01E83 /* 反馈 */ = {
+			isa = PBXGroup;
+			children = (
+				7D41F5E419DA8A9100C01E83 /* FeedBackVC.h */,
+				7D41F5E519DA8A9100C01E83 /* FeedBackVC.m */,
+			);
+			path = "反馈";
+			sourceTree = "<group>";
+		};
+		7D41F5E719DA8AFB00C01E83 /* UMAnalytics_Sdk_3.1.2 */ = {
+			isa = PBXGroup;
+			children = (
+				7D41F5E819DA8AFB00C01E83 /* libMobClickLibrary.a */,
+				7D41F5E919DA8AFB00C01E83 /* MobClick.h */,
+				7D41F5EA19DA8AFB00C01E83 /* MobClickSocialAnalytics.h */,
+			);
+			path = UMAnalytics_Sdk_3.1.2;
 			sourceTree = "<group>";
 		};
 		7D7A486C19868B1E0019E9B3 /* 订阅新 */ = {
@@ -3723,6 +3752,7 @@
 				7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */,
 				77E072C7194043140098BA09 /* CommentCell.m in Sources */,
 				77E075A5194043B20098BA09 /* AYHCustomComboBox.m in Sources */,
+				7D41F5E619DA8A9100C01E83 /* FeedBackVC.m in Sources */,
 				7DFC44C6198A4B250018BCB9 /* ApiMChatBlack.m in Sources */,
 				771EDF4E193F37A200A3DCBB /* SubscribeCell.m in Sources */,
 				771EDF38193F373000A3DCBB /* UtilMethods.m in Sources */,
@@ -4072,10 +4102,11 @@
 					"$(PROJECT_DIR)/ThirdParty/Frontia/WX",
 					"$(PROJECT_DIR)/Frame",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
+					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2438CEE8-57D1-41D7-9A19-66B92A3F3315";
+				PROVISIONING_PROFILE = "2d0a4233-b66f-4890-a177-f1c162559dc2";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -4104,10 +4135,11 @@
 					"$(PROJECT_DIR)/ThirdParty/Frontia/WX",
 					"$(PROJECT_DIR)/Frame",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
+					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2438CEE8-57D1-41D7-9A19-66B92A3F3315";
+				PROVISIONING_PROFILE = "2d0a4233-b66f-4890-a177-f1c162559dc2";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
