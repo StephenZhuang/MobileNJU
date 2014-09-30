@@ -71,7 +71,10 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-//    [self loadData];
+//
+    [super viewWillAppear:animated];
+
+    [self loadData];
 //    [self.infoTable reloadData];
     [self loadData];
     [self.infoTable reloadData];

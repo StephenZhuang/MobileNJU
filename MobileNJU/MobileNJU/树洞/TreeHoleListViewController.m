@@ -79,6 +79,12 @@
 {
     [super viewWillAppear:animated];
     [[ApisFactory getApiMGetMsgCount] load:self selecter:@selector(disposMessage:)];
+    if ([ToolUtils showTreeHole]) {
+        TreeHoleDetailViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"TreeHoleDetailViewController"];
+        vc.treeHoleid = [ToolUtils showTreeHole];
+        [ToolUtils setShowTreeHole:nil];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)goToAdd
@@ -417,7 +423,7 @@
         {
             FrontiaShare *share = [Frontia getShare];
 //            [share registerSinaweiboAppId:@"306527345"];
-            [share registerWeixinAppId:@"wxea47194dd88f89c9"];
+            [share registerWeixinAppId:@"wx928aaee695fe9986"];
             
             //授权取消回调函数
             FrontiaShareCancelCallback onCancel = ^(){
@@ -447,9 +453,10 @@
             }
             content.description = topic.content;
             content.imageObj = [ToolUtils getImageUrlWtihString:topic.img].absoluteString;
+            
             NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
             [share registerQQAppId:@"100358052" enableSSO:YES];
-            [share registerWeixinAppId:@"wxea47194dd88f89c9"];
+            [share registerWeixinAppId:@"wx928aaee695fe9986"];
             [share registerSinaweiboAppId:@"306527345"];
 
             [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];

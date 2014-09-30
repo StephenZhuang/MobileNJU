@@ -24,7 +24,7 @@
 #import "loginDelegate.h"
 #import <Frontia/Frontia.h>
 
-@interface WelcomeViewController ()<UITextFieldDelegate,RDVTabBarControllerDelegate,loginDelegate>
+@interface WelcomeViewController ()<UITextFieldDelegate,RDVTabBarControllerDelegate,loginDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 
@@ -61,6 +61,7 @@ static NSArray* buttonImages;
     [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timeChangeIndicate) userInfo:nil repeats:YES];
     self.time = 1;
     self.offline = NO;
+    [ToolUtils setOffline:NO];
     //api调用方式 可以点进去查看，也可按option + 左键查看 ， 回调函数统一写作disposMessage ， 如下
     [[ApisFactory getApiMGetWelcomePage] load:self selecter:@selector(disposMessage:)];
     [self.usernameTextField setText:[ToolUtils getAccount]==nil?@"":[ToolUtils getAccount]];
@@ -85,7 +86,7 @@ static NSArray* buttonImages;
 - (IBAction)login:(UIButton *)sender {
     
     if ([self.usernameTextField.text isEqualToString:@""]) {
-        [ToolUtils showMessage:@"请输入您的手机号"];
+        [ToolUtils showMessage:@"请输入您的用户名"];
         return;
     }
     if ([self.passwordTextField.text isEqualToString:@""]) {
@@ -99,6 +100,7 @@ static NSArray* buttonImages;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (!self.firstOpen) {
         NSLog(@"调用showLoginView");
         [self showLoginView];
@@ -106,6 +108,10 @@ static NSArray* buttonImages;
         NSLog(@"firstOpen设为YES");
         self.firstOpen = NO;
     }
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [ToolUtils setOffline:self.offline];
 }
 #pragma - mark api回调
 - (void)disposMessage:(Son *)son
@@ -168,7 +174,7 @@ static NSArray* buttonImages;
                         } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
                             NSString *message = [[NSString alloc] initWithFormat:@"set tag failed with %@ error code : %d error message %@", action, errorCode, errorMessage];
                             //                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
-                            [ToolUtils showMessage:message];
+//                            [ToolUtils showMessage:message];
                         }];
                     }
 
@@ -215,6 +221,16 @@ static NSArray* buttonImages;
     }
 
 }
+- (IBAction)tryUse:(id)sender {
+    [ToolUtils setVerify:@""];
+    [ToolUtils setLoginId:@""];
+    NSArray *array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],@"device=IOS",nil];
+    [Frame setAutoAddParams:array];
+    [ToolUtils setIsLogin:NO];
+    [self loadMain];
+
+}
+
 - (void)getUnread
 {
     [[ApisFactory getApiMUnreadModule]load:self selecter:@selector(disposMessage:)];
@@ -225,7 +241,9 @@ static NSArray* buttonImages;
 {
     UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     MainMenuViewController* mainMenuVC = (MainMenuViewController*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"home"]; //test2为viewcontroller的StoryboardId
-    mainMenuVC.unread = self.unread;
+    if (self.unread) {
+        mainMenuVC.unread = self.unread;
+    }
     mainMenuVC.offline = self.offline;
     mainMenuVC.imageArrays = self.imageArrays;
     mainMenuVC.imageArraysSelected = self.imageArraysSelected;
@@ -396,10 +414,33 @@ static NSArray* buttonImages;
     }];
 }
 
+- (void) alertLogin
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"您必须登录才能使用该功能" delegate:self cancelButtonTitle:@"继续使用" otherButtonTitles:@"登录", nil];
+    [alert show];
+    alert.delegate = self;
+}
+
+
+
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        return;
+    } else {
+        [self.tabBarController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 #pragma mark -RDVTabbarcontrollerdelegate
 - (BOOL)tabBarController:(RDVTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if ([tabBarController.viewControllers indexOfObject:viewController]==3) {
+    if ([ToolUtils getLoginId].length==0&&[tabBarController.viewControllers indexOfObject:viewController]!=0) {
+        [self alertLogin];
+        return NO;
+    } else if ([tabBarController.viewControllers indexOfObject:viewController]==3) {
         [viewController.rdv_tabBarController setTabBarHidden:YES];
 //        [tabBarController presentViewController:viewController animated:YES completion:^{
 //            
@@ -415,10 +456,8 @@ static NSArray* buttonImages;
         RegisterVC* next = (RegisterVC*)segue.destinationViewController;
         if (sender==self.forgetBt) {
             next.myTitle = @"忘记密码";
-
         } else {
             next.myTitle = @"注册";
-
         }
         next.myDelegate = self;
     }
