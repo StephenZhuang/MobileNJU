@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="lB3-bc-ufJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="lB3-bc-ufJ">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -27,15 +27,15 @@
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" autoresizesSubviews="NO" contentMode="scaleToFill" id="8pD-hB-bbo">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="158"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vSL-yy-TgG">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="217"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="217" id="lcG-bL-nXq"/>
+                                                <constraint firstAttribute="height" constant="200" id="lcG-bL-nXq"/>
                                             </constraints>
                                         </scrollView>
                                         <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Aq2-AS-jaX">
@@ -47,14 +47,14 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="vSL-yy-TgG" secondAttribute="trailing" id="4jH-uE-1zk"/>
                                         <constraint firstItem="vSL-yy-TgG" firstAttribute="top" secondItem="8pD-hB-bbo" secondAttribute="top" id="GVe-6E-gKg"/>
-                                        <constraint firstItem="Aq2-AS-jaX" firstAttribute="bottom" secondItem="vSL-yy-TgG" secondAttribute="bottom" id="KP9-yw-eIH"/>
+                                        <constraint firstItem="Aq2-AS-jaX" firstAttribute="bottom" secondItem="vSL-yy-TgG" secondAttribute="bottom" constant="17" id="KP9-yw-eIH"/>
                                         <constraint firstItem="vSL-yy-TgG" firstAttribute="leading" secondItem="8pD-hB-bbo" secondAttribute="leading" id="lm4-F8-7AD"/>
                                         <constraint firstItem="Aq2-AS-jaX" firstAttribute="leading" secondItem="8pD-hB-bbo" secondAttribute="leading" constant="140" id="lvc-79-qC6"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeftCell" rowHeight="53" id="R9K-vF-mw0" customClass="HomeCell">
-                                        <rect key="frame" x="0.0" y="197" width="320" height="53"/>
+                                        <rect key="frame" x="0.0" y="180" width="320" height="53"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R9K-vF-mw0" id="wcF-ta-U5G">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
@@ -107,7 +107,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RightCell" rowHeight="53" id="GNz-qN-l31" customClass="HomeCell">
-                                        <rect key="frame" x="0.0" y="250" width="320" height="53"/>
+                                        <rect key="frame" x="0.0" y="233" width="320" height="53"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GNz-qN-l31" id="PTp-ZY-Mp0">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
@@ -202,6 +202,7 @@
                         <segue destination="0Kn-vJ-RX8" kind="push" identifier="课程表" id="zfe-33-ey4"/>
                         <segue destination="NTf-5A-T84" kind="push" identifier="失物招领" id="0iX-Nx-Rod"/>
                         <segue destination="bg9-tl-Fbv" kind="push" identifier="临时功能" id="Qh6-rb-c2N"/>
+                        <segue destination="LgE-Ch-bvH" kind="push" identifier="用户反馈" id="Gqg-zl-5nf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qbw-Cv-Lvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -234,10 +235,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="团委" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ac-L2-7bZ">
-                                                    <rect key="frame" x="20" y="11" width="152" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="265" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="152" id="rHD-3h-twt"/>
+                                                        <constraint firstAttribute="width" constant="265" id="rHD-3h-twt"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.5725490196078431" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
@@ -2227,13 +2228,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="84" translatesAutoresizingMaskIntoConstraints="NO" id="ke5-vl-AAQ">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="84" translatesAutoresizingMaskIntoConstraints="NO" id="ke5-vl-AAQ">
                                                     <rect key="frame" x="108" y="0.0" width="84" height="76"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="84" id="Y4a-8q-aSn"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3221,6 +3222,48 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1598" y="-897"/>
         </scene>
+        <!--Feed BackVC-->
+        <scene sceneID="6Rd-tu-TRB">
+            <objects>
+                <viewController id="LgE-Ch-bvH" customClass="FeedBackVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yr4-Nh-b9n"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jgi-uP-4u2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qLc-7I-ocs" customClass="UIControl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EOA-oz-5qt">
+                                <rect key="frame" x="20" y="20" width="280" height="209"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="用的不爽，说两句···" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khr-qj-Trw">
+                                <rect key="frame" x="27" y="24" width="138" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="resign:" destination="LgE-Ch-bvH" eventType="touchUpInside" id="IHP-Ez-hwR"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="xwl-XD-0kE"/>
+                    <connections>
+                        <outlet property="placeholder" destination="Khr-qj-Trw" id="WDX-5p-wTm"/>
+                        <outlet property="textArea" destination="EOA-oz-5qt" id="yHg-Hh-NCV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DYo-sM-vlL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2765" y="2166"/>
+        </scene>
     </scenes>
     <resources>
         <image name="00手机注册" width="15" height="21"/>
@@ -3266,6 +3309,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="rTY-II-oOd"/>
+        <segue reference="Qh6-rb-c2N"/>
     </inferredMetricsTieBreakers>
 </document>

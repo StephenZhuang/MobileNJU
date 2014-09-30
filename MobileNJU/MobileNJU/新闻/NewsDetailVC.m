@@ -24,6 +24,15 @@
     
     // Do any additional setup after loading the view from its nib.
 }
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (!self.img) {
+        UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100,100)];
+        [imgView setImageWithURL:[ToolUtils getImageUrlWtihString:self.currentNew.img width:100 height:100] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            self.img = image;
+        }];
+    }
+}
 - (IBAction)share:(id)sender {
     FrontiaShareContent *content = [[FrontiaShareContent alloc] init];
     content.url = [[self.url.absoluteString componentsSeparatedByString:@"?"]firstObject];
@@ -56,7 +65,7 @@
     FrontiaShare *share = [Frontia getShare];
     [share registerQQAppId:@"100358052" enableSSO:YES];
     [share registerWeixinAppId:@"wxf4c6fb8fd85fa6b1"];
-    [share registerSinaweiboAppId:@"306527345"];
+//    [share registerSinaweiboAppId:@"306527345"];
     
     [share showShareMenuWithShareContent:content displayPlatforms:sharePlatforms supportedInterfaceOrientations:UIInterfaceOrientationMaskAll isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
 }
