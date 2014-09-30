@@ -18,6 +18,7 @@
 @property (nonatomic,strong)NSString* week;
 @property (nonatomic,strong)NSString* time;
 @property (nonatomic,strong)NSString* id;
+@property (nonatomic,strong)NSString* busyweeks;
 -(NSDictionary*) getDic;
 -(void)loadDic:(NSDictionary*)dic;
 @end
