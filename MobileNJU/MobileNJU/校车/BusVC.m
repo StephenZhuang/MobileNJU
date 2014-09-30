@@ -98,9 +98,16 @@
 {
     return self.busList.count;
 }
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    MBus* bus = [self.busList objectAtIndex:indexPath.row];
+    NSString* pass = bus.process;
+    UIFont *font = [UIFont systemFontOfSize:14];
+    CGSize size = CGSizeMake(100,2000);
+    CGSize labelsize = [pass sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+    return labelsize.height+30;
 }
 
 

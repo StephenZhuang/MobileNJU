@@ -28,6 +28,8 @@
 @property (nonatomic)CGRect frame;
 @property (nonatomic)int isRe;
 @property (nonatomic,strong)NSString* lastUserId;
+@property (nonatomic,strong)NSMutableDictionary* gradesDic;
+
 //@property (nonatomic,strong)UIImageView* imgView;
 @end
 
@@ -48,12 +50,19 @@
     self.LessonChooseDic = [[NSMutableDictionary alloc]init];
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
     self.isRe=1;
+    if ([ToolUtils getGradeDic]) {
+        self.gradesDic = [[NSMutableDictionary alloc]initWithDictionary:[ToolUtils getGradeDic]];
+    } else {
+        self.gradesDic = [[NSMutableDictionary alloc]init];
+    }
+
 
     // Do any additional setup after loading the view.
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [self loadSavedState];
+    
 }
 
 - (void)initAlert
@@ -183,6 +192,7 @@
                 }
                 self.lastVC.termList = termArray;
                 [self cancelAlert:nil];
+                [ToolUtils setTermList:termArray];
                 [self.navigationController popViewControllerAnimated:YES];
             }
         } else if([[son getMethod]isEqualToString:@"MGradeSearch"])
@@ -190,6 +200,18 @@
             MCourseList_Builder* courseList = (MCourseList_Builder*)[son getBuild];
             self.gradeList = courseList.courseList;
             [self.tableView reloadData];
+            NSMutableArray* myCourse = [[NSMutableArray alloc]init];
+            for (MCourse* course in self.gradeList) {
+                NSMutableDictionary* dic = [[NSMutableDictionary alloc]init];
+                [dic setObject:[NSString stringWithFormat:@"%d",course.type] forKey:@"type"];
+                [dic setObject:course.name forKey:@"name"];
+                [dic setObject:course.grade forKey:@"grade"];
+                [dic setObject:course.point forKey:@"point"];
+                [myCourse addObject:dic];
+            }
+            [self.gradesDic setObject:myCourse forKey:self.term];
+            [ToolUtils setGradeDic:self.gradesDic];
+
         }
     } else {
         [super disposMessage:son];
@@ -198,14 +220,34 @@
 
 
 
+
 - (void)loadSavedState
 {
-    [self waiting:@"正在加载"];
     [self.passwordTextField setText:self.password];
     [self.schIdTextField setText:self.account];
-    [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
-//    [[ApisFactory getApiMGradeSearch] load:self selecter:@selector(disposMessage:) url:self.term];
+    NSArray* grades = [self.gradesDic objectForKey:self.term];
+    if (grades) {
+        NSMutableArray* courses = [[NSMutableArray alloc]init];
+        for (NSDictionary* grade in grades) {
+            MCourse_Builder* course = [[MCourse_Builder alloc]init];
+            course.type = [[grade objectForKey:@"type"] integerValue];
+            course.name  = [grade objectForKey:@"name"];
+            course.grade = [grade objectForKey:@"grade"];
+            course.point = [grade objectForKey:@"point"];
+            [courses addObject:course];
+        }
+        self.gradeList = courses;
+        [self.tableView reloadData];
+    }
+    if (![ToolUtils offLine]) {
+        [self waiting:@"正在加载"];
+        [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
+        
+    }
+    
+    //    [[ApisFactory getApiMGradeSearch] load:self selecter:@selector(disposMessage:) url:self.term];
 }
+
 
 -(UpdateOne*)load:(id)delegate selecter:(SEL)select  url:url account:(NSString*)account password:(NSString*)password {
     NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
