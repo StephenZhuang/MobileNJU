@@ -153,6 +153,8 @@
 //返回时重新加载
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+
     if ([ToolUtils getJWID].length>0) {
         [self loadLast];
     }
