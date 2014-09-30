@@ -20,7 +20,7 @@
 #import "NewsListTVC.h"
 #import "MobClick.h"
 #import "TreeHoleListViewController.h"
-#define APP_KEY @"ikKR37FYgutHGDrrjq3c4SDS"
+#define APP_KEY @"vMBCvk48eauaICkYB6XfROSb"
 
 #define REPORT_ID @"d5dd317228"
 
@@ -44,6 +44,7 @@
     self.window.rootViewController = nav;
     
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"14",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
 
     if (userInfo) {
         [self savePush:userInfo];
@@ -62,7 +63,7 @@
 - (void) initUmen
 {
     
-    [MobClick startWithAppkey:@"5415286ffd98c50aa70c16e7" reportPolicy:BATCH   channelId:nil];
+    [MobClick startWithAppkey:@"54158e25fd98c50a910c7343" reportPolicy:BATCH   channelId:nil];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
 //    [MobClick setLogEnabled:YES];

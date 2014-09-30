@@ -488,6 +488,7 @@
         lesson.length = each_class.end-each_class.begin+1;
         lesson.time = each_class.time;
         lesson.id = each_class.id;
+        lesson.busyweeks = each_class.busyweeks;
         [schedules addObject:lesson];
         [canSaveLessons addObject:[lesson getDic]];
     }
