@@ -1213,9 +1213,19 @@ static MClassList* defaultMClassListInstance = nil;
 @property int32_t begin;
 @property int32_t end;
 @property (retain) NSString* time;
+@property (retain) NSString* busyweeks;
 @end
 
 @implementation MClass
+@synthesize busyweeks;
+- (BOOL)hasBusyweeks
+{
+    return !!hasBusyweeks_;
+}
+
+- (void) setHasBusyweeks:(BOOL)value {
+    hasBusyweeks_ = !!value;
+}
 
 - (BOOL) hasId {
   return !!hasId_;
@@ -1287,6 +1297,7 @@ static MClassList* defaultMClassListInstance = nil;
   self.address = nil;
   self.week = nil;
   self.time = nil;
+    self.busyweeks = nil;
   [super dealloc];
 }
 - (id) init {
@@ -1299,6 +1310,7 @@ static MClassList* defaultMClassListInstance = nil;
     self.day = 0;
     self.begin = 0;
     self.end = 0;
+      self.busyweeks = @"";
     self.time = @"";
   }
   return self;
@@ -1346,6 +1358,9 @@ static MClass* defaultMClassInstance = nil;
   if (self.hasTime) {
     [output writeString:9 value:self.time];
   }
+    if (self.hasBusyweeks) {
+        [output writeString:10 value:self.busyweeks];
+    }
   [self.unknownFields writeToCodedOutputStream:output];
 }
 - (int32_t) serializedSize {
@@ -1382,6 +1397,9 @@ static MClass* defaultMClassInstance = nil;
   if (self.hasTime) {
     size += computeStringSize(9, self.time);
   }
+    if (self.hasBusyweeks) {
+        size += computeStringSize(10, self.busyweeks);
+    }
   size += self.unknownFields.serializedSize;
   memoizedSerializedSize = size;
   return size;
@@ -1484,6 +1502,9 @@ static MClass* defaultMClassInstance = nil;
   if (other.hasTime) {
     [self setTime:other.time];
   }
+    if (other.hasBusyweeks) {
+        [self setBusyweeks:other.busyweeks];
+    }
   [self mergeUnknownFields:other.unknownFields];
   return self;
 }
@@ -1541,25 +1562,45 @@ static MClass* defaultMClassInstance = nil;
         [self setTime:[input readString]];
         break;
       }
+        case 82: {
+            [self setBusyweeks:[input readString]];
+        }
     }
   }
 }
 - (BOOL) hasId {
   return result.hasId;
 }
+- (BOOL) hasBusyweeks {
+    return result.hasBusyweeks;
+}
 - (NSString*) id {
   return result.id;
+}
+- (NSString*) busyweeks {
+    return result.busyweeks;
 }
 - (MClass_Builder*) setId:(NSString*) value {
   result.hasId = YES;
   result.id = value;
   return self;
 }
+- (MClass_Builder*) setBusyweeks:(NSString*) value {
+    result.hasBusyweeks = YES;
+    result.busyweeks = value;
+    return self;
+}
 - (MClass_Builder*) clearId {
   result.hasId = NO;
   result.id = @"";
   return self;
 }
+- (MClass_Builder*) clearBusyweeks {
+    result.hasBusyweeks = NO;
+    result.busyweeks = @"";
+    return self;
+}
+
 - (BOOL) hasName {
   return result.hasName;
 }

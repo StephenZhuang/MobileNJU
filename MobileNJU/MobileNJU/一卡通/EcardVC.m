@@ -76,14 +76,45 @@
     self.endDate = searchDateFormat;
     NSString* searchStartDate = [dateFormatter stringFromDate:newDate];
     self.startDate = searchStartDate;
-    if (self.alertView.isHidden) {
-        [self waiting:@"正在读取"];
-        [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
+    if (![ToolUtils offLine]) {
+        if (self.alertView.isHidden) {
+            [self waiting:@"正在读取"];
+            [[ApisFactory getApiMCardInfo]load:self selecter:@selector(disposeMessage:) code:nil account:self.schIDText.text password:self.passwordText.text isV:[ToolUtils getIsVeryfy] isReInput:self.isRe];
+            
+        } else {
+            //        [self getCode];
+        }
 
-    } else {
-//        [self getCode];
     }
+       [self loadLast];
     // Do any additional setup after loading the view.
+}
+
+
+- (void)loadLast
+{
+    NSArray* cardHistory = [ToolUtils getEcardList];
+    NSMutableArray* detailList = [[NSMutableArray alloc]init];
+    if (cardHistory) {
+        for (NSDictionary* dic in cardHistory) {
+            MCard_Builder* card = [[MCard_Builder alloc]init];
+            card.time = [dic objectForKey:@"time"];
+            card.name = [dic objectForKey:@"name"];
+            card.total = [dic objectForKey:@"total"];
+            card.cost = [dic objectForKey:@"cost"];
+            [detailList addObject:card];
+        }
+        self.detaiList = detailList;
+        [self.tableView reloadData];
+    }
+    
+    NSDictionary* card = [ToolUtils ecardRemain];
+    if (card) {
+        [self.nameLabel setText:[card objectForKey:@"name"]];
+        [self.remainLabel setText:[card objectForKey:@"total"]];
+        [self.unitLabel setHidden:NO];
+        [self.remainNameLabel setHidden:NO];
+    }
 }
 
 
@@ -168,6 +199,8 @@
                 [self.unitLabel setHidden:NO];
                 [self.remainNameLabel setHidden:NO];
                 [self.tableView reloadData];
+                NSDictionary* ecardRemain = [[NSDictionary alloc]initWithObjectsAndKeys:card.name,@"name",card.total,@"total", nil];
+                [ToolUtils setEcardRemain:ecardRemain];
                 if (self.autoSearch.isOn)
                 {
                     [ToolUtils setEcardId:self.schIDText.text];
@@ -202,6 +235,13 @@
            } else {
                [self.tableView reloadData];
            }
+           NSMutableArray* savableList = [[ NSMutableArray alloc]init];
+           for (MCard* card in self.detaiList) {
+               NSDictionary* dic = [[NSDictionary alloc]initWithObjectsAndKeys:card.name,@"name",card.cost,@"cost",card.time,@"time",card.total,@"total", nil];
+               [savableList addObject:dic];
+           }
+           [ToolUtils setEcardList:savableList];
+
        }
     } else if ([son getError]==10021){
 //        [self getCode];
