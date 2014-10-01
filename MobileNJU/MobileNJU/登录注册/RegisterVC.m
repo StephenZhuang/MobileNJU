@@ -13,14 +13,8 @@
 @interface RegisterVC ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumField;
-@property (weak, nonatomic) IBOutlet UITextField *codeField;
+@property (weak, nonatomic) IBOutlet UITextField *confirmField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
-@property (weak, nonatomic) IBOutlet UIButton *veryfyBt;
-@property (strong,nonatomic)NSString* phoneNum;
-@property (nonatomic)NSInteger remainTime;
-@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
-@property(nonatomic)BOOL canGetCode;
-@property(nonatomic)BOOL hasStartTime;
 @end
 
 @implementation RegisterVC
@@ -30,70 +24,109 @@
 {
     [super viewDidLoad];
     [self setTitle:self.myTitle];
-    if (self.myDelegate==nil) {
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.myDelegate!=nil) {
+        self.passwordField.placeholder = @"设置密码";
+        self.confirmField.placeholder = @"确认密码";
+    } else {
+        [self.phoneNumField setEnabled:NO];
         [self.phoneNumField setText:[ToolUtils getAccount]];
     }
-    self.canGetCode = YES;
-    self.hasStartTime = NO;
-    
-    // Do any additional setup after loading the view.
 }
+
+//- (void)setMyDelegate:(id<loginDelegate>)myDelegate
+//{
+//   }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
-- (IBAction)getCode:(id)sender {
-    if (!self.canGetCode) {
-        return;
-    }
-    if ([ToolUtils checkTel:self.phoneNumField.text]) {
-        [self waiting:@"正在发送.."];
-        [[ApisFactory getApiMGetMobileVerify]load:self selecter:@selector(disposMessage:) phone:self.phoneNumField.text];
-        
-    }
-}
+
 - (IBAction)complete:(id)sender {
-//    
-//#warning just for test
-//    [self login];
-//    return;
-//
-    
-    if (self.passwordField.text.length==0) {
-        [self showAlert:@"密码不得为空"];
+    if (self.phoneNumField.text.length==0) {
+        [ToolUtils showMessage:@"用户名不得为空"];
         return;
-    } else if (self.codeField.text.length==0)
+    } else if (self.passwordField.text.length==0)
     {
-        [self showAlert:@"验证码不得为空"];
+        if (self.myDelegate!=nil) {
+            [ToolUtils showMessage:@"密码不能为空"];
+        } else {
+            [ToolUtils showMessage:@"请输入旧密码"];
+        }
         return;
-    } else if (self.phoneNum==nil)
+    } else if (self.confirmField.text.length==0)
     {
-        [self showAlert:@"请先验证"];
+        if (self.myDelegate!=nil) {
+            [ToolUtils showMessage:@"请输入确认密码"];
+        } else {
+            [ToolUtils showMessage:@"请输入新密码"];
+        }
         return;
     }
-    [self waiting:@"注册中..."];
-    NSString* password = [mMD5 md5s:self.passwordField.text];
     
-   [[ApisFactory getApiMRegist]load:self selecter:@selector(disposMessage:) phone:self.phoneNum password:password nickname:@"" code:self.codeField.text device:@"IOS"];
-  
+    if (self.myDelegate!=nil) {
+        if (![self.passwordField.text isEqualToString:self.confirmField.text]) {
+            [ToolUtils showMessage:@"两次密码输入不一致"];
+            return;
+        }
+    } else {
+        if (![self.passwordField.text isEqualToString:[ToolUtils getPassword]]) {
+            [ToolUtils showMessage:@"请输入正确的原密码"];
+            return;
+        }
+    }
+    
+    if (self.phoneNumField.text.length>16) {
+        [ToolUtils showMessage:@"用户名不能超过16位"];
+        return;
+    }
+    if (self.passwordField.text.length>16||self.confirmField.text.length>16) {
+        [ToolUtils showMessage:@"密码不能超过16位"];
+        return;
+    }
+    NSString* password = [mMD5 md5s:self.confirmField.text];
+    if (self.myDelegate!=nil) {
+        [self waiting:@"注册中..."];
+        [[ApisFactory getApiMRegist]load:self selecter:@selector(disposMessage:) phone:self.phoneNumField.text password:password nickname:@"" code:@"" device:@"IOS"];
+    } else {
+//        [self waiting:@"处理中..."];
+        [self load:self selecter:@selector(disposMessage:) newPassword:password];
+
+    }
+    
 }
+
+/**
+ * 注册或忘记密码 /mobile?methodno=MRegist&debug=1&deviceid=1&phone=&password=&nickname=&code=&appid=&device=
+ * @param delegate 回调类
+ * @param select  回调函数
+ * @param phone * 手机号
+ * @param password * 密码(需要加密)
+ * @param nickname * 昵称
+ * @param code * 短信验证码
+ * @param device * 设备类型  android或ios
+ * @callback MUser_Builder
+ */
+-(UpdateOne*)load:(id)delegate selecter:(SEL)select  newPassword:(NSString*)password {
+    NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
+    [array addObject:[NSString stringWithFormat:@"password=%@",password==nil?@"":password]];
+    UpdateOne *update=[[UpdateOne alloc] init:@"MChangePasswd" params:array  delegate:delegate selecter:select];
+    [DataManager loadData:[[NSArray alloc]initWithObjects:update,nil] delegate:delegate];
+    return update;
+}
+
+
 - (void)disposMessage:(Son *)son
 {
     [self.loginIndicator removeFromSuperview];
     if ([son getError]==0) {
-        if ([[son getMethod] isEqualToString:@"MGetMobileVerify"]) {
-            MRet_Builder* ret = (MRet_Builder*)[son getBuild];
-            [ToolUtils showMessage:ret.msg];
-            if (!self.hasStartTime) {
-                [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timer) userInfo:nil repeats:YES];
-                self.hasStartTime=YES;
-            }
-            self.remainTime = 60;
-            self.canGetCode = NO;
-            self.phoneNum = self.phoneNumField.text;
-            [self.veryfyBt setTitle:@"" forState:UIControlStateNormal];
-        } else if ([[son getMethod]isEqualToString:@"MRegist"])
+        if ([[son getMethod]isEqualToString:@"MRegist"]||[[son getMethod] isEqualToString:@"MChangePasswd"])
         {
             MUser_Builder* user = (MUser_Builder*)[son getBuild];
             if (user.headImg.length>0) {
@@ -102,6 +135,10 @@
             [ToolUtils setAccount:user.account];
             [ToolUtils setNickname:user.nickname];
             [ToolUtils setVerify:user.verify];
+            [ToolUtils setPassword:self.confirmField.text];
+            if ([[son getMethod]isEqualToString:@"MChangePasswd"]) {
+                [ToolUtils showMessage:@"修改成功"];
+            }
             [self login];
         } else
         if ([[son getMethod] isEqualToString:@"MLogin"])
@@ -116,8 +153,10 @@
             NSArray *array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],@"device=IOS",nil];
             [Frame setAutoAddParams:array];
             [ToolUtils setIsLogin:YES];
-            [ToolUtils setAccount:self.phoneNum];
-            [ToolUtils setPassword:self.passwordField.text];
+            [ToolUtils setAccount:self.phoneNumField.text];
+            [ToolUtils setPassword:self.confirmField.text];
+            [ToolUtils setIsVeryfy:user.isV];
+
             [self.myDelegate login];
             [self.navigationController popViewControllerAnimated:NO];
             
@@ -130,20 +169,7 @@
 - (IBAction)resignAll:(id)sender {
     [self.phoneNumField resignFirstResponder];
     [self.passwordField resignFirstResponder];
-    [self.codeField resignFirstResponder];
-}
-
-- (void) timer
-{
-    self.remainTime--;
-    if (self.remainTime==0) {
-        [self.timerLabel setText:@""];
-        [self.veryfyBt setTitle:@"验证" forState:UIControlStateNormal];
-        self.canGetCode = YES;
-    } else if (self.remainTime>0){
-        
-        [self.timerLabel setText:[NSString stringWithFormat:@"%d",self.remainTime]];
-    }
+    [self.confirmField resignFirstResponder];
 }
 
 #pragma -mark textFieldDelegate
@@ -156,9 +182,8 @@
 
 - (void)login
 {
-    [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.phoneNum password:
-     [mMD5 md5s:self.passwordField.text] device:@"ios"];
-
+    [[ApisFactory getApiMLogin]load:self selecter:@selector(disposMessage:) phone:self.phoneNumField.text password:
+     [mMD5 md5s:self.confirmField.text] device:@"ios"];
 }
 
 

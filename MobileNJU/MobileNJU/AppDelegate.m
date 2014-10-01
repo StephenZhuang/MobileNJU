@@ -46,7 +46,7 @@
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
 
 //    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
-//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"14",@"type",@"nju/news/1411992130101.html",@"target", @"source",@"source",@"img",@"img",@"titlepush",@"titlepush",nil];
+    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"14",@"type",@"nju/news/1411992130101.html",@"target", @"source",@"source",@"img",@"img",    [[NSDictionary alloc]initWithObjectsAndKeys:@"alert",@"alert", nil],@"aps",nil];
 
     if (userInfo) {
         [self savePush:userInfo];
@@ -65,7 +65,7 @@
 - (void) initUmen
 {
     
-    [MobClick startWithAppkey:@"541526bbfd98c50b120a76d7" reportPolicy:BATCH   channelId:nil];
+    [MobClick startWithAppkey:@"54158cf3fd98c50ac10d6d1a" reportPolicy:BATCH   channelId:nil];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
 //    [MobClick setLogEnabled:YES];
