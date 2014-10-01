@@ -115,6 +115,11 @@
     [[[self selectedViewController] view] setFrame:[[self contentView] bounds]];
     [[self contentView] addSubview:[[self selectedViewController] view]];
     [[self selectedViewController] didMoveToParentViewController:self];
+    
+    if (selectedIndex!=3) {
+        [self setTabBarHidden:NO];
+    }
+    
 }
 
 - (void)setViewControllers:(NSArray *)viewControllers {
@@ -323,5 +328,14 @@
     [tabBarItems replaceObjectAtIndex:index withObject:tabBarItem];
     [tabBar setItems:tabBarItems];
 }
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==1) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } 
+}
+
 
 @end

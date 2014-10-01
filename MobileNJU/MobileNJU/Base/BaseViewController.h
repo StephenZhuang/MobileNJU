@@ -26,4 +26,5 @@
 - (void) showAlert:(NSString*)msg;
 - (void) waiting:(NSString*)msg;
 - (void)disposMessage:(Son *)son;
+- (void)goToChat:(NSNotification *)notification;
 @end

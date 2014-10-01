@@ -79,6 +79,12 @@
 {
     [super viewWillAppear:animated];
     [[ApisFactory getApiMGetMsgCount] load:self selecter:@selector(disposMessage:)];
+    if ([ToolUtils showTreeHole]) {
+        TreeHoleDetailViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"TreeHoleDetailViewController"];
+        vc.treeHoleid = [ToolUtils showTreeHole];
+        [ToolUtils setShowTreeHole:nil];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)goToAdd

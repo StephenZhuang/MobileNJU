@@ -481,6 +481,8 @@
 		77E7D9EE193089B500BFA983 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E7D9ED193089B500BFA983 /* libstdc++.dylib */; };
 		77E7D9F0193089BE00BFA983 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E7D9EF193089BE00BFA983 /* libz.dylib */; };
 		77E7D9F319308BE400BFA983 /* RefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7D9F219308BE400BFA983 /* RefreshTableViewController.m */; };
+		7D15C59819DB93EC001CE57E /* FeedBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D15C59719DB93EC001CE57E /* FeedBackVC.m */; };
+		7D15C59D19DB943E001CE57E /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D15C59A19DB943E001CE57E /* libMobClickLibrary.a */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
 		7D54A7B01945F3040082909E /* BookDetailScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */; };
 		7D6496AE198F9CDE0086435F /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6496AD198F9CDE0086435F /* AlertView.xib */; };
@@ -1350,6 +1352,11 @@
 		77E7D9EF193089BE00BFA983 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		77E7D9F119308BE400BFA983 /* RefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshTableViewController.h; sourceTree = "<group>"; };
 		77E7D9F219308BE400BFA983 /* RefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshTableViewController.m; sourceTree = "<group>"; };
+		7D15C59619DB93EC001CE57E /* FeedBackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackVC.h; sourceTree = "<group>"; };
+		7D15C59719DB93EC001CE57E /* FeedBackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackVC.m; sourceTree = "<group>"; };
+		7D15C59A19DB943E001CE57E /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		7D15C59B19DB943E001CE57E /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		7D15C59C19DB943E001CE57E /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
 		7D54A7A9194550670082909E /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
@@ -1667,6 +1674,7 @@
 				77E7D9EE193089B500BFA983 /* libstdc++.dylib in Frameworks */,
 				77E7D9EC193089AD00BFA983 /* libsqlite3.dylib in Frameworks */,
 				77E7D9EA1930899A00BFA983 /* CoreLocation.framework in Frameworks */,
+				7D15C59D19DB943E001CE57E /* libMobClickLibrary.a in Frameworks */,
 				77E7D9E81930898A00BFA983 /* CoreTelephony.framework in Frameworks */,
 				77E7D9E61930897C00BFA983 /* QuartzCore.framework in Frameworks */,
 				77E7D9E41930897500BFA983 /* MessageUI.framework in Frameworks */,
@@ -2258,6 +2266,7 @@
 		77B9042E192C3F040062237D /* MobileNJU */ = {
 			isa = PBXGroup;
 			children = (
+				7D15C59519DB93EC001CE57E /* 反馈 */,
 				771EDEA3193F363D00A3DCBB /* 成绩查询 */,
 				7DD25B3D192D9DF30066494D /* 电话 */,
 				7DB046041987C19900A7612B /* 跳蚤市场 */,
@@ -2411,6 +2420,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7D15C59919DB943E001CE57E /* UMAnalytics_Sdk_3.1.2 */,
 				775B184F1993909200EF1C48 /* SWCell */,
 				774D4B8B1991B9A800D675D7 /* GKClasses */,
 				777B42041990DD16007A498D /* PlaceHolderTextView */,
@@ -2875,6 +2885,25 @@
 				77E075C2194043CD0098BA09 /* WXApiObject.h */,
 			);
 			path = WX;
+			sourceTree = "<group>";
+		};
+		7D15C59519DB93EC001CE57E /* 反馈 */ = {
+			isa = PBXGroup;
+			children = (
+				7D15C59619DB93EC001CE57E /* FeedBackVC.h */,
+				7D15C59719DB93EC001CE57E /* FeedBackVC.m */,
+			);
+			path = "反馈";
+			sourceTree = "<group>";
+		};
+		7D15C59919DB943E001CE57E /* UMAnalytics_Sdk_3.1.2 */ = {
+			isa = PBXGroup;
+			children = (
+				7D15C59A19DB943E001CE57E /* libMobClickLibrary.a */,
+				7D15C59B19DB943E001CE57E /* MobClick.h */,
+				7D15C59C19DB943E001CE57E /* MobClickSocialAnalytics.h */,
+			);
+			path = UMAnalytics_Sdk_3.1.2;
 			sourceTree = "<group>";
 		};
 		7D7A486C19868B1E0019E9B3 /* 订阅新 */ = {
@@ -3723,6 +3752,7 @@
 				7765DB4A19416CA800EDDA68 /* NewMessageCell.m in Sources */,
 				77E072C7194043140098BA09 /* CommentCell.m in Sources */,
 				77E075A5194043B20098BA09 /* AYHCustomComboBox.m in Sources */,
+				7D15C59819DB93EC001CE57E /* FeedBackVC.m in Sources */,
 				7DFC44C6198A4B250018BCB9 /* ApiMChatBlack.m in Sources */,
 				771EDF4E193F37A200A3DCBB /* SubscribeCell.m in Sources */,
 				771EDF38193F373000A3DCBB /* UtilMethods.m in Sources */,
@@ -4072,6 +4102,7 @@
 					"$(PROJECT_DIR)/ThirdParty/Frontia/WX",
 					"$(PROJECT_DIR)/Frame",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
+					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4104,6 +4135,7 @@
 					"$(PROJECT_DIR)/ThirdParty/Frontia/WX",
 					"$(PROJECT_DIR)/Frame",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
+					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";

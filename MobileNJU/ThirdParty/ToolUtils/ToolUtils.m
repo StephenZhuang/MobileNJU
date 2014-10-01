@@ -279,7 +279,6 @@
     if (urlString == nil || [urlString isEqualToString:@""]) {
         return [NSURL URLWithString:@""];
     }
-//    NSLog(@"%@",[NSString stringWithFormat:@"%@%@&w=%.0f&h=%.0f",[[Frame INITCONFIG] getDUrl],urlString , width , height]);
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@&w=%.0f&h=%.0f",[[Frame INITCONFIG] getDUrl],urlString , width , height]];
 }
 
@@ -592,6 +591,118 @@
 +(BOOL)getScheduleAuto;
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"scheduleAuto"];
+}
+
++(NSDictionary*)shouldShowNews
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"showNews"];
+
+    
+}
++(void)setShowNews:(NSDictionary*)should;
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: should  forKey:@"showNews"];
+    [userDefaults synchronize];
+}
+
++ (void) setTermList:(NSArray*)termArray
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: termArray forKey:@"termList"];
+    [userDefaults synchronize];
+
+}
++ (NSArray*) getTermList
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"termList"];
+
+}
++ (void) setGradeDic:(NSDictionary*)grades
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: grades forKey:@"grades"];
+    [userDefaults synchronize];
+
+}
++ (NSDictionary*) getGradeDic
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"grades"];
+
+}
+
++ (NSArray*) getEcardList
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ecardList"];
+
+}
++ (void)setEcardList:(NSArray*)ecardList
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: ecardList forKey:@"ecardList"];
+    [userDefaults synchronize];
+}
+
++ (void)setShowRss:(NSDictionary *)dic
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: dic forKey:@"showRss"];
+    [userDefaults synchronize];
+}
+
++ (NSDictionary *)showRss
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"showRss"];
+
+}
++ (void)setShowActivity:(NSDictionary *)dic
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: dic forKey:@"showActivity"];
+    [userDefaults synchronize];
+}
+
++ (NSDictionary *)showActivity
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"showActivity"];
+
+}
+
++ (void)setShowTreeHole:(NSString *)dic
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject: dic forKey:@"showTreeHole"];
+    [userDefaults synchronize];
+}
+
++ (NSString *)showTreeHole
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"showTreeHole"];
+}
+
++(BOOL) offLine
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"offline"];
+
+}
++(void)setOffline:(BOOL)offline
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:offline forKey:@"offline"];
+    [userDefaults synchronize];
+    
+}
+
++ (NSDictionary*)ecardRemain
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ecardRemain"];
+
+}
++ (void) setEcardRemain: (NSDictionary*)dic
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:dic forKey:@"ecardRemain"];
+    [userDefaults synchronize];
 }
 
 @end

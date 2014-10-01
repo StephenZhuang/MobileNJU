@@ -45,7 +45,7 @@
 			<key>type</key>
 			<string>1</string>
 			<key>value</key>
-			<string>程序错误</string>
+			<string>系统升级中</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -74,6 +74,42 @@
 	</array>
 	<key>urls</key>
 	<array>
+		<dict>
+			<key>name</key>
+			<string>MIndexNew</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MIndex_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MIndexNew</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MWeek</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MWeek</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>MFeedback</string>
+			<key>type</key>
+			<string>1</string>
+			<key>classname</key>
+			<string>MRet_Builder</string>
+			<key>errortype</key>
+			<string>0</string>
+			<key>value</key>
+			<string>MFeedback</string>
+		</dict>
 		<dict>
 			<key>name</key>
 			<string>MDelMarket</string>
@@ -808,7 +844,7 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>MChangePhone</string>
+			<string>MChangePasswd</string>
 			<key>type</key>
 			<string>1</string>
 			<key>classname</key>
@@ -816,7 +852,7 @@
 			<key>errortype</key>
 			<string>0</string>
 			<key>value</key>
-			<string>MChangePhone</string>
+			<string>MChangePasswd</string>
 		</dict>
 		<dict>
 			<key>name</key>
