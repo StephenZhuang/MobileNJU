@@ -57,8 +57,8 @@
             [self.backgroundImg setContentMode:UIViewContentModeScaleAspectFill];
             [self.backgroundImg setImageToBlur:image blurRadius:10 completionBlock:nil];
             [self.backgroundImg setClipsToBounds:YES];
-            [self.headImage removeFromSuperview];
-            [self.headView addSubview:self.headImage];
+//            [self.headImage removeFromSuperview];
+//            [self.headView addSubview:self.headImage];
         }];
     } else {
         [self.headImage setImage:[UIImage imageNamed:@"05个人－个人头像"]];

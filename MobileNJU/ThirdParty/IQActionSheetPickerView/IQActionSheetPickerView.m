@@ -1,78 +1,132 @@
 //
-// IQActionSheetPickerView.m
-// Created by Mohd Iftekhar Qurashi on 11/5/13.
-// Copyright (c) 2013 Iftekhar. All rights reserved.
+//  IQActionSheetPickerView.m
+// https://github.com/hackiftekhar/IQActionSheetPickerView
+// Copyright (c) 2013-14 Iftekhar Qurashi.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
 
 #import "IQActionSheetPickerView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "IQActionSheetViewController.h"
+
+@interface IQActionSheetPickerView ()
+{
+    UILabel     *_titleLabel;
+    IQActionSheetViewController *actionSheetController;
+}
+
+@end
 
 @implementation IQActionSheetPickerView
+
 @synthesize actionSheetPickerStyle = _actionSheetPickerStyle;
 @synthesize titlesForComponenets = _titlesForComponenets;
 @synthesize widthsForComponents = _widthsForComponents;
 @synthesize isRangePickerView = _isRangePickerView;
 @synthesize dateStyle = _dateStyle;
 @synthesize date = _date;
-@synthesize delegate;
-- (id)init
+@synthesize delegate = _delegate;
+
+- (id)initWithTitle:(NSString *)title delegate:(id<IQActionSheetPickerViewDelegate>)delegate
 {
     self = [super init];
-    if (self) {
-        [self setBackgroundColor:[UIColor whiteColor]];
-        _actionToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-        //        _actionToolbar.barStyle = UIBarButtonItemStyleBordered;
-        [_actionToolbar sizeToFit];
-        
-        
-        
-        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]init];
-        [cancelButton setTitle:@"取消"];
-        [cancelButton setTarget:self];
-        [cancelButton setAction:@selector(pickerCancelClicked:)];
-        [cancelButton setTintColor:[UIColor colorWithRed:139/255.0 green:65/255.0 blue:139/255.0 alpha:1]];
-        
-        
-        
-        UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-        
-        
-        
-        UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]init];
-        [doneBtn setTitle:@"确认"];
-        [doneBtn setTarget:self];
-        [doneBtn setAction:@selector(pickerDoneClicked:)];
-        [doneBtn setTintColor:[UIColor colorWithRed:139/255.0 green:65/255.0 blue:139/255.0 alpha:1]];
-        
-        
-        
-        [_actionToolbar setItems:[NSArray arrayWithObjects:cancelButton,flexSpace,doneBtn, nil] animated:YES];
-        
-        [self addSubview:_actionToolbar];
-        
-        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_actionToolbar.frame) , 320, 0)];
-        [_pickerView sizeToFit];
-        [_pickerView setShowsSelectionIndicator:YES];
-        [_pickerView setDelegate:self];
-        [_pickerView setDataSource:self];
-        [_pickerView setBackgroundColor:[UIColor whiteColor]];
-        [self addSubview:_pickerView];
-        
-        
-        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_actionToolbar.frame), 320, 0)];
-        [_datePicker sizeToFit];
-        NSDate *date = [[NSDate alloc]initWithTimeIntervalSinceNow:-(19*365*24*60*60)];
-        [_datePicker setDate:date];
-        [_datePicker setDatePickerMode:UIDatePickerModeDate];
 
-        [self addSubview:_datePicker];
-        [self setDateStyle:NSDateFormatterMediumStyle];
+    if (self)
+    {
+        //UIToolbar
+        {
+            _actionToolbar = [[UIToolbar alloc] init];
+            _actionToolbar.barStyle = UIBarStyleBlackTranslucent;
+            [_actionToolbar sizeToFit];
+            
+            CGRect toolbarFrame = _actionToolbar.frame;
+            toolbarFrame.size.height = 44;
+            _actionToolbar.frame = toolbarFrame;
+            
+            NSMutableArray *items = [[NSMutableArray alloc] init];
+            
+            //  Create a cancel button to show on keyboard to resign it. Adding a selector to resign it.
+            UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pickerCancelClicked:)];
+            [items addObject:cancelButton];
+            
+            _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _actionToolbar.frame.size.width-66-57.0-16, 44)];
+            _titleLabel.font = [UIFont boldSystemFontOfSize:12.0];
+            [_titleLabel setBackgroundColor:[UIColor clearColor]];
+            [_titleLabel setTextAlignment:NSTextAlignmentCenter];
+            [_titleLabel setText:title];
+            [_titleLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+            
+            UIBarButtonItem *titlebutton = [[UIBarButtonItem alloc] initWithCustomView:_titleLabel];
+            titlebutton.enabled = NO;
+            
+            
+            //  Create a fake button to maintain flexibleSpace between doneButton and nilButton. (Actually it moves done button to right side.
+            UIBarButtonItem *nilButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+            [items addObject:nilButton];
+            
+            //  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
+            UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked:)];
+            [items addObject:doneButton];
+            
+            //  Adding button to toolBar.
+            [_actionToolbar setItems:items];
+            
+            [self addSubview:_actionToolbar];
+        }
+
+        //UIPickerView
+        {
+            _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_actionToolbar.frame) , CGRectGetWidth(_actionToolbar.frame), 216)];
+            [_pickerView setShowsSelectionIndicator:YES];
+            [_pickerView setDelegate:self];
+            [_pickerView setDataSource:self];
+            [self addSubview:_pickerView];
+        }
         
-        [self setActionSheetPickerStyle:IQActionSheetPickerStyleTextPicker];
+        //UIDatePicker
+        {
+            _datePicker = [[UIDatePicker alloc] initWithFrame:_pickerView.frame];
+            _datePicker.frame = _pickerView.frame;
+            [_datePicker setDatePickerMode:UIDatePickerModeDate];
+            [self addSubview:_datePicker];
+            [self setDateStyle:NSDateFormatterMediumStyle];
+            
+        }
+        
+        //Initial settings
+        {
+            self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
+            [self setFrame:CGRectMake(0, 0, CGRectGetWidth(_pickerView.frame), CGRectGetMaxY(_pickerView.frame))];
+            [self setActionSheetPickerStyle:IQActionSheetPickerStyleTextPicker];
+            
+            self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleWidth;
+            _actionToolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            _pickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            _datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        }
     }
+    
+    _delegate = delegate;
+    
     return self;
 }
-
-
 
 -(void)setActionSheetPickerStyle:(IQActionSheetPickerStyle)actionSheetPickerStyle
 {
@@ -93,24 +147,9 @@
     }
 }
 
--(void)setFrame:(CGRect)frame
-{
-    //Forcing it to be static frame
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-    {
-        [super setFrame:CGRectMake(0, 0, 320, 260+12)];
-        [_actionToolbar setFrame:CGRectMake(0, 0, 320, 44)];
-        [_pickerView setFrame:CGRectMake(0, 44, 320, 216)];
-    }
-    else
-    {
-        [super setFrame:frame];
-    }
-}
-
 -(void)pickerCancelClicked:(UIBarButtonItem*)barButton
 {
-    [self dismissWithClickedButtonIndex:0 animated:YES];
+    [self dismiss];
 }
 
 -(void)pickerDoneClicked:(UIBarButtonItem*)barButton
@@ -147,7 +186,8 @@
         
         [self.delegate actionSheetPickerView:self didSelectTitles:selectedTitles];
     }
-    [self dismissWithClickedButtonIndex:0 animated:YES];
+    
+    [self dismiss];
 }
 
 -(void)setSelectedTitles:(NSArray *)selectedTitles
@@ -155,9 +195,48 @@
     [self setSelectedTitles:selectedTitles animated:NO];
 }
 
+-(NSArray *)selectedTitles
+{
+    NSMutableArray *selectedTitles = [[NSMutableArray alloc] init];
+    
+    if (_actionSheetPickerStyle == IQActionSheetPickerStyleTextPicker)
+    {
+        NSUInteger totalComponent = _pickerView.numberOfComponents;
+        
+        for (NSInteger component = 0; component<totalComponent; component++)
+        {
+            NSInteger selectedRow = [_pickerView selectedRowInComponent:component];
+            
+            if (selectedRow == -1)
+            {
+                [selectedTitles addObject:[NSNull null]];
+            }
+            else
+            {
+                NSArray *items = [_titlesForComponenets objectAtIndex:component];
+                
+                if ([items count] > selectedRow)
+                {
+                    id selectTitle = [items objectAtIndex:selectedRow];
+                    [selectedTitles addObject:selectTitle];
+                }
+                else
+                {
+                    [selectedTitles addObject:[NSNull null]];
+                }
+            }
+        }
+    }
+    else if (_actionSheetPickerStyle == IQActionSheetPickerStyleDatePicker)
+    {
+        [selectedTitles addObject:_datePicker.date];
+    }
+    
+    return selectedTitles;
+}
+
 -(void)setSelectedTitles:(NSArray *)selectedTitles animated:(BOOL)animated
 {
-
     if (_actionSheetPickerStyle == IQActionSheetPickerStyleTextPicker)
     {
         NSUInteger totalComponent = MIN(selectedTitles.count, _pickerView.numberOfComponents);
@@ -185,7 +264,6 @@
 
 -(void)selectIndexes:(NSArray *)indexes animated:(BOOL)animated
 {
-    
     if (_actionSheetPickerStyle == IQActionSheetPickerStyleTextPicker)
     {
         NSUInteger totalComponent = MIN(indexes.count, _pickerView.numberOfComponents);
@@ -195,12 +273,22 @@
             NSArray *items = [_titlesForComponenets objectAtIndex:component];
             NSUInteger selectIndex = [[indexes objectAtIndex:component] unsignedIntegerValue];
             
-            if (items.count < selectIndex)
+            if (selectIndex < items.count)
             {
                 [_pickerView selectRow:selectIndex inComponent:component animated:animated];
             }
         }
     }
+}
+
+-(void)reloadComponent:(NSInteger)component
+{
+    [_pickerView reloadComponent:component];
+}
+
+-(void)reloadAllComponents
+{
+    [_pickerView reloadAllComponents];
 }
 
 -(void) setDate:(NSDate *)date
@@ -250,17 +338,24 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    NSArray* titles = [_titlesForComponenets objectAtIndex:component];
-    return [titles count];
+    return [[_titlesForComponenets objectAtIndex:component] count];
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+-(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
-    return [[_titlesForComponenets objectAtIndex:component] objectAtIndex:row];
+    UILabel *labelText = [[UILabel alloc] init];
+    labelText.font = [UIFont boldSystemFontOfSize:20.0];
+    labelText.backgroundColor = [UIColor clearColor];
+    [labelText setTextAlignment:NSTextAlignmentCenter];
+    [labelText setText:[[_titlesForComponenets objectAtIndex:component] objectAtIndex:row]];
+    return labelText;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    if ([self.delegate respondsToSelector:@selector(actionSheetPickerView:didChangeRow:inComponent:)]) {
+        [self.delegate actionSheetPickerView:self didChangeRow:row inComponent:component];
+    }
     if (_isRangePickerView && pickerView.numberOfComponents == 3)
     {
         if (component == 0)
@@ -272,45 +367,25 @@
             [pickerView selectRow:MIN([pickerView selectedRowInComponent:0], row) inComponent:0 animated:YES];
         }
     }
-    if (self.tag==233 ) {
-        NSArray* originTitles = [self titlesForComponenets];
-        NSArray* courseArr = [originTitles objectAtIndex:1];
-        NSArray* dayArr = [originTitles firstObject];
-        NSString* selectedDay = [dayArr objectAtIndex:[_pickerView selectedRowInComponent:0]];        
-        if (component==1) {
-            if ([_pickerView selectedRowInComponent:2]<=[_pickerView selectedRowInComponent:1]) {
-                [self setSelectedTitles:[NSArray arrayWithObjects:selectedDay,[courseArr objectAtIndex:row],[courseArr objectAtIndex:row], nil] animated:YES];
-            }
-
-        } else if (component==2){
-            if ([_pickerView selectedRowInComponent:2]<=[_pickerView selectedRowInComponent:1]) {
-                [self setSelectedTitles:[NSArray arrayWithObjects:selectedDay,[courseArr objectAtIndex:row],[courseArr objectAtIndex:row], nil] animated:YES];
-            }
-        }
-    }
 }
 
+-(void)dismiss
+{
+    [actionSheetController dismiss];
+}
 
--(void)showInView:(UIView *)view
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)showInViewController:(UIViewController*)controller
 {
     [_pickerView reloadAllComponents];
 
-    [super showInView:view];
-    [UIView animateWithDuration:0.3 animations:^{
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-        {
-            CGRect bounds ;
-            if (self.tag==123456||self.tag==654321) {
-                bounds = self.window.bounds;
-            } else {
-                bounds = view.bounds;
-            }
-            CGRect newbounds = CGRectMake(0, 0, bounds.size.width, bounds.size.height);
-            [self setBounds:newbounds];
-            [self setFrame:CGRectMake(self.frame.origin.x, bounds.size.height-_actionToolbar.bounds.size.height-_pickerView.bounds.size.height, self.frame.size.width, self.frame.size.height)];
-        }
-    }];
-    
+    actionSheetController = [[IQActionSheetViewController alloc] init];
+    [actionSheetController showPickerView:self inViewController:controller];
 }
 
 @end
+

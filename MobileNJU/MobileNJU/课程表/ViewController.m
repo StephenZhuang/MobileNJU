@@ -198,7 +198,8 @@
 -(void)showDateChoose
 {
     
-    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择节数" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择节数" delegate:self];
     [picker setTag:233];
    
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
@@ -206,9 +207,7 @@
                                     self.classTitle
                                      ,self.classTitle,
                                      nil]];
-    [picker showInView:self.view];
-    
-    
+    [picker showInViewController:self];
 }
 
 #pragma -mark weekchooseDelegate

@@ -10,6 +10,7 @@
 #import "TitleView.h"
 #import "MBProgressHUD.h"
 #import "WaitingView.h"
+#import "UIImageView+WebCache.h"
 @interface BaseViewController : UIViewController
 @property (strong, nonatomic) NSArray *backIcons;
 @property (nonatomic , strong) TitleView *titleView;

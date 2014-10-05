@@ -8,6 +8,7 @@
 
 #import "ActivityCell.h"
 #import "UtilMethods.h"
+#import "UIImageView+WebCache.h"
 @implementation ActivityCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

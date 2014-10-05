@@ -5,9 +5,9 @@
 //  Copyright (c) 2013年 itcast. All rights reserved.
 
 #import <QuartzCore/QuartzCore.h>
+#import "SDWebImageManager.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
-#import "SDWebImageManager+MJ.h"
 #import "MJPhotoView.h"
 #import "MJPhotoToolbar.h"
 
@@ -223,12 +223,12 @@
 {
     if (index > 0) {
         MJPhoto *photo = _photos[index - 1];
-        [SDWebImageManager downloadWithURL:photo.url];
+//        [SDWebImageManager downloadWithURL:photo.url];
     }
     
     if (index < _photos.count - 1) {
         MJPhoto *photo = _photos[index + 1];
-        [SDWebImageManager downloadWithURL:photo.url];
+//        [SDWebImageManager downloadWithURL:photo.url];
     }
 }
 
