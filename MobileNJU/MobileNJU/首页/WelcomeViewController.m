@@ -395,12 +395,12 @@ static NSArray* buttonImages;
 {
     [self.view setUserInteractionEnabled:YES];
     [self hideLoad];
-//    [self.loginView removeFromSuperview];
-//    [self.logoImage removeFromSuperview];
+    [self.loginView removeFromSuperview];
+    [self.logoImage removeFromSuperview];
     [self.logoImage setImage:[UIImage imageNamed:@"欢迎2"]];
-//    [self.view addSubview:self.logoImage];
-//    [self.view addSubview:self.loginView];
-//
+    [self.view addSubview:self.logoImage];
+    [self.view addSubview:self.loginView];
+
     
     [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
         CGRect loginViewFrame = CGRectMake(self.loginView.frame.origin.x, 146,self.loginView.frame.size.width, self.loginView.frame.size.height);

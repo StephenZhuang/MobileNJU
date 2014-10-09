@@ -495,6 +495,7 @@
 		7D793DDD19E0F690005ADF27 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D793DCB19E0F690005ADF27 /* UIImageView+HighlightedWebCache.m */; };
 		7D793DDE19E0F690005ADF27 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D793DCD19E0F690005ADF27 /* UIImageView+WebCache.m */; };
 		7D793DDF19E0F690005ADF27 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D793DCF19E0F690005ADF27 /* UIView+WebCacheOperation.m */; };
+		7D793DE519E103AC005ADF27 /* IQActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D793DE419E103AC005ADF27 /* IQActionSheetViewController.m */; };
 		7D7A486F198690640019E9B3 /* subscribeCell_n.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A486E198690640019E9B3 /* subscribeCell_n.m */; };
 		7D7A4872198691450019E9B3 /* RSSVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A4871198691450019E9B3 /* RSSVC.m */; };
 		7D7A4875198698CE0019E9B3 /* AllRssVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A4874198698CE0019E9B3 /* AllRssVC.m */; };
@@ -1374,6 +1375,8 @@
 		7D793DCD19E0F690005ADF27 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		7D793DCE19E0F690005ADF27 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		7D793DCF19E0F690005ADF27 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		7D793DE319E103AC005ADF27 /* IQActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetViewController.h; sourceTree = "<group>"; };
+		7D793DE419E103AC005ADF27 /* IQActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetViewController.m; sourceTree = "<group>"; };
 		7D7A486D198690640019E9B3 /* subscribeCell_n.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = subscribeCell_n.h; path = "订阅/subscribeCell_n.h"; sourceTree = "<group>"; };
 		7D7A486E198690640019E9B3 /* subscribeCell_n.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = subscribeCell_n.m; path = "订阅/subscribeCell_n.m"; sourceTree = "<group>"; };
 		7D7A4870198691450019E9B3 /* RSSVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSSVC.h; path = "订阅/RSSVC.h"; sourceTree = "<group>"; };
@@ -3189,6 +3192,8 @@
 		7DB045E41987A86E00A7612B /* IQActionSheetPickerView */ = {
 			isa = PBXGroup;
 			children = (
+				7D793DE319E103AC005ADF27 /* IQActionSheetViewController.h */,
+				7D793DE419E103AC005ADF27 /* IQActionSheetViewController.m */,
 				7DB045E51987A86E00A7612B /* IQActionSheetPickerView.h */,
 				7DB045E61987A86E00A7612B /* IQActionSheetPickerView.m */,
 			);
@@ -3846,6 +3851,7 @@
 				7DFC44F5198A4B250018BCB9 /* ApiMVerifyUser.m in Sources */,
 				7796F1E419496FD000015307 /* HBTalkTableViewRightCell.m in Sources */,
 				77E0740C194043A20098BA09 /* HBCoreLabel.m in Sources */,
+				7D793DE519E103AC005ADF27 /* IQActionSheetViewController.m in Sources */,
 				77883D4B1947F09C00197F59 /* ChatViewController.m in Sources */,
 				7D947C341989EAFE0000EB4E /* ZsndChat.pb.m in Sources */,
 				775B185C1993909200EF1C48 /* NSMutableArray+SWUtilityButtons.m in Sources */,
@@ -4044,7 +4050,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "E1132C6F-0B4D-4E92-9538-7574981DD9AB";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.1;
 			};
 			name = Debug;
 		};
@@ -4077,7 +4083,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PROVISIONING_PROFILE = "E1132C6F-0B4D-4E92-9538-7574981DD9AB";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -4106,9 +4112,11 @@
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
 					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "166f5f6e-95c9-48e9-a9c7-047fadc2480c";
+				PROVISIONING_PROFILE = "E1132C6F-0B4D-4E92-9538-7574981DD9AB";
+				SDKROOT = iphoneos7.1;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -4139,9 +4147,11 @@
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
 					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "166f5f6e-95c9-48e9-a9c7-047fadc2480c";
+				PROVISIONING_PROFILE = "E1132C6F-0B4D-4E92-9538-7574981DD9AB";
+				SDKROOT = iphoneos7.1;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

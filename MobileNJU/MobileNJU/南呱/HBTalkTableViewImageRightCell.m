@@ -7,9 +7,8 @@
 //
 
 #import "HBTalkTableViewImageRightCell.h"
-#import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
-
+#import "MJPhotoBrowser.h"
 @implementation HBTalkTableViewImageRightCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -55,8 +54,7 @@
     CGRect frame = _image.frame;
     frame.size = CGSizeMake(width, height);
     _image.frame = frame;
-    [_image setImageWithURL:[ToolUtils getImageUrlWtihString:self.talkData.img] placeholderImage:[UIImage imageNamed:@""]];
-    
+    [_image sd_setImageWithURL:[ToolUtils getImageUrlWtihString:self.talkData.img] placeholderImage:[UIImage imageNamed:@""]];
     frame = _content.frame;
     frame.size = _image.frame.size;
     _content.frame = frame;

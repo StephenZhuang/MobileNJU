@@ -53,7 +53,7 @@
         //UIToolbar
         {
             _actionToolbar = [[UIToolbar alloc] init];
-            _actionToolbar.barStyle = UIBarStyleBlackTranslucent;
+            _actionToolbar.barStyle = UIBarStyleDefault;
             [_actionToolbar sizeToFit];
             
             CGRect toolbarFrame = _actionToolbar.frame;
@@ -62,8 +62,24 @@
             
             NSMutableArray *items = [[NSMutableArray alloc] init];
             
+            
+            
+            UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc]init];
+            [cancelButton setTitle:@"取消"];
+            [cancelButton setTarget:self];
+            [cancelButton setAction:@selector(pickerCancelClicked:)];
+            [cancelButton setTintColor:[UIColor  colorWithRed:165/255.0 green:10/255.0 blue:163/255.0 alpha:1]];
+            
+
+            
+            
+            UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]init];
+            [doneBtn setTitle:@"确认"];
+            [doneBtn setTarget:self];
+            [doneBtn setAction:@selector(pickerDoneClicked:)];
+            [doneBtn setTintColor:[UIColor  colorWithRed:165/255.0 green:10/255.0 blue:163/255.0 alpha:1]];
             //  Create a cancel button to show on keyboard to resign it. Adding a selector to resign it.
-            UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(pickerCancelClicked:)];
+          
             [items addObject:cancelButton];
             
             _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _actionToolbar.frame.size.width-66-57.0-16, 44)];
@@ -79,11 +95,10 @@
             
             //  Create a fake button to maintain flexibleSpace between doneButton and nilButton. (Actually it moves done button to right side.
             UIBarButtonItem *nilButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        
             [items addObject:nilButton];
-            
-            //  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
-            UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked:)];
-            [items addObject:doneButton];
+         
+            [items addObject:doneBtn];
             
             //  Adding button to toolBar.
             [_actionToolbar setItems:items];
@@ -103,6 +118,8 @@
         //UIDatePicker
         {
             _datePicker = [[UIDatePicker alloc] initWithFrame:_pickerView.frame];
+            NSDate *date = [[NSDate alloc]initWithTimeIntervalSinceNow:-(19*365*24*60*60)];
+            [_datePicker setDate:date];
             _datePicker.frame = _pickerView.frame;
             [_datePicker setDatePickerMode:UIDatePickerModeDate];
             [self addSubview:_datePicker];
@@ -112,7 +129,7 @@
         
         //Initial settings
         {
-            self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.8];
+            self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:1];
             [self setFrame:CGRectMake(0, 0, CGRectGetWidth(_pickerView.frame), CGRectGetMaxY(_pickerView.frame))];
             [self setActionSheetPickerStyle:IQActionSheetPickerStyleTextPicker];
             
@@ -365,6 +382,22 @@
         else if (component == 2)
         {
             [pickerView selectRow:MIN([pickerView selectedRowInComponent:0], row) inComponent:0 animated:YES];
+        }
+    }
+    if (self.tag==233 ) {
+        NSArray* originTitles = [self titlesForComponenets];
+        NSArray* courseArr = [originTitles objectAtIndex:1];
+        NSArray* dayArr = [originTitles firstObject];
+        NSString* selectedDay = [dayArr objectAtIndex:[_pickerView selectedRowInComponent:0]];
+        if (component==1) {
+            if ([_pickerView selectedRowInComponent:2]<=[_pickerView selectedRowInComponent:1]) {
+                [self setSelectedTitles:[NSArray arrayWithObjects:selectedDay,[courseArr objectAtIndex:row],[courseArr objectAtIndex:row], nil] animated:YES];
+            }
+            
+        } else if (component==2){
+            if ([_pickerView selectedRowInComponent:2]<=[_pickerView selectedRowInComponent:1]) {
+                [self setSelectedTitles:[NSArray arrayWithObjects:selectedDay,[courseArr objectAtIndex:row],[courseArr objectAtIndex:row], nil] animated:YES];
+            }
         }
     }
 }

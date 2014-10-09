@@ -174,7 +174,7 @@ static NSArray* descriptions;
 ////                [self.tableView reloadData];
 //            }
             [self loadTableData];
-//            [self.tableView reloadData];
+            [self.tableView reloadData];
             
             
             
