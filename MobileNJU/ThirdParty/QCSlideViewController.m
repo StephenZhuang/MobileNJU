@@ -116,6 +116,7 @@
         UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
         AddShopVC* vc = (AddShopVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"add"];
         vc.typeList = self.typeList;
+        vc.lastVC = self;
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -162,7 +163,6 @@
 {
     if ([[segue identifier]isEqualToString:@"add"]) {
         AddShopVC* add = (AddShopVC*)[segue destinationViewController];
-        
     }
 }
 - (void)showView:(UIViewController *)vc
