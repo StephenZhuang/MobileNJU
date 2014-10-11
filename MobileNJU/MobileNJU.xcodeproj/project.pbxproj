@@ -463,9 +463,8 @@
 		7D4C138B19E7EF0A009CD94D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C138A19E7EF0A009CD94D /* CFNetwork.framework */; };
 		7D4C138D19E7EF18009CD94D /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C138C19E7EF18009CD94D /* CoreFoundation.framework */; };
 		7D4C138F19E7EF38009CD94D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C138E19E7EF38009CD94D /* Security.framework */; };
-		7D4C139319E7F1FC009CD94D /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C139219E7F1FC009CD94D /* libPushSDK.a */; };
-		7D4C139419E7F223009CD94D /* APService.h in Sources */ = {isa = PBXBuildFile; fileRef = 7D4C139119E7F1FC009CD94D /* APService.h */; };
-		7D4C139619E7F263009CD94D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C139519E7F263009CD94D /* PushConfig.plist */; };
+		7D4C13BD19E912E9009CD94D /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13BB19E912E9009CD94D /* libPushSDK.a */; };
+		7D4C13BE19E912E9009CD94D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C13BC19E912E9009CD94D /* PushConfig.plist */; };
 		7D54A7B01945F3040082909E /* BookDetailScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */; };
 		7D6496AE198F9CDE0086435F /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6496AD198F9CDE0086435F /* AlertView.xib */; };
 		7D6496B1198F9D610086435F /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6496B0198F9D610086435F /* AlertView.m */; };
@@ -1311,9 +1310,9 @@
 		7D4C138A19E7EF0A009CD94D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7D4C138C19E7EF18009CD94D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		7D4C138E19E7EF38009CD94D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		7D4C139119E7F1FC009CD94D /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
-		7D4C139219E7F1FC009CD94D /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
-		7D4C139519E7F263009CD94D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		7D4C13BA19E912E9009CD94D /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		7D4C13BB19E912E9009CD94D /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
+		7D4C13BC19E912E9009CD94D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		7D54A7A9194550670082909E /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
 		7D54A7AE1945F3040082909E /* BookDetailScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailScrollerView.h; sourceTree = "<group>"; };
 		7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailScrollerView.m; sourceTree = "<group>"; };
@@ -1698,7 +1697,7 @@
 				7DCA723319E7E71F00D320CF /* TencentOpenAPI in Frameworks */,
 				77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */,
 				77B9042D192C3F040062237D /* UIKit.framework in Frameworks */,
-				7D4C139319E7F1FC009CD94D /* libPushSDK.a in Frameworks */,
+				7D4C13BD19E912E9009CD94D /* libPushSDK.a in Frameworks */,
 				77B90429192C3F040062237D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2439,7 +2438,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				7D4C139019E7F1FC009CD94D /* lib */,
+				7D4C13B919E912E9009CD94D /* lib */,
 				7DCA721519E7E71E00D320CF /* Frontia */,
 				7D793DAE19E0F690005ADF27 /* SDWebImage */,
 				7D02873B19D9768800EB5122 /* UMAnalytics_Sdk_3.1.2 */,
@@ -2838,15 +2837,14 @@
 			path = UMAnalytics_Sdk_3.1.2;
 			sourceTree = "<group>";
 		};
-		7D4C139019E7F1FC009CD94D /* lib */ = {
+		7D4C13B919E912E9009CD94D /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				7D4C139519E7F263009CD94D /* PushConfig.plist */,
-				7D4C139119E7F1FC009CD94D /* APService.h */,
-				7D4C139219E7F1FC009CD94D /* libPushSDK.a */,
+				7D4C13BA19E912E9009CD94D /* APService.h */,
+				7D4C13BB19E912E9009CD94D /* libPushSDK.a */,
+				7D4C13BC19E912E9009CD94D /* PushConfig.plist */,
 			);
-			name = lib;
-			path = "../../../../Downloads/JPush-iOS-SDK-1.7.4/lib";
+			path = lib;
 			sourceTree = "<group>";
 		};
 		7D793DAE19E0F690005ADF27 /* SDWebImage */ = {
@@ -3697,7 +3695,7 @@
 				7D784D251991DF7800E7CE64 /* loading16.gif in Resources */,
 				77E0750F194043A90098BA09 /* f026@2x.png in Resources */,
 				77B904C3192C4B3B0062237D /* MJPhotoBrowser.bundle in Resources */,
-				7D4C139619E7F263009CD94D /* PushConfig.plist in Resources */,
+				7D4C13BE19E912E9009CD94D /* PushConfig.plist in Resources */,
 				77E0754D194043A90098BA09 /* f057@2x.png in Resources */,
 				775B183B1993519800EF1C48 /* logo_default_1@2x.png in Resources */,
 				77E07517194043A90098BA09 /* f030@2x.png in Resources */,
@@ -3734,7 +3732,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D4C139419E7F223009CD94D /* APService.h in Sources */,
 				7D943E65198D384F0060222B /* iCarousel.m in Sources */,
 				7DFC44C2198A4B250018BCB9 /* ApiMCardHistory.m in Sources */,
 				7DFC44E8198A4B250018BCB9 /* ApiMSignInInDetail.m in Sources */,
