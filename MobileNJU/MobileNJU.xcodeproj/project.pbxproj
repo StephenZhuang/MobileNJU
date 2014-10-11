@@ -484,6 +484,13 @@
 		7D02874A19D9937D00EB5122 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D02874719D9937D00EB5122 /* libMobClickLibrary.a */; };
 		7D02874E19D998FA00EB5122 /* FeedBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D02874D19D998FA00EB5122 /* FeedBackVC.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
+		7D4C139F19E90634009CD94D /* IQActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4C139E19E90634009CD94D /* IQActionSheetViewController.m */; };
+		7D4C13A419E9063A009CD94D /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13A219E9063A009CD94D /* libPushSDK.a */; };
+		7D4C13A519E9063A009CD94D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C13A319E9063A009CD94D /* PushConfig.plist */; };
+		7D4C13A619E9073D009CD94D /* APService.h in Sources */ = {isa = PBXBuildFile; fileRef = 7D4C13A119E9063A009CD94D /* APService.h */; };
+		7D4C13A819E90785009CD94D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13A719E90785009CD94D /* CFNetwork.framework */; };
+		7D4C13AA19E90796009CD94D /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13A919E90796009CD94D /* CoreFoundation.framework */; };
+		7D4C13AC19E907BD009CD94D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13AB19E907BD009CD94D /* Security.framework */; };
 		7D54A7B01945F3040082909E /* BookDetailScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */; };
 		7D6496AE198F9CDE0086435F /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6496AD198F9CDE0086435F /* AlertView.xib */; };
 		7D6496B1198F9D610086435F /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6496B0198F9D610086435F /* AlertView.m */; };
@@ -1359,6 +1366,14 @@
 		7D02874D19D998FA00EB5122 /* FeedBackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackVC.m; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
+		7D4C139D19E90634009CD94D /* IQActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetViewController.h; sourceTree = "<group>"; };
+		7D4C139E19E90634009CD94D /* IQActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetViewController.m; sourceTree = "<group>"; };
+		7D4C13A119E9063A009CD94D /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		7D4C13A219E9063A009CD94D /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
+		7D4C13A319E9063A009CD94D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		7D4C13A719E90785009CD94D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		7D4C13A919E90796009CD94D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		7D4C13AB19E907BD009CD94D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7D54A7A9194550670082909E /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
 		7D54A7AE1945F3040082909E /* BookDetailScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailScrollerView.h; sourceTree = "<group>"; };
 		7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailScrollerView.m; sourceTree = "<group>"; };
@@ -1666,6 +1681,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D4C13AC19E907BD009CD94D /* Security.framework in Frameworks */,
+				77E7D9E21930896A00BFA983 /* SystemConfiguration.framework in Frameworks */,
+				77E7D9E81930898A00BFA983 /* CoreTelephony.framework in Frameworks */,
+				7D4C13AA19E90796009CD94D /* CoreFoundation.framework in Frameworks */,
+				7D4C13A819E90785009CD94D /* CFNetwork.framework in Frameworks */,
 				77E7D9F0193089BE00BFA983 /* libz.dylib in Frameworks */,
 				77E075CA194043CD0098BA09 /* libWeChatSDK in Frameworks */,
 				77E075C9194043CD0098BA09 /* libWeiboSDK in Frameworks */,
@@ -1674,10 +1694,9 @@
 				77E7D9EC193089AD00BFA983 /* libsqlite3.dylib in Frameworks */,
 				77E7D9EA1930899A00BFA983 /* CoreLocation.framework in Frameworks */,
 				7D02874A19D9937D00EB5122 /* libMobClickLibrary.a in Frameworks */,
-				77E7D9E81930898A00BFA983 /* CoreTelephony.framework in Frameworks */,
 				77E7D9E61930897C00BFA983 /* QuartzCore.framework in Frameworks */,
+				7D4C13A419E9063A009CD94D /* libPushSDK.a in Frameworks */,
 				77E7D9E41930897500BFA983 /* MessageUI.framework in Frameworks */,
-				77E7D9E21930896A00BFA983 /* SystemConfiguration.framework in Frameworks */,
 				77E073E91940435D0098BA09 /* libIsoFrame.a in Frameworks */,
 				77E075C4194043CD0098BA09 /* Frontia.framework in Frameworks */,
 				77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */,
@@ -2244,6 +2263,9 @@
 		77B90427192C3F030062237D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7D4C13AB19E907BD009CD94D /* Security.framework */,
+				7D4C13A919E90796009CD94D /* CoreFoundation.framework */,
+				7D4C13A719E90785009CD94D /* CFNetwork.framework */,
 				7D93042A198F2B090084412C /* Frontia */,
 				7D930428198F2ACA0084412C /* Frontia */,
 				77E7D9EF193089BE00BFA983 /* libz.dylib */,
@@ -2419,6 +2441,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7D4C13A019E9063A009CD94D /* lib */,
 				7D02874619D9937D00EB5122 /* UMAnalytics_Sdk_3.1.2 */,
 				775B184F1993909200EF1C48 /* SWCell */,
 				774D4B8B1991B9A800D675D7 /* GKClasses */,
@@ -2904,6 +2927,17 @@
 			path = "反馈";
 			sourceTree = "<group>";
 		};
+		7D4C13A019E9063A009CD94D /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				7D4C13A119E9063A009CD94D /* APService.h */,
+				7D4C13A219E9063A009CD94D /* libPushSDK.a */,
+				7D4C13A319E9063A009CD94D /* PushConfig.plist */,
+			);
+			name = lib;
+			path = "../../../../Desktop/IOS8适配/lib";
+			sourceTree = "<group>";
+		};
 		7D7A486C19868B1E0019E9B3 /* 订阅新 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3185,6 +3219,8 @@
 		7DB045E41987A86E00A7612B /* IQActionSheetPickerView */ = {
 			isa = PBXGroup;
 			children = (
+				7D4C139D19E90634009CD94D /* IQActionSheetViewController.h */,
+				7D4C139E19E90634009CD94D /* IQActionSheetViewController.m */,
 				7DB045E51987A86E00A7612B /* IQActionSheetPickerView.h */,
 				7DB045E61987A86E00A7612B /* IQActionSheetPickerView.m */,
 			);
@@ -3654,6 +3690,7 @@
 				7D784D251991DF7800E7CE64 /* loading16.gif in Resources */,
 				77E0750F194043A90098BA09 /* f026@2x.png in Resources */,
 				77B904C3192C4B3B0062237D /* MJPhotoBrowser.bundle in Resources */,
+				7D4C13A519E9063A009CD94D /* PushConfig.plist in Resources */,
 				77E0754D194043A90098BA09 /* f057@2x.png in Resources */,
 				775B183B1993519800EF1C48 /* logo_default_1@2x.png in Resources */,
 				77E07517194043A90098BA09 /* f030@2x.png in Resources */,
@@ -3690,6 +3727,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D4C13A619E9073D009CD94D /* APService.h in Sources */,
 				7D943E65198D384F0060222B /* iCarousel.m in Sources */,
 				7DFC44C2198A4B250018BCB9 /* ApiMCardHistory.m in Sources */,
 				7DFC44E8198A4B250018BCB9 /* ApiMSignInInDetail.m in Sources */,
@@ -3839,6 +3877,7 @@
 				7796F1E419496FD000015307 /* HBTalkTableViewRightCell.m in Sources */,
 				77E0740C194043A20098BA09 /* HBCoreLabel.m in Sources */,
 				77883D4B1947F09C00197F59 /* ChatViewController.m in Sources */,
+				7D4C139F19E90634009CD94D /* IQActionSheetViewController.m in Sources */,
 				7D947C341989EAFE0000EB4E /* ZsndChat.pb.m in Sources */,
 				775B185C1993909200EF1C48 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				7DFC44C9198A4B250018BCB9 /* ApiMChatChange.m in Sources */,
@@ -4097,11 +4136,13 @@
 					"$(PROJECT_DIR)/Frame",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
 					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
+					"/Users/luck-mac/Desktop/IOS8适配/lib",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ff32777d-e575-4237-91f1-c7dd3efd0ee7";
+				PROVISIONING_PROFILE = "dceb56e3-2061-499e-876d-8cb97cf23986";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/ThirdParty/lib";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4129,11 +4170,13 @@
 					"$(PROJECT_DIR)/Frame",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
 					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
+					"/Users/luck-mac/Desktop/IOS8适配/lib",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ff32777d-e575-4237-91f1-c7dd3efd0ee7";
+				PROVISIONING_PROFILE = "dceb56e3-2061-499e-876d-8cb97cf23986";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/ThirdParty/lib";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
