@@ -19,6 +19,7 @@
 #import "NewsListTVC.h"
 #import "MobClick.h"
 #import "TreeHoleListViewController.h"
+#import <Frontia/Frontia.h>
 #define APP_KEY @"rGeiqb4QirOIXyWQQq5q8kGw"
 
 #define REPORT_ID @"d5dd317228"
@@ -36,7 +37,7 @@
     [self initDeviceid];
     [self initApiFrame];
     [self initJPush:launchOptions];
-//    [self initShare:application options:launchOptions];
+    [self initShare:application options:launchOptions];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     WelcomeViewController *vc = [storyboard instantiateInitialViewController];
@@ -68,6 +69,73 @@
                                                    UIRemoteNotificationTypeAlert)];
     [APService setupWithOption:launchOptions];
 }
+
+
+- (void)initShare:(UIApplication *)application options:(NSDictionary *)launchOptions
+{
+    
+    //初始化Frontia
+    [Frontia initWithApiKey:APP_KEY];
+    
+    [Frontia getPush];
+    [FrontiaPush setupChannel:launchOptions];
+    
+    [application registerForRemoteNotificationTypes:
+     UIRemoteNotificationTypeAlert
+     | UIRemoteNotificationTypeBadge
+     | UIRemoteNotificationTypeSound];
+    
+    
+    FrontiaStatistics* statTracker = [Frontia getStatistics];
+    statTracker.enableExceptionLog = YES; // 是否允许截获并发送崩溃信息，请设置YES或者NO
+    statTracker.channelId = @"123456";//设置您的app的发布渠道
+    statTracker.logStrategy = FrontiaStatLogStrategyCustom;//根据开发者设定的时间间隔接口发送 也可以使用启动时发送策略
+    statTracker.logSendInterval = 1;  //为1时表示发送日志的时间间隔为1小时
+    statTracker.logSendWifiOnly = YES; //是否仅在WIfi情况下发送日志数据
+    statTracker.sessionResumeInterval = 60;//设置应用进入后台再回到前台为同一次session的间隔时间[0~600s],超过600s则设为600s，默认为30s
+    statTracker.shortAppVersion  = IosAppVersion; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+    [statTracker startWithReportId:REPORT_ID];//设置您在mtj网站上添加的app的appkey
+    
+    BOOL isFirstOpen = NO;
+    if ([[ToolUtils getVersion] isEqualToString:IosAppVersion]) {
+        isFirstOpen = NO;
+    } else {
+        isFirstOpen = YES;
+    }
+    
+    if (isFirstOpen) {
+        [self onBindClick:nil];
+    }
+    [ToolUtils setVersion:IosAppVersion];
+}
+
+//绑定，以获取通知
+- (IBAction)onBindClick:(id)sender {
+    FrontiaPush *push = [Frontia getPush];
+    
+    if(push) {
+        
+        [push bindChannel:^(NSString *appId, NSString *userId, NSString *channelId) {
+            //            NSString *message = [[NSString alloc] initWithFormat:@"appid:%@ \nuserid:%@ \nchannelID:%@", appId, userId, channelId];
+            NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:userId forKey:@"pushId"];
+            [userDefaults synchronize];
+            
+            //            self.appidText.text = appId;
+            //            self.useridText.text = userId;
+            //            self.channelidText.text = channelId;
+            
+            //            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
+            
+        } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
+            
+            //            NSString *message = [[NSString alloc] initWithFormat:@"string is %@ error code : %d error message %@", action, errorCode, errorMessage];
+            //            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
+        }];
+    } else {
+    }
+}
+
 
 #pragma - mark init param
 - (void) initUmen
