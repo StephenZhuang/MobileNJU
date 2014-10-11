@@ -382,7 +382,7 @@ static NSArray* buttonImages;
     [self hideLoad];
     [self.loginView removeFromSuperview];
     [self.logoImage removeFromSuperview];
-    [self.logoImage setImage:[UIImage imageNamed:@"欢迎2"]];
+    [self.logoImage setImage:[UIImage imageNamed:@"欢迎"]];
     [self.view addSubview:self.logoImage];
     [self.view addSubview:self.loginView];
 

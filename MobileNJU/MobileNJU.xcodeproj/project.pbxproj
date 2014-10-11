@@ -467,8 +467,8 @@
 		77E7D9F319308BE400BFA983 /* RefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E7D9F219308BE400BFA983 /* RefreshTableViewController.m */; };
 		7D19562219CAAC260009F432 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D19561F19CAAC260009F432 /* libMobClickLibrary.a */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
-		7D4C139B19E8DB59009CD94D /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C139919E8DB59009CD94D /* libPushSDK.a */; };
-		7D4C139C19E8DB59009CD94D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C139A19E8DB59009CD94D /* PushConfig.plist */; };
+		7D4C13B119E91219009CD94D /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13AF19E91219009CD94D /* libPushSDK.a */; };
+		7D4C13B219E91219009CD94D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C13B019E91219009CD94D /* PushConfig.plist */; };
 		7D54A7B01945F3040082909E /* BookDetailScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */; };
 		7D6496AE198F9CDE0086435F /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6496AD198F9CDE0086435F /* AlertView.xib */; };
 		7D6496B1198F9D610086435F /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6496B0198F9D610086435F /* AlertView.m */; };
@@ -1324,9 +1324,9 @@
 		7D19562119CAAC260009F432 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		7D2FFEDC192F16B200E6C040 /* SelfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCell.h; sourceTree = "<group>"; };
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
-		7D4C139819E8DB59009CD94D /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
-		7D4C139919E8DB59009CD94D /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
-		7D4C139A19E8DB59009CD94D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		7D4C13AE19E91219009CD94D /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		7D4C13AF19E91219009CD94D /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
+		7D4C13B019E91219009CD94D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		7D54A7A9194550670082909E /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
 		7D54A7AE1945F3040082909E /* BookDetailScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailScrollerView.h; sourceTree = "<group>"; };
 		7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailScrollerView.m; sourceTree = "<group>"; };
@@ -1682,7 +1682,7 @@
 				7D19562219CAAC260009F432 /* libMobClickLibrary.a in Frameworks */,
 				77E7D9E81930898A00BFA983 /* CoreTelephony.framework in Frameworks */,
 				77E7D9E61930897C00BFA983 /* QuartzCore.framework in Frameworks */,
-				7D4C139B19E8DB59009CD94D /* libPushSDK.a in Frameworks */,
+				7D4C13B119E91219009CD94D /* libPushSDK.a in Frameworks */,
 				77E7D9E41930897500BFA983 /* MessageUI.framework in Frameworks */,
 				77E7D9E21930896A00BFA983 /* SystemConfiguration.framework in Frameworks */,
 				77E073E91940435D0098BA09 /* libIsoFrame.a in Frameworks */,
@@ -2426,7 +2426,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				7D4C139719E8DB59009CD94D /* lib */,
+				7D4C13AD19E91219009CD94D /* lib */,
 				7D19561E19CAAC260009F432 /* UMAnalytics_Sdk_3.1.2 */,
 				775B184F1993909200EF1C48 /* SWCell */,
 				774D4B8B1991B9A800D675D7 /* GKClasses */,
@@ -2901,15 +2901,14 @@
 			path = UMAnalytics_Sdk_3.1.2;
 			sourceTree = "<group>";
 		};
-		7D4C139719E8DB59009CD94D /* lib */ = {
+		7D4C13AD19E91219009CD94D /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				7D4C139819E8DB59009CD94D /* APService.h */,
-				7D4C139919E8DB59009CD94D /* libPushSDK.a */,
-				7D4C139A19E8DB59009CD94D /* PushConfig.plist */,
+				7D4C13AE19E91219009CD94D /* APService.h */,
+				7D4C13AF19E91219009CD94D /* libPushSDK.a */,
+				7D4C13B019E91219009CD94D /* PushConfig.plist */,
 			);
-			name = lib;
-			path = "../../../../Desktop/IOS8适配/lib";
+			path = lib;
 			sourceTree = "<group>";
 		};
 		7D7A486C19868B1E0019E9B3 /* 订阅新 */ = {
@@ -3676,7 +3675,7 @@
 				7D784D251991DF7800E7CE64 /* loading16.gif in Resources */,
 				77E0750F194043A90098BA09 /* f026@2x.png in Resources */,
 				77B904C3192C4B3B0062237D /* MJPhotoBrowser.bundle in Resources */,
-				7D4C139C19E8DB59009CD94D /* PushConfig.plist in Resources */,
+				7D4C13B219E91219009CD94D /* PushConfig.plist in Resources */,
 				77E0754D194043A90098BA09 /* f057@2x.png in Resources */,
 				775B183B1993519800EF1C48 /* logo_default_1@2x.png in Resources */,
 				77E07517194043A90098BA09 /* f030@2x.png in Resources */,
@@ -4123,7 +4122,7 @@
 					"$(PROJECT_DIR)/Frame",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
 					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
-					"/Users/luck-mac/Desktop/IOS8适配/lib",
+					"$(PROJECT_DIR)/ThirdParty/lib",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4158,7 +4157,7 @@
 					"$(PROJECT_DIR)/Frame",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
 					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
-					"/Users/luck-mac/Desktop/IOS8适配/lib",
+					"$(PROJECT_DIR)/ThirdParty/lib",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
