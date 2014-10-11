@@ -128,6 +128,8 @@
     [self.classroomField setEnabled:enable];
 }
 
+
+
 -  (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectTitles:(NSArray *)titles
 {
     [self.timeField setText:[NSString stringWithFormat:@"%@ %@-%@",[titles firstObject],[titles objectAtIndex:1],[titles lastObject]]];
@@ -215,6 +217,13 @@
                                      nil]];
     [picker showInViewController:self];
 }
+
+
+-(void)cancelPicker
+{
+    [self.tableView setScrollEnabled:YES];
+}
+
 
 #pragma -mark weekchooseDelegate
 - (void)cancel

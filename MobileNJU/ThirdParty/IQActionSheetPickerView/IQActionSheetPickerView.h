@@ -38,6 +38,8 @@ typedef enum IQActionSheetPickerStyle
 
 @optional
 - (void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didChangeRow:(NSInteger)row inComponent:(NSInteger)component;
+- (void)cancelPicker;
+
 @end
 
 @interface IQActionSheetPickerView : UIView <UIPickerViewDataSource,UIPickerViewDelegate>

@@ -166,6 +166,9 @@
 
 -(void)pickerCancelClicked:(UIBarButtonItem*)barButton
 {
+    if ([_delegate respondsToSelector:@selector(cancelPicker)]) {
+        [_delegate cancelPicker];
+    }
     [self dismiss];
 }
 
@@ -405,6 +408,7 @@
 -(void)dismiss
 {
     [actionSheetController dismiss];
+    
 }
 
 -(void)dealloc
