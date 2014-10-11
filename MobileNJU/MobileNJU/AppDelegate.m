@@ -84,7 +84,7 @@
 - (void) initUmen
 {
     
-    [MobClick startWithAppkey:@"541526bbfd98c50b120a76d7" reportPolicy:BATCH   channelId:nil];
+    [MobClick startWithAppkey:@"54158c40fd98c50aa110e01c" reportPolicy:BATCH   channelId:nil];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
 //    [MobClick setLogEnabled:YES];
