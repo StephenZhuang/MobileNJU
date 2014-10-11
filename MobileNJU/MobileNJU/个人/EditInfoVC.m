@@ -126,13 +126,13 @@
 //    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"selfInfo" ofType:@"plist"];
 //    NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     NSArray* items = [NSArray arrayWithObjects:@"基础医学院",@"基础医学研究所",@"第一临床医学院",@"临床医学研究所",@"第二临床医学院",@"针灸推拿学院",@"针灸研究所",@"药学院",@"药物研究所",@"经贸管理学院",@"护理学院",@"外国语学院",@"信息技术学院",@"心理学院、大学生心理健康教育咨询中心",@"人文与政治教育学院",@"继续教育学院",@"国际教育学院",@"翰林学院",@"其他",nil];
-    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择院系" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择院系" delegate:self];
     [picker setTag:1];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
                                      items,
                                      nil]];
 
-    [picker showInView:self.view];
+                                       [picker showInViewController:self];
 }
 
 /*
@@ -150,10 +150,10 @@
 
 
 - (IBAction)showDataPicker:(id)sender {
-    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择生日" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择生日" delegate:self];
     [picker setTag:6];
     [picker setActionSheetPickerStyle:IQActionSheetPickerStyleDatePicker];
-    [picker showInView:self.view];
+    [picker showInViewController:self];
 
 }
 

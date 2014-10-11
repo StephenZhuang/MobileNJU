@@ -11,6 +11,9 @@
 #import "ZsndNews.pb.h"
 #import "NewsDetailVC.h"
 #import "ApiMRssNews.h"
+#import "NewsDetailVC.h"
+#import <Frontia/Frontia.h>
+
 @interface RSSListVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSMutableArray* rssNews;
 @property(nonatomic,strong)MNews* currentNew;
@@ -38,6 +41,8 @@
 }
 
 - (void) viewWillAppear: (BOOL)inAnimated {
+    [super viewWillAppear:inAnimated];
+
 //    NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
     if(self.selected)
     {
@@ -47,6 +52,7 @@
     
 //    [self.tableView reloadData];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -64,6 +70,7 @@
     if ([son getError]==0) {
         if ([[son getMethod]isEqualToString:@"MRssNews"]) {
             MMyRss_Builder* ret = (MMyRss_Builder*)[son getBuild];
+            
             if (page==1) {
                 [self.rssNews removeAllObjects];
                 [self.rssNews addObjectsFromArray:ret.newsList];
@@ -71,7 +78,6 @@
             } else {
                 [self.rssNews addObjectsFromArray:ret.newsList];
                 [self doneWithView:_footer];
-                
             }
         }
     } else {
@@ -124,13 +130,12 @@
     
     if ([[segue identifier] isEqualToString:@"detail"]) {
         NewsDetailVC* destinationVC = (NewsDetailVC*)segue.destinationViewController;
-        NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.currentUrl]];
+        NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",self.currentUrl]];
         NSLog(@"设置的网址%@",self.currentUrl);
-        [destinationVC setMyTitle:@"订阅详情"];
+        [destinationVC setMyTitle:@"兴趣详情"];
         [destinationVC setUrl:url];
         [destinationVC setCurrentNew:self.currentNew];
         [destinationVC setImg:self.currentImg];
-        
     }
 }
 /*

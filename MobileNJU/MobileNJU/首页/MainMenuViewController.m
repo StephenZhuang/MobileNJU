@@ -73,6 +73,7 @@ static NSArray* descriptions;
     functionNames = [ToolUtils getFunctionName];
     buttonImages= [ToolUtils getButtonImage];
     descriptions = [ToolUtils getFunctionDetails];
+    
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -81,17 +82,44 @@ static NSArray* descriptions;
         [self loadIndex];
         self.firstOpen = NO;
     }
-    
+    if ([ToolUtils shouldShowNews]) {
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+        UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
+        NewsListTVC* newsList = (NewsListTVC*)[unc.childViewControllers firstObject];
+        newsList.jump = YES;
+        MNews_Builder* focus = [[MNews_Builder alloc]init];
+        NSDictionary* pushNews = [ToolUtils shouldShowNews];
+        focus.title = [pushNews objectForKey:@"title"];
+        focus.source = [pushNews objectForKey:@"source"];
+        focus.img = [pushNews objectForKey:@"img"];
+        focus.url = [pushNews objectForKey:@"url"];
+        [newsList setCurrentUrl:focus.url];
+        [newsList setCurrentNew:focus.build];
+//        [newsList setCurrentImg:[self.photoList objectAtIndex:self.pageController.currentPage]];
+        [self presentViewController:unc animated:YES completion:^{
+            [ToolUtils setShowNews:nil];
+        }];
+    } else if ([ToolUtils showActivity])
+    {
+        [self.rdv_tabBarController setSelectedIndex:2];
+    } else if ([ToolUtils showRss])
+    {
+        [self.rdv_tabBarController setSelectedIndex:1];
+    } else if ([ToolUtils showTreeHole])
+    {
+        [self gotoTreeHole];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:NO animated:YES];
 }
 - (void)loadIndex
 {
     if (!self.offline) {
-        [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:)];
+        [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:) version:[NSString stringWithFormat:@"%d",2]];
     } else {
         [self loadTableData];
     }
@@ -106,7 +134,7 @@ static NSArray* descriptions;
             MNewsList_Builder *newsList = (MNewsList_Builder *)[son getBuild];
             self.allNews = newsList.newsList;
             
-        } else if ([[son getMethod] isEqualToString:@"MIndex"]) {
+        } else if ([[son getMethod] isEqualToString:@"MIndexNew"]) {
             [[[ApisFactory getApiMNewsList]setPage:1 pageCount:10]load:self selecter:@selector(disposeMessage:)];
             MIndex_Builder* index = (MIndex_Builder*)[son getBuild];
             NSMutableArray* image = [[NSMutableArray alloc]init];
@@ -227,7 +255,7 @@ static NSArray* descriptions;
     } else if ([[segue identifier]isEqualToString:@"临时功能"])
     {
         ProcedureDetailVC* nextVC = (ProcedureDetailVC*)[segue destinationViewController];
-        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",self.tempUrl]];
+        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",self.tempUrl]];
 
     }
     if ([[segue identifier] isEqual:@"课程表"]) {
@@ -444,14 +472,14 @@ static NSArray* descriptions;
     UIImageView *imageView = [self.UIImageViewList objectAtIndex:site-1];;
     if (self.focusList.count>=site) {
         MFocus* focus = [self.focusList objectAtIndex:site-1];
-        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434]
+        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:400]
                         placeholderImage:[UIImage imageNamed:@"640乘400"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             if (image!=nil) {
                 [self.photoList setObject:image atIndexedSubscript:site-1];
             }
         }];
     } else {
-        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site-1]width:640 height:434]   placeholderImage:[UIImage imageNamed:@"640乘400"]  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [imageView setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:site-1]width:640 height:400]   placeholderImage:[UIImage imageNamed:@"640乘400"]  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             self.complete++;
             if (image!=nil) {
                 [self.photoList setObject:image atIndexedSubscript:site-1];
@@ -501,9 +529,9 @@ static NSArray* descriptions;
         frame.origin.y = self.headerView.frame.size.height-frame.size.height-40;
         _newImage = [[UIImageView alloc]initWithFrame:frame];
         if (focus==nil) {
-            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:page]   width:640 height:434]];
+            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:[self.newsImgList objectAtIndex:page]   width:640 height:400]];
         } else {
-            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:434]];
+            [_newImage setImageWithURL:[ToolUtils getImageUrlWtihString:focus.img width:640 height:400]];
         }
     }
     return _newImage;
@@ -587,7 +615,12 @@ static NSArray* descriptions;
 
 -(void) onClickImage:(id) sender{
     if (self.allNews==nil) {
-        [ToolUtils showMessage:@"脱机状态下无法浏览新闻"];
+        if ([ToolUtils isLogin]){
+            [ToolUtils showMessage:@"新闻列表未获取，请稍等片刻"];
+        } else {
+            [ToolUtils showMessage:@"网络未连接，请检查网络情况"];
+
+        }
         return;
     }
     [self.newsList removeAllObjects];
@@ -605,7 +638,9 @@ static NSArray* descriptions;
     newsList.jump = YES;
     if (self.newsList!=nil) {
         MNews* focus = [self.newsList objectAtIndex:self.pageController.currentPage];
-        [newsList setCurrentNew:focus];
+        MNews_Builder* news_builders = [[MNews_Builder alloc]init];
+        news_builders = [news_builders mergeFrom:focus];
+        [newsList setCurrentNew:news_builders];
         [newsList setCurrentUrl:focus.url];
         [newsList setCurrentImg:[self.photoList objectAtIndex:self.pageController.currentPage]];
     }
@@ -720,8 +755,24 @@ static NSArray* descriptions;
             [self.navigationController pushViewController:vc animated:YES];
             //        [self dismissCallView];
         }
-        
     }
+    else if (type.integerValue ==2 ){
+        [super goToChat:notification];
+    } else if (type.integerValue ==3) {
+        [self.rdv_tabBarController setSelectedIndex:1];
+    } else if (type.integerValue ==4) {
+        [self.rdv_tabBarController setSelectedIndex:2];
+    } else if (type.integerValue ==5) {
+        [self gotoTreeHole];
+    }
+}
+
+- (void) gotoTreeHole
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
+    TreeHoleListViewController *vc = [storyboard instantiateInitialViewController];
+    [self.rdv_tabBarController setTabBarHidden:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

@@ -11,6 +11,8 @@
 #import "ZsndNews.pb.h"
 #import "RSSListVC.h"
 #import "ZsndSystem.pb.h"
+#import "NewsDetailVC.h"
+#import "APService.h"
 @interface RSSVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSArray* myRss;
 @end
@@ -39,6 +41,8 @@
     
 }
 - (void) viewWillAppear: (BOOL)inAnimated {
+    [super viewWillAppear:inAnimated];
+
     NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
     if(selected)
         [self.tableView deselectRowAtIndexPath:selected animated:NO];
@@ -61,9 +65,32 @@
 
 
 - (void)viewDidAppear:(BOOL)animated
-{
-    [_header beginRefreshing];
+{   
+    [self loadData];
+    
+    if ([ToolUtils showRss]) {
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+        NewsDetailVC* detail = (NewsDetailVC*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"NewsDetail"]; //test2为viewcontroller的StoryboardId
+        MNews_Builder* focus = [[MNews_Builder alloc]init];
+        NSDictionary* pushNews = [ToolUtils showRss];
+        focus.title = [pushNews objectForKey:@"title"];
+        focus.source = [pushNews objectForKey:@"source"];
+        focus.img = [pushNews objectForKey:@"img"];
+        focus.url = [pushNews objectForKey:@"url"];
+        [detail setMyTitle:@"兴趣详情"];
+        NSURL* url;
+        if (![focus.url hasPrefix:@"http"]) {
+            url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",focus.url]];
+        } else {
+            url = [[NSURL alloc]initWithString:focus.url];
+        }
+        detail.url = url;
+        detail.currentNew = focus.build;
 
+        [self.navigationController pushViewController:detail animated:YES];
+        [ToolUtils setShowRss:nil];
+    }
+    
 }
 - (void)didReceiveMemoryWarning
 {
@@ -84,6 +111,18 @@
         if ([[son getMethod]isEqualToString:@"MMyRss"]) {
             MRssList_Builder* ret = (MRssList_Builder*)[son getBuild];
             self.myRss = ret.listList;
+            NSMutableArray* idList = [[NSMutableArray alloc]init];
+            for (MRss* news in self.myRss) {
+                NSString* tag =[ news.id stringByReplacingOccurrencesOfString:@"-" withString:@"_"];
+                [idList addObject:[NSString stringWithFormat:@"%@rss",tag]];
+                NSLog(@"%@",news.id);
+            }
+            [ToolUtils setTagList:idList];
+            UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+            if(types!= UIRemoteNotificationTypeNone)
+            {
+                [APService setTags:[[NSSet alloc]initWithArray:idList] alias:[[ToolUtils getVerify] stringByReplacingOccurrencesOfString:@"-" withString:@"_"] callbackSelector:nil target:nil];
+            }
         }
     } else {
         [super disposMessage:son];
