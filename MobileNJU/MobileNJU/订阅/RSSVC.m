@@ -12,8 +12,7 @@
 #import "RSSListVC.h"
 #import "ZsndSystem.pb.h"
 #import "NewsDetailVC.h"
-#import <Frontia/Frontia.h>
-
+#import "APService.h"
 @interface RSSVC ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)NSArray* myRss;
 @end
@@ -114,24 +113,16 @@
             self.myRss = ret.listList;
             NSMutableArray* idList = [[NSMutableArray alloc]init];
             for (MRss* news in self.myRss) {
-                [idList addObject:[NSString stringWithFormat:@"%@rss",news.id]];
+                NSString* tag =[ news.id stringByReplacingOccurrencesOfString:@"-" withString:@"_"];
+                [idList addObject:[NSString stringWithFormat:@"%@rss",tag]];
+                NSLog(@"%@",news.id);
             }
-            FrontiaPush *push = [Frontia getPush];
-            if (push) {
-                UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-                if(types!= UIRemoteNotificationTypeNone)
-                {
-                    [push setTags:idList tagOpResult:^(int count, NSArray *failureTag) {
-                        
-                    } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
-                        
-                    }];
-                    //                    [push setTag:[NSString stringWithFormat:@"%@rss",self.selectedId] tagOpResult:^(int count, NSArray *failureTag) {
-                    //                    } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
-                    //                    }];
-                }
+            [ToolUtils setTagList:idList];
+            UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+            if(types!= UIRemoteNotificationTypeNone)
+            {
+                [APService setTags:[[NSSet alloc]initWithArray:idList] alias:[[ToolUtils getVerify] stringByReplacingOccurrencesOfString:@"-" withString:@"_"] callbackSelector:nil target:nil];
             }
-
         }
     } else {
         [super disposMessage:son];

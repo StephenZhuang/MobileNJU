@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
     [self setTitle:@"校车"];
-    self.segmentArray = [[NSArray alloc]initWithObjects:@"滨江",@"花旗营", nil];
+    self.segmentArray = [[NSArray alloc]initWithObjects:@"滨江",@"花旗营",@"本部" ,nil];
     [self.segmentView setBackgroundColor:[UIColor clearColor]];
     
     // Do any additional setup after loading the view.
@@ -53,7 +53,7 @@
 - (void)loadData
 {
     ApiMBusSearch *bussearch = [[ApisFactory getApiMBusSearch]setPage:page pageCount:20];
-    [bussearch load:self selecter:@selector(disposMessage:) type:self.segmentView.selectedIndex?1:2];
+    [bussearch load:self selecter:@selector(disposMessage:) type:self.segmentView.selectedIndex+1];
 //    [[[ApisFactory getApiMBusSearch]setPage:page pageCount:20] load:self selecter:@selector(disposMessage:) type:self.segmentView.selectedIndex?1:2];
 }
 
