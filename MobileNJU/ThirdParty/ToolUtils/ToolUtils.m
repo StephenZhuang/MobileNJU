@@ -693,4 +693,28 @@
     
 }
 
++ (NSDictionary*)ecardRemain
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ecardRemain"];
+
+}
++ (void) setEcardRemain: (NSDictionary*)dic
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:dic forKey:@"ecardRemain"];
+    [userDefaults synchronize];
+}
+
++ (NSArray*) getTagList
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"tagList"];
+
+}
++ (void) setTagList: (NSArray*)tags
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:tags forKey:@"tagList"];
+    [userDefaults synchronize];
+}
+
 @end

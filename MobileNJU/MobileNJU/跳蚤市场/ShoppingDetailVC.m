@@ -85,6 +85,7 @@
                 [self.downShelfBt setEnabled:NO];
             }
         }
+        [self.navigationController popViewControllerAnimated:YES];
     } else {
         [super disposMessage:son];
     }

@@ -11,6 +11,7 @@
 #import "SecondPage.h"
 @interface AddShopVC : BaseViewController
 @property (nonatomic)NSInteger currentPage;
+@property (nonatomic)UIViewController* lastVC;
 @property (weak, nonatomic) IBOutlet FirstPage *firstPage;
 @property (nonatomic,strong)MAddMarket_Builder* market;
 @property (weak, nonatomic) IBOutlet SecondPage *secondPage;
