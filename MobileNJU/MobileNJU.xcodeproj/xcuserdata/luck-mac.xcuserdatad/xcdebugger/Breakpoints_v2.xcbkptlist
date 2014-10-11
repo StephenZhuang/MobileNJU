@@ -93,8 +93,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "553"
             endingLineNumber = "553"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
+            landmarkName = "-initNewScroller"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -205,7 +205,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
             endingLineNumber = "94"
-            landmarkName = "-initApiFrame"
+            landmarkName = "-initUmen"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -221,7 +221,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
             endingLineNumber = "86"
-            landmarkName = "-initApiFrame"
+            landmarkName = "-initUmen"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -237,7 +237,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "87"
             endingLineNumber = "87"
-            landmarkName = "-initApiFrame"
+            landmarkName = "-initUmen"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -763,7 +763,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "183"
             endingLineNumber = "183"
-            landmarkName = "-loadTableData"
+            landmarkName = "-loadImages"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -843,7 +843,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "540"
             endingLineNumber = "540"
-            landmarkName = "-prepareForNews"
+            landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -859,7 +859,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "547"
             endingLineNumber = "547"
-            landmarkName = "-prepareForNews"
+            landmarkName = "-pageChange:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -875,7 +875,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "548"
             endingLineNumber = "548"
-            landmarkName = "-prepareForNews"
+            landmarkName = "-pageChange:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -891,7 +891,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "549"
             endingLineNumber = "549"
-            landmarkName = "-prepareForNews"
+            landmarkName = "-pageChange:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -907,7 +907,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "550"
             endingLineNumber = "550"
-            landmarkName = "-prepareForNews"
+            landmarkName = "-pageChange:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -1113,8 +1113,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "153"
             endingLineNumber = "153"
-            landmarkName = "-collectionView:didSelectItemAtIndexPath:"
-            landmarkType = "5">
+            landmarkName = "@implementation ShoppingVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1303,8 +1303,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "123"
             endingLineNumber = "123"
-            landmarkName = "@implementation EditInfoVC"
-            landmarkType = "3">
+            landmarkName = "-showComboBox:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1589,7 +1589,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "171"
             endingLineNumber = "171"
-            landmarkName = "-loadLast"
+            landmarkName = "-addTitleView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1605,7 +1605,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
             endingLineNumber = "172"
-            landmarkName = "-loadLast"
+            landmarkName = "-addTitleView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1621,7 +1621,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "173"
             endingLineNumber = "173"
-            landmarkName = "-loadLast"
+            landmarkName = "-addTitleView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1891,9 +1891,25 @@
             timestampString = "429343586.490332"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x8bfe;&#x7a0b;&#x8868;/ScheduleVC.m"
+            timestampString = "429343586.490332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "174"
             endingLineNumber = "174"
-            landmarkName = "-loadLast"
+            landmarkName = "-addTitleView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1909,7 +1925,119 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "175"
             endingLineNumber = "175"
-            landmarkName = "-loadLast"
+            landmarkName = "@implementation ScheduleVC"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x8bfe;&#x7a0b;&#x8868;/ScheduleVC.m"
+            timestampString = "429343586.490332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "-addTitleView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x8bfe;&#x7a0b;&#x8868;/ScheduleVC.m"
+            timestampString = "429343586.490332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "-addTitleView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x8bfe;&#x7a0b;&#x8868;/ScheduleVC.m"
+            timestampString = "429343586.490332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "-addTitleView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x8bfe;&#x7a0b;&#x8868;/ScheduleVC.m"
+            timestampString = "429343586.490332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "-addTitleView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x8bfe;&#x7a0b;&#x8868;/ScheduleVC.m"
+            timestampString = "429343586.490332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "@implementation ScheduleVC"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x8bfe;&#x7a0b;&#x8868;/ScheduleVC.m"
+            timestampString = "429343586.490332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x8bfe;&#x7a0b;&#x8868;/ScheduleVC.m"
+            timestampString = "429343586.490332"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2037,8 +2165,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "210"
             endingLineNumber = "210"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-loadSavedLesson"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2053,7 +2181,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "212"
             endingLineNumber = "212"
-            landmarkName = "-search:"
+            landmarkName = "-loadSavedLesson"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2133,8 +2261,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
             endingLineNumber = "30"
-            landmarkName = "@implementation AppDelegate"
-            landmarkType = "3">
+            landmarkName = "-application:didFinishLaunchingWithOptions:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2437,8 +2565,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
             endingLineNumber = "31"
-            landmarkName = "@implementation BBSDetail"
-            landmarkType = "3">
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2453,8 +2581,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
             endingLineNumber = "32"
-            landmarkName = "@implementation BBSDetail"
-            landmarkType = "3">
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2469,8 +2597,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
             endingLineNumber = "68"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
+            landmarkName = "@implementation BBSDetail"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2501,8 +2629,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
             endingLineNumber = "64"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
+            landmarkName = "@implementation BBSDetail"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2565,8 +2693,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "405"
             endingLineNumber = "405"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-textFieldDidBeginEditing:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2677,8 +2805,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "220"
             endingLineNumber = "220"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
+            landmarkName = "-prepareForSegue:sender:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2741,8 +2869,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "249"
             endingLineNumber = "249"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-search:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2757,8 +2885,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "252"
             endingLineNumber = "252"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-search:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2773,8 +2901,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "251"
             endingLineNumber = "251"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-search:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2789,8 +2917,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "220"
             endingLineNumber = "220"
-            landmarkName = "-search:"
-            landmarkType = "5">
+            landmarkName = "@implementation ScheduleVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3285,8 +3413,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "137"
             endingLineNumber = "137"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-initAlert"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3301,8 +3429,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "374"
             endingLineNumber = "374"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-addCode:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3317,8 +3445,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "376"
             endingLineNumber = "376"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-addCode:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3333,8 +3461,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "377"
             endingLineNumber = "377"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-addCode:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3349,8 +3477,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "378"
             endingLineNumber = "378"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-addCode:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3365,7 +3493,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "380"
             endingLineNumber = "380"
-            landmarkName = "-textFieldShouldReturn:"
+            landmarkName = "-addCode:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3381,7 +3509,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "381"
             endingLineNumber = "381"
-            landmarkName = "-textFieldShouldReturn:"
+            landmarkName = "-addCode:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3397,7 +3525,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "379"
             endingLineNumber = "379"
-            landmarkName = "-textFieldShouldReturn:"
+            landmarkName = "-addCode:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3413,7 +3541,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "382"
             endingLineNumber = "382"
-            landmarkName = "-textFieldShouldReturn:"
+            landmarkName = "-addCode:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4019,8 +4147,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "152"
             endingLineNumber = "152"
-            landmarkName = "@implementation EcardVC"
-            landmarkType = "3">
+            landmarkName = "-disposeMessage:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4371,22 +4499,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
             endingLineNumber = "76"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MobileNJU/&#x4e00;&#x5361;&#x901a;/EcardVC.m"
-            timestampString = "429162775.200335"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -4877,7 +4989,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "513"
             endingLineNumber = "513"
-            landmarkName = "-pageChange:"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4893,7 +5005,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "514"
             endingLineNumber = "514"
-            landmarkName = "-pageChange:"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4909,7 +5021,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "515"
             endingLineNumber = "515"
-            landmarkName = "-pageChange:"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4925,7 +5037,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "516"
             endingLineNumber = "516"
-            landmarkName = "-pageChange:"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4941,8 +5053,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "517"
             endingLineNumber = "517"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
+            landmarkName = "-changeSectionHeader:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4957,7 +5069,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "424"
             endingLineNumber = "424"
-            landmarkName = "-reloadNews:"
+            landmarkName = "-goToShop"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4973,7 +5085,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "519"
             endingLineNumber = "519"
-            landmarkName = "-initNewScroller"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4989,7 +5101,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "521"
             endingLineNumber = "521"
-            landmarkName = "-initNewScroller"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5069,7 +5181,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "520"
             endingLineNumber = "520"
-            landmarkName = "-initNewScroller"
+            landmarkName = "-changeSectionHeader:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5085,7 +5197,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "500"
             endingLineNumber = "500"
-            landmarkName = "-scrollViewDidScroll:"
+            landmarkName = "-newImage"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5133,23 +5245,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "395"
             endingLineNumber = "395"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MobileNJU/&#x9996;&#x9875;/MainMenuViewController.m"
-            timestampString = "429158500.79807"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
-            landmarkName = "-getEmptyUIImage"
+            landmarkName = "-goToDetail:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5165,7 +5261,23 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "397"
             endingLineNumber = "397"
-            landmarkName = "-getEmptyUIImage"
+            landmarkName = "-goToDetail:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x9996;&#x9875;/MainMenuViewController.m"
+            timestampString = "429158500.79807"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
+            landmarkName = "-goToDetail:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5181,8 +5293,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "399"
             endingLineNumber = "399"
-            landmarkName = "-getEmptyUIImage"
-            landmarkType = "5">
+            landmarkName = "@implementation MainMenuViewController"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -5227,8 +5339,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "405"
             endingLineNumber = "405"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
+            landmarkName = "-gotoLogin"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5243,8 +5355,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "406"
             endingLineNumber = "406"
-            landmarkName = "@implementation MainMenuViewController"
-            landmarkType = "3">
+            landmarkName = "-gotoLogin"
+            landmarkType = "5">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -6295,8 +6407,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "375"
             endingLineNumber = "375"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-addCode:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6599,7 +6711,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "397"
             endingLineNumber = "397"
-            landmarkName = "-getEmptyUIImage"
+            landmarkName = "-goToDetail:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -6661,8 +6773,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "408"
             endingLineNumber = "408"
-            landmarkName = "-reloadNews:"
-            landmarkType = "5">
+            landmarkName = "@implementation MainMenuViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6677,8 +6789,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "409"
             endingLineNumber = "409"
-            landmarkName = "-reloadNews:"
-            landmarkType = "5">
+            landmarkName = "@implementation MainMenuViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6853,7 +6965,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "318"
             endingLineNumber = "318"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7171,7 +7283,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "414"
             endingLineNumber = "414"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-alertLogin"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7187,7 +7299,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "415"
             endingLineNumber = "415"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-alertLogin"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7203,8 +7315,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "418"
             endingLineNumber = "418"
-            landmarkName = "-prepareForSegue:sender:"
-            landmarkType = "5">
+            landmarkName = "@implementation WelcomeViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7219,7 +7331,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "424"
             endingLineNumber = "424"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7235,7 +7347,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "425"
             endingLineNumber = "425"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7251,7 +7363,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "428"
             endingLineNumber = "428"
-            landmarkName = "-login"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7267,7 +7379,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "224"
             endingLineNumber = "224"
-            landmarkName = "-loadMain"
+            landmarkName = "-tryUse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7283,7 +7395,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
             endingLineNumber = "226"
-            landmarkName = "-loadMain"
+            landmarkName = "-tryUse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7299,8 +7411,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "426"
             endingLineNumber = "426"
-            landmarkName = "@implementation WelcomeViewController"
-            landmarkType = "3">
+            landmarkName = "-alertView:clickedButtonAtIndex:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7505,7 +7617,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "223"
             endingLineNumber = "223"
-            landmarkName = "-loadMain"
+            landmarkName = "-tryUse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7532,11 +7644,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeVC.m"
-            timestampString = "429345333.351554"
+            timestampString = "429510089.245089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "-disposMessage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7553,7 +7665,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "207"
             endingLineNumber = "207"
-            landmarkName = "-disposMessage:"
+            landmarkName = "-loadColor"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -8865,8 +8977,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "258"
             endingLineNumber = "258"
-            landmarkName = "-load:selecter:code:account:password:"
-            landmarkType = "5">
+            landmarkName = "@implementation ScheduleVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8881,8 +8993,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "262"
             endingLineNumber = "262"
-            landmarkName = "-load:selecter:code:account:password:"
-            landmarkType = "5">
+            landmarkName = "@implementation ScheduleVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8913,8 +9025,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "250"
             endingLineNumber = "250"
-            landmarkName = "@implementation ScheduleVC"
-            landmarkType = "3">
+            landmarkName = "-search:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -9004,7 +9116,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "181"
@@ -9020,11 +9132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeVC.m"
-            timestampString = "429345333.351554"
+            timestampString = "429530083.055147"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -9116,13 +9228,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "334"
             endingLineNumber = "334"
-            landmarkName = "@implementation GradeDetailVC"
-            landmarkType = "3">
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -9132,7 +9244,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "335"
@@ -9148,7 +9260,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "336"
@@ -9164,7 +9276,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "337"
@@ -9180,7 +9292,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "339"
@@ -9196,7 +9308,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "339"
@@ -9212,7 +9324,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "340"
@@ -9228,7 +9340,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "342"
@@ -9244,7 +9356,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "347"
@@ -9260,7 +9372,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "348"
@@ -9276,7 +9388,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "347"
@@ -9292,7 +9404,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "349"
@@ -9308,7 +9420,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "350"
@@ -9324,7 +9436,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "351"
@@ -9340,11 +9452,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
-            timestampString = "429500772.65559"
+            timestampString = "429505243.298747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "344"
             endingLineNumber = "344"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
+            timestampString = "429505243.298747"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -9363,6 +9491,214 @@
             endingLineNumber = "379"
             landmarkName = "@implementation TreeHoleListViewController"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x767e;&#x5408;&#x5341;&#x5927;/BBSVC.m"
+            timestampString = "429428882.1962"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "-prepareForSegue:sender:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeVC.m"
+            timestampString = "429510044.481835"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeVC.m"
+            timestampString = "429510046.240839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeVC.m"
+            timestampString = "429510046.80741"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeVC.m"
+            timestampString = "429510047.2246"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeVC.m"
+            timestampString = "429510047.791336"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeVC.m"
+            timestampString = "429510193.457828"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeVC.m"
+            timestampString = "429510195.45824"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
+            timestampString = "429510349.466999"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
+            timestampString = "429510351.546413"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
+            timestampString = "429510366.333216"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
+            timestampString = "429510377.087427"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MobileNJU/&#x6210;&#x7ee9;&#x67e5;&#x8be2;/GradeDetailVC.m"
+            timestampString = "429510423.856326"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "-disposMessage:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
