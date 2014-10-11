@@ -484,6 +484,9 @@
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
 		7D41F5E619DA8A9100C01E83 /* FeedBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D41F5E519DA8A9100C01E83 /* FeedBackVC.m */; };
 		7D41F5EB19DA8AFB00C01E83 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D41F5E819DA8AFB00C01E83 /* libMobClickLibrary.a */; };
+		7D4C13F719E95DDC009CD94D /* IQActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4C13F619E95DDC009CD94D /* IQActionSheetViewController.m */; };
+		7D4C13FC19E95DE5009CD94D /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13FA19E95DE5009CD94D /* libPushSDK.a */; };
+		7D4C13FD19E95DE5009CD94D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C13FB19E95DE5009CD94D /* PushConfig.plist */; };
 		7D54A7B01945F3040082909E /* BookDetailScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */; };
 		7D6496AE198F9CDE0086435F /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6496AD198F9CDE0086435F /* AlertView.xib */; };
 		7D6496B1198F9D610086435F /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6496B0198F9D610086435F /* AlertView.m */; };
@@ -1359,6 +1362,11 @@
 		7D41F5E819DA8AFB00C01E83 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		7D41F5E919DA8AFB00C01E83 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		7D41F5EA19DA8AFB00C01E83 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		7D4C13F519E95DDC009CD94D /* IQActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetViewController.h; sourceTree = "<group>"; };
+		7D4C13F619E95DDC009CD94D /* IQActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetViewController.m; sourceTree = "<group>"; };
+		7D4C13F919E95DE5009CD94D /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		7D4C13FA19E95DE5009CD94D /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
+		7D4C13FB19E95DE5009CD94D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		7D54A7A9194550670082909E /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
 		7D54A7AE1945F3040082909E /* BookDetailScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailScrollerView.h; sourceTree = "<group>"; };
 		7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailScrollerView.m; sourceTree = "<group>"; };
@@ -1677,6 +1685,7 @@
 				7D41F5EB19DA8AFB00C01E83 /* libMobClickLibrary.a in Frameworks */,
 				77E7D9E81930898A00BFA983 /* CoreTelephony.framework in Frameworks */,
 				77E7D9E61930897C00BFA983 /* QuartzCore.framework in Frameworks */,
+				7D4C13FC19E95DE5009CD94D /* libPushSDK.a in Frameworks */,
 				77E7D9E41930897500BFA983 /* MessageUI.framework in Frameworks */,
 				77E7D9E21930896A00BFA983 /* SystemConfiguration.framework in Frameworks */,
 				77E073E91940435D0098BA09 /* libIsoFrame.a in Frameworks */,
@@ -2420,6 +2429,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7D4C13F819E95DE5009CD94D /* lib */,
 				7D41F5E719DA8AFB00C01E83 /* UMAnalytics_Sdk_3.1.2 */,
 				775B184F1993909200EF1C48 /* SWCell */,
 				774D4B8B1991B9A800D675D7 /* GKClasses */,
@@ -2906,6 +2916,16 @@
 			path = UMAnalytics_Sdk_3.1.2;
 			sourceTree = "<group>";
 		};
+		7D4C13F819E95DE5009CD94D /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				7D4C13F919E95DE5009CD94D /* APService.h */,
+				7D4C13FA19E95DE5009CD94D /* libPushSDK.a */,
+				7D4C13FB19E95DE5009CD94D /* PushConfig.plist */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		7D7A486C19868B1E0019E9B3 /* 订阅新 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3187,6 +3207,8 @@
 		7DB045E41987A86E00A7612B /* IQActionSheetPickerView */ = {
 			isa = PBXGroup;
 			children = (
+				7D4C13F519E95DDC009CD94D /* IQActionSheetViewController.h */,
+				7D4C13F619E95DDC009CD94D /* IQActionSheetViewController.m */,
 				7DB045E51987A86E00A7612B /* IQActionSheetPickerView.h */,
 				7DB045E61987A86E00A7612B /* IQActionSheetPickerView.m */,
 			);
@@ -3659,6 +3681,7 @@
 				7D784D251991DF7800E7CE64 /* loading16.gif in Resources */,
 				77E0750F194043A90098BA09 /* f026@2x.png in Resources */,
 				77B904C3192C4B3B0062237D /* MJPhotoBrowser.bundle in Resources */,
+				7D4C13FD19E95DE5009CD94D /* PushConfig.plist in Resources */,
 				77E0754D194043A90098BA09 /* f057@2x.png in Resources */,
 				775B183B1993519800EF1C48 /* logo_default_1@2x.png in Resources */,
 				77E07517194043A90098BA09 /* f030@2x.png in Resources */,
@@ -3844,6 +3867,7 @@
 				7796F1E419496FD000015307 /* HBTalkTableViewRightCell.m in Sources */,
 				77E0740C194043A20098BA09 /* HBCoreLabel.m in Sources */,
 				77883D4B1947F09C00197F59 /* ChatViewController.m in Sources */,
+				7D4C13F719E95DDC009CD94D /* IQActionSheetViewController.m in Sources */,
 				7D947C341989EAFE0000EB4E /* ZsndChat.pb.m in Sources */,
 				775B185C1993909200EF1C48 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				7DFC44C9198A4B250018BCB9 /* ApiMChatChange.m in Sources */,
@@ -4041,8 +4065,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "30C72627-2ADF-401D-8953-DC75C71DF9CE";
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "c9990928-406c-400b-ac46-1f5873d9e9db";
+				SDKROOT = iphoneos7.1;
 			};
 			name = Debug;
 		};
@@ -4074,8 +4098,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PROVISIONING_PROFILE = "30C72627-2ADF-401D-8953-DC75C71DF9CE";
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "c9990928-406c-400b-ac46-1f5873d9e9db";
+				SDKROOT = iphoneos7.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -4103,10 +4127,12 @@
 					"$(PROJECT_DIR)/Frame",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
 					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
+					"$(PROJECT_DIR)/ThirdParty/lib",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2d0a4233-b66f-4890-a177-f1c162559dc2";
+				SDKROOT = iphoneos7.1;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -4136,10 +4162,12 @@
 					"$(PROJECT_DIR)/Frame",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
 					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
+					"$(PROJECT_DIR)/ThirdParty/lib",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2d0a4233-b66f-4890-a177-f1c162559dc2";
+				SDKROOT = iphoneos7.1;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

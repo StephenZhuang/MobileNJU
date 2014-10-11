@@ -464,9 +464,9 @@
     }
     ScheduleView* schedule = [[[NSBundle mainBundle] loadNibNamed:@"ScheduleView" owner:self options:nil] firstObject];
     [schedule initDate];
-    CGRect frame = CGRectMake(0, 0, 320, 620);
+    CGRect frame = CGRectMake(0, 0, 320, 750);
     schedule.frame = frame;
-    self.scrollView.contentSize = CGSizeMake(320, 620);
+    self.scrollView.contentSize = CGSizeMake(320, 750);
     [self.scrollView addSubview:schedule];
     
     NSMutableArray* schedules = [[NSMutableArray alloc]init];
