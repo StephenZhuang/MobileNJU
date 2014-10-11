@@ -32,6 +32,8 @@
 }
 - (void) viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+
     [_header beginRefreshing];
 }
 - (void)initNavigationBar

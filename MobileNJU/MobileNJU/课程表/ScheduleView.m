@@ -13,7 +13,7 @@
 #define STARTX 31
 #define STARTY 27
 #define WIDTH 41
-#define HEIGHT 47.5
+#define HEIGHT 95
 #define HEADBACKCOLOR  [UIColor colorWithRed:235/255.0 green:234/255.0 blue:231/255.0 alpha:1]
 #define HEADTEXTCOLOR  [UIColor colorWithRed:129/255.0 green:129/255.0 blue:129/255.0 alpha:1]
 @implementation ScheduleView
@@ -36,6 +36,7 @@
 
 - (void)initDate
 {
+    self.week = [ToolUtils getCurrentWeek];
     NSArray* dayLabels = [NSArray arrayWithObjects:self.dayOne,self.dayTwo,self.dayThree,self.dayFour,self.dayFive,self.daySex,self.daySeven, nil];
     
     NSCalendar*calendar = [NSCalendar currentCalendar];
@@ -44,7 +45,13 @@
                                           fromDate:date];
     //    NSInteger week = [compos week]; // 今年的第几周
     NSInteger weekday = [compos weekday]; // 星期几（注意，周日是“1”，周一是“2”。。。。）
-    self.currentWeek.transform = CGAffineTransformMakeTranslation(((weekday-2)%7)*WIDTH*2, 0);
+    if (weekday>1) {
+        self.currentWeek.transform = CGAffineTransformMakeTranslation(((weekday-2)%7)*WIDTH*2, 0);
+
+    } else {
+        self.currentWeek.transform = CGAffineTransformMakeTranslation(6*WIDTH*2, 0);
+
+    }
     NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
     // 设置日期格式
     
@@ -158,23 +165,25 @@
                 [touchButton setTitle:@"" forState:UIControlStateNormal];
                 [touchButton setBackgroundColor:[UIColor clearColor]];
                 touchButton.backgroundColor = [button getColor];
-                CGRect nameFrame = CGRectMake(3, 7, WIDTH-6, HEIGHT*lesson.length-22);
+                CGRect nameFrame = CGRectMake(3, 0, WIDTH-6, HEIGHT*lesson.length-22);
                 VerticallyAlignedLabel *lessonNameLabel = [[VerticallyAlignedLabel alloc]initWithFrame:nameFrame];
                 [lessonNameLabel setFont:[UIFont fontWithName:@"Helvetica" size:11]];
-                [lessonNameLabel setText:button.myLesson.name];
+                [lessonNameLabel setText:lesson.name];
                 [lessonNameLabel setTextColor:[UIColor whiteColor]];
                 // 0代表不限制行数
-                [lessonNameLabel setNumberOfLines:0];
+                [lessonNameLabel setNumberOfLines:3];
                 [lessonNameLabel setVerticalAlignment:VerticalAlignmentTop];
                 // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
                 //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
                 
-                CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-30, WIDTH-6, 30);
+                CGRect loactionFrame = CGRectMake(3, 40, WIDTH-6, 60);
                 VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
+                
+                
                 [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
                 [locationLabel setNumberOfLines:0];
-                [locationLabel setVerticalAlignment:VerticalAlignmentBottom];
-                [locationLabel setText:button.myLesson.location];
+                [locationLabel setVerticalAlignment:VerticalAlignmentTop];
+                [locationLabel setText:[NSString stringWithFormat:@"@%@",lesson.location]];
                 [locationLabel setTextColor:[UIColor whiteColor]];
                 [button addSubview:touchButton];
                 [button setMyButton:touchButton];
@@ -218,18 +227,19 @@
             [lessonNameLabel setText:lesson.name];
             [lessonNameLabel setTextColor:[UIColor whiteColor]];
             // 0代表不限制行数
-            [lessonNameLabel setNumberOfLines:0];
+            [lessonNameLabel setNumberOfLines:3];
             [lessonNameLabel setVerticalAlignment:VerticalAlignmentTop];
             // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
             //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
             
-            CGRect loactionFrame = CGRectMake(3, HEIGHT*lesson.length-30, WIDTH-6, 30);
+            CGRect loactionFrame = CGRectMake(3,40, WIDTH-6, 60);
             VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
+            
             
             [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
             [locationLabel setNumberOfLines:0];
-            [locationLabel setVerticalAlignment:VerticalAlignmentBottom];
-            [locationLabel setText:lesson.location];
+            [locationLabel setVerticalAlignment:VerticalAlignmentTop];
+            [locationLabel setText:[NSString stringWithFormat:@"@%@",lesson.location]];
             [locationLabel setTextColor:[UIColor whiteColor]];
             
             
@@ -251,6 +261,75 @@
     }
     
     
+    for (LessonButton* button in self.buttonList) {
+        if (button.lessonArr.count==1) {
+            if (![self judgeHasLesson:button.myLesson]) {
+                button.backgroundColor =  [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+                button.touchButton.backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+                
+                [button.locationLabel setText:@"@本周无课程"];
+            }
+        } else {
+            BOOL hasLesson = NO;
+            for (ScheduleLesson* lesson in button.lessonArr) {
+                if ([self judgeHasLesson:lesson]) {
+                    [button.lessonNameLabel setText:lesson.name];
+                    [button.locationLabel setText:[NSString stringWithFormat:@"@%@",lesson.location]];
+                    hasLesson = YES;
+                }
+            }
+            if (!hasLesson) {
+                button.backgroundColor =  [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+                 button.touchButton.backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+                [button.locationLabel setText:@"@本周无课程"];
+            }
+        }
+    }
+    
+    
+}
+
+- (BOOL)judgeHasLesson:(ScheduleLesson*)lesson
+{
+    NSArray* busyweeks = [lesson.busyweeks componentsSeparatedByString:@","];
+    for (NSString* week in busyweeks) {
+        if (week.integerValue == self.week) {
+            return YES;
+        }
+    }
+    return NO;
+//    NSString* week = lesson.week;
+//    if ([week isEqualToString:@"双周"]) {
+//        if (self.week%2!=0) {
+//            return NO;
+//        }
+//    } else if ([week isEqualToString:@"单周"]){
+//        if (self.week%2==0) {
+//            return NO;
+//        }
+//    } else if ([week rangeOfString:@"-"].length>0)
+//    {
+//        NSArray* range = [week componentsSeparatedByString:@"-"];
+//        NSString* end = [[[range objectAtIndex:1] componentsSeparatedByString:@"周"] firstObject];
+//        
+//        if ([[range firstObject] integerValue] > self.week|| [end integerValue] < self.week) {
+//            return NO;
+//        }
+//    } else if ([week rangeOfString:@" "].length>0)
+//    {
+//        NSArray* range = [week componentsSeparatedByString:@" "];
+//        BOOL has = NO;
+//        for (NSString* day in range) {
+//            if ( [day integerValue]==self.week) {
+//                has = YES;
+//                break;
+//            }
+//        }
+//        if (!has) {
+//            return NO;
+//        }
+//    }
+//    return YES;
 }
 
 

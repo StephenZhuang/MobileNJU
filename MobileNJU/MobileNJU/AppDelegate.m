@@ -8,17 +8,20 @@
 
 #import "AppDelegate.h"
 #import "WelcomeViewController.h"
-#import <Frontia/Frontia.h>
+
 #include <sys/socket.h>
 #include <sys/sysctl.h>
 #include <net/if.h>
 #include <net/if_dl.h>
-#import <Frontia/FrontiaPush.h>
-#import <Frontia/Frontia.h>
+#import "APService.h"
 #import "JDStatusBarNotification.h"
 #import "RDVTabBarController.h"
-
+#import "NewsListTVC.h"
+#import "MobClick.h"
+#import "TreeHoleListViewController.h"
+#import <Frontia/Frontia.h>
 #define APP_KEY @"MGZF96fGRexFypz7bvgapVY1"
+
 #define REPORT_ID @"d5dd317228"
 
 #define IosAppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
@@ -33,6 +36,7 @@
 
     [self initDeviceid];
     [self initApiFrame];
+    [self initJPush:launchOptions];
     [self initShare:application options:launchOptions];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
@@ -41,17 +45,59 @@
     self.window.rootViewController = nav;
     
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"14",@"type",@"nju/news/1411992130101.html",@"target", @"source",@"source",@"img",@"img",@"titlepush",@"titlepush",nil];
+
     if (userInfo) {
-        [self operaUserInfo:userInfo appliccation:application];
+        [self savePush:userInfo];
+//        [self operaUserInfo:userInfo appliccation:application];
     }
+    
+    [self initUmen];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-
+    
     return YES;
 }
 
+- (void) initJPush:(NSDictionary*) launchOptions
+{
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                   UIRemoteNotificationTypeSound |
+                                                   UIRemoteNotificationTypeAlert)];
+    [APService setupWithOption:launchOptions];
+}
+
+
+- (void)initShare:(UIApplication *)application options:(NSDictionary *)launchOptions
+{
+    
+    //初始化Frontia
+    [Frontia initWithApiKey:APP_KEY];
+    
+}
+
+
 #pragma - mark init param
+- (void) initUmen
+{
+    
+    [MobClick startWithAppkey:@"54158e91fd98c50afa0d3855" reportPolicy:BATCH   channelId:nil];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+//    [MobClick setLogEnabled:YES];
+//    Class cls = NSClassFromString(@"UMANUtil");
+//    SEL deviceIDSelector = @selector(openUDIDString);
+//    NSString *deviceID = nil;
+//    if(cls && [cls respondsToSelector:deviceIDSelector]){
+//        deviceID = [cls performSelector:deviceIDSelector];
+//    }
+//    NSLog(@"{\"oid\": \"%@\"}", deviceID);
+    
+}
+
 - (void)initApiFrame
 {
     [Frame build];
@@ -67,71 +113,6 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:@"WIFI" forKey:@"internet"];
     [[NSUserDefaults standardUserDefaults] setObject:@"kai" forKey:@"3g2g"];
-}
-
-- (void)initShare:(UIApplication *)application options:(NSDictionary *)launchOptions
-{
-
-    //初始化Frontia
-    [Frontia initWithApiKey:APP_KEY];
-    
-    [Frontia getPush];
-    [FrontiaPush setupChannel:launchOptions];
-    
-    [application registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeAlert
-     | UIRemoteNotificationTypeBadge
-     | UIRemoteNotificationTypeSound];
-    
-    
-    FrontiaStatistics* statTracker = [Frontia getStatistics];
-    statTracker.enableExceptionLog = YES; // 是否允许截获并发送崩溃信息，请设置YES或者NO
-    statTracker.channelId = @"123456";//设置您的app的发布渠道
-    statTracker.logStrategy = FrontiaStatLogStrategyCustom;//根据开发者设定的时间间隔接口发送 也可以使用启动时发送策略
-    statTracker.logSendInterval = 1;  //为1时表示发送日志的时间间隔为1小时
-    statTracker.logSendWifiOnly = YES; //是否仅在WIfi情况下发送日志数据
-    statTracker.sessionResumeInterval = 60;//设置应用进入后台再回到前台为同一次session的间隔时间[0~600s],超过600s则设为600s，默认为30s
-    statTracker.shortAppVersion  = IosAppVersion; //参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
-    [statTracker startWithReportId:REPORT_ID];//设置您在mtj网站上添加的app的appkey
-    
-    BOOL isFirstOpen = NO;
-    if ([[ToolUtils getVersion] isEqualToString:IosAppVersion]) {
-        isFirstOpen = NO;
-    } else {
-        isFirstOpen = YES;
-    }
-    
-    if (isFirstOpen) {
-        [self onBindClick:nil];
-    }
-    [ToolUtils setVersion:IosAppVersion];
-}
-
-//绑定，以获取通知
-- (IBAction)onBindClick:(id)sender {
-    FrontiaPush *push = [Frontia getPush];
-
-    if(push) {
-
-        [push bindChannel:^(NSString *appId, NSString *userId, NSString *channelId) {
-//            NSString *message = [[NSString alloc] initWithFormat:@"appid:%@ \nuserid:%@ \nchannelID:%@", appId, userId, channelId];
-            NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-            [userDefaults setObject:userId forKey:@"pushId"];
-            [userDefaults synchronize];
-
-//            self.appidText.text = appId;
-//            self.useridText.text = userId;
-//            self.channelidText.text = channelId;
-            
-//            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
-            
-        } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
-
-//            NSString *message = [[NSString alloc] initWithFormat:@"string is %@ error code : %d error message %@", action, errorCode, errorMessage];
-//            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
-        }];
-    } else {
-    }
 }
 
 - (void)initDeviceid
@@ -222,8 +203,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     NSLog(@"frontia application:%@", deviceToken);
-    [FrontiaPush registerDeviceToken: deviceToken];
-    
+    [APService registerDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -234,6 +214,7 @@
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     NSLog(@"frontia applciation receive Notify: %@", [userInfo description]);
+    
 //    NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if (application.applicationState == UIApplicationStateActive || application.applicationState == UIApplicationStateInactive) {
         // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
@@ -247,14 +228,65 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     } else {
         int bage = [[userInfo objectForKey:@"badge"] intValue];
         [application setApplicationIconBadgeNumber:bage];
+        
     }
-    
-    [FrontiaPush handleNotification:userInfo];
+    [APService handleRemoteNotification:userInfo];
+
     
 }
 
+
+
+- (void) savePush:(NSDictionary*)userInfo
+{
+    
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
+
+    int type = [[userInfo objectForKey:@"type"] integerValue];
+    if (type==11) {
+        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+    
+        [pushNews setObject:[userInfo objectForKey:@"target"]==nil?@"":[userInfo objectForKey:@"target"] forKey:@"url"];
+        [pushNews setObject:[userInfo objectForKey:@"source"]==nil?@"":[userInfo objectForKey:@"source"] forKey:@"source"];
+        [pushNews setObject:[userInfo objectForKey:@"img"]==nil?@"":[userInfo objectForKey:@"img"] forKey:@"img"];
+        [pushNews setObject:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]  forKey:@"title"];
+        //        [pushNews setObject:@"title" forKey:@"title"];
+        [ToolUtils setShowNews:pushNews];
+        
+    } else if (type == 13)
+    {
+        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+        [pushNews setObject:[userInfo objectForKey:@"target"]==nil?@"":[userInfo objectForKey:@"target"] forKey:@"url"];
+        [pushNews setObject:[userInfo objectForKey:@"source"]==nil?@"":[userInfo objectForKey:@"source"] forKey:@"source"];
+        [pushNews setObject:[userInfo objectForKey:@"img"] ==nil?@"":[userInfo objectForKey:@"img"]forKey:@"img"];
+        [pushNews setObject:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]  forKey:@"title"];
+        //        [pushNews setObject:@"title" forKey:@"title"];
+        [ToolUtils setShowActivity:pushNews];
+        
+    } else if (type == 14)
+    {
+        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+        [pushNews setObject:[userInfo objectForKey:@"target"]==nil?@"":[userInfo objectForKey:@"target"] forKey:@"url"];
+        [pushNews setObject:[userInfo objectForKey:@"source"]==nil?@"":[userInfo objectForKey:@"source"] forKey:@"source"];
+        [pushNews setObject:[userInfo objectForKey:@"img"]==nil?@"":[userInfo objectForKey:@"img"] forKey:@"img"];
+        [pushNews setObject:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]  forKey:@"title"];
+        //        [pushNews setObject:@"title" forKey:@"title"];
+        [ToolUtils setShowRss:pushNews];
+    } else if (type==15)
+    {
+        NSString* url = [userInfo objectForKey:@"target"];
+        if (url) {
+            [ToolUtils setShowTreeHole:url];
+        }
+    }
+
+}
 - (void)operaUserInfo:(NSDictionary *)userInfo appliccation:(UIApplication *)application
 {
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"14",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
+    [self savePush:userInfo];
+    
+    
     if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
         UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
         RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
@@ -268,6 +300,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
                 //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
                 //        style.progressBarPosition = self.progressBarPosition;
                 //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
+                
                 return style;
             }];
             [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
@@ -280,7 +313,136 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getCall" object:nil userInfo:userInfo];        
     } else if ([[userInfo objectForKey:@"type"] integerValue] == 4) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"receivedCall" object:nil userInfo:userInfo];
+    } else if ([[userInfo objectForKey:@"type"] integerValue] == 11){
+//            NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+//            [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+//            [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+//            [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+//            [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+////        [pushNews setObject:@"title" forKey:@"title"];
+//            [ToolUtils setShowNews:pushNews];
+        if (application.applicationState == UIApplicationStateInactive){
+            UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
+            RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
+            UINavigationController *nav = (UINavigationController*)tabbar.selectedViewController;
+            UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"News" bundle:nil];
+            UINavigationController* unc = (UINavigationController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"newsList"]; //test2为viewcontroller的StoryboardId
+            NewsListTVC* newsList = (NewsListTVC*)[unc.childViewControllers firstObject];
+            newsList.jump = YES;
+            MNews_Builder* focus = [[MNews_Builder alloc]init];
+            NSDictionary* pushNews = [ToolUtils shouldShowNews];
+            focus.title = [pushNews objectForKey:@"title"];
+            focus.source = [pushNews objectForKey:@"source"];
+            focus.img = [pushNews objectForKey:@"img"];
+            focus.url = [pushNews objectForKey:@"url"];
+            [newsList setCurrentUrl:focus.url];
+            [newsList setCurrentNew:focus.build];
+            [[nav.viewControllers lastObject] presentViewController:unc animated:YES completion:nil];
+            //        [newsList setCurrentImg:[self.photoList objectAtIndex:self.pageController.currentPage]];
+            [ToolUtils setShowNews:nil];
+
+        } else if(application.applicationState == UIApplicationStateActive){
+            [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
+                style.font = [UIFont systemFontOfSize:12];
+                style.textColor = [UIColor whiteColor];
+                style.barColor = RGB(60, 139, 253);
+                style.animationType = JDStatusBarAnimationTypeMove;
+                //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
+                //        style.progressBarPosition = self.progressBarPosition;
+                //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
+                
+                return style;
+            }];
+            [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
+                                          styleName:@"style" object:@"2" userInfo:userInfo];
+
+        }
+    }else if ([[userInfo objectForKey:@"type"] integerValue] == 14){
+//        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+//        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+//        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+//        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+//        [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+////        [pushNews setObject:@"title" forKey:@"title"];
+//        [ToolUtils setShowRss:pushNews];
+        if (application.applicationState != UIApplicationStateActive){
+#warning 此处判断是否在新闻列表界面
+            UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
+            RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
+            [tabbar setSelectedIndex:1];
+        } else {
+            [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
+                style.font = [UIFont systemFontOfSize:12];
+                style.textColor = [UIColor whiteColor];
+                style.barColor = RGB(60, 139, 253);
+                style.animationType = JDStatusBarAnimationTypeMove;
+                //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
+                //        style.progressBarPosition = self.progressBarPosition;
+                //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
+                
+                return style;
+            }];
+            [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
+                                          styleName:@"style" object:@"3" userInfo:userInfo];
+        }
+
+    }else if ([[userInfo objectForKey:@"type"] integerValue] == 13){
+//        NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
+//        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
+//        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
+//        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
+//        [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+////        [pushNews setObject:@"title" forKey:@"title"];
+//        [ToolUtils setShowActivity:pushNews];
+        if (application.applicationState != UIApplicationStateActive){
+#warning 此处判断是否在新闻列表界面
+            UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
+            RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
+            [tabbar setSelectedIndex:2];
+        } else {
+            [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
+                style.font = [UIFont systemFontOfSize:12];
+                style.textColor = [UIColor whiteColor];
+                style.barColor = RGB(60, 139, 253);
+                style.animationType = JDStatusBarAnimationTypeMove;
+                //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
+                //        style.progressBarPosition = self.progressBarPosition;
+                //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
+                
+                return style;
+            }];
+            [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
+                                          styleName:@"style" object:@"4" userInfo:userInfo];
+        }
+        
+    } else if ([[userInfo objectForKey:@"type"] integerValue] == 15)
+    {
+        if (application.applicationState != UIApplicationStateActive){
+            UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
+            RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
+            [tabbar setTabBarHidden:YES];
+            UINavigationController *nav = (UINavigationController*)tabbar.selectedViewController;
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
+            TreeHoleListViewController *treeHole = [storyboard instantiateInitialViewController];
+            [nav pushViewController:treeHole animated:YES];
+        } else {
+            [JDStatusBarNotification addStyleNamed:@"style" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
+                style.font = [UIFont systemFontOfSize:12];
+                style.textColor = [UIColor whiteColor];
+                style.barColor = RGB(60, 139, 253);
+                style.animationType = JDStatusBarAnimationTypeMove;
+                //        style.progressBarColor = self.progressBarColorPreview.backgroundColor;
+                //        style.progressBarPosition = self.progressBarPosition;
+                //        style.progressBarHeight = [self.barHeightLabel.text integerValue];
+                
+                return style;
+            }];
+            [JDStatusBarNotification showWithStatus:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] dismissAfter:2.0
+                                          styleName:@"style" object:@"5" userInfo:userInfo];
+
+        }
     }
+
     [application setApplicationIconBadgeNumber:0];
 }
 
@@ -317,11 +479,6 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    FrontiaShare *share = [Frontia getShare];
-    return [share handleOpenURL:url];
-}
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application { // 清除内存中的图片缓存
     SDWebImageManager *mgr = [SDWebImageManager sharedManager];

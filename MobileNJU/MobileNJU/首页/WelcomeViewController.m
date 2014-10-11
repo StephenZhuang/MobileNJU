@@ -22,8 +22,7 @@
 #import "RegisterVC.h"
 #import "ZsndIndex.pb.h"
 #import "loginDelegate.h"
-#import <Frontia/Frontia.h>
-
+#import "APService.h"
 @interface WelcomeViewController ()<UITextFieldDelegate,RDVTabBarControllerDelegate,loginDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *loginView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
@@ -61,6 +60,7 @@ static NSArray* buttonImages;
     [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timeChangeIndicate) userInfo:nil repeats:YES];
     self.time = 1;
     self.offline = NO;
+    [ToolUtils setOffline:NO];
     //api调用方式 可以点进去查看，也可按option + 左键查看 ， 回调函数统一写作disposMessage ， 如下
     [[ApisFactory getApiMGetWelcomePage] load:self selecter:@selector(disposMessage:)];
     [self.usernameTextField setText:[ToolUtils getAccount]==nil?@"":[ToolUtils getAccount]];
@@ -99,6 +99,7 @@ static NSArray* buttonImages;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (!self.firstOpen) {
         NSLog(@"调用showLoginView");
         [self showLoginView];
@@ -106,6 +107,10 @@ static NSArray* buttonImages;
         NSLog(@"firstOpen设为YES");
         self.firstOpen = NO;
     }
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [ToolUtils setOffline:self.offline];
 }
 #pragma - mark api回调
 - (void)disposMessage:(Son *)son
@@ -129,6 +134,7 @@ static NSArray* buttonImages;
             if ([ToolUtils isLogin]) {
                 [self login:nil ];
             } else {
+
                 [self showLoginView];
             }
         }
@@ -151,28 +157,14 @@ static NSArray* buttonImages;
             [ToolUtils setIsLogin:YES];
             [ToolUtils setAccount:self.usernameTextField.text];
             [ToolUtils setPassword:self.passwordTextField.text];
-            FrontiaPush *push = [Frontia getPush];
-            if(push) {
-                 UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-                if(types!= UIRemoteNotificationTypeNone)
-                {
-                    NSString *tags = user.verify;
-                    if (![@"" isEqualToString:tags]) {
-                        NSArray *tagArr = [tags componentsSeparatedByString:@";"];
-                        
-                        [push setTags:tagArr tagOpResult:^(int count, NSArray *failureTag) {
-                            //                        NSString *message = [[NSString alloc] initWithFormat:@"set tag success result: %d with failure tags %@", count, failureTag];
-                            //                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
-                            
-                        } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
-                            NSString *message = [[NSString alloc] initWithFormat:@"set tag failed with %@ error code : %d error message %@", action, errorCode, errorMessage];
-                            //                        [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
-                            [ToolUtils showMessage:message];
-                        }];
-                    }
-
+            UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+            if(types!= UIRemoteNotificationTypeNone)
+            {
+                if ([ToolUtils getTagList]) {
+                    [APService setTags:[[NSSet alloc]initWithArray:[ToolUtils getTagList]] alias:[[ToolUtils getVerify]stringByReplacingOccurrencesOfString:@"-" withString:@"_"] callbackSelector:nil object:nil];
+                } else {
+                    [APService setTags:nil alias:[ToolUtils getVerify] callbackSelector:nil object:nil];
                 }
-                    
                 
             }
             [self getUnread];

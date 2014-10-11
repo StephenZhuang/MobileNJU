@@ -37,25 +37,25 @@
     self.typeArr= typeArr;
     [self returnLabel:self.lastField];
     [self.QQField resignFirstResponder];
-    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择商品类别" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择商品类别" delegate:self ];
     [picker setTag:123456];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
                                      self.typeArr,
                                      nil]];
 
-    [picker showInView:self];
+    [picker showInViewController:self.myController];
 }
 
 
 - (IBAction)chooseLocation:(id)sender {
     [self returnLabel:self.lastField];
     [self.QQField resignFirstResponder];
-    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择交易地点" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择交易地点" delegate:self];
     [picker setTag:654321];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
                                      [NSArray arrayWithObjects:@"滨江",@"其他", nil],
                                      nil]];
-    [picker showInView:self];
+    [picker showInViewController:self.myController];
     
 }
 
@@ -127,7 +127,7 @@
         label = self.phoneLabel;
     }
     [UIView animateWithDuration:0.2f animations:^{
-        [label setTextColor:[UIColor colorWithRed:0 green:147/255.0 blue:242/255.0 alpha:1]];
+        [label setTextColor:[UIColor colorWithRed:139/255.0 green:63/255.0 blue:139/255.0 alpha:1]];
         [label setFont:[UIFont fontWithName:@"Helvetica" size:10.0]];
         label.transform = CGAffineTransformMakeTranslation(0, -10);
     }];

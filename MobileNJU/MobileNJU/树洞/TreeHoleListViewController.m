@@ -79,6 +79,12 @@
 {
     [super viewWillAppear:animated];
     [[ApisFactory getApiMGetMsgCount] load:self selecter:@selector(disposMessage:)];
+    if ([ToolUtils showTreeHole]) {
+        TreeHoleDetailViewController *vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"TreeHoleDetailViewController"];
+        vc.treeHoleid = [ToolUtils showTreeHole];
+        [ToolUtils setShowTreeHole:nil];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)goToAdd
@@ -417,7 +423,7 @@
         {
             FrontiaShare *share = [Frontia getShare];
 //            [share registerSinaweiboAppId:@"306527345"];
-            [share registerWeixinAppId:@"wx277782943f4c36be"];
+            [share registerWeixinAppId:@"wx2bd28feda749e342"];
             
             //授权取消回调函数
             FrontiaShareCancelCallback onCancel = ^(){

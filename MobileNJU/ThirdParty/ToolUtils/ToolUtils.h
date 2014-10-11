@@ -102,5 +102,25 @@
 +(void)setHasLogOut:(NSString*) hasLogout;
 +(NSString*)getHasLogOut;
 +(void)setScheduleAuto:(BOOL) isAuto;
-                        +(BOOL)getScheduleAuto;
++(BOOL)getScheduleAuto;
++(NSDictionary*)shouldShowNews;
++(void)setShowNews:(NSDictionary*)should;
++ (void) setTermList:(NSArray*)termArray;
++ (NSArray*) getTermList;
++ (void) setGradeDic:(NSDictionary*)grades;
++ (NSDictionary*) getGradeDic;
++ (NSArray*) getEcardList;
++ (void)setEcardList:(NSArray*)ecardList;
++ (NSDictionary*)showRss;
++ (void) setShowRss: (NSDictionary*)dic;
++ (NSDictionary*)showActivity;
++ (void) setShowActivity: (NSDictionary*)dic;
++ (NSString*)showTreeHole;
++ (void) setShowTreeHole: (NSString*)dic;
++(BOOL) offLine;
++(void)setOffline:(BOOL)offline;
++ (NSDictionary*)ecardRemain;
++ (void) setEcardRemain: (NSDictionary*)dic;
++ (NSArray*) getTagList;
++ (void) setTagList :(NSArray*)tags;
 @end

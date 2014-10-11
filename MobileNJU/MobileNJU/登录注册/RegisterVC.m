@@ -24,10 +24,12 @@
 {
     [super viewDidLoad];
     [self setTitle:self.myTitle];
+    
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (self.myDelegate!=nil) {
         self.passwordField.placeholder = @"设置密码";
         self.confirmField.placeholder = @"确认密码";
@@ -47,8 +49,8 @@
 }
 
 - (IBAction)complete:(id)sender {
-    if (self.passwordField.text.length==0) {
-        [ToolUtils showMessage:@"密码不得为空"];
+    if (self.phoneNumField.text.length==0) {
+        [ToolUtils showMessage:@"用户名不得为空"];
         return;
     } else if (self.passwordField.text.length==0)
     {
@@ -153,6 +155,8 @@
             [ToolUtils setIsLogin:YES];
             [ToolUtils setAccount:self.phoneNumField.text];
             [ToolUtils setPassword:self.confirmField.text];
+            [ToolUtils setIsVeryfy:user.isV];
+
             [self.myDelegate login];
             [self.navigationController popViewControllerAnimated:NO];
             
