@@ -27,6 +27,7 @@
 @property (nonatomic,strong) NSString* weekStr;
 @property (nonatomic)int end;
 @property (nonatomic,strong)ScheduleLesson* addedLesson;
+@property(nonatomic)BOOL shoudMove;
 @end
 
 @implementation ViewController
@@ -39,6 +40,7 @@
     self.end = 0;
     self.weekTitle = [NSArray arrayWithObjects:@"周一" ,@"周二",@"周三",@"周四",@"周五",@"周六",@"周日",nil];
     self.classTitle =  [NSArray arrayWithObjects:@"第1节",@"第2节",@"第3节",@"第4节",@"第5节",@"第6节",@"第7节",@"第8节",@"第9节",@"第10节",@"第11节",@"第12节",@"第13节",@"第14节",@"第15节",nil];
+    self.shoudMove = YES;
 //    [self.tableView setScrollEnabled:NO];
     if([self.navigationController.navigationBar
         respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
@@ -148,6 +150,9 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    
     [self.lessonNameField resignFirstResponder];
     [self.teacherNameField resignFirstResponder];
     [self.classroomField resignFirstResponder];
@@ -157,17 +162,18 @@
         if (self.weekPicker) {
             [self cancel];
         }
+        [self.tableView setScrollEnabled:NO];
         [self showDateChoose];
     } else if (indexPath.section==1&&indexPath.row==2)
     {
+        self.tableView.contentOffset = CGPointMake(0, 0);
+        
         if (self.weekPicker)
         {
-            [self.weekPicker removeFromSuperview];
+            return;
         }
+        [self.tableView setScrollEnabled:NO];
         [self enableAll:NO];
-        if (self.weekPicker!=nil) {
-            [self.weekPicker removeFromSuperview];
-        }
         WeekPicker* weekPicker = [[[NSBundle mainBundle] loadNibNamed:@"View" owner:self options:nil] objectAtIndex:0];
         [weekPicker setFrame:CGRectMake(0, self.view.bounds.size.height, 320, 280)];
         [weekPicker addWeek];
@@ -198,7 +204,7 @@
 -(void)showDateChoose
 {
     
-    
+    self.tableView.contentOffset = CGPointMake(0, 0);
     IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc] initWithTitle:@"请选择节数" delegate:self];
     [picker setTag:233];
    
@@ -213,6 +219,7 @@
 #pragma -mark weekchooseDelegate
 - (void)cancel
 {
+    [self.tableView setScrollEnabled:YES];
     NSArray* selectedButton = self.weekPicker.weekButtons;
     NSMutableString* weekStr = [[NSMutableString alloc]init];
     for (WeekCell* button in selectedButton) {
@@ -231,8 +238,8 @@
         }
     } completion:^(BOOL finished) {
         [self.weekPicker removeFromSuperview];
+        self.weekPicker = nil;
     }];
-    self.weekPicker = nil;
 }
 
 - (void)done:(NSArray *)result
@@ -328,16 +335,24 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    
     if (self.weekPicker) {
         [self cancel];
     }
     return YES;
 }
-
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    
+    if (self.shoudMove){
+        [self.lessonNameField resignFirstResponder];
+        [self.teacherNameField resignFirstResponder];
+        [self.classroomField resignFirstResponder];
+        
+    }
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.lessonNameField resignFirstResponder];
-    [self.teacherNameField resignFirstResponder];
-    [self.classroomField resignFirstResponder];
-}
+    
+ }
 @end

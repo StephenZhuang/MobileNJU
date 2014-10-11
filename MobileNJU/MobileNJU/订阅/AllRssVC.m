@@ -9,8 +9,7 @@
 #import "AllRssVC.h"
 #import "MySubscribeCell.h"
 #import "ZsndNews.pb.h"
-#import <Frontia/Frontia.h>
-
+#import "APService.h"
 @interface AllRssVC ()<UITableViewDelegate,UITableViewDataSource,RssDelegate>
 @property (nonatomic,strong)NSMutableArray* allRss;
 @property (nonatomic,strong)NSString* selectedId;
@@ -61,35 +60,9 @@
                 [self.allRss  addObjectsFromArray:builder.listList];
                 [self doneWithView:_footer];
             }
-        } else if ([[son getMethod]isEqualToString:@"MRss"])
-        {
-            FrontiaPush *push = [Frontia getPush];
-            if (push) {
-                UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-                if(types!= UIRemoteNotificationTypeNone)
-                {
-                    [push setTag:[NSString stringWithFormat:@"%@rss",self.selectedId] tagOpResult:^(int count, NSArray *failureTag) {
-                    } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
-                    }];
-                }
-            }
-            
-        } else if ([[son getMethod]isEqualToString:@"MRssCancel"])
-        {
-            FrontiaPush *push = [Frontia getPush];
-            if (push) {
-                UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-                if(types!= UIRemoteNotificationTypeNone)
-                {
-                    [push delTag:[NSString stringWithFormat:@"%@rss",self.selectedId] tagOpResult:^(int count, NSArray *failureTag) {
-                    } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
-                          NSString *message = [[NSString alloc] initWithFormat:@"set tag failed with %@ error code : %d error message %@", action, errorCode, errorMessage];
-//                        [ToolUtils showMessage:message];
-                    }];
-                }
-            }
-            
         }
+            
+        
     } else {
         [super disposMessage:son];
     }
