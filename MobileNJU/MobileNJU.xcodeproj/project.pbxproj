@@ -485,12 +485,11 @@
 		7D02874E19D998FA00EB5122 /* FeedBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D02874D19D998FA00EB5122 /* FeedBackVC.m */; };
 		7D2FFEDE192F16B200E6C040 /* SelfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D2FFEDD192F16B200E6C040 /* SelfCell.m */; };
 		7D4C139F19E90634009CD94D /* IQActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4C139E19E90634009CD94D /* IQActionSheetViewController.m */; };
-		7D4C13A419E9063A009CD94D /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13A219E9063A009CD94D /* libPushSDK.a */; };
-		7D4C13A519E9063A009CD94D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C13A319E9063A009CD94D /* PushConfig.plist */; };
-		7D4C13A619E9073D009CD94D /* APService.h in Sources */ = {isa = PBXBuildFile; fileRef = 7D4C13A119E9063A009CD94D /* APService.h */; };
 		7D4C13A819E90785009CD94D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13A719E90785009CD94D /* CFNetwork.framework */; };
 		7D4C13AA19E90796009CD94D /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13A919E90796009CD94D /* CoreFoundation.framework */; };
 		7D4C13AC19E907BD009CD94D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13AB19E907BD009CD94D /* Security.framework */; };
+		7D4C13B719E91250009CD94D /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13B519E91250009CD94D /* libPushSDK.a */; };
+		7D4C13B819E91250009CD94D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C13B619E91250009CD94D /* PushConfig.plist */; };
 		7D54A7B01945F3040082909E /* BookDetailScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */; };
 		7D6496AE198F9CDE0086435F /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6496AD198F9CDE0086435F /* AlertView.xib */; };
 		7D6496B1198F9D610086435F /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6496B0198F9D610086435F /* AlertView.m */; };
@@ -1368,12 +1367,12 @@
 		7D2FFEDD192F16B200E6C040 /* SelfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCell.m; sourceTree = "<group>"; };
 		7D4C139D19E90634009CD94D /* IQActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetViewController.h; sourceTree = "<group>"; };
 		7D4C139E19E90634009CD94D /* IQActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetViewController.m; sourceTree = "<group>"; };
-		7D4C13A119E9063A009CD94D /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
-		7D4C13A219E9063A009CD94D /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
-		7D4C13A319E9063A009CD94D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		7D4C13A719E90785009CD94D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7D4C13A919E90796009CD94D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		7D4C13AB19E907BD009CD94D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		7D4C13B419E91250009CD94D /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		7D4C13B519E91250009CD94D /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
+		7D4C13B619E91250009CD94D /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		7D54A7A9194550670082909E /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
 		7D54A7AE1945F3040082909E /* BookDetailScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailScrollerView.h; sourceTree = "<group>"; };
 		7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailScrollerView.m; sourceTree = "<group>"; };
@@ -1695,12 +1694,12 @@
 				77E7D9EA1930899A00BFA983 /* CoreLocation.framework in Frameworks */,
 				7D02874A19D9937D00EB5122 /* libMobClickLibrary.a in Frameworks */,
 				77E7D9E61930897C00BFA983 /* QuartzCore.framework in Frameworks */,
-				7D4C13A419E9063A009CD94D /* libPushSDK.a in Frameworks */,
 				77E7D9E41930897500BFA983 /* MessageUI.framework in Frameworks */,
 				77E073E91940435D0098BA09 /* libIsoFrame.a in Frameworks */,
 				77E075C4194043CD0098BA09 /* Frontia.framework in Frameworks */,
 				77B9042B192C3F040062237D /* CoreGraphics.framework in Frameworks */,
 				77B9042D192C3F040062237D /* UIKit.framework in Frameworks */,
+				7D4C13B719E91250009CD94D /* libPushSDK.a in Frameworks */,
 				77B90429192C3F040062237D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2441,7 +2440,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				7D4C13A019E9063A009CD94D /* lib */,
+				7D4C13B319E91250009CD94D /* lib */,
 				7D02874619D9937D00EB5122 /* UMAnalytics_Sdk_3.1.2 */,
 				775B184F1993909200EF1C48 /* SWCell */,
 				774D4B8B1991B9A800D675D7 /* GKClasses */,
@@ -2927,15 +2926,14 @@
 			path = "反馈";
 			sourceTree = "<group>";
 		};
-		7D4C13A019E9063A009CD94D /* lib */ = {
+		7D4C13B319E91250009CD94D /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				7D4C13A119E9063A009CD94D /* APService.h */,
-				7D4C13A219E9063A009CD94D /* libPushSDK.a */,
-				7D4C13A319E9063A009CD94D /* PushConfig.plist */,
+				7D4C13B419E91250009CD94D /* APService.h */,
+				7D4C13B519E91250009CD94D /* libPushSDK.a */,
+				7D4C13B619E91250009CD94D /* PushConfig.plist */,
 			);
-			name = lib;
-			path = "../../../../Desktop/IOS8适配/lib";
+			path = lib;
 			sourceTree = "<group>";
 		};
 		7D7A486C19868B1E0019E9B3 /* 订阅新 */ = {
@@ -3690,7 +3688,7 @@
 				7D784D251991DF7800E7CE64 /* loading16.gif in Resources */,
 				77E0750F194043A90098BA09 /* f026@2x.png in Resources */,
 				77B904C3192C4B3B0062237D /* MJPhotoBrowser.bundle in Resources */,
-				7D4C13A519E9063A009CD94D /* PushConfig.plist in Resources */,
+				7D4C13B819E91250009CD94D /* PushConfig.plist in Resources */,
 				77E0754D194043A90098BA09 /* f057@2x.png in Resources */,
 				775B183B1993519800EF1C48 /* logo_default_1@2x.png in Resources */,
 				77E07517194043A90098BA09 /* f030@2x.png in Resources */,
@@ -3727,7 +3725,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D4C13A619E9073D009CD94D /* APService.h in Sources */,
 				7D943E65198D384F0060222B /* iCarousel.m in Sources */,
 				7DFC44C2198A4B250018BCB9 /* ApiMCardHistory.m in Sources */,
 				7DFC44E8198A4B250018BCB9 /* ApiMSignInInDetail.m in Sources */,
@@ -4137,6 +4134,7 @@
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
 					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
 					"/Users/luck-mac/Desktop/IOS8适配/lib",
+					"$(PROJECT_DIR)/ThirdParty/lib",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4171,6 +4169,7 @@
 					"$(PROJECT_DIR)/ThirdParty/Frontia/Frontia.framework/Versions/2.0.2",
 					"$(PROJECT_DIR)/ThirdParty/UMAnalytics_Sdk_3.1.2",
 					"/Users/luck-mac/Desktop/IOS8适配/lib",
+					"$(PROJECT_DIR)/ThirdParty/lib",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
