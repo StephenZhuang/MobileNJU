@@ -32,7 +32,6 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
     [self.rdv_tabBarController setTabBarHidden:YES];
     int location = self.slideSwitchView.rootScrollView.contentOffset.x/320;
     ShoppingVC* vc = [self.viewControllers objectAtIndex:location];
@@ -117,6 +116,7 @@
         UIStoryboard *firstStoryBoard = [UIStoryboard storyboardWithName:@"shop" bundle:nil];
         AddShopVC* vc = (AddShopVC*)[firstStoryBoard instantiateViewControllerWithIdentifier:@"add"];
         vc.typeList = self.typeList;
+        vc.lastVC = self;
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -163,7 +163,6 @@
 {
     if ([[segue identifier]isEqualToString:@"add"]) {
         AddShopVC* add = (AddShopVC*)[segue destinationViewController];
-        
     }
 }
 - (void)showView:(UIViewController *)vc

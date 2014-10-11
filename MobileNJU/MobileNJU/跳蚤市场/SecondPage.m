@@ -37,25 +37,25 @@
     self.typeArr= typeArr;
     [self returnLabel:self.lastField];
     [self.QQField resignFirstResponder];
-    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择商品类别" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择商品类别" delegate:self ];
     [picker setTag:123456];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
                                      self.typeArr,
                                      nil]];
 
-    [picker showInView:self];
+    [picker showInViewController:self.myController];
 }
 
 - (IBAction)chooseLocation:(id)sender {
     [self returnLabel:self.lastField];
     [self.QQField resignFirstResponder];
-    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择交易地点" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    IQActionSheetPickerView *picker = [[IQActionSheetPickerView alloc]initWithTitle:@"请选择交易地点" delegate:self];
     [picker setTag:654321];
     [picker setTitlesForComponenets:[NSArray arrayWithObjects:
                                      [NSArray arrayWithObjects:@"江浦校区",@"莫愁校区", nil],
                                      nil]];
     
-    [picker showInView:self];
+    [picker showInViewController:self.myController];
     
 }
 

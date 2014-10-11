@@ -705,4 +705,16 @@
     [userDefaults synchronize];
 }
 
++ (NSArray*) getTagList
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"tagList"];
+
+}
++ (void) setTagList: (NSArray*)tags
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:tags forKey:@"tagList"];
+    [userDefaults synchronize];
+}
+
 @end
