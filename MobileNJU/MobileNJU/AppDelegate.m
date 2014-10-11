@@ -8,19 +8,19 @@
 
 #import "AppDelegate.h"
 #import "WelcomeViewController.h"
-#import <Frontia/Frontia.h>
+
 #include <sys/socket.h>
 #include <sys/sysctl.h>
 #include <net/if.h>
 #include <net/if_dl.h>
-#import <Frontia/FrontiaPush.h>
-#import <Frontia/Frontia.h>
+#import "APService.h"
 #import "JDStatusBarNotification.h"
 #import "RDVTabBarController.h"
 #import "NewsListTVC.h"
 #import "MobClick.h"
 #import "TreeHoleListViewController.h"
-#define APP_KEY @"cCtXIW2pI7tDXnlvdYpHfLGu"
+#import <Frontia/Frontia.h>
+#define APP_KEY @"cCtXIW2pI7tDXnlvdYpHfLGuff"
 
 #define REPORT_ID @"d5dd317228"
 
@@ -36,6 +36,7 @@
 
     [self initDeviceid];
     [self initApiFrame];
+    [self initJPush:launchOptions];
     [self initShare:application options:launchOptions];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
@@ -44,8 +45,9 @@
     self.window.rootViewController = nav;
     
     NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-//        userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"11",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
-    //    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
+
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"15",@"type",@"7ea5ed86-463e-11e4-bde1-ac853d9f54d2",@"target", nil];
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"14",@"type",@"nju/news/1411992130101.html",@"target", @"source",@"source",@"img",@"img",@"titlepush",@"titlepush",nil];
 
     if (userInfo) {
         [self savePush:userInfo];
@@ -60,44 +62,18 @@
     return YES;
 }
 
-#pragma - mark init param
-- (void) initUmen
+- (void) initJPush:(NSDictionary*) launchOptions
 {
-    
-    [MobClick startWithAppkey:@"54158d1efd98c50aa110e3fe" reportPolicy:BATCH   channelId:nil];
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    [MobClick setAppVersion:version];
-//    [MobClick setLogEnabled:YES];
-//    Class cls = NSClassFromString(@"UMANUtil");
-//    SEL deviceIDSelector = @selector(openUDIDString);
-//    NSString *deviceID = nil;
-//    if(cls && [cls respondsToSelector:deviceIDSelector]){
-//        deviceID = [cls performSelector:deviceIDSelector];
-//    }
-//    NSLog(@"{\"oid\": \"%@\"}", deviceID);
-    
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                   UIRemoteNotificationTypeSound |
+                                                   UIRemoteNotificationTypeAlert)];
+    [APService setupWithOption:launchOptions];
 }
 
-- (void)initApiFrame
-{
-    [Frame build];
-    
-    //设置全局参数
-    NSArray *array = nil;
-    if ([ToolUtils isLogin]) {
-        array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],nil];
-    } else {
-        array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],@"device=IOS",nil];
-    }
-    [Frame setAutoAddParams:array];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:@"WIFI" forKey:@"internet"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"kai" forKey:@"3g2g"];
-}
 
 - (void)initShare:(UIApplication *)application options:(NSDictionary *)launchOptions
 {
-
+    
     //初始化Frontia
     [Frontia initWithApiKey:APP_KEY];
     
@@ -136,28 +112,64 @@
 //绑定，以获取通知
 - (IBAction)onBindClick:(id)sender {
     FrontiaPush *push = [Frontia getPush];
-
+    
     if(push) {
-
+        
         [push bindChannel:^(NSString *appId, NSString *userId, NSString *channelId) {
-//            NSString *message = [[NSString alloc] initWithFormat:@"appid:%@ \nuserid:%@ \nchannelID:%@", appId, userId, channelId];
+            //            NSString *message = [[NSString alloc] initWithFormat:@"appid:%@ \nuserid:%@ \nchannelID:%@", appId, userId, channelId];
             NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setObject:userId forKey:@"pushId"];
             [userDefaults synchronize];
-
-//            self.appidText.text = appId;
-//            self.useridText.text = userId;
-//            self.channelidText.text = channelId;
             
-//            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
+            //            self.appidText.text = appId;
+            //            self.useridText.text = userId;
+            //            self.channelidText.text = channelId;
+            
+            //            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
             
         } failureResult:^(NSString *action, int errorCode, NSString *errorMessage) {
-
-//            NSString *message = [[NSString alloc] initWithFormat:@"string is %@ error code : %d error message %@", action, errorCode, errorMessage];
-//            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
+            
+            //            NSString *message = [[NSString alloc] initWithFormat:@"string is %@ error code : %d error message %@", action, errorCode, errorMessage];
+            //            [self performSelectorOnMainThread:@selector(updateBindDisplayMessage:) withObject:message waitUntilDone:NO];
         }];
     } else {
     }
+}
+
+
+#pragma - mark init param
+- (void) initUmen
+{
+    
+    [MobClick startWithAppkey:@"541526bbfd98c50b120a76d7" reportPolicy:BATCH   channelId:nil];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+//    [MobClick setLogEnabled:YES];
+//    Class cls = NSClassFromString(@"UMANUtil");
+//    SEL deviceIDSelector = @selector(openUDIDString);
+//    NSString *deviceID = nil;
+//    if(cls && [cls respondsToSelector:deviceIDSelector]){
+//        deviceID = [cls performSelector:deviceIDSelector];
+//    }
+//    NSLog(@"{\"oid\": \"%@\"}", deviceID);
+    
+}
+
+- (void)initApiFrame
+{
+    [Frame build];
+    
+    //设置全局参数
+    NSArray *array = nil;
+    if ([ToolUtils isLogin]) {
+        array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],[NSString stringWithFormat:@"verify=%@",[ToolUtils getVerify]],[NSString stringWithFormat:@"userid=%@",[ToolUtils getLoginId]],nil];
+    } else {
+        array=[[NSArray alloc]initWithObjects:[NSString stringWithFormat:@"appid=%@",[[Frame INITCONFIG] getAppid]],[NSString stringWithFormat:@"deviceid=%@",[ToolUtils getDeviceid]],@"device=IOS",nil];
+    }
+    [Frame setAutoAddParams:array];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"WIFI" forKey:@"internet"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"kai" forKey:@"3g2g"];
 }
 
 - (void)initDeviceid
@@ -248,8 +260,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     NSLog(@"frontia application:%@", deviceToken);
-    [FrontiaPush registerDeviceToken: deviceToken];
-    
+    [APService registerDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -276,10 +287,13 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         [application setApplicationIconBadgeNumber:bage];
         
     }
-    
-    [FrontiaPush handleNotification:userInfo];
+    [APService handleRemoteNotification:userInfo];
+
     
 }
+
+
+
 - (void) savePush:(NSDictionary*)userInfo
 {
     
@@ -288,42 +302,45 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     int type = [[userInfo objectForKey:@"type"] integerValue];
     if (type==11) {
         NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
-        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
-        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
-        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
-        [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+    
+        [pushNews setObject:[userInfo objectForKey:@"target"]==nil?@"":[userInfo objectForKey:@"target"] forKey:@"url"];
+        [pushNews setObject:[userInfo objectForKey:@"source"]==nil?@"":[userInfo objectForKey:@"source"] forKey:@"source"];
+        [pushNews setObject:[userInfo objectForKey:@"img"]==nil?@"":[userInfo objectForKey:@"img"] forKey:@"img"];
+        [pushNews setObject:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]  forKey:@"title"];
         //        [pushNews setObject:@"title" forKey:@"title"];
         [ToolUtils setShowNews:pushNews];
         
     } else if (type == 13)
     {
         NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
-        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
-        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
-        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
-        [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+        [pushNews setObject:[userInfo objectForKey:@"target"]==nil?@"":[userInfo objectForKey:@"target"] forKey:@"url"];
+        [pushNews setObject:[userInfo objectForKey:@"source"]==nil?@"":[userInfo objectForKey:@"source"] forKey:@"source"];
+        [pushNews setObject:[userInfo objectForKey:@"img"] ==nil?@"":[userInfo objectForKey:@"img"]forKey:@"img"];
+        [pushNews setObject:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]  forKey:@"title"];
         //        [pushNews setObject:@"title" forKey:@"title"];
         [ToolUtils setShowActivity:pushNews];
         
     } else if (type == 14)
     {
         NSMutableDictionary* pushNews = [[NSMutableDictionary alloc]init];
-        [pushNews setObject:[userInfo objectForKey:@"target"] forKey:@"url"];
-        [pushNews setObject:[userInfo objectForKey:@"source"] forKey:@"source"];
-        [pushNews setObject:[userInfo objectForKey:@"img"] forKey:@"img"];
-        [pushNews setObject:[userInfo objectForKey:@"titlepush"] forKey:@"title"];
+        [pushNews setObject:[userInfo objectForKey:@"target"]==nil?@"":[userInfo objectForKey:@"target"] forKey:@"url"];
+        [pushNews setObject:[userInfo objectForKey:@"source"]==nil?@"":[userInfo objectForKey:@"source"] forKey:@"source"];
+        [pushNews setObject:[userInfo objectForKey:@"img"]==nil?@"":[userInfo objectForKey:@"img"] forKey:@"img"];
+        [pushNews setObject:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]  forKey:@"title"];
         //        [pushNews setObject:@"title" forKey:@"title"];
         [ToolUtils setShowRss:pushNews];
     } else if (type==15)
     {
         NSString* url = [userInfo objectForKey:@"target"];
-        [ToolUtils setShowTreeHole:url];
+        if (url) {
+            [ToolUtils setShowTreeHole:url];
+        }
     }
 
 }
 - (void)operaUserInfo:(NSDictionary *)userInfo appliccation:(UIApplication *)application
 {
-//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"11",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
+//    userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:@"14",@"type",@"nju/news/1411901779786.html",@"target",@"测试",@"titlepush",@"img",@"img",@"source",@"source",nil];
     [self savePush:userInfo];
     
     
@@ -519,11 +536,6 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    FrontiaShare *share = [Frontia getShare];
-    return [share handleOpenURL:url];
-}
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application { // 清除内存中的图片缓存
     SDWebImageManager *mgr = [SDWebImageManager sharedManager];
