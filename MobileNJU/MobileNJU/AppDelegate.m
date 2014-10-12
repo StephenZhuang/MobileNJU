@@ -87,6 +87,7 @@
     [MobClick startWithAppkey:@"541526bbfd98c50b120a76d7" reportPolicy:BATCH   channelId:nil];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
+    [ToolUtils setVersion:version];
 //    [MobClick setLogEnabled:YES];
 //    Class cls = NSClassFromString(@"UMANUtil");
 //    SEL deviceIDSelector = @selector(openUDIDString);
