@@ -19,6 +19,7 @@
 #import "NewsListTVC.h"
 #import "MobClick.h"
 #import "TreeHoleListViewController.h"
+#import <Frontia/Frontia.h>
 #define APP_KEY @"rGeiqb4QirOIXyWQQq5q8kGw"
 
 #define REPORT_ID @"d5dd317228"
@@ -36,7 +37,7 @@
     [self initDeviceid];
     [self initApiFrame];
     [self initJPush:launchOptions];
-//    [self initShare:application options:launchOptions];
+    [self initShare:application options:launchOptions];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     WelcomeViewController *vc = [storyboard instantiateInitialViewController];
@@ -68,6 +69,16 @@
                                                    UIRemoteNotificationTypeAlert)];
     [APService setupWithOption:launchOptions];
 }
+
+
+- (void)initShare:(UIApplication *)application options:(NSDictionary *)launchOptions
+{
+    
+    //初始化Frontia
+    [Frontia initWithApiKey:APP_KEY];
+    
+}
+
 
 #pragma - mark init param
 - (void) initUmen
