@@ -84,7 +84,8 @@
         if ([[self.schIdField.text uppercaseString] hasPrefix:@"MG"]) {
             [self load:self selecter:@selector(disposMessage:) code:nil account:@"mg......."  password:@"....."];
         }
-        [self loadLast];[self getCurrentWeek];
+        [self loadLast];
+        [self getCurrentWeek];
     }
 }
 
@@ -288,8 +289,13 @@
                 [self loadSchedule];
                 [ToolUtils setIsVeryfy:1];
             } else {
+                if (self.codeView)
+                {
+                    [ToolUtils showMessage:@"信息输入错误"];
+                }
                 [self removeCode];
                 [self addCode:classList.img];
+                
            }
             
         } else if ([[son getMethod]isEqualToString:@"MScheduleAuto"]){
@@ -318,6 +324,7 @@
         {
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
             [ToolUtils setCurrentWeek:ret.code];
+            [self loadSavedLesson];
         }
     
     } else if ([[son getMsg]hasPrefix:@"信息"]      &&  self.imgView!=nil )
@@ -415,7 +422,31 @@
 }
 - (void)showSchedules:(NSArray *)lessons color:(UIColor *)color
 {
-     NSSet *set = [NSSet setWithArray:lessons];
+    
+    ScheduleLesson* grayLesson;
+    for (ScheduleLesson* lesson in lessons)
+    {
+        NSArray* busyweeks = [lesson.busyweeks componentsSeparatedByString:@","];
+        BOOL has = NO;
+        for (NSString* week in busyweeks) {
+            if (week.integerValue == [ToolUtils getCurrentWeek]) {
+                has = YES;
+                break;
+            }
+        }
+        if (!has)
+        {
+            grayLesson = lesson;
+        }
+    }
+    NSMutableArray* arr = [[NSMutableArray alloc]initWithArray:lessons];
+    if (grayLesson)
+    {
+        [arr removeObject:grayLesson];
+        [arr addObject:grayLesson];
+
+    }
+    NSSet *set = [NSSet setWithArray:arr];
     self.lessonsForIcarousel = [set allObjects];;
     self.currentColor = color;
     ((iCarousel*)self.icarousel).delegate = self;
@@ -423,7 +454,6 @@
     self.icarousel.perspective=-0.0095;
     self.icarousel.dataSource = self;
     self.icarousel.type = iCarouselTypeCoverFlow;
-    
     [self.icarousel reloadData];
     [self.icarousel setHidden:NO];
     [self.maskView setHidden:NO];
@@ -566,8 +596,8 @@
         [view setBackgroundColor:self.currentColor];
         [view setAlpha:0.85];
     } else {
-        [view setBackgroundColor:[UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1]];
-        [view setAlpha:0.85];
+        [view setBackgroundColor:[UIColor blackColor]];
+        [view setAlpha:0.5];
     }
     
     ScheduleLesson* lesson = [self.lessonsForIcarousel objectAtIndex:index];
@@ -614,6 +644,10 @@
     {
         [carousel.currentItemView setBackgroundColor:self.currentColor];
         [carousel.currentItemView setAlpha:0.85];
+    } else {
+        [carousel.currentItemView setBackgroundColor:[UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1]];
+        [carousel.currentItemView setAlpha:0.85];
+
     }
     self.lastView = carousel.currentItemView;
     NSLog(@"update");

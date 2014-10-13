@@ -34,7 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initAlert];
 
     [self.schIDText setDelegate:self];
     [self.maskView setHidden:YES];
@@ -43,7 +42,7 @@
     [self.timeLabel setText:@"0"];
     self.isRe = 0;
     self.isV=0;
-    
+    [self initAlert];
     
 
 }

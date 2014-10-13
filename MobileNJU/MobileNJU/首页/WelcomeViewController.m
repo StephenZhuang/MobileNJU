@@ -163,7 +163,7 @@ static NSArray* buttonImages;
                 if ([ToolUtils getTagList]) {
                     [APService setTags:[[NSSet alloc]initWithArray:[ToolUtils getTagList]] alias:[[ToolUtils getVerify]stringByReplacingOccurrencesOfString:@"-" withString:@"_"] callbackSelector:nil object:nil];
                 } else {
-                    [APService setTags:nil alias:[ToolUtils getVerify] callbackSelector:nil object:nil];
+                    [APService setTags:nil alias:[[ToolUtils getVerify]stringByReplacingOccurrencesOfString:@"-" withString:@"_"] callbackSelector:nil object:nil];
                 }
                 
             }

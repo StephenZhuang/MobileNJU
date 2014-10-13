@@ -280,6 +280,10 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
             [ToolUtils setShowTreeHole:url];
         }
     }
+    else if (type==1)
+    {
+        [ToolUtils setHasSixin:YES];
+    }
 
 }
 - (void)operaUserInfo:(NSDictionary *)userInfo appliccation:(UIApplication *)application

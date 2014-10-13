@@ -81,7 +81,9 @@
     [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
     self.searchButton = self.alertView.searchBt;
+    
 }
+
 
 
 - (void)textFieldDidChange:(NSNotification *)note
@@ -117,6 +119,7 @@
         [self search:nil];
     } else if (!self.hasLogin&&![ToolUtils offLine]){
         [self showAlert];
+
     }
     [self.tableView reloadData];
 }
@@ -173,8 +176,13 @@
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }
+                if (self.imgView)
+                {
+                    [ToolUtils showMessage:@"信息输入错误"];
+                }
                 [self removeCode];
                 [self addCode:termList.img];
+                
             } else {
                 self.hasLogin = YES;
                 self.isRe=1;

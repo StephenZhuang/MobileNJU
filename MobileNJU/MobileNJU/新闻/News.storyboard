@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0HC-43-OVy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0HC-43-OVy">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--News DetailVC-->
@@ -613,9 +614,9 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="党委新闻" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c87-Wk-MBp">
-                                                    <rect key="frame" x="48" y="60" width="52" height="16"/>
+                                                    <rect key="frame" x="48" y="60" width="153" height="16"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="52" id="yCw-IY-Iza"/>
+                                                        <constraint firstAttribute="width" constant="153" id="yCw-IY-Iza"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -632,23 +633,23 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="南京大学举行党委书记任免大会" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="192" translatesAutoresizingMaskIntoConstraints="NO" id="6Ow-km-8UQ">
-                                                    <rect key="frame" x="20" y="4" width="192" height="56"/>
+                                                    <rect key="frame" x="20" y="7" width="192" height="56"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="192" id="fec-ji-jOT"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="highlightedColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="6Ow-km-8UQ" firstAttribute="top" secondItem="jLu-Ya-iwe" secondAttribute="top" constant="4" id="1Sz-Ac-g4N"/>
+                                                <constraint firstItem="6Ow-km-8UQ" firstAttribute="top" secondItem="jLu-Ya-iwe" secondAttribute="top" constant="7" id="1Sz-Ac-g4N"/>
                                                 <constraint firstItem="koN-XQ-pfK" firstAttribute="top" secondItem="jLu-Ya-iwe" secondAttribute="top" constant="9" id="9py-kH-xxy"/>
                                                 <constraint firstItem="6Ow-km-8UQ" firstAttribute="leading" secondItem="Lek-3N-JpE" secondAttribute="leading" id="I1D-ll-OK7"/>
                                                 <constraint firstItem="koN-XQ-pfK" firstAttribute="bottom" secondItem="c87-Wk-MBp" secondAttribute="bottom" id="RMf-3c-NO3"/>
                                                 <constraint firstItem="Lek-3N-JpE" firstAttribute="leading" secondItem="jLu-Ya-iwe" secondAttribute="leading" constant="20" symbolic="YES" id="Zh0-EL-0bM"/>
                                                 <constraint firstItem="c87-Wk-MBp" firstAttribute="baseline" secondItem="Lek-3N-JpE" secondAttribute="baseline" id="iqX-7D-ISL"/>
                                                 <constraint firstAttribute="trailing" secondItem="koN-XQ-pfK" secondAttribute="trailing" constant="22" id="rIh-Z4-2TW"/>
-                                                <constraint firstItem="Lek-3N-JpE" firstAttribute="top" secondItem="6Ow-km-8UQ" secondAttribute="bottom" id="sCj-sB-ivI"/>
+                                                <constraint firstItem="Lek-3N-JpE" firstAttribute="top" secondItem="6Ow-km-8UQ" secondAttribute="bottom" constant="-3" id="sCj-sB-ivI"/>
                                                 <constraint firstItem="c87-Wk-MBp" firstAttribute="leading" secondItem="Lek-3N-JpE" secondAttribute="trailing" constant="2" id="sXE-ec-cgn"/>
                                                 <constraint firstItem="koN-XQ-pfK" firstAttribute="centerY" secondItem="jLu-Ya-iwe" secondAttribute="centerY" id="w2u-ox-U9F"/>
                                                 <constraint firstItem="c87-Wk-MBp" firstAttribute="top" secondItem="Lek-3N-JpE" secondAttribute="top" id="xgs-kO-F4h"/>
@@ -806,6 +807,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qms-gb-U7f"/>
+        <segue reference="py4-9b-1rW"/>
     </inferredMetricsTieBreakers>
 </document>
