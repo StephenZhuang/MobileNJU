@@ -33,7 +33,6 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-
 - (void)setType:(NSArray *)typeList
 {
         self.secondPage.typeList = self.typeList;
@@ -177,7 +176,7 @@
         MRet_Builder* ret = (MRet_Builder*)[son getBuild];
         [ToolUtils showMessage:ret.msg];
         self.myLast.shoudReturn=YES;
-        [self.navigationController popViewControllerAnimated:NO];
+        [self.navigationController popToViewController:self.lastVC animated:YES];
     } else {
         [super disposMessage:son];
     }
@@ -253,6 +252,7 @@
         nextVC.market = self.market;
         nextVC.myLast = self;
         nextVC.typeList = self.typeList;
+        nextVC.lastVC = self.lastVC;
     }
 }
 
