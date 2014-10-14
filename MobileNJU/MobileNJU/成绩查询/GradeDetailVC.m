@@ -199,6 +199,7 @@
                     [termArray addObject:arr];
                 }
                 self.lastVC.termList = termArray;
+                [ToolUtils setTermList:termArray];
                 [self cancelAlert:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             }

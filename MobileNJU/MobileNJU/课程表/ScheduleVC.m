@@ -222,6 +222,7 @@
     if (sender!=nil) {
         [self waiting:@"正在查询"];
         [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
+        self.handle = YES;
         return;
     }
     if (self.lastUserId!=nil&&![self.lastUserId isEqualToString:self.schIdField.text]) {
@@ -229,7 +230,6 @@
     }
     
     [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
-    self.handle = YES;
     
     
     

@@ -63,6 +63,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (self.termList) {
+        self.termList = [ToolUtils getTermList];
+        [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
+        [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)initAlert
@@ -177,7 +183,7 @@
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
             if (termList.termList.count==0) {
                 if (self.alertView.isHidden&&!self.hasLogin) {
-                    [self.alertView setHidden:NO];
+                    [self showAlert];
                 }
                 if (self.imgView&&_handle)
                 {
