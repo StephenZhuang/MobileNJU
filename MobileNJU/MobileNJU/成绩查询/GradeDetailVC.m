@@ -169,6 +169,10 @@
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
             if (termList.img.length>0) {
+                if (self.imgView)
+                {
+                    [ToolUtils showMessage:@"信息输入错误"];
+                }
                 [self removeCode];
                 [self addCode:termList.img];
             } else if (termList.termList.count>0) {
@@ -207,6 +211,9 @@
             [ToolUtils setGradeDic:self.gradesDic];
 
             [self.tableView reloadData];
+            if (self.gradeList.count==0) {
+                [ToolUtils showMessage:@"教务处该学期无成绩记录，请登录教务网确认"];
+            }
         }
     } else {
         [self removeCode];

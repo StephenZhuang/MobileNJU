@@ -24,4 +24,5 @@ typedef void(^ReadMessageBlock)(NSInteger num);
 @property (nonatomic , weak) IBOutlet UIButton *commentButton;
 @property (nonatomic , weak) IBOutlet UIButton *messageButton;
 @property (nonatomic , strong) UIView *sectionHeader;
+@property (nonatomic)BOOL push;
 @end

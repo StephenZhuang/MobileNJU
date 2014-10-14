@@ -26,14 +26,14 @@
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" autoresizesSubviews="NO" contentMode="scaleToFill" id="8pD-hB-bbo">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="158"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vSL-yy-TgG">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="217"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="217" id="lcG-bL-nXq"/>
+                                                <constraint firstAttribute="height" constant="200" id="lcG-bL-nXq"/>
                                             </constraints>
                                         </scrollView>
                                         <pageControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Aq2-AS-jaX">
@@ -44,7 +44,7 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="vSL-yy-TgG" secondAttribute="trailing" id="4jH-uE-1zk"/>
                                         <constraint firstItem="vSL-yy-TgG" firstAttribute="top" secondItem="8pD-hB-bbo" secondAttribute="top" id="GVe-6E-gKg"/>
-                                        <constraint firstItem="Aq2-AS-jaX" firstAttribute="bottom" secondItem="vSL-yy-TgG" secondAttribute="bottom" id="KP9-yw-eIH"/>
+                                        <constraint firstItem="Aq2-AS-jaX" firstAttribute="bottom" secondItem="vSL-yy-TgG" secondAttribute="bottom" constant="17" id="KP9-yw-eIH"/>
                                         <constraint firstItem="vSL-yy-TgG" firstAttribute="leading" secondItem="8pD-hB-bbo" secondAttribute="leading" id="lm4-F8-7AD"/>
                                         <constraint firstItem="Aq2-AS-jaX" firstAttribute="leading" secondItem="8pD-hB-bbo" secondAttribute="leading" constant="140" id="lvc-79-qC6"/>
                                     </constraints>

@@ -118,14 +118,23 @@
     
     UIFont *font = [UIFont systemFontOfSize:14];
     CGSize size = CGSizeMake(227,2000);
+//    NSMutableString* str = [[NSMutableString alloc]initWithString:comment.content];
+//    if (comment.content.length>16) {
+//        int space = 16-comment.content.length%16;
+//        for (int i = 0 ; i < space ; i ++)
+//        {
+//            [str appendString:@"    "];
+//        }
+//    }
+//    [str appendString:@"。"];
     CGSize labelsize = [comment.content sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
     height += labelsize.height;
     
-    if (comment.replyid.length > 0 || comment.isLz == 1) {
+//    if (comment.replyid.length > 0 || comment.isLz == 1) {
         height += 53;
-    } else {
-        height += 36;
-    }
+//    } else {
+//        height += 36;
+//    }
     
     return height;
 }

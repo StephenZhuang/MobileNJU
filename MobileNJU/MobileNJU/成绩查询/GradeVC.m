@@ -177,6 +177,10 @@
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }
+                if (self.imgView)
+                {
+                    [ToolUtils showMessage:@"信息输入错误，请重新输入"];
+                }
                 [self removeCode];
                 [self addCode:termList.img];
             } else if (termList.termList.count>0){
