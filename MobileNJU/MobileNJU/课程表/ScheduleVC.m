@@ -311,10 +311,10 @@
                 [self loadSchedule];
                 [ToolUtils setIsVeryfy:1];
             }
-             else {
-                [ToolUtils showMessage:@"教务处没有该学期课表"];
-                [self cancelAlert:nil];
-            }
+//             else {
+//                [ToolUtils showMessage:@"教务处没有该学期课表"];
+//                [self cancelAlert:nil];
+//            }
             
         } else if ([[son getMethod]isEqualToString:@"MScheduleAuto"]){
             MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
