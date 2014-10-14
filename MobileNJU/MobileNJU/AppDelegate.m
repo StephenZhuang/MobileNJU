@@ -20,7 +20,7 @@
 #import "MobClick.h"
 #import "TreeHoleListViewController.h"
 #import <Frontia/Frontia.h>
-#define APP_KEY @"rGeiqb4QirOIXyWQQq5q8kGw"
+#define APP_KEY @"q12Fx3G97zoI97f96G09k6f1"
 
 #define REPORT_ID @"d5dd317228"
 
