@@ -63,12 +63,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (self.termList) {
-        self.termList = [ToolUtils getTermList];
+    if ([ToolUtils getTermList])
+    {
+        self.termList = [ToolUtils getTermList]
         [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
         [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
         [self.tableView reloadData];
     }
+  
 }
 
 - (void)initAlert
