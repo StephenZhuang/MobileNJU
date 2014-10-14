@@ -56,16 +56,21 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!self.termList) {
+    if ([ToolUtils getTermList]) {
         self.termList = [ToolUtils getTermList];
+        [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
+        [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
         [self.tableView reloadData];
     }
+
 }
 
 
 - (void)loadSavedState
 {
-    
+    if ([ToolUtils getTermList]) {
+        self.termList = [ToolUtils getTermList];
+    }
     [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
     [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
     if (![self.schIdTextField.text isEqualToString:@""]&&![self.passwordTextField.text isEqualToString:@""]&&!self.hasLogin&&![ToolUtils offLine]) {
