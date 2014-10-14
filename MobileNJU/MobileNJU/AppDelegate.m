@@ -20,7 +20,7 @@
 #import "MobClick.h"
 #import "TreeHoleListViewController.h"
 #import <Frontia/Frontia.h>
-#define APP_KEY @"q12Fx3G97zoI97f96G09k6f1"
+#define APP_KEY @"rGeiqb4QirOIXyWQQq5q8kGw"
 
 #define REPORT_ID @"d5dd317228"
 
@@ -87,6 +87,7 @@
     [MobClick startWithAppkey:@"541526bbfd98c50b120a76d7" reportPolicy:BATCH   channelId:nil];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
+    [ToolUtils setVersion:version];
 //    [MobClick setLogEnabled:YES];
 //    Class cls = NSClassFromString(@"UMANUtil");
 //    SEL deviceIDSelector = @selector(openUDIDString);
@@ -278,6 +279,10 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
         if (url) {
             [ToolUtils setShowTreeHole:url];
         }
+    }
+    else if (type==1)
+    {
+        [ToolUtils setHasSixin:YES];
     }
 
 }

@@ -49,6 +49,7 @@
     [self loadColor];
     self.isRe=0;
     self.hasLogin = NO;
+    [self loadSavedState];
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
 }
 
@@ -57,8 +58,8 @@
     [super viewWillAppear:animated];
     if (!self.termList) {
         self.termList = [ToolUtils getTermList];
+        [self.tableView reloadData];
     }
-    [self loadSavedState];
 }
 
 
@@ -176,6 +177,11 @@
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }
+                if (self.imgView)
+                {
+                    [ToolUtils showMessage:@"信息输入错误"];
+                }
+
                 [self removeCode];
                 [self addCode:termList.img];
             } else if (termList.termList.count>0){

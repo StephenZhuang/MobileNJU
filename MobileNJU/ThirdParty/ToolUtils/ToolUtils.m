@@ -716,5 +716,17 @@
     [userDefaults setObject:tags forKey:@"tagList"];
     [userDefaults synchronize];
 }
++ (BOOL)hasSixin
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"sixin"];
+
+}
+
++ (void)setHasSixin:(BOOL)hasSixin
+{
+    NSUserDefaults* userDefaults =[NSUserDefaults standardUserDefaults];
+    [userDefaults setBool: hasSixin forKey:@"sixin"];
+    [userDefaults synchronize];
+}
 
 @end

@@ -308,10 +308,14 @@
                 [ToolUtils setIsVeryfy:1];
             }
             else if (classList.img.length>0) {
+                if (self.imgView)
+                {
+                [ToolUtils showMessage:@"信息输入错误"];
+                }
                 [self removeCode];
                 [self addCode:classList.img];
             } else {
-                [ToolUtils showMessage:@"教务处没有该学期课表"];
+                [ToolUtils showMessage:@"教务处没有该学期课表,请登录教务处网站确认或请点击+号自动添加"];
                 [self cancelAlert:nil];
             }
             
@@ -342,6 +346,7 @@
         {
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
             [ToolUtils setCurrentWeek:ret.code];
+            [self loadSavedLesson];
         }
 
     }
@@ -596,14 +601,32 @@
         [view setBackgroundColor:[UIColor blackColor]];
         [view setAlpha:0.5];
     }
-   
+    
     ScheduleLesson* lesson = [self.lessonsForIcarousel objectAtIndex:index];
+    NSArray* busyweeks = [lesson.busyweeks componentsSeparatedByString:@","];
+    BOOL has = NO;
+    for (NSString* week in busyweeks) {
+        if (week.integerValue == [ToolUtils getCurrentWeek]) {
+            has = YES;
+        }
+    }
+    if (!has)
+    {
+        [view setBackgroundColor:[UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1]];
+        [view setAlpha:0.85];
+        [view setTag:-1];
+    } else {
+        [view setTag:1];
+    }
+    
+    
     [view.LessonNameLabel setText:lesson.name];
     view.LessonNameLabel.verticalAlignment = VerticalAlignmentMiddle;
     [view.locationLabel setText:lesson.location];
     view.frame = CGRectMake(30, 5, 134, 195);
     return view;
 }
+
 
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
 {
@@ -620,9 +643,15 @@
 {
     [self.lastView setBackgroundColor:[UIColor blackColor]];
     [self.lastView setAlpha:0.5];
-    
-    [carousel.currentItemView setBackgroundColor:self.currentColor];
-    [carousel.currentItemView setAlpha:0.85];
+    if (carousel.currentItemView.tag!=-1)
+    {
+        [carousel.currentItemView setBackgroundColor:self.currentColor];
+        [carousel.currentItemView setAlpha:0.85];
+    } else {
+        [carousel.currentItemView setBackgroundColor:[UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1]];
+        [carousel.currentItemView setAlpha:0.85];
+        
+    }
     self.lastView = carousel.currentItemView;
     NSLog(@"update");
 }
