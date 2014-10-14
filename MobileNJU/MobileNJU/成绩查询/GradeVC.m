@@ -49,6 +49,7 @@
     [self loadColor];
     self.isRe=0;
     self.hasLogin = NO;
+    self.hasUpdate = NO;
     [self loadSavedState];
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
 }
@@ -210,6 +211,7 @@
                 [ToolUtils setTermList:termArray];
                 self.termList = termArray;
                 [self.tableView reloadData];
+                self.hasUpdate = YES;
             }
         }
     }
@@ -429,6 +431,9 @@
         [nextVC setPassword:self.password];
         [nextVC setAccount:self.account];
         [nextVC setLastVC:self];
+        if (self.hasUpdate) {
+            nextVC.shouldRead = @"yes";
+        }
     }
 }
 

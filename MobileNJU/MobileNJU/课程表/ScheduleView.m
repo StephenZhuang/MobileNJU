@@ -307,6 +307,8 @@
             }
             if (!hasLesson) {
                 button.backgroundColor =  [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+                button.touchButton.backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+
                 [button.locationLabel setText:@"@本周无课程"];
             }
         }

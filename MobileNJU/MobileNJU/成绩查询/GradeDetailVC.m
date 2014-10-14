@@ -191,6 +191,7 @@
                     [termArray addObject:arr];
                 }
                 self.lastVC.termList = termArray;
+                self.lastVC.hasUpdate = YES;
                 [self cancelAlert:nil];
                 [ToolUtils setTermList:termArray];
                 [self.navigationController popViewControllerAnimated:YES];
@@ -208,6 +209,9 @@
                 [dic setObject:course.grade forKey:@"grade"];
                 [dic setObject:course.point forKey:@"point"];
                 [myCourse addObject:dic];
+            }
+            if (self.gradeList.count==0) {
+                [ToolUtils showMessage:@"教务处该学期没有成绩显示，请登录教务网查看"];
             }
             [self.gradesDic setObject:myCourse forKey:self.term];
             [ToolUtils setGradeDic:self.gradesDic];
@@ -239,7 +243,7 @@
         self.gradeList = courses;
         [self.tableView reloadData];
     }
-    if (![ToolUtils offLine]) {
+    if (![ToolUtils offLine]&&self.shouldRead) {
         [self waiting:@"正在加载"];
         [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
         

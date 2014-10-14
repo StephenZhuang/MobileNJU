@@ -12,5 +12,5 @@
 - (void)showAlert;
 - (IBAction)cancelAlert:(id)sender;
 @property(nonatomic,strong)NSArray* termList;
-
+@property (nonatomic)BOOL hasUpdate;
 @end
