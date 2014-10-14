@@ -29,7 +29,7 @@
 @property (nonatomic)int isRe;
 @property (nonatomic,strong)UIImageView* imgView;
 @property (nonatomic,strong)NSMutableDictionary* gradesDic;
-
+@property (nonatomic)BOOL handle;
 @end
 
 @implementation GradeDetailVC
@@ -38,6 +38,7 @@
 {
     [super viewDidLoad];
     [self initAlert];
+    self.handle = NO;
     [self initNavigationBar];
     [self.schIdTextField setDelegate:self];
     [self.passwordTextField setDelegate:self];
@@ -114,6 +115,9 @@
     }
     [self waiting:@"正在加载"];
     [self load:self selecter:@selector(disposMessage:) code:self.codeField==nil?nil:self.codeField.text account:self.schIdTextField.text password:self.passwordTextField.text];
+    if (sender) {
+        self.handle = YES;
+    }
 }
 
 -(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
@@ -169,9 +173,10 @@
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
             if (termList.img.length>0) {
-                if (self.imgView)
+                if (self.imgView&&_handle)
                 {
                     [ToolUtils showMessage:@"信息输入错误"];
+                    _handle = NO;
                 }
                 [self removeCode];
                 [self addCode:termList.img];
@@ -191,6 +196,8 @@
                     [termArray addObject:arr];
                 }
                 self.lastVC.termList = termArray;
+                self.lastVC.hasUpdate = YES;
+                [ToolUtils setTermList:termArray];
                 [self cancelAlert:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             }
@@ -242,7 +249,7 @@
         self.gradeList = courses;
         [self.tableView reloadData];
     }
-    if (![ToolUtils offLine]) {
+    if (![ToolUtils offLine]&&self.shouldRead) {
         [self waiting:@"正在加载"];
         [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
         

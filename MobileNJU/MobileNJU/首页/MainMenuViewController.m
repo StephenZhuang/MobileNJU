@@ -57,8 +57,7 @@ static NSArray* descriptions;
 {
     [super viewDidLoad];
     self.navigationController.delegate = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCall:) name:@"getCall" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToChat:) name:@"getPushInfo" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToChat:) name:@"getPushInfo" object:nil];
     [self initNewScroller];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
     [self.pageScroller addGestureRecognizer:singleTap];
@@ -281,7 +280,7 @@ static NSArray* descriptions;
         
         ProcedureDetailVC* nextVC = (ProcedureDetailVC*)[segue destinationViewController];
         nextVC.url = [[NSURL alloc]initWithString:self.caidanUrl];
-        [nextVC setTitle:@""];
+        nextVC.title = @"";
     
     }
 

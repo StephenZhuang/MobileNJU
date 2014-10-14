@@ -59,11 +59,10 @@
     [self initNavigationBar];
     self.code=nil;
     self.hasCode=NO;
-    if ([ToolUtils getScheduleAuto]==YES) {
-        self.schIdField.text=[ToolUtils getJWID];
-        self.passwordField.text = [ToolUtils getJWPassword];
-    }
-   //    [self loadLast];
+    self.schIdField.text=[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID];
+    
+    self.passwordField.text = [ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword];
+       //    [self loadLast];
     self.isRe=0;
     [self addTitleView];
     self.icarousel = [[iCarousel alloc]initWithFrame:CGRectMake(20, 120, 280, 200)];

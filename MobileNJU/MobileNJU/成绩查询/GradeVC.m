@@ -28,6 +28,7 @@
 @property (nonatomic,strong) UIImageView* imgView;
 @property (nonatomic)CGRect frame;
 @property (nonatomic)BOOL hasLogin;
+
 @end
 
 @implementation GradeVC
@@ -53,6 +54,7 @@
         self.termList = [ToolUtils getTermList];
     }
     [self loadSavedState];
+    self.hasUpdate = NO;
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
 }
 
@@ -209,6 +211,7 @@
                 }
                 [ToolUtils setTermList:termArray];
                 self.termList = termArray;
+                self.hasUpdate = YES;
                 [self.tableView reloadData];
             }
         }
@@ -428,9 +431,12 @@
     if ([[segue identifier] isEqualToString:@"gradeDetail"]) {
         GradeDetailVC* nextVC = (GradeDetailVC*)segue.destinationViewController;
         [nextVC setTerm:sender];
-        [nextVC setPassword:self.password];
-        [nextVC setAccount:self.account];
+        [nextVC setPassword:[ToolUtils getJWPassword]];
+        [nextVC setAccount:[ToolUtils getJWID]];
         [nextVC setLastVC:self];
+        if (self.hasUpdate) {
+            nextVC.shouldRead = @"yes";
+        }
     }
 }
 
