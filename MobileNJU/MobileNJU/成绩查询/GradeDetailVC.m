@@ -29,7 +29,7 @@
 @property (nonatomic)int isRe;
 @property (nonatomic,strong)UIImageView* imgView;
 @property (nonatomic,strong)NSMutableDictionary* gradesDic;
-
+@property (nonatomic)BOOL handle;
 @end
 
 @implementation GradeDetailVC
@@ -37,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.handle = NO;
     [self initAlert];
     [self initNavigationBar];
     [self.schIdTextField setDelegate:self];
@@ -99,7 +100,7 @@
 
 - (IBAction)search:(id)sender {
     
-    
+  
     [self.schIdTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     [self.codeField resignFirstResponder];
@@ -117,9 +118,13 @@
     }
     [self waiting:@"正在加载"];
     [self load:self selecter:@selector(disposMessage:) code:self.codeField==nil?nil:self.codeField.text account:self.schIdTextField.text password:self.passwordTextField.text];
+    if (sender) {
+        _handle = YES;
+    }
 }
 
 -(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
+    
     NSMutableArray *array=[[NSMutableArray alloc]initWithObjects:nil];
     if (code!=nil) {
         [array addObject:[NSString stringWithFormat:@"code=%@",code==nil?@"":code]];
@@ -172,7 +177,7 @@
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
             if (termList.termList.count==0) {
-                if(self.imgView)
+                if(self.imgView&&_handle)
                 {
                     [ToolUtils showMessage:@"信息输入错误"];
                 }
@@ -197,6 +202,7 @@
                 [self cancelAlert:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             }
+            _handle = NO;
         } else if([[son getMethod]isEqualToString:@"MGradeSearch"])
         {
             MCourseList_Builder* courseList = (MCourseList_Builder*)[son getBuild];
@@ -215,6 +221,7 @@
 
             [self.tableView reloadData];
         }
+        
     } else {
         [super disposMessage:son];
     }

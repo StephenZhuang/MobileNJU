@@ -28,6 +28,7 @@
 @property (nonatomic,strong) UIImageView* imgView;
 @property (nonatomic)CGRect frame;
 @property (nonatomic)BOOL hasLogin;
+@property (nonatomic)BOOL handle;
 @end
 
 @implementation GradeVC
@@ -55,14 +56,13 @@
     }
     
     [self loadSavedState];
+    _handle = NO;
 
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-
 }
 
 - (void)initAlert
@@ -147,6 +147,9 @@
         [self waiting:@"正在登录"];
     }
     [self load:self selecter:@selector(disposMessage:) code:self.codeField==nil?nil:self.codeField.text account:self.schIdTextField.text password:self.passwordTextField.text];
+    if (sender) {
+        _handle = YES;
+    }
 }
 
 -(UpdateOne*)load:(id)delegate selecter:(SEL)select  code:(NSString*)code account:(NSString*)account password:(NSString*)password {
@@ -176,12 +179,13 @@
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }
-                if (self.imgView)
+                if (self.imgView&&_handle)
                 {
                     [ToolUtils showMessage:@"信息输入错误"];
                 }
                 [self removeCode];
                 [self addCode:termList.img];
+                _handle = NO;
                 
             } else {
                 self.hasLogin = YES;

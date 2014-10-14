@@ -44,7 +44,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addBack;
 @property (strong,nonatomic)UIImageView* imgView;
 @property (strong,nonatomic)NSString* lastUserId;
-
+@property (nonatomic)BOOL handle;
 @end
 
 
@@ -68,6 +68,7 @@
     [self.view addSubview:self.icarousel];
     [self.icarousel setHidden:YES];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdField];
+    _handle = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -87,6 +88,7 @@
         [self loadLast];
         [self getCurrentWeek];
     }
+    
 }
 
 - (void)getCurrentWeek
@@ -225,13 +227,10 @@
     if (self.lastUserId!=nil&&![self.lastUserId isEqualToString:self.schIdField.text]) {
         self.isRe=1;
     }
-    if ([[ToolUtils getJWID] isEqualToString:self.schIdField.text]) {
-        ApiMScheduleAuto* scheduleAuto = [[ApiMScheduleAuto alloc]init];
-        [scheduleAuto load:self selecter:@selector(disposMessage:) account:[ToolUtils getJWID]];
-    } else {
-        [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
-        
-    }
+    
+    [self load:self selecter:@selector(disposMessage:) code:self.codeView.text account:self.schIdField.text password:self.passwordField.text] ;
+    self.handle = YES;
+    
     
     
 }
@@ -293,15 +292,14 @@
                     [ToolUtils showMessage:@"教务系统无显示，请使用电脑登录您的教务系统，确认是否可以成功查看课程，或者点击+号进行手动添加"];
                 }
             } else {
-                if (self.codeView)
+                if (self.codeView&&_handle)
                 {
                     [ToolUtils showMessage:@"信息输入错误"];
                 }
                 [self removeCode];
                 [self addCode:classList.img];
-                
            }
-            
+            _handle = NO;
         } else if ([[son getMethod]isEqualToString:@"MScheduleAuto"]){
             MClassList_Builder* classList = (MClassList_Builder*)[son getBuild];
             [self.weekNumLabel setText:[NSString stringWithFormat:@"第%d周",classList.week]];
