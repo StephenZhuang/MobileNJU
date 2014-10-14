@@ -422,6 +422,8 @@
     [self.maskView setHidden:NO];
     [self addMask];
 }
+
+
 - (void)showSchedules:(NSArray *)lessons color:(UIColor *)color
 {
     
@@ -446,11 +448,13 @@
     {
         [arr removeObject:grayLesson];
         [arr addObject:grayLesson];
-
     }
-    NSSet *set = [NSSet setWithArray:arr];
-    self.lessonsForIcarousel = [set allObjects];;
+    //    NSSet *set = [NSSet setWithArray:arr];
+    self.lessonsForIcarousel = arr;
     self.currentColor = color;
+    [self.icarousel removeFromSuperview];
+    self.icarousel = [[iCarousel alloc]initWithFrame:CGRectMake(20, 120, 280, 200)];
+    [self.view addSubview:self.icarousel];
     ((iCarousel*)self.icarousel).delegate = self;
     [self.icarousel setBounces:NO];
     self.icarousel.perspective=-0.0095;
