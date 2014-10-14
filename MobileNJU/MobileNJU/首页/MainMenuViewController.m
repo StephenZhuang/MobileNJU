@@ -281,8 +281,7 @@ static NSArray* descriptions;
         
         ProcedureDetailVC* nextVC = (ProcedureDetailVC*)[segue destinationViewController];
         nextVC.url = [[NSURL alloc]initWithString:self.caidanUrl];
-        [nextVC setTitle:@""];
-    
+        nextVC.myTitle = @"";
     }
 
 }
