@@ -49,15 +49,22 @@
     [self loadColor];
     self.isRe=0;
     self.hasLogin = NO;
+    if (!self.termList) {
+        self.termList = [ToolUtils getTermList];
+    }
+    [self loadSavedState];
+    self.hasUpdate = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!self.termList) {
+    if ([ToolUtils getTermList]) {
         self.termList = [ToolUtils getTermList];
+        [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
+        [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
+        [self.tableView reloadData];
     }
-    [self loadSavedState];
 }
 
 - (void)initAlert
@@ -173,6 +180,10 @@
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }
+                if (self.imgView)
+                {
+                    [ToolUtils showMessage:@"信息输入错误"];
+                }
                 [self removeCode];
                 [self addCode:termList.img];
             } else if (termList.termList.count>0){
@@ -196,6 +207,7 @@
                 [ToolUtils setTermList:termArray];
                 self.termList = termArray;
                 [self.tableView reloadData];
+                self.hasUpdate = YES;
             }
         }
     }
@@ -415,6 +427,7 @@
         [nextVC setPassword:self.password];
         [nextVC setAccount:self.account];
         [nextVC setLastVC:self];
+        nextVC.shoudload=@"YES";
     }
 }
 

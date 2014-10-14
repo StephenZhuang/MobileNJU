@@ -167,6 +167,9 @@
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
             if (termList.img.length>0) {
+                if (self.imgView) {
+                    [ToolUtils showMessage:@"信息输入错误"];
+                }
                 [self removeCode];
                 [self addCode:termList.img];
             } else if (termList.termList.count>0) {
@@ -185,7 +188,9 @@
                     [termArray addObject:arr];
                 }
                 self.lastVC.termList = termArray;
+                self.lastVC.hasUpdate = YES;
                 [self cancelAlert:nil];
+                [ToolUtils setTermList:termArray];
                 [self.navigationController popViewControllerAnimated:YES];
             }
         } else if([[son getMethod]isEqualToString:@"MGradeSearch"])
@@ -204,6 +209,9 @@
             [self.gradesDic setObject:myCourse forKey:self.term];
             [ToolUtils setGradeDic:self.gradesDic];
             [self.tableView reloadData];
+            if (self.gradeList.count==0) {
+                [ToolUtils showMessage:@"教务处显示本学期成绩列表为空，如有疑问，请登录教务网确认"];
+            }
         }
     } else {
         [self removeCode];
@@ -231,7 +239,7 @@
         self.gradeList = courses;
         [self.tableView reloadData];
     }
-    if (![ToolUtils offLine]) {
+    if (![ToolUtils offLine]&&self.shoudload) {
         [self waiting:@"正在加载"];
         [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
 
