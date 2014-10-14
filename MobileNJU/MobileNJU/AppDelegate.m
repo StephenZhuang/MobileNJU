@@ -293,6 +293,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     
     
     if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
+        [ToolUtils setHasSixin:NO];
         UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
         RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
         UINavigationController *nav = [tabbar.viewControllers firstObject];

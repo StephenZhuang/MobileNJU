@@ -57,8 +57,8 @@ static NSArray* descriptions;
 {
     [super viewDidLoad];
     self.navigationController.delegate = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCall:) name:@"getCall" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToChat:) name:@"getPushInfo" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCall:) name:@"getCall" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToChat:) name:@"getPushInfo" object:nil];
     [self initNewScroller];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
     [self.pageScroller addGestureRecognizer:singleTap];
@@ -777,6 +777,7 @@ static NSArray* descriptions;
 {
     NSString *type = notification.object;
     if (type.integerValue == 1) {
+        [ToolUtils setHasSixin:NO];
         UIViewController *vc = (UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
         UINavigationController *nav = (UINavigationController *)[tabbar selectedViewController];

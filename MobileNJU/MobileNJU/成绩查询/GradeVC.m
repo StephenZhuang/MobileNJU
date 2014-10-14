@@ -65,7 +65,7 @@
     [super viewWillAppear:animated];
     if ([ToolUtils getTermList])
     {
-        self.termList = [ToolUtils getTermList]
+        self.termList = [ToolUtils getTermList];
         [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
         [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
         [self.tableView reloadData];

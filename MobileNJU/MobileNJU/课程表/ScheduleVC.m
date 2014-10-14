@@ -184,7 +184,7 @@
 - (void)loadSavedLesson
 {
     NSArray* lessons = [ToolUtils getMySchedule];
-    if (lessons.count>0) {
+    if (lessons) {
         NSMutableArray* lessonList = [[NSMutableArray alloc]init];
         for (NSDictionary* dic in lessons) {
             ScheduleLesson* each_lesson = [[ScheduleLesson alloc]init];
