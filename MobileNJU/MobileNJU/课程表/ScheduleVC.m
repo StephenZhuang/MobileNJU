@@ -57,10 +57,10 @@
     [self initNavigationBar];
     self.code=nil;
     self.hasCode=NO;
-    if ([ToolUtils getScheduleAuto]==YES) {
-        self.schIdField.text=[ToolUtils getJWID];
-        self.passwordField.text = [ToolUtils getJWPassword];
-    }
+//    if ([ToolUtils getScheduleAuto]==YES) {
+        self.schIdField.text=[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID];
+        self.passwordField.text = [ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword];
+//    }
    //    [self loadLast];
     self.isRe=0;
     [self addTitleView];
@@ -288,6 +288,10 @@
                 self.lessonList = classList.classList;
                 [self loadSchedule];
                 [ToolUtils setIsVeryfy:1];
+                if (classList.classList.count==0)
+                {
+                    [ToolUtils showMessage:@"教务系统无显示，请使用电脑登录您的教务系统，确认是否可以成功查看课程，或者点击+号进行手动添加"];
+                }
             } else {
                 if (self.codeView)
                 {

@@ -50,16 +50,17 @@
     self.isRe=0;
     self.hasLogin = NO;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
+    if (!self.termList) {
+        self.termList = [ToolUtils getTermList];
+    }
+    
+    [self loadSavedState];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!self.termList) {
-        self.termList = [ToolUtils getTermList];
-    }
-
-    [self loadSavedState];
     
 
 }
@@ -119,7 +120,6 @@
         [self search:nil];
     } else if (!self.hasLogin&&![ToolUtils offLine]){
         [self showAlert];
-
     }
     [self.tableView reloadData];
 }
@@ -413,8 +413,8 @@
     if ([[segue identifier] isEqualToString:@"gradeDetail"]) {
         GradeDetailVC* nextVC = (GradeDetailVC*)segue.destinationViewController;
         [nextVC setTerm:sender];
-        [nextVC setPassword:self.password];
-        [nextVC setAccount:self.account];
+        [nextVC setPassword:[ToolUtils getJWPassword]];
+        [nextVC setAccount:[ToolUtils getJWID]];
         [nextVC setLastVC:self];
     }
 }

@@ -89,9 +89,9 @@
 - (void)textFieldDidChange:(NSNotification *)note
 {
     NSLog(@"%@",self.schIdTextField.text);
-    if ([self.schIdTextField.text hasPrefix:@"Mg"]&&self.codeField==nil) {
+    if ([[self.schIdTextField.text uppercaseString] hasPrefix:@"MG"]&&self.codeField==nil) {
         [self load:self selecter:@selector(disposMessage:) code:nil account:@"Mg10000000" password:@"123456"];
-    } else if (![self.schIdTextField.text hasPrefix:@"Mg"]){
+    } else if (![[self.schIdTextField.text uppercaseString] hasPrefix:@"MG"]){
         [self removeCode];
     }
 
