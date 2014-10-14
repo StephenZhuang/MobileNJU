@@ -49,16 +49,22 @@
     [self loadColor];
     self.isRe=0;
     self.hasLogin = NO;
+    if (!self.termList) {
+        self.termList = [ToolUtils getTermList];
+    }
+    [self loadSavedState];
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!self.termList) {
+    if ([ToolUtils getTermList]) {
         self.termList = [ToolUtils getTermList];
+        [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
+        [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
+        [self.tableView reloadData];
     }
-    [self loadSavedState];
 }
 
 
