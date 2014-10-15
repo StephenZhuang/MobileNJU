@@ -37,7 +37,7 @@
     [self initDeviceid];
     [self initApiFrame];
     [self initJPush:launchOptions];
-   [self initShare:application options:launchOptions];
+    [self initShare:application options:launchOptions];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Home" bundle:nil];
     WelcomeViewController *vc = [storyboard instantiateInitialViewController];
@@ -73,19 +73,21 @@
 
 - (void)initShare:(UIApplication *)application options:(NSDictionary *)launchOptions
 {
+    
     //初始化Frontia
     [Frontia initWithApiKey:APP_KEY];
+    
 }
-
 
 
 #pragma - mark init param
 - (void) initUmen
 {
     
-    [MobClick startWithAppkey:@"541526bbfd98c50b120a76d7" reportPolicy:BATCH   channelId:nil];
+    [MobClick startWithAppkey:@"54158ddefd98c591e0079b3e" reportPolicy:BATCH   channelId:nil];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
+    [ToolUtils setVersion:version];
 //    [MobClick setLogEnabled:YES];
 //    Class cls = NSClassFromString(@"UMANUtil");
 //    SEL deviceIDSelector = @selector(openUDIDString);
@@ -278,6 +280,10 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
             [ToolUtils setShowTreeHole:url];
         }
     }
+    else if (type==1)
+    {
+        [ToolUtils setHasSixin:YES];
+    }
 
 }
 - (void)operaUserInfo:(NSDictionary *)userInfo appliccation:(UIApplication *)application
@@ -287,6 +293,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     
     
     if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
+        [ToolUtils setHasSixin:NO];
         UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
         RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
         UINavigationController *nav = [tabbar.viewControllers firstObject];

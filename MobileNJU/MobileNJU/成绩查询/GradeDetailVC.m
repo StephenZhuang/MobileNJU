@@ -176,19 +176,16 @@
                 self.lastUserId = self.schIdTextField.text;
                 self.password  = self.passwordTextField.text;
                 self.account = self.schIdTextField.text;
-                if (self.autoSwitch.isOn) {
                     [ToolUtils setJWPassword:self.passwordTextField.text];
                     [ToolUtils setJWId:self.schIdTextField.text];
-                } else {
-                    [ToolUtils setJWPassword:@""];
-                    [ToolUtils setJWId:@""];
-                }
+              
                 NSMutableArray* termArray = [[NSMutableArray alloc]init];
                 for (MTerm* term in termList.termList) {
                     NSArray* arr = [[NSArray alloc]initWithObjects:term.name,term.url,nil];
                     [termArray addObject:arr];
                 }
                 self.lastVC.termList = termArray;
+                self.lastVC.hasUpdate = YES;
                 [self cancelAlert:nil];
                 [ToolUtils setTermList:termArray];
                 [self.navigationController popViewControllerAnimated:YES];
@@ -234,7 +231,7 @@
         self.gradeList = courses;
         [self.tableView reloadData];
     }
-    if (![ToolUtils offLine]) {
+    if (![ToolUtils offLine]&&self.shoudLoad) {
         [self waiting:@"正在加载"];
         [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
         
