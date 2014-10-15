@@ -1032,6 +1032,12 @@
                                     <outlet property="delegate" destination="lP4-vl-qFi" id="zhI-cQ-tu0"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您没有借阅的图书！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EbB-n3-kYd">
+                                <rect key="frame" x="84" y="274" width="153" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.96470588235294119" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1040,12 +1046,17 @@
                             <constraint firstAttribute="trailing" secondItem="EnH-V7-gOn" secondAttribute="trailing" id="InZ-pc-5vg"/>
                             <constraint firstItem="xvb-Cx-2Sj" firstAttribute="top" secondItem="EnH-V7-gOn" secondAttribute="bottom" id="Nte-22-dyB"/>
                             <constraint firstItem="EnH-V7-gOn" firstAttribute="top" secondItem="cdJ-t5-Aii" secondAttribute="top" id="YdV-AW-GCs"/>
+                            <constraint firstAttribute="centerY" secondItem="EbB-n3-kYd" secondAttribute="centerY" id="a10-D1-Ws0"/>
                             <constraint firstItem="EnH-V7-gOn" firstAttribute="top" secondItem="cdJ-t5-Aii" secondAttribute="top" id="ee9-CO-lJZ"/>
                             <constraint firstItem="xvb-Cx-2Sj" firstAttribute="top" secondItem="EnH-V7-gOn" secondAttribute="bottom" id="j1z-PQ-rEc"/>
+                            <constraint firstAttribute="centerX" secondItem="EbB-n3-kYd" secondAttribute="centerX" id="pv4-wL-5Hz"/>
                             <constraint firstItem="EnH-V7-gOn" firstAttribute="leading" secondItem="cdJ-t5-Aii" secondAttribute="leading" id="suV-8T-W7G"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Mdd-xS-xSY"/>
+                    <connections>
+                        <outlet property="tintLabel" destination="EbB-n3-kYd" id="aFn-gh-UY6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tVE-Yt-C1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
