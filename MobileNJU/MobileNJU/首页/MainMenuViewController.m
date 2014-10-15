@@ -20,6 +20,7 @@
 #import "ScheduleVC.h"
 #import "ProcedureDetailVC.h"
 #import "ZsndNews.pb.h"
+#import "NewMessageListViewController.h"
 #define NEWSCOUNT 4
 @interface MainMenuViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIPageControl *pageController;
@@ -29,7 +30,7 @@
 @property (nonatomic)BOOL changeHeader;
 @property (weak, nonatomic) IBOutlet UIView *tableHeadView;
 @property (strong,nonatomic)UIImageView* newImage;
-@property (strong,nonatomic)UIImageView* touchButton;
+@property (strong,nonatomic)UIButton* touchButton;
 @property (strong,nonatomic)UIImageView* cloudBack;
 @property (strong,nonatomic)NSArray* focusList;
 
@@ -43,6 +44,7 @@
 @property (nonatomic)int prepare;
 @property (nonatomic)BOOL firstOpen;
 @property (nonatomic,strong)HomeCell* treeholeCell;
+@property (nonatomic,strong)NSString* caidanUrl;
 @end
 
 @implementation MainMenuViewController
@@ -55,8 +57,8 @@ static NSArray* descriptions;
 {
     [super viewDidLoad];
     self.navigationController.delegate = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCall:) name:@"getCall" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToChat:) name:@"getPushInfo" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCall:) name:@"getCall" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToChat:) name:@"getPushInfo" object:nil];
     [self initNewScroller];
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
     [self.pageScroller addGestureRecognizer:singleTap];
@@ -108,6 +110,14 @@ static NSArray* descriptions;
     } else if ([ToolUtils showTreeHole])
     {
         [self gotoTreeHole];
+    } else if ([ToolUtils hasSixin])
+    {
+        UIStoryboard *secondStoryBoard = [UIStoryboard storyboardWithName:@"TreeHole" bundle:nil];
+        NewMessageListViewController* unc = (NewMessageListViewController*)[secondStoryBoard instantiateViewControllerWithIdentifier:@"NewMessageListViewController"]; //test2为viewcontroller的StoryboardId
+        unc.push = YES;
+        [self.navigationController pushViewController:unc animated:YES];
+        
+        [ToolUtils setHasSixin:NO];
     }
 }
 
@@ -119,7 +129,7 @@ static NSArray* descriptions;
 - (void)loadIndex
 {
     if (!self.offline) {
-        [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:) version:[NSString stringWithFormat:@"%d",2]];
+        [[ApisFactory getApiMIndex]load:self selecter:@selector(disposeMessage:) version:[NSString stringWithFormat:@"%d",3]];
     } else {
         [self loadTableData];
     }
@@ -137,15 +147,21 @@ static NSArray* descriptions;
         } else if ([[son getMethod] isEqualToString:@"MIndexNew"]) {
             [[[ApisFactory getApiMNewsList]setPage:1 pageCount:10]load:self selecter:@selector(disposeMessage:)];
             MIndex_Builder* index = (MIndex_Builder*)[son getBuild];
+            
             NSMutableArray* image = [[NSMutableArray alloc]init];
             NSMutableArray* names = [[NSMutableArray alloc]init];
             NSMutableArray* details = [[NSMutableArray alloc]init];
+            
             for (MMdoule* model in index.moduleList) {
-                [names addObject:model.name];
-                [image addObject:model.img];
-                [details addObject:model.desc];
-                if ([model.desc hasSuffix:@"html"]) {
-                    self.tempUrl = model.desc;
+                if ([model.name isEqualToString:@"彩蛋"]){
+                    self.caidanUrl = model.desc;
+                } else {
+                    [names addObject:model.name];
+                    [image addObject:model.img];
+                    [details addObject:model.desc];
+                    if ([model.desc hasPrefix:@"/"]) {
+                        self.tempUrl = model.desc;
+                    }
                 }
             }
             if (functionNames==nil) {
@@ -154,7 +170,6 @@ static NSArray* descriptions;
                 descriptions=details;
                 [self loadImages];
             } else {
-    
                 functionNames=names;
                 buttonImages=image;
                 descriptions=details;
@@ -255,17 +270,31 @@ static NSArray* descriptions;
     } else if ([[segue identifier]isEqualToString:@"临时功能"])
     {
         ProcedureDetailVC* nextVC = (ProcedureDetailVC*)[segue destinationViewController];
-        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",self.tempUrl]];
-
+        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89%@",self.tempUrl]];
+        
     }
     if ([[segue identifier] isEqual:@"课程表"]) {
         ScheduleVC* vc = (ScheduleVC*)[segue destinationViewController];
         vc.offline = self.offline;
     }
+    if ([[segue identifier] isEqual:@"彩蛋"]) {
+        
+        ProcedureDetailVC* nextVC = (ProcedureDetailVC*)[segue destinationViewController];
+        nextVC.url = [[NSURL alloc]initWithString:self.caidanUrl];
+        [nextVC setMyTitle:@""];
+    
+    }
+
 }
 
 
-
+-(void)touchCircle
+{
+    if (self.caidanUrl)
+    {
+        [self performSegueWithIdentifier:@"彩蛋" sender:nil];
+    }
+}
 
 #pragma mark tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -284,11 +313,16 @@ static NSArray* descriptions;
     [self.headerView addSubview:self.cloudBack];
     
     UIImage* touch = [UIImage imageNamed:@"触控区"];
-    self.touchButton = [[UIImageView alloc]initWithFrame:CGRectMake(132.5, 15, 55, 75)];
-    [self.touchButton setImage:touch];
+    self.touchButton = [[UIButton alloc]initWithFrame:CGRectMake(132.5, 15, 55, 75)];
+    [self.touchButton setBackgroundImage:touch forState:UIControlStateNormal];
+    [self.touchButton addTarget:self action:@selector(touchCircle) forControlEvents:UIControlEventTouchUpInside];
     [self.headerView addSubview:self.touchButton];
+    [self.headerView bringSubviewToFront:self.touchButton];
     return self.headerView;
+    
 }
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -410,13 +444,12 @@ static NSArray* descriptions;
     } else if ([menuButton.desitination isEqualToString:@"跳蚤市场"])
     {
         [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
-
+        
         [self goToShop];
-    } else if ([menuButton.desitination hasSuffix:@"html"]){
+    } else if ([menuButton.desitination hasPrefix:@"/"]){
         [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
-
         [self performSegueWithIdentifier:@"临时功能"  sender:menuButton.desitination];
-
+        
     }
     else {
         [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
@@ -744,6 +777,7 @@ static NSArray* descriptions;
 {
     NSString *type = notification.object;
     if (type.integerValue == 1) {
+        [ToolUtils setHasSixin:NO];
         UIViewController *vc = (UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
         UINavigationController *nav = (UINavigationController *)[tabbar selectedViewController];

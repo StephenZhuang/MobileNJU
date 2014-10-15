@@ -169,24 +169,24 @@
         if ([[son getMethod]isEqualToString:@"MTermList"]) {
             MTermList_Builder* termList = (MTermList_Builder*)[son getBuild];
             if (termList.img.length>0) {
+                if (self.imgView)
+                {
+                    [ToolUtils showMessage:@"信息输入错误"];
+                }
                 [self removeCode];
                 [self addCode:termList.img];
             } else if (termList.termList.count>0) {
                 self.password  = self.passwordTextField.text;
                 self.account = self.schIdTextField.text;
-                if (self.autoSwitch.isOn) {
-                    [ToolUtils setJWPassword:self.passwordTextField.text];
-                    [ToolUtils setJWId:self.schIdTextField.text];
-                } else {
-                    [ToolUtils setJWPassword:@""];
-                    [ToolUtils setJWId:@""];
-                }
+                [ToolUtils setJWPassword:self.passwordTextField.text];
+                [ToolUtils setJWId:self.schIdTextField.text];
                 NSMutableArray* termArray = [[NSMutableArray alloc]init];
                 for (MTerm* term in termList.termList) {
                     NSArray* arr = [[NSArray alloc]initWithObjects:term.name,term.url,nil];
                     [termArray addObject:arr];
                 }
                 self.lastVC.termList = termArray;
+                self.lastVC.hasUpdate = YES;
                 [ToolUtils setTermList:termArray];
                 [self cancelAlert:nil];
                 [self.navigationController popViewControllerAnimated:YES];
@@ -208,8 +208,9 @@
             [ToolUtils setGradeDic:self.gradesDic];
             [self.tableView reloadData];
             [self.tableView reloadData];
-            if (courseList.courseList.count==0) {
-                [ToolUtils showMessage:@"教务系统无显示，请登录电脑端进行查看"];
+            
+            if (self.gradeList.count==0) {
+                [ToolUtils showMessage:@"教务处显示本学期无成绩列表，如有疑问，请登录教务网查看"];
             }
         }
     } else {
@@ -238,7 +239,7 @@
         self.gradeList = courses;
         [self.tableView reloadData];
     }
-    if (![ToolUtils offLine]) {
+    if (![ToolUtils offLine]&&self.shoudLoad) {
         [self waiting:@"正在加载"];
         [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
         

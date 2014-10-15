@@ -123,4 +123,6 @@
 + (void) setEcardRemain: (NSDictionary*)dic;
 + (NSArray*) getTagList;
 + (void) setTagList :(NSArray*)tags;
++ (void) setHasSixin : (BOOL) hasSixin;
++ (BOOL) hasSixin;
 @end

@@ -44,21 +44,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hasUpdate = NO;
     [self initAlert];
     [self initNavigationBar];
     [self loadColor];
     self.isRe=0;
     self.hasLogin = NO;
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
+    if (!self.termList) {
+        self.termList = [ToolUtils getTermList];
+    }
+    [self loadSavedState];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!self.termList) {
+    if ([ToolUtils getTermList]) {
         self.termList = [ToolUtils getTermList];
+        [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
+        [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
+        self.password = self.passwordTextField.text;
+        self.account = self.schIdTextField.text;
+        [self.tableView reloadData];
     }
-    [self loadSavedState];
 }
 
 - (void)initAlert
@@ -174,6 +184,11 @@
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }
+                if (self.imgView)
+                {
+                    [ToolUtils showMessage:@"信息输入错误"];
+                }
+
                 [self removeCode];
                 [self addCode:termList.img];
             } else if (termList.termList.count>0){
@@ -181,13 +196,9 @@
                 self.isRe=1;
                 self.password  = self.passwordTextField.text;
                 self.account = self.schIdTextField.text;
-                if (self.autoSwitch.isOn) {
-                    [ToolUtils setJWPassword:self.passwordTextField.text];
-                    [ToolUtils setJWId:self.schIdTextField.text];
-                } else {
-                    [ToolUtils setJWPassword:@""];
-                    [ToolUtils setJWId:@""];
-                }
+                [ToolUtils setJWPassword:self.passwordTextField.text];
+                [ToolUtils setJWId:self.schIdTextField.text];
+               
                 [self cancelAlert:nil];
                 NSMutableArray* termArray = [[NSMutableArray alloc]init];
                 for (MTerm* term in termList.termList) {
@@ -197,6 +208,7 @@
                 [ToolUtils setTermList:termArray];
                 self.termList = termArray;
                 [self.tableView reloadData];
+                self.hasUpdate = YES;
             }
         }
     }
@@ -415,6 +427,9 @@
         [nextVC setPassword:self.password];
         [nextVC setAccount:self.account];
         [nextVC setLastVC:self];
+        if (self.hasUpdate) {
+            nextVC.shoudLoad = @"YES";
+        }
     }
 }
 

@@ -174,6 +174,7 @@
             [ProgressHUD showSuccess:@"举报成功"];
         }
     } else {
+        [super disposMessage:son];
         self.isError = YES;
     }
     if ([[son getMethod] isEqualToString:@"MTreeHoleList"] || [[son getMethod] isEqualToString:@"MTagTreeHole"] || [[son getMethod] isEqualToString:@"MTreeHoleQuery"]) {
@@ -325,7 +326,7 @@
         return;
     };
     UIButton *button = (UIButton *)sender;
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享",@"举报", nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"举报", nil];
     sheet.tag = button.tag;
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
@@ -419,50 +420,50 @@
 {
     MTopic *topic = self.dataArray[actionSheet.tag];
     switch (buttonIndex) {
-        case 0:
-        {
-            FrontiaShare *share = [Frontia getShare];
+//        case 0:
+//        {
+//            FrontiaShare *share = [Frontia getShare];
+////            [share registerSinaweiboAppId:@"306527345"];
+//            [share registerWeixinAppId:@"wxc62537e5f0891e41"];
+//            
+//            //授权取消回调函数
+//            FrontiaShareCancelCallback onCancel = ^(){
+//                NSLog(@"OnCancel: share is cancelled");
+//            };
+//            
+//            //授权失败回调函数
+//            FrontiaShareFailureCallback onFailure = ^(int errorCode, NSString *errorMessage){
+//                NSLog(@"OnFailure: %d  %@", errorCode, errorMessage);
+//                [ProgressHUD showError:@"分享失败"];
+//            };
+//            
+//            //授权成功回调函数
+//            FrontiaMultiShareResultCallback onResult = ^(NSDictionary *respones){
+//                NSLog(@"OnResult: %@", [respones description]);
+//                [ProgressHUD showSuccess:@"分享成功"];
+//            };
+//            
+//            FrontiaShareContent *content=[[FrontiaShareContent alloc] init];
+//            //    content.url = ShareUrl;
+//            NSString *contentUrl = @"http://www.baidu.com";
+//            content.url = contentUrl;
+//            if (topic.tag.length > 0) {
+//                content.title = topic.tag;
+//            } else {
+//                content.title = topic.content;
+//            }
+//            content.description = topic.content;
+//            content.imageObj = [ToolUtils getImageUrlWtihString:topic.img].absoluteString;
+//            
+//            NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
+//            [share registerQQAppId:@"100358052" enableSSO:YES];
+//            [share registerWeixinAppId:@"wxc62537e5f0891e41"];
 //            [share registerSinaweiboAppId:@"306527345"];
-            [share registerWeixinAppId:@"wx3a90eaf2fcd3fcb2"];
-            
-            //授权取消回调函数
-            FrontiaShareCancelCallback onCancel = ^(){
-                NSLog(@"OnCancel: share is cancelled");
-            };
-            
-            //授权失败回调函数
-            FrontiaShareFailureCallback onFailure = ^(int errorCode, NSString *errorMessage){
-                NSLog(@"OnFailure: %d  %@", errorCode, errorMessage);
-                [ProgressHUD showError:@"分享失败"];
-            };
-            
-            //授权成功回调函数
-            FrontiaMultiShareResultCallback onResult = ^(NSDictionary *respones){
-                NSLog(@"OnResult: %@", [respones description]);
-                [ProgressHUD showSuccess:@"分享成功"];
-            };
-            
-            FrontiaShareContent *content=[[FrontiaShareContent alloc] init];
-            //    content.url = ShareUrl;
-            NSString *contentUrl = @"http://www.baidu.com";
-            content.url = contentUrl;
-            if (topic.tag.length > 0) {
-                content.title = topic.tag;
-            } else {
-                content.title = topic.content;
-            }
-            content.description = topic.content;
-            content.imageObj = [ToolUtils getImageUrlWtihString:topic.img].absoluteString;
-            
-            NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
-            [share registerQQAppId:@"100358052" enableSSO:YES];
-            [share registerWeixinAppId:@"wx3a90eaf2fcd3fcb2"];
-            [share registerSinaweiboAppId:@"306527345"];
-
-            [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
-        }
-            break;
-        case 1:
+//
+//            [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
+//        }
+//            break;
+        case 0:
         {
             [[ApisFactory getApiMTreeHoleReport] load:self selecter:@selector(disposMessage:) id:topic.id];
         }
