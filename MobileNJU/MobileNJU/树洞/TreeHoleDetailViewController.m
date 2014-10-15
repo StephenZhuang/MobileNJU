@@ -406,18 +406,18 @@
 
 - (void)showFlower
 {
-    [_flowerView setAlpha:0];
-    [_flowerView setHidden:NO];
-    
-    [UIView animateWithDuration:0.2 animations:^(void) {
-        [_flowerView setAlpha:1];
-        _flowerView.transform = CGAffineTransformMakeTranslation(0, -50);
-    }];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_flowerView setHidden:YES];
-        _flowerView.transform = CGAffineTransformIdentity;
-    });
+//    [_flowerView setAlpha:0];
+//    [_flowerView setHidden:NO];
+//    
+//    [UIView animateWithDuration:0.2 animations:^(void) {
+//        [_flowerView setAlpha:1];
+//        _flowerView.transform = CGAffineTransformMakeTranslation(0, -50);
+//    }];
+//    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [_flowerView setHidden:YES];
+//        _flowerView.transform = CGAffineTransformIdentity;
+//    });
 }
 
 #pragma mark-
