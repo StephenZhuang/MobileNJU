@@ -420,22 +420,50 @@
     [self.maskView setHidden:NO];
     [self addMask];
 }
+
+
 - (void)showSchedules:(NSArray *)lessons color:(UIColor *)color
 {
-     NSSet *set = [NSSet setWithArray:lessons];
-    self.lessonsForIcarousel = [set allObjects];;
+    
+    NSMutableArray* grayLessons = [[NSMutableArray alloc]init];
+    for (ScheduleLesson* lesson in lessons)
+    {
+        NSArray* busyweeks = [lesson.busyweeks componentsSeparatedByString:@","];
+        BOOL has = NO;
+        for (NSString* week in busyweeks) {
+            if (week.integerValue == [ToolUtils getCurrentWeek]) {
+                has = YES;
+                break;
+            }
+        }
+        if (!has)
+        {
+            [grayLessons addObject:lesson];
+        }
+    }
+    NSMutableArray* arr = [[NSMutableArray alloc]initWithArray:lessons];
+    if (grayLessons.count>0 )
+    {
+        [arr removeObjectsInArray:grayLessons];
+        [arr addObjectsFromArray:grayLessons];
+    }
+    //    NSSet *set = [NSSet setWithArray:arr];
+    self.lessonsForIcarousel = arr;
     self.currentColor = color;
+    [self.icarousel removeFromSuperview];
+    self.icarousel = [[iCarousel alloc]initWithFrame:CGRectMake(20, 120, 280, 200)];
+    [self.view addSubview:self.icarousel];
     ((iCarousel*)self.icarousel).delegate = self;
     [self.icarousel setBounces:NO];
     self.icarousel.perspective=-0.0095;
     self.icarousel.dataSource = self;
     self.icarousel.type = iCarouselTypeCoverFlow;
-    
     [self.icarousel reloadData];
     [self.icarousel setHidden:NO];
     [self.maskView setHidden:NO];
     [self addMask];
 }
+
 
 //加载课程表界面
 - (void)loadSchedule
