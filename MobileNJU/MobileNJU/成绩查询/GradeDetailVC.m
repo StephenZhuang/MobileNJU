@@ -175,13 +175,8 @@
             } else if (termList.termList.count>0) {
                 self.password  = self.passwordTextField.text;
                 self.account = self.schIdTextField.text;
-                if (self.autoSwitch.isOn) {
-                    [ToolUtils setJWPassword:self.passwordTextField.text];
-                    [ToolUtils setJWId:self.schIdTextField.text];
-                } else {
-                    [ToolUtils setJWPassword:@""];
-                    [ToolUtils setJWId:@""];
-                }
+                [ToolUtils setJWPassword:self.passwordTextField.text];
+                [ToolUtils setJWId:self.schIdTextField.text];
                 NSMutableArray* termArray = [[NSMutableArray alloc]init];
                 for (MTerm* term in termList.termList) {
                     NSArray* arr = [[NSArray alloc]initWithObjects:term.name,term.url,nil];
