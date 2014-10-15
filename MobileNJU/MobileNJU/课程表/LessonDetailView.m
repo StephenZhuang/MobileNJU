@@ -25,6 +25,9 @@
 {
     _lesson = lesson;
     [self.lessonName setText:lesson.name];
+    if (lesson.teacher.length==0) {
+        lesson.teacher=@"  ";
+    }
     [self.teacher setText:lesson.teacher];
     [self.time setText:lesson.time];
     [self.week setText:lesson.week];
