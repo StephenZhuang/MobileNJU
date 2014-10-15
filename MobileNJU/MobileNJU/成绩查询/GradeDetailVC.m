@@ -189,6 +189,7 @@
                 [self cancelAlert:nil];
                 [ToolUtils setTermList:termArray];
                 [self.navigationController popViewControllerAnimated:YES];
+                
             }
         } else if([[son getMethod]isEqualToString:@"MGradeSearch"])
         {
@@ -206,6 +207,9 @@
             [self.gradesDic setObject:myCourse forKey:self.term];
             [ToolUtils setGradeDic:self.gradesDic];
             [self.tableView reloadData];
+            if (self.gradeList.count==0) {
+                [ToolUtils showMessage:@"教务处显示本学期无成绩列表，如有疑问，请登录教务网查看"];
+            }
         }
     } else {
         [super disposMessage:son];
