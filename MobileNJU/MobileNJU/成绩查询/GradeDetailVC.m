@@ -204,6 +204,9 @@
             }
             [self.gradesDic setObject:myCourse forKey:self.term];
             [ToolUtils setGradeDic:self.gradesDic];
+            if (self.gradeList.count==0) {
+                [ToolUtils showMessage:@"教务处本学期无成绩列表显示，如有疑问，请登录教务网进行查询"];
+            }
             
 
         }

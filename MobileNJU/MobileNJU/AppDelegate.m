@@ -64,6 +64,7 @@
 
 - (void) initJPush:(NSDictionary*) launchOptions
 {
+    
     [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                                    UIRemoteNotificationTypeSound |
                                                    UIRemoteNotificationTypeAlert)];

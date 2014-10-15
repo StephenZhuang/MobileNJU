@@ -299,6 +299,9 @@
                 self.lessonList = classList.classList;
                 [self loadSchedule];
                 [ToolUtils setIsVeryfy:1];
+                if (classList.classList.count==0) {
+                    [ToolUtils showMessage:@"教务处无课程显示，请登录教务网查看或点击加号自行添加课程"];
+                }
             } else {
 //                [self removeCode];
 //                [self addCode:classList.img];
