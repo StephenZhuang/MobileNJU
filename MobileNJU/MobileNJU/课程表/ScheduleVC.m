@@ -443,10 +443,11 @@
     [self addMask];
 }
 
+
 - (void)showSchedules:(NSArray *)lessons color:(UIColor *)color
 {
     
-    ScheduleLesson* grayLesson;
+    NSMutableArray* grayLessons = [[NSMutableArray alloc]init];
     for (ScheduleLesson* lesson in lessons)
     {
         NSArray* busyweeks = [lesson.busyweeks componentsSeparatedByString:@","];
@@ -459,14 +460,14 @@
         }
         if (!has)
         {
-            grayLesson = lesson;
+            [grayLessons addObject:lesson];
         }
     }
     NSMutableArray* arr = [[NSMutableArray alloc]initWithArray:lessons];
-    if (grayLesson)
+    if (grayLessons.count>0 )
     {
-        [arr removeObject:grayLesson];
-        [arr addObject:grayLesson];
+        [arr removeObjectsInArray:grayLessons];
+        [arr addObjectsFromArray:grayLessons];
     }
     //    NSSet *set = [NSSet setWithArray:arr];
     self.lessonsForIcarousel = arr;
@@ -484,6 +485,7 @@
     [self.maskView setHidden:NO];
     [self addMask];
 }
+
 
 //加载课程表界面
 - (void)loadSchedule
