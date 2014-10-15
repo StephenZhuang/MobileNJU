@@ -189,6 +189,7 @@
                     NSArray* arr = [[NSArray alloc]initWithObjects:term.name,term.url,nil];
                     [termArray addObject:arr];
                 }
+                self.lastVC.hasUpdate = YES;
                 self.lastVC.termList = termArray;
                 [ToolUtils setTermList:termArray];
                 [self cancelAlert:nil];
@@ -213,6 +214,7 @@
             }
             [self.gradesDic setObject:myCourse forKey:self.term];
             [ToolUtils setGradeDic:self.gradesDic];
+            
 
 
         }
@@ -242,7 +244,7 @@
         self.gradeList = courses;
         [self.tableView reloadData];
     }
-    if (![ToolUtils offLine]) {
+    if (![ToolUtils offLine]&&self.shoudLoad) {
         [self waiting:@"正在加载"];
         [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
         

@@ -84,9 +84,10 @@
 - (void) initUmen
 {
     
-    [MobClick startWithAppkey:@"541526bbfd98c50b120a76d7" reportPolicy:BATCH   channelId:nil];
+    [MobClick startWithAppkey:@"54158e25fd98c50a910c7343" reportPolicy:BATCH   channelId:nil];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
+    [ToolUtils setVersion:version];
 //    [MobClick setLogEnabled:YES];
 //    Class cls = NSClassFromString(@"UMANUtil");
 //    SEL deviceIDSelector = @selector(openUDIDString);
@@ -279,6 +280,10 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
             [ToolUtils setShowTreeHole:url];
         }
     }
+    else if (type==1)
+    {
+        [ToolUtils setHasSixin:YES];
+    }
 
 }
 - (void)operaUserInfo:(NSDictionary *)userInfo appliccation:(UIApplication *)application
@@ -288,6 +293,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo
     
     
     if ([[userInfo objectForKey:@"type"] integerValue] == 1) {
+        [ToolUtils setHasSixin:NO];
         UIViewController *vc = (UINavigationController *)application.keyWindow.rootViewController;
         RDVTabBarController *tabbar = (RDVTabBarController *)vc.presentedViewController;
         UINavigationController *nav = [tabbar.viewControllers firstObject];
