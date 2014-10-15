@@ -270,7 +270,7 @@ static NSArray* descriptions;
     } else if ([[segue identifier]isEqualToString:@"临时功能"])
     {
         ProcedureDetailVC* nextVC = (ProcedureDetailVC*)[segue destinationViewController];
-        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",self.tempUrl]];
+        nextVC.url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89%@",self.tempUrl]];
         
     }
     if ([[segue identifier] isEqual:@"课程表"]) {
@@ -281,7 +281,7 @@ static NSArray* descriptions;
         
         ProcedureDetailVC* nextVC = (ProcedureDetailVC*)[segue destinationViewController];
         nextVC.url = [[NSURL alloc]initWithString:self.caidanUrl];
-        nextVC.myTitle = @"";
+        [nextVC setMyTitle:@""];
     
     }
 
@@ -446,7 +446,7 @@ static NSArray* descriptions;
         [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
         
         [self goToShop];
-    } else if ([menuButton.desitination hasSuffix:@"html"]){
+    } else if ([menuButton.desitination hasPrefix:@"/"]){
         [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
         [self performSegueWithIdentifier:@"临时功能"  sender:menuButton.desitination];
         
