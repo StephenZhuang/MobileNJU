@@ -11,6 +11,7 @@
 #import "MyBookCell.h"
 #import "ZsndLibrary.pb.h"
 @interface MyLibraryVC ()<UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *tintLabel;
 @end
 
 @implementation MyLibraryVC
@@ -20,12 +21,20 @@
 {
     [super viewDidLoad];
     [self setTitle:@"我的借阅"];
+    
     // Do any additional setup after loading the view.
 }
 - (IBAction)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.myBookList.count==0) {
+        [self.tintLabel setHidden:NO];
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {

@@ -219,9 +219,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="团委" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ac-L2-7bZ">
-                                                    <rect key="frame" x="20" y="11" width="152" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="259" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="152" id="rHD-3h-twt"/>
+                                                        <constraint firstAttribute="width" constant="259" id="rHD-3h-twt"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="0.0" green="0.5725490196078431" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
@@ -1032,9 +1032,16 @@
                                     <outlet property="delegate" destination="lP4-vl-qFi" id="zhI-cQ-tu0"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您没有借阅的图书！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CnG-bs-fHg">
+                                <rect key="frame" x="84" y="274" width="153" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.96470588235294119" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="CnG-bs-fHg" secondAttribute="centerX" id="Az0-j3-IhS"/>
                             <constraint firstAttribute="trailing" secondItem="EnH-V7-gOn" secondAttribute="trailing" id="B8V-Aw-1oc"/>
                             <constraint firstItem="EnH-V7-gOn" firstAttribute="leading" secondItem="cdJ-t5-Aii" secondAttribute="leading" id="I1W-Ja-5rX"/>
                             <constraint firstAttribute="trailing" secondItem="EnH-V7-gOn" secondAttribute="trailing" id="InZ-pc-5vg"/>
@@ -1043,9 +1050,13 @@
                             <constraint firstItem="EnH-V7-gOn" firstAttribute="top" secondItem="cdJ-t5-Aii" secondAttribute="top" id="ee9-CO-lJZ"/>
                             <constraint firstItem="xvb-Cx-2Sj" firstAttribute="top" secondItem="EnH-V7-gOn" secondAttribute="bottom" id="j1z-PQ-rEc"/>
                             <constraint firstItem="EnH-V7-gOn" firstAttribute="leading" secondItem="cdJ-t5-Aii" secondAttribute="leading" id="suV-8T-W7G"/>
+                            <constraint firstAttribute="centerY" secondItem="CnG-bs-fHg" secondAttribute="centerY" constant="-0.5" id="ti1-kt-ibD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Mdd-xS-xSY"/>
+                    <connections>
+                        <outlet property="tintLabel" destination="CnG-bs-fHg" id="Kc7-m0-2W6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tVE-Yt-C1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
