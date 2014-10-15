@@ -296,7 +296,7 @@
     [self removeMask];
     [self.schIdTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
-    
+    [self.codeField resignFirstResponder];
 }
 
 
