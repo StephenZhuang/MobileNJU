@@ -38,13 +38,13 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    [self setTitle:@"树洞"];
+    [self setTitle:@"南呱"];
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"发表" style:UIBarButtonItemStyleBordered target:self action:@selector(commitTreeHole)];
     [item setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = item;
     
-    _textView.placeholder = @"匿名发表树洞，不超过120字";
+    _textView.placeholder = @"匿名发表南呱，不超过120字";
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -89,6 +89,8 @@
             }
             [self.navigationController popViewControllerAnimated:YES];
         }
+    } else {
+        [super disposMessage:son];
     }
 }
 
