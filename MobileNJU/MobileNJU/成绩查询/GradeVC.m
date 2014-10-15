@@ -335,6 +335,10 @@
     return YES;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat windowHeight = self.view.window.frame.size.height;
+    return windowHeight==480?50:60;
+}
 
 
 #pragma mark tableViewDelegate
