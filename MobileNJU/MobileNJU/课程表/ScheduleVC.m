@@ -57,10 +57,9 @@
     [self initNavigationBar];
     self.code=nil;
     self.hasCode=NO;
-    if ([ToolUtils getScheduleAuto]==YES) {
-        self.schIdField.text=[ToolUtils getJWID];
-        self.passwordField.text = [ToolUtils getJWPassword];
-    }
+    self.schIdField.text=[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID];
+    
+    self.passwordField.text = [ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword];
    //    [self loadLast];
     self.isRe=0;
     [self addTitleView];
@@ -331,6 +330,7 @@
         {
             MRet_Builder* ret = (MRet_Builder*)[son getBuild];
             [ToolUtils setCurrentWeek:ret.code];
+            [self loadSavedLesson];
         }
         
 
@@ -428,22 +428,49 @@
     [self.maskView setHidden:NO];
     [self addMask];
 }
+
 - (void)showSchedules:(NSArray *)lessons color:(UIColor *)color
 {
-     NSSet *set = [NSSet setWithArray:lessons];
-    self.lessonsForIcarousel = [set allObjects];;
+    
+    ScheduleLesson* grayLesson;
+    for (ScheduleLesson* lesson in lessons)
+    {
+        NSArray* busyweeks = [lesson.busyweeks componentsSeparatedByString:@","];
+        BOOL has = NO;
+        for (NSString* week in busyweeks) {
+            if (week.integerValue == [ToolUtils getCurrentWeek]) {
+                has = YES;
+                break;
+            }
+        }
+        if (!has)
+        {
+            grayLesson = lesson;
+        }
+    }
+    NSMutableArray* arr = [[NSMutableArray alloc]initWithArray:lessons];
+    if (grayLesson)
+    {
+        [arr removeObject:grayLesson];
+        [arr addObject:grayLesson];
+    }
+    //    NSSet *set = [NSSet setWithArray:arr];
+    self.lessonsForIcarousel = arr;
     self.currentColor = color;
+    [self.icarousel removeFromSuperview];
+    self.icarousel = [[iCarousel alloc]initWithFrame:CGRectMake(20, 120, 280, 200)];
+    [self.view addSubview:self.icarousel];
     ((iCarousel*)self.icarousel).delegate = self;
     [self.icarousel setBounces:NO];
     self.icarousel.perspective=-0.0095;
     self.icarousel.dataSource = self;
     self.icarousel.type = iCarouselTypeCoverFlow;
-    
     [self.icarousel reloadData];
     [self.icarousel setHidden:NO];
     [self.maskView setHidden:NO];
     [self addMask];
 }
+
 
 //加载课程表界面
 - (void)loadSchedule
@@ -453,9 +480,9 @@
     }
     ScheduleView* schedule = [[[NSBundle mainBundle] loadNibNamed:@"ScheduleView" owner:self options:nil] firstObject];
     [schedule initDate];
-    CGRect frame = CGRectMake(0, 0, 320, 620);
+    CGRect frame = CGRectMake(0, 0, 320, 750);
     schedule.frame = frame;
-    self.scrollView.contentSize = CGSizeMake(320, 620);
+    self.scrollView.contentSize = CGSizeMake(320, 750);
     [self.scrollView addSubview:schedule];
     
     NSMutableArray* schedules = [[NSMutableArray alloc]init];
@@ -584,14 +611,34 @@
         [view setBackgroundColor:[UIColor blackColor]];
         [view setAlpha:0.5];
     }
-   
+    
     ScheduleLesson* lesson = [self.lessonsForIcarousel objectAtIndex:index];
+    NSArray* busyweeks = [lesson.busyweeks componentsSeparatedByString:@","];
+    BOOL has = NO;
+    for (NSString* week in busyweeks) {
+        if (week.integerValue == [ToolUtils getCurrentWeek]) {
+            has = YES;
+        }
+    }
+    if (!has)
+    {
+        [view setBackgroundColor:[UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1]];
+        [view setAlpha:0.85];
+        [view setTag:-1];
+    } else {
+        [view setTag:1];
+    }
+    
+    
     [view.LessonNameLabel setText:lesson.name];
     view.LessonNameLabel.verticalAlignment = VerticalAlignmentMiddle;
     [view.locationLabel setText:lesson.location];
     view.frame = CGRectMake(30, 5, 134, 195);
     return view;
 }
+
+
+
 
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
 {
@@ -608,9 +655,15 @@
 {
     [self.lastView setBackgroundColor:[UIColor blackColor]];
     [self.lastView setAlpha:0.5];
-    
-    [carousel.currentItemView setBackgroundColor:self.currentColor];
-    [carousel.currentItemView setAlpha:0.85];
+    if (carousel.currentItemView.tag!=-1)
+    {
+        [carousel.currentItemView setBackgroundColor:self.currentColor];
+        [carousel.currentItemView setAlpha:0.85];
+    } else {
+        [carousel.currentItemView setBackgroundColor:[UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1]];
+        [carousel.currentItemView setAlpha:0.85];
+        
+    }
     self.lastView = carousel.currentItemView;
     NSLog(@"update");
 }
