@@ -173,13 +173,9 @@
             } else if (termList.termList.count>0) {
                 self.password  = self.passwordTextField.text;
                 self.account = self.schIdTextField.text;
-                if (self.autoSwitch.isOn) {
-                    [ToolUtils setJWPassword:self.passwordTextField.text];
-                    [ToolUtils setJWId:self.schIdTextField.text];
-                } else {
-                    [ToolUtils setJWPassword:@""];
-                    [ToolUtils setJWId:@""];
-                }
+                [ToolUtils setJWPassword:self.passwordTextField.text];
+                [ToolUtils setJWId:self.schIdTextField.text];
+                
                 NSMutableArray* termArray = [[NSMutableArray alloc]init];
                 for (MTerm* term in termList.termList) {
                     NSArray* arr = [[NSArray alloc]initWithObjects:term.name,term.url,nil];
@@ -187,6 +183,7 @@
                 }
                 [ToolUtils setTermList:termArray];
                 self.lastVC.termList = termArray;
+                self.lastVC.hasUpdate = YES;
                 [self cancelAlert:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             }
@@ -202,6 +199,9 @@
                 [dic setObject:course.grade forKey:@"grade"];
                 [dic setObject:course.point forKey:@"point"];
                 [myCourse addObject:dic];
+            }
+            if (courseList.courseList.count==0) {
+                [ToolUtils showMessage:@"教务处显示本学期成绩列表为空，如有疑问，请登录教务网查看"];
             }
             [self.gradesDic setObject:myCourse forKey:self.term];
             [ToolUtils setGradeDic:self.gradesDic];
@@ -232,7 +232,7 @@
         self.gradeList = courses;
         [self.tableView reloadData];
     }
-    if (![ToolUtils offLine]) {
+    if (![ToolUtils offLine]&&self.shoudLoad) {
         [self waiting:@"正在加载"];
         [self load:self selecter:@selector(disposMessage:) url:self.term account:self.account password:self.password];
         
