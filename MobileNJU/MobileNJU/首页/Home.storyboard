@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cen-fN-C5p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cen-fN-C5p">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--主页-->
+        <!--Main Menu View Controller - 主页-->
         <scene sceneID="YJJ-UF-7Hw">
             <objects>
                 <viewController storyboardIdentifier="home" id="cRp-mI-hpY" customClass="MainMenuViewController" sceneMemberID="viewController">
@@ -29,7 +29,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="158"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vSL-yy-TgG">
+                                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vSL-yy-TgG">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -187,6 +187,7 @@
                         <segue destination="NTf-5A-T84" kind="push" identifier="失物招领" id="0iX-Nx-Rod"/>
                         <segue destination="bg9-tl-Fbv" kind="push" identifier="临时功能" id="Qh6-rb-c2N"/>
                         <segue destination="Day-He-Lhu" kind="push" identifier="用户反馈" id="FLu-tL-n1d"/>
+                        <segue destination="bg9-tl-Fbv" kind="push" identifier="彩蛋" id="mzW-d1-9My"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qbw-Cv-Lvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1028,20 +1029,31 @@
                                     <outlet property="delegate" destination="lP4-vl-qFi" id="zhI-cQ-tu0"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您没有借阅的图书！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ttx-xH-8rU">
+                                <rect key="frame" x="84" y="274" width="153" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.96470588235294119" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="Ttx-xH-8rU" secondAttribute="centerX" id="4f7-yi-gcf"/>
                             <constraint firstAttribute="trailing" secondItem="EnH-V7-gOn" secondAttribute="trailing" id="B8V-Aw-1oc"/>
                             <constraint firstItem="EnH-V7-gOn" firstAttribute="leading" secondItem="cdJ-t5-Aii" secondAttribute="leading" id="I1W-Ja-5rX"/>
                             <constraint firstAttribute="trailing" secondItem="EnH-V7-gOn" secondAttribute="trailing" id="InZ-pc-5vg"/>
                             <constraint firstItem="xvb-Cx-2Sj" firstAttribute="top" secondItem="EnH-V7-gOn" secondAttribute="bottom" id="Nte-22-dyB"/>
                             <constraint firstItem="EnH-V7-gOn" firstAttribute="top" secondItem="cdJ-t5-Aii" secondAttribute="top" id="YdV-AW-GCs"/>
+                            <constraint firstAttribute="centerY" secondItem="Ttx-xH-8rU" secondAttribute="centerY" id="Zqd-KE-uGE"/>
                             <constraint firstItem="EnH-V7-gOn" firstAttribute="top" secondItem="cdJ-t5-Aii" secondAttribute="top" id="ee9-CO-lJZ"/>
                             <constraint firstItem="xvb-Cx-2Sj" firstAttribute="top" secondItem="EnH-V7-gOn" secondAttribute="bottom" id="j1z-PQ-rEc"/>
                             <constraint firstItem="EnH-V7-gOn" firstAttribute="leading" secondItem="cdJ-t5-Aii" secondAttribute="leading" id="suV-8T-W7G"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Mdd-xS-xSY"/>
+                    <connections>
+                        <outlet property="tintLabel" destination="Ttx-xH-8rU" id="KBf-WU-Y4Y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tVE-Yt-C1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1267,7 +1279,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="top_back" translatesAutoresizingMaskIntoConstraints="NO" id="Yb6-4O-Gd8">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="158"/>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="          " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qvn-nX-Hqv">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="          " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qvn-nX-Hqv">
                                             <rect key="frame" x="51" y="119" width="88" height="40"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1321,7 +1333,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WoY-KY-rcP">
+                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WoY-KY-rcP">
                                             <rect key="frame" x="153" y="122" width="20" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
@@ -1382,7 +1394,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-5.70" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fc-Fm-rtr">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-5.70" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fc-Fm-rtr">
                                                     <rect key="frame" x="40" y="14" width="56" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2586,7 +2598,7 @@
             </objects>
             <point key="canvasLocation" x="3305" y="707"/>
         </scene>
-        <!--创建课程-->
+        <!--View Controller - 创建课程-->
         <scene sceneID="vqO-ki-MrN">
             <objects>
                 <tableViewController id="WjD-M9-04I" customClass="ViewController" sceneMemberID="viewController">
@@ -3077,6 +3089,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Qh6-rb-c2N"/>
+        <segue reference="mzW-d1-9My"/>
     </inferredMetricsTieBreakers>
 </document>

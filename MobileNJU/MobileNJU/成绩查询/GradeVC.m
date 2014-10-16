@@ -50,6 +50,10 @@
     self.isRe=0;
     self.hasLogin = NO;
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
+    if (!self.termList) {
+        self.termList = [ToolUtils getTermList];
+    }
+    [self loadSavedState];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -193,20 +197,22 @@
                 if (self.alertView.isHidden&&!self.hasLogin) {
                     [self.alertView setHidden:NO];
                 }
+                
+                if (self.imgView)
+                {
+                    [ToolUtils showMessage:@"信息输入错误"];
+                }
                 [self removeCode];
                 [self addCode:termList.img];
+                
             } else if (termList.termList.count>0){
                 self.hasLogin = YES;
                 self.isRe=1;
                 self.password  = self.passwordTextField.text;
                 self.account = self.schIdTextField.text;
-                if (self.autoSwitch.isOn) {
                     [ToolUtils setJWPassword:self.passwordTextField.text];
                     [ToolUtils setJWId:self.schIdTextField.text];
-                } else {
-                    [ToolUtils setJWPassword:@""];
-                    [ToolUtils setJWId:@""];
-                }
+                self.hasUpdate = YES;
                 [self cancelAlert:nil];
                 NSMutableArray* termArray = [[NSMutableArray alloc]init];
                 for (MTerm* term in termList.termList) {
@@ -424,6 +430,9 @@
         [nextVC setPassword:self.password];
         [nextVC setAccount:self.account];
         [nextVC setLastVC:self];
+        if (self.hasUpdate) {
+            nextVC.shoudLoad = @"YES";
+        }
     }
 }
 
