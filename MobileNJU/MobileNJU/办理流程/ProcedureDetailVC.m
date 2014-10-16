@@ -19,9 +19,16 @@
 {
     [super viewDidLoad];
     [self setTitle:self.title];
+    
     // Do any additional setup after loading the view.
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    if (self.myTitle) {
+        [self setTitle:self.myTitle];
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

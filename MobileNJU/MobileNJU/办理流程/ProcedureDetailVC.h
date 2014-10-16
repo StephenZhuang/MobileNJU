@@ -10,4 +10,6 @@
 #import "BBSDetail.h"
 @interface ProcedureDetailVC : BBSDetail
 @property (nonatomic,strong)NSString* title;
+@property (nonatomic,strong)NSString* myTitle;
+
 @end
