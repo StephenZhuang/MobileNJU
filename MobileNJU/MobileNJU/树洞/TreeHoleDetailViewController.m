@@ -91,16 +91,21 @@
                 [self.dataArray removeAllObjects];
             }
             [self.dataArray addObjectsFromArray:commentList.commentsList];
+            if (page == 1) {
+                [self doneWithView:_header];
+            } else {
+                [self doneWithView:_footer];
+            }
         } else if ([[son getMethod] isEqualToString:@"MTreeHoleReport"]) {
             [ProgressHUD showSuccess:@"举报成功"];
         }
-    }
-    if ([[son getMethod] isEqualToString:@"MTreeHoleComments"]) {
+    } else  if ([[son getMethod] isEqualToString:@"MTreeHoleComments"]) {
         if (page == 1) {
             [self doneWithView:_header];
         } else {
             [self doneWithView:_footer];
         }
+        [super disposMessage:son];
     }
 }
 
@@ -160,6 +165,8 @@
             
         } else {
             cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+            NSLog(@"%@",comment.content);
+            NSLog(@"%d",comment.content.length);
         }
         
         if (comment.isLz == 1) {
@@ -180,8 +187,18 @@
         
         [cell.floorLabel setBackgroundColor:_colorArray[indexPath.row % _colorArray.count]];
         [cell.floorLabel setText:[NSString stringWithFormat:@"%i",indexPath.row+1]];
-        
-        [cell.contentLabel setText:comment.content];
+//        NSMutableString* str = [[NSMutableString alloc]initWithString:comment.content];
+//        if (comment.content.length>16) {
+//            int space = 16-comment.content.length%16;
+//            for (int i = 0 ; i < space ; i ++)
+//            {
+//                [str appendString:@"    "];
+//            }
+//        }
+//        [str appendString:@"."];
+
+        [cell.contentLabel setText:[NSString stringWithFormat:@"%@",comment.content]];
+//        [cell.contentLabel setText:comment.content];
         [cell.timeLabel setText:comment.time];
         [cell.messageButton setTag:indexPath.row];
         return cell;
@@ -319,8 +336,7 @@
         [button setTitle:[NSString stringWithFormat:@"%d" , _topic.praiseCnt + 1] forState:UIControlStateNormal];
         [_topic setPraiseCnt:_topic.praiseCnt +1];
         [_topic setHasPraise:1];
-        [self showFlower];
-
+//        [self showFlower];
     } else {
         [button setTitle:[NSString stringWithFormat:@"%d" , _topic.praiseCnt - 1] forState:UIControlStateNormal];
         [_topic setPraiseCnt:_topic.praiseCnt - 1];
@@ -360,7 +376,7 @@
 
 - (IBAction)moreAction:(id)sender
 {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"分享",@"举报", nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"举报", nil];
     [sheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
@@ -390,18 +406,18 @@
 
 - (void)showFlower
 {
-    [_flowerView setAlpha:0];
-    [_flowerView setHidden:NO];
-    
-    [UIView animateWithDuration:0.2 animations:^(void) {
-        [_flowerView setAlpha:1];
-        _flowerView.transform = CGAffineTransformMakeTranslation(0, -50);
-    }];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_flowerView setHidden:YES];
-        _flowerView.transform = CGAffineTransformIdentity;
-    });
+//    [_flowerView setAlpha:0];
+//    [_flowerView setHidden:NO];
+//    
+//    [UIView animateWithDuration:0.2 animations:^(void) {
+//        [_flowerView setAlpha:1];
+//        _flowerView.transform = CGAffineTransformMakeTranslation(0, -50);
+//    }];
+//    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [_flowerView setHidden:YES];
+//        _flowerView.transform = CGAffineTransformIdentity;
+//    });
 }
 
 #pragma mark-
@@ -409,48 +425,48 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (buttonIndex) {
+//        case 0:
+//        {
+//            FrontiaShare *share = [Frontia getShare];
+//            
+//            //授权取消回调函数
+//            FrontiaShareCancelCallback onCancel = ^(){
+//                NSLog(@"OnCancel: share is cancelled");
+//            };
+//            
+//            //授权失败回调函数
+//            FrontiaShareFailureCallback onFailure = ^(int errorCode, NSString *errorMessage){
+//                NSLog(@"OnFailure: %d  %@", errorCode, errorMessage);
+//                [ProgressHUD showError:@"分享失败"];
+//            };
+//            
+//            //授权成功回调函数
+//            FrontiaMultiShareResultCallback onResult = ^(NSDictionary *respones){
+//                NSLog(@"OnResult: %@", [respones description]);
+//                [ProgressHUD showSuccess:@"分享成功"];
+//            };
+//            
+//            FrontiaShareContent *content=[[FrontiaShareContent alloc] init];
+//            //    content.url = ShareUrl;
+//            NSString *contentUrl = @"http://www.s1.smartjiangsu.com";
+//            content.url = contentUrl;
+//            if (_topic.tag.length > 0) {
+//                content.title = _topic.tag;
+//            } else {
+//                content.title = _topic.content;
+//            }
+//            content.description = _topic.content;
+//            content.imageObj = [ToolUtils getImageUrlWtihString:_topic.img].absoluteString;
+//            
+//            NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_SINAWEIBO,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
+//            [share registerQQAppId:@"100358052" enableSSO:YES];
+//            [share registerWeixinAppId:@"wxea47194dd88f89c9"];
+//            [share registerSinaweiboAppId:@"306527345"];
+//
+//            [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
+//        }
+//            break;
         case 0:
-        {
-            FrontiaShare *share = [Frontia getShare];
-            
-            //授权取消回调函数
-            FrontiaShareCancelCallback onCancel = ^(){
-                NSLog(@"OnCancel: share is cancelled");
-            };
-            
-            //授权失败回调函数
-            FrontiaShareFailureCallback onFailure = ^(int errorCode, NSString *errorMessage){
-                NSLog(@"OnFailure: %d  %@", errorCode, errorMessage);
-                [ProgressHUD showError:@"分享失败"];
-            };
-            
-            //授权成功回调函数
-            FrontiaMultiShareResultCallback onResult = ^(NSDictionary *respones){
-                NSLog(@"OnResult: %@", [respones description]);
-                [ProgressHUD showSuccess:@"分享成功"];
-            };
-            
-            FrontiaShareContent *content=[[FrontiaShareContent alloc] init];
-            //    content.url = ShareUrl;
-            NSString *contentUrl = @"http://www.s1.smartjiangsu.com";
-            content.url = contentUrl;
-            if (_topic.tag.length > 0) {
-                content.title = _topic.tag;
-            } else {
-                content.title = _topic.content;
-            }
-            content.description = _topic.content;
-            content.imageObj = [ToolUtils getImageUrlWtihString:_topic.img].absoluteString;
-            
-            NSArray *platforms = @[FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_SESSION,FRONTIA_SOCIAL_SHARE_PLATFORM_WEIXIN_TIMELINE,FRONTIA_SOCIAL_SHARE_PLATFORM_QQFRIEND,FRONTIA_SOCIAL_SHARE_PLATFORM_QQ,FRONTIA_SOCIAL_SHARE_PLATFORM_RENREN];
-            [share registerQQAppId:@"100358052" enableSSO:YES];
-            [share registerWeixinAppId:@"wx2bd28feda749e342"];
-            [share registerSinaweiboAppId:@"306527345"];
-
-            [share showShareMenuWithShareContent:content displayPlatforms:platforms supportedInterfaceOrientations:UIInterfaceOrientationMaskPortrait isStatusBarHidden:NO targetViewForPad:nil cancelListener:onCancel failureListener:onFailure resultListener:onResult];
-        }
-            break;
-        case 1:
         {
             [[ApisFactory getApiMTreeHoleReport] load:self selecter:@selector(disposMessage:) id:_topic.id];
         }

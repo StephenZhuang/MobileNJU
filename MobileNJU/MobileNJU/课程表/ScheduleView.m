@@ -13,7 +13,7 @@
 #define STARTX 31
 #define STARTY 27
 #define WIDTH 41
-#define HEIGHT 95
+#define HEIGHT 47.5
 #define HEADBACKCOLOR  [UIColor colorWithRed:235/255.0 green:234/255.0 blue:231/255.0 alpha:1]
 #define HEADTEXTCOLOR  [UIColor colorWithRed:129/255.0 green:129/255.0 blue:129/255.0 alpha:1]
 @implementation ScheduleView
@@ -153,7 +153,6 @@
                     } else {
                         NSLog(@"重复");
                     }
-             
                 }
                 [button.lessonNameLabel removeFromSuperview];
                 [button.locationLabel removeFromSuperview];
@@ -175,10 +174,18 @@
                 [lessonNameLabel setVerticalAlignment:VerticalAlignmentTop];
                 // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
                 //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
-                
-                CGRect loactionFrame = CGRectMake(3, 40, WIDTH-6, 60);
+                UIFont *font = [UIFont systemFontOfSize:11];
+                CGSize size = CGSizeMake(WIDTH-6,2000);
+                CGSize labelsize ;
+                if (lesson.name.length >=8)
+                {
+                    NSString* tempStr = @"测试测试测试测试";
+                    labelsize = [tempStr sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+                } else {
+                    labelsize = [lesson.name sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+                }
+                CGRect loactionFrame = CGRectMake(3, labelsize.height, WIDTH-6, 60);
                 VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
-                
                 
                 [locationLabel setFont:[UIFont fontWithName:@"Helvetica" size:9]];
                 [locationLabel setNumberOfLines:0];
@@ -194,7 +201,6 @@
                 button.touchButton = touchButton;
                 [button setNeedsDisplay];
                 [self addSubview:button];
-                
                 if (button.lessonArr.count>=2) {
                     CGRect frame = CGRectMake(button.frame.size.width-8.5, 0, 8.5, 7.5);
                     UIImageView* img1 = [[UIImageView alloc]initWithFrame:frame];
@@ -205,6 +211,7 @@
                     [button addSubview:img2];
                 }
                 flag=0;
+              
             }
         }
         [self.buttonList removeObjectsInArray:removeButtonList];
@@ -232,7 +239,18 @@
             // 因为行数不限制，所以这里在宽度不变的基础上(实际宽度会略为缩小)，高度会自动扩充
             //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
             
-            CGRect loactionFrame = CGRectMake(3,40, WIDTH-6, 60);
+            UIFont *font = [UIFont systemFontOfSize:11];
+            CGSize size = CGSizeMake(WIDTH-6,2000);
+            CGSize labelsize ;
+            if (lesson.name.length >=8)
+            {
+                NSString* tempStr = @"测试测试测试测试";
+                labelsize = [tempStr sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+            } else {
+                labelsize = [lesson.name sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+            }
+            
+            CGRect loactionFrame = CGRectMake(3,labelsize.height, WIDTH-6, 60);
             VerticallyAlignedLabel *locationLabel = [[VerticallyAlignedLabel alloc]initWithFrame:loactionFrame];
             
             
@@ -256,17 +274,16 @@
             }
             [self.buttonList addObject:lessonBt];
             [self addSubview:lessonBt];
-
         }
     }
     
     
     for (LessonButton* button in self.buttonList) {
+        NSSet* set = [[NSSet alloc]initWithArray:button.lessonArr];
+        button.lessonArr = [[NSMutableArray alloc]initWithArray:[set allObjects]];
         if (button.lessonArr.count==1) {
             if (![self judgeHasLesson:button.myLesson]) {
                 button.backgroundColor =  [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
-                button.touchButton.backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
-                
                 [button.locationLabel setText:@"@本周无课程"];
             }
         } else {
@@ -274,16 +291,29 @@
             for (ScheduleLesson* lesson in button.lessonArr) {
                 if ([self judgeHasLesson:lesson]) {
                     [button.lessonNameLabel setText:lesson.name];
+                    UIFont *font = [UIFont systemFontOfSize:11];
+                    CGSize size = CGSizeMake(WIDTH-6,2000);
+                    CGSize labelsize ;
+                    if (lesson.name.length >=8)
+                    {
+                        NSString* tempStr = @"测试测试测试测试";
+                        labelsize = [tempStr sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+                    } else {
+                        labelsize = [lesson.name sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByCharWrapping];
+                    }
+                    button.locationLabel.frame = CGRectMake(3, labelsize.height, WIDTH-6, 60);
                     [button.locationLabel setText:[NSString stringWithFormat:@"@%@",lesson.location]];
                     hasLesson = YES;
                 }
             }
             if (!hasLesson) {
                 button.backgroundColor =  [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
-                 button.touchButton.backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+                button.touchButton.backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
+
                 [button.locationLabel setText:@"@本周无课程"];
             }
         }
+     
     }
     
     

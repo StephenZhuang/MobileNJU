@@ -51,15 +51,25 @@
     self.isRe=0;
     self.hasLogin = NO;
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textFieldDidChange:)name:UITextFieldTextDidChangeNotification object:self.schIdTextField];
+    if (!self.termList) {
+        self.termList = [ToolUtils getTermList];
+    }
+    [self loadSavedState];
+    self.hasUpdate = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!self.termList) {
+    if ([ToolUtils getTermList]) {
         self.termList = [ToolUtils getTermList];
+        [self.schIdTextField setText:[ToolUtils getJWID]==nil?@"":[ToolUtils getJWID]];
+        [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
+        self.password = self.passwordTextField.text;
+        self.account = self.schIdTextField.text;
+        [self.tableView reloadData];
     }
-    [self loadSavedState];
+
 }
 
 
@@ -200,13 +210,8 @@
                 self.lastUser = self.schIdTextField.text;
                 self.password  = self.passwordTextField.text;
                 self.account = self.schIdTextField.text;
-                if (self.autoSwitch.isOn) {
-                    [ToolUtils setJWPassword:self.passwordTextField.text];
-                    [ToolUtils setJWId:self.schIdTextField.text];
-                } else {
-                    [ToolUtils setJWPassword:@""];
-                    [ToolUtils setJWId:@""];
-                }
+                [ToolUtils setJWPassword:self.passwordTextField.text];
+                [ToolUtils setJWId:self.schIdTextField.text];
                 [self cancelAlert:nil];
                 NSMutableArray* termArray = [[NSMutableArray alloc]init];
                 for (MTerm* term in termList.termList) {
@@ -217,6 +222,7 @@
                 self.termList = termArray;
                 [ToolUtils setTermList:termArray];
                 [self.tableView reloadData];
+                self.hasUpdate = YES;
             }
         }
     }
@@ -418,6 +424,9 @@
         [nextVC setPassword:self.password];
         [nextVC setAccount:self.account];
         [nextVC setLastVC:self];
+        if (self.hasUpdate) {
+            nextVC.shouldLoad = @"YES";
+        }
     }
 }
 
