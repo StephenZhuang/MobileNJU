@@ -13,7 +13,7 @@
 #define STARTX 31
 #define STARTY 27
 #define WIDTH 41
-#define HEIGHT 47.5
+#define HEIGHT 95
 #define HEADBACKCOLOR  [UIColor colorWithRed:235/255.0 green:234/255.0 blue:231/255.0 alpha:1]
 #define HEADTEXTCOLOR  [UIColor colorWithRed:129/255.0 green:129/255.0 blue:129/255.0 alpha:1]
 @implementation ScheduleView
