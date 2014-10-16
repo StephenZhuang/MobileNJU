@@ -14,4 +14,5 @@
 @property (nonatomic,strong)NSString* account;
 @property(nonatomic,strong)NSString* password;
 @property(nonatomic,weak)GradeVC* lastVC;
+@property(nonatomic,strong)NSString* shoudLoad;
 @end

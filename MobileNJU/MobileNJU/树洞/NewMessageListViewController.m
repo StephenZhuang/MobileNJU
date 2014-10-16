@@ -36,7 +36,14 @@
 //    [self setTitle:@"树洞的回复"];
     
     _sectionHeader = [[UIView alloc] initWithFrame:CGRectZero];
-    selectIndex = 0;
+    if (_push)
+    {
+        selectIndex = 1;
+        [self changeIndex:self.messageButton];
+    } else{
+        selectIndex = 0;
+        
+    }
     _commentNumLabel.layer.cornerRadius = 10;
     _messageNumLabel.layer.cornerRadius = 10;
     _topicArray = [[NSMutableArray alloc] init];
