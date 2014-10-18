@@ -116,7 +116,26 @@
         if ([[son getMethod] isEqualToString:@"MSearchBook"]) {
             MBookList_Builder* bookList = (MBookList_Builder*)[son getBuild];
             if (page>1) {
-                [self.books addObjectsFromArray:bookList.newsList];
+                BOOL has= NO;
+                for (MBook* book in bookList.newsList)
+                {
+                    for (MBook* currentBooks in self.books)
+                    {
+                        if ([book.id isEqualToString:currentBooks.id]&&[book.title isEqualToString:currentBooks.title])
+                        {
+                            has = YES;
+                            break;
+                        }
+                    }
+                    if (has)
+                    {
+                        break;
+                    }
+                }
+                if (!has)
+                {
+                    [self.books addObjectsFromArray:bookList.newsList];
+                }
                 [self doneWithView:_footer];
             } else if (page==1)
             {
@@ -273,7 +292,7 @@
    
     [textField resignFirstResponder];
     if (textField==self.searchField) {
-        [self searchBook:nil];
+        [self searchBook:textField];
     } else if (textField==self.schIdField)
     {
         [self.passwordField becomeFirstResponder];
