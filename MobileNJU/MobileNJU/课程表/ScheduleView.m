@@ -240,7 +240,7 @@
             //    self.titleLabel.lineBreakMode= NSLineBreakByCharWrapping;
             
             UIFont *font = [UIFont systemFontOfSize:11];
-            CGSize size = CGSizeMake(WIDTH-8,2000);
+            CGSize size = CGSizeMake(WIDTH-6,2000);
             CGSize labelsize ;
             if (lesson.name.length >=8)
             {
@@ -274,12 +274,13 @@
             }
             [self.buttonList addObject:lessonBt];
             [self addSubview:lessonBt];
-            
         }
     }
     
     
     for (LessonButton* button in self.buttonList) {
+        NSSet* set = [[NSSet alloc]initWithArray:button.lessonArr];
+        button.lessonArr = [[NSMutableArray alloc]initWithArray:[set allObjects]];
         if (button.lessonArr.count==1) {
             if (![self judgeHasLesson:button.myLesson]) {
                 button.backgroundColor =  [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
@@ -291,7 +292,7 @@
                 if ([self judgeHasLesson:lesson]) {
                     [button.lessonNameLabel setText:lesson.name];
                     UIFont *font = [UIFont systemFontOfSize:11];
-                    CGSize size = CGSizeMake(WIDTH-8,2000);
+                    CGSize size = CGSizeMake(WIDTH-6,2000);
                     CGSize labelsize ;
                     if (lesson.name.length >=8)
                     {
@@ -312,6 +313,7 @@
                 [button.locationLabel setText:@"@本周无课程"];
             }
         }
+     
     }
     
     
