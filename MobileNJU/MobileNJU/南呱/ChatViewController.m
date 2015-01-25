@@ -21,7 +21,11 @@
 #import "RDVTabBarController.h"
 
 @interface ChatViewController ()
+@property(nonatomic,strong)CCPHelper* helper;
+@property(nonatomic,strong)CCPHelper* another;
+@property(nonatomic,strong)NSString* targetVoip;
 
+@property (nonatomic,strong)CCPCallService* ccpService;
 @end
 
 @implementation ChatViewController
@@ -42,9 +46,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNewMessage:) name:@"getNanguaMessage" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeChat:) name:@"getPushInfo" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getNewMessage:) name:@"getNanguaMessage" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeChat:) name:@"getPushInfo" object:nil];
     _dataArray = [[NSMutableArray alloc] init];
+    _helper = [[CCPHelper alloc]init];
+    _helper.delegate = self;
+    
+    _another = [[CCPHelper alloc]init];
+    _another.delegate = self;
+    _ccpService = [[CCPCallService alloc]init];
+    [_ccpService setDelegate:self];
     
     if (_isFromGua) {
         [self addConnect];
@@ -53,8 +64,58 @@
 //        [self addCall];
         [self addHeader];
         [[ApisFactory getApiMChatReq] load:self selecter:@selector(disposMessage:) targetid:_targetid topicid:_topicid];
+        [_helper querySubAccount:[ToolUtils getLoginId]];
+        [_another querySubAccount:_targetid];
     }
 }
+
+- (void)reveiveData:(NSDictionary *)data method:(NSString *)method
+{
+    if ([method isEqualToString:@"querySubAccount"]) {
+        if (![[data objectForKey:@"SubAccount"] isKindOfClass:[NSDictionary class]])
+        {
+            [_helper createSubAccount:[ToolUtils getLoginId]];
+        } else {
+            NSDictionary* subAccount = [data objectForKey:@"SubAccount"];
+            [_ccpService connectToCCP:SERVER_IP onPort:SERVER_PORT withAccount:[subAccount objectForKey:@"voipAccount"] withPsw:[subAccount objectForKey:@"voipPwd"] withAccountSid:[subAccount objectForKey:@"subAccountSid"] withAuthToken:[subAccount objectForKey:@"subToken"]];
+        }
+    } else if ([method isEqualToString:@"createSubAccount"])
+    {
+        if ([data objectForKey:@"SubAccount"]) {
+            NSDictionary* subAccount = [data objectForKey:@"SubAccount"];
+            [_ccpService connectToCCP:SERVER_IP onPort:SERVER_PORT withAccount:[subAccount objectForKey:@"voipAccount"] withPsw:[subAccount objectForKey:@"voipPwd"] withAccountSid:[subAccount objectForKey:@"subAccountSid"] withAuthToken:[subAccount objectForKey:@"subToken"]];
+        }
+    } else if ([method isEqualToString:@"queryAnotherSubAccount"])
+    {
+        
+        if (![[data objectForKey:@"SubAccount"] isKindOfClass:[NSDictionary class]])
+        {
+            [_helper createSubAccount:_targetid];
+            
+        } else {
+            _targetVoip = [[data objectForKey:@"SubAccount"]objectForKey:@"voipAccount"];
+        }
+    } else if ([method isEqualToString:@"createAnotherSubAccount"])
+    {
+        if ([data objectForKey:@"SubAccount"]) {
+            _targetVoip = [[data objectForKey:@"SubAccount"]objectForKey:@"voipAccount"];
+        }
+    }
+}
+
+
+
+- (void)onConnected
+{
+    NSLog(@"Connect");
+}
+
+- (void)onConnectError:(NSInteger)reason withReasonMessge:(NSString *)reasonMessage
+{
+    NSLog(@"%@",reasonMessage);
+   
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -445,10 +506,29 @@
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 
         [[ApisFactory getApiMAddChat] load:self selecter:@selector(disposMessage:) id:_targetid topicid:_topicid content:string image:nil];
+        [_ccpService sendInstanceMessage:_targetVoip andText:string andAttached:nil andUserdata:nil];
     }
     [_messageField resignFirstResponder];
     [_messageField setText:@""];
 
+}
+
+- (void)onSendInstanceMessageWithReason:(CloopenReason *)reason andMsg:(InstanceMsg *)data
+{
+    NSLog(@"%d",reason.reason);
+}
+- (void) onReceiveInstanceMessage:(InstanceMsg *)msg
+{
+    if ([msg isKindOfClass:[IMTextMsg class]])
+    {
+        NSLog(@"%@",((IMTextMsg*)msg).message);
+        MChat_Builder* chat = [[MChat_Builder alloc]init];
+        chat.userid = _targetid;
+        chat.content =((IMTextMsg*)msg).message;
+        [self.dataArray addObject:chat.build];
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 - (IBAction)addImageAction:(id)sender

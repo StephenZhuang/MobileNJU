@@ -8,10 +8,12 @@
 
 #import "NanguaBaseViewController.h"
 #import "MJRefresh.h"
-
-@interface ChatViewController : BaseViewController<UITableViewDataSource , UITableViewDelegate , UIActionSheetDelegate , UIImagePickerControllerDelegate>
+#import "CCPCallService.h"
+#import "CCPCallEvent.h"
+#import "CCPHelper.h"
+@interface ChatViewController : BaseViewController<UITableViewDataSource , UITableViewDelegate , UIActionSheetDelegate , UIImagePickerControllerDelegate,CCPHelperDelegate,CCPCallEventDelegate>
 {
-    MJRefreshHeaderView *_header;
+    MJRefreshHeaderView *_header; 
 }
 @property (nonatomic , weak) IBOutlet UITableView *tableView;
 @property (nonatomic , strong) NSMutableArray *dataArray;

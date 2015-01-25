@@ -454,7 +454,9 @@ static NSArray* descriptions;
     else {
         [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
             NSLog(@"%@ destination",menuButton.desitination);
-        [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
+//        [self performSegueWithIdentifier:menuButton.desitination  sender:nil];
+        [self performSegueWithIdentifier:@"附近的人" sender:nil];
+
     }
 }
 
