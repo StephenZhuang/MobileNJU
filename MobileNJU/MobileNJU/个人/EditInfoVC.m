@@ -13,6 +13,8 @@
 #import "ZsndUser.pb.h"
 #import "IQActionSheetPickerView.h"
 @interface EditInfoVC ()<UITextFieldDelegate,IQActionSheetPickerViewDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *birthdayButton;
+@property (weak, nonatomic) IBOutlet UIButton *instituteButton;
 @property (weak, nonatomic) IBOutlet UITextField *instituteField;
 @property (weak, nonatomic) IBOutlet UITextField *nickNameField;
 
@@ -32,6 +34,13 @@
     [self.nickNameField setDelegate:self];
     [self.instituteField setDelegate:self];
     [self.birthField setDelegate:self];
+    self.birthdayButton.layer.borderColor = [UIColor blackColor].CGColor;
+    self.birthdayButton.layer.borderWidth = 1.0;
+    
+    self.instituteButton.layer.borderColor = [UIColor blackColor].CGColor;
+    self.instituteButton.layer.borderWidth = 1.0;
+    
+    
     [self initField];
     // Do any additional setup after loading the view.
 }

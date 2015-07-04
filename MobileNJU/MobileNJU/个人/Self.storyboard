@@ -338,7 +338,7 @@
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q8t-aG-h2W">
-                                <rect key="frame" x="81" y="85" width="189" height="30"/>
+                                <rect key="frame" x="81" y="85" width="219" height="30"/>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -385,7 +385,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2UL-kY-cqi">
-                                <rect key="frame" x="81" y="215" width="189" height="30"/>
+                                <rect key="frame" x="81" y="215" width="219" height="30"/>
                                 <animations/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -403,7 +403,7 @@
                                 <animations/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <state key="normal" image="plus">
-                                    <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="1" green="0.93333333330000001" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="showDataPicker:" destination="D68-ft-VPq" eventType="touchUpInside" id="xlN-t9-Ovv"/>
@@ -453,7 +453,7 @@
                             <constraint firstItem="2UL-kY-cqi" firstAttribute="trailing" secondItem="Q8t-aG-h2W" secondAttribute="trailing" id="Biz-ST-lPU"/>
                             <constraint firstItem="HAf-Q0-7vg" firstAttribute="trailing" secondItem="dnK-6q-n4H" secondAttribute="trailing" id="FT2-na-XDQ"/>
                             <constraint firstItem="yAd-Ia-uog" firstAttribute="leading" secondItem="1nX-1p-3ak" secondAttribute="leading" constant="20" id="JJq-iO-tJT"/>
-                            <constraint firstAttribute="trailing" secondItem="Q8t-aG-h2W" secondAttribute="trailing" constant="50" id="Jb0-ts-UiD"/>
+                            <constraint firstAttribute="trailing" secondItem="Q8t-aG-h2W" secondAttribute="trailing" constant="20" id="Jb0-ts-UiD"/>
                             <constraint firstAttribute="trailing" secondItem="mGD-gV-R2l" secondAttribute="trailing" constant="20" id="L5E-Gw-Grc"/>
                             <constraint firstItem="mGD-gV-R2l" firstAttribute="leading" secondItem="1nX-1p-3ak" secondAttribute="leading" constant="20" id="OCS-zx-qHx"/>
                             <constraint firstItem="2UL-kY-cqi" firstAttribute="top" secondItem="yAd-Ia-uog" secondAttribute="top" id="Oix-nH-gbw"/>
@@ -482,7 +482,9 @@
                     <navigationItem key="navigationItem" id="Lax-oI-Y60"/>
                     <connections>
                         <outlet property="birthField" destination="2UL-kY-cqi" id="e6c-jw-wfb"/>
+                        <outlet property="birthdayButton" destination="xR4-VR-DHB" id="c7j-A0-SpC"/>
                         <outlet property="femaleCheckBox" destination="L8Q-W1-5Z4" id="3GC-8S-NLk"/>
+                        <outlet property="instituteButton" destination="HAf-Q0-7vg" id="Oy0-ni-Yry"/>
                         <outlet property="instituteField" destination="Q8t-aG-h2W" id="1J1-Rz-ad3"/>
                         <outlet property="maleCheckBox" destination="bdL-PP-Gft" id="G0T-qm-Yar"/>
                         <outlet property="nickNameField" destination="dnK-6q-n4H" id="vja-M5-GwM"/>

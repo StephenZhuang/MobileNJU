@@ -51,6 +51,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.startButton.layer.borderWidth = 1.0;
+    self.startButton.layer.borderColor = [UIColor blackColor].CGColor;
+    
+    self.endButton.layer.borderWidth = 1.0;
+    self.endButton.layer.borderColor = [UIColor blackColor].CGColor;
+    
     self.isRe=0;
     page=0;
     [self.maskView setHidden:YES];
