@@ -356,8 +356,10 @@ static NSArray* descriptions;
          [cell.menuButton setImage:imageSelected.image forState:UIControlStateSelected];
         [cell.menuButton setDesitination:[descriptions objectAtIndex:indexPath.row]];
         [cell.menuTitle setText:[functionNames objectAtIndex:indexPath.row]];
+        if ([cell.menuTitle.text isEqualToString:@"办理流程"]) {
+            [cell.menuTitle setText:@"流程介绍"];
+        }
         [cell setUserInteractionEnabled:YES];
-//        [cell.menuSubTitle setText:[descriptions objectAtIndex:indexPath.row]];
         [cell.menuButton addTarget:self action:@selector(
                                                          goToDetail
                                                 :) forControlEvents:UIControlEventTouchUpInside];
