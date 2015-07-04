@@ -57,7 +57,7 @@
 
 - (void)initAlert
 {
-    if (_alertView) {
+    if (!_alertView) {
         self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
         [self.view addSubview:self.alertView];
     }

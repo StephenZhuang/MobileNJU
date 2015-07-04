@@ -124,8 +124,13 @@
 
 - (void)initAlert
 {
-    if (_alertView) {
+    if (!_alertView) {
         self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewCode" owner:self options:nil] objectAtIndex:0];
+        if (self.detaiList.count == 0) {
+            [self.alertView setHidden:NO];
+        } else {
+            [self.alertView setHidden:YES];
+        }
         [self.view addSubview:self.alertView];
     }
 
@@ -133,7 +138,6 @@
     CGRect frame = CGRectMake((screenBounds.size.width-281)/2.0, (screenBounds.size.height-320)/2.0, 261, 281);
     self.alertView.frame = frame;
     self.frame = frame;
-    [self.alertView setHidden:YES];
     self.schIDText =self.alertView.schIdField;
     self.schIDText.delegate = self;
     self.autoSearch = self.alertView.autoSwitch;
@@ -145,6 +149,7 @@
     self.confirmCodeText.delegate = self;
     [self.alertView.searchBt addTarget:self action:@selector(searchResult:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView.closeBt addTarget:self action:@selector(closeAlertView:) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 

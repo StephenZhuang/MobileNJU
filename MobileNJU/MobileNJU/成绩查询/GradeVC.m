@@ -54,7 +54,6 @@
         self.termList = [ToolUtils getTermList];
     }
     
-    [self loadSavedState];
     _handle = NO;
 
 }
@@ -72,6 +71,10 @@
   
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self loadSavedState];
+}
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
@@ -83,23 +86,23 @@
 {
     if (!_alertView) {
           self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
+        if (self.termList.count != 0) {
+            [self.alertView setHidden:YES];
+        }
         [self.view addSubview:self.alertView];
+        self.schIdTextField =self.alertView.schIdField;
+        self.schIdTextField.delegate = self;
+        self.autoSwitch = self.alertView.autoSwitch;
+        self.passwordTextField = self.alertView.passwordField;
+        self.schIdTextField.delegate = self;
+        self.passwordTextField.delegate = self;
+        [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
+        [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
+        self.searchButton = self.alertView.searchBt;
     }
-  
     CGRect frame = CGRectMake((self.view.bounds.size.width-261)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 257);
     self.alertView.frame = frame;
     self.frame = frame;
-    [self.alertView setHidden:YES];
-    self.schIdTextField =self.alertView.schIdField;
-    self.schIdTextField.delegate = self;
-    self.autoSwitch = self.alertView.autoSwitch;
-    self.passwordTextField = self.alertView.passwordField;
-    self.schIdTextField.delegate = self;
-    self.passwordTextField.delegate = self;
-    [self.alertView.searchBt addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
-    [self.alertView.closeBt addTarget:self action:@selector(cancelAlert:) forControlEvents:UIControlEventTouchUpInside];
-    self.searchButton = self.alertView.searchBt;
-    
 }
 
 
@@ -135,6 +138,7 @@
     [self.passwordTextField setText:[ToolUtils getJWPassword]==nil?@"":[ToolUtils getJWPassword]];
     if (![self.schIdTextField.text isEqualToString:@""]&&![self.passwordTextField.text isEqualToString:@""]&&!self.hasLogin&&![ToolUtils offLine]) {
         [self search:nil];
+        [self.alertView setHidden:YES];
     } else if (!self.hasLogin&&![ToolUtils offLine]){
         [self showAlert];
     }

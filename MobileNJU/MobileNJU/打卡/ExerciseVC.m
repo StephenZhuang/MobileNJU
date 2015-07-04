@@ -54,7 +54,9 @@
 {
     if (!_alertView) {
         self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertView" owner:self options:nil] firstObject];
-        [self.alertView setHidden:YES];
+        if (self.dataArray.count !=0) {
+            self.alertView.hidden = YES;
+        }
         [self.view addSubview:self.alertView];
     }
     CGRect screenBounds = [UIScreen mainScreen].bounds;
