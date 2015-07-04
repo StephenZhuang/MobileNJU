@@ -135,6 +135,10 @@ static NSArray* descriptions;
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
+}
+
 - (void)disposeMessage:(Son*)son
 {
     if ([son getError]==0) {
