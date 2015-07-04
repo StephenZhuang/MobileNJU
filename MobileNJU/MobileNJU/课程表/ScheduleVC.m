@@ -389,7 +389,11 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    self.view.transform = CGAffineTransformIdentity;
     return YES;
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.view.transform = CGAffineTransformIdentity;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -397,7 +401,7 @@
         [UIView animateWithDuration:0.3f animations:^{
             
             CGFloat offset= self.frame.origin.y+self.frame.size.height-(self.view.bounds.size.height-216);
-            self.alertView.transform = CGAffineTransformMakeTranslation(0, -offset);
+            self.view.transform = CGAffineTransformMakeTranslation(0, -offset);
         }         ];
 
 

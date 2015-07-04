@@ -326,18 +326,21 @@
 {
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
         CGFloat offset= self.frame.origin.y+self.frame.size.height-(self.view.bounds.size.height-216);
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, -offset);
+        self.view.transform = CGAffineTransformMakeTranslation(0, -offset);
         
     } completion:^(BOOL finished) {
     }];
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.view.transform = CGAffineTransformIdentity;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
+        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
         //    self.logoImage.center = CGPointMake(self.logoImage.center.x, 100);
     } completion:^(BOOL finished) {
     }];

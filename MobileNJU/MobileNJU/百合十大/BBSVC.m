@@ -146,7 +146,12 @@
     if ([segue.identifier isEqualToString:@"bbsDetail"]) {
         BBSDetail* detail = (BBSDetail*)segue.destinationViewController;
         MNews* new = [self.newsList objectAtIndex:((NSIndexPath*)sender).row];
-        NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://114.215.196.179/%@",new.url]];
+        NSURL *url;
+        if (![new.url hasPrefix:@"http"]) {
+            url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://static-web.smartjiangsu.com/%@",new.url]];
+        } else {
+            url = [[NSURL alloc]initWithString:new.url];
+        }
         [detail setUrl:url];
     }
 }

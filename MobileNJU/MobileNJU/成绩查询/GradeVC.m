@@ -53,9 +53,7 @@
     if (!self.termList) {
         self.termList = [ToolUtils getTermList];
     }
-    
     _handle = NO;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -324,20 +322,24 @@
 {
     [UIView animateWithDuration:0.3f animations:^{
         CGFloat offset= self.frame.origin.y+self.frame.size.height-(self.view.bounds.size.height-216);
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, -offset);
+        self.view.transform = CGAffineTransformMakeTranslation(0, -offset);
 
     }];
     
 }
 
-
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [UIView animateWithDuration:0.3f animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
+    } ];
+}
 
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     [UIView animateWithDuration:0.3f animations:^{
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
+        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
     } ];
 
     return YES;

@@ -131,15 +131,22 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [UIView animateWithDuration:0.3 animations:^{
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, -80);
+        self.view.transform = CGAffineTransformMakeTranslation(0, -80);
     }];
 }
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
+    }];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self search:nil];
     [textField resignFirstResponder];
     [UIView animateWithDuration:0.3 animations:^{
-        self.alertView.transform = CGAffineTransformMakeTranslation(0, 0);
+        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
     }];
 
     return YES;
