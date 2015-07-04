@@ -83,10 +83,10 @@
 {
     if ([son getError] == 0) {
         if ([[son getMethod] isEqualToString:@"MAddTreeHole"]) {
-            [ProgressHUD showSuccess:@"发布成功"];
             if (_addSuccessBlock) {
                 _addSuccessBlock();
             }
+            [self showAlert:@"发布成功"];
             [self.navigationController popViewControllerAnimated:YES];
         }
     } else {
