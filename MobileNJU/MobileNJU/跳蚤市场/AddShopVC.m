@@ -140,13 +140,8 @@
         return;
     
     }
-    if (![ToolUtils checkTel:page.phoneField.text]) {
-        return;
-    }
     [page.QQField resignFirstResponder];
     [page.phoneField resignFirstResponder];
-    
-    
     NSString* typeStr = page.typeField.text;
     for (MMarketType* type in self.typeList) {
         if ([type.title isEqualToString:typeStr]) {

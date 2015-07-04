@@ -367,6 +367,8 @@
     } else if ([self.passwordText.text isEqualToString:@""])
     {
         [ToolUtils showMessage:@"密码不得为空"];
+    } else if (self.confirmCodeText.text.length==0 ) {
+        [ToolUtils showMessage:@"验证码不得为空"];
     } else
     {
         if (self.autoSearch.isOn) {
