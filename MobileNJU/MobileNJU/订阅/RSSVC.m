@@ -80,7 +80,7 @@
         [detail setMyTitle:@"兴趣详情"];
         NSURL* url;
         if (![focus.url hasPrefix:@"http"]) {
-            url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",focus.url]];
+            url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://static-web.smartjiangsu.com/%@",focus.url]];
         } else {
             url = [[NSURL alloc]initWithString:focus.url];
         }

@@ -105,7 +105,7 @@
         nextVC.img = self.currentImg;
         NSURL* url;
         if (![new.url hasPrefix:@"http"]) {
-            url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",new.url]];
+            url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://static-web.smartjiangsu.com/%@",new.url]];
         } else {
             url = [[NSURL alloc]initWithString:new.url];
         }
@@ -141,7 +141,13 @@
     CGPoint center = cell.imageView.center;
     center.x = cell.center.x;
     cell.imageView.center = center;
-    cell.url =     [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",news.url]];
+    NSURL *url;
+    if (![news.url hasPrefix:@"http"]) {
+        url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://static-web.smartjiangsu.com/%@",news.url]];
+    } else {
+        url = [[NSURL alloc]initWithString:news.url];
+    }
+    cell.url = url;
     return cell;
 }
 

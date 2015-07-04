@@ -130,7 +130,13 @@
     
     if ([[segue identifier] isEqualToString:@"detail"]) {
         NewsDetailVC* destinationVC = (NewsDetailVC*)segue.destinationViewController;
-        NSURL* url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://s1.smartjiangsu.com:89/%@",self.currentUrl]];
+        NSURL* url;
+        if (![self.currentUrl hasPrefix:@"http"]) {
+            url = [[NSURL alloc]initWithString:[NSString stringWithFormat:@"http://static-web.smartjiangsu.com/%@",self.currentUrl]];
+        } else {
+            url = [[NSURL alloc]initWithString:self.currentUrl];
+        }
+
         NSLog(@"设置的网址%@",self.currentUrl);
         [destinationVC setMyTitle:@"兴趣详情"];
         [destinationVC setUrl:url];
