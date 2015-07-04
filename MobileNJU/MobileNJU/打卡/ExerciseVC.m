@@ -42,21 +42,25 @@
     [self.timeLabel setText:@"0"];
     self.isRe = 0;
     self.isV=0;
-    [self initAlert];
-    
-
 }
-//- (void)addHeader
-//{
-//    
-//}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self initAlert];
+}
+
+
 - (void)initAlert
 {
-    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertView" owner:self options:nil] firstObject];
-    CGRect frame = CGRectMake((self.view.frame.size.width-261)/2.0, (self.view.frame.size.height-220)/2.0, 261, 220);
+    if (!_alertView) {
+        self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertView" owner:self options:nil] firstObject];
+        [self.alertView setHidden:YES];
+        [self.view addSubview:self.alertView];
+    }
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    CGRect frame = CGRectMake((screenBounds.size.width-261)/2.0, (screenBounds.size.height-220)/2.0, 261, 220);
     self.alertView.frame = frame;
-    [self.view addSubview:self.alertView];
-    [self.alertView setHidden:YES];
+    
     self.schIDText =self.alertView.schIdField;
     self.schIDText.delegate = self;
     self.autoSearch = self.alertView.autoSwitch;

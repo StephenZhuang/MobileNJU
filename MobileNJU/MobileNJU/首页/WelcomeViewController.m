@@ -42,6 +42,7 @@
 @property (nonatomic)int complete;
 @property (nonatomic)int jumpState;
 @property (nonatomic,strong)RDVTabBarController* tabBarController;
+@property (nonatomic,strong)NSTimer *timer;
 @end
 
 @implementation WelcomeViewController
@@ -57,7 +58,7 @@ static NSArray* buttonImages;
     //中间缺少加载过程
     self.page = 1;
     //加载动画
-    [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timeChangeIndicate) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timeChangeIndicate) userInfo:nil repeats:YES];
     self.time = 1;
     self.offline = NO;
     [ToolUtils setOffline:NO];
@@ -110,6 +111,8 @@ static NSArray* buttonImages;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [ToolUtils setOffline:self.offline];
+    [_timer invalidate];
+    _timer = nil;
 }
 #pragma - mark api回调
 - (void)disposMessage:(Son *)son

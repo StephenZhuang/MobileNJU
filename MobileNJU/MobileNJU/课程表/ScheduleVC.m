@@ -53,7 +53,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initAlert];
     [self initNavigationBar];
     self.code=nil;
     self.hasCode=NO;
@@ -116,13 +115,23 @@
     return updateone;
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self initAlert];
+}
+
 - (void)initAlert
 {
-    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
-    CGRect frame = CGRectMake((self.view.bounds.size.width-261)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 257);
+    if (_alertView) {
+         self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewWithPassword" owner:self options:nil] objectAtIndex:0];
+        [self.view addSubview:self.alertView];
+
+    }
+   
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    CGRect frame = CGRectMake((screenBounds.size.width-261)/2.0, (screenBounds.size.height-320)/2.0, 261, 257);
     self.alertView.frame = frame;
     self.frame = frame;
-    [self.view addSubview:self.alertView];
     [self.alertView setHidden:YES];
     self.schIdField =self.alertView.schIdField;
     self.schIdField.delegate = self;

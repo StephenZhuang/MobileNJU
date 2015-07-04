@@ -51,7 +51,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initAlert];
     self.isRe=0;
     page=0;
     [self.maskView setHidden:YES];
@@ -116,17 +115,24 @@
 }
 
 
-
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self initAlert];
+}
 
 
 
 - (void)initAlert
 {
-    self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewCode" owner:self options:nil] objectAtIndex:0];
-    CGRect frame = CGRectMake((self.view.bounds.size.width-281)/2.0, (self.view.bounds.size.height-320)/2.0, 261, 281);
+    if (_alertView) {
+        self.alertView = [[[NSBundle mainBundle] loadNibNamed:@"AlertViewCode" owner:self options:nil] objectAtIndex:0];
+        [self.view addSubview:self.alertView];
+    }
+
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    CGRect frame = CGRectMake((screenBounds.size.width-281)/2.0, (screenBounds.size.height-320)/2.0, 261, 281);
     self.alertView.frame = frame;
     self.frame = frame;
-    [self.view addSubview:self.alertView];
     [self.alertView setHidden:YES];
     self.schIDText =self.alertView.schIdField;
     self.schIDText.delegate = self;
