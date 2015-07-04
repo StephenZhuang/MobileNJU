@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumField;
 @property (weak, nonatomic) IBOutlet UITextField *confirmField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIView *confirmPasswordView;
+@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 @end
 
 @implementation RegisterVC
@@ -34,6 +36,7 @@
         self.passwordField.placeholder = @"设置密码";
         self.confirmField.placeholder = @"确认密码";
     } else {
+        self.confirmPasswordView.hidden = NO;
         [self.phoneNumField setEnabled:NO];
         [self.phoneNumField setText:[ToolUtils getAccount]];
     }
@@ -49,6 +52,13 @@
 }
 
 - (IBAction)complete:(id)sender {
+    if (self.myDelegate==nil) {
+        if (![self.confirmPasswordTextField.text isEqualToString:self.confirmField.text]) {
+            [ToolUtils showMessage:@"两次密码不一致"];
+            return;
+        }
+    }
+    
     if (self.phoneNumField.text.length==0) {
         [ToolUtils showMessage:@"用户名不得为空"];
         return;

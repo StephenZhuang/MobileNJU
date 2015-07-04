@@ -227,7 +227,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4r-m3-5qW">
-                                <rect key="frame" x="35" y="226" width="245" height="40"/>
+                                <rect key="frame" x="34" y="257" width="245" height="40"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
@@ -252,6 +252,32 @@
                                 <rect key="frame" x="39" y="153" width="13" height="21"/>
                                 <animations/>
                             </imageView>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fDp-Sw-Tah">
+                                <rect key="frame" x="34" y="193" width="252" height="49"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="确认密码" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="U4v-lB-BYc" userLabel="密码填写框">
+                                        <rect key="frame" x="28" y="4" width="232" height="42"/>
+                                        <animations/>
+                                        <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="0nO-l6-z6N" id="PmN-G4-IWo"/>
+                                        </connections>
+                                    </textField>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3vU-Jh-Sbv" userLabel="密码填写线">
+                                        <rect key="frame" x="0.0" y="45" width="252" height="1"/>
+                                        <animations/>
+                                        <color key="backgroundColor" red="0.68627450980000004" green="0.68627450980000004" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="00手机注册3" translatesAutoresizingMaskIntoConstraints="NO" id="5Ax-jl-SXU">
+                                        <rect key="frame" x="8" y="14" width="13" height="21"/>
+                                        <animations/>
+                                    </imageView>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.95294117647058818" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
@@ -265,6 +291,8 @@
                     <navigationItem key="navigationItem" id="vjC-Sz-n6R"/>
                     <connections>
                         <outlet property="confirmField" destination="CvL-L7-VkM" id="qH0-AN-4Dh"/>
+                        <outlet property="confirmPasswordTextField" destination="U4v-lB-BYc" id="Q3Y-SJ-2xw"/>
+                        <outlet property="confirmPasswordView" destination="fDp-Sw-Tah" id="Pf4-hh-QE7"/>
                         <outlet property="passwordField" destination="aXW-e7-rcu" id="v1p-zc-enZ"/>
                         <outlet property="phoneNumField" destination="AE2-pt-lCC" id="dSr-B8-j0X"/>
                     </connections>
