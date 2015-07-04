@@ -70,13 +70,12 @@ static NSArray* buttonImages;
     self.jumpState = 0 ; 
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    
+- (void)viewDidAppear:(BOOL)animated {
     self.complete = 0 ;
     self.jumpState = 0;
     [self loadImages];
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -295,16 +294,12 @@ static NSArray* buttonImages;
 
 
 - (IBAction)resignAllResponders:(id)sender {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.transform = CGAffineTransformIdentity;
+    }];
     if (sender==self.loginButton||sender==self.view||sender==self.loginView) {
         [self.usernameTextField resignFirstResponder];
         [self.passwordTextField resignFirstResponder];
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-            CGRect loginViewFrame = CGRectMake(self.loginView.frame.origin.x, 146,self.loginView.frame.size.width, self.loginView.frame.size.height);
-            self.loginView.frame = loginViewFrame;
-            CGRect loginLogoFrame = CGRectMake(self.logoImage.frame.origin.x, -74,self.logoImage.frame.size.width, self.logoImage.frame.size.height);
-            self.logoImage.frame = loginLogoFrame;
-        } completion:^(BOOL finished) {
-        }];
     }
 }
 
@@ -318,32 +313,13 @@ static NSArray* buttonImages;
     [self resignAllResponders:self.loginButton];
     return YES;
 }
+
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-   
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-        if (self.view.bounds.size.height==480) {
-            CGRect loginViewFrame = CGRectMake(self.loginView.frame.origin.x, 0,self.loginView.frame.size.width, self.loginView.frame.size.height);
-            self.loginView.frame = loginViewFrame;
-            
-            
-            CGRect loginLogoFrame = CGRectMake(self.logoImage.frame.origin.x, -228,self.logoImage.frame.size.width, self.logoImage.frame.size.height);
-            self.logoImage.frame = loginLogoFrame;
-
-        } else {
-            CGRect loginViewFrame = CGRectMake(self.loginView.frame.origin.x, 50,self.loginView.frame.size.width, self.loginView.frame.size.height);
-            self.loginView.frame = loginViewFrame;
-            
-            
-            CGRect loginLogoFrame = CGRectMake(self.logoImage.frame.origin.x, -178,self.logoImage.frame.size.width, self.logoImage.frame.size.height);
-            self.logoImage.frame = loginLogoFrame;
-
-        }
-        
-        
-    } completion:^(BOOL finished) {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0, -100);
     }];
-
     return YES;
 }
 
@@ -380,20 +356,10 @@ static NSArray* buttonImages;
 {
     [self.view setUserInteractionEnabled:YES];
     [self hideLoad];
-    [self.loginView removeFromSuperview];
-    [self.logoImage removeFromSuperview];
     [self.logoImage setImage:[UIImage imageNamed:@"欢迎2"]];
-    [self.view addSubview:self.logoImage];
-    [self.view addSubview:self.loginView];
-
-    
-    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionTransitionNone animations:^{
-        CGRect loginViewFrame = CGRectMake(self.loginView.frame.origin.x, 146,self.loginView.frame.size.width, self.loginView.frame.size.height);
-        self.loginView.frame = loginViewFrame;
-        CGRect loginLogoFrame = CGRectMake(self.logoImage.frame.origin.x, -74,self.logoImage.frame.size.width, self.logoImage.frame.size.height);
-        self.logoImage.frame = loginLogoFrame;
-        
-        
+    [UIView animateWithDuration:1.0 animations:^{
+        self.loginView.transform = CGAffineTransformMakeTranslation(0, 146-self.view.frame.size.height);
+        self.logoImage.transform = CGAffineTransformMakeTranslation(0, -74);
     } completion:^(BOOL finished) {
         [self.loginButton setHidden:NO];
     }];

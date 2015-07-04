@@ -466,6 +466,7 @@
 		7D4C13BD19E912E9009CD94D /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4C13BB19E912E9009CD94D /* libPushSDK.a */; };
 		7D4C13BE19E912E9009CD94D /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D4C13BC19E912E9009CD94D /* PushConfig.plist */; };
 		7D54A7B01945F3040082909E /* BookDetailScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */; };
+		7D5BDF671B47813900222509 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BDF661B47813900222509 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		7D6496AE198F9CDE0086435F /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D6496AD198F9CDE0086435F /* AlertView.xib */; };
 		7D6496B1198F9D610086435F /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6496B0198F9D610086435F /* AlertView.m */; };
 		7D6496B4198FA6FD0086435F /* AlertViewWithPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6496B3198FA6FD0086435F /* AlertViewWithPassword.m */; };
@@ -1316,6 +1317,8 @@
 		7D54A7A9194550670082909E /* SubscribeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeCell.h; sourceTree = "<group>"; };
 		7D54A7AE1945F3040082909E /* BookDetailScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailScrollerView.h; sourceTree = "<group>"; };
 		7D54A7AF1945F3040082909E /* BookDetailScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailScrollerView.m; sourceTree = "<group>"; };
+		7D5BDF651B47813900222509 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		7D5BDF661B47813900222509 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		7D6496AD198F9CDE0086435F /* AlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
 		7D6496AF198F9D610086435F /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		7D6496B0198F9D610086435F /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
@@ -2438,6 +2441,7 @@
 		77B90459192C433F0062237D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7D5BDF641B47813900222509 /* FDFullscreenPopGesture */,
 				7D4C13B919E912E9009CD94D /* lib */,
 				7DCA721519E7E71E00D320CF /* Frontia */,
 				7D793DAE19E0F690005ADF27 /* SDWebImage */,
@@ -2460,7 +2464,6 @@
 				7747D0F41952C2230008C36C /* NotificationStatusBar */,
 				77B9046F192C4B3A0062237D /* MJRefresh */,
 				77B9047C192C4B3A0062237D /* PhotoBrowser */,
-				77B90491192C4B3A0062237D /* SDWebImage */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -2683,13 +2686,6 @@
 			path = MJPhotoBrowser;
 			sourceTree = "<group>";
 		};
-		77B90491192C4B3A0062237D /* SDWebImage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SDWebImage;
-			sourceTree = "<group>";
-		};
 		77B904B6192C4B3B0062237D /* ToolUtils */ = {
 			isa = PBXGroup;
 			children = (
@@ -2845,6 +2841,15 @@
 				7D4C13BC19E912E9009CD94D /* PushConfig.plist */,
 			);
 			path = lib;
+			sourceTree = "<group>";
+		};
+		7D5BDF641B47813900222509 /* FDFullscreenPopGesture */ = {
+			isa = PBXGroup;
+			children = (
+				7D5BDF651B47813900222509 /* UINavigationController+FDFullscreenPopGesture.h */,
+				7D5BDF661B47813900222509 /* UINavigationController+FDFullscreenPopGesture.m */,
+			);
+			path = FDFullscreenPopGesture;
 			sourceTree = "<group>";
 		};
 		7D793DAE19E0F690005ADF27 /* SDWebImage */ = {
@@ -3351,7 +3356,7 @@
 		77B9041D192C3F030062237D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Stephen Zhuang";
 				TargetAttributes = {
 					77B90424192C3F030062237D = {
@@ -3766,6 +3771,7 @@
 				77E0760F1940441F0098BA09 /* ClassroomVC.m in Sources */,
 				774D4B9C1991B9A800D675D7 /* GKImagePicker.m in Sources */,
 				7DD25B38192D9C230066494D /* MainMenuViewController.m in Sources */,
+				7D5BDF671B47813900222509 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				7DFC44C8198A4B250018BCB9 /* ApiMChatCallBack.m in Sources */,
 				774D4B9B1991B9A800D675D7 /* GKImageCropViewController.m in Sources */,
 				778EA7851945D415007B6C7E /* NanguaBaseViewController.m in Sources */,
@@ -4079,8 +4085,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "166f5f6e-95c9-48e9-a9c7-047fadc2480c";
-				SDKROOT = iphoneos7.1;
+				PROVISIONING_PROFILE = "ce16ee28-98da-48c8-a934-b99ad861fd91";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -4112,8 +4118,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PROVISIONING_PROFILE = "166f5f6e-95c9-48e9-a9c7-047fadc2480c";
-				SDKROOT = iphoneos7.1;
+				PROVISIONING_PROFILE = "ce16ee28-98da-48c8-a934-b99ad861fd91";
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -4123,7 +4129,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Fei Yang (7RCFXNA42W)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4133,7 +4139,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileNJU/MobileNJU-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/MobileNJU/MobileNJU-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/QQ",
@@ -4148,8 +4154,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "05acda0d-f5e9-4f20-a5d6-722430fe6acb";
-				SDKROOT = iphoneos7.1;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;
@@ -4161,7 +4167,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Fei Yang (7RCFXNA42W)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4171,7 +4177,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MobileNJU/MobileNJU-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/MobileNJU/MobileNJU-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ThirdParty/Frontia/QQ",
@@ -4186,8 +4192,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "05acda0d-f5e9-4f20-a5d6-722430fe6acb";
-				SDKROOT = iphoneos7.1;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;

@@ -19,6 +19,7 @@
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
 #import "ProgressHUD.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
 #define DEFAULTBACKICON @"navigation_back"
 #define NLSystemVersionGreaterOrEqualThan(version) ([[[UIDevice currentDevice] systemVersion] floatValue] >= version)
 #define IOS7_OR_LATER NLSystemVersionGreaterOrEqualThan(7.0)

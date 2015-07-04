@@ -121,8 +121,7 @@
     NSLog(@"%f,%f",self.contentSize.height ,CGRectGetMaxY(_letterNumLabel.frame));
 }
 
-- (void)setPlaceholder:(NSString *)aPlaceholder
-{
+- (void)setPlaceholder:(NSString *)aPlaceholder {
     placeholder = aPlaceholder;
     [self.placeHolderLabel setText:self.placeholder];
     if([[self text] length] == 0)
