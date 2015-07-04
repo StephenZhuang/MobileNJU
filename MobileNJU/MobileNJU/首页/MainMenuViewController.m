@@ -359,6 +359,9 @@ static NSArray* descriptions;
         if ([cell.menuTitle.text isEqualToString:@"办理流程"]) {
             [cell.menuTitle setText:@"流程介绍"];
         }
+        if ([cell.menuTitle.text isEqualToString:@"成绩绩点"]){
+            [cell.menuTitle setText:@"成绩查询"];
+        }
         [cell setUserInteractionEnabled:YES];
         [cell.menuButton addTarget:self action:@selector(
                                                          goToDetail

@@ -49,7 +49,7 @@
 {
 //    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"注册" message:msg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil] ;
 //    [alert show];
-    [ProgressHUD showError:msg];
+    [ToolUtils showMessage:msg];
 }
 
 - (void)viewDidLoad

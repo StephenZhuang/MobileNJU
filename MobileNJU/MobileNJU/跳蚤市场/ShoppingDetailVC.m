@@ -34,7 +34,7 @@
                   forControlEvents:UIControlEventTouchUpInside];
     [self addDetail:self.market.description];
     if (![self.market.userid isEqualToString:[ToolUtils getLoginId]]) {
-        [self addButton:@"联系买家"];
+        [self addButton:@"联系卖家"];
     } else {
         [self addButton:nil];
     }
@@ -100,7 +100,7 @@
     
     UIActionSheet *sheet;
     // 判断是否支持相机
-    sheet  = [[UIActionSheet alloc] initWithTitle:@"联系买家" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:self.market.phone
+    sheet  = [[UIActionSheet alloc] initWithTitle:@"联系卖家" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:self.market.phone
               , [NSString stringWithFormat:@"QQ:%@",self.market.qq], nil];
     sheet.tag = 255;
     [sheet setDelegate:self];
