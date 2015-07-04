@@ -179,7 +179,12 @@
         
     }else
     {
-       
+        NSArray *list = [[dataArray objectAtIndex:self.selectIndex.section] objectForKey:@"list"];
+        MContact* contact = [list objectAtIndex:indexPath.row-1];
+        NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",contact.phoneList.firstObject];
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [self.view addSubview:callWebview];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
