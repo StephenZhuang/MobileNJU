@@ -8,6 +8,8 @@
 
 #import "ShoppingDetailVC.h"
 #import "MarketDetailCell.h"
+#import "MJPhotoBrowser.h"
+#import "MJPhoto.h"
 @interface ShoppingDetailVC ()<UIScrollViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
@@ -152,6 +154,23 @@
     
 }
 
+- (void)lookImage:(UITapGestureRecognizer *)tap {
+    UIImageView *imageView = (UIImageView *)tap.view;
+    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+    NSArray *urlArray = [self.market.imgs componentsSeparatedByString:@","];
+    NSMutableArray *photoArray = [[NSMutableArray alloc] initWithCapacity:urlArray.count];
+    for (int i = 0 ; i < self.pageControl.numberOfPages; i++) {
+        MJPhoto *photo = [[MJPhoto alloc] init];
+        photo.url = [ToolUtils getImageUrlWtihString:urlArray[i]];
+        photo.srcImageView = (UIImageView*)[self.view viewWithTag:i+2333];
+        [photoArray addObject:photo];
+    }
+    browser.currentPhotoIndex = imageView.tag - 2333; // 弹出相册时显示的第一张图片是？
+    browser.photos = photoArray; // 设置所有的图片
+    [browser show];
+}
+
+
 - (void)loadNews
 {
     NSArray* photoList = [self.market.imgs componentsSeparatedByString:@","];
@@ -171,6 +190,10 @@
         [pageView setImageWithURL:[ToolUtils getImageUrlWtihString:[photoList objectAtIndex:i] width:640 height:640] placeholderImage:[UIImage imageNamed:@"640乘640"]];
         pageView.contentMode = UIViewContentModeScaleAspectFit;
         [pageView setClipsToBounds:YES];
+        pageView.tag = 2333+i;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lookImage:)];
+        [pageView addGestureRecognizer:tap];
+        pageView.userInteractionEnabled = YES;
         [self.scrollView addSubview:pageView];
     }
 }

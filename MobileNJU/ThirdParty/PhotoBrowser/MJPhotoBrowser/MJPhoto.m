@@ -28,4 +28,8 @@
     }
 }
 
+- (NSString *)description {
+    return @"    ";
+}
+
 @end

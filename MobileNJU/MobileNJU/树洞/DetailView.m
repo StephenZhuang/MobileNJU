@@ -98,7 +98,7 @@
                 height = 300;
                 break;
         }
-        [imageView setImageWithURL:[NSURL URLWithString:_imageArray[i]] placeholderImage:[UIImage imageNamed:@""]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:_imageArray[i]] placeholderImage:[UIImage imageNamed:@""]];
         imageView.tag = i;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lookImage:)];
         [imageView addGestureRecognizer:tap];

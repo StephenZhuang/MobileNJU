@@ -135,13 +135,29 @@
     return [CommentCell getHeightByComment:comment];
 }
 
+
+- (void)lookImage:(UITapGestureRecognizer *)tap {
+    UIImageView *imageView = (UIImageView *)tap.view;
+    MJPhoto *photo = [[MJPhoto alloc] init];
+    photo.url = [ToolUtils getImageUrlWtihString:_topic.img];
+    photo.srcImageView = imageView; // 来源于哪个UIImageView
+    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = imageView.tag; // 弹出相册时显示的第一张图片是？
+    browser.photos = @[photo]; // 设置所有的图片
+    [browser show];
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         TreeHoleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TreeHoleCell"];
         if (_topic) {            
             [cell.contentLabel setText:_topic.content];
-            [cell.logoImage setImageWithURL:[ToolUtils getImageUrlWtihString:_topic.img] placeholderImage:[UIImage imageNamed:@""]];
+            [cell.logoImage sd_setImageWithURL:[ToolUtils getImageUrlWtihString:_topic.img] placeholderImage:[UIImage imageNamed:@""]];
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lookImage:)];
+            [cell.logoImage addGestureRecognizer:tap];
+            cell.logoImage.userInteractionEnabled = YES;
 //            cell.logoImage.layer.contentsGravity = kCAGravityCenter;
             [cell.zanButton setTag:indexPath.section];
             [cell.commentButton setTag:indexPath.section];
